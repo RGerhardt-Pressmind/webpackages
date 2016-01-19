@@ -1,0 +1,437 @@
+<?php
+/*
+    Copyright (C) 2015  <Robbyn Gerhardt>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+    @category   zip.class.php
+	@package    Packages
+	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
+	@copyright  2010-2015 Packages
+	@license    http://www.gnu.org/licenses/
+*/
+
+namespace package;
+
+
+class zip 
+{
+	private $now, $zipdata = '', $directory = '', $offset = 0, $entries = 0, $file_num = 0;
+
+	public function __construct()
+	{
+		$this->now	=	time();
+	}
+
+
+	/**
+	 * Fügt ein Ordner dem Archiv hinzu
+	 *
+	 * @param string|array $directory
+	 * @return void
+	 */
+	public function add_dir($directory)
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'add_dir', 'zip', array($directory));
+		}
+
+		foreach((array)$directory as $dir)
+		{
+			if(!preg_match("|.+/$|", $dir))
+			{
+				$dir	.=	'/';
+			}
+
+			$dir_time	=	$this->_get_mod_time($dir);
+
+			$this->_add_dir($dir, $dir_time['file_mtime'], $dir_time['file_mdate']);
+		}
+
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('after', 'add_dir', 'zip', array($directory, $this->zipdata, $this->directory));
+		}
+	}
+
+
+	/**
+	 * Fügt Daten dem Archiv hinzu
+	 *
+	 * @param string|array $filepath
+	 * @param string $data
+	 * @return void
+	 */
+	public function add_data($filepath, $data = null)
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'add_data', 'zip', array($filepath, $data));
+		}
+
+		if(is_array($filepath))
+		{
+			foreach($filepath as $path => $data)
+			{
+				$file_data = $this->_get_mod_time($path);
+
+				$this->_add_data($path, $data, $file_data['file_mtime'], $file_data['file_mdate']);
+			}
+		}
+		else
+		{
+			$file_data = $this->_get_mod_time($filepath);
+
+			$this->_add_data($filepath, $data, $file_data['file_mtime'], $file_data['file_mdate']);
+		}
+
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('after', 'add_data', 'zip', array($this->zipdata, $this->directory));
+		}
+	}
+
+
+	/**
+	 * Liest die Daten aus dem Pfad aus und fügt sie dem Archiv hinzu
+	 *
+	 * @param string $path
+	 * @param bool $preserve_filepath
+	 * @return bool
+	 */
+	public function read_file($path, $preserve_filepath = false)
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'read_file', 'zip', array($path, $preserve_filepath));
+		}
+
+		if(file_exists($path) === false)
+		{
+			return false;
+		}
+
+		if(($data = file_get_contents($path)) === false)
+		{
+			$name = str_replace("\\", "/", $path);
+
+			if($preserve_filepath === false)
+			{
+				$name	=	preg_replace("|.*/(.+)|", "\\1", $name);
+			}
+
+			$this->add_data($name, $data);
+
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Liest ein Verzeichnis aus und fügt es dem Archiv hinzu
+	 *
+	 * @param string $path
+	 * @param bool $preserve_filepath
+	 * @param string $root_path
+	 * @return bool
+	 */
+	public function read_dir($path, $preserve_filepath = true, $root_path = null)
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'read_dir', 'zip', array($path, $preserve_filepath, $root_path));
+		}
+
+		if(($fp = @opendir($path)) === false)
+		{
+			return false;
+		}
+
+		if($root_path === null)
+		{
+			$root_path	=	dirname($path).'/';
+		}
+
+		while(($file = readdir($fp)) !== false)
+		{
+			if(substr($file, 0, 1) == '.')
+			{
+				continue;
+			}
+
+			if(@is_dir($path.$file) === true)
+			{
+				$this->read_dir($path.$file."/", $preserve_filepath, $root_path);
+			}
+			else
+			{
+				if(($data = file_get_contents($path.$file)) !== false)
+				{
+					$name = str_replace("\\", "/", $path);
+
+					if($preserve_filepath === false)
+					{
+						$name	=	str_replace($root_path, '', $name);
+					}
+
+					$this->add_data($name.$file, $data);
+				}
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Gibt das ZIP Archiv im Binary Format zurück
+	 *
+	 * @return bool|string
+	 */
+	public function get_zip()
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'get_zip', 'zip');
+			$plugin	=	plugins::hookCall('before', 'get_zip', 'zip');
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
+		if($this->entries == 0)
+		{
+			return false;
+		}
+
+		$zip_data	=	$this->zipdata;
+		$zip_data 	.= 	$this->directory."\x50\x4b\x05\x06\x00\x00\x00\x00";
+		$zip_data 	.= 	pack('v', $this->entries); // total # of entries "on this disk"
+		$zip_data 	.= 	pack('v', $this->entries); // total # of entries overall
+		$zip_data 	.= 	pack('V', strlen($this->directory)); // size of central dir
+		$zip_data 	.= 	pack('V', strlen($this->zipdata)); // offset to start of central dir
+		$zip_data 	.= 	"\x00\x00"; // .zip file comment length
+
+		return $zip_data;
+	}
+
+
+	/**
+	 * Speichert das ZIP Archiv in einer Datei auf dem Server ab
+	 *
+	 * @param string $filepath
+	 * @return bool
+	 */
+	public function archive($filepath)
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'archive', 'zip', array($filepath));
+			$plugin	=	plugins::hookCall('before', 'archive', 'zip', array($filepath));
+
+			if($plugin != null)
+			{
+				return (bool)$plugin;
+			}
+		}
+
+		if(($fp = @fopen($filepath, 'wb')) === false)
+		{
+			return false;
+		}
+
+		flock($fp, LOCK_EX);
+		fwrite($fp, $this->get_zip());
+		flock($fp, LOCK_UN);
+		fclose($fp);
+
+		return true;
+	}
+
+
+	/**
+	 * Bietet die Datei zum Download an
+	 *
+	 * @param string $filename
+	 * @throws \Exception
+	 */
+	public function download($filename = 'backup.zip')
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'download', 'zip', array($filename));
+		}
+
+		if(preg_match("|.+?\.zip$|", $filename) === false)
+		{
+			$filename .= '.zip';
+		}
+
+		$get_zip 		=	$this->get_zip();
+		$zip_content	=&	$get_zip;
+
+		if(class_exists('\package\download') === true)
+		{
+			download::force_download($filename, $zip_content);
+		}
+		else
+		{
+			throw new \Exception('class download not found');
+		}
+	}
+
+
+	/**
+	 * Säubert das letzte zusammengeführte Archiv
+	 *
+	 * @return void
+	 */
+	public function clear_data()
+	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'clear_data', 'zip');
+		}
+
+		$this->zipdata		=	'';
+		$this->directory	= 	'';
+		$this->entries		= 	0;
+		$this->file_num		= 	0;
+		$this->offset		= 	0;
+	}
+
+
+	/**
+	 * Gibt die Modifikationszeit zurück
+	 *
+	 * @param $dir
+	 * @return mixed
+	 */
+	private function _get_mod_time($dir)
+	{
+		$date = (@filemtime($dir)) ? filemtime($dir) : getdate($this->now);
+
+		$time['file_mtime']	=	($date['hours'] << 11) + ($date['minutes'] << 5) + $date['seconds'] / 2;
+		$time['file_mdate'] = 	(($date['year'] - 1980) << 9) + ($date['mon'] << 5) + $date['mday'];
+
+		return $time;
+	}
+
+
+	/**
+	 * Verschlüsselt die Daten in ZIP Formate
+	 *
+	 * @param string $dir
+	 * @param string $file_mtime
+	 * @param string $file_mdate
+	 *
+	 * @return void
+	 */
+	private function _add_dir($dir, $file_mtime, $file_mdate)
+	{
+		$dir = str_replace("\\", "/", $dir);
+
+		$this->zipdata .=
+			"\x50\x4b\x03\x04\x0a\x00\x00\x00\x00\x00"
+			.pack('v', $file_mtime)
+			.pack('v', $file_mdate)
+			.pack('V', 0) // crc32
+			.pack('V', 0) // compressed filesize
+			.pack('V', 0) // uncompressed filesize
+			.pack('v', strlen($dir)) // length of pathname
+			.pack('v', 0) // extra field length
+			.$dir
+			// below is "data descriptor" segment
+			.pack('V', 0) // crc32
+			.pack('V', 0) // compressed filesize
+			.pack('V', 0); // uncompressed filesize
+
+		$this->directory .=
+			"\x50\x4b\x01\x02\x00\x00\x0a\x00\x00\x00\x00\x00"
+			.pack('v', $file_mtime)
+			.pack('v', $file_mdate)
+			.pack('V',0) // crc32
+			.pack('V',0) // compressed filesize
+			.pack('V',0) // uncompressed filesize
+			.pack('v', strlen($dir)) // length of pathname
+			.pack('v', 0) // extra field length
+			.pack('v', 0) // file comment length
+			.pack('v', 0) // disk number start
+			.pack('v', 0) // internal file attributes
+			.pack('V', 16) // external file attributes - 'directory' bit set
+			.pack('V', $this->offset) // relative offset of local header
+			.$dir;
+
+		$this->offset	=	strlen($this->zipdata);
+		++$this->entries;
+	}
+
+
+	/**
+	 * Fügt Daten dem ZIP Archiv hinzu
+	 *
+	 * @param string $filepath
+	 * @param string $data
+	 * @param string $file_mtime
+	 * @param string $file_mdate
+	 * @return void
+	 */
+	private function _add_data($filepath, $data, $file_mtime, $file_mdate)
+	{
+		$filepath 			= 	str_replace("\\", "/", $filepath);
+		$uncompressed_size 	=	strlen($data);
+		$crc32  			= 	crc32($data);
+
+		$gzdata 			= 	gzcompress($data);
+		$gzdata 			=	substr($gzdata, 2, -4);
+		$compressed_size 	= 	strlen($gzdata);
+
+		$this->zipdata .=
+			"\x50\x4b\x03\x04\x14\x00\x00\x00\x08\x00"
+			.pack('v', $file_mtime)
+			.pack('v', $file_mdate)
+			.pack('V', $crc32)
+			.pack('V', $compressed_size)
+			.pack('V', $uncompressed_size)
+			.pack('v', strlen($filepath)) // length of filename
+			.pack('v', 0) // extra field length
+			.$filepath
+			.$gzdata; // "file data" segment
+
+		$this->directory .=
+			"\x50\x4b\x01\x02\x00\x00\x14\x00\x00\x00\x08\x00"
+			.pack('v', $file_mtime)
+			.pack('v', $file_mdate)
+			.pack('V', $crc32)
+			.pack('V', $compressed_size)
+			.pack('V', $uncompressed_size)
+			.pack('v', strlen($filepath)) // length of filename
+			.pack('v', 0) // extra field length
+			.pack('v', 0) // file comment length
+			.pack('v', 0) // disk number start
+			.pack('v', 0) // internal file attributes
+			.pack('V', 32) // external file attributes - 'archive' bit set
+			.pack('V', $this->offset) // relative offset of local header
+			.$filepath;
+
+		$this->offset = strlen($this->zipdata);
+		++$this->entries;
+		++$this->file_num;
+	}
+}

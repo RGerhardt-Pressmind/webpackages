@@ -1,0 +1,109 @@
+<?php
+/*
+    Copyright (C) 2015  <Robbyn Gerhardt>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    @category   init.php
+	@package    Packages
+	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
+	@copyright  2010-2015 Packages
+	@license    http://www.gnu.org/licenses/
+*/
+
+require_once 'constants.php';
+require_once 'controllExistsPaths.php';
+
+if(ERROR_REPORTING === true || ERROR_REPORTING == 1)
+{
+	error_reporting(-1);
+	ini_set('display_errors', 1);
+}
+else
+{
+	error_reporting(0);
+	ini_set('display_errors', 0);
+}
+
+if(CHARSET != '')
+{
+	header('Content-Type: text/html; charset='.CHARSET);
+}
+
+if(TIMEZONE != '')
+{
+	date_default_timezone_set(TIMEZONE);
+}
+
+$myPaths	=	array();
+$myPaths[]	=	ROOT.SEP.'update';
+$myPaths[]	=	ROOT.SEP.'package';
+$myPaths[]	=	ROOT.SEP.'package'.SEP.'implement';
+$myPaths[]	=	ROOT.SEP.'package'.SEP.'gettext';
+$myPaths[]	=	ROOT.SEP.'package'.SEP.'gettext'.SEP.'php5';
+$myPaths[]	=	ROOT.SEP.'package'.SEP.'PHPMailer';
+
+if(PAGE_DIR != '')
+{
+	$myPaths[]	=	PAGE_DIR;
+
+	$iterator	=	new \RecursiveDirectoryIterator(PAGE_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
+
+	foreach($iterator as $item)
+	{
+		$dir	=	new SplFileInfo($item);
+
+		if($dir->isDir() === true)
+		{
+			$myPaths[]	=	$dir;
+		}
+	}
+}
+
+if(DYNAMIC_DIR != '')
+{
+	$myPaths[]	=	DYNAMIC_DIR;
+
+	$iterator	=	new \RecursiveDirectoryIterator(DYNAMIC_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
+
+	foreach($iterator as $item)
+	{
+		$dir	=	new SplFileInfo($item);
+
+		if($dir->isDir() === true)
+		{
+			$myPaths[]	=	$dir;
+		}
+	}
+}
+
+ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR, $myPaths));
+
+require_once 'gettext_reader.php';
+require_once 'FileReader.php';
+
+require_once 'autoload.class.php';
+
+require_once 'iLogger.class.php';
+require_once 'iDynamic.class.php';
+require_once 'IPlugin.class.php';
+
+require_once 'security.class.php';
+require_once 'GeneralFunctions.abstract.class.php';
+require_once 'load_functions.abstract.class.php';
+
+if(file_exists(ROOT.SEP.'dynamicInit.php') === true)
+{
+	require_once ROOT.SEP.'dynamicInit.php';
+}

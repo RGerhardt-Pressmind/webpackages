@@ -1,0 +1,57 @@
+RewriteEngine On
+RewriteRule ^([^/]*)/([^/]*)\.html$ /index.php?c=$1&m=$2 [L]
+
+<IfModule mod_headers.c>
+    # Akzeptiert das Encoding
+    <FilesMatch ".(js|css|xml|gz|html|svg|woff2)$">
+        Header append Vary: Accept-Encoding
+    </FilesMatch>
+
+    # Keep-Alive aktivieren
+    Header set Connection keep-alive
+
+    # Ablaufdatum standart auf 3 tage
+    ExpiresActive On
+    ExpiresDefault A259200
+
+    # 1 Monat folgenden Dateitypen Cachen
+    <filesMatch ".(ico|gif|jpg|jpeg|png|flv|pdf|swf|mov|mp3|wmv|ppt|js|css|svg)$">
+        ExpiresDefault A2419200
+        Header append Cache-Control "public"
+    </filesMatch>
+
+    # 2 Stunden folgende Dateitypen Cachen
+    <filesMatch ".(xml|txt|html)$">
+        ExpiresDefault A7200
+        Header append Cache-Control "private, must-revalidate"
+    </filesMatch>
+
+    # Folgende Dateitypen nie cachen
+    <filesMatch ".(php|cgi|pl|htm)$">
+        ExpiresDefault A0
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+    </filesMatch>
+</ifModule>
+
+# Kompirimierung bei folgenden Mime-Types erlauben
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml
+    AddOutputFilterByType DEFLATE text/css text/javascript
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE application/x-font-woff
+</IfModule>
+
+# Wenn folgende Dateitypen im Cache nicht mehr aktuelle sind, dann neu besorgen
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)\.(\d+)\.(js|css|png|jpe?g)$ $1.$3 [L]
+</IfModule>
+
+# ETag deaktivieren
+Header unset ETag
+FileETag None

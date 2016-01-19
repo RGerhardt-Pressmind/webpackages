@@ -1,0 +1,157 @@
+<?php
+/*
+    Copyright (C) 2015  <Robbyn Gerhardt>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    @category   databaseTest.php
+	@package    Packages
+	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
+	@copyright  2010-2015 Packages
+	@license    http://www.gnu.org/licenses/
+*/
+
+require_once 'unitInit.php';
+
+class databaseTest extends PHPUnit_Framework_TestCase
+{
+	private $db;
+
+	public function setUp()
+	{
+		$dsn		=	'mysql:host=localhost;dbname=phpmyadmin;charset=utf8;port=3306';
+		$username	=	'root';
+		$password	=	'';
+
+		$this->db	=	new \package\database($dsn, $username, $password, null);
+	}
+
+	public function tearDown()
+	{
+		$this->db	=	null;
+	}
+
+	public function testQuefetch()
+	{
+		if($this->db instanceof \package\database)
+		{
+			$getData	=	'
+			SELECT
+				COUNT(*) as count
+			FROM
+				`pma__userconfig`
+			WHERE
+				`username`	=	"root";
+			';
+
+			$getData	=	$this->db->quefetch($getData);
+
+			$this->assertEquals(1, $getData['count']);
+		}
+	}
+
+	public function testResultArray()
+	{
+		if($this->db instanceof \package\database)
+		{
+			$getAllData	=	'
+			SELECT
+				*
+			FROM
+				`pma__userconfig`;
+			';
+
+			$getAllData	=	$this->db->result_array($getAllData);
+
+			$this->assertNotEmpty($getAllData);
+		}
+	}
+
+	public function testMultiQuery()
+	{
+		if($this->db instanceof \package\database)
+		{
+			$updateAll	=	'
+			UPDATE
+				`pma_userconfig`
+			SET
+				`username`	=	`username`;
+			UPDATE
+				`pma_userconfig`
+			SET
+				`username`	=	`username`;
+			';
+
+			$updateAll	=	$this->db->multi_query($updateAll);
+
+			$this->assertTrue($updateAll);
+		}
+	}
+
+
+	public function testSecQuery()
+	{
+		if($this->db instanceof \package\database)
+		{
+			$updateTest	=	'
+			UPDATE
+				`pma__userconfig`
+			SET
+				`username`	=	?
+			WHERE
+				`username`	=	"test"
+			LIMIT
+				1;
+			';
+
+			$updateTest	=	$this->db->secQuery($updateTest, array("'test"), false);
+
+			$this->assertTrue($updateTest);
+
+			if($updateTest === true)
+			{
+				$getTest	=	'
+				SELECT
+					`username`
+				FROM
+					`pma__userconfig`
+				WHERE
+					`username`	=	?
+				LIMIT
+					1;
+				';
+
+				$getTest	=	$this->db->secQuery($getTest, array("'test"), true, true);
+
+				$this->assertEquals("'test", $getTest['username']);
+
+				$updateTest	=	'
+				UPDATE
+					`pma__userconfig`
+				SET
+					`username`	=	?
+				WHERE
+					`username`	=	"\'test"
+				LIMIT
+					1;
+				';
+
+				$updateTest	=	$this->db->secQuery($updateTest, array("test"), false);
+
+				$this->assertTrue($updateTest);
+			}
+		}
+	}
+}
+
