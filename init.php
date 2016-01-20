@@ -25,6 +25,11 @@ require 'constants.php';
 require 'controllExistsPaths.php';
 require 'loadSessionHandler.php';
 
+if(!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER)
+{
+	session_start();
+}
+
 
 if(ERROR_REPORTING === true || ERROR_REPORTING == 1)
 {

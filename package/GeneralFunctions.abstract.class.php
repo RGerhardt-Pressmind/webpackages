@@ -188,7 +188,7 @@ abstract class GeneralFunctions
 
 		if(!class_exists('database') && !USE_SESSION_SAVE_HANDLER)
 		{
-			require 'database.class.php';
+			require_once 'database.class.php';
 		}
 
 		if($useDefault === true)
