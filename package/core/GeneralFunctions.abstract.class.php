@@ -51,6 +51,29 @@ abstract class GeneralFunctions
 		return autoload::get('XML', '\package\\');
 	}
 
+
+	/**
+	 * Lädt die Date Klasse
+	 *
+	 * @throws \Exception
+	 */
+	public function loadDate()
+	{
+		autoload::get('date', '\package\\', true);
+	}
+
+
+	/**
+	 * Lädt die FileSystem Klasse
+	 *
+	 * @throws \Exception
+	 */
+	public function loadFileSystem()
+	{
+		autoload::get('FileSystem', '\package\\', true);
+	}
+
+
 	/**
 	 * Lädt die Browser Klasse
 	 *

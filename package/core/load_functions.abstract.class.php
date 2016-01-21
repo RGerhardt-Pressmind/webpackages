@@ -56,7 +56,9 @@ abstract class load_functions extends GeneralFunctions
 		'browser',
 		'xml',
 		'Validater',
-		'mod_rewrite'
+		'mod_rewrite',
+		'date',
+		'fileSystem'
 	);
 
 
@@ -89,6 +91,12 @@ abstract class load_functions extends GeneralFunctions
 	public function __construct()
 	{
 		//Class load with $this->load...(template,security,captcha)
+
+		//date class load
+		$this->loadDate();
+
+		//FileSystem class load
+		$this->loadFileSystem();
 
 		//mod_rewrite class load
 		$this->mod_rewrite	=	$this->loadModRewrite();

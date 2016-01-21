@@ -2,36 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/core/Date.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/core/FileSystem.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/GeneralFunctions.abstract.class.php" afterPath="$PROJECT_DIR$/package/core/GeneralFunctions.abstract.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/Validater.class.php" afterPath="$PROJECT_DIR$/package/core/Validater.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/XML.class.php" afterPath="$PROJECT_DIR$/package/core/XML.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/autoload.class.php" afterPath="$PROJECT_DIR$/package/core/autoload.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/benchmark.class.php" afterPath="$PROJECT_DIR$/package/core/benchmark.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/browser.class.php" afterPath="$PROJECT_DIR$/package/core/browser.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/cache.class.php" afterPath="$PROJECT_DIR$/package/core/cache.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/captcha.class.php" afterPath="$PROJECT_DIR$/package/core/captcha.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/curl.class.php" afterPath="$PROJECT_DIR$/package/core/curl.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/database.class.php" afterPath="$PROJECT_DIR$/package/core/database.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/download.class.php" afterPath="$PROJECT_DIR$/package/core/download.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/errors.class.php" afterPath="$PROJECT_DIR$/package/core/errors.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/ftp.class.php" afterPath="$PROJECT_DIR$/package/core/ftp.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/language.class.php" afterPath="$PROJECT_DIR$/package/core/language.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/logger.class.php" afterPath="$PROJECT_DIR$/package/core/logger.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/mod_rewrite.class.php" afterPath="$PROJECT_DIR$/package/core/mod_rewrite.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/number.class.php" afterPath="$PROJECT_DIR$/package/core/number.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/plugins.class.php" afterPath="$PROJECT_DIR$/package/core/plugins.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/security.class.php" afterPath="$PROJECT_DIR$/package/core/security.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/template.class.php" afterPath="$PROJECT_DIR$/package/core/template.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/text.class.php" afterPath="$PROJECT_DIR$/package/core/text.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/version.class.php" afterPath="$PROJECT_DIR$/package/core/version.class.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package/zip.class.php" afterPath="$PROJECT_DIR$/package/core/zip.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/loadSessionHandler.php" afterPath="$PROJECT_DIR$/loadSessionHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/GeneralFunctions.abstract.class.php" afterPath="$PROJECT_DIR$/package/core/GeneralFunctions.abstract.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,41 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/constants.php">
+      <file leaf-file-name="load_functions.abstract.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package/core/load_functions.abstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.833333">
-              <caret line="42" column="73" selection-start-line="42" selection-start-column="73" selection-end-line="42" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="text.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package/core/text.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.375">
-              <caret line="1423" column="26" selection-start-line="1423" selection-start-column="26" selection-end-line="1423" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="date_helper.php" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/helpers/date_helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="425.875">
-              <caret line="74" column="69" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Date.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package/core/Date.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6502058">
-              <caret line="396" column="32" selection-start-line="396" selection-start-column="32" selection-end-line="396" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.3804945">
+              <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -102,8 +45,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/update/step4.php" />
-        <option value="$PROJECT_DIR$/templates/update/step2.php" />
         <option value="$PROJECT_DIR$/templates/update/step5.php" />
         <option value="$PROJECT_DIR$/templates/update/step3.php" />
         <option value="$PROJECT_DIR$/update/update.class.php" />
@@ -153,6 +94,8 @@
         <option value="$PROJECT_DIR$/package/core/text.class.php" />
         <option value="$PROJECT_DIR$/package/core/Date.class.php" />
         <option value="$PROJECT_DIR$/package/core/version.class.php" />
+        <option value="$PROJECT_DIR$/package/core/GeneralFunctions.abstract.class.php" />
+        <option value="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" />
       </list>
     </option>
   </component>
@@ -542,7 +485,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453285782428</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="- Change System Folder &#10;- Add Code Folder&#10;- Add Date class&#10;- Add FileSystem class&#10;- constant OS change Linux to Unix&#10;- init session_start change&#10;&#10;">
+      <created>1453419615205</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1453419615205</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -550,17 +499,17 @@
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2922636" sideWeight="0.5294118" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2922636" sideWeight="0.5300896" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2922636" sideWeight="0.47058824" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2922636" sideWeight="0.46991038" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -587,7 +536,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="0.3.3 / 12.04.2015&#10;==================&#10;* Add PCLZip for Update&#10;* Add rename Directory&#10;* Add copy Directory&#10;* Change update class" />
     <MESSAGE value="0.3.3 / 12.04.2015&#10;==================&#10;* Add load PCLZip" />
     <MESSAGE value="0.3.4 / 12.04.2015&#10;==================&#10;* Add Final Update functions" />
     <MESSAGE value="0.3.5 / 13.04.2015&#10;==================&#10;* Add version update&#10;* Add show current version" />
@@ -612,7 +560,8 @@
     <MESSAGE value="0.7.3 / 12.12.2015&#10;==================&#10;* Remove session_start() function&#10;* Add loadSessionHandler, safe session handler, needs a database, can in constants.php deactivated" />
     <MESSAGE value="- First Commit" />
     <MESSAGE value="- bugfixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="- bugfixes" />
+    <MESSAGE value="- Change System Folder &#10;- Add Code Folder&#10;- Add Date class&#10;- Add FileSystem class&#10;- constant OS change Linux to Unix&#10;- init session_start change&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Change System Folder &#10;- Add Code Folder&#10;- Add Date class&#10;- Add FileSystem class&#10;- constant OS change Linux to Unix&#10;- init session_start change&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -623,13 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34430727">
           <caret line="378" column="10" selection-start-line="378" selection-start-column="10" selection-end-line="378" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/download.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4238683">
-          <caret line="88" column="55" selection-start-line="88" selection-start-column="55" selection-end-line="88" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -766,24 +708,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/GeneralFunctions.abstract.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0576131">
-          <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/load_functions.abstract.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28806585">
-          <caret line="171" column="9" selection-start-line="171" selection-start-column="9" selection-end-line="171" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/loadSessionHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8765432">
           <caret line="235" column="71" selection-start-line="235" selection-start-column="71" selection-end-line="235" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -954,22 +883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.833333">
-          <caret line="42" column="73" selection-start-line="42" selection-start-column="73" selection-end-line="42" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/text.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.375">
-          <caret line="1423" column="26" selection-start-line="1423" selection-start-column="26" selection-end-line="1423" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/calendar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.436214">
@@ -1004,8 +917,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package/core/Date.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6502058">
-          <caret line="396" column="32" selection-start-line="396" selection-start-column="32" selection-end-line="396" selection-end-column="32" />
+        <state vertical-scroll-proportion="7.0467033">
+          <caret line="393" column="42" selection-start-line="393" selection-start-column="42" selection-end-line="393" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/text.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7005494">
+          <caret line="1423" column="26" selection-start-line="1423" selection-start-column="26" selection-end-line="1423" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3447802">
+          <caret line="42" column="73" selection-start-line="42" selection-start-column="73" selection-end-line="42" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/download.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8131868">
+          <caret line="88" column="55" selection-start-line="88" selection-start-column="55" selection-end-line="88" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/GeneralFunctions.abstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61126375">
+          <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/load_functions.abstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3804945">
+          <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
           <folding />
         </state>
       </provider>
