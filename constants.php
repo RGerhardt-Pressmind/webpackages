@@ -40,7 +40,7 @@ define('HTTP', $base_url);
 define('SEP', DIRECTORY_SEPARATOR);
 
 //Betriebssystem
-define('OS', (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? 'WIN' : 'LINUX');
+define('OS', (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? 'WIN' : 'UNIX');
 
 //Verzeichniss zum httpdocs Ordner der Webadresse
 define('ROOT', __DIR__);

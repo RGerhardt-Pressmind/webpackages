@@ -25,7 +25,7 @@ require 'constants.php';
 require 'controllExistsPaths.php';
 require 'loadSessionHandler.php';
 
-if(!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER)
+if(!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER || !defined('PDO_HOST') || empty(PDO_HOST))
 {
 	session_start();
 }
@@ -56,6 +56,7 @@ $myPaths	=	array();
 $myPaths[]	=	ROOT.SEP.'update';
 $myPaths[]	=	ROOT.SEP.'package';
 $myPaths[]	=	ROOT.SEP.'package'.SEP.'implement';
+$myPaths[]	=	ROOT.SEP.'package'.SEP.'core';
 $myPaths[]	=	ROOT.SEP.'package'.SEP.'gettext';
 $myPaths[]	=	ROOT.SEP.'package'.SEP.'gettext'.SEP.'php5';
 $myPaths[]	=	ROOT.SEP.'package'.SEP.'PHPMailer';

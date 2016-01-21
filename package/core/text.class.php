@@ -1391,4 +1391,103 @@ class text
 
 		return $locale_data;
 	}
+
+
+	/**
+	 * Gibt ein Zufallsstring zurück
+	 *
+	 * @param string $type
+	 * @param int $length
+	 *
+	 * @return string
+	 */
+	public function random_string($type = 'normal', $length = 10)
+	{
+		switch ($type)
+		{
+			default:
+			case 'normal':
+
+				$back	=	uniqid(mt_rand(), true);
+
+			break;
+			case 'alnum':
+
+				$back 	= 	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+			break;
+			case 'numeric':
+
+				$back	= 	'0123456789';
+
+			break;
+			case 'nozero':
+
+				$back 	= 	'123456789';
+
+			break;
+			case 'alpha':
+
+				$back 	= 	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+			break;
+			break;
+			case 'md5':
+
+				$back	=	md5(uniqid(mt_rand(), true));
+
+			break;
+			case 'sha1':
+
+				$back	=	sha1(uniqid(mt_rand(), true));
+
+			break;
+		}
+
+		return substr(str_shuffle(str_repeat($back, ceil($length / strlen($back)))), 0, $length);
+	}
+
+
+	/**
+	 * Entfernt Doppelte Slashes aus einem String
+	 *
+	 * Beispiel
+	 *
+	 * http://www.google.de//meineSuche
+	 *
+	 * wird
+	 *
+	 * http://www.google.de/meineSuche
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	public static function reduce_double_slashes($str)
+	{
+		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
+	}
+
+
+	/**
+	 * Entfernt einfache und Doppelte Anführungszeichen aus einem String
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	public static function strip_quotes($str)
+	{
+		return str_replace(array('"', "'"), array('', ''), $str);
+	}
+
+
+	/**
+	 * Entfernt am Anfang und am Ende Slahes aus einem String
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	public static function trim_slashes($str)
+	{
+		return trim($str, '/');
+	}
 }

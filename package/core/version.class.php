@@ -27,7 +27,7 @@ namespace package;
 
 class version 
 {
-	const VERSION	=	'0.7.3'; //Versionsnummer
+	const VERSION	=	'0.8.0'; //Versionsnummer
 	const REPO		=	'https://github.com/Robbyn666/webpackage/archive/master.zip'; // ZIP Download Link
 	const COMMITS	=	'https://api.github.com/repos/Robbyn666/webpackage/commits'; // API Link zu allen Commits von Robbyn666
 	const COMMITTER	=	'Robbyn666'; //Commiter Name
