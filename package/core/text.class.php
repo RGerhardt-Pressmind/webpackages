@@ -25,8 +25,15 @@
 namespace package;
 
 
-class text 
+use package\implement\IStatic;
+
+class text implements IStatic
 {
+	/**
+	 * Zum initiailisieren von Daten
+	 */
+	public static function init(){}
+
 	/**
 	 * @var array Alle erlaubten locales
 	 */

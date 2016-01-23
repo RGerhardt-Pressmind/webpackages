@@ -25,9 +25,16 @@
 namespace package;
 
 
-class benchmark 
+use package\implement\IStatic;
+
+class benchmark implements IStatic
 {
 	private static $startTime, $endTime, $middleTime = array();
+
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
 
 	/**
 	 * Setzt den Startpunkt und somit die Anfangszeit

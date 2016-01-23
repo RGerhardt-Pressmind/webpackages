@@ -25,11 +25,13 @@
 namespace package;
 
 
-class mod_rewrite
-{
-	public $isModRewriteActiv	=	false, $useModRewrite = false, $useFileExtension = 'html';
+use package\implement\IStatic;
 
-	public function __construct()
+class mod_rewrite implements IStatic
+{
+	public static $isModRewriteActiv	=	false, $useModRewrite = false, $useFileExtension = 'html';
+
+	public static function init()
 	{
 		if(function_exists('apache_get_modules'))
 		{
@@ -37,13 +39,15 @@ class mod_rewrite
 
 			if(in_array('mod_rewrite', $allModules))
 			{
-				$this->isModRewriteActiv	=	true;
+				self::$isModRewriteActiv	=	true;
 			}
 		}
 		else
 		{
-			$this->isModRewriteActiv	=	true;
+			self::$isModRewriteActiv	=	true;
 		}
+
+		self::setUseModRewrite(USE_MOD_REWRITE);
 	}
 
 	/**

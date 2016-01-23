@@ -25,8 +25,15 @@
 namespace package;
 
 
-class download 
+use package\implement\IStatic;
+
+class download implements IStatic
 {
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
+
 	/**
 	 * Bietet eine Datei zum Download an
 	 *

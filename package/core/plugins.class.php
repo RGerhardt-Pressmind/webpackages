@@ -25,13 +25,19 @@
 namespace package;
 
 use package\implement\IPlugin;
+use package\implement\IStatic;
 
-class plugins
+class plugins implements IStatic
 {
 	public static $definedPluginsClasses	=	array();
 
 	const BEFORE	=	'before';
 	const AFTER		=	'after';
+
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
 
 	/**
 	 * Geht alle Plugins durch und kontrolliert

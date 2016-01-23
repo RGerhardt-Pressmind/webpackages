@@ -25,8 +25,16 @@
 namespace package;
 
 
-class number 
+use package\implement\IStatic;
+
+class number implements IStatic
 {
+
+	/**
+	 * Zum initialisieren der Daten
+	 */
+	public static function init(){}
+
 	/**
 	 * Wandelt eine Zahl in ein Computer Byte-Format um
 	 *

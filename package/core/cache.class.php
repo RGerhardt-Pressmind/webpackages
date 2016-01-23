@@ -25,9 +25,29 @@
 namespace package;
 
 
-class cache
+use package\implement\IStatic;
+
+class cache implements IStatic
 {
 	private static $cacheDir, $cacheActiv, $cacheExtension = '.cache';
+
+	/**
+	 * Setzt die Standard Werte
+	 *
+	 * cache constructor.
+	 */
+	public static function init()
+	{
+		if(empty(CACHE_PATH) === false)
+		{
+			self::setCacheDir(CACHE_PATH);
+		}
+
+		if(empty(CACHE_EXTENSION) === false)
+		{
+			self::setCacheExtension(CACHE_EXTENSION);
+		}
+	}
 
 
 	/**

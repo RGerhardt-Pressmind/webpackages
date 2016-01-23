@@ -38,7 +38,7 @@ class testPlugin implements IPlugin
 
 	public function setAllClasses($allClasses)
 	{
-		$this->db		=	$allClasses['database'];
+		$this->db		=	$allClasses['db'];
 		$this->template	=	$allClasses['template'];
 	}
 

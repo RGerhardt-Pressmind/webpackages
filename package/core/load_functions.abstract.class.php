@@ -27,10 +27,32 @@ namespace package;
 use package\implement\iDynamic;
 use package\implement\IPlugin;
 
-abstract class load_functions extends GeneralFunctions
+abstract class load_functions
 {
-	protected $db, $template, $phpmailer, $logger, $error, $ftp, $zip, $browser, $xml, $mod_rewrite;
+	public static $LOAD_DATE			=	array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_FILE_SYSTEM		=	array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_MOD_REWRITE		=	array('isStatic' => false, 'class' => 'mod_rewrite', 'writeInAttribute' => 'mod_rewrite', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_BROWSER			=	array('isStatic' => false, 'class' => 'browser', 'writeInAttribute' => 'browser', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_VERSION			=	array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_DOWNLOAD		=	array('isStatic' => true, 'class' => 'download', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_ZIP				=	array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_FTP				=	array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_BENCHMARK		=	array('isStatic' => true, 'class' => 'benchmark', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_TEMPLATE		=	array('isStatic' => false, 'class' => 'template', 'writeInAttribute' =>'template', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_XML				=	array('isStatic' => false, 'class' => 'XML', 'writeInAttribute' => 'xml', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_LOGGER			=	array('isStatic' => false, 'class' => 'logger', 'writeInAttribute' => 'logger', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_ERROR			=	array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_DATABASE		=	array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('dsn' => PDO_TYPE.':dbname='.PDO_DATABASE.';host='.PDO_HOST.';port='.PDO_PORT, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'options' => null, 'driver' => PDO_TYPE), 'namespace' => '\package\\');
+	public static $LOAD_PLUGINS			=	array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_CACHE			=	array('isStatic' => true, 'class' => 'cache', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_CURL			=	array('isStatic' => true, 'class' => 'curl', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_TEXT			=	array('isStatic' => true, 'class' => 'text', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_NUMBER			=	array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_LANGUAGE		=	array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 
+	protected $phpmailer;
+
+	private	$allLoadClasses			=	array();
 	private $defineDynamicClasses	=	array();
 	private $notAllowedClassName	=	array(
 		'autoload',
@@ -74,7 +96,7 @@ abstract class load_functions extends GeneralFunctions
 	public function __get($varName)
 	{
 		//Change from array_key_exists to isset - performance
-		if(empty($this->defineDynamicClasses[$varName]) === false)
+		if(isset($this->defineDynamicClasses[$varName]) === true)
 		{
 			return $this->defineDynamicClasses[$varName];
 		}
@@ -87,104 +109,76 @@ abstract class load_functions extends GeneralFunctions
 
 	/**
 	 * Hier können alle Notwendigen Klassen geladen werden
+	 *
+	 * @param array $loadClasses Lädt die angegebene Liste an Klassen
+	 * @throws \Exception
 	 */
-	public function __construct()
+	public function __construct($loadClasses = array())
 	{
-		//Class load with $this->load...(template,security,captcha)
+		if(empty($loadClasses))
+		{
+			$loadClasses	=	array(
+				self::$LOAD_DATE,
+				self::$LOAD_FILE_SYSTEM,
+				self::$LOAD_MOD_REWRITE,
+				self::$LOAD_BROWSER,
+				self::$LOAD_VERSION,
+				self::$LOAD_DOWNLOAD,
+				self::$LOAD_ZIP,
+				self::$LOAD_FTP,
+				self::$LOAD_BENCHMARK,
+				self::$LOAD_TEMPLATE,
+				self::$LOAD_XML,
+				self::$LOAD_LOGGER,
+				self::$LOAD_ERROR,
+				self::$LOAD_DATABASE,
+				self::$LOAD_PLUGINS,
+				self::$LOAD_CACHE,
+				self::$LOAD_CURL,
+				self::$LOAD_TEXT,
+				self::$LOAD_NUMBER,
+				self::$LOAD_LANGUAGE
+			);
+		}
 
-		//date class load
-		$this->loadDate();
+		$this->allLoadClasses	=	$loadClasses;
 
-		//FileSystem class load
-		$this->loadFileSystem();
+		foreach($loadClasses as $classes)
+		{
+			if($classes['isStatic'] === true)
+			{
+				autoload::get($classes['class'], $classes['namespace'], true);
 
-		//mod_rewrite class load
-		$this->mod_rewrite	=	$this->loadModRewrite();
+				if(!empty($classes['namespace']))
+				{
+					call_user_func($classes['namespace'].$classes['class'].'::init');
+				}
+				else
+				{
+					call_user_func($classes['class'].'::init');
+				}
+			}
+			else
+			{
+				if(!empty($classes['writeInAttribute']))
+				{
+					$this->defineDynamicClasses[$classes['writeInAttribute']]	=	autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter']);
+				}
+				else
+				{
+					throw new \Exception('Error: class '.$classes['class'].' has not attribute');
+				}
+			}
+		}
 
-		$this->mod_rewrite->setUseModRewrite(USE_MOD_REWRITE);
-
-		//browser class load
-		$this->browser	=	$this->loadBrowser();
-
-		//versions class load
-		$this->loadVersion();
-
-		//download class load
-		$this->loadDownload();
-
-		//zip class load
-		$this->zip	=	$this->loadZIP();
-
-		//ftp class load
-		$this->ftp	=	$this->loadFTP();
-
-		//benchmark class load
-		$this->loadBenchmark();
-
-		//Template class load and configuration
-		$this->template	=	$this->loadTemplate();
-
-		$this->template->setTemplateDir(TEMPLATE_DIR);
-		$this->template->setHeaderFile(TEMPLATE_HEADER);
-		$this->template->setFooterFile(TEMPLATE_FOOTER);
-
-		//xml class load
-		$this->xml	=	$this->loadXML();
 
 		//PHPMailer class load
-		$this->phpmailer	=	$this->loadPHPMailer();
-
-		//logger class load
-		$this->logger	=	$this->loadLogger();
-
-		//error class load
-		$this->error	=	$this->loadError();
-
-		//Database class load and configuration
-		if(!empty(PDO_HOST))
+		if(class_exists('PHPMailer') === false)
 		{
-			$this->db	=	$this->loadDatabase(true);
+			require 'PHPMailerAutoload.php';
 		}
 
-		//plugins class load
-		$this->loadPlugins();
-
-		//cache class load
-		$this->loadCache();
-
-		//cURL class load
-		$this->loadCurl();
-
-		//text class load
-		$this->loadText();
-
-		//number class load
-		$this->loadNumber();
-
-		//Langauge class load and configuration
-		$this->loadLanguage();
-
-		if(empty(LANGUAGE_PATH) === false)
-		{
-			language::setLanguagePath(LANGUAGE_PATH);
-		}
-
-		if(empty(DEFAULT_LANGUAGE) === false)
-		{
-			language::setDefaultLanguage(DEFAULT_LANGUAGE);
-		}
-
-		if(empty(CACHE_PATH) === false)
-		{
-			cache::setCacheDir(CACHE_PATH);
-		}
-
-		if(empty(CACHE_EXTENSION) === false)
-		{
-			cache::setCacheExtension(CACHE_EXTENSION);
-		}
-
-		language::loadLang(true);
+		$this->phpmailer	=	new \PHPMailer();
 
 		$this->loadDynamicClasses();
 		$this->loadInstallPlugins();
@@ -200,18 +194,18 @@ abstract class load_functions extends GeneralFunctions
 	 */
 	private function getAllInitClasses()
 	{
-		return array(
-			'database'		=>	$this->db,
-			'template'		=>	$this->template,
-			'phpmailer'		=>	$this->phpmailer,
-			'logger'		=>	$this->logger,
-			'error'			=>	$this->error,
-			'ftp'			=>	$this->ftp,
-			'zip'			=>	$this->zip,
-			'browser'		=>	$this->browser,
-			'xml'			=>	$this->xml,
-			'mod_rewrite'	=>	$this->mod_rewrite
-		);
+		$back				=	array();
+		$back['phpmailer']	=	$this->phpmailer;
+
+		foreach($this->allLoadClasses as $cl)
+		{
+			if($cl['isStatic'] === false)
+			{
+				$back[$cl['writeInAttribute']]	=	$this->defineDynamicClasses[$cl['writeInAttribute']];
+			}
+		}
+
+		return $back;
 	}
 
 
@@ -222,7 +216,7 @@ abstract class load_functions extends GeneralFunctions
 	 */
 	protected function loadInstallPlugins()
 	{
-		if(!empty(PLUGIN_DIR))
+		if(empty(PLUGIN_DIR) || class_exists('\package\plugins') === false)
 		{
 			return;
 		}

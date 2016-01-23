@@ -110,15 +110,29 @@ define('CACHE_PATH',		ROOT.SEP.'cache'.SEP);
 //Template Pfad
 define('TEMPLATE_DIR',		ROOT.SEP.'templates'.SEP);
 
+//Update Pfad
+define('UPDATE_DIR',		ROOT.SEP.'update'.SEP);
+
+//Package Pfad
+define('PACKAGE_DIR',		ROOT.SEP.'package'.SEP);
+
 //Dynamische Klasse Pfad
-define('DYNAMIC_DIR',		ROOT.SEP.'package'.SEP.'dynamic'.SEP);
+define('DYNAMIC_DIR',		PACKAGE_DIR.'dynamic'.SEP);
 
 //Pages Pfad - Klassen zur Verarbeitung
-define('PAGE_DIR',			ROOT.SEP.'package'.SEP.'pages'.SEP);
+define('PAGE_DIR',			PACKAGE_DIR.'pages'.SEP);
 
 //Plugin Pfad
-define('PLUGIN_DIR',		ROOT.SEP.'package'.SEP.'plugins'.SEP);
+define('PLUGIN_DIR',		PACKAGE_DIR.'plugins'.SEP);
 
+//Core Pfad
+define('CORE_DIR',			PACKAGE_DIR.'core'.SEP);
+
+//Implement Pfad
+define('IMPLEMENT_DIR',		PACKAGE_DIR.'implement'.SEP);
+
+//Libraries Pfad
+define('LIB_DIR',			PACKAGE_DIR.'libs'.SEP);
 
 #### Konstanten Funktionen ####
 

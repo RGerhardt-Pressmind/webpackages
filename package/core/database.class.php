@@ -35,11 +35,22 @@ class database extends \PDO
 	/**
 	 * @var string Der aktuell benutzte PDO Treiber
 	 */
-	private $useDriver	=	'';
+	private $useDriver	=	'', $isInit = false;
 
 
-	public function __construct($dsn, $username, $passwd, $options, $driver = 'mysql')
+	public function __construct($para/*$dsn, $username, $passwd, $options, $driver = 'mysql'*/)
 	{
+		$dsn		=	$para['dsn'];
+		$username	=	$para['username'];
+		$passwd		=	$para['password'];
+		$options	=	$para['options'];
+		$driver		=	$para['driver'];
+
+		if(empty($dsn) || empty($username) || empty($passwd))
+		{
+			return;
+		}
+
 		if(is_array($options) === false)
 		{
 			$options	=	array();
@@ -73,6 +84,8 @@ class database extends \PDO
 		}
 
 		parent::__construct($dsn, $username, $passwd, $options);
+
+		$this->isInit	=	true;
 	}
 
 
@@ -86,6 +99,11 @@ class database extends \PDO
 	 */
 	public function quefetch($sql)
 	{
+		if($this->isInit === false)
+		{
+			return array();
+		}
+
 		if(is_string($sql) === false || empty($sql))
 		{
 			throw new \Exception('pdo::quefetch: $sql ist kein string oder ist leer');
@@ -119,6 +137,11 @@ class database extends \PDO
 	 */
 	public function result_array($sql)
 	{
+		if($this->isInit === false)
+		{
+			return array();
+		}
+
 		if(is_string($sql) === false || empty($sql))
 		{
 			throw new \Exception('pdo::result_array $sql ist kein string oder ist leer');
@@ -152,6 +175,11 @@ class database extends \PDO
 	 */
 	public function multi_query($sql)
 	{
+		if($this->isInit === false)
+		{
+			return false;
+		}
+
 		if(is_string($sql) === false)
 		{
 			throw new \Exception('pdo::multi_query: $sql ist kein string');
@@ -173,6 +201,11 @@ class database extends \PDO
 	 */
 	public function version()
 	{
+		if($this->isInit === false)
+		{
+			return false;
+		}
+
 		return $this->getAttribute(\PDO::ATTR_CLIENT_VERSION);
 	}
 
@@ -185,6 +218,11 @@ class database extends \PDO
 	 */
 	public function insert_id($name = null)
 	{
+		if($this->isInit === false)
+		{
+			return 0;
+		}
+
 		if($this->useDriver == 'pgsql')
 		{
 			$v 		=	$this->version();
@@ -222,6 +260,11 @@ class database extends \PDO
 	 */
 	public function secQuery($sql, $execute, $isResultAssociative = true, $getFirstResult = false)
 	{
+		if($this->isInit === false)
+		{
+			return false;
+		}
+
 		if(is_string($sql) === false || empty($sql))
 		{
 			throw new \Exception('pdo::secQuery: $sql ist kein string');

@@ -22,10 +22,12 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package\core;
+namespace package;
 
 
-class Date
+use package\implement\IStatic;
+
+class Date implements IStatic
 {
 	const STATE_BW = 'Baden-Württemberg';
     const STATE_BY = 'Bayern';
@@ -53,6 +55,12 @@ class Date
 	const NATION_POLISH		=	'Polish';
 	const NATION_SWEDISH	=	'Swedish';
 
+
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
+
 	/**
 	 * Gibt den aktuellen Zeitstempel der Zeitzone zurück
 	 *
@@ -61,6 +69,17 @@ class Date
 	 */
 	public static function now($timezone)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'now', array($timezone));
+			$plugins	=	plugins::hookCall('before', 'Date', 'now', array($timezone));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(empty($timezone))
 		{
 			$timezone	=	TIMEZONE;
@@ -72,6 +91,16 @@ class Date
 		}
 
 		$datetime	=	new \DateTime('now', new \DateTimeZone($timezone));
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('after', 'Date', 'now', array($datetime));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
 
 		return $datetime->getTimestamp();
 	}
@@ -86,7 +115,28 @@ class Date
 	 */
 	public static function get_timestamp_by_date($date)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_timestamp_by_date', array($date));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_timestamp_by_date', array($date));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		$datetime	=	new \DateTime($date, new \DateTimeZone(TIMEZONE));
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_timestamp_by_date', array($datetime));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
 
 		return $datetime->getTimestamp();
 	}
@@ -103,9 +153,30 @@ class Date
 	 */
 	public static function get_date_by_timestamp($timestamp, $format = 'Y-m-d')
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_date_by_timestamp', array($timestamp, $format));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_date_by_timestamp', array($timestamp, $format));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		$datetime	=	new \DateTime();
 		$datetime->setTimestamp($timestamp);
 		$datetime->setTimezone(new \DateTimeZone(TIMEZONE));
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_date_by_timestamp', array($datetime, $format));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
 
 		return $datetime->format($format);
 	}
@@ -121,10 +192,31 @@ class Date
 	 */
 	public static function get_easter_day_by_year($year, $inTimestamp = false)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_easter_day_by_year', array($year, $inTimestamp));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_easter_day_by_year', array($year, $inTimestamp));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		$base	=	new \DateTime($year.'-03-21', new \DateTimeZone(TIMEZONE));
 		$day	=	easter_days($year);
 
 		$base->add(new \DateInterval('P'.$day.'D'));
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_easter_day_by_year', array($base, $inTimestamp));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
 
 		if($inTimestamp)
 		{
@@ -145,6 +237,17 @@ class Date
 	 */
 	private static function get_all_holidays($year)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_all_holidays', array($year));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_all_holidays', array($year));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		$base	=	new \DateTime($year.'-03-21', new \DateTimeZone(TIMEZONE));
 		$base->modify('+'.easter_days($year).' days');
 
@@ -177,8 +280,7 @@ class Date
 		$fronleichname		=	clone $base;
 		$fronleichname->modify('+60 days');
 
-
-		return array(
+		$back	=	array(
 			'maundyThursday'	=>	$gruendonnerstag,
 			'goodFriday'		=>	$karfreitag,
 			'easterSaturday'	=>	$ostersamstag,
@@ -190,6 +292,19 @@ class Date
 			'pentecostMonday'	=>	$pfingstmontag,
 			'corpusChristi'		=>	$fronleichname
 		);
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_all_holidays', array($year, $back));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
+
+		return $back;
 	}
 
 
@@ -200,8 +315,19 @@ class Date
 	 * @param string $nation
 	 * @return array
 	 */
-	public static function get_german_holidays_by_year($year, $nation = self::NATION_GERMANY)
+	public static function get_nation_holidays_by_year($year, $nation = self::NATION_GERMANY)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_nation_holidays_by_year', array($year, $nation));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_nation_holidays_by_year', array($year, $nation));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		$holidays		=	array();
 		$allHolidays	=	self::get_all_holidays($year);
 
@@ -624,6 +750,16 @@ class Date
 
 		ksort($holidays);
 
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_nation_holidays_by_year', array($year, $nation, $holidays));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		return $holidays;
 	}
 
@@ -635,6 +771,17 @@ class Date
 	 */
 	public static function get_all_saints_day($year)
     {
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_all_saints_day', array($year));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_all_saints_day', array($year));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
         $date = new \DateTime($year.'-10-31');
 
         for($i = -1; ++$i < 7;)
@@ -646,6 +793,16 @@ class Date
 
             $date->add(new \DateInterval('P1D'));
         }
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_all_saints_day', array($year, $date));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
 
         return $date;
     }
@@ -659,6 +816,17 @@ class Date
 	 */
 	public static function get_mid_summer_day($year)
     {
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_mid_summer_day', array($year));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_mid_summer_day', array($year));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
         $date = new \DateTime($year.'-06-20');
 
         for($i = -1; ++$i < 7;)
@@ -670,6 +838,16 @@ class Date
 
             $date->add(new \DateInterval('P1D'));
         }
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'Date', 'get_mid_summer_day', array($year, $date));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
 
         return $date;
     }
@@ -683,6 +861,17 @@ class Date
 	 */
 	public static function is_year_leap_year($year)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'is_year_leap_year', array($year));
+			$plugins	=	plugins::hookCall('before', 'Date', 'is_year_leap_year', array($year));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(($year % 400) == 0 || (($year % 4) == 0 && ($year % 100) != 0))
 		{
 		   return true;
@@ -705,6 +894,17 @@ class Date
 	 */
 	public static function get_days_in_month($month, $year = 0, $particular_calendar = CAL_GREGORIAN)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'Date', 'get_days_in_month', array($month, $year, $particular_calendar));
+			$plugins	=	plugins::hookCall('before', 'Date', 'get_days_in_month', array($month, $year, $particular_calendar));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if($month < 1 || $month > 12)
 		{
 			return 0;

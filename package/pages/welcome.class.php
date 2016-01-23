@@ -38,6 +38,6 @@ class welcome extends load_functions
 
 		$_SESSION['test']	=	'myTest';
 
-		$this->template->displayNP('hello.php');
+		$this->template->displayNP('welcome/hello.php');
 	}
 }

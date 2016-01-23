@@ -29,6 +29,19 @@ class template
 {
 	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer;
 
+
+	/**
+	 * Setzt die Standard Werte
+	 *
+	 * template constructor.
+	 */
+	public function __construct()
+	{
+		$this->setTemplateDir(TEMPLATE_DIR);
+		$this->setHeaderFile(TEMPLATE_HEADER);
+		$this->setFooterFile(TEMPLATE_FOOTER);
+	}
+
 	/**
 	 * Setzt die Header Datei die Standartmäßig in alles eingebunden wird
 	 *

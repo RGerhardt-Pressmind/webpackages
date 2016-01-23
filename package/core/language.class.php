@@ -25,9 +25,31 @@
 namespace package;
 
 
-class language 
+use package\implement\IStatic;
+
+class language implements IStatic
 {
 	private static $userLng, $lngPath, $defaultLng = 'de_DE', $gettext_reader;
+
+	/**
+	 * Setzt die Standard Werte
+	 *
+	 * language constructor.
+	 */
+	public static function init()
+	{
+		if(empty(LANGUAGE_PATH) === false)
+		{
+			self::setLanguagePath(LANGUAGE_PATH);
+		}
+
+		if(empty(DEFAULT_LANGUAGE) === false)
+		{
+			self::setDefaultLanguage(DEFAULT_LANGUAGE);
+		}
+
+		self::loadLang(true);
+	}
 
 
 	/**

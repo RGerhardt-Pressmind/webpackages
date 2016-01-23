@@ -43,11 +43,12 @@ class autoload
      * @param string $class_name Der Klassenname der aufzurufenen Klasse
 	 * @param string $namespace Wenn die Klasse einen Namespace besitzt, dann diesen angeben
      * @param bool $isStatic Wenn es sich um eine statische Klasse handelt
+	 * @param array $parameter Parameter für den Konstruktor der Klasse. Er muss ein Assoziatives Array sein
 	 *
 	 * @throws \Exception
 	 * @return mixed Gibt die Klasseninstanz zurück oder bei einer statischen Klasse ein true
      */
-	public static function get($class_name, $namespace = null, $isStatic = false)
+	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array())
     {
         if(empty($class_name))
         {
@@ -61,12 +62,12 @@ class autoload
 			//Wenn schon eingebunden, nicht erneut laden
 			if(class_exists($class_name) === false)
 			{
-            	require $pathToFile;
+            	require_once $pathToFile;
 			}
 
 			if($isStatic === false)
 			{
-				if(empty($namespace) === false)
+				if(!empty($namespace))
 				{
 					$class_name	=	$namespace.$class_name;
 
@@ -75,7 +76,7 @@ class autoload
 						throw new \Exception('class '.$class_name.'('.$pathToFile.') not exists (NS)');
 					}
 
-					self::$classes[$class_name] = new $class_name();
+					self::$classes[$class_name] = new $class_name($parameter);
 				}
 				else
 				{
@@ -84,7 +85,7 @@ class autoload
 						throw new \Exception('class '.$class_name.'('.$pathToFile.') not exists');
 					}
 
-					self::$classes[$class_name] = new $class_name();
+					self::$classes[$class_name] = new $class_name($parameter);
 				}
 			}
 			else

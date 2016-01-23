@@ -6,5 +6,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://$USER_HOME$/vendor/composer" />
+          <root url="file://$USER_HOME$/vendor/matthiasmullie/minify" />
+          <root url="file://$USER_HOME$/vendor/matthiasmullie/path-converter" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$USER_HOME$/vendor/composer" />
+          <root url="file://$USER_HOME$/vendor/matthiasmullie/minify" />
+          <root url="file://$USER_HOME$/vendor/matthiasmullie/path-converter" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

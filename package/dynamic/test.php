@@ -38,7 +38,13 @@ class test implements \package\implement\iDynamic
 
 	public function setAllClasses($allClasses)
 	{
-		self::$db	=	$allClasses['database'];
+		self::$db	=	$allClasses['db'];
+	}
+
+
+	public function hello_body()
+	{
+		return 'Hallo Welt';
 	}
 
 	public function loadData()

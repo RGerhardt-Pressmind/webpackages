@@ -25,9 +25,16 @@
 namespace package;
 
 
-class curl 
+use package\implement\IStatic;
+
+class curl implements IStatic
 {
 	public static $userAgent, $cookieActive = false;
+
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
 
 	/**
 	 * Kontrolliert ob die cURL Extension existiert

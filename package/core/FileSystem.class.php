@@ -22,11 +22,18 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package\core;
+namespace package;
 
 
-class FileSystem
+use package\implement\IStatic;
+
+class FileSystem implements IStatic
 {
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
+
 	/**
 	 * Kontrolliert ob eine Datei beschreibbar ist oder nicht.
 	 * Unter Unix System kein Problem, aber Windows Systeme
@@ -38,6 +45,17 @@ class FileSystem
 	 */
 	public static function is_really_writable($file)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'FileSystem', 'is_really_writable', array($file));
+			$plugins	=	plugins::hookCall('before', 'FileSystem', 'is_really_writable', array($file));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(OS == 'UNIX' && !ini_get('safe_mode'))
 		{
 			return is_writable($file);
@@ -74,11 +92,23 @@ class FileSystem
 	 *
 	 * @param string $path
 	 * @param int $orderBack
+	 * @param bool $withData
 	 *
 	 * @return array|bool
 	 */
 	public static function get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
+			$plugins	=	plugins::hookCall('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(is_dir($path) === false || file_exists($path) === false)
 		{
 			return false;
@@ -144,6 +174,16 @@ class FileSystem
 			$back	=	$newSort;
 		}
 
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'FileSystem', 'get_all_files', array($back));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 
 		return $back;
 	}
@@ -159,6 +199,17 @@ class FileSystem
 	 */
 	public static function delete_files($path, $delete_dir = false)
 	{
+		if(class_exists('\package\plugins') === true)
+		{
+			plugins::hookShow('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
+			$plugins	=	plugins::hookCall('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(is_dir($path) === false || file_exists($path) === false)
 		{
 			return false;
@@ -196,6 +247,16 @@ class FileSystem
 			if(@rmdir($path) === false)
 			{
 				return false;
+			}
+		}
+
+		if(class_exists('\package\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'FileSystem', 'delete_files', array($path, $delete_dir));
+
+			if($plugins != null)
+			{
+				return $plugins;
 			}
 		}
 

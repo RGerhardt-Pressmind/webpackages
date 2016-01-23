@@ -53,14 +53,15 @@ if(TIMEZONE != '')
 }
 
 $myPaths	=	array();
-$myPaths[]	=	ROOT.SEP.'update';
-$myPaths[]	=	ROOT.SEP.'package';
-$myPaths[]	=	ROOT.SEP.'package'.SEP.'implement';
-$myPaths[]	=	ROOT.SEP.'package'.SEP.'core';
-$myPaths[]	=	ROOT.SEP.'package'.SEP.'gettext';
-$myPaths[]	=	ROOT.SEP.'package'.SEP.'gettext'.SEP.'php5';
-$myPaths[]	=	ROOT.SEP.'package'.SEP.'PHPMailer';
-$myPaths[]	=	ROOT.SEP.'package'.SEP.'libs';
+$myPaths[]	=	UPDATE_DIR;
+$myPaths[]	=	PACKAGE_DIR;
+$myPaths[]	=	IMPLEMENT_DIR;
+$myPaths[]	=	CORE_DIR;
+$myPaths[]	=	LIB_DIR;
+$myPaths[]	=	LIB_DIR.'gettext';
+$myPaths[]	=	LIB_DIR.'gettext'.SEP.'php5';
+$myPaths[]	=	LIB_DIR.'PHPMailer';
+$myPaths[]	=	LIB_DIR.'minifiy';
 
 if(PAGE_DIR != '')
 {
@@ -108,10 +109,10 @@ require 'autoload.class.php';
 require 'iLogger.class.php';
 require 'iDynamic.class.php';
 require 'IPlugin.class.php';
+require 'IStatic.class.php';
 
 require 'Validater.class.php';
 require 'security.class.php';
-require 'GeneralFunctions.abstract.class.php';
 require 'load_functions.abstract.class.php';
 
 if(file_exists(ROOT.SEP.'dynamicInit.php') === true)
