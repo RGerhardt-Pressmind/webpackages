@@ -69,15 +69,16 @@ switch(strtolower($type))
 
 			if($withConvert === true)
 			{
-				$minifier = new \MatthiasMullie\Minify\CSS($file);
-				echo $minifier->minify();
-				exit;
+				$minifier 	=	new \MatthiasMullie\Minify\CSS($file);
+				$output		=	$minifier->minify();
 			}
 			else
 			{
-				echo file_get_contents($file);
-				exit;
+				$output		=	file_get_contents($file);
 			}
+
+			echo $output;
+			exit;
 		}
 		else
 		{
@@ -103,14 +104,49 @@ switch(strtolower($type))
 			if($withConvert === true)
 			{
 				$minifier	=	new \MatthiasMullie\Minify\JS($file);
-				echo $minifier->minify();
-				exit;
+				$output	=	$minifier->minify();
 			}
 			else
 			{
-				echo file_get_contents($file);
-				exit;
+				$output	= file_get_contents($file);
 			}
+
+			echo $output;
+			exit;
+		}
+		else
+		{
+			header('HTTP/1.1 404 Not Found');
+		}
+
+	break;
+	case 'img':
+
+		$file	=	TEMPLATE_DIR.$skin.$dir.$filename;
+
+		if(file_exists($file))
+		{
+			header('Content-type: '.image_type_to_mime_type(exif_imagetype($file)));
+			header('Cache-Control: must-revalidate');
+			$offset = 60 * 60 ;
+			$ExpStr = 'Expires: '.gmdate('D, d M Y H:i:s', time() + $offset).' GMT';
+			header($ExpStr);
+
+			ob_start();
+
+			if(stripos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)
+			{
+			  ob_start('ob_gzhandler');
+			  echo file_get_contents($file);
+			  ob_end_flush();
+			}
+			else
+			{
+			  	echo file_get_contents($file);
+			}
+
+			header('Content-Length: '.ob_get_length());
+			ob_end_flush();
 		}
 		else
 		{

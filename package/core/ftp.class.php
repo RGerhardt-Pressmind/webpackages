@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     @category   ftp.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -123,7 +123,7 @@ class ftp
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function setPassiveModus()
+	public function set_passive_modus()
 	{
 		if($this->_ftp === false)
 		{
@@ -143,7 +143,7 @@ class ftp
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public function getRemoteFile($remoteFile, $localeFile)
+	public function get_remote_file($remoteFile, $localeFile)
 	{
 		if($this->_ftp === false)
 		{
@@ -173,7 +173,7 @@ class ftp
 	 * @return bool|int|string Gibt, je nach Parameter, ein false zurück wenn die Bearbeitungszeit nicht ermittels werden konnte. Gibt ein Integer zurück wenn kein Datumsformat angegeben wurde und einen String wenn ein Datumsformat angegeben wurde.
 	 * @throws \Exception
 	 */
-	public function modifiedTime($remoteFile, $timeFormat = null)
+	public function modified_time($remoteFile, $timeFormat = null)
 	{
 		if($this->_ftp === false)
 		{
@@ -244,7 +244,7 @@ class ftp
 	 * @return bool Gibt ein true zurück wenn es sich um ein Ordner handelt und ein false wenn es keiner ist.
 	 * @throws \Exception
 	 */
-	public function isDir($remoteDirectory = '.')
+	public function is_dir($remoteDirectory = '.')
 	{
 		if($this->_ftp === false)
 		{
@@ -314,7 +314,7 @@ class ftp
 		}
 		else
 		{
-			$items	=	$this->scanDir($remoteDirectory, $recursive);
+			$items	=	$this->scan_dir($remoteDirectory, $recursive);
 		}
 
         $count 	= 	0;
@@ -338,7 +338,7 @@ class ftp
 	 * @return int Gibt die Anzahl an gefundenen Dateien im FTP Verzeichnis zurück
 	 * @throws \Exception
 	 */
-	public function isEmpty($remoteDirectory)
+	public function is_empty($remoteDirectory)
 	{
 		if($this->_ftp === false)
 		{
@@ -377,7 +377,7 @@ class ftp
 	 * @return bool Wenn es erfolgreich hochgeladen wurde gibt es ein true zurück. Bei einem Fehler false.
 	 * @throws \Exception
 	 */
-	public function putFromPath($local_file)
+	public function put_from_path($local_file)
     {
 		if($this->_ftp === false)
 		{
@@ -417,7 +417,7 @@ class ftp
 	 * @return bool Gibt nach erfolgreichem hochladen ein true zurück oder ein false bei einem Fehler.
 	 * @throws \Exception
 	 */
-	public function putAll($source_directory, $target_directory, $mode = FTP_BINARY)
+	public function put_all($source_directory, $target_directory, $mode = FTP_BINARY)
     {
 		if($this->_ftp === false)
 		{
@@ -453,7 +453,7 @@ class ftp
 						}
                     }
 
-                    $this->putAll($source_directory.'/'.$file, $target_directory.'/'.$file, $mode);
+                    $this->put_all($source_directory.'/'.$file, $target_directory.'/'.$file, $mode);
                 }
 				else
 				{
@@ -479,7 +479,7 @@ class ftp
 	 * @return bool Gibt nach erfolgreichem hochladen ein true und bei einem Fehler false zurück.
 	 * @throws \Exception
 	 */
-	public function putFromString($remote_file, $content)
+	public function put_from_string($remote_file, $content)
     {
 		if($this->_ftp === false)
 		{
@@ -515,7 +515,7 @@ class ftp
 	 * @return int Gibt die Byte Größe des FTP Verzeichnises zurück
 	 * @throws \Exception
 	 */
-	public function dirSize($remoteDirectory = '.', $recursive = true)
+	public function dir_size($remoteDirectory = '.', $recursive = true)
     {
 		if($this->_ftp === false)
 		{
@@ -533,7 +533,7 @@ class ftp
 			}
 		}
 
-        $items	=	$this->scanDir($remoteDirectory, $recursive);
+        $items	=	$this->scan_dir($remoteDirectory, $recursive);
         $size 	= 	0;
 
         foreach($items as $item)
@@ -576,7 +576,7 @@ class ftp
 			}
 		}
 
-		if($this->isDir($remoteDirectory) === false)
+		if($this->is_dir($remoteDirectory) === false)
 		{
 			throw new \Exception('Remote path is not directory');
 		}
@@ -637,7 +637,7 @@ class ftp
                 $file = substr($file, $dir_len);
             }
 
-            if($this->isDir($file) === true)
+            if($this->is_dir($file) === true)
 			{
                 $result[] = $file;
                 $items    = $flatten($this->nlist($file, true, $filter));
@@ -687,7 +687,7 @@ class ftp
 			}
 		}
 
-		if($recursive === false || $this->isDir($remoteDirectory) === true)
+		if($recursive === false || $this->is_dir($remoteDirectory) === true)
 		{
 			$ftpMkdir	=	@ftp_mkdir($this->_ftp, $remoteDirectory);
 
@@ -755,7 +755,7 @@ class ftp
 			}
 		}
 
-		if($this->isDir($remoteFile) === true)
+		if($this->is_dir($remoteFile) === true)
 		{
 			return false;
 		}
@@ -797,7 +797,7 @@ class ftp
 
 			foreach($files as $file)
 			{
-				if($this->isDir($file) === false)
+				if($this->is_dir($file) === false)
 				{
 					$remove	=	$this->remove($file);
 
@@ -836,7 +836,7 @@ class ftp
 	 * @return bool Bei erfolgreichen Reinigung gibt er true ansonsten false zurück.
 	 * @throws \Exception
 	 */
-	public function cleanDir($remoteDirectory)
+	public function clean_dir($remoteDirectory)
 	{
 		if($this->_ftp === false)
 		{
@@ -856,12 +856,12 @@ class ftp
 
 		if(!$files = $this->nlist($remoteDirectory))
 		{
-            return $this->isEmpty($remoteDirectory);
+            return $this->is_empty($remoteDirectory);
         }
 
         foreach($files as $file)
 		{
-            $remove	=	$this->remove($file, true);
+            $remove	=	$this->remove($file);
 
 			if($remove === false)
 			{
@@ -869,7 +869,7 @@ class ftp
 			}
         }
 
-        return $this->isEmpty($remoteDirectory);
+        return $this->is_empty($remoteDirectory);
 	}
 
 
@@ -881,7 +881,7 @@ class ftp
 	 * @return array Gibt ein mehrdimensionales Array mit allen gefundenen Dateien zurück
 	 * @throws \Exception
 	 */
-	public function scanDir($remoteDirectory = '.', $recursive = false)
+	public function scan_dir($remoteDirectory = '.', $recursive = false)
     {
 		if($this->_ftp === false)
 		{
@@ -899,7 +899,7 @@ class ftp
 			}
 		}
 
-        return $this->parseRawList($this->rawlist($remoteDirectory, $recursive));
+        return $this->parse_raw_list($this->rawlist($remoteDirectory, $recursive));
     }
 
 
@@ -929,7 +929,7 @@ class ftp
 			}
 		}
 
-        if($this->isDir($remoteDirectory) === false)
+        if($this->is_dir($remoteDirectory) === false)
 		{
             throw new \Exception('"'.$remoteDirectory.'" is not a directory.');
         }
@@ -965,7 +965,7 @@ class ftp
                     $path	=	substr($path, 2);
                 }
 
-                $items[$this->rawToType($item).'#'.$path] = $item;
+                $items[$this->raw_to_type($item).'#'.$path] = $item;
             }
 
             return $items;
@@ -1004,7 +1004,7 @@ class ftp
                 $path	=	substr($path, 2);
             }
 
-            $items[$this->rawToType($item).'#'.$path] = $item;
+            $items[$this->raw_to_type($item).'#'.$path] = $item;
 
             if($item[0] == 'd')
 			{
@@ -1028,7 +1028,7 @@ class ftp
 	 * @return array Gibt Details zu den einzelnen FTP-Dateien zurück
 	 * @throws \Exception
 	 */
-	public function parseRawList(array $rawlist)
+	public function parse_raw_list(array $rawlist)
     {
 		if($this->_ftp === false)
 		{
@@ -1080,7 +1080,7 @@ class ftp
                 'day'         => $chunks[6],
                 'time'        => $chunks[7],
                 'name'        => $chunks[8],
-                'type'        => $this->rawToType($chunks[0]),
+                'type'        => $this->raw_to_type($chunks[0]),
 			);
 
             if($item['type'] == 'link')
@@ -1119,7 +1119,7 @@ class ftp
 	 * @return string Der umgewandelete, verständlichere, Typ kommt zurück.
 	 * @throws \Exception
 	 */
-	public function rawToType($permission)
+	public function raw_to_type($permission)
     {
 		if($this->_ftp === false)
 		{

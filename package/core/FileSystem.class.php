@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     @category   FileSystem.class.php
-	@package    webpackage
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 webpackage
+	@copyright  2010-2016 webpackages
 	@license    http://www.gnu.org/licenses/
 */
 

@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
     @category   browser.class.php
 	@package    webpackage
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 webpackage
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -659,9 +659,12 @@ class browser
      */
     public function setUserAgent($agent_string)
     {
-        $this->reset();
-        $this->_agent = $agent_string;
-        $this->determine();
+		if(is_string($agent_string))
+		{
+        	$this->reset();
+        	$this->_agent = $agent_string;
+        	$this->determine();
+		}
     }
 
     /**

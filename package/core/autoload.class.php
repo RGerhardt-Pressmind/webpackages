@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   autoload.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -27,11 +27,6 @@ namespace package;
 
 class autoload
 {
-	/**
-	 * @var array Auflistung aller bereits instanzierten Klassen
-	 */
-	private static $classes = 	array();
-
 	/**
 	 * @const Der Klassensuffix unter den die Dateien abzuspeichern sind
 	 */
@@ -55,60 +50,50 @@ class autoload
             throw new \Exception('class is not string or empty');
         }
 
-        if(empty(self::$classes[$class_name]))
-        {
-            $pathToFile =  $class_name.self::CLASS_SUFFIX;
+		$pathToFile =  $class_name.self::CLASS_SUFFIX;
 
-			//Wenn schon eingebunden, nicht erneut laden
-			if(class_exists($class_name) === false)
-			{
-            	require_once $pathToFile;
-			}
-
-			if($isStatic === false)
-			{
-				if(!empty($namespace))
-				{
-					$class_name	=	$namespace.$class_name;
-
-					if(class_exists($class_name) === false)
-					{
-						throw new \Exception('class '.$class_name.'('.$pathToFile.') not exists (NS)');
-					}
-
-					self::$classes[$class_name] = new $class_name($parameter);
-				}
-				else
-				{
-					if(class_exists($class_name) === false)
-					{
-						throw new \Exception('class '.$class_name.'('.$pathToFile.') not exists');
-					}
-
-					self::$classes[$class_name] = new $class_name($parameter);
-				}
-			}
-			else
-			{
-				if(empty($namespace) === false)
-				{
-					$class_name	=	$namespace.$class_name;
-				}
-
-				if(class_exists($class_name) === false)
-				{
-					self::$classes[$class_name] = new $class_name();
-				}
-			}
-        }
+		//Wenn schon eingebunden, nicht erneut laden
+		if(class_exists($class_name) === false)
+		{
+			require_once $pathToFile;
+		}
 
 		if($isStatic === false)
 		{
-			return self::$classes[$class_name];
+			if(!empty($namespace))
+			{
+				$class_name	=	$namespace.$class_name;
+
+				if(class_exists($class_name) === false)
+				{
+					throw new \Exception('class '.$class_name.'('.$pathToFile.') not exists (with namespace)');
+				}
+
+				return new $class_name($parameter);
+			}
+			else
+			{
+				if(class_exists($class_name) === false)
+				{
+					throw new \Exception('class '.$class_name.'('.$pathToFile.') not exists');
+				}
+
+				return new $class_name($parameter);
+			}
 		}
 		else
 		{
-			return true;
+			if(!empty($namespace))
+			{
+				$class_name	=	$namespace.$class_name;
+			}
+
+			if(class_exists($class_name) === false)
+			{
+				new $class_name();
+			}
 		}
+
+		return true;
     }
 }

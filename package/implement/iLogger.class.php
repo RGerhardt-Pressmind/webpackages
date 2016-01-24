@@ -33,19 +33,19 @@ interface iLogger
 	 * @param string $level Der Level des Logs
 	 * @return mixed
 	 */
-	public function writeLog($msg, $code = 0, $level = 'info');
+	public function write_log($msg, $code = 0, $level = 'info');
 
 	/**
 	 * Löscht einen Log
 	 *
 	 * @return mixed
 	 */
-	public function deleteLog();
+	public function delete_log();
 
 	/**
 	 * Liest den Log aus
 	 *
 	 * @return mixed
 	 */
-	public function readLog();
+	public function read_log();
 } 

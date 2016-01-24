@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   language.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -40,15 +40,15 @@ class language implements IStatic
 	{
 		if(empty(LANGUAGE_PATH) === false)
 		{
-			self::setLanguagePath(LANGUAGE_PATH);
+			self::set_language_path(LANGUAGE_PATH);
 		}
 
 		if(empty(DEFAULT_LANGUAGE) === false)
 		{
-			self::setDefaultLanguage(DEFAULT_LANGUAGE);
+			self::set_default_language(DEFAULT_LANGUAGE);
 		}
 
-		self::loadLang(true);
+		self::load_lang(true);
 	}
 
 
@@ -59,9 +59,10 @@ class language implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function setLanguage($lng)
+	public static function set_language($lng)
 	{
 		self::$userLng	=	$lng;
+		self::load_lang(true);
 	}
 
 
@@ -70,7 +71,7 @@ class language implements IStatic
 	 *
 	 * @return mixed
 	 */
-	public static function getLanguage()
+	public static function get_language()
 	{
 		return self::$userLng;
 	}
@@ -83,7 +84,7 @@ class language implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function setLanguagePath($path)
+	public static function set_language_path($path)
 	{
 		self::$lngPath	=	$path;
 	}
@@ -94,7 +95,7 @@ class language implements IStatic
 	 *
 	 * @return mixed
 	 */
-	public static function getLanguagePath()
+	public static function get_language_path()
 	{
 		return self::$lngPath;
 	}
@@ -107,7 +108,7 @@ class language implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function setDefaultLanguage($lng)
+	public static function set_default_language($lng)
 	{
 		self::$defaultLng	=	$lng;
 	}
@@ -118,7 +119,7 @@ class language implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function getDefaultLanguage()
+	public static function get_default_language()
 	{
 		return self::$defaultLng;
 	}
@@ -130,7 +131,7 @@ class language implements IStatic
 	 * @param bool $ignoreFileExists Soll ignorieren ob die Sprachdatei existiert oder nicht. Standartmäßig false.
 	 * @return boolean
 	 */
-	public static function loadLang($ignoreFileExists = false)
+	public static function load_lang($ignoreFileExists = false)
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -184,7 +185,7 @@ class language implements IStatic
 	/**
 	 * Tauscht die Variablen aus
 	 *
-	 * @param $text Der String der übersetzt/ersetzt werden soll
+	 * @param string $text Der String der übersetzt/ersetzt werden soll
 	 * @return mixed Gibt den übersetzten String zurück
 	 */
 	public static function translate($text)

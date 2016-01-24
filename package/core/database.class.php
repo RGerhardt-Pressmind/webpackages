@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   database.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -38,22 +38,57 @@ class database extends \PDO
 	private $useDriver	=	'', $isInit = false;
 
 
-	public function __construct($para/*$dsn, $username, $passwd, $options, $driver = 'mysql'*/)
+	/**
+	 * database constructor.
+	 * @param array $para
+	 * @throws \Exception
+	 */
+	public function __construct($para)
 	{
-		$dsn		=	$para['dsn'];
-		$username	=	$para['username'];
-		$passwd		=	$para['password'];
-		$options	=	$para['options'];
-		$driver		=	$para['driver'];
+		$dsn		=	'';
+		$username	=	'';
+		$passwd		=	'';
+		$options	=	null;
+		$driver		=	'mysql';
 
-		if(empty($dsn) || empty($username) || empty($passwd))
+		if(!empty($para['dsn']))
+		{
+			$dsn		=	$para['dsn'];
+		}
+
+		if(!empty($para['username']))
+		{
+			$username	=	$para['username'];
+		}
+
+		if(!empty($para['password']))
+		{
+			$passwd		=	$para['password'];
+		}
+
+		if(!empty($para['options']))
+		{
+			$options	=	$para['options'];
+		}
+
+		if(!empty($para['driver']))
+		{
+			$driver		=	$para['driver'];
+		}
+
+		if(empty($dsn) || empty($username))
 		{
 			return;
 		}
 
-		if(is_array($options) === false)
+		if(empty($options))
 		{
 			$options	=	array();
+		}
+
+		if(in_array($driver, self::$allowedDrivers) === false)
+		{
+			throw new \Exception('Driver: '.$driver.' not allowed. Allowed: '.implode(',', self::$allowedDrivers));
 		}
 
 		$this->useDriver	=	$driver;
@@ -106,7 +141,7 @@ class database extends \PDO
 
 		if(is_string($sql) === false || empty($sql))
 		{
-			throw new \Exception('pdo::quefetch: $sql ist kein string oder ist leer');
+			throw new \Exception('pdo::quefetch: $sql is not a string or empty');
 		}
 
 		try{
@@ -144,14 +179,14 @@ class database extends \PDO
 
 		if(is_string($sql) === false || empty($sql))
 		{
-			throw new \Exception('pdo::result_array $sql ist kein string oder ist leer');
+			throw new \Exception('pdo::result_array $sql is not a string or empty');
 		}
 
 		preg_match_all('/(SELECT|select)/', $sql, $matches);
 
-		if(is_array($matches) === false || empty($matches))
+		if(empty($matches))
 		{
-			throw new \Exception('pdo::result_array $sql ist keine SELECT Anweisung');
+			throw new \Exception('pdo::result_array $sql is not select');
 		}
 
 		try{
@@ -180,14 +215,15 @@ class database extends \PDO
 			return false;
 		}
 
-		if(is_string($sql) === false)
+		if(is_string($sql) === false || empty($sql))
 		{
-			throw new \Exception('pdo::multi_query: $sql ist kein string');
+			throw new \Exception('pdo::multi_query: $sql is not a string or empty');
 		}
 
 		try{
 			$this->exec($sql);
 		}catch(\PDOException $e){
+			$this->rollBack();
 			return false;
 		}
 
@@ -267,7 +303,7 @@ class database extends \PDO
 
 		if(is_string($sql) === false || empty($sql))
 		{
-			throw new \Exception('pdo::secQuery: $sql ist kein string');
+			throw new \Exception('pdo::secQuery: $sql is not a string or empty');
 		}
 
 		try{

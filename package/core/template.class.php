@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   template.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
 namespace package;
 
 
-class template 
+class template
 {
-	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer;
+	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer, $skin;
 
 
 	/**
@@ -40,6 +40,19 @@ class template
 		$this->setTemplateDir(TEMPLATE_DIR);
 		$this->setHeaderFile(TEMPLATE_HEADER);
 		$this->setFooterFile(TEMPLATE_FOOTER);
+		$this->setSkin(TEMPLATE_DEFAULT_SKIN);
+	}
+
+
+	/**
+	 * Setzt den Skin (Ordner) im Template Verzeichnis
+	 *
+	 * @param string $skin
+	 * @return void
+	 */
+	public function setSkin($skin)
+	{
+		$this->skin	=	$skin;
 	}
 
 	/**
@@ -146,6 +159,12 @@ class template
 			${$key}	=	$value;
 		}
 
+		$templateFile	=	$this->tempDir.$this->skin.SEP.$template;
+		$splFileInfo	=	new \SplFileInfo($templateFile);
+
+		$headerPath		=	$splFileInfo->getPath().SEP.$header;
+		$footerPath		=	$splFileInfo->getPath().SEP.$footer;
+
 		if($cacheActive === true)
 		{
 			if(class_exists('\package\cache') === false)
@@ -154,7 +173,7 @@ class template
 			}
 
 			$cacheName		=	md5($this->currentURL().'_'.$template.'_'.$header.'_'.$footer.'_'.md5(serialize($this->contentData))).'.cache';
-			$getTemplate	=	cache::getTemplateElement($cacheName, $cacheExpiresTime);
+			$getTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)
 			{
@@ -166,11 +185,11 @@ class template
 			{
 				ob_start();
 
-				require $this->tempDir.$header;
-				require $this->tempDir.$template;
-				require $this->tempDir.$footer;
+				require $headerPath;
+				require $templateFile;
+				require $footerPath;
 
-				$setTemplateElement	=	cache::setTemplateElement($cacheName, ob_get_contents());
+				$setTemplateElement	=	cache::set_template_element($cacheName, ob_get_contents());
 
 				ob_end_clean();
 
@@ -180,15 +199,15 @@ class template
 				}
 
 				$loadHeader		=	false;
-				$loadTemplate	=	cache::getTemplateElement($cacheName, $cacheExpiresTime);
+				$loadTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 				$loadFooter		=	false;
 			}
 		}
 		else
 		{
-			$loadHeader		=	$this->tempDir.$header;
-			$loadTemplate	=	$this->tempDir.$template;
-			$loadFooter		=	$this->tempDir.$footer;
+			$loadHeader		=	$headerPath;
+			$loadTemplate	=	$templateFile;
+			$loadFooter		=	$footerPath;
 		}
 
 		if($loadHeader !== false)
@@ -223,6 +242,12 @@ class template
 			${$key}	=	$value;
 		}
 
+		$templatePath	=	$this->tempDir.$this->skin.SEP.$template;
+		$splFileInfo	=	new \SplFileInfo($templatePath);
+
+		$headerPath		=	$splFileInfo->getPath().SEP.$this->header;
+		$footerPath		=	$splFileInfo->getPath().SEP.$this->footer;
+
 		if($cacheActive === true)
 		{
 			if(class_exists('\package\cache') === false)
@@ -231,7 +256,7 @@ class template
 			}
 
 			$cacheName		=	md5($this->currentURL().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
-			$getTemplate	=	cache::getTemplateElement($cacheName, $cacheExpiresTime);
+			$getTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)
 			{
@@ -243,13 +268,13 @@ class template
 			{
 				ob_start();
 
-				require $this->tempDir.$this->header;
-				require $this->tempDir.$template;
-				require $this->tempDir.$this->footer;
+				require $headerPath;
+				require $templatePath;
+				require $footerPath;
 
 				$output	=	ob_get_contents();
 
-				$setTemplateElement	=	cache::setTemplateElement($cacheName, $output);
+				$setTemplateElement	=	cache::set_template_element($cacheName, $output);
 
 				ob_end_clean();
 
@@ -265,14 +290,14 @@ class template
 		}
 		else
 		{
-			$loadTemplate	=	$this->tempDir.$template;
+			$loadTemplate	=	$this->tempDir.$this->skin.SEP.$template;
 		}
 
-		require $this->tempDir.$this->header;
+		require $headerPath;
 
 		require $loadTemplate;
 
-		require $this->tempDir.$this->footer;
+		require $footerPath;
 	}
 
 
@@ -301,11 +326,11 @@ class template
 		{
 			if(class_exists('\package\cache') === false)
 			{
-				throw new \Exception('class cache not found');
+				throw new \Exception('Error: class cache not found');
 			}
 
 			$cacheName		=	md5($this->currentURL().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
-			$getTemplate	=	cache::getTemplateElement($cacheName, $cacheExpiresTime);
+			$getTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)
 			{
@@ -315,9 +340,9 @@ class template
 			{
 				ob_start();
 
-				require $this->tempDir.$template;
+				require $this->tempDir.$this->skin.SEP.$template;
 
-				$setTemplateElement	=	cache::setTemplateElement($cacheName, ob_get_contents());
+				$setTemplateElement	=	cache::set_template_element($cacheName, ob_get_contents());
 
 				ob_end_clean();
 
@@ -326,7 +351,7 @@ class template
 					throw new \Exception('setTemplateElement not write');
 				}
 
-				$templatePath	=	cache::getTemplateElement($cacheName, $cacheExpiresTime);
+				$templatePath	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 				if($templatePath === false)
 				{
@@ -618,5 +643,21 @@ class template
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Lädt eine Datei aus dem Template Verzeichnis (js,css,images) und gibt den Inhalt zurück
+	 *
+	 * @param string $file Dateiname der zu ladenen Datei
+	 * @param string $type css,js,javascript,img,image,images
+	 * @param string $dir Der Ordnernamen falls nicht mit $type übereinstimmend
+	 * @param bool $minify Definiert ob die Ausgabe von JavaScript oder CSS komprimiert werden soll
+	 *
+	 * @return Gibt den Inhalt der Datei zurück
+	 */
+	public function load_template_file($file, $type, $dir = '', $minify = true)
+	{
+		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.$this->skin.'&d='.$dir.'&c='.$minify;
 	}
 } 

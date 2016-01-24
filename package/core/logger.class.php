@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   logger.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -39,7 +39,7 @@ class logger implements iLogger
 	 *
 	 * @return bool
 	 */
-	public function writeLog($msg, $code = 0, $level = 'info')
+	public function write_log($msg, $code = 0, $level = 'info')
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -75,7 +75,7 @@ class logger implements iLogger
 	 * @return bool Gibt bei erfolg true ansonsten false zurück.
 	 * @throws \Exception
 	 */
-	public function deleteLog()
+	public function delete_log()
 	{
 		$filename	=	CACHE_PATH.$this->filename;
 
@@ -117,7 +117,7 @@ class logger implements iLogger
 	 *
 	 * @return string Gibt den Inhalt des Logs zurück
 	 */
-	public function readLog()
+	public function read_log()
 	{
 		$filename	=	CACHE_PATH.$this->filename;
 

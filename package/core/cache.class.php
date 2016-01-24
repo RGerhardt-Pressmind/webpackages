@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   cache.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -40,12 +40,12 @@ class cache implements IStatic
 	{
 		if(empty(CACHE_PATH) === false)
 		{
-			self::setCacheDir(CACHE_PATH);
+			self::set_cache_dir(CACHE_PATH);
 		}
 
 		if(empty(CACHE_EXTENSION) === false)
 		{
-			self::setCacheExtension(CACHE_EXTENSION);
+			self::set_cache_extension(CACHE_EXTENSION);
 		}
 	}
 
@@ -56,7 +56,7 @@ class cache implements IStatic
 	 * @param string $cachePath Der Ordner wo alle Gecachten Dateien landen
 	 * @return boolean
 	 */
-	public static function setCacheDir($cachePath)
+	public static function set_cache_dir($cachePath)
 	{
 		if(empty($cachePath))
 		{
@@ -67,7 +67,7 @@ class cache implements IStatic
 		{
 			self::$cacheDir	=	$cachePath;
 
-			return	mkdir(self::$cacheDir, 0777, true);
+			return @mkdir(self::$cacheDir, 0777, true);
 		}
 		elseif(file_exists($cachePath) === true)
 		{
@@ -85,7 +85,7 @@ class cache implements IStatic
 	 * @param bool $active Aktiviert bzw Deaktiviert den Cache
 	 * @return void
 	 */
-	public static function setCacheActive($active = false)
+	public static function set_cache_active($active = false)
 	{
 		self::$cacheActiv	=	$active;
 	}
@@ -99,7 +99,7 @@ class cache implements IStatic
 	 * @throws \Exception
 	 * @return void
 	 */
-	public static function setCacheExtension($extension = 'cache')
+	public static function set_cache_extension($extension = 'cache')
 	{
 		if(empty($extension))
 		{
@@ -122,9 +122,9 @@ class cache implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function setTemplateElement($cache_name, $content)
+	public static function set_template_element($cache_name, $content)
 	{
-		$isSave	=	file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
+		$isSave	=	@file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
 
 		if($isSave === false)
 		{
@@ -145,7 +145,7 @@ class cache implements IStatic
 	 *
 	 * @return bool|string Gibt den Link zur gecachten Datei zurück, false wenn Lebensdauer abgelaufen oder gecachte Datei nicht existiert
 	 */
-	public static function getTemplateElement($cache_name, $lifetime = 500)
+	public static function get_template_element($cache_name, $lifetime = 500)
 	{
 		$cacheFile	=	self::$cacheDir.$cache_name.'.html';
 
@@ -185,7 +185,7 @@ class cache implements IStatic
 	 * @throws \Exception
 	 * @return bool Wenn Cache erfolgreich erstellt true, wenn es Probleme gab false
 	 */
-	public static function setElement($cache_name, $content, $lifetime = 500)
+	public static function set_element($cache_name, $content, $lifetime = 500)
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -239,12 +239,12 @@ class cache implements IStatic
 	/**
 	 * Gibt das gültige Cache Element zurück
 	 *
-	 * @param $cache_name Der eindeutige Name der gecachten Datei
+	 * @param string $cache_name Der eindeutige Name der gecachten Datei
 	 *
 	 * @throws
 	 * @return mixed Gibt den Inhalt des Caches zurück, false wenn Datei nicht existiert oder Lebensdauer abgelaufen
 	 */
-	public static function getElement($cache_name)
+	public static function get_element($cache_name)
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -267,16 +267,26 @@ class cache implements IStatic
 
 		if(is_file($filename) === true)
 		{
-			$getContent		=	file_get_contents($filename);
-			$unserialize	=	unserialize($getContent);
+			$getContent		=	@file_get_contents($filename);
 
-			if(isset($unserialize['lifetime']) === true && $unserialize['lifetime'] >= time())
+			if(!empty($getContent))
 			{
-				return $unserialize['content'];
+				$unserialize	=	unserialize($getContent);
+
+				if(isset($unserialize['lifetime']) === true && $unserialize['lifetime'] >= time())
+				{
+					return $unserialize['content'];
+				}
+				else
+				{
+					unlink($filename);
+					return false;
+				}
 			}
 			else
 			{
-				unlink($filename);
+				@unlink($filename);
+
 				return false;
 			}
 		}
@@ -290,12 +300,12 @@ class cache implements IStatic
 	/**
 	 * Entfernt eine Cache Datei
 	 *
-	 * @param $cache_name Eindeutiger Name der Cache Datei
+	 * @param string $cache_name Eindeutiger Name der Cache Datei
 	 *
 	 * @throws \Exception
 	 * @return bool Nach erfolgreichem löschen des Caches wird true zurück gegeben, bei einem Fehler false.
 	 */
-	public static function deleteElement($cache_name)
+	public static function delete_element($cache_name)
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -318,7 +328,7 @@ class cache implements IStatic
 
 		if(is_file($filename) === true)
 		{
-			$remove	=	unlink($filename);
+			$remove	=	@unlink($filename);
 		}
 
 		if(class_exists('\package\plugins') === true)

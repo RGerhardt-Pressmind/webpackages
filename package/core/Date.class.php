@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     @category   Date.class.php
-	@package    webpackage
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 webpackage
+	@copyright  2010-2016 webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -66,9 +66,15 @@ class Date implements IStatic
 	 *
 	 * @param string $timezone
 	 * @return int
+	 * @throws \Exception
 	 */
-	public static function now($timezone)
+	public static function now($timezone = TIMEZONE)
 	{
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'now', array($timezone));
@@ -112,9 +118,15 @@ class Date implements IStatic
 	 *
 	 * @param string $date
 	 * @return int
+	 * @throws \Exception
 	 */
 	public static function get_timestamp_by_date($date)
 	{
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_timestamp_by_date', array($date));
@@ -150,9 +162,15 @@ class Date implements IStatic
 	 * @param string $format
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	public static function get_date_by_timestamp($timestamp, $format = 'Y-m-d')
 	{
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_date_by_timestamp', array($timestamp, $format));
@@ -189,9 +207,19 @@ class Date implements IStatic
 	 * @param bool $inTimestamp
 	 *
 	 * @return string|int
+	 * @throws \Exception
 	 */
 	public static function get_easter_day_by_year($year, $inTimestamp = false)
 	{
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+		else if(function_exists('easter_days') === false)
+		{
+			throw new \Exception('Error: easter_days function in php not exists');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_easter_day_by_year', array($year, $inTimestamp));
@@ -206,7 +234,7 @@ class Date implements IStatic
 		$base	=	new \DateTime($year.'-03-21', new \DateTimeZone(TIMEZONE));
 		$day	=	easter_days($year);
 
-		$base->add(new \DateInterval('P'.$day.'D'));
+		$base->modify('+'.$day.' Days');
 
 		if(class_exists('\package\plugins') === true)
 		{
@@ -234,9 +262,19 @@ class Date implements IStatic
 	 *
 	 * @param int $year
 	 * @return array
+	 * @throws \Exception
 	 */
 	private static function get_all_holidays($year)
 	{
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+		else if(function_exists('easter_days') === false)
+		{
+			throw new \Exception('Error: easter_days function in php not exists');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_all_holidays', array($year));
@@ -768,9 +806,15 @@ class Date implements IStatic
 	 *
 	 * @param $year
 	 * @return \DateTime
+	 * @throws \Exception
 	 */
 	public static function get_all_saints_day($year)
     {
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_all_saints_day', array($year));
@@ -782,7 +826,7 @@ class Date implements IStatic
 			}
 		}
 
-        $date = new \DateTime($year.'-10-31');
+        $date = new \DateTime($year.'-10-31', new \DateTimeZone(TIMEZONE));
 
         for($i = -1; ++$i < 7;)
 		{
@@ -791,7 +835,7 @@ class Date implements IStatic
                 break;
             }
 
-            $date->add(new \DateInterval('P1D'));
+            $date->modify('+1 days');
         }
 
 		if(class_exists('\package\plugins') === true)
@@ -813,9 +857,15 @@ class Date implements IStatic
 	 *
 	 * @param $year
 	 * @return \DateTime
+	 * @throws \Exception
 	 */
 	public static function get_mid_summer_day($year)
     {
+		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		{
+			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_mid_summer_day', array($year));
@@ -827,7 +877,7 @@ class Date implements IStatic
 			}
 		}
 
-        $date = new \DateTime($year.'-06-20');
+        $date = new \DateTime($year.'-06-20', new \DateTimeZone(TIMEZONE));
 
         for($i = -1; ++$i < 7;)
 		{
@@ -836,7 +886,7 @@ class Date implements IStatic
                 break;
             }
 
-            $date->add(new \DateInterval('P1D'));
+            $date->modify('+1 days');
         }
 
 		if(class_exists('\package\plugins') === true)
@@ -891,9 +941,15 @@ class Date implements IStatic
 	 * @param int $particular_calendar CAL_GREGORIAN | CAL_JULIAN | CAL_JEWISH | CAL_FRENCH | CAL_NUM_CALS
 	 *
 	 * @return int
+	 * @throws \Exception
 	 */
 	public static function get_days_in_month($month, $year = 0, $particular_calendar = CAL_GREGORIAN)
 	{
+		if(function_exists('cal_days_in_month') === false)
+		{
+			throw new \Exception('Error: cal_days_in_month function in php not exists');
+		}
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_days_in_month', array($month, $year, $particular_calendar));

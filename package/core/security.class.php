@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   security.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -452,7 +452,7 @@ class security
 	 * @throws \Exception
 	 * @return mixed Gibt die Dateierweiterung zurück.
 	 */
-	public static function getFileType($path)
+	public static function get_file_type($path)
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -513,11 +513,24 @@ class security
 	/**
 	 * Verschlüsselt einen String
 	 *
+	 * @deprecated
 	 * @param string $string Der String der Verschlüsselt werden soll.
 	 * @throws \Exception
 	 * @return string Gibt den SHA512 Verschlüsselten String zurück.
 	 */
 	public static function shaSec($string)
+	{
+		return self::sha_sec($string);
+	}
+
+	/**
+	 * Verschlüsselt einen String
+	 *
+	 * @param string $string Der String der Verschlüsselt werden soll.
+	 * @throws \Exception
+	 * @return string Gibt den SHA512 Verschlüsselten String zurück.
+	 */
+	public static function sha_sec($string)
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -562,49 +575,16 @@ class security
 		$str	=	self::remove_invisible_characters($str);
 		$str	= 	self::_validate_entities($str);
 
-		/*
-		 * URL Decode
-		 *
-		 * Just in case stuff like this is submitted:
-		 *
-		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">Google</a>
-		 *
-		 * Note: Use rawurldecode() so it does not remove plus signs
-		 *
-		 */
 		$str	=	rawurldecode($str);
-
-		/*
-		 * Convert character entities to ASCII
-		 *
-		 * This permits our tests below to work reliably.
-		 * We only convert entities that are within tags since
-		 * these are the ones that will pose security problems.
-		 *
-		 */
 		$str	=	preg_replace_callback("/[a-z]+=([\'\"]).*?\\1/si", array('self', '_convert_attribute'), $str);
 		$str	=	preg_replace_callback("/<\w+.*?(?=>|<|$)/si", array('self', '_decode_entity'), $str);
-
-		/*
-		 * Remove Invisible Characters Again!
-		 */
 		$str	=	self::remove_invisible_characters($str);
 
-		/*
-		 * Convert all tabs to spaces
-		 *
-		 * This prevents strings like this: ja	vascript
-		 * NOTE: we deal with spaces between characters later.
-		 * NOTE: preg_replace was found to be amazingly slow here on
-		 * large blocks of data, so we use str_replace.
-		 */
 		if(strpos($str, "\t") !== false)
 		{
 			$str	=	str_replace("\t", ' ', $str);
 		}
 
-
-		// Remove Strings that are never allowed
 		$str	=	self::_do_never_allowed($str);
 
 		return $str;
@@ -695,32 +675,9 @@ class security
 	 */
 	protected static function _validate_entities($str)
 	{
-		/*
-		 * Protect GET variables in URLs
-		 */
-		 // 901119URL5918AMP18930PROTECT8198
 		$str	=	preg_replace('|\&([a-z\_0-9\-]+)\=([a-z\_0-9\-]+)|i', self::xss_hash()."\\1=\\2", $str);
-
-		/*
-		 * Validate standard character entities
-		 *
-		 * Add a semicolon if missing.  We do this to enable
-		 * the conversion of entities to ASCII later.
-		 *
-		 */
 		$str	=	preg_replace('#(&\#?[0-9a-z]{2,})([\x00-\x20])*;?#i', "\\1;\\2", $str);
-
-		/*
-		 * Validate UTF16 two byte encoding (x00)
-		 *
-		 * Just as above, adds a semicolon if missing.
-		 *
-		 */
 		$str	=	preg_replace('#(&\#x?)([0-9A-F]+);?#i',"\\1\\2;",$str);
-
-		/*
-		 * Un-Protect GET variables in URLs
-		 */
 		$str	=	str_replace(self::xss_hash(), '&', $str);
 
 		return $str;
@@ -757,11 +714,11 @@ class security
 
 		if($url_encoded === true)
 		{
-			$non_displayables[]	=	'/%0[0-8bcef]/';	// url encoded 00-08, 11, 12, 14, 15
-			$non_displayables[] = 	'/%1[0-9a-f]/';		// url encoded 16-31
+			$non_displayables[]	=	'/%0[0-8bcef]/';
+			$non_displayables[] = 	'/%1[0-9a-f]/';
 		}
 
-		$non_displayables[]	=	'/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127
+		$non_displayables[]	=	'/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
 
 		do{
 			$str	=	preg_replace($non_displayables, '', $str, -1, $count);
@@ -774,33 +731,18 @@ class security
 	/**
 	 * Erstellt ein Zufallspasswort
 	 *
+	 * @deprecated Wird nicht mehr seit v2.0 verwendet. Stattdessen text::random_string verwenden
 	 * @param string $length Die Länge des Zufallsstrings
 	 * @return string Gibt den generierten Zufallsstring zurück
 	 */
 	public static function random_string($length = '8')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\text') === true)
 		{
-			plugins::hookShow('before', 'security', 'randomString', array($length));
-			$plugin	=	plugins::hookCall('before', 'security', 'randomString', array($length));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
+			return text::random_string('normal', $length);
 		}
 
-		$rand	=	"";
-		$c		= 	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@&*$";
-
-		srand((double)microtime() * 1000000);
-
-		for($i = -1; ++$i < $length;)
-		{
-			$rand	.= $c[rand()%strlen($c)];
-		}
-
-		return $rand;
+		return '';
 	}
 
 
@@ -888,9 +830,9 @@ class security
 	/**
 	 * Gibt die MAC-Adresse zurück
 	 *
-	 * @return string Gibt bei UNIX Servern die MAC-Adresse zurück. Bei Windows Servern einen leeren String.
+	 * @return string|bool Gibt bei UNIX Servern die MAC-Adresse zurück. Bei Windows Servern ein false zurück
 	 */
-	public function getMacAdress()
+	public function get_mac_adress()
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -904,7 +846,7 @@ class security
 
 		if(OS == 'WIN')
 		{
-			return '';
+			return false;
 		}
 
 		ob_start();

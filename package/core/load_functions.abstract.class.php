@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   load_functions.abstract.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -49,39 +49,12 @@ abstract class load_functions
 	public static $LOAD_TEXT			=	array('isStatic' => true, 'class' => 'text', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_NUMBER			=	array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_LANGUAGE		=	array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_PAYPAL			=	array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\\');
 
 	protected $phpmailer;
 
-	private	$allLoadClasses			=	array();
-	private $defineDynamicClasses	=	array();
-	private $notAllowedClassName	=	array(
-		'autoload',
-		'cache',
-		'captcha',
-		'curl',
-		'database',
-		'pdo',
-		'download',
-		'error',
-		'GeneralFunctions',
-		'load_functions',
-		'logger',
-		'number',
-		'security',
-		'template',
-		'text',
-		'phpmailer',
-		'db',
-		'session',
-		'ftp',
-		'zip',
-		'browser',
-		'xml',
-		'Validater',
-		'mod_rewrite',
-		'date',
-		'fileSystem'
-	);
+	private	$allLoadClasses			=	array(), $defineDynamicClasses	=	array();
+	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'download', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'browser', 'xml', 'Validater', 'mod_rewrite', 'date', 'Date', 'fileSystem', 'paypal');
 
 
 	/**
@@ -95,7 +68,6 @@ abstract class load_functions
 	 */
 	public function __get($varName)
 	{
-		//Change from array_key_exists to isset - performance
 		if(isset($this->defineDynamicClasses[$varName]) === true)
 		{
 			return $this->defineDynamicClasses[$varName];
@@ -180,9 +152,9 @@ abstract class load_functions
 
 		$this->phpmailer	=	new \PHPMailer();
 
-		$this->loadDynamicClasses();
-		$this->loadInstallPlugins();
-		$this->loadDefaultFunctions();
+		$this->load_dynamic_classes();
+		$this->load_install_plugins();
+		$this->load_default_functions();
 	}
 
 
@@ -192,7 +164,7 @@ abstract class load_functions
 	 *
 	 * @return array
 	 */
-	private function getAllInitClasses()
+	private function get_all_init_classes()
 	{
 		$back				=	array();
 		$back['phpmailer']	=	$this->phpmailer;
@@ -214,16 +186,16 @@ abstract class load_functions
 	 *
 	 * @return void
 	 */
-	protected function loadInstallPlugins()
+	protected function load_install_plugins()
 	{
 		if(empty(PLUGIN_DIR) || class_exists('\package\plugins') === false)
 		{
 			return;
 		}
 
-		$allInitClasses	=	$this->getAllInitClasses();
+		$allInitClasses	=	$this->get_all_init_classes();
 
-		$back	=	$this->getPlugins(PLUGIN_DIR);
+		$back	=	$this->get_plugins(PLUGIN_DIR);
 
 		if(is_array($back) === true && empty($back) === false)
 		{
@@ -249,7 +221,7 @@ abstract class load_functions
 	 * @param string $dir
 	 * @return array
 	 */
-	protected function getPlugins($dir)
+	protected function get_plugins($dir)
 	{
 		$directory 	= 	new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
 		$iterator 	= 	new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::LEAVES_ONLY);
@@ -261,7 +233,7 @@ abstract class load_functions
 
 			if(strpos($file->getFilename(), '.master.class.php') !== false && $file->isDir() === false)
 			{
-				require $file;
+				require_once $file;
 
 				$className	=	str_replace(array('.php', '.php5', '.master.class'), array('', '', ''), $file->getFilename());
 				$className	=	'package\plugins\\'.$className;
@@ -277,7 +249,7 @@ abstract class load_functions
 			}
 			elseif($file->isDir() === true)
 			{
-				$back	=	array_merge($back, $this->getPlugins($file));
+				$back	=	array_merge($back, $this->get_plugins($file));
 			}
 		}
 
@@ -291,14 +263,14 @@ abstract class load_functions
 	 * @param array $loadFiles
 	 * @return array
 	 */
-	protected function loadDynamicClasses($loadFiles = array())
+	protected function load_dynamic_classes($loadFiles = array())
 	{
 		if(empty(DYNAMIC_DIR))
 		{
 			return array();
 		}
 
-		$allInitClasses	=	$this->getAllInitClasses();
+		$allInitClasses	=	$this->get_all_init_classes();
 
 		$directory 	= 	new \RecursiveDirectoryIterator(DYNAMIC_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
 		$iterator 	= 	new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::LEAVES_ONLY);
@@ -322,7 +294,7 @@ abstract class load_functions
 				}
 			}
 
-			require $file;
+			require_once $file;
 
 			$className	=	str_replace(array('.php', '.php5', '.class'), array('', '', ''), $file->getFilename());
 
@@ -364,7 +336,7 @@ abstract class load_functions
 	 *
 	 * @return void
 	 */
-	protected function loadDefaultFunctions()
+	protected function load_default_functions()
 	{
 		//Load default functions
 		if(class_exists('\package\plugins') === true)
@@ -381,7 +353,7 @@ abstract class load_functions
 	 *
 	 * @return bool Gibt bei erfolg ein true zurück ansonsten ein false.
 	 */
-	protected function isUserLoggedIn()
+	protected function is_user_logged_in()
 	{
 		if(empty($_SESSION['id_users']))
 		{
@@ -403,11 +375,11 @@ abstract class load_functions
 			}
 		}
 
-		if(empty($_SESSION['id_users']) === false)
+		if(!empty($_SESSION['id_users']))
 		{
 			return true;
 		}
-		elseif(empty($_COOKIE['id_users']) === false)
+		elseif(!empty($_COOKIE['id_users']))
 		{
 			return true;
 		}

@@ -22,11 +22,11 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-$controllPaths	=	array(LANGUAGE_PATH, CACHE_PATH, TEMPLATE_DIR, DYNAMIC_DIR, PAGE_DIR, PLUGIN_DIR);
+$controllPaths	=	array(LANGUAGE_PATH, CACHE_PATH, TEMPLATE_DIR, UPDATE_DIR, PACKAGE_DIR, DYNAMIC_DIR, PAGE_DIR, PLUGIN_DIR, CORE_DIR, IMPLEMENT_DIR, LIB_DIR);
 
 foreach($controllPaths as $path)
 {
-	if($path != '')
+	if(!empty($path))
 	{
 		if(is_dir($path) === false)
 		{
@@ -37,6 +37,15 @@ foreach($controllPaths as $path)
 				throw new Exception('Folder '.$path.' cant not created');
 			}
 		}
+
+		$permission	=	substr(sprintf('%o', fileperms($path)), -4);
+
+		if($permission != '0777' && $permission != '777')
+		{
+			@chmod($path, 0777);
+		}
+
+		clearstatcache();
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,16 +16,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   captcha.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
 namespace package;
 
 
-class captcha 
+class captcha
 {
 	/**
 	 * Erstellt ein Captcha
@@ -33,11 +33,17 @@ class captcha
 	 * @param string $img_path Der Ordner wo das Captcha abgelegt wird
 	 * @param string $img_url Der HTTP Pfad zum abgelegten Captcha
 	 * @param string $font_path Eine Schriftart mit der das Captcha erstellt werden soll
+	 * @param int $fontSize Die Schriftgröße der Schriftart in Pixel
+	 * @param int $imgWidth Die Breite des Captchas in Pixeln
+	 * @param int $imgHeight Die Höhe des Captchas in Pixeln
 	 *
 	 * @return array Gibt das fertige Captcha zurück
+	 * @throws \Exception
 	 */
-	public static function create_captcha($img_path = '', $img_url = '', $font_path = '')
+	public static function create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
 	{
+		$fontSize = 5;
+
 		if(class_exists('\package\plugins') === true)
 		{
 			plugins::hookShow('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
@@ -49,28 +55,28 @@ class captcha
 			}
 		}
 
-		$img_width	=	150;
-		$img_height	=	30;
+		$img_width	=	$imgWidth;
+		$img_height	=	$imgHeight;
 		$expiration	=	7200;
 
 		if(empty($img_path) || empty($img_url))
 		{
-			return false;
+			throw new \Exception('Error: image path or image url is empty');
 		}
 
 		if(is_dir($img_path) === false)
 		{
-			return false;
+			throw new \Exception('Error: image path is not a directory');
 		}
 
 		if(is_writable($img_path) === false)
 		{
-			return false;
+			throw new \Exception('Error: image path not writable');
 		}
 
 		if(extension_loaded('gd') === false)
 		{
-			return false;
+			throw new \Exception('Error: gd lib not installed');
 		}
 
 		// -----------------------------------
@@ -181,14 +187,14 @@ class captcha
 
 		$use_font = ($font_path != '' && file_exists($font_path) && function_exists('imagettftext')) ? true : false;
 
+		$font_size = $fontSize;
+
 		if($use_font == false)
 		{
-			$font_size = 5;
 			$x = rand(0, $img_width / ($length / 3));
 		}
 		else
 		{
-			$font_size	= 16;
 			$x = rand(0, $img_width / ($length / 1.5));
 		}
 
@@ -227,7 +233,7 @@ class captcha
 
 		ImageDestroy($im);
 
-		$back	=	array('word' => $word, 'time' => $now, 'image' => $img);
+		$back	=	array('word' => $word, 'time' => $now, 'image' => $img, 'filepath' => $img_path.$img_name);
 
 		if(class_exists('\package\plugins') === true)
 		{

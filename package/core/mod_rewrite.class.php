@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     @category   mod_rewrite.class.php
-	@package    webpackage
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 webpackage
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -47,7 +47,7 @@ class mod_rewrite implements IStatic
 			self::$isModRewriteActiv	=	true;
 		}
 
-		self::setUseModRewrite(USE_MOD_REWRITE);
+		self::set_use_mod_rewrite(USE_MOD_REWRITE);
 	}
 
 	/**
@@ -56,11 +56,11 @@ class mod_rewrite implements IStatic
 	 * @param $mod
 	 * @throws \Exception
 	 */
-	public function setUseModRewrite($mod)
+	public function set_use_mod_rewrite($mod)
 	{
-		$this->useModRewrite	=	(bool)$mod;
+		self::$useModRewrite	=	(bool)$mod;
 
-		if($this->useModRewrite && !$this->isModRewriteActiv)
+		if(self::$useModRewrite && !self::$isModRewriteActiv)
 		{
 			throw new \Exception('apache has mod_rewrite not activated');
 		}
@@ -73,7 +73,7 @@ class mod_rewrite implements IStatic
 	 * @param string $extension
 	 * @throws \Exception
 	 */
-	public function setUseFileExtension($extension)
+	public function set_use_file_extension($extension)
 	{
 		$extension	=	trim($extension, '.');
 		$extension	=	trim($extension);
@@ -83,7 +83,7 @@ class mod_rewrite implements IStatic
 			throw new \Exception('mod_rewrite file extension is empty');
 		}
 
-		$this->useFileExtension	=	$extension;
+		self::$useFileExtension	=	$extension;
 	}
 
 
@@ -95,13 +95,13 @@ class mod_rewrite implements IStatic
 	 * @param array $parameters
 	 * @return string $link
 	 */
-	public function getUrl($httpRoot, $parameters)
+	public function get_url($httpRoot, $parameters)
 	{
 		$link	=	$httpRoot;
 
 		if(!empty($parameters))
 		{
-			if($this->useModRewrite)
+			if(self::$useModRewrite)
 			{
 				foreach($parameters as $par)
 				{
@@ -116,7 +116,7 @@ class mod_rewrite implements IStatic
 				}
 
 				$link	=	trim($link, '/');
-				$link	.=	'.'.$this->useFileExtension;
+				$link	.=	'.'.self::$useFileExtension;
 			}
 			else
 			{
@@ -138,13 +138,13 @@ class mod_rewrite implements IStatic
 	 * @param array $parameters
 	 * @return string $link
 	 */
-	public function getUrlSimple($httpRoot, $parameters)
+	public function get_url_simple($httpRoot, $parameters)
 	{
 		$link	=	$httpRoot;
 
 		if(!empty($parameters))
 		{
-			if($this->useModRewrite)
+			if(self::$useModRewrite === true)
 			{
 				foreach($parameters as $v)
 				{
@@ -159,7 +159,7 @@ class mod_rewrite implements IStatic
 				}
 
 				$link	=	trim($link, '/');
-				$link	.=	'.'.$this->useFileExtension;
+				$link	.=	'.'.self::$useFileExtension;
 			}
 			else
 			{

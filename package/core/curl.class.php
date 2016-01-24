@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @category   curl.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -36,12 +36,13 @@ class curl implements IStatic
 	 */
 	public static function init(){}
 
+
 	/**
 	 * Kontrolliert ob die cURL Extension existiert
 	 *
 	 * @return bool Gibt true zurück wenn die cURL Extension installiert ist und false wenn nicht
 	 */
-	public static function existCurl()
+	public static function curl_extension_exists()
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -67,9 +68,9 @@ class curl implements IStatic
 	 * @throws \Exception
 	 * @return mixed Gibt die aufgerufenen Daten zurück
 	 */
-	public static function getData($url, $postfields = array(), $ssl = false)
+	public static function get_data($url, $postfields = array(), $ssl = false)
 	{
-		if(self::existCurl() === false)
+		if(self::curl_extension_exists() === false)
 		{
 			throw new \Exception('curl extension not loaded');
 		}
@@ -160,9 +161,9 @@ class curl implements IStatic
 	 * @throws \Exception
 	 * @return int Gibt die HTTP Statuscode zurück
 	 */
-	public static function getState($url)
+	public static function get_status($url)
 	{
-		if(self::existCurl() === false)
+		if(self::curl_extension_exists() === false)
 		{
 			throw new \Exception('curl extension not loaded');
 		}
@@ -219,9 +220,9 @@ class curl implements IStatic
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
 	 * @throws \Exception
 	 */
-	public static function getCityCoordinates($city)
+	public static function get_city_coordinates($city)
 	{
-		if(self::existCurl() === false)
+		if(self::curl_extension_exists() === false)
 		{
 			throw new \Exception('curl extension not loaded');
 		}
@@ -283,7 +284,7 @@ class curl implements IStatic
 	 *
 	 * @return string Gibt, Anhand der IP-Adresse, den Namen der Stadt zurück oder "Not found" wenn keine Stadt gefunden wurde
 	 */
-	public static function getCityNameByIp()
+	public static function get_city_name_by_ip()
 	{
 		if(class_exists('\package\plugins') === true)
 		{

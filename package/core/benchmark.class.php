@@ -1,6 +1,6 @@
 <?php
 /*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+    Copyright (C) 2016  <Robbyn Gerhardt>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     @category   benchmark.class.php
-	@package    Packages
+	@package    webpackages
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
+	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
 
@@ -42,7 +42,7 @@ class benchmark implements IStatic
 	 * @param bool $inSeconds Soll der Wert in Sekunden abgespeichert werden oder in Millisekunden
 	 * @return void
 	 */
-	public static function startPoint($inSeconds = false)
+	public static function start_point($inSeconds = false)
 	{
 		self::$startTime	=	microtime($inSeconds);
 	}
@@ -54,7 +54,7 @@ class benchmark implements IStatic
 	 * @param bool $inSeconds Soll der Wert in Sekunden abgespeichert werden oder in Millisekunden
 	 * @return void
 	 */
-	public static function endPoint($inSeconds = false)
+	public static function end_point($inSeconds = false)
 	{
 		self::$endTime	=	microtime($inSeconds);
 	}
@@ -66,7 +66,7 @@ class benchmark implements IStatic
 	 * @param bool $inSeconds Soll der Wert in Sekunden abgespeichert werden oder in Millisekunden
 	 * @return void
 	 */
-	public static function middlePoint($inSeconds = false)
+	public static function middle_point($inSeconds = false)
 	{
 		self::$middleTime[]	=	microtime($inSeconds);
 	}
@@ -81,9 +81,13 @@ class benchmark implements IStatic
 	 */
 	public static function finish()
 	{
-		if(empty(self::$startTime) || empty(self::$endTime))
+		if(empty(self::$startTime))
 		{
-			throw new \Exception('StartTime or EndTime is empty');
+			throw new \Exception('StartTime empty');
+		}
+		else if(empty(self::$endTime))
+		{
+			self::end_point(true);
 		}
 
 		$diff	=	self::$endTime - self::$startTime;

@@ -38,7 +38,10 @@ class test implements \package\implement\iDynamic
 
 	public function setAllClasses($allClasses)
 	{
-		self::$db	=	$allClasses['db'];
+		if(!empty($allClasses['db']) && $allClasses['db'] instanceof \package\database)
+		{
+			self::$db	=	$allClasses['db'];
+		}
 	}
 
 

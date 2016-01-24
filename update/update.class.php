@@ -33,7 +33,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step5']) === false || $_SESSION['step5'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$masterZIP		=	ROOT.SEP.'update'.SEP.'master.zip';
@@ -56,7 +56,7 @@ class update extends \package\load_functions
 						continue;
 					}
 
-					if($match == 'ERROR_REPORTING')
+					if($match == 'ERROR_REPORTING' || $match == 'USE_SESSION_SAVE_HANDLER' || $match == 'USE_MOD_REWRITE')
 					{
 						$allValues[]	=	array('constant' => $match, 'value' => (bool)constant($match));
 					}
@@ -141,7 +141,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step5']) === false || $_SESSION['step5'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$masterZIP		=	ROOT.SEP.'update'.SEP.'master.zip';
@@ -212,7 +212,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step5']) === false || $_SESSION['step5'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$masterZIP		=	ROOT.SEP.'update'.SEP.'master.zip';
@@ -248,7 +248,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step5']) === false || $_SESSION['step5'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$masterZIP	=	ROOT.SEP.'update'.SEP.'master.zip';
@@ -258,7 +258,6 @@ class update extends \package\load_functions
 			if(is_writable($masterZIP) === true)
 			{
 				$updateFolder	=	ROOT.SEP.'update'.SEP.md5_file($masterZIP).SEP;
-				$masterZIP		=	new PclZip($masterZIP);
 
 				if(is_dir($updateFolder) === false && mkdir($updateFolder, 0777, true) === false)
 				{
@@ -266,7 +265,7 @@ class update extends \package\load_functions
 				}
 				else
 				{
-					if($masterZIP->extract(PCLZIP_OPT_PATH, $updateFolder, PCLZIP_OPT_REPLACE_NEWER))
+					if($this->zip->extractZipArchive($masterZIP, $updateFolder, true))
 					{
 						echo json_encode(array('error' => false, 'message' => '<span class="text-success">Archiv erfolgreich entpackt</span>', 'percent' => 15));
 					}
@@ -297,7 +296,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step5']) === false || $_SESSION['step5'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$this->template->displayDH('update/step5.php', 'update/header.php', 'update/footer.php');
@@ -313,7 +312,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step4']) === false || $_SESSION['step4'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$masterZIP	=	ROOT.SEP.'update'.SEP.'master.zip';
@@ -340,7 +339,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step4']) === false || $_SESSION['step4'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		$this->template->displayDH('update/step4.php', 'update/header.php', 'update/footer.php');
@@ -356,7 +355,7 @@ class update extends \package\load_functions
 	{
 		if(isset($_SESSION['step3']) === false || $_SESSION['step3'] !== true)
 		{
-			$this->error->create404();
+			$this->error->create_error(404);
 		}
 
 		\package\curl::$userAgent	=	\package\version::COMMITTER;
