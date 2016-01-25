@@ -258,7 +258,7 @@ class Date implements IStatic
 
 
 	/**
-	 * Gibt alle Feiertage in einem JAhr zurück
+	 * Gibt alle Feiertage in einem Jahr zurück
 	 *
 	 * @param int $year
 	 * @return array
@@ -710,7 +710,7 @@ class Date implements IStatic
 		elseif($nation == self::NATION_SWEDISH)
 		{
 			$midSummerDay = self::get_mid_summer_day($year);
-        	$allSaintsDay = self::getAllSaintsDay($year);
+        	$allSaintsDay = self::get_all_saints_day($year);
 
 			$holidays	=	array(
 				$year.'-01-01'	=>	array(

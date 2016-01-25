@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.DIRECTORY_SEPARATOR.'package'.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'database.class.php';
+require_once CORE_DIR.'database.class.php';
 
 class NewSessionHandler implements SessionHandlerInterface
 {

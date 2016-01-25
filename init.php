@@ -22,8 +22,8 @@
 	@license    http://www.gnu.org/licenses/
 */
 require 'constants.php';
-require 'controllExistsPaths.php';
-require 'loadSessionHandler.php';
+require SYSTEM_PATH.'controllExistsPaths.php';
+require SYSTEM_PATH.'loadSessionHandler.php';
 
 if(!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER || !defined('PDO_HOST') || empty(PDO_HOST))
 {
@@ -55,6 +55,7 @@ if(TIMEZONE != '')
 $myPaths	=	array();
 $myPaths[]	=	UPDATE_DIR;
 $myPaths[]	=	PACKAGE_DIR;
+$myPaths[]	=	SYSTEM_PATH;
 $myPaths[]	=	IMPLEMENT_DIR;
 $myPaths[]	=	CORE_DIR;
 $myPaths[]	=	LIB_DIR;

@@ -62,11 +62,11 @@ class curl implements IStatic
 	 * Gibt Daten mittels cURL zurück
 	 *
 	 * @paam string $url Die HTTP Adresse die cURL aufrufen soll
+	 * @param $url
 	 * @param array $postfields Irgendwelche Post Felder die übermittelt werden sollen
 	 * @param bool $ssl Wenn es sich um eine SSL Verbindung handelt kann man dies hier noch angeben
-	 *
+	 * @return mixed
 	 * @throws \Exception
-	 * @return mixed Gibt die aufgerufenen Daten zurück
 	 */
 	public static function get_data($url, $postfields = array(), $ssl = false)
 	{

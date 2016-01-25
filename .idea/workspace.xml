@@ -2,334 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/glyphicons-halflings-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/glyphicons-halflings-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/images/flags/France.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/images/flags/Germany.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/images/flags/Italy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/images/flags/United-States.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/images/slider-bg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/core/paypal.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/css/prettyPhoto.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/fonts/glyphicons-halflings-regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/js/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/js/jquery.isotope.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/js/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/js/jquery.prettyPhoto.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/js/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/js/respond.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/template/footer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/welcome/template/header.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/DateTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/browserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/cacheTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/captchaTest.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/FileReader.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/PHPMailer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/POP3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/PclZip.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/SMTP.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/autoloadTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/cacheTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/curlTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/databaseTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/gettext_reader.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/languageTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.GeneralFunctions.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.autoload.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.benchmark.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.cache.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.captcha.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.curl.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.database.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.download.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.error.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.ftp.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.implement.IPlugin.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.implement.iDynamic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.implement.iLogger.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.language.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.load_functions.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.logger.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.number.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.plugins.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.plugins.testPlugin.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.security.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.session.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.template.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.text.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.version.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/package.zip.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/phpmailerException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/update.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/classes/welcome.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/bootstrap-combined.no-icons.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/jquery.iviewer.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/Read Me.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/fonts/phpdocumentor-clean-icons.dev.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/fonts/phpdocumentor-clean-icons.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/fonts/phpdocumentor-clean-icons.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/fonts/phpdocumentor-clean-icons.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/fonts/phpdocumentor-clean-icons.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/lte-ie7.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/phpdocumentor-clean-icons/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/prism.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/css/template.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/constants.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/constants.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/controllExistsPaths.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/controllExistsPaths.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/example.autoload.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/index.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/init.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/init.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.GeneralFunctions.abstract.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.PHPMailer.PHPMailerAutoload.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.PHPMailer.class.phpmailer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.PHPMailer.class.pop3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.PHPMailer.class.smtp.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.autoload.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.benchmark.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.cache.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.captcha.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.curl.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.database.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.download.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.dynamic.test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.error.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.ftp.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.gettext.php5.FileReader.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.gettext.php5.gettext_reader.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.implement.IPlugin.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.implement.iDynamic.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.implement.iLogger.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.language.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.libs.pclzip.lib.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.load_functions.abstract.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.logger.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.number.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.pages.welcome.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.plugins.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.plugins.testPlugin.testPlugin.master.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.security.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.session.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.template.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.text.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.version.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package.zip.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/GeneralFunctions.abstract.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/PHPMailer/PHPMailerAutoload.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/PHPMailer/class.phpmailer.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/PHPMailer/class.pop3.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/PHPMailer/class.smtp.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/autoload.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/benchmark.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/cache.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/captcha.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/curl.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/database.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/download.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/error.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/ftp.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/gettext/php5/FileReader.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/gettext/php5/gettext_reader.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/implement/IPlugin.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/implement/iDynamic.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/implement/iLogger.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/language.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/libs/pclzip.lib.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/load_functions.abstract.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/logger.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/number.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/plugins.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/plugins/testPlugin/testPlugin.master.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/security.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/session.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/template.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/text.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/package/zip.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit.package.autoloadTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit.package.cacheTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit.package.curlTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit.package.databaseTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit.package.languageTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit.unitInit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit/package/autoloadTest.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit/package/cacheTest.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit/package/curlTest.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit/package/databaseTest.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit/package/languageTest.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/phpunit/unitInit.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.hello.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.footer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.header.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.step1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.step2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.step3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.step4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates.update.step5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/hello.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/footer.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/header.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/step1.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/step2.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/step3.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/step4.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/templates/update/step5.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/update.update.class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/files/update/update.class.php.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/font/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/font/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/font/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/font/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/font/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/graphs/class.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/apple-touch-icon-114x114.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/apple-touch-icon-72x72.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/apple-touch-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/custom-icons.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/hierarchy-item.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/icon-class-13x13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/icon-class.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/icon-interface-13x13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/icon-interface.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/icon-trait-13x13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/icon-trait.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/grab.cur" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/hand.cur" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/iviewer.rotate_left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/iviewer.rotate_right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/iviewer.zoom_fit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/iviewer.zoom_in.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/iviewer.zoom_out.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/images/iviewer/iviewer.zoom_zero.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery-1.11.0.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery.dotdotdot-1.5.9.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery.dotdotdot-1.5.9.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery.iviewer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery.iviewer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery.mousewheel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/jquery.smooth-scroll.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/prism.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/js/ui/1.10.4/jquery-ui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/namespaces/default.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/namespaces/package.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/namespaces/package.implement.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/namespaces/package.plugins.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-08/phpdoc-cache-file_a9f3d24105d708988fb2eb9a779912e3.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-0d/phpdoc-cache-file_0d65d2c3e95c7d5ac6590c88dce9b4cd.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-0f/phpdoc-cache-file_a9f2cb9d828938f68a9d50efd109b8eb.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-11/phpdoc-cache-file_c12b92d949d1252711da348a6dca97ec.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-15/phpdoc-cache-file_1fd3aa307b10f6e08f96b9de27cc90eb.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-15/phpdoc-cache-file_370b4b0bac6fbe9bbab3c88b75797ac1.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-22/phpdoc-cache-file_14eb16dd3b38baae5afafc3503c17c0f.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-25/phpdoc-cache-file_4a7b2c2fbceeb033916c00c2495b1c1a.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-29/phpdoc-cache-file_69e09b3b62b3ab07d72484755c8ee31b.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-2c/phpdoc-cache-file_240ba12fb478a97ce85fa8c7f401fec0.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-2c/phpdoc-cache-file_a344ee2c9035fd5135ca3d6eb0bbed98.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-2d/phpdoc-cache-file_f80f4b7686e6af844837628278fe244c.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-2e/phpdoc-cache-settings.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-39/phpdoc-cache-file_b4acac984827d7b08226f4e38ef56ddc.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-41/phpdoc-cache-file_e9fa0d13b445ed0246ee0003db4374d6.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-52/phpdoc-cache-file_92a792e62fc7424c6642523ffec7b1c6.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-59/phpdoc-cache-file_80bbd49aebd86297ff70c43bdec6d80c.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-5f/phpdoc-cache-file_b6f895ed135056a1c9e00e74ab11bd79.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-64/phpdoc-cache-file_826bb4e65ea79fd1feb070ee3c2c4a85.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-65/phpdoc-cache-file_78124642d872378aec8b0b8941f5b01b.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-7a/phpdoc-cache-file_1f5c2fb7e413936e0093dee72ddaea88.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-83/phpdoc-cache-file_887c8bfd55cd130860ce75835ed0ab97.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-83/phpdoc-cache-file_de32d73573112de269daf4d818361a29.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-85/phpdoc-cache-file_13fecf56e0a6de9b150c33fc3b4e62c4.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-8e/phpdoc-cache-file_55235bb789a942d6410047ee07afc064.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-8e/phpdoc-cache-file_ef087997e9058e52befe15c5979cbf3c.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-90/phpdoc-cache-file_9ff55be768bd61e0cfa4074e9645ba7e.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-94/phpdoc-cache-file_946667a684a75b94260a54460d3cd427.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-98/phpdoc-cache-file_3060141c0cbca76d4a7612f4a3e18af1.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-a6/phpdoc-cache-file_d5b02f88f90ae461b58a8959910c347c.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-ab/phpdoc-cache-file_851c5910b7e16eb3556c16566eed518f.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-ab/phpdoc-cache-file_96b7afa7eedcc08664ea386aa672f7fa.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-c0/phpdoc-cache-file_1a639ea53fb870cb470c82f49e521f67.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-c3/phpdoc-cache-file_4d983e1290611567c48635ed721c860f.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-c6/phpdoc-cache-file_cb5750dd6aaf05fc04215ac64074bc9a.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-c8/phpdoc-cache-file_828e0013b8f3bc1bb22b4f57172b019d.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-c8/phpdoc-cache-file_afbcf41ec68715e7f71021111bb5624d.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-cb/phpdoc-cache-file_dfa5a6d3da1d43e2cb3e2540f70d3aff.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-d1/phpdoc-cache-file_4cd92333229ebf5ad5ae4f313b0a9152.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-df/phpdoc-cache-file_0f9f2b19f4f7289786d156553bf2559d.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-e1/phpdoc-cache-file_c9fb06ab41c3af6744b872281dc34365.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-e5/phpdoc-cache-file_13851f0933451d27393b5016628247c5.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-f0/phpdoc-cache-file_07ecde22c325ac4f66650871d6d46945.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-f2/phpdoc-cache-file_67f48086abbed8109df593abc20ae553.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-f3/phpdoc-cache-file_1b30ca9c2b926499141960ef3f26408e.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-f3/phpdoc-cache-file_d0e0176cab1386e7fddbf607105dbf2a.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-f5/phpdoc-cache-file_946cccd1c7061d9b66d4113d141b1b00.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/phpdoc-cache-fe/phpdoc-cache-file_2d11dc7e8dc3fa488c93ddc6c00ccb91.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/reports/deprecated.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/reports/errors.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/reports/markers.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/welcome/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/welcome/css/default.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/welcome/css/wata.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/welcome/js/default.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/templates/welcome/css/font-awesome.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/files/example/autoload.php.txt" afterPath="$PROJECT_DIR$/unitTest/core/curlTest.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/files/package/dynamic/test.php.txt" afterPath="$PROJECT_DIR$/unitTest/core/benchmarkTest.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/files/package/pages/welcome.class.php.txt" afterPath="$PROJECT_DIR$/unitTest/core/databaseTest.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/files/package/version.class.php.txt" afterPath="$PROJECT_DIR$/unitTest/core/autoloadTest.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/js/html5.js" afterPath="$PROJECT_DIR$/templates/welcome/js/html5shiv.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/welcome/hello.php" afterPath="$PROJECT_DIR$/templates/welcome/template/hello.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webServers.xml" afterPath="$PROJECT_DIR$/.idea/webServers.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webpackage.iml" afterPath="$PROJECT_DIR$/.idea/webpackage.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/.htaccess" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/ftpTest.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/controllExistsPaths.php" afterPath="$PROJECT_DIR$/package/system/controllExistsPaths.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/loadSessionHandler.php" afterPath="$PROJECT_DIR$/package/system/loadSessionHandler.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllExistsPaths.php" afterPath="$PROJECT_DIR$/controllExistsPaths.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/getTemplateFile.php" afterPath="$PROJECT_DIR$/getTemplateFile.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/Date.class.php" afterPath="$PROJECT_DIR$/package/core/Date.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/FileSystem.class.php" afterPath="$PROJECT_DIR$/package/core/FileSystem.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/Validater.class.php" afterPath="$PROJECT_DIR$/package/core/Validater.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/XML.class.php" afterPath="$PROJECT_DIR$/package/core/XML.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/autoload.class.php" afterPath="$PROJECT_DIR$/package/core/autoload.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/benchmark.class.php" afterPath="$PROJECT_DIR$/package/core/benchmark.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/browser.class.php" afterPath="$PROJECT_DIR$/package/core/browser.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/cache.class.php" afterPath="$PROJECT_DIR$/package/core/cache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/captcha.class.php" afterPath="$PROJECT_DIR$/package/core/captcha.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/curl.class.php" afterPath="$PROJECT_DIR$/package/core/curl.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/database.class.php" afterPath="$PROJECT_DIR$/package/core/database.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/download.class.php" afterPath="$PROJECT_DIR$/package/core/download.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/errors.class.php" afterPath="$PROJECT_DIR$/package/core/errors.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/ftp.class.php" afterPath="$PROJECT_DIR$/package/core/ftp.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/language.class.php" afterPath="$PROJECT_DIR$/package/core/language.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/logger.class.php" afterPath="$PROJECT_DIR$/package/core/logger.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/mod_rewrite.class.php" afterPath="$PROJECT_DIR$/package/core/mod_rewrite.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/number.class.php" afterPath="$PROJECT_DIR$/package/core/number.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/plugins.class.php" afterPath="$PROJECT_DIR$/package/core/plugins.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/security.class.php" afterPath="$PROJECT_DIR$/package/core/security.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/template.class.php" afterPath="$PROJECT_DIR$/package/core/template.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/text.class.php" afterPath="$PROJECT_DIR$/package/core/text.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/version.class.php" afterPath="$PROJECT_DIR$/package/core/version.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/zip.class.php" afterPath="$PROJECT_DIR$/package/core/zip.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/dynamic/test.php" afterPath="$PROJECT_DIR$/package/dynamic/test.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/implement/iLogger.class.php" afterPath="$PROJECT_DIR$/package/implement/iLogger.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/pages/welcome.class.php" afterPath="$PROJECT_DIR$/package/pages/welcome.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/update/update.class.php" afterPath="$PROJECT_DIR$/update/update.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo" afterPath="$PROJECT_DIR$/todo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/DateTest.php" afterPath="$PROJECT_DIR$/unitTest/core/DateTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/curlTest.php" afterPath="$PROJECT_DIR$/unitTest/core/curlTest.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -355,21 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Date.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package/core/Date.class.php">
+      <file leaf-file-name="ftp.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package/core/ftp.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="13.125">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DateTest.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/unitTest/core/DateTest.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9043659">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.28846154">
+              <caret line="517" column="28" selection-start-line="517" selection-start-column="20" selection-end-line="517" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -392,19 +68,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/todo" />
-        <option value="$PROJECT_DIR$/controllExistsPaths.php" />
-        <option value="$PROJECT_DIR$/update/update.class.php" />
-        <option value="$PROJECT_DIR$/package/core/paypal.class.php" />
-        <option value="$PROJECT_DIR$/package/core/Date.class.php" />
-        <option value="$PROJECT_DIR$/package/core/download.class.php" />
         <option value="$PROJECT_DIR$/package/core/errors.class.php" />
         <option value="$PROJECT_DIR$/package/core/FileSystem.class.php" />
         <option value="$PROJECT_DIR$/package/core/plugins.class.php" />
         <option value="$PROJECT_DIR$/package/core/security.class.php" />
         <option value="$PROJECT_DIR$/package/core/autoload.class.php" />
-        <option value="$PROJECT_DIR$/package/core/curl.class.php" />
-        <option value="$PROJECT_DIR$/package/core/ftp.class.php" />
         <option value="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" />
         <option value="$PROJECT_DIR$/package/implement/iLogger.class.php" />
         <option value="$PROJECT_DIR$/package/core/logger.class.php" />
@@ -419,14 +87,12 @@
         <option value="$PROJECT_DIR$/getTemplateFile.php" />
         <option value="$PROJECT_DIR$/templates/welcome/css/main.css" />
         <option value="$PROJECT_DIR$/templates/welcome/css/font-awesome.min.css" />
-        <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/package/core/benchmark.class.php" />
         <option value="$PROJECT_DIR$/package/dynamic/test.php" />
         <option value="$PROJECT_DIR$/templates/welcome/template/hello.php" />
         <option value="$PROJECT_DIR$/templates/welcome/template/footer.php" />
         <option value="$PROJECT_DIR$/package/core/template.class.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
-        <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/package/core/language.class.php" />
         <option value="$PROJECT_DIR$/templates/welcome/template/header.php" />
         <option value="$PROJECT_DIR$/package/pages/welcome.class.php" />
@@ -439,10 +105,20 @@
         <option value="$PROJECT_DIR$/unitTest/core/cacheTest.php" />
         <option value="$PROJECT_DIR$/package/core/captcha.class.php" />
         <option value="$PROJECT_DIR$/unitTest/core/captchaTest.php" />
-        <option value="$PROJECT_DIR$/unitTest/core/curlTest.php" />
         <option value="$PROJECT_DIR$/package/core/database.class.php" />
         <option value="$PROJECT_DIR$/unitTest/core/databaseTest.php" />
+        <option value="$PROJECT_DIR$/todo" />
+        <option value="$PROJECT_DIR$/unitTest/core/curlTest.php" />
+        <option value="$PROJECT_DIR$/package/core/Date.class.php" />
         <option value="$PROJECT_DIR$/unitTest/core/DateTest.php" />
+        <option value="$PROJECT_DIR$/unitTest/core/downloadTest.php" />
+        <option value="$PROJECT_DIR$/package/core/curl.class.php" />
+        <option value="$PROJECT_DIR$/constants.php" />
+        <option value="$PROJECT_DIR$/package/system/loadSessionHandler.php" />
+        <option value="$PROJECT_DIR$/init.php" />
+        <option value="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" />
+        <option value="$PROJECT_DIR$/package/core/ftp.class.php" />
+        <option value="$PROJECT_DIR$/unitTest/core/ftpTest.php" />
       </list>
     </option>
   </component>
@@ -562,14 +238,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webpackage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webpackage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="package" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -584,19 +278,19 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/package/system" />
+      <recent name="$PROJECT_DIR$/package" />
+      <recent name="$PROJECT_DIR$/templates/welcome/template" />
+      <recent name="$PROJECT_DIR$/package/libs/minify/src" />
+      <recent name="$PROJECT_DIR$/templates/welcome" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/package/system" />
       <recent name="$PROJECT_DIR$/templates/welcome/images/flags" />
       <recent name="$PROJECT_DIR$/templates/welcome" />
       <recent name="$PROJECT_DIR$/package/core" />
       <recent name="$PROJECT_DIR$/package/libs/minify" />
-      <recent name="$PROJECT_DIR$/package/libs/jsMinify" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/welcome/template" />
-      <recent name="$PROJECT_DIR$/package/libs/minify/src" />
-      <recent name="$PROJECT_DIR$/templates/welcome" />
-      <recent name="$PROJECT_DIR$/package/libs" />
-      <recent name="$PROJECT_DIR$/package/core" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.UnitTests">
@@ -890,38 +584,44 @@
       <option name="project" value="LOCAL" />
       <updated>1453550084381</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="v2.0 Alpha">
+      <created>1453671648086</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1453671648086</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UnitTests - 2016.01.24 at 18h 41m 06s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 38m 43s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 41m 34s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 39m 05s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 42m 14s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 39m 42s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 43m 09s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 40m 01s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 43m 37s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 40m 33s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 43m 52s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 40m 51s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 46m 13s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 41m 07s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 47m 41s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 43m 37s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 49m 57s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 43m 52s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="UnitTests - 2016.01.24 at 18h 51m 56s.xml">
+    <history-entry file="UnitTests - 2016.01.25 at 20h 45m 21s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
   </component>
@@ -929,28 +629,28 @@
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30873924" sideWeight="0.50187266" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2612036" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31303725" sideWeight="0.75672215" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3162612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30873924" sideWeight="0.49812734" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31303725" sideWeight="0.24327785" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39820743" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1001,94 +701,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package/libs/gettext/php5/gettext_reader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66255146">
-          <caret line="278" column="13" selection-start-line="278" selection-start-column="13" selection-end-line="278" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/implement/iLogger.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8888889">
-          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/logger.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1193416">
-          <caret line="119" column="26" selection-start-line="119" selection-start-column="26" selection-end-line="119" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/mod_rewrite.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.3950617">
-          <caret line="165" column="37" selection-start-line="165" selection-start-column="37" selection-end-line="165" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/number.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48559672">
-          <caret line="299" column="252" selection-start-line="299" selection-start-column="252" selection-end-line="299" selection-end-column="252" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/paypal.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9218107">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/plugins.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3909465">
-          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/security.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65157753">
-          <caret line="46" column="24" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/text.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37037036">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/Validater.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37037036">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/version.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41152263">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/core/XML.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.041152265">
@@ -1109,7 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37037036">
           <caret line="8" column="1163" selection-start-line="8" selection-start-column="1163" selection-end-line="8" selection-end-column="1163" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1117,11 +728,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37037036">
           <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllExistsPaths.php">
+    <entry file="file://$PROJECT_DIR$/package/system/controllExistsPaths.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5596708">
           <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
@@ -1133,7 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43209878">
           <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1141,7 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5555556">
           <caret line="14" column="130" selection-start-line="14" selection-start-column="130" selection-end-line="14" selection-end-column="130" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,29 +761,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/getTemplateFile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32921812">
-          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/welcome/template/footer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08230453">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/template.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.75">
-          <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
-          <folding>
-            <marker date="1453645146000" expanded="true" signature="10456:10491" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1183,11 +772,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/language/en_US/en_US.mo">
+    <entry file="file://$PROJECT_DIR$/package/system/language/en_US/en_US.mo">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4183267">
           <caret line="15" column="293" selection-start-line="15" selection-start-column="293" selection-end-line="15" selection-end-column="293" />
@@ -1195,26 +783,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/language/en_US/en_US.po">
+    <entry file="file://$PROJECT_DIR$/package/system/language/en_US/en_US.po">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40239045">
           <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4814814">
-          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6995885">
-          <caret line="90" column="40" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1244,7 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65488565">
           <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,7 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.87318087">
           <caret line="23" column="206" selection-start-line="23" selection-start-column="206" selection-end-line="23" selection-end-column="206" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,7 +846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4074844">
           <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1300,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45322245">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1308,7 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46153846">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1324,7 +891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.916667">
           <caret line="77" column="5" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1342,23 +908,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15592515">
           <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/curl.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.87110186">
-          <caret line="286" column="46" selection-start-line="286" selection-start-column="27" selection-end-line="286" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/curlTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53222454">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1390,37 +939,164 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84407485">
           <caret line="166" column="62" selection-start-line="166" selection-start-column="62" selection-end-line="166" selection-end-column="62" />
-          <folding>
-            <marker date="1453657913000" expanded="true" signature="1352:1386" placeholder="SELECT COUNT... " />
-            <marker date="1453657913000" expanded="true" signature="1352:1391" placeholder="SELECT COUNT... " />
-            <marker date="1453657913000" expanded="true" signature="1352:1401" placeholder="SELECT COUNT... " />
-            <marker date="1453657913000" expanded="true" signature="1352:1414" placeholder="SELECT COUNT... " />
-            <marker date="1453657913000" expanded="true" signature="1737:1765" placeholder="SELECT `name... " />
-            <marker date="1453657913000" expanded="true" signature="1737:1775" placeholder="SELECT `name... " />
-            <marker date="1453657913000" expanded="true" signature="1737:1788" placeholder="SELECT `name... unit_test" />
-            <marker date="1453657913000" expanded="true" signature="2227:2281" placeholder="INSERT INTO unit_test" />
-            <marker date="1453657913000" expanded="true" signature="2311:2365" placeholder="INSERT INTO unit_test" />
-            <marker date="1453657913000" expanded="true" signature="2457:2483" placeholder="DELETE FROM " />
-            <marker date="1453657913000" expanded="true" signature="2457:2526" placeholder="DELETE FROM " />
-            <marker date="1453657913000" expanded="true" signature="3080:3134" placeholder="INSERT INTO unit_test" />
-            <marker date="1453657913000" expanded="true" signature="3233:3289" placeholder="DELETE FROM " />
-            <marker date="1453657913000" expanded="true" signature="3546:3619" placeholder="SELECT `name... unit_test" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/Date.class.php">
+    <entry file="file://$PROJECT_DIR$/unitTest/core/curlTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="13.125">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.20610687">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/unitTest/core/DateTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9043659">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state vertical-scroll-proportion="4.0648856">
+          <caret line="142" column="1" selection-start-line="142" selection-start-column="1" selection-end-line="142" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/Date.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.059160307">
+          <caret line="945" column="44" selection-start-line="945" selection-start-column="27" selection-end-line="945" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/libs/PHPMailer/class.phpmailer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33173078">
+          <caret line="1256" column="4" selection-start-line="1256" selection-start-column="4" selection-end-line="1256" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/curl.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4591346">
+          <caret line="73" column="9" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/loadSessionHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53571427">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding>
+            <marker date="1453748641000" expanded="true" signature="1346:1521" placeholder="CREATE TABLE... IF" />
+            <marker date="1453748641000" expanded="true" signature="2222:2329" placeholder="SELECT `sess... sessions" />
+            <marker date="1453748641000" expanded="true" signature="3448:3514" placeholder="DELETE FROM " />
+            <marker date="1453748641000" expanded="true" signature="3789:3927" placeholder="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/template.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32417583">
+          <caret line="460" column="21" selection-start-line="460" selection-start-column="21" selection-end-line="460" selection-end-column="21" />
+          <folding>
+            <marker date="1453645146000" expanded="true" signature="10456:10491" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5769231">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/download.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4945055">
+          <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/getTemplateFile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.23626374">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/todo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/errors.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.4739011">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34732825">
+          <caret line="122" column="8" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9446565">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/unitTest/core/FileSystemTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74236643">
+          <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/FileSystem.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4274809">
+          <caret line="199" column="27" selection-start-line="199" selection-start-column="27" selection-end-line="199" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/unitTest/core/ftpTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85687023">
+          <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/ftp.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28846154">
+          <caret line="517" column="28" selection-start-line="517" selection-start-column="20" selection-end-line="517" selection-end-column="28" />
           <folding />
         </state>
       </provider>

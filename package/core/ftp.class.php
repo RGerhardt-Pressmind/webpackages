@@ -195,7 +195,7 @@ class ftp
 
 		if($time !== -1 && $timeFormat != null)
 		{
-			return date($time, $timeFormat);
+			return date($timeFormat, $time);
 		}
 
 		return $time;
@@ -332,7 +332,7 @@ class ftp
 
 
 	/**
-	 * Gibt die Anzahl an Dateien im FTP Verzeichnis zurück
+	 * Kontrolliert ob ein Verzeichnis leer ist
 	 *
 	 * @param string $remoteDirectory Der interne FTP-Pfad zum Verzeichnis
 	 * @return int Gibt die Anzahl an gefundenen Dateien im FTP Verzeichnis zurück

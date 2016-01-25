@@ -42,7 +42,7 @@ class curlTest extends \PHPUnit_Framework_TestCase
 	{
 		autoload::get('curl', '\package\\', true);
 
-		$back	=	curl::get_data('http://requestb.in/11jzlt51');
+		$back	=	curl::get_data('http://webpackages.de/test/todo');
 
 		$this->assertEquals('ok', $back);
 	}
@@ -51,7 +51,7 @@ class curlTest extends \PHPUnit_Framework_TestCase
 	{
 		autoload::get('curl', '\package\\', true);
 
-		$back	=	curl::get_status('http://requestb.in/11jzlt51');
+		$back	=	curl::get_status('http://webpackages.de/test/todo');
 
 		$this->assertEquals(200, $back);
 	}

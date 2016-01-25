@@ -101,12 +101,6 @@ define('USE_MOD_REWRITE',	true);
  * Pfade im System
  */
 
-//Sprachdateien Pfad
-define('LANGUAGE_PATH',			ROOT.SEP.'language'.SEP);
-
-//Cache Pfad
-define('CACHE_PATH',			ROOT.SEP.'cache'.SEP);
-
 //Template Pfad
 define('TEMPLATE_DIR',			ROOT.SEP.'templates'.SEP);
 
@@ -119,6 +113,18 @@ define('UPDATE_DIR',			ROOT.SEP.'update'.SEP);
 //Package Pfad
 define('PACKAGE_DIR',			ROOT.SEP.'package'.SEP);
 
+//Core Pfad
+define('CORE_DIR',				PACKAGE_DIR.'core'.SEP);
+
+//System Pfad
+define('SYSTEM_PATH',			PACKAGE_DIR.'system'.SEP);
+
+//Cache Pfad
+define('CACHE_PATH',			SYSTEM_PATH.'cache'.SEP);
+
+//Sprachdateien Pfad
+define('LANGUAGE_PATH',			SYSTEM_PATH.'language'.SEP);
+
 //Dynamische Klasse Pfad
 define('DYNAMIC_DIR',			PACKAGE_DIR.'dynamic'.SEP);
 
@@ -127,9 +133,6 @@ define('PAGE_DIR',				PACKAGE_DIR.'pages'.SEP);
 
 //Plugin Pfad
 define('PLUGIN_DIR',			PACKAGE_DIR.'plugins'.SEP);
-
-//Core Pfad
-define('CORE_DIR',				PACKAGE_DIR.'core'.SEP);
 
 //Implement Pfad
 define('IMPLEMENT_DIR',			PACKAGE_DIR.'implement'.SEP);
