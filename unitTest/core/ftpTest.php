@@ -43,6 +43,11 @@ class ftpTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->ftp->login($this->username, $this->password);
+
+		if(file_exists(CACHE_PATH.'version.txt') === false)
+		{
+			file_put_contents(CACHE_PATH.'version.txt', 1);
+		}
 	}
 
 
@@ -58,7 +63,6 @@ class ftpTest extends \PHPUnit_Framework_TestCase
 		chmod(CACHE_PATH, 0777);
 
 		$this->assertTrue($this->ftp->get_remote_file('/download/version.txt', CACHE_PATH.'version.txt'));
-		@unlink(CACHE_PATH.'version.txt');
 	}
 
 
@@ -83,5 +87,23 @@ class ftpTest extends \PHPUnit_Framework_TestCase
 	public function testIsEmpty()
 	{
 		$this->assertFalse($this->ftp->is_empty('/download'));
+	}
+
+
+	public function testPutAll()
+	{
+		$this->assertTrue($this->ftp->put_all(CACHE_PATH, '/upload'));
+	}
+
+
+	public function testPutFromString()
+	{
+		$this->assertTrue($this->ftp->put_from_string('/upload/version22.txt', file_get_contents(CACHE_PATH.'version.txt')));
+	}
+
+
+	public function testDirSize()
+	{
+		$this->assertEquals(18424717, $this->ftp->dir_size('/download/'));
 	}
 }

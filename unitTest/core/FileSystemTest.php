@@ -31,10 +31,13 @@ require_once 'init.php';
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
-	public function testIsReallyWritable()
+	public function setUp()
 	{
 		autoload::get('FileSystem', '\package\\', true);
+	}
 
+	public function testIsReallyWritable()
+	{
 		$this->assertTrue(FileSystem::is_really_writable(ROOT.SEP.'unitTest'.SEP.'core'.SEP.'FileSystemTest.php'));
 		$this->assertTrue(FileSystem::is_really_writable(ROOT.SEP.'unitTest'.SEP.'core'.SEP));
 	}
@@ -42,20 +45,39 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAllFiles()
 	{
-		autoload::get('FileSystem', '\package\\', true);
-
 		$this->assertEquals('d836f5b875c7facb45646babd66a7380', md5(serialize(FileSystem::get_all_files(PLUGIN_DIR,\RecursiveIteratorIterator::SELF_FIRST))));
 	}
 
 
 	public function testDeleteFiles()
 	{
-		autoload::get('FileSystem', '\package\\', true);
-
 		//Cache files created
 		mkdir(CACHE_PATH.'UnitTest1.1', 0777, true);
 		file_put_contents(CACHE_PATH.'UnitTest1.1'.SEP.'unitTest5.txt', 'UnitTest5');
 
-		$this->assertTrue(FileSystem::delete_files(CACHE_PATH, true));
+		$this->assertTrue(FileSystem::delete_files(CACHE_PATH, false));
+	}
+
+
+	public function testCopyDirectory()
+	{
+		//Cache files created
+		mkdir(CACHE_PATH.'UnitTest1.1'.SEP.'cacheInCache', 0777, true);
+		file_put_contents(CACHE_PATH.'UnitTest1.1'.SEP.'unitTest5.txt', 'UnitTest5');
+		file_put_contents(CACHE_PATH.'UnitTest1.1'.SEP.'cacheInCache'.SEP.'unitTest6.txt', 'UnitTest6');
+
+		$this->assertTrue(FileSystem::copyDirectory(CACHE_PATH.'UnitTest1.1', CACHE_PATH.'UnitTest1.2'));
+		$this->assertTrue(FileSystem::delete_files(CACHE_PATH, false));
+	}
+
+
+	public function testRenameDirectory()
+	{
+		mkdir(SYSTEM_PATH.'cacheUnit'.SEP.'cacheInCache', 0777, true);
+		file_put_contents(SYSTEM_PATH.'cacheUnit'.SEP.'unitTest5.txt', 'UnitTest5');
+		file_put_contents(SYSTEM_PATH.'cacheUnit'.SEP.'cacheInCache'.SEP.'unitTest6.txt', 'UnitTest6');
+
+		$this->assertTrue(FileSystem::renameDirectory(SYSTEM_PATH.'cacheUnit', SYSTEM_PATH.'cacheUnit2'));
+		$this->assertTrue(FileSystem::delete_files(SYSTEM_PATH.'cacheUnit2', true));
 	}
 }

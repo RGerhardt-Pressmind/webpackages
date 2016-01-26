@@ -141,8 +141,8 @@ class number implements IStatic
 		$start  	= 	date('Y-m-d H:i:s',$start);
 		$end    	= 	date('Y-m-d H:i:s',$end);
 
-		$d_start    = 	new \DateTime($start);
-		$d_end      = 	new \DateTime($end);
+		$d_start    = 	new \DateTime($start, new \DateTimeZone(TIMEZONE));
+		$d_end      = 	new \DateTime($end, new \DateTimeZone(TIMEZONE));
 		$diff 		= 	$d_start->diff($d_end);
 
 		$back		=	new \stdClass();
@@ -228,6 +228,8 @@ class number implements IStatic
 			{
 				require 'language.class.php';
 			}
+
+			language::init();
 		}
 
 		if($diffDate->year == 0)

@@ -262,4 +262,175 @@ class FileSystem implements IStatic
 
 		return true;
 	}
+
+
+	/**
+	 * Kopiert ein ganzes Verzeichnis
+	 *
+	 * @param string $source Relativer Pfad zum koopierenden Verzeichnis
+	 * @param string $dest Relativer Pfad zum Zielverzeichnis
+	 * @param int $chmod Ändert anschließend die Zugriffsrechte im Zielverzeichnis, wenn erlaubt. Standartmäßig "0755"
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public static function copyDirectory($source, $dest, $chmod = 0755)
+	{
+		if(file_exists($dest) === false)
+		{
+			mkdir($dest, $chmod);
+		}
+
+		if(is_dir($source) === true)
+		{
+			$directory	=	new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS);
+			$iterator	=	new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::SELF_FIRST);
+
+			foreach($iterator as $file)
+			{
+				if($file instanceof \SplFileInfo)
+				{
+					if($file->isDir() === true)
+					{
+						$newPath	=	str_replace($source, $dest, $file->__toString());
+
+						if(file_exists($newPath) === false)
+						{
+							if(@mkdir($newPath, $chmod, true) === false)
+							{
+								return false;
+							}
+						}
+					}
+					else
+					{
+						$newPath	=	str_replace($source, $dest, $file->__toString());
+						$copy		=	@copy($file->__toString(), $newPath);
+
+						if($copy === false)
+						{
+							return false;
+						}
+
+						$chmod	=	@chmod($newPath, $chmod);
+
+						if($chmod === false)
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			$copy	=	@copy($source, $dest);
+
+			if($copy === false)
+			{
+				return false;
+			}
+
+			$chmod	=	@chmod($dest, $chmod);
+
+			if($chmod === false)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Verschiebt ein ganzes Verzeichnis
+	 *
+	 * @param string $source Relativer Pfad zum Ursprungsverzeichnis
+	 * @param string $dest Relativer Pfad zum Zielverzeichnis
+	 * @param int $chmod Ändert Anschließend die Zugriffsrechte, wenn erlaubt. Standartmäßig "0755"
+	 *
+	 * @return bool Gibt true bei Erfolg und false bei einem Fehler zurück.
+	 */
+	public static function renameDirectory($source, $dest, $chmod = 0755)
+	{
+		if(file_exists($dest) === false)
+		{
+			@mkdir($dest, $chmod, true);
+		}
+
+		if(is_dir($source) === true)
+		{
+			$directory	=	new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS);
+			$iterator	=	new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::SELF_FIRST);
+
+			foreach($iterator as $file)
+			{
+				if($file instanceof \SplFileInfo)
+				{
+					if($file->isFile() === true)
+					{
+						if(file_exists($file->getPath()) === false)
+						{
+							if(@mkdir($file->getPath(), $chmod, true) === false)
+							{
+								return false;
+							}
+						}
+
+						$newPath	=	str_replace($source, $dest, $file->__toString());
+						$rename		=	@rename($file->__toString(), $newPath);
+
+						if($rename === false)
+						{
+							return false;
+						}
+
+						$chmod	=	@chmod($newPath, $chmod);
+
+						if($chmod === false)
+						{
+							return false;
+						}
+					}
+					else if($file->isDir() === true)
+					{
+						$newPath	=	str_replace($source, $dest, $file->__toString());
+
+						if(file_exists($newPath) === false)
+						{
+							if(@mkdir($newPath, $chmod, true) === false)
+							{
+								return false;
+							}
+						}
+					}
+				}
+			}
+
+			$rmdir	=	self::delete_files($source, true);
+
+			if($rmdir === false)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			$rename	=	@rename($source, $dest);
+
+			if($rename === false)
+			{
+				return false;
+			}
+
+			$chmod	=	@chmod($dest, $chmod);
+
+			if($chmod === false)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

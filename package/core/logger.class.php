@@ -56,7 +56,7 @@ class logger implements iLogger
 
 		$time		=	date('d.m.Y H:i:s');
 
-		$writeLog	=	@file_put_contents($filename, $time.' - '.$level.': '.$msg."\r\n", FILE_APPEND);
+		$writeLog	=	@file_put_contents($filename, $time.' - '.$level.'('.$code.'): '.$msg."\r\n", FILE_APPEND);
 
 		if($writeLog === false)
 		{

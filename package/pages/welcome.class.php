@@ -30,7 +30,7 @@ class welcome extends load_functions
 	{
 		\package\benchmark::start_point(true);
 
-		parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE));
+		parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL));
 	}
 
 
@@ -45,7 +45,7 @@ class welcome extends load_functions
 
 		$_SESSION['default_lng']	=	$lng;
 
-		$this->template->loc(HTTP);
+		\package\url::loc(HTTP);
 	}
 
 	/**

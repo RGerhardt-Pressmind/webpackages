@@ -31,7 +31,7 @@ abstract class load_functions
 {
 	public static $LOAD_DATE			=	array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_FILE_SYSTEM		=	array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_MOD_REWRITE		=	array('isStatic' => false, 'class' => 'mod_rewrite', 'writeInAttribute' => 'mod_rewrite', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_URL				=	array('isStatic' => false, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_BROWSER			=	array('isStatic' => false, 'class' => 'browser', 'writeInAttribute' => 'browser', 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_VERSION			=	array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_DOWNLOAD		=	array('isStatic' => true, 'class' => 'download', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
@@ -54,7 +54,7 @@ abstract class load_functions
 	protected $phpmailer;
 
 	private	$allLoadClasses			=	array(), $defineDynamicClasses	=	array();
-	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'download', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'browser', 'xml', 'Validater', 'mod_rewrite', 'date', 'Date', 'fileSystem', 'paypal');
+	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'download', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'browser', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal');
 
 
 	/**
@@ -92,7 +92,7 @@ abstract class load_functions
 			$loadClasses	=	array(
 				self::$LOAD_DATE,
 				self::$LOAD_FILE_SYSTEM,
-				self::$LOAD_MOD_REWRITE,
+				self::$LOAD_URL,
 				self::$LOAD_BROWSER,
 				self::$LOAD_VERSION,
 				self::$LOAD_DOWNLOAD,

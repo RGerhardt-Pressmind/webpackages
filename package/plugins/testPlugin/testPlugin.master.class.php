@@ -25,7 +25,9 @@
 namespace package\plugins;
 
 
+use package\database;
 use package\implement\IPlugin;
+use package\template;
 
 class testPlugin implements IPlugin
 {
@@ -38,16 +40,37 @@ class testPlugin implements IPlugin
 
 	public function setAllClasses($allClasses)
 	{
-		$this->db		=	$allClasses['db'];
-		$this->template	=	$allClasses['template'];
+		if(isset($allClasses['db']) && $allClasses['db'] instanceof database)
+		{
+			$this->db		=	$allClasses['db'];
+		}
+
+		if(isset($allClasses['template']) && $allClasses['template'] instanceof template)
+		{
+			$this->template	=	$allClasses['template'];
+		}
+	}
+
+
+	public function before_pluginTest_testHookShow_show($hello, $world)
+	{
+		$foo	=	$hello.' - '.$world;
+
+		file_put_contents(CACHE_PATH.'unitTestPlugin.txt', $foo);
+	}
+
+
+	public function simple_UnitTest($hello, $world)
+	{
+		return $hello.' '.$world;
 	}
 
 
 	/**
 	 * Template Test Klasse
 	 */
-	public function hello_body()
+	public function before_pluginTest_testHookCall_call($hello, $world)
 	{
-		return 'Ich bin ein Plugin "Hello World"';
+		return 'Ich bin ein Plugin "'.$hello.' '.$world.'"';
 	}
 }

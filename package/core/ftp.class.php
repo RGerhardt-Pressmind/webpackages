@@ -413,7 +413,7 @@ class ftp
 	 *
 	 * @param string $source_directory Der Server Ordner der auf den FTP-Server hochgeladen werden soll.
 	 * @param string $target_directory Das Ziel Verzeichnis auf dem FTP-Server.
-	 * @param int $mode Der Modus in dem das Verzeichnis hochgeladen werden soll. Standartmäßig FTP_BINARY(2)
+	 * @param int $mode Der Modus in dem das Verzeichnis hochgeladen werden soll. Standartmäßig FTP_BINARY
 	 * @return bool Gibt nach erfolgreichem hochladen ein true zurück oder ein false bei einem Fehler.
 	 * @throws \Exception
 	 */

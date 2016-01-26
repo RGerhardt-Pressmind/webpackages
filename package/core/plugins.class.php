@@ -68,12 +68,12 @@ class plugins implements IStatic
 	{
 		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
 		{
+			$pointer	=	$position.'_'.$classes.'_'.$methode.'_show';
+
 			foreach(self::$definedPluginsClasses as $class)
 			{
-				if($class instanceof IPlugin && method_exists($class, $position.'_'.$classes.'_'.$methode.'_show') === true)
+				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
 				{
-					$pointer	=	$position.'_'.$classes.'_'.$methode;
-
 					call_user_func_array(array($class, $pointer), $args);
 				}
 			}
@@ -95,12 +95,12 @@ class plugins implements IStatic
 	{
 		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
 		{
+			$pointer	=	$position.'_'.$classes.'_'.$methode.'_call';
+
 			foreach(self::$definedPluginsClasses as $class)
 			{
-				if($class instanceof IPlugin && method_exists($class, $position.'_'.$classes.'_'.$methode) === true)
+				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
 				{
-					$pointer	=	$position.'_'.$classes.'_'.$methode.'_call';
-
 					$plugin	=	call_user_func_array(array($class, $pointer), $args);
 
 					if($plugin != null)
@@ -128,12 +128,12 @@ class plugins implements IStatic
 	{
 		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
 		{
+			$methode	=	$template.'_'.$position;
+
 			foreach(self::$definedPluginsClasses as $class)
 			{
-				if($class instanceof IPlugin && method_exists($class, $template.'_'.$position) === true)
+				if($class instanceof IPlugin && method_exists($class, $methode) === true)
 				{
-					$methode	=	$template.'_'.$position;
-
 					$plugin	=	call_user_func_array(array($class, $methode), $args);
 
 					if($plugin != null)
