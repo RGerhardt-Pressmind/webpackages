@@ -2,58 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webpackage.iml" afterPath="$PROJECT_DIR$/.idea/webpackage.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/Date.class.php" afterPath="$PROJECT_DIR$/package/core/Date.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/FileSystem.class.php" afterPath="$PROJECT_DIR$/package/core/FileSystem.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/Validater.class.php" afterPath="$PROJECT_DIR$/package/core/Validater.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/XML.class.php" afterPath="$PROJECT_DIR$/package/core/XML.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/autoload.class.php" afterPath="$PROJECT_DIR$/package/core/autoload.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/benchmark.class.php" afterPath="$PROJECT_DIR$/package/core/benchmark.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/browser.class.php" afterPath="$PROJECT_DIR$/package/core/browser.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/cache.class.php" afterPath="$PROJECT_DIR$/package/core/cache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/captcha.class.php" afterPath="$PROJECT_DIR$/package/core/captcha.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/curl.class.php" afterPath="$PROJECT_DIR$/package/core/curl.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/database.class.php" afterPath="$PROJECT_DIR$/package/core/database.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/download.class.php" afterPath="$PROJECT_DIR$/package/core/download.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/errors.class.php" afterPath="$PROJECT_DIR$/package/core/errors.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/ftp.class.php" afterPath="$PROJECT_DIR$/package/core/ftp.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/language.class.php" afterPath="$PROJECT_DIR$/package/core/language.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/core/load_functions.abstract.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/logger.class.php" afterPath="$PROJECT_DIR$/package/core/logger.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/number.class.php" afterPath="$PROJECT_DIR$/package/core/number.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/paypal.class.php" afterPath="$PROJECT_DIR$/package/core/paypal.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/plugins.class.php" afterPath="$PROJECT_DIR$/package/core/plugins.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/security.class.php" afterPath="$PROJECT_DIR$/package/core/security.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/template.class.php" afterPath="$PROJECT_DIR$/package/core/template.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/text.class.php" afterPath="$PROJECT_DIR$/package/core/text.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/url.class.php" afterPath="$PROJECT_DIR$/package/core/url.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/version.class.php" afterPath="$PROJECT_DIR$/package/core/version.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/core/zip.class.php" afterPath="$PROJECT_DIR$/package/core/zip.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/pages/welcome.class.php" afterPath="$PROJECT_DIR$/package/pages/welcome.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/welcome/template/header.php" afterPath="$PROJECT_DIR$/templates/welcome/template/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/welcome/template/hello.php" afterPath="$PROJECT_DIR$/templates/welcome/template/hello.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/DateTest.php" afterPath="$PROJECT_DIR$/unitTest/core/DateTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" afterPath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/ValidaterTest.php" afterPath="$PROJECT_DIR$/unitTest/core/ValidaterTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/XMLTest.php" afterPath="$PROJECT_DIR$/unitTest/core/XMLTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/autoloadTest.php" afterPath="$PROJECT_DIR$/unitTest/core/autoloadTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/benchmarkTest.php" afterPath="$PROJECT_DIR$/unitTest/core/benchmarkTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/browserTest.php" afterPath="$PROJECT_DIR$/unitTest/core/browserTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/cacheTest.php" afterPath="$PROJECT_DIR$/unitTest/core/cacheTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/captchaTest.php" afterPath="$PROJECT_DIR$/unitTest/core/captchaTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/curlTest.php" afterPath="$PROJECT_DIR$/unitTest/core/curlTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/databaseTest.php" afterPath="$PROJECT_DIR$/unitTest/core/databaseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/ftpTest.php" afterPath="$PROJECT_DIR$/unitTest/core/ftpTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/languageTest.php" afterPath="$PROJECT_DIR$/unitTest/core/languageTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/loggerTest.php" afterPath="$PROJECT_DIR$/unitTest/core/loggerTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/numberTest.php" afterPath="$PROJECT_DIR$/unitTest/core/numberTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/pluginsTest.php" afterPath="$PROJECT_DIR$/unitTest/core/pluginsTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/securityTest.php" afterPath="$PROJECT_DIR$/unitTest/core/securityTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/textTest.php" afterPath="$PROJECT_DIR$/unitTest/core/textTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/urlTest.php" afterPath="$PROJECT_DIR$/unitTest/core/urlTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/zipTest.php" afterPath="$PROJECT_DIR$/unitTest/core/zipTest.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,8 +33,8 @@
       <file leaf-file-name="curl.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package/core/curl.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.82857144">
-              <caret line="373" column="2" selection-start-line="373" selection-start-column="2" selection-end-line="373" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.41523808">
+              <caret line="303" column="9" selection-start-line="303" selection-start-column="9" selection-end-line="303" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -98,6 +49,7 @@
         <option value="JavaScript File" />
       </list>
     </option>
+    <option name="SCHEME" value="Project" />
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -111,7 +63,6 @@
         <option value="$PROJECT_DIR$/package/core/errors.class.php" />
         <option value="$PROJECT_DIR$/package/core/FileSystem.class.php" />
         <option value="$PROJECT_DIR$/package/core/ftp.class.php" />
-        <option value="$PROJECT_DIR$/package/core/logger.class.php" />
         <option value="$PROJECT_DIR$/package/core/paypal.class.php" />
         <option value="$PROJECT_DIR$/package/core/plugins.class.php" />
         <option value="$PROJECT_DIR$/package/core/security.class.php" />
@@ -153,10 +104,11 @@
         <option value="$PROJECT_DIR$/templates/welcome/template/hello.php" />
         <option value="$PROJECT_DIR$/package/core/browser.class.php" />
         <option value="$PROJECT_DIR$/package/core/benchmark.class.php" />
-        <option value="$PROJECT_DIR$/package/core/autoload.class.php" />
         <option value="$PROJECT_DIR$/package/core/cache.class.php" />
         <option value="$PROJECT_DIR$/package/core/captcha.class.php" />
         <option value="$PROJECT_DIR$/package/core/curl.class.php" />
+        <option value="$PROJECT_DIR$/package/core/logger.class.php" />
+        <option value="$PROJECT_DIR$/package/core/autoload.class.php" />
       </list>
     </option>
   </component>
@@ -654,16 +606,16 @@
       <option name="project" value="LOCAL" />
       <updated>1453915457278</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="v2.0 Alpha">
+      <created>1453920808873</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1453920808873</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UnitTests - 2016.01.27 at 18h 19m 10s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.01.27 at 18h 21m 40s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="UnitTests - 2016.01.27 at 18h 22m 34s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -688,23 +640,29 @@
     <history-entry file="UnitTests - 2016.01.27 at 19h 42m 29s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="UnitTests - 2016.01.28 at 00h 40m 30s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.01.28 at 00h 41m 16s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26086956" sideWeight="0.5028653" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599232" sideWeight="0.5057307" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650447" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2599232" sideWeight="0.49713466" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2599232" sideWeight="0.49426934" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32593122" sideWeight="0.5467128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32593122" sideWeight="0.53979236" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32593122" sideWeight="0.45328718" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32593122" sideWeight="0.4602076" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39820743" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -756,153 +714,15 @@
     <MESSAGE value="- Change System Folder &#10;- Add Code Folder&#10;- Add Date class&#10;- Add FileSystem class&#10;- constant OS change Linux to Unix&#10;- init session_start change&#10;&#10;" />
     <MESSAGE value="- include new classes&#10;" />
     <MESSAGE value="- add todo" />
-    <MESSAGE value="v2.0 Alpha" />
     <MESSAGE value="v2.0 Alpha&#10;- add last unit tests&#10;- add images class" />
-    <option name="LAST_COMMIT_MESSAGE" value="v2.0 Alpha&#10;- add last unit tests&#10;- add images class" />
+    <MESSAGE value="v2.0 Alpha" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.0 Alpha" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package/core/ftp.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4739011">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/images.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4835165">
-          <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/logger.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/paypal.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/plugins.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/security.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/template.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/text.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/url.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding>
-            <marker date="1453918555000" expanded="true" signature="4800:4833" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/Validater.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/version.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/XML.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4739011">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/zip.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4945055">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50549453">
-          <caret line="104" column="29" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/load_functions.abstract.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32005495">
-          <caret line="52" column="172" selection-start-line="52" selection-start-column="172" selection-end-line="52" selection-end-column="172" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/benchmarkTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45714286">
-          <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/browserTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6">
-          <caret line="36" column="63" selection-start-line="36" selection-start-column="63" selection-end-line="36" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/unitTest/core/cacheTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.40761906">
@@ -1147,22 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/core/autoload.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8447802">
-          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3434066">
-          <caret line="175" column="9" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/core/cache.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.74285716">
@@ -1181,10 +985,206 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Image_lib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.560439">
+          <caret line="383" column="6" selection-start-line="383" selection-start-column="6" selection-end-line="383" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Migration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6373627">
+          <caret line="113" column="20" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Profiler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.677198">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1452611366000" expanded="true" signature="5452:5524" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="5568:5642" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="8654:8749" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="8784:8798" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="9077:9088" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="9223:9301" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="9681:9773" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="9820:9884" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="10524:10577" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="10681:10704" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="10826:10881" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="10937:11014" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="11814:11867" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="11972:11983" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="12106:12161" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="12218:12295" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="12670:12725" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="12783:12860" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="16648:16722" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="16768:16823" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="18074:18138" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="18184:18229" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="18619:18711" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="18735:18746" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="18836:18852" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="19259:19283" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="19497:19561" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="19604:19649" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="19948:19994" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="20292:20366" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Zip.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0274725">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/logger.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.020604396">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="25" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="49" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46285716">
+          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/database.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1428572">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Trackback.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.885714">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Typography.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1142857">
+          <caret line="152" column="9" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Unit_test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0857143">
+          <caret line="155" column="9" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+          <folding>
+            <marker date="1452611366000" expanded="true" signature="5136:5148" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="5261:5273" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="8031:8078" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="8120:8149" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Upload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="237" column="11" selection-start-line="237" selection-start-column="11" selection-end-line="237" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Xmlrpc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.4">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+          <folding>
+            <marker date="1452611366000" expanded="true" signature="17534:17792" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="17543:17783" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="17554:17773" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="17566:17653" placeholder="..." />
+            <marker date="1452611366000" expanded="true" signature="17665:17761" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Javascript.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2857144">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Encryption.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.171429">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Email.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.4">
+          <caret line="572" column="9" selection-start-line="572" selection-start-column="9" selection-end-line="572" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Calendar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.2">
+          <caret line="178" column="62" selection-start-line="178" selection-start-column="62" selection-end-line="178" selection-end-column="62" />
+          <folding>
+            <marker date="1452611366000" expanded="true" signature="13498:13510" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/CodeIgniter-3.0.4/system/libraries/Cart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61904764">
+          <caret line="415" column="48" selection-start-line="415" selection-start-column="48" selection-end-line="415" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/core/autoload.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08571429">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package/core/curl.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82857144">
-          <caret line="373" column="2" selection-start-line="373" selection-start-column="2" selection-end-line="373" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.41523808">
+          <caret line="303" column="9" selection-start-line="303" selection-start-column="9" selection-end-line="303" selection-end-column="9" />
           <folding />
         </state>
       </provider>
