@@ -69,6 +69,7 @@ class XML
 		if($result !== false)
 		{
 			$this->xml	=	simplexml_load_string($xml);
+
 			return;
 		}
 

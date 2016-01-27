@@ -50,6 +50,7 @@ abstract class load_functions
 	public static $LOAD_NUMBER			=	array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_LANGUAGE		=	array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 	public static $LOAD_PAYPAL			=	array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_IMAGES			=	array('isStatic' => true, 'class' => 'images', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
 
 	protected $phpmailer;
 
@@ -109,7 +110,9 @@ abstract class load_functions
 				self::$LOAD_CURL,
 				self::$LOAD_TEXT,
 				self::$LOAD_NUMBER,
-				self::$LOAD_LANGUAGE
+				self::$LOAD_LANGUAGE,
+				self::$LOAD_PAYPAL,
+				self::$LOAD_IMAGES
 			);
 		}
 

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
-    @category   curlTest.php
+    @category   zipTest.php
 	@package    webpackage
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
 	@copyright  2010-2016 webpackage
@@ -25,47 +25,41 @@
 namespace unitTest\core;
 
 use package\autoload;
-use package\curl;
+use package\FileSystem;
 
 require_once 'init.php';
 
-class curlTest extends \PHPUnit_Framework_TestCase
+class zipTest extends \PHPUnit_Framework_TestCase
 {
+	private $zip;
+
 	public function setUp()
 	{
-		autoload::get('curl', '\package\\', true);
+		$this->zip	=	autoload::get('zip', '\package\\');
 	}
 
-	public function testCurlExtensionExists()
+	public function tearDown()
 	{
-		$this->assertTrue(curl::curl_extension_exists());
+		$this->zip	=	null;
 	}
 
-	public function testGetData()
+	public function testCreateZipArchive()
 	{
-		$back	=	curl::get_data('http://webpackages.de/test/todo');
-
-		$this->assertEquals('ok', $back);
+		$this->assertTrue($this->zip->createZipArchive(CORE_DIR, CACHE_PATH, 'UnitTest.zip'));
+		$this->assertFileExists(CACHE_PATH.'UnitTest.zip');
 	}
 
-	public function testGetStatus()
+	public function testAddFileToZipArchive()
 	{
-		$back	=	curl::get_status('http://webpackages.de/test/todo');
-
-		$this->assertEquals(200, $back);
+		$this->assertTrue($this->zip->addFileToZipArchive(PACKAGE_DIR, SYSTEM_PATH.'loadSessionHandler.php', CACHE_PATH.'UnitTest.zip'));
 	}
 
-	public function testGetCityCoordinates()
+	public function testExtractZipArchive()
 	{
-		$back	=	curl::get_city_coordinates('Berlin');
+		$this->assertTrue($this->zip->extractZipArchive(CACHE_PATH.'UnitTest.zip', CACHE_PATH, true));
+		$this->assertFileNotExists(CACHE_PATH.'UnitTest.zip');
 
-		$this->assertEquals('O:8:"stdClass":2:{s:3:"lat";d:52.520006599999987884075380861759185791015625;s:3:"lng";d:13.404954000000000036152414395473897457122802734375;}', serialize($back));
-	}
-
-	public function testGetCityNameByIp()
-	{
-		$back	=	curl::get_city_name_by_ip();
-
-		$this->assertEquals('Not found', $back);
+		autoload::get('FileSystem', '\package\\', true);
+		FileSystem::delete_files(CACHE_PATH, false);
 	}
 }

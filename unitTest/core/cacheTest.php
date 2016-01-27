@@ -31,12 +31,14 @@ require_once 'init.php';
 
 class cacheTest extends \PHPUnit_Framework_TestCase
 {
-	public function testSetTemplateElement()
+	public function setUp()
 	{
 		autoload::get('cache', '\package\\', true);
-
 		cache::init();
+	}
 
+	public function testSetTemplateElement()
+	{
 		$this->assertTrue(cache::set_template_element('unitTest', '1234'));
 
 		unlink(CACHE_PATH.'unitTest.html');
@@ -45,9 +47,6 @@ class cacheTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetTemplateElement()
 	{
-		autoload::get('cache', '\package\\', true);
-		cache::init();
-
 		$this->assertTrue(cache::set_template_element('unitTest', '1234'));
 		$this->assertEquals(CACHE_PATH.'unitTest.html', cache::get_template_element('unitTest'));
 
@@ -57,9 +56,6 @@ class cacheTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetElement()
 	{
-		autoload::get('cache', '\package\\', true);
-		cache::init();
-
 		$this->assertTrue(cache::set_element('unitTest', '1234'));
 
 		unlink(CACHE_PATH.md5('unitTest').CACHE_EXTENSION);
@@ -68,9 +64,6 @@ class cacheTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetElement()
 	{
-		autoload::get('cache', '\package\\', true);
-		cache::init();
-
 		$this->assertTrue(cache::set_element('unitTest', '1234'));
 		$this->assertEquals('1234', cache::get_element('unitTest'));
 
@@ -80,9 +73,6 @@ class cacheTest extends \PHPUnit_Framework_TestCase
 
 	public function testDeleteElement()
 	{
-		autoload::get('cache', '\package\\', true);
-		cache::init();
-
 		$this->assertTrue(cache::set_element('unitTest', '1234'));
 		$this->assertTrue(cache::delete_element('unitTest'));
 	}

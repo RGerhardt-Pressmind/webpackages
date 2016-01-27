@@ -30,12 +30,20 @@ require_once 'init.php';
 
 class databaseTest extends \PHPUnit_Framework_TestCase
 {
-	private $dsn	=	'mysql:dbname=test;host=127.0.0.1;port=3307', $username = 'root', $password = '';
+	private $dsn	=	'mysql:dbname=test;host=127.0.0.1;port=3307', $username = 'root', $password = '', $db;
+
+	public function setUp()
+	{
+		$this->db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
+	}
+
+	public function tearDown()
+	{
+		$this->db	=	null;
+	}
 
 	public function testQuefetch()
 	{
-		$db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
-
 		$getDatas	=	'
 		SELECT
 			COUNT(*) as count
@@ -45,7 +53,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			1;
 		';
 
-		$getDatas	=	$db->quefetch($getDatas);
+		$getDatas	=	$this->db->quefetch($getDatas);
 
 		$this->assertTrue(($getDatas['count'] > 0));
 	}
@@ -53,8 +61,6 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testResultArray()
 	{
-		$db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
-
 		$getDatas	=	'
 		SELECT
 			`name`
@@ -64,7 +70,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			1;
 		';
 
-		$getDatas	=	$db->result_array($getDatas);
+		$getDatas	=	$this->db->result_array($getDatas);
 
 		if(!empty($getDatas))
 		{
@@ -82,8 +88,6 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testMultiQuery()
 	{
-		$db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
-
 		$insertOne	=	'
 		INSERT INTO
 			`unit_test`
@@ -100,7 +104,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 		;
 		';
 
-		$this->assertTrue($db->multi_query($insertOne.$insertTwo));
+		$this->assertTrue($this->db->multi_query($insertOne.$insertTwo));
 
 		$deleteIn	=	'
 		DELETE FROM
@@ -109,22 +113,18 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			`name` IN("Insert1", "Insert2")
 		';
 
-		$this->assertEquals(2, $db->exec($deleteIn));
+		$this->assertEquals(2, $this->db->exec($deleteIn));
 	}
 
 
 	public function testVersion()
 	{
-		$db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
-
-		$this->assertTrue((stripos($db->version(), 'mysqlnd') !== false));
+		$this->assertTrue((stripos($this->db->version(), 'mysqlnd') !== false));
 	}
 
 
 	public function testInsertId()
 	{
-		$db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
-
 		$insertOne	=	'
 		INSERT INTO
 			`unit_test`
@@ -132,9 +132,9 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			`name`	=	"Insert3";
 		';
 
-		$db->exec($insertOne);
+		$this->db->exec($insertOne);
 
-		$this->assertTrue(($db->insert_id() > 0));
+		$this->assertTrue(($this->db->insert_id() > 0));
 
 		$deleteOne	=	'
 		DELETE FROM
@@ -143,14 +143,12 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			`name`	=	"Insert3";
 		';
 
-		$db->exec($deleteOne);
+		$this->db->exec($deleteOne);
 	}
 
 
 	public function testSecQuery()
 	{
-		$db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
-
 		$getInfos	=	'
 		SELECT
 			`name`
@@ -162,7 +160,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			1;
 		';
 
-		$getInfos	=	$db->secQuery($getInfos, array('UnitTest123'), true, true);
+		$getInfos	=	$this->db->secQuery($getInfos, array('UnitTest123'), true, true);
 
 		$this->assertEquals('UnitTest123', $getInfos['name']);
 	}

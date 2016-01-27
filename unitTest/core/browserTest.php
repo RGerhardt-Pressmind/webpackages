@@ -38,7 +38,7 @@ class browserTest extends \PHPUnit_Framework_TestCase
 
 		if($browser instanceof browser)
 		{
-			$this->assertTrue(($browser->__toString() != ''));
+			$this->assertNotEmpty($browser->__toString());
 		}
 	}
 }

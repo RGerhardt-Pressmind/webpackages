@@ -42,7 +42,7 @@ class text implements IStatic
 	 * @param string $suffix Ein String der nach der kürzung anschließend angehangen wird. Standartmäßig "&#8230;"
 	 * @return string Gibt den gekürzten String zurück
 	 */
-	public static function word_limiter($str, $limit = 100, $suffix = '&#8230;')
+	public static function word_limiter($str, $limit = 100, $suffix = '...')
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -89,7 +89,7 @@ class text implements IStatic
 	 * @param string $suffix Der String soll am Ende einen weiteren String bekommen. Standartmäßig "..."
 	 * @return string Gibt den gekürzten String zurück
 	 */
-	public static function truncate($string, $limit, $suffix = "...")
+	public static function truncate($string, $limit, $suffix = '...')
 	{
 		if(class_exists('\package\plugins') === true)
 		{
@@ -114,83 +114,12 @@ class text implements IStatic
 	}
 
 
-	/**
-	 * Kürzt den String nach einer Anzahl von Zeichen
-	 *
-	 * @param string $str Den zu kürzenden String.
-	 * @param int $n Die Anzahl an Zeichen nachdem der Rest abgeschnitten/gekürzt werden soll. Standartmäßig 500
-	 * @param string $suffix Ein String der nach der kürzung angehangen werden soll. Standartmäßig "&#8230"
-	 * @return string Gibt den gekürzten String zurück
-	 */
-	public static function character_limiter($str, $n = 500, $suffix = '&#8230;')
-	{
-		if(class_exists('\package\plugins') === true)
-		{
-			$plugin	=	plugins::hookCall('before', 'text', 'characterLimiter', array($str, $n, $suffix));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
-		if(strlen($str) < $n)
-		{
-			return $str;
-		}
-
-		$str = preg_replace("/\s+/", ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $str));
-
-		if(strlen($str) <= $n)
-		{
-			return $str;
-		}
-
-		$out 		= 	'';
-		$exploder	=	explode(' ', trim($str));
-
-		foreach($exploder as $val)
-		{
-			$out .= $val.' ';
-
-			if(strlen($out) >= $n)
-			{
-				$out 	= 	trim($out);
-				$back	=	(strlen($out) == strlen($str)) ? $out : $out.$suffix;
-
-				if(class_exists('\package\plugins') === true)
-				{
-					$plugin	=	plugins::hookCall('after', 'text', 'characterLimiter', array($back));
-
-					if($plugin != null)
-					{
-						return $plugin;
-					}
-				}
-
-				return $back;
-			}
-		}
-
-		if(class_exists('\package\plugins') === true)
-		{
-			$plugin	=	plugins::hookCall('after', 'text', 'characterLimiter', array(''));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
-		return '';
-	}
-
 
 	/**
 	 * Zensiert Wörter in einem String
 	 *
 	 * @param string $str Der String der Wörter enthält die Zentriert werden sollen.
-	 * @param array $censored Ein assoziatives Array das die zu zensierenden Wörter enthält
+	 * @param array $censored Ein Array das die zu zensierenden Wörter enthält
 	 * @param string $replacement Der String der die zu zensierenden Wörte einnehmen soll. Standartmäßig ''
 	 * @return string Gibt den zensierten String zurück
 	 */

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
-    @category   curlTest.php
+    @category   XMLTest.php
 	@package    webpackage
 	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
 	@copyright  2010-2016 webpackage
@@ -25,47 +25,40 @@
 namespace unitTest\core;
 
 use package\autoload;
-use package\curl;
 
 require_once 'init.php';
 
-class curlTest extends \PHPUnit_Framework_TestCase
+class XMLTest extends \PHPUnit_Framework_TestCase
 {
+	private $xml, $testXML;
+
 	public function setUp()
 	{
-		autoload::get('curl', '\package\\', true);
+		$this->xml	=	autoload::get('XML', '\package\\');
+
+		$this->testXML	=	'
+		<root>
+			<products>
+				<product id="1" language="en">Unit Test 1</product>
+				<product id="2" language="en">Unit Test 2</product>
+				<product id="3" language="en">Unit Test 3</product>
+				<product id="4" language="en">Unit Test 4</product>
+			</products>
+		</root>
+		';
+
+		$this->xml->loadXML($this->testXML);
 	}
 
-	public function testCurlExtensionExists()
+
+	public function tearDown()
 	{
-		$this->assertTrue(curl::curl_extension_exists());
+		$this->xml	=	null;
 	}
 
-	public function testGetData()
+
+	public function testToArray()
 	{
-		$back	=	curl::get_data('http://webpackages.de/test/todo');
-
-		$this->assertEquals('ok', $back);
-	}
-
-	public function testGetStatus()
-	{
-		$back	=	curl::get_status('http://webpackages.de/test/todo');
-
-		$this->assertEquals(200, $back);
-	}
-
-	public function testGetCityCoordinates()
-	{
-		$back	=	curl::get_city_coordinates('Berlin');
-
-		$this->assertEquals('O:8:"stdClass":2:{s:3:"lat";d:52.520006599999987884075380861759185791015625;s:3:"lng";d:13.404954000000000036152414395473897457122802734375;}', serialize($back));
-	}
-
-	public function testGetCityNameByIp()
-	{
-		$back	=	curl::get_city_name_by_ip();
-
-		$this->assertEquals('Not found', $back);
+		$this->assertEquals('1dbc0be0c4feb6065674fb28891752cd', md5(serialize($this->xml->toArray())));
 	}
 }

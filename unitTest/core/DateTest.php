@@ -31,10 +31,13 @@ require_once 'init.php';
 
 class DateTest extends \PHPUnit_Framework_TestCase
 {
-	public function testNow()
+	public function setUp()
 	{
 		autoload::get('Date', '\package\\', true);
+	}
 
+	public function testNow()
+	{
 		$current	=	time();
 
 		$this->assertTrue((Date::now() >= $current));
@@ -42,8 +45,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetTimestampByDate()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$time	=	time();
 		$date	=	date('Y-m-d H:i:s', $time);
 
@@ -53,16 +54,12 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDateByTimestamp()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$this->assertEquals(date('Y-m-d'), Date::get_date_by_timestamp(time()));
 	}
 
 
 	public function testGetEasterDayByYear()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$this->assertEquals('2015-04-05', Date::get_easter_day_by_year(2015));
 		$this->assertEquals(1428184800, Date::get_easter_day_by_year(2015, true));
 	}
@@ -70,8 +67,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetNationHolidaysByYear()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$holidays_germany	=	Date::get_nation_holidays_by_year(2015, Date::NATION_GERMANY);
 		$this->assertEquals('8b7f7675e86aa85c2d221210bd0b18c4', md5(serialize($holidays_germany)));
 
@@ -100,24 +95,18 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAllSaintsDay()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$this->assertEquals('2015-10-31', Date::get_all_saints_day(2015)->format('Y-m-d'));
 	}
 
 
 	public function testGetMidSummerDay()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$this->assertEquals('2015-06-20', Date::get_mid_summer_day(2015)->format('Y-m-d'));
 	}
 
 
 	public function testIsYearLeapYear()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$this->assertFalse(Date::is_year_leap_year(2015));
 		$this->assertTrue(Date::is_year_leap_year(2016));
 	}
@@ -125,8 +114,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDaysInMonth()
 	{
-		autoload::get('Date', '\package\\', true);
-
 		$this->assertEquals(31, Date::get_days_in_month(1, 2015));
 		$this->assertEquals(28, Date::get_days_in_month(2, 2015));
 		$this->assertEquals(31, Date::get_days_in_month(3, 2015));

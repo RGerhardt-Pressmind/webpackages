@@ -26,13 +26,14 @@ namespace unitTest\core;
 
 require_once 'init.php';
 
+use package\autoload;
 use package\benchmark;
 
 class benchmarkTest extends \PHPUnit_Framework_TestCase
 {
 	public function testBenchmark()
 	{
-		require_once 'benchmark.class.php';
+		autoload::get('benchmark', '\package\\', true);
 
 		benchmark::start_point(true);
 		benchmark::end_point(true);

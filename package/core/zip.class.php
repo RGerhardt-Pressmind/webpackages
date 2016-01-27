@@ -24,15 +24,14 @@
 
 namespace package;
 
-//PHP 5 >= 5.2
 class zip
 {
 	/**
 	 * Erstellt ein ZipArchive
 	 *
-	 * @param string $folder
-	 * @param string $destination
-	 * @param string $zipName
+	 * @param string $folder Ordner der verpackt werden soll
+	 * @param string $destination Zielordner wo die Zip Datei abgespeichert werden soll (nicht der Name nur der Pfad)
+	 * @param string $zipName Der Name der Zip Datei (nicht der Pfad nur der Name)
 	 *
 	 * @return bool
 	 * @throws \Exception
@@ -98,9 +97,9 @@ class zip
 	/**
 	 * Fügt eine Datei in das ZipArchive hinzu
 	 *
-	 * @param string $rootFolder
-	 * @param string $file
-	 * @param string $zipArchive
+	 * @param string $rootFolder Das Root Verzeichnis des Webservers
+	 * @param string $file Die Datei die dem Zip Archiv hinzugefügt werden soll
+	 * @param string $zipArchive Der Pfad zum Zip Archiv
 	 *
 	 * @return bool
 	 * @throws \Exception
@@ -145,9 +144,9 @@ class zip
 	/**
 	 * Entpackt ein ZipArchive
 	 *
-	 * @param string $zipArchive
-	 * @param string $destinationFolder
-	 * @param bool $removeZipArchiveAfterExtract
+	 * @param string $zipArchive Der Pfad zum Zip Archiv
+	 * @param string $destinationFolder Der Zielordner wo das Zip Archiv entpackt werden soll
+	 * @param bool $removeZipArchiveAfterExtract Löschen nach erfolgreichem entpacken des Zip Archivs (true => Ja Zip Archiv löschen, Nein => Zip Archiv bestehen lassen)
 	 *
 	 * @return bool
 	 * @throws \Exception
