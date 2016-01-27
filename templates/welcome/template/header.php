@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="webpackages ist kostenlos und das Leistungsstärkste PHP Framework zum erstellen von PHP Projekten.">
     <meta name="author" content="webpackages">
-    <title><?php echo \package\language::translate('webpackages - das Leistungsstärkste PHP Framework'); ?></title>
+    <title><?php echo \package\core\language::translate('webpackages - das Leistungsstärkste PHP Framework'); ?></title>
     <link href="<?php echo $this->load_template_file('bootstrap.min', 'css'); ?>" rel="stylesheet">
     <link href="<?php echo $this->load_template_file('font-awesome.min', 'css'); ?>" rel="stylesheet">
     <link href="<?php echo $this->load_template_file('prettyPhoto', 'css'); ?>" rel="stylesheet">

@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
@@ -546,7 +546,7 @@ class Date implements IStatic
 			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'now', array($timezone));
 			$plugins	=	plugins::hookCall('before', 'Date', 'now', array($timezone));
@@ -569,7 +569,7 @@ class Date implements IStatic
 
 		$datetime	=	new \DateTime('now', new \DateTimeZone($timezone));
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'Date', 'now', array($datetime));
 
@@ -598,7 +598,7 @@ class Date implements IStatic
 			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_timestamp_by_date', array($date));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_timestamp_by_date', array($date));
@@ -611,7 +611,7 @@ class Date implements IStatic
 
 		$datetime	=	new \DateTime($date, new \DateTimeZone(TIMEZONE));
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_timestamp_by_date', array($datetime));
 
@@ -642,7 +642,7 @@ class Date implements IStatic
 			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_date_by_timestamp', array($timestamp, $format));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_date_by_timestamp', array($timestamp, $format));
@@ -657,7 +657,7 @@ class Date implements IStatic
 		$datetime->setTimestamp($timestamp);
 		$datetime->setTimezone(new \DateTimeZone(TIMEZONE));
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_date_by_timestamp', array($datetime, $format));
 
@@ -691,7 +691,7 @@ class Date implements IStatic
 			throw new \Exception('Error: easter_days function in php not exists');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_easter_day_by_year', array($year, $inTimestamp));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_easter_day_by_year', array($year, $inTimestamp));
@@ -707,7 +707,7 @@ class Date implements IStatic
 
 		$base->modify('+'.$day.' Days');
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_easter_day_by_year', array($base, $inTimestamp));
 
@@ -746,7 +746,7 @@ class Date implements IStatic
 			throw new \Exception('Error: easter_days function in php not exists');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_all_holidays', array($year));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_all_holidays', array($year));
@@ -802,7 +802,7 @@ class Date implements IStatic
 			'corpusChristi'		=>	$fronleichname
 		);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_all_holidays', array($year, $back));
 
@@ -826,7 +826,7 @@ class Date implements IStatic
 	 */
 	public static function get_nation_holidays_by_year($year, $nation = self::NATION_GERMANY)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_nation_holidays_by_year', array($year, $nation));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_nation_holidays_by_year', array($year, $nation));
@@ -1259,7 +1259,7 @@ class Date implements IStatic
 
 		ksort($holidays);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_nation_holidays_by_year', array($year, $nation, $holidays));
 
@@ -1286,7 +1286,7 @@ class Date implements IStatic
 			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_all_saints_day', array($year));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_all_saints_day', array($year));
@@ -1309,7 +1309,7 @@ class Date implements IStatic
             $date->modify('+1 days');
         }
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_all_saints_day', array($year, $date));
 
@@ -1337,7 +1337,7 @@ class Date implements IStatic
 			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_mid_summer_day', array($year));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_mid_summer_day', array($year));
@@ -1360,7 +1360,7 @@ class Date implements IStatic
             $date->modify('+1 days');
         }
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'Date', 'get_mid_summer_day', array($year, $date));
 
@@ -1382,7 +1382,7 @@ class Date implements IStatic
 	 */
 	public static function is_year_leap_year($year)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'is_year_leap_year', array($year));
 			$plugins	=	plugins::hookCall('before', 'Date', 'is_year_leap_year', array($year));
@@ -1421,7 +1421,7 @@ class Date implements IStatic
 			throw new \Exception('Error: cal_days_in_month function in php not exists');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'Date', 'get_days_in_month', array($month, $year, $particular_calendar));
 			$plugins	=	plugins::hookCall('before', 'Date', 'get_days_in_month', array($month, $year, $particular_calendar));

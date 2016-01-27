@@ -27,8 +27,8 @@ namespace unitTest\core;
 require_once 'init.php';
 
 
-use package\autoload;
-use package\language;
+use package\core\autoload;
+use package\core\language;
 
 class autoloadTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,7 +37,7 @@ class autoloadTest extends \PHPUnit_Framework_TestCase
 		new autoload();
 
 		try{
-			autoload::get('language', '\package\\', true);
+			autoload::get('language', '\package\core\\', true);
 		}catch(\Exception $e){
 			$this->assertEquals(true, false);
 			exit;

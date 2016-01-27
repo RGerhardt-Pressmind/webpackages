@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\number;
+use package\core\autoload;
+use package\core\number;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class numberTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('number', '\package\\', true);
+		autoload::get('number', '\package\core\\', true);
 	}
 
 

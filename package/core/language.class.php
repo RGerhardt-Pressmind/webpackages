@@ -22,8 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
-
+namespace package\core;
 
 use package\implement\IStatic;
 
@@ -382,7 +381,7 @@ class language implements IStatic
 	 */
 	public static function load_lang($ignoreFileExists = false)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'language', 'loadLang', array($ignoreFileExists));
 			$plugins	=	plugins::hookCall('before', 'language', 'loadLang', array($ignoreFileExists));
@@ -417,7 +416,7 @@ class language implements IStatic
 		$localeFile				=	new \FileReader($moFile);
 		self::$gettext_reader	=	new \gettext_reader($localeFile);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'language', 'loadLang', array($moFile));
 			$plugins	=	plugins::hookCall('after', 'language', 'loadLang', array($moFile));
@@ -439,7 +438,7 @@ class language implements IStatic
 	 */
 	public static function translate($text)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'language', 'translate', array($text));
 			$plugins	=	plugins::hookCall('before', 'language', 'translate', array($text));
@@ -461,7 +460,7 @@ class language implements IStatic
 	 */
 	public static function getAllSystemLocales()
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'text', 'getLocale');
 
@@ -503,7 +502,7 @@ class language implements IStatic
 			}
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'text', 'getLocale', array($locale_data));
 

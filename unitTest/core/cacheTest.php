@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\cache;
+use package\core\autoload;
+use package\core\cache;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class cacheTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('cache', '\package\\', true);
+		autoload::get('cache', '\package\core\\', true);
 		cache::init();
 	}
 

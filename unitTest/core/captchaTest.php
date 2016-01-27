@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\captcha;
+use package\core\autoload;
+use package\core\captcha;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class captchaTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateCaptcha()
 	{
-		autoload::get('captcha', '\package\\', true);
+		autoload::get('captcha', '\package\core\\', true);
 
 		$back	=	captcha::create_captcha(CACHE_PATH, HTTP.'cache/', '', 40, 150, 30);
 

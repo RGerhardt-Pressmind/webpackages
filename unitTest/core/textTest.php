@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\text;
+use package\core\autoload;
+use package\core\text;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class textTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('text', '\package\\', true);
+		autoload::get('text', '\package\core\\', true);
 	}
 
 

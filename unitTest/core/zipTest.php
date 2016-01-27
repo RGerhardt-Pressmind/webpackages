@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\FileSystem;
+use package\core\autoload;
+use package\core\FileSystem;
 
 require_once 'init.php';
 
@@ -35,7 +35,7 @@ class zipTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->zip	=	autoload::get('zip', '\package\\');
+		$this->zip	=	autoload::get('zip', '\package\core\\');
 	}
 
 	public function tearDown()
@@ -59,7 +59,7 @@ class zipTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($this->zip->extractZipArchive(CACHE_PATH.'UnitTest.zip', CACHE_PATH, true));
 		$this->assertFileNotExists(CACHE_PATH.'UnitTest.zip');
 
-		autoload::get('FileSystem', '\package\\', true);
+		autoload::get('FileSystem', '\package\core\\', true);
 		FileSystem::delete_files(CACHE_PATH, false);
 	}
 }

@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\browser;
+use package\core\autoload;
+use package\core\browser;
 
 require_once 'init.php';
 
@@ -34,7 +34,7 @@ class browserTest extends \PHPUnit_Framework_TestCase
 {
 	public function testToString()
 	{
-		$browser	=	autoload::get('browser', '\package\\');
+		$browser	=	autoload::get('browser', '\package\core\\');
 
 		if($browser instanceof browser)
 		{

@@ -24,9 +24,9 @@
 
 namespace unitTest\core;
 
-use package\autoload;
+use package\core\autoload;
 use package\implement\IPlugin;
-use package\plugins;
+use package\core\plugins;
 
 require_once 'init.php';
 
@@ -34,7 +34,7 @@ class pluginsTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('plugins', '\package\\', true);
+		autoload::get('plugins', '\package\core\\', true);
 		plugins::init();
 
 		$back	=	$this->get_plugins(PLUGIN_DIR);

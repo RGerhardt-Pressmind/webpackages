@@ -24,7 +24,7 @@
 
 namespace unitTest\core;
 
-use package\autoload;
+use package\core\autoload;
 
 require_once 'init.php';
 
@@ -34,7 +34,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->db	=	autoload::get('database', '\package\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
+		$this->db	=	autoload::get('database', '\package\core\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
 	}
 
 	public function tearDown()

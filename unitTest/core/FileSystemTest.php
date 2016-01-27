@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\FileSystem;
+use package\core\autoload;
+use package\core\FileSystem;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('FileSystem', '\package\\', true);
+		autoload::get('FileSystem', '\package\core\\', true);
 	}
 
 	public function testIsReallyWritable()

@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 class captcha
@@ -37,14 +37,19 @@ class captcha
 	 * @param int $imgWidth Die Breite des Captchas in Pixeln
 	 * @param int $imgHeight Die Höhe des Captchas in Pixeln
 	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
 	 * @return array Gibt das fertige Captcha zurück
-	 * @throws \Exception
+	 * @throws \Exception Bei leeren Parametern oder im Fehlerfall
 	 */
 	public static function create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
 	{
 		$fontSize = 5;
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
 			$plugins	=	plugins::hookCall('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
@@ -235,7 +240,7 @@ class captcha
 
 		$back	=	array('word' => $word, 'time' => $now, 'image' => $img, 'filepath' => $img_path.$img_name);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'captcha', 'createCaptcha', array($back));
 			$plugins	=	plugins::hookCall('after', 'captcha', 'createCaptcha', array($back));

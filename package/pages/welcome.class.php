@@ -22,13 +22,13 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-use package\load_functions;
+use package\core\load_functions;
 
 class welcome extends load_functions
 {
 	public function __construct()
 	{
-		\package\benchmark::start_point(true);
+		\package\core\benchmark::start_point(true);
 
 		parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL));
 	}
@@ -41,11 +41,11 @@ class welcome extends load_functions
 	 */
 	public function change_language()
 	{
-		$lng	=	\package\security::url('lng', 'GET', 'string');
+		$lng	=	\package\core\security::url('lng', 'GET', 'string');
 
 		$_SESSION['default_lng']	=	$lng;
 
-		\package\url::loc(HTTP);
+		\package\core\url::loc(HTTP);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class welcome extends load_functions
 	{
 		if(!empty($_SESSION['default_lng']))
 		{
-			\package\language::set_language($_SESSION['default_lng']);
+			\package\core\language::set_language($_SESSION['default_lng']);
 		}
 		else
 		{
@@ -87,7 +87,7 @@ class welcome extends load_functions
 				break;
 			}
 
-			\package\language::set_language($_SESSION['default_lng']);
+			\package\core\language::set_language($_SESSION['default_lng']);
 		}
 
 		$this->template->display('template/hello.php', false);

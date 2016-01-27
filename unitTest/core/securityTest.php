@@ -24,7 +24,7 @@
 
 namespace unitTest\core;
 
-use package\security;
+use package\core\security;
 
 require_once 'init.php';
 

@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
@@ -44,7 +44,7 @@ class text implements IStatic
 	 */
 	public static function word_limiter($str, $limit = 100, $suffix = '...')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'text', 'wordLimiter', array($str, $limit, $suffix));
 
@@ -68,7 +68,7 @@ class text implements IStatic
 
 		$back	=	rtrim($matches[0]).$suffix;
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'text', 'wordLimiter', array($back));
 
@@ -91,7 +91,7 @@ class text implements IStatic
 	 */
 	public static function truncate($string, $limit, $suffix = '...')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'template', 'truncate', array($string, $limit, $suffix));
 
@@ -125,7 +125,7 @@ class text implements IStatic
 	 */
 	public static function word_censor($str, $censored, $replacement = '')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'text', 'wordCensor', array($str, $censored, $replacement));
 
@@ -156,7 +156,7 @@ class text implements IStatic
 			}
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'text', 'wordCensor', array($str));
 
@@ -178,7 +178,7 @@ class text implements IStatic
 	 */
 	public static function highlight_code($str)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'text', 'highlightCode', array($str));
 
@@ -204,7 +204,7 @@ class text implements IStatic
 		$str = str_replace(array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'),
 							array('&lt;?', '?&gt;', '&lt;%', '%&gt;', '\\', '&lt;/script&gt;'), $str);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'text', 'highlightCode', array($str));
 
@@ -229,7 +229,7 @@ class text implements IStatic
 	 */
 	public static function highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'text', 'highlightPhrase', array($str, $phrase, $tag_open, $tag_close));
 
@@ -249,7 +249,7 @@ class text implements IStatic
 			return preg_replace('/('.preg_quote($phrase, '/').')/i', $tag_open."\\1".$tag_close, $str);
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'text', 'highlightPhrase', array($str));
 

@@ -21,7 +21,7 @@
 	@copyright  2010-2016 Webpackages
 	@license    http://www.gnu.org/licenses/
 */
-namespace package;
+namespace package\core;
 
 class XML
 {

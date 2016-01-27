@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 use package\implement\iLogger as iLogger;
 
@@ -41,7 +41,7 @@ class logger implements iLogger
 	 */
 	public function write_log($msg, $code = 0, $level = 'info')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'logger', 'writeLog', array($msg, $code, $level));
 			$plugins	=	plugins::hookCall('before', 'logger', 'writeLog', array($msg, $code, $level));
@@ -79,7 +79,7 @@ class logger implements iLogger
 	{
 		$filename	=	CACHE_PATH.$this->filename;
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'logger', 'deleteLog', array($filename));
 			$plugins	=	plugins::hookCall('before', 'logger', 'deleteLog', array($filename));
@@ -97,7 +97,7 @@ class logger implements iLogger
 
 		$unlink	=	@unlink($filename);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'logger', 'deleteLog', array($filename));
 			$plugins	=	plugins::hookCall('after', 'logger', 'deleteLog', array($filename));
@@ -121,7 +121,7 @@ class logger implements iLogger
 	{
 		$filename	=	CACHE_PATH.$this->filename;
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'logger', 'readLog', array($filename));
 			$plugins	=	plugins::hookCall('before', 'logger', 'readLog', array($filename));
@@ -134,7 +134,7 @@ class logger implements iLogger
 
 		$read		=	@file_get_contents($filename);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'logger', 'readLog', array($read));
 			$plugins	=	plugins::hookCall('after', 'logger', 'readLog', array($read));

@@ -24,7 +24,7 @@
 
 namespace unitTest\core;
 
-use package\autoload;
+use package\core\autoload;
 
 require_once 'init.php';
 
@@ -34,7 +34,7 @@ class ftpTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->ftp	=	autoload::get('ftp', '\package\\');
+		$this->ftp	=	autoload::get('ftp', '\package\core\\');
 
 		try{
 			$this->ftp->connect($this->ftpServer);

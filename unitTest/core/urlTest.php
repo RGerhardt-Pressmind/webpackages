@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\url;
+use package\core\autoload;
+use package\core\url;
 
 require_once 'init.php';
 
@@ -35,7 +35,7 @@ class mod_rewriteTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->url	=	autoload::get('url', '\package\\');
+		$this->url	=	autoload::get('url', '\package\core\\');
 		url::init();
 	}
 

@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\Date;
+use package\core\autoload;
+use package\core\Date;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('Date', '\package\\', true);
+		autoload::get('Date', '\package\core\\', true);
 	}
 
 	public function testNow()

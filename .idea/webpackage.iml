@@ -12,12 +12,14 @@
           <root url="file://$USER_HOME$/vendor/composer" />
           <root url="file://$USER_HOME$/vendor/matthiasmullie/minify" />
           <root url="file://$USER_HOME$/vendor/matthiasmullie/path-converter" />
+          <root url="file://$USER_HOME$/vendor/phpdocumentor/reflection-docblock" />
           <root url="file:///usr/local/Cellar/phpunit/5.1.0/libexec" />
         </CLASSES>
         <SOURCES>
           <root url="file://$USER_HOME$/vendor/composer" />
           <root url="file://$USER_HOME$/vendor/matthiasmullie/minify" />
           <root url="file://$USER_HOME$/vendor/matthiasmullie/path-converter" />
+          <root url="file://$USER_HOME$/vendor/phpdocumentor/reflection-docblock" />
           <root url="file:///usr/local/Cellar/phpunit/5.1.0/libexec" />
         </SOURCES>
       </library>

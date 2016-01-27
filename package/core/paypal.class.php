@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 class paypal
@@ -80,7 +80,7 @@ class paypal
     */
    	public function request($method, $params = array())
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'paypal', 'request', array($method, $params));
 			$plugins	=	plugins::hookCall('before', 'paypal', 'request', array($method, $params));
@@ -130,7 +130,7 @@ class paypal
 
       	$response = curl_exec($ch);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'paypal', 'request', array($response));
 

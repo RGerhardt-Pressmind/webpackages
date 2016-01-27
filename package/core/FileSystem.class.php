@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
@@ -45,7 +45,7 @@ class FileSystem implements IStatic
 	 */
 	public static function is_really_writable($file)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'FileSystem', 'is_really_writable', array($file));
 			$plugins	=	plugins::hookCall('before', 'FileSystem', 'is_really_writable', array($file));
@@ -98,7 +98,7 @@ class FileSystem implements IStatic
 	 */
 	public static function get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
 			$plugins	=	plugins::hookCall('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
@@ -174,7 +174,7 @@ class FileSystem implements IStatic
 			$back	=	$newSort;
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'FileSystem', 'get_all_files', array($back));
 
@@ -199,7 +199,7 @@ class FileSystem implements IStatic
 	 */
 	public static function delete_files($path, $delete_dir = false)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
 			$plugins	=	plugins::hookCall('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
@@ -250,7 +250,7 @@ class FileSystem implements IStatic
 			}
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('after', 'FileSystem', 'delete_files', array($path, $delete_dir));
 

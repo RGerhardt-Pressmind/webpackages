@@ -22,14 +22,22 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
 
 class curl implements IStatic
 {
-	public static $userAgent, $cookieActive = false;
+	/**
+	 * @var string Browser UserAgent Daten
+	 */
+	public static $userAgent;
+
+	/**
+	 * @var bool Ist Cookie bei der cURL Anfrage Aktiv oder nicht
+	 */
+	public static $cookieActive = false;
 
 	/**
 	 * Zum initialisieren von Daten
@@ -40,11 +48,16 @@ class curl implements IStatic
 	/**
 	 * Kontrolliert ob die cURL Extension existiert
 	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0
+	 *
 	 * @return bool Gibt true zurück wenn die cURL Extension installiert ist und false wenn nicht
 	 */
 	public static function curl_extension_exists()
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('before', 'curl', 'existCurl');
 
@@ -61,12 +74,17 @@ class curl implements IStatic
 	/**
 	 * Gibt Daten mittels cURL zurück
 	 *
-	 * @paam string $url Die HTTP Adresse die cURL aufrufen soll
-	 * @param $url
+	 * @param string $url Die HTTP Adresse die cURL aufrufen soll
 	 * @param array $postfields Irgendwelche Post Felder die übermittelt werden sollen
 	 * @param bool $ssl Wenn es sich um eine SSL Verbindung handelt kann man dies hier noch angeben
+	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 * @throws \Exception Wenn die Extension nicht installiert ist.
 	 */
 	public static function get_data($url, $postfields = array(), $ssl = false)
 	{
@@ -75,7 +93,7 @@ class curl implements IStatic
 			throw new \Exception('curl extension not loaded');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'curl', 'getData', array($url, $postfields, $ssl));
 			$plugins	=	plugins::hookCall('before', 'curl', 'getData', array($url, $postfields, $ssl));
@@ -138,7 +156,7 @@ class curl implements IStatic
 		$data = curl_exec($ch);
 		curl_close($ch);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'curl', 'getData', array($data));
 			$plugins	=	plugins::hookCall('after', 'curl', 'getData', array($data));
@@ -156,10 +174,15 @@ class curl implements IStatic
 	/**
 	 * Gibt den Statuscode einer URL zurück
 	 *
-	 * @param string Die HTTP Adresse die cURL aufrufen soll
+	 * @param string $url Die HTTP Adresse die cURL aufrufen soll und der HTTP-Statuscode überprüft werden soll
 	 *
-	 * @throws \Exception
-	 * @return int Gibt die HTTP Statuscode zurück
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
+	 * @throws \Exception Wenn die Extension nicht installiert ist oder im Fehlerfall
+	 * @return int Gibt den HTTP-Statuscode zurück
 	 */
 	public static function get_status($url)
 	{
@@ -168,7 +191,7 @@ class curl implements IStatic
 			throw new \Exception('curl extension not loaded');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'curl', 'getState', array($url));
 			$plugins	=	plugins::hookCall('before', 'curl', 'getState', array($url));
@@ -197,7 +220,7 @@ class curl implements IStatic
 
 		curl_close($ch);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'curl', 'getState', array((int)$httpcode));
 			$plugins	=	plugins::hookCall('after', 'curl', 'getState', array((int)$httpcode));
@@ -217,8 +240,13 @@ class curl implements IStatic
 	 *
 	 * @param string $city Den Stadtnamen
 	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
-	 * @throws \Exception
+	 * @throws \Exception Wenn die Extension nicht installiert oder im Fehlerfall.
 	 */
 	public static function get_city_coordinates($city)
 	{
@@ -227,7 +255,7 @@ class curl implements IStatic
 			throw new \Exception('curl extension not loaded');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'curl', 'getCityCoordinates', array($city));
 			$plugins	=	plugins::hookCall('before', 'curl', 'getCityCoordinates', array($city));
@@ -264,7 +292,7 @@ class curl implements IStatic
 			$data	=	array();
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'curl', 'getCityCoordinates', array($data));
 			$plugins	=	plugins::hookCall('after', 'curl', 'getCityCoordinates', array($data));
@@ -282,11 +310,16 @@ class curl implements IStatic
 	/**
 	 * Gibt den Namen der Stadt zurück
 	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
 	 * @return string Gibt, Anhand der IP-Adresse, den Namen der Stadt zurück oder "Not found" wenn keine Stadt gefunden wurde
 	 */
 	public static function get_city_name_by_ip()
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'curl', 'getCityNameByIp');
 			$plugins	=	plugins::hookCall('before', 'curl', 'getCityNameByIp');
@@ -315,10 +348,10 @@ class curl implements IStatic
 			return 'Not found';
 		}
 
-		$getData	=	self::getData('http://ip-api.com/php/'.$ip);
+		$getData	=	self::get_data('http://ip-api.com/php/'.$ip);
 		$query		=	@unserialize($getData);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'curl', 'getCityNameByIp', array($query));
 			$plugins	=	plugins::hookCall('after', 'curl', 'getCityNameByIp', array($query));

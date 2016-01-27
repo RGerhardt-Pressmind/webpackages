@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\language;
+use package\core\autoload;
+use package\core\language;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class languageTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('language', '\package\\', true);
+		autoload::get('language', '\package\core\\', true);
 	}
 
 	public function testSetLanguage()

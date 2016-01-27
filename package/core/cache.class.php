@@ -14,25 +14,33 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   cache.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
 
 class cache implements IStatic
 {
-	private static $cacheDir, $cacheActiv, $cacheExtension = '.cache';
+	/**
+	 * @var string Der Pfad zum Cache Verzeichnis
+	 */
+	private static $cacheDir;
 
 	/**
-	 * Setzt die Standard Werte
+	 * @var bool Die Angabe ob der Cache aktiv ist oder nicht
+	 */
+	private static $cacheActiv;
+
+	/**
+	 * @var string Die Dateiendung einer jeden Cache Datei
+	 */
+	private static $cacheExtension = '.cache';
+
+	/**
+	 * Setzt die Standard Werte für den Cache
+	 * Wird von load_functions.abstract.class.php verwendet
 	 *
 	 * cache constructor.
 	 */
@@ -53,29 +61,33 @@ class cache implements IStatic
 	/**
 	 * Setzt den Cache Pfad
 	 *
-	 * @param string $cachePath Der Ordner wo alle Gecachten Dateien landen
-	 * @return boolean
+	 * @param string $cachePath Der Ordner wo alle Gecachten Dateien abgespeichert werden sollen
+	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
+	 * @return boolean Gibt im Fehlerfall ein false zurück
 	 */
 	public static function set_cache_dir($cachePath)
 	{
-		if(empty($cachePath))
+		if(empty($cachePath) || is_file($cachePath) === true)
 		{
 			return false;
 		}
 
-		if(is_dir($cachePath) === false)
+		if(file_exists($cachePath) === false)
 		{
 			self::$cacheDir	=	$cachePath;
 
 			return @mkdir(self::$cacheDir, 0777, true);
 		}
-		elseif(file_exists($cachePath) === true)
+		else
 		{
 			self::$cacheDir	=	$cachePath;
 			return true;
 		}
-
-		return false;
 	}
 
 
@@ -83,6 +95,12 @@ class cache implements IStatic
 	 * Aktiviert / Deaktiviert den Cache
 	 *
 	 * @param bool $active Aktiviert bzw Deaktiviert den Cache
+	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0
+	 *
 	 * @return void
 	 */
 	public static function set_cache_active($active = false)
@@ -96,7 +114,12 @@ class cache implements IStatic
 	 *
 	 * @param string $extension Die Cache Extension ist die Dateiendung jeder Cache Datei
 	 *
-	 * @throws \Exception
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0
+	 *
+	 * @throws \Exception Wenn der Parameter leer ist.
 	 * @return void
 	 */
 	public static function set_cache_extension($extension = 'cache')
@@ -115,10 +138,15 @@ class cache implements IStatic
 
 
 	/**
-	 * Cachte eine HTML Template Datei
+	 * Cache eine HTML Template Datei
 	 *
 	 * @param string $cache_name Der eindeutige Cache Name
 	 * @param string $content Der Inhalt der Cache Datei
+	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0
 	 *
 	 * @return bool
 	 */
@@ -138,10 +166,15 @@ class cache implements IStatic
 
 
 	/**
-	 * Gibt den HTML Link zurück wenn Datei nicht abgelaufen
+	 * Gibt den HTML Link zurück wenn die Cache Datei nicht abgelaufen ist
 	 *
 	 * @param string $cache_name Der eindeutige Cache Name
 	 * @param int $lifetime Die maximale Lebensdauer der Cache Datei
+	 *
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
 	 *
 	 * @return bool|string Gibt den Link zur gecachten Datei zurück, false wenn Lebensdauer abgelaufen oder gecachte Datei nicht existiert
 	 */
@@ -154,7 +187,7 @@ class cache implements IStatic
 			return false;
 		}
 
-		$filemtime	=	filemtime($cacheFile);
+		$filemtime	=	@filemtime($cacheFile);
 
 		if($filemtime === false)
 		{
@@ -180,14 +213,19 @@ class cache implements IStatic
 	 *
 	 * @param string $cache_name Eindeutiger Cache Name
 	 * @param mixed $content Inhalt der zu cachenden Datei
-	 * @param int $lifetime maximale Lebensdauer der Cache Datei
+	 * @param int $lifetime Die maximale Lebensdauer der Cache Datei
 	 *
-	 * @throws \Exception
-	 * @return bool Wenn Cache erfolgreich erstellt true, wenn es Probleme gab false
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
+	 * @throws \Exception Wenn der $cache_name leer ist
+	 * @return bool Wenn Cache erfolgreich erstellt true, wenn es Probleme gab false (z.b. Cache nicht aktiv oder wenn die Cache Datei nicht abgespeichert werden konnte)
 	 */
 	public static function set_element($cache_name, $content, $lifetime = 500)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'cache', 'setElement', array($cache_name, $content, $lifetime));
 			$plugin	=	plugins::hookCall('before', 'cache', 'setElement', array($cache_name, $content, $lifetime));
@@ -214,7 +252,7 @@ class cache implements IStatic
 		$cachePath	=	self::$cacheDir.$cache_name.self::$cacheExtension;
 		$saveFile	=	file_put_contents($cachePath, $serialize);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'cache', 'setElement', array($cachePath));
 			$plugin	=	plugins::hookCall('after', 'cache', 'setElement', array($cachePath));
@@ -241,12 +279,17 @@ class cache implements IStatic
 	 *
 	 * @param string $cache_name Der eindeutige Name der gecachten Datei
 	 *
-	 * @throws
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
+	 * @throws \Exception Wenn $cache_name leer ist.
 	 * @return mixed Gibt den Inhalt des Caches zurück, false wenn Datei nicht existiert oder Lebensdauer abgelaufen
 	 */
 	public static function get_element($cache_name)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'cache', 'getElement', array($cache_name));
 			$plugin	=	plugins::hookCall('before', 'cache', 'getElement', array($cache_name));
@@ -271,9 +314,9 @@ class cache implements IStatic
 
 			if(!empty($getContent))
 			{
-				$unserialize	=	unserialize($getContent);
+				$unserialize	=	@unserialize($getContent);
 
-				if(isset($unserialize['lifetime']) === true && $unserialize['lifetime'] >= time())
+				if($unserialize !== false && isset($unserialize['lifetime']) === true && $unserialize['lifetime'] >= time())
 				{
 					return $unserialize['content'];
 				}
@@ -302,12 +345,17 @@ class cache implements IStatic
 	 *
 	 * @param string $cache_name Eindeutiger Name der Cache Datei
 	 *
-	 * @throws \Exception
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
+	 * @throws \Exception Wenn $cache_name leer ist.
 	 * @return bool Nach erfolgreichem löschen des Caches wird true zurück gegeben, bei einem Fehler false.
 	 */
 	public static function delete_element($cache_name)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'cache', 'deleteElement', array($cache_name));
 			$plugins	=	plugins::hookCall('before', 'cache', 'deleteElement', array($cache_name));
@@ -331,7 +379,7 @@ class cache implements IStatic
 			$remove	=	@unlink($filename);
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'cache', 'deleteElement', array($filename, $remove));
 			$plugins	=	plugins::hookCall('after', 'cache', 'deleteElement', array($filename, $remove));

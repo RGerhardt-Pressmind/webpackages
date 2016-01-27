@@ -24,7 +24,7 @@
 
 namespace unitTest\core;
 
-use package\Validater;
+use package\core\Validater;
 
 require_once 'init.php';
 

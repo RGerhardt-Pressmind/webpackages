@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
@@ -44,7 +44,7 @@ class number implements IStatic
 	 */
 	public static function byte_format($num, $precision = 1)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'number', 'byteFormat', array($num, $precision));
 			$plugins	=	plugins::hookCall('before', 'number', 'byteFormat', array($num, $precision));
@@ -81,7 +81,7 @@ class number implements IStatic
 
 			$back	=	number_format($num).' '.$unit;
 
-			if(class_exists('\package\plugins') === true)
+			if(class_exists('\package\core\plugins') === true)
 			{
 				plugins::hookShow('after', 'number', 'byteFormat', array($back));
 				$plugins	=	plugins::hookCall('after', 'number', 'byteFormat', array($back));
@@ -97,7 +97,7 @@ class number implements IStatic
 
 		$back	=	number_format($num, $precision).' '.$unit;
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'number', 'byteFormat', array($back));
 			$plugins	=	plugins::hookCall('after', 'number', 'byteFormat', array($back));
@@ -122,7 +122,7 @@ class number implements IStatic
 	 */
 	public static function diff($start, $end = false)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'number', 'diff', array($start, $end));
 			$plugins	=	plugins::hookCall('before', 'number', 'diff', array($start, $end));
@@ -154,7 +154,7 @@ class number implements IStatic
 		$back->min      = 	$diff->format('%i');
 		$back->sec      = 	$diff->format('%s');
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'number', 'diff', array($back));
 			$plugins	=	plugins::hookCall('after', 'number', 'diff', array($back));
@@ -180,7 +180,7 @@ class number implements IStatic
 	 */
 	public static function get_diff_value($diffDate, $short = false)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'number', 'getDiffValue', array($diffDate, $short));
 			$plugins	=	plugins::hookCall('before', 'number', 'getDiffValue', array($diffDate, $short));
@@ -220,9 +220,9 @@ class number implements IStatic
 
 		if(class_exists('language') === false)
 		{
-			if(class_exists('\package\autoload') === true)
+			if(class_exists('\package\core\autoload') === true)
 			{
-				autoload::get('language', '\package\\', true);
+				autoload::get('language', '\package\core\\', true);
 			}
 			else
 			{
@@ -305,7 +305,7 @@ class number implements IStatic
 			}
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'number', 'getDiffValue', array($return));
 			$plugins	=	plugins::hookCall('after', 'number', 'getDiffValue', array($return));

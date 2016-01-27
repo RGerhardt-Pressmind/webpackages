@@ -29,12 +29,12 @@ $m	=	'hello';
 
 if(isset($_GET['c']) === true)
 {
-	$c	=	\package\security::url('c', 'GET', 'string');
+	$c	=	\package\core\security::url('c', 'GET', 'string');
 }
 
 if(isset($_GET['m']) === true)
 {
-	$m	=	\package\security::url('m', 'GET', 'string');
+	$m	=	\package\core\security::url('m', 'GET', 'string');
 }
 
 function searchInFolder($folder, $c)
@@ -49,7 +49,7 @@ function searchInFolder($folder, $c)
 		{
 			if($file->getFilename() == $c.'.class.php')
 			{
-				return	\package\autoload::get($c);
+				return	\package\core\autoload::get($c);
 			}
 		}
 		else
@@ -69,7 +69,7 @@ function searchInFolder($folder, $c)
 
 if($c == 'update')
 {
-	$install	=	\package\autoload::get('update');
+	$install	=	\package\core\autoload::get('update');
 
 	if($m == 'hello')
 	{

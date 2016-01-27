@@ -14,15 +14,9 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   autoload.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 class autoload
@@ -40,7 +34,12 @@ class autoload
      * @param bool $isStatic Wenn es sich um eine statische Klasse handelt
 	 * @param array $parameter Parameter für den Konstruktor der Klasse. Er muss ein Assoziatives Array sein
 	 *
-	 * @throws \Exception
+	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
+	 * @copyright 2010-2016 webpackages
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @version 1.0.1
+	 *
+	 * @throws \Exception Wird ausgegeben wenn der Klassennamen leer ist oder die Klasse nicht geladen werden kann
 	 * @return mixed Gibt die Klasseninstanz zurück oder bei einer statischen Klasse ein true
      */
 	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array())

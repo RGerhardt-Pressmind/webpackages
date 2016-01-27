@@ -24,7 +24,7 @@
 
 namespace unitTest\core;
 
-use package\autoload;
+use package\core\autoload;
 
 require_once 'init.php';
 
@@ -34,7 +34,7 @@ class XMLTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->xml	=	autoload::get('XML', '\package\\');
+		$this->xml	=	autoload::get('XML', '\package\core\\');
 
 		$this->testXML	=	'
 		<root>

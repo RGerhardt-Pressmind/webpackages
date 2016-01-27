@@ -24,7 +24,7 @@
 
 namespace unitTest\core;
 
-use package\autoload;
+use package\core\autoload;
 
 require_once 'init.php';
 
@@ -35,7 +35,7 @@ class loggerTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->logger	=	autoload::get('logger', '\package\\');
+		$this->logger	=	autoload::get('logger', '\package\core\\');
 	}
 
 	public function tearDown()

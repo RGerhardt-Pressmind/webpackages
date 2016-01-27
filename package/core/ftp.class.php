@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 class ftp
@@ -42,7 +42,7 @@ class ftp
 	 */
 	public function connect($host, $ssl = false, $port = 21, $timeout = 90)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'connect', array($host, $ssl, $port, $timeout));
 
@@ -63,7 +63,7 @@ class ftp
 			$this->_ftp	=	@ftp_connect($host, $port, $timeout);
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'ftp', 'connect', array($this->_ftp));
 		}
@@ -86,7 +86,7 @@ class ftp
 	 */
 	public function login($username, $password)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'login', array($this->_ftp, $username, $password));
 			plugins::hookCall('before', 'ftp', 'login', array($this->_ftp, $username, $password));
@@ -99,7 +99,7 @@ class ftp
 
 		$login	=	ftp_login($this->_ftp, $username, $password);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'ftp', 'login', array($login));
 			$plugin	=	plugins::hookCall('after', 'ftp', 'login', array($login));
@@ -150,7 +150,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'getRemoteFile', array($this->_ftp, $remoteFile, $localeFile));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'getRemoteFile', array($this->_ftp, $remoteFile, $localeFile));
@@ -180,7 +180,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'modifiedTime', array($this->_ftp, $remoteFile, $timeFormat));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'modifiedTime', array($this->_ftp, $remoteFile, $timeFormat));
@@ -215,7 +215,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'up', array($this->_ftp));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'up', array($this->_ftp));
@@ -251,7 +251,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'isDir', array($this->_ftp, $remoteDirectory));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'isDir', array($this->_ftp, $remoteDirectory));
@@ -297,7 +297,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'count', array($this->_ftp, $remoteDirectory, $type, $recursive));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'count', array($this->_ftp, $remoteDirectory, $type, $recursive));
@@ -345,7 +345,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'isEmpty', array($this->_ftp, $remoteDirectory));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'isEmpty', array($this->_ftp, $remoteDirectory));
@@ -384,7 +384,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'putFromPath', array($this->_ftp, $local_file));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'putFromPath', array($this->_ftp, $local_file));
@@ -424,7 +424,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'putAll', array($this->_ftp, $source_directory, $target_directory, $mode));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'putAll', array($this->_ftp, $source_directory, $target_directory, $mode));
@@ -486,7 +486,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'putFromString', array($this->_ftp, $remote_file, $content));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'putFromString', array($this->_ftp, $remote_file, $content));
@@ -522,7 +522,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'dirSize', array($this->_ftp, $remoteDirectory, $recursive));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'dirSize', array($this->_ftp, $remoteDirectory, $recursive));
@@ -565,7 +565,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'nlist', array($this->_ftp, $remoteDirectory, $recursive, $filter));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'nlist', array($this->_ftp, $remoteDirectory, $recursive, $filter));
@@ -676,7 +676,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'mkdir', array($this->_ftp, $remoteDirectory, $recursive));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'mkdir', array($this->_ftp, $remoteDirectory, $recursive));
@@ -744,7 +744,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'remove', array($this->_ftp, $remoteFile));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'remove', array($this->_ftp, $remoteFile));
@@ -780,7 +780,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'rmdir', array($this->_ftp, $remoteDirectory, $recursive));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'rmdir', array($this->_ftp, $remoteDirectory, $recursive));
@@ -843,7 +843,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'cleanDir', array($this->_ftp, $remoteDirectory));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'cleanDir', array($this->_ftp, $remoteDirectory));
@@ -888,7 +888,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'scanDir', array($this->_ftp, $remoteDirectory, $recursive));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'scanDir', array($this->_ftp, $remoteDirectory, $recursive));
@@ -918,7 +918,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'rawlist', array($this->_ftp, $remoteDirectory, $recursive));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'rawlist', array($this->_ftp, $remoteDirectory, $recursive));
@@ -1035,7 +1035,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'parseRawList', array($this->_ftp, $rawlist));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'parseRawList', array($this->_ftp, $rawlist));
@@ -1126,7 +1126,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'ftp', 'rawToType', array($this->_ftp, $permission));
 			$plugin	=	plugins::hookCall('before', 'ftp', 'rawToType', array($this->_ftp, $permission));

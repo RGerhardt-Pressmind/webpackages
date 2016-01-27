@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 class security
@@ -311,7 +311,7 @@ class security
 	 */
 	public static function get_mime_type($path)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'security', 'getMimeType', array($path));
 			$plugins	=	plugins::hookCall('before', 'security', 'getMimeType', array($path));
@@ -332,7 +332,7 @@ class security
 
 		finfo_close($finfo);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('after', 'security', 'getMimeType', array($mime_type));
 			$plugins	=	plugins::hookCall('after', 'security', 'getMimeType', array($mime_type));
@@ -356,7 +356,7 @@ class security
 	 */
 	public static function get_file_type($path)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'security', 'getFileType', array($path));
 			$plugins	=	plugins::hookCall('before', 'security', 'getFileType', array($path));
@@ -399,7 +399,7 @@ class security
 	 */
 	public static function sha_sec($string)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'security', 'shaSec', array($string));
 			$plugins	=	plugins::hookCall('before', 'security', 'shaSec', array($string));
@@ -621,7 +621,7 @@ class security
 	 */
 	public static function is_bot()
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugins	=	plugins::hookCall('before', 'security', 'isBot');
 

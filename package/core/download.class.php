@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
@@ -44,7 +44,7 @@ class download implements IStatic
 	 */
 	public static function force_download($filename = '', $data = '')
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'download', 'forceDownload', array($filename, $data));
 			plugins::hookCall('before', 'download', 'forceDownload', array($filename, $data));

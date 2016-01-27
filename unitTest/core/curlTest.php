@@ -24,8 +24,8 @@
 
 namespace unitTest\core;
 
-use package\autoload;
-use package\curl;
+use package\core\autoload;
+use package\core\curl;
 
 require_once 'init.php';
 
@@ -33,7 +33,7 @@ class curlTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		autoload::get('curl', '\package\\', true);
+		autoload::get('curl', '\package\core\\', true);
 	}
 
 	public function testCurlExtensionExists()

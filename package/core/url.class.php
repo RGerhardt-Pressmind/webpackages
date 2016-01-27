@@ -22,7 +22,7 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 
 use package\implement\IStatic;
@@ -143,7 +143,7 @@ class url implements IStatic
 	 */
 	public static function createValidUrlString($url)
 	{
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'template', 'createValidURL', array($url));
 
@@ -157,7 +157,7 @@ class url implements IStatic
 		$url	=	preg_replace('/\s/', '-', $url);
 		$url 	=	filter_var($url, FILTER_SANITIZE_URL);
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('after', 'template', 'createValidURL', array($url));
 

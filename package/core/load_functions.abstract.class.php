@@ -22,35 +22,35 @@
 	@license    http://www.gnu.org/licenses/
 */
 
-namespace package;
+namespace package\core;
 
 use package\implement\iDynamic;
 use package\implement\IPlugin;
 
 abstract class load_functions
 {
-	public static $LOAD_DATE			=	array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_FILE_SYSTEM		=	array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_URL				=	array('isStatic' => false, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_BROWSER			=	array('isStatic' => false, 'class' => 'browser', 'writeInAttribute' => 'browser', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_VERSION			=	array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_DOWNLOAD		=	array('isStatic' => true, 'class' => 'download', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_ZIP				=	array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_FTP				=	array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_BENCHMARK		=	array('isStatic' => true, 'class' => 'benchmark', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_TEMPLATE		=	array('isStatic' => false, 'class' => 'template', 'writeInAttribute' =>'template', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_XML				=	array('isStatic' => false, 'class' => 'XML', 'writeInAttribute' => 'xml', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_LOGGER			=	array('isStatic' => false, 'class' => 'logger', 'writeInAttribute' => 'logger', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_ERROR			=	array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_DATABASE		=	array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('dsn' => PDO_TYPE.':dbname='.PDO_DATABASE.';host='.PDO_HOST.';port='.PDO_PORT, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'options' => null, 'driver' => PDO_TYPE), 'namespace' => '\package\\');
-	public static $LOAD_PLUGINS			=	array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_CACHE			=	array('isStatic' => true, 'class' => 'cache', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_CURL			=	array('isStatic' => true, 'class' => 'curl', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_TEXT			=	array('isStatic' => true, 'class' => 'text', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_NUMBER			=	array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_LANGUAGE		=	array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_PAYPAL			=	array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\\');
-	public static $LOAD_IMAGES			=	array('isStatic' => true, 'class' => 'images', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\\');
+	public static $LOAD_DATE			=	array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_FILE_SYSTEM		=	array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_URL				=	array('isStatic' => false, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_BROWSER			=	array('isStatic' => false, 'class' => 'browser', 'writeInAttribute' => 'browser', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_VERSION			=	array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_DOWNLOAD		=	array('isStatic' => true, 'class' => 'download', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_ZIP				=	array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_FTP				=	array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_BENCHMARK		=	array('isStatic' => true, 'class' => 'benchmark', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_TEMPLATE		=	array('isStatic' => false, 'class' => 'template', 'writeInAttribute' =>'template', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_XML				=	array('isStatic' => false, 'class' => 'XML', 'writeInAttribute' => 'xml', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_LOGGER			=	array('isStatic' => false, 'class' => 'logger', 'writeInAttribute' => 'logger', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_ERROR			=	array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_DATABASE		=	array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('dsn' => PDO_TYPE.':dbname='.PDO_DATABASE.';host='.PDO_HOST.';port='.PDO_PORT, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'options' => null, 'driver' => PDO_TYPE), 'namespace' => '\package\core\\');
+	public static $LOAD_PLUGINS			=	array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_CACHE			=	array('isStatic' => true, 'class' => 'cache', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_CURL			=	array('isStatic' => true, 'class' => 'curl', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_TEXT			=	array('isStatic' => true, 'class' => 'text', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_NUMBER			=	array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_LANGUAGE		=	array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_PAYPAL			=	array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\core\\');
+	public static $LOAD_IMAGES			=	array('isStatic' => true, 'class' => 'images', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 
 	protected $phpmailer;
 
@@ -342,7 +342,7 @@ abstract class load_functions
 	protected function load_default_functions()
 	{
 		//Load default functions
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			plugins::hookShow('before', 'load_functions', 'loadDefaultFunctions');
 			plugins::hookShow('after', 'load_functions', 'loadDefaultFunctions');
@@ -368,7 +368,7 @@ abstract class load_functions
 			$_COOKIE['id_users']	=	0;
 		}
 
-		if(class_exists('\package\plugins') === true)
+		if(class_exists('\package\core\plugins') === true)
 		{
 			$back	=	plugins::hookCall('before', 'load_functions', 'isUserLoggedIn', array($_SESSION['id_users'], $_COOKIE['id_users']));
 
