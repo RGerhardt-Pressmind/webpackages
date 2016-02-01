@@ -12,6 +12,8 @@
     <script src="<?php echo $this->load_template_file('bootstrap.min', 'js') ?>"></script>
     <script src="<?php echo $this->load_template_file('jquery.isotope.min', 'js'); ?>"></script>
     <script src="<?php echo $this->load_template_file('jquery.prettyPhoto', 'js'); ?>"></script>
+	<script src="<?php echo $this->load_template_file('fusioncharts', 'js'); ?>"></script>
+    <script src="<?php echo $this->load_template_file('fusioncharts.charts', 'js'); ?>"></script>
     <script src="<?php echo $this->load_template_file('main', 'js'); ?>"></script>
 </body>
 </html>

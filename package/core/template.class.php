@@ -60,6 +60,25 @@ class template
 
 
 	/**
+	 * Destructor
+	 */
+	public function __destruct()
+	{
+		$this->contentData	=	null;
+		$this->tempDir		=	null;
+		$this->header		=	null;
+		$this->footer		=	null;
+		$this->skin			=	null;
+
+		unset($this->contentData);
+		unset($this->tempDir);
+		unset($this->header);
+		unset($this->footer);
+		unset($this->skin);
+	}
+
+
+	/**
 	 * Setzt den Skin (Ordner) im Template Verzeichnis
 	 *
 	 * @param string $skin

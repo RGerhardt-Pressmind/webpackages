@@ -42,6 +42,15 @@ class ftp
 	private $_ftp;
 
 	/**
+	 * Destructor
+	 */
+	public function __destruct()
+	{
+		$this->_ftp	=	null;
+		unset($this->_ftp);
+	}
+
+	/**
 	 * Stellt eine FTP Verbindung her
 	 *
 	 * @param string $host Der Host des FTP Servers mit dem sich verbunden werden soll
@@ -68,11 +77,11 @@ class ftp
 
 		if($ssl === true)
 		{
-			$this->_ftp	=	@ftp_ssl_connect($host, $port, $timeout);
+			$this->_ftp	=	ftp_ssl_connect($host, $port, $timeout);
 		}
 		else
 		{
-			$this->_ftp	=	@ftp_connect($host, $port, $timeout);
+			$this->_ftp	=	ftp_connect($host, $port, $timeout);
 		}
 
 		if(class_exists('\package\core\plugins') === true)
@@ -82,7 +91,7 @@ class ftp
 
 		if($this->_ftp === false)
 		{
-			throw new \Exception('No connection');
+			throw new \Exception('Error: No ftp connection');
 		}
 	}
 
@@ -142,7 +151,7 @@ class ftp
 			throw new \Exception('No connection');
 		}
 
-		@ftp_pasv($this->_ftp, true);
+		ftp_pasv($this->_ftp, true);
 	}
 
 
@@ -173,7 +182,7 @@ class ftp
 			}
 		}
 
-		return @ftp_get($this->_ftp, $localeFile, $remoteFile, FTP_BINARY);
+		return ftp_get($this->_ftp, $localeFile, $remoteFile, FTP_BINARY);
 	}
 
 
@@ -205,7 +214,7 @@ class ftp
 
 		$time	=	ftp_mdtm($this->_ftp, $remoteFile);
 
-		if($time !== -1 && $timeFormat != null)
+		if($time !== -1 && $timeFormat !== null)
 		{
 			return date($timeFormat, $time);
 		}
@@ -274,20 +283,20 @@ class ftp
 			}
 		}
 
-		$pwd	=	@ftp_pwd($this->_ftp);
+		$pwd	=	ftp_pwd($this->_ftp);
 
 		if($pwd === false)
 		{
 			throw new \Exception('Unable to resolve the current directory');
 		}
 
-		if(@ftp_chdir($this->_ftp, $remoteDirectory) === true)
+		if(ftp_chdir($this->_ftp, $remoteDirectory) === true)
 		{
-			@ftp_chdir($this->_ftp, $pwd);
+			ftp_chdir($this->_ftp, $pwd);
 			return true;
 		}
 
-		@ftp_chdir($this->_ftp, $pwd);
+		ftp_chdir($this->_ftp, $pwd);
 
 		return false;
 	}
@@ -410,9 +419,9 @@ class ftp
         $remote_file	=	basename($local_file);
         $handle      	=	fopen($local_file, 'r');
 
-        if(@ftp_fput($this->_ftp, $remote_file, $handle, FTP_BINARY) === true)
+        if(ftp_fput($this->_ftp, $remote_file, $handle, FTP_BINARY) === true)
 		{
-            @rewind($handle);
+            rewind($handle);
             return true;
         }
 
@@ -455,9 +464,9 @@ class ftp
 			{
                 if(is_dir($source_directory.'/'.$file) === true)
 				{
-                    if(@ftp_chdir($this->_ftp, $target_directory.'/'.$file) === false)
+                    if(ftp_chdir($this->_ftp, $target_directory.'/'.$file) === false)
 					{
-                        $ftpMkdir	=	@ftp_mkdir($this->_ftp, $target_directory.'/'.$file);
+                        $ftpMkdir	=	ftp_mkdir($this->_ftp, $target_directory.'/'.$file);
 
 						if($ftpMkdir === false)
 						{
@@ -469,7 +478,7 @@ class ftp
                 }
 				else
 				{
-                   	$ftpPut	=	 @ftp_put($this->_ftp, $target_directory.'/'.$file, $source_directory.'/'.$file, $mode);
+                   	$ftpPut	=	 ftp_put($this->_ftp, $target_directory.'/'.$file, $source_directory.'/'.$file, $mode);
 
 					if($ftpPut === false)
 					{
@@ -511,7 +520,7 @@ class ftp
 
         $handle = fopen('php://temp', 'w');
 
-        @fwrite($handle, $content);
+        fwrite($handle, $content);
 
 		rewind($handle);
 
@@ -593,7 +602,7 @@ class ftp
 			throw new \Exception('Remote path is not directory');
 		}
 
-		$files	=	@ftp_nlist($this->_ftp, $remoteDirectory);
+		$files	=	ftp_nlist($this->_ftp, $remoteDirectory);
 
 		if($files === false)
 		{
@@ -626,7 +635,7 @@ class ftp
 
 		$flatten = function (array $arr) use (&$flatten) {
             $flat = array();
-            foreach($arr as $k => $v)
+            foreach($arr as $v)
 			{
                 if(is_array($v))
 				{
@@ -701,7 +710,7 @@ class ftp
 
 		if($recursive === false || $this->is_dir($remoteDirectory) === true)
 		{
-			$ftpMkdir	=	@ftp_mkdir($this->_ftp, $remoteDirectory);
+			$ftpMkdir	=	ftp_mkdir($this->_ftp, $remoteDirectory);
 
 			if($ftpMkdir === false)
 			{
@@ -721,7 +730,7 @@ class ftp
 		{
             if(@ftp_chdir($this->_ftp, $part) === false)
 			{
-				$ftpMkdir	=	@ftp_mkdir($this->_ftp, $part);
+				$ftpMkdir	=	ftp_mkdir($this->_ftp, $part);
 
 				if($ftpMkdir === false)
 				{
@@ -732,11 +741,11 @@ class ftp
 					$result	=	true;
 				}
 
-                @ftp_chdir($this->_ftp, $part);
+                ftp_chdir($this->_ftp, $part);
             }
         }
 
-        @ftp_chdir($this->_ftp, $pwd);
+        ftp_chdir($this->_ftp, $pwd);
 
         return $result;
 	}
@@ -772,7 +781,7 @@ class ftp
 			return false;
 		}
 
-		return @ftp_delete($this->_ftp, $remoteFile);
+		return ftp_delete($this->_ftp, $remoteFile);
 	}
 
 
@@ -827,7 +836,7 @@ class ftp
 						return false;
 					}
 
-					$rmdir	=	@ftp_rmdir($this->_ftp, $file);
+					$rmdir	=	ftp_rmdir($this->_ftp, $file);
 
 					if($rmdir === false)
 					{
@@ -837,7 +846,7 @@ class ftp
 			}
 		}
 
-		return @ftp_rmdir($this->_ftp, $remoteDirectory);
+		return ftp_rmdir($this->_ftp, $remoteDirectory);
 	}
 
 
@@ -951,7 +960,7 @@ class ftp
 
         if($recursive === false)
 		{
-            foreach($list as $path => $item)
+            foreach($list as $item)
 			{
                 $chunks = preg_split("/\s+/", $item);
 

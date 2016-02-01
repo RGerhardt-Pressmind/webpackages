@@ -69,7 +69,7 @@ class FileSystem implements IStatic
 			}
 		}
 
-		if(OS == 'UNIX' && !ini_get('safe_mode'))
+		if(OS === 'UNIX' && ini_get('safe_mode') === false)
 		{
 			return is_writable($file);
 		}
@@ -89,7 +89,7 @@ class FileSystem implements IStatic
 
 			return true;
 		}
-		elseif(is_file($file) == false or ($fp = @fopen($file, 'ab')) === false)
+		elseif(is_file($file) === false || ($fp = @fopen($file, 'ab')) === false)
 		{
 			return false;
 		}
@@ -138,32 +138,35 @@ class FileSystem implements IStatic
 			{
 				if($file instanceof \SplFileInfo)
 				{
+					$toString	=	$file->__toString();
+					$getPath	=	$file->getPath();
+
 					if($withData === false)
 					{
 						if($file->isDir() === true)
 						{
-							$back[$file->__toString()]['filepath']	=	$file->__toString();
+							$back[$toString]['filepath']	=	$toString;
 						}
 						else
 						{
-							$back[$file->getPath()]['childs'][]['filepath']	=	$file->__toString();
+							$back[$getPath]['childs'][]['filepath']	=	$toString;
 						}
 					}
 					else
 					{
 						if($file->isDir() === true)
 						{
-							$back[$file->__toString()]['filepath']	=	$file->__toString();
-							$back[$file->__toString()]['path']		=	$file->getPath();
-							$back[$file->__toString()]['basename']	=	$file->getBasename();
-							$back[$file->__toString()]['filename']	=	$file->getFilename();
-							$back[$file->__toString()]['realPath']	=	$file->getRealPath();
+							$back[$toString]['filepath']	=	$toString;
+							$back[$toString]['path']		=	$getPath;
+							$back[$toString]['basename']	=	$file->getBasename();
+							$back[$toString]['filename']	=	$file->getFilename();
+							$back[$toString]['realPath']	=	$file->getRealPath();
 						}
 						else
 						{
 							$add					=	array();
-							$add['filepath']		=	$file->__toString();
-							$add['path']			=	$file->getPath();
+							$add['filepath']		=	$toString;
+							$add['path']			=	$getPath;
 							$add['filename']		=	$file->getFilename();
 							$add['extension']		=	$file->getExtension();
 							$add['basename']		=	$file->getBasename();
@@ -171,7 +174,7 @@ class FileSystem implements IStatic
 							$add['size']			=	$file->getSize();
 							$add['modified_time']	=	$file->getMTime();
 
-							$back[$file->__toString()]['childs'][]	=	$add;
+							$back[$toString]['childs'][]	=	$add;
 						}
 					}
 				}
@@ -179,7 +182,7 @@ class FileSystem implements IStatic
 
 			$newSort	=	array();
 
-			foreach($back as $k => $file)
+			foreach($back as $file)
 			{
 				$newSort[]	=	$file;
 			}
@@ -237,16 +240,16 @@ class FileSystem implements IStatic
 			{
 				if($file instanceof \SplFileInfo)
 				{
-					if($file->isFile())
+					if($file->isFile() === true)
 					{
-						if(@unlink($file->__toString()) === false)
+						if(unlink($file->__toString()) === false)
 						{
 							return false;
 						}
 					}
-					elseif($file->isDir())
+					elseif($file->isDir() === true)
 					{
-						if(@rmdir($file->__toString()) === false)
+						if(rmdir($file->__toString()) === false)
 						{
 							return false;
 						}
@@ -257,7 +260,7 @@ class FileSystem implements IStatic
 
 		if($delete_dir === true)
 		{
-			if(@rmdir($path) === false)
+			if(rmdir($path) === false)
 			{
 				return false;
 			}
@@ -288,6 +291,17 @@ class FileSystem implements IStatic
 	 */
 	public static function copyDirectory($source, $dest, $chmod = 0755)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookShow('before', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
+			$plugins	=	plugins::hookCall('before', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(file_exists($dest) === false)
 		{
 			mkdir($dest, $chmod);
@@ -298,37 +312,40 @@ class FileSystem implements IStatic
 			$directory	=	new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS);
 			$iterator	=	new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::SELF_FIRST);
 
-			foreach($iterator as $file)
+			if(iterator_count($iterator) > 0)
 			{
-				if($file instanceof \SplFileInfo)
+				foreach($iterator as $file)
 				{
-					if($file->isDir() === true)
+					if($file instanceof \SplFileInfo)
 					{
-						$newPath	=	str_replace($source, $dest, $file->__toString());
-
-						if(file_exists($newPath) === false)
+						if($file->isDir() === true)
 						{
-							if(@mkdir($newPath, $chmod, true) === false)
+							$newPath	=	str_replace($source, $dest, $file->__toString());
+
+							if(file_exists($newPath) === false)
+							{
+								if(mkdir($newPath, $chmod, true) === false)
+								{
+									return false;
+								}
+							}
+						}
+						else
+						{
+							$newPath	=	str_replace($source, $dest, $file->__toString());
+							$copy		=	copy($file->__toString(), $newPath);
+
+							if($copy === false)
 							{
 								return false;
 							}
-						}
-					}
-					else
-					{
-						$newPath	=	str_replace($source, $dest, $file->__toString());
-						$copy		=	@copy($file->__toString(), $newPath);
 
-						if($copy === false)
-						{
-							return false;
-						}
+							$chmod	=	chmod($newPath, $chmod);
 
-						$chmod	=	@chmod($newPath, $chmod);
-
-						if($chmod === false)
-						{
-							return false;
+							if($chmod === false)
+							{
+								return false;
+							}
 						}
 					}
 				}
@@ -336,18 +353,28 @@ class FileSystem implements IStatic
 		}
 		else
 		{
-			$copy	=	@copy($source, $dest);
+			$copy	=	copy($source, $dest);
 
 			if($copy === false)
 			{
 				return false;
 			}
 
-			$chmod	=	@chmod($dest, $chmod);
+			$chmod	=	chmod($dest, $chmod);
 
 			if($chmod === false)
 			{
 				return false;
+			}
+		}
+
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
+
+			if($plugins != null)
+			{
+				return $plugins;
 			}
 		}
 
@@ -366,9 +393,20 @@ class FileSystem implements IStatic
 	 */
 	public static function renameDirectory($source, $dest, $chmod = 0755)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookShow('before', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
+			$plugins	=	plugins::hookCall('before', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
 		if(file_exists($dest) === false)
 		{
-			@mkdir($dest, $chmod, true);
+			mkdir($dest, $chmod, true);
 		}
 
 		if(is_dir($source) === true)
@@ -376,44 +414,47 @@ class FileSystem implements IStatic
 			$directory	=	new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS);
 			$iterator	=	new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::SELF_FIRST);
 
-			foreach($iterator as $file)
+			if(iterator_count($iterator) > 0)
 			{
-				if($file instanceof \SplFileInfo)
+				foreach($iterator as $file)
 				{
-					if($file->isFile() === true)
+					if($file instanceof \SplFileInfo)
 					{
-						if(file_exists($file->getPath()) === false)
+						if($file->isFile() === true)
 						{
-							if(@mkdir($file->getPath(), $chmod, true) === false)
+							if(file_exists($file->getPath()) === false)
+							{
+								if(mkdir($file->getPath(), $chmod, true) === false)
+								{
+									return false;
+								}
+							}
+
+							$newPath	=	str_replace($source, $dest, $file->__toString());
+							$rename		=	rename($file->__toString(), $newPath);
+
+							if($rename === false)
+							{
+								return false;
+							}
+
+							$chmod	=	chmod($newPath, $chmod);
+
+							if($chmod === false)
 							{
 								return false;
 							}
 						}
-
-						$newPath	=	str_replace($source, $dest, $file->__toString());
-						$rename		=	@rename($file->__toString(), $newPath);
-
-						if($rename === false)
+						elseif($file->isDir() === true)
 						{
-							return false;
-						}
+							$newPath	=	str_replace($source, $dest, $file->__toString());
 
-						$chmod	=	@chmod($newPath, $chmod);
-
-						if($chmod === false)
-						{
-							return false;
-						}
-					}
-					else if($file->isDir() === true)
-					{
-						$newPath	=	str_replace($source, $dest, $file->__toString());
-
-						if(file_exists($newPath) === false)
-						{
-							if(@mkdir($newPath, $chmod, true) === false)
+							if(file_exists($newPath) === false)
 							{
-								return false;
+								if(mkdir($newPath, $chmod, true) === false)
+								{
+									return false;
+								}
 							}
 						}
 					}
@@ -429,18 +470,28 @@ class FileSystem implements IStatic
 		}
 		else
 		{
-			$rename	=	@rename($source, $dest);
+			$rename	=	rename($source, $dest);
 
 			if($rename === false)
 			{
 				return false;
 			}
 
-			$chmod	=	@chmod($dest, $chmod);
+			$chmod	=	chmod($dest, $chmod);
 
 			if($chmod === false)
 			{
 				return false;
+			}
+		}
+
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugins	=	plugins::hookCall('after', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
+
+			if($plugins != null)
+			{
+				return $plugins;
 			}
 		}
 

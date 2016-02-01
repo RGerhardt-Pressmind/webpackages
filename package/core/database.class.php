@@ -60,43 +60,102 @@ class database extends \PDO
 	 */
 	public function __construct($para)
 	{
-		$dsn		=	'';
 		$username	=	'';
 		$passwd		=	'';
 		$options	=	null;
 		$driver		=	'mysql';
 
-		if(!empty($para['dsn']))
+		$dsn		=	$para['driver'].':';
+
+		if($para['driver'] === 'sqlite' || $para['driver'] === 'sqlite2')
 		{
-			$dsn		=	$para['dsn'];
+			$dsn	.=	$para['database'];
+		}
+		else
+		{
+			if($para['driver'] === 'sqlsrv')
+			{
+				$dsn	.=	'Server='.$para['host'];
+			}
+			else
+			{
+				$dsn	.=	'host='.$para['host'];
+			}
+
+			$addIn	=	true;
+
+			if(empty($para['port']) === false)
+			{
+				if($addIn === true && $para['driver'] !== 'sqlsrv')
+				{
+					$dsn	.=	';';
+				}
+
+				if($para['driver'] === 'informix')
+				{
+					$dsn	.=	'service='.$para['port'];
+				}
+				elseif($para['driver'] === 'sqlsrv')
+				{
+					$dsn	.=	','.$para['port'];
+				}
+				else
+				{
+					$dsn	.=	'port='.$para['port'];
+				}
+
+				$addIn	=	true;
+			}
+
+			if(empty($para['database']) === false)
+			{
+				if($addIn === true)
+				{
+					$dsn	.=	';';
+				}
+
+				$dsn	.=	'dbname='.$para['database'];
+				$addIn	=	true;
+			}
+
+			if(empty($para['charset']) === false)
+			{
+				if($addIn === true)
+				{
+					$dsn	.=	';';
+				}
+
+				$dsn	.=	'charset='.$para['charset'];
+			}
 		}
 
-		if(!empty($para['username']))
+		if(empty($para['username']) === false)
 		{
 			$username	=	$para['username'];
 		}
 
-		if(!empty($para['password']))
+		if(empty($para['password']) === false)
 		{
 			$passwd		=	$para['password'];
 		}
 
-		if(!empty($para['options']))
+		if(empty($para['options']) === false)
 		{
 			$options	=	$para['options'];
 		}
 
-		if(!empty($para['driver']))
+		if(empty($para['driver']) === false)
 		{
 			$driver		=	$para['driver'];
 		}
 
-		if(empty($dsn) || empty($username))
+
+		if(empty($dsn) === true || empty($username) === true)
 		{
 			return;
 		}
 
-		if(empty($options))
+		if(empty($options) === true)
 		{
 			$options	=	array();
 		}
@@ -154,7 +213,7 @@ class database extends \PDO
 			return array();
 		}
 
-		if(is_string($sql) === false || empty($sql))
+		if(is_string($sql) === false || empty($sql) === true)
 		{
 			throw new \Exception('pdo::quefetch: $sql is not a string or empty');
 		}
@@ -166,7 +225,7 @@ class database extends \PDO
 			return false;
 		}
 
-		if(is_array($stmt) === false || empty($stmt[0]))
+		if(is_array($stmt) === false || empty($stmt[0]) === true)
 		{
 			return array();
 		}
@@ -192,14 +251,14 @@ class database extends \PDO
 			return array();
 		}
 
-		if(empty($sql))
+		if(empty($sql) === true)
 		{
 			throw new \Exception('pdo::result_array $sql is empty');
 		}
 
 		preg_match_all('/(SELECT|select)/', $sql, $matches);
 
-		if(empty($matches))
+		if(empty($matches) === true)
 		{
 			throw new \Exception('pdo::result_array $sql is not select');
 		}
@@ -230,7 +289,7 @@ class database extends \PDO
 			return false;
 		}
 
-		if(is_string($sql) === false || empty($sql))
+		if(is_string($sql) === false || empty($sql) === true)
 		{
 			throw new \Exception('pdo::multi_query: $sql is not a string or empty');
 		}
@@ -274,12 +333,12 @@ class database extends \PDO
 			return 0;
 		}
 
-		if($this->useDriver == 'pgsql')
+		if($this->useDriver === 'pgsql')
 		{
 			$v 		=	$this->version();
 			$table	= 	func_num_args() > 0 ? func_get_arg(0) : null;
 
-			if($table == null && $v >= '8.1')
+			if($table === null && $v >= '8.1')
 			{
 				$sql = 'SELECT LASTVAL() as ins_id';
 			}
@@ -316,7 +375,7 @@ class database extends \PDO
 			return false;
 		}
 
-		if(empty($sql))
+		if(empty($sql) === true)
 		{
 			throw new \Exception('pdo::secQuery: $sql is empty');
 		}
@@ -460,7 +519,7 @@ class database extends \PDO
 
 		$update	=	trim($update, ',');
 
-		if(!empty($whereParameter))
+		if(empty($whereParameter) === false)
 		{
 			$update	.=	'
 			WHERE';
@@ -531,11 +590,12 @@ class database extends \PDO
 		DELETE FROM
 			`'.$table.'`';
 
-		if(!empty($whereParameter))
+		if(empty($whereParameter) === false)
 		{
 			$deleteTable	.=	'
 			WHERE
 			';
+
 			foreach($whereParameter as $key => $value)
 			{
 				if(preg_match($this->databaseFunctions, $key) !== 0)

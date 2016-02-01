@@ -1,37 +1,42 @@
 <?php
-/*
-    Copyright (C) 2015  <Robbyn Gerhardt>
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   init.php
-	@package    Packages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2015 Packages
-	@license    http://www.gnu.org/licenses/
-*/
 require 'constants.php';
 require SYSTEM_PATH.'controllExistsPaths.php';
 require SYSTEM_PATH.'loadSessionHandler.php';
 
-if(!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER || !defined('PDO_HOST') || empty(PDO_HOST))
+
+if(defined('USE_SESSION_SAVE_HANDLER') === false || USE_SESSION_SAVE_HANDLER === false || defined('PDO_HOST') === false || empty(PDO_HOST) === true)
 {
 	session_start();
 }
 
 
-if(ERROR_REPORTING === true || ERROR_REPORTING == 1)
+if(defined('ERROR_REPORTING') === true && (ERROR_REPORTING === true || ERROR_REPORTING === 1))
 {
 	error_reporting(-1);
 	ini_set('display_errors', 1);
@@ -42,12 +47,12 @@ else
 	ini_set('display_errors', 0);
 }
 
-if(CHARSET != '')
+if(defined('CHARSET') === true && empty(CHARSET) === false)
 {
 	header('Content-Type: text/html; charset='.CHARSET);
 }
 
-if(TIMEZONE != '')
+if(defined('TIMEZONE') === true && empty(TIMEZONE) === false)
 {
 	date_default_timezone_set(TIMEZONE);
 }
@@ -64,36 +69,32 @@ $myPaths[]	=	LIB_DIR.'gettext'.SEP.'php5';
 $myPaths[]	=	LIB_DIR.'PHPMailer';
 $myPaths[]	=	LIB_DIR.'minifiy';
 
-if(PAGE_DIR != '')
+if(defined('PAGE_DIR') === true && empty(PAGE_DIR) === false)
 {
 	$myPaths[]	=	PAGE_DIR;
 
 	$director	=	new \RecursiveDirectoryIterator(PAGE_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::LEAVES_ONLY);
+	$iterator	=	new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::SELF_FIRST);
 
 	foreach($iterator as $item)
 	{
-		$dir	=	new SplFileInfo($item);
-
-		if($dir->isDir() === true)
+		if($item->isDir() === true)
 		{
 			$myPaths[]	=	$dir;
 		}
 	}
 }
 
-if(DYNAMIC_DIR != '')
+if(defined('DYNAMIC_DIR') === true && empty(DYNAMIC_DIR) === false)
 {
 	$myPaths[]	=	DYNAMIC_DIR;
 
 	$director	=	new \RecursiveDirectoryIterator(DYNAMIC_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::LEAVES_ONLY);
+	$iterator	=	new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::SELF_FIRST);
 
 	foreach($iterator as $item)
 	{
-		$dir	=	new SplFileInfo($item);
-
-		if($dir->isDir() === true)
+		if($item->isDir() === true)
 		{
 			$myPaths[]	=	$dir;
 		}
@@ -112,6 +113,7 @@ require 'iDynamic.class.php';
 require 'IPlugin.class.php';
 require 'IStatic.class.php';
 
+require 'version.class.php';
 require 'benchmark.class.php';
 require 'Validater.class.php';
 require 'security.class.php';

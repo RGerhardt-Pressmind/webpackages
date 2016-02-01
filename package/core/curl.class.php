@@ -44,11 +44,6 @@ use package\implement\IStatic;
 class curl implements IStatic
 {
 	/**
-	 * @var string Browser UserAgent Daten
-	 */
-	public static $userAgent;
-
-	/**
 	 * @var bool Ist Cookie bei der cURL Anfrage Aktiv oder nicht
 	 */
 	public static $cookieActive = false;
@@ -135,7 +130,7 @@ class curl implements IStatic
         $curl = curl_init();
         curl_setopt_array($curl, $curlOptions);
 
-        if(!empty($postfields))
+        if(empty($postfields) === false)
         {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
@@ -301,7 +296,7 @@ class curl implements IStatic
 			}
 		}
 
-		if(class_exists('\package\security'))
+		if(class_exists('\package\security') === true)
 		{
 			$ip	=	security::get_ip_address();
 
@@ -320,7 +315,7 @@ class curl implements IStatic
 		}
 
 		$getData	=	self::get_data('http://ip-api.com/php/'.$ip);
-		$query		=	@unserialize($getData);
+		$query		=	unserialize($getData);
 
 		if(class_exists('\package\core\plugins') === true)
 		{

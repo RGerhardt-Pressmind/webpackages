@@ -57,14 +57,14 @@ class autoload
      */
 	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array())
     {
-        if(empty($class_name))
+        if(empty($class_name) === true)
         {
             throw new \Exception('Error: $class_name is empty');
         }
 
 		$pathToFile =  $class_name.self::CLASS_SUFFIX;
 
-		if(!empty($namespace))
+		if(empty($namespace) === false)
 		{
 			$class_name	=	$namespace.$class_name;
 		}

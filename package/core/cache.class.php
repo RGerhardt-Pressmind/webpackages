@@ -87,7 +87,7 @@ class cache implements IStatic
 	 */
 	public static function set_cache_dir($cachePath)
 	{
-		if(empty($cachePath) || is_file($cachePath) === true)
+		if(empty($cachePath) === true || is_dir($cachePath) === false)
 		{
 			return false;
 		}
@@ -96,7 +96,7 @@ class cache implements IStatic
 		{
 			self::$cacheDir	=	$cachePath;
 
-			return @mkdir(self::$cacheDir, 0777, true);
+			return mkdir(self::$cacheDir, 0777, true);
 		}
 		else
 		{
@@ -149,7 +149,7 @@ class cache implements IStatic
 	 */
 	public static function set_template_element($cache_name, $content)
 	{
-		$isSave	=	@file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
+		$isSave	=	file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
 
 		if($isSave === false)
 		{
@@ -207,9 +207,8 @@ class cache implements IStatic
 			}
 		}
 
-		if(($filemtime + $lifetime) >= time() || $lifetime == 0)
+		if(($filemtime + $lifetime) >= time() || $lifetime === 0)
 		{
-
 			return $cacheFile;
 		}
 		else
@@ -244,14 +243,14 @@ class cache implements IStatic
 			}
 		}
 
-		if(empty($cache_name))
+		if(empty($cache_name) === true)
 		{
 			throw new \Exception('cache name is empty');
 		}
 
 		$cache_name	=	md5($cache_name);
 
-		if(empty($cache_name) || self::$cacheActiv === false)
+		if(empty($cache_name) === true || self::$cacheActiv === false)
 		{
 			return false;
 		}
@@ -302,7 +301,7 @@ class cache implements IStatic
 			}
 		}
 
-		if(empty($cache_name))
+		if(empty($cache_name) === true)
 		{
 			throw new \Exception('cache name is empty');
 		}
@@ -314,7 +313,7 @@ class cache implements IStatic
 		{
 			$getContent		=	@file_get_contents($filename);
 
-			if(!empty($getContent))
+			if(empty($getContent) === false)
 			{
 				$unserialize	=	@unserialize($getContent);
 
@@ -330,7 +329,7 @@ class cache implements IStatic
 			}
 			else
 			{
-				@unlink($filename);
+				unlink($filename);
 
 				return false;
 			}
@@ -362,7 +361,7 @@ class cache implements IStatic
 			}
 		}
 
-		if(empty($cache_name))
+		if(empty($cache_name) === true)
 		{
 			throw new \Exception('cache name is empty');
 		}
@@ -372,7 +371,7 @@ class cache implements IStatic
 
 		if(is_file($filename) === true)
 		{
-			$remove	=	@unlink($filename);
+			$remove	=	unlink($filename);
 		}
 
 		if(class_exists('\package\core\plugins') === true)

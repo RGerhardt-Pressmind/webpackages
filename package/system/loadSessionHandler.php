@@ -1,4 +1,30 @@
 <?php
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
+
 require_once CORE_DIR.'database.class.php';
 
 class NewSessionHandler implements SessionHandlerInterface
@@ -7,46 +33,42 @@ class NewSessionHandler implements SessionHandlerInterface
 
 	public function __construct()
 	{
-		if(empty(PDO_HOST) || empty(PDO_USERNAME) || empty(PDO_DATABASE))
+		if(empty(PDO_USERNAME) === true || empty(PDO_DATABASE) === true)
 		{
 			throw new Exception('Error: Database connection');
 		}
 
-		$addIn		=	false;
 		$dsn		=	PDO_TYPE.':';
 
-		if(PDO_TYPE == 'sqlite' || PDO_TYPE == 'sqlite2')
+		if(PDO_TYPE === 'sqlite' || PDO_TYPE === 'sqlite2')
 		{
 			$dsn	.=	PDO_DATABASE;
 		}
 		else
 		{
-			if(PDO_HOST != '')
+			if(PDO_TYPE === 'sqlsrv')
 			{
-				if(PDO_TYPE == 'sqlsrv')
-				{
-					$dsn	.=	'Server='.PDO_HOST;
-				}
-				else
-				{
-					$dsn	.=	'host='.PDO_HOST;
-				}
-
-				$addIn	=	true;
+				$dsn	.=	'Server='.PDO_HOST;
+			}
+			else
+			{
+				$dsn	.=	'host='.PDO_HOST;
 			}
 
-			if(PDO_PORT != '')
+			$addIn	=	true;
+
+			if(empty(PDO_PORT) === false)
 			{
-				if($addIn === true && PDO_TYPE != 'sqlsrv')
+				if($addIn === true && PDO_TYPE !== 'sqlsrv')
 				{
 					$dsn	.=	';';
 				}
 
-				if(PDO_TYPE == 'informix')
+				if(PDO_TYPE === 'informix')
 				{
 					$dsn	.=	'service='.PDO_PORT;
 				}
-				else if(PDO_TYPE == 'sqlsrv')
+				elseif(PDO_TYPE === 'sqlsrv')
 				{
 					$dsn	.=	','.PDO_PORT;
 				}
@@ -58,7 +80,7 @@ class NewSessionHandler implements SessionHandlerInterface
 				$addIn	=	true;
 			}
 
-			if(PDO_DATABASE != '')
+			if(empty(PDO_DATABASE) === false)
 			{
 				if($addIn === true)
 				{
@@ -69,7 +91,7 @@ class NewSessionHandler implements SessionHandlerInterface
 				$addIn	=	true;
 			}
 
-			if(PDO_CHARSET != '')
+			if(empty(PDO_CHARSET) === false)
 			{
 				if($addIn === true)
 				{
@@ -80,7 +102,7 @@ class NewSessionHandler implements SessionHandlerInterface
 			}
 		}
 
-		$this->database	=	new \package\database($dsn, PDO_USERNAME, PDO_PASSWORD, null, PDO_TYPE);
+		$this->database	=	new \package\core\database($dsn, PDO_USERNAME, PDO_PASSWORD, null, PDO_TYPE);
 
 		$createTable	=	'
 		CREATE TABLE IF NOT EXISTS `sessions` (
@@ -137,7 +159,7 @@ class NewSessionHandler implements SessionHandlerInterface
 
 		$getDatas	=	$this->database->secQuery($getDatas, array($session_id), true, true);
 
-		if(!empty($getDatas['session_data']))
+		if(empty($getDatas['session_data']) === false)
 		{
         	return $getDatas['session_data'];
 		}
@@ -168,14 +190,7 @@ class NewSessionHandler implements SessionHandlerInterface
 			`session_data`		=	?
 		';
 
-        if($this->database->secQuery($writeData, array($session_id, $newDateTime, $session_data), false))
-		{
-            return true;
-        }
-		else
-		{
-            return false;
-        }
+       return $this->database->secQuery($writeData, array($session_id, $newDateTime, $session_data), false);
 	}
 
 	/**
@@ -183,6 +198,8 @@ class NewSessionHandler implements SessionHandlerInterface
 	 */
 	public function close()
 	{
+		$this->database	=	null;
+
 		unset($this->database);
 
 		return true;
@@ -233,7 +250,7 @@ class NewSessionHandler implements SessionHandlerInterface
 	}
 }
 
-if(defined('USE_SESSION_SAVE_HANDLER') && USE_SESSION_SAVE_HANDLER === true && defined('PDO_HOST') && !empty(PDO_HOST))
+if(defined('USE_SESSION_SAVE_HANDLER') === true && USE_SESSION_SAVE_HANDLER === true && defined('PDO_HOST') === true && empty(PDO_HOST) === false)
 {
 	new NewSessionHandler();
 }

@@ -98,7 +98,7 @@ class errors
 	 */
 	public function create_error($errorCode)
 	{
-		if(empty($errorCode) || isset($this->callErrors[$errorCode]) === false)
+		if(empty($errorCode) === true || empty($this->callErrors[$errorCode]) === true)
 		{
 			throw new \Exception('Error: error code '.$errorCode.' not allowed. Allowed: '.implode(',', $this->callErrors));
 		}

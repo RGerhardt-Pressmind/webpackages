@@ -41,6 +41,16 @@ class XML
 {
 	private $xml = null;
 
+
+	/**
+	 * Destructor
+	 */
+	public function __destruct()
+	{
+		unset($this->xml);
+	}
+
+
 	/**
 	 * Lädt ein XML String / Datei / URL
 	 *

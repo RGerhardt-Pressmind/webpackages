@@ -43,6 +43,16 @@ use package\implement\IStatic;
 class benchmark implements IStatic
 {
 	/**
+	 * Destructor
+	 */
+	public function __destruct()
+	{
+		self::$startTime	=	null;
+		self::$endTime		=	null;
+		self::$middleTime	=	null;
+	}
+
+	/**
 	 * @var array Definiert die Start/End/Mittel Zeiten des Benchmark Ergebnisses
 	 */
 	private static $startTime, $endTime, $middleTime = array();
@@ -98,18 +108,18 @@ class benchmark implements IStatic
 	 */
 	public static function finish()
 	{
-		if(empty(self::$startTime))
+		if(empty(self::$startTime) === true)
 		{
 			throw new \Exception('StartTime empty');
 		}
-		else if(empty(self::$endTime))
+		elseif(empty(self::$endTime) === true)
 		{
 			self::end_point(true);
 		}
 
-		$diff	=	self::$endTime - self::$startTime;
+		$diff	=	(self::$endTime - self::$startTime);
 
-		if(is_array(self::$middleTime) === true && !empty(self::$middleTime))
+		if(empty(self::$middleTime) === false)
 		{
 			$diff	=	array('startTime' => self::$startTime, 'endTime' => self::$endTime, 'middleTime' => self::$middleTime, 'diff' => $diff);
 		}

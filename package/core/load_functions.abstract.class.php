@@ -45,7 +45,6 @@ abstract class load_functions
 	public static $LOAD_DATE			=	array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_FILE_SYSTEM		=	array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_URL				=	array('isStatic' => false, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\core\\');
-	public static $LOAD_BROWSER			=	array('isStatic' => false, 'class' => 'browser', 'writeInAttribute' => 'browser', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_VERSION			=	array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_ZIP				=	array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_FTP				=	array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\core\\');
@@ -54,7 +53,7 @@ abstract class load_functions
 	public static $LOAD_XML				=	array('isStatic' => false, 'class' => 'XML', 'writeInAttribute' => 'xml', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_LOGGER			=	array('isStatic' => false, 'class' => 'logger', 'writeInAttribute' => 'logger', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_ERROR			=	array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\core\\');
-	public static $LOAD_DATABASE		=	array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('dsn' => PDO_TYPE.':dbname='.PDO_DATABASE.';host='.PDO_HOST.';port='.PDO_PORT, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'options' => null, 'driver' => PDO_TYPE), 'namespace' => '\package\core\\');
+	public static $LOAD_DATABASE		=	array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('driver' => PDO_TYPE, 'host' => PDO_HOST, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'charset' => PDO_CHARSET, 'port' => PDO_PORT, 'database' => PDO_DATABASE), 'namespace' => '\package\core\\');
 	public static $LOAD_PLUGINS			=	array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_CACHE			=	array('isStatic' => true, 'class' => 'cache', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_CURL			=	array('isStatic' => true, 'class' => 'curl', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
@@ -63,12 +62,40 @@ abstract class load_functions
 	public static $LOAD_LANGUAGE		=	array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_PAYPAL			=	array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_IMAGES			=	array('isStatic' => true, 'class' => 'images', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
-
-	protected $phpmailer;
+	public static $LOAD_MAILER			=	array('isStatic' => true, 'class' => 'phpmailer', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\\');
 
 	private	$allLoadClasses			=	array(), $defineDynamicClasses	=	array();
-	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'browser', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal');
+	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal');
 
+	/**
+	 * Destructor
+	 */
+	public function __destruct()
+	{
+		if(!empty($this->defineDynamicClasses))
+		{
+			foreach($this->defineDynamicClasses as $k => $class)
+			{
+				$this->defineDynamicClasses[$k]	=	null;
+				$class							=	null;
+
+				unset($class);
+				unset($this->defineDynamicClasses[$k]);
+			}
+		}
+
+		if(!empty($this->allLoadClasses))
+		{
+			foreach($this->allLoadClasses as $k => $class)
+			{
+				$this->allLoadClasses[$k]	=	null;
+				$class						=	null;
+
+				unset($class);
+				unset($this->allLoadClasses[$k]);
+			}
+		}
+	}
 
 	/**
 	 * Kontrolliert ob es sich vielleicht um
@@ -106,7 +133,6 @@ abstract class load_functions
 				self::$LOAD_DATE,
 				self::$LOAD_FILE_SYSTEM,
 				self::$LOAD_URL,
-				self::$LOAD_BROWSER,
 				self::$LOAD_VERSION,
 				self::$LOAD_ZIP,
 				self::$LOAD_FTP,
@@ -123,7 +149,8 @@ abstract class load_functions
 				self::$LOAD_NUMBER,
 				self::$LOAD_LANGUAGE,
 				self::$LOAD_PAYPAL,
-				self::$LOAD_IMAGES
+				self::$LOAD_IMAGES,
+				self::$LOAD_MAILER
 			);
 		}
 
@@ -131,6 +158,17 @@ abstract class load_functions
 
 		foreach($loadClasses as $classes)
 		{
+			if($classes['class'] == 'phpmailer')
+			{
+				//PHPMailer class load
+				if(class_exists('PHPMailer') === false)
+				{
+					require 'PHPMailerAutoload.php';
+				}
+
+				continue;
+			}
+
 			if($classes['isStatic'] === true)
 			{
 				autoload::get($classes['class'], $classes['namespace'], true);
@@ -158,17 +196,11 @@ abstract class load_functions
 		}
 
 
-		//PHPMailer class load
-		if(class_exists('PHPMailer') === false)
-		{
-			require 'PHPMailerAutoload.php';
-		}
-
-		$this->phpmailer	=	new \PHPMailer();
-
 		$this->load_dynamic_classes();
 		$this->load_install_plugins();
 		$this->load_default_functions();
+
+		unset($loadClasses);
 	}
 
 
@@ -181,7 +213,6 @@ abstract class load_functions
 	private function get_all_init_classes()
 	{
 		$back				=	array();
-		$back['phpmailer']	=	$this->phpmailer;
 
 		foreach($this->allLoadClasses as $cl)
 		{
@@ -243,13 +274,11 @@ abstract class load_functions
 
 		foreach($iterator as $item)
 		{
-			$file	=	new \SplFileInfo($item);
-
-			if(strpos($file->getFilename(), '.master.class.php') !== false && $file->isDir() === false)
+			if($item instanceof \SplFileInfo && stripos($item->getFilename(), '.master.class.php') !== false && $item->isDir() === false)
 			{
-				require_once $file;
+				require_once $item->__toString();
 
-				$className	=	str_replace(array('.php', '.php5', '.master.class'), array('', '', ''), $file->getFilename());
+				$className	=	str_replace(array('.php', '.php5', '.master.class'), array('', '', ''), $item->getFilename());
 				$className	=	'package\plugins\\'.$className;
 
 				if(class_exists($className) === false)
@@ -261,9 +290,9 @@ abstract class load_functions
 
 				$back[]	=	array('class_name' => $className, 'class' => $class);
 			}
-			elseif($file->isDir() === true)
+			elseif($item->isDir() === true)
 			{
-				$back	=	array_merge($back, $this->get_plugins($file));
+				$back	=	array_merge($back, $this->get_plugins($item->__toString()));
 			}
 		}
 
@@ -293,24 +322,22 @@ abstract class load_functions
 
 		foreach($iterator as $item)
 		{
-			$file	=	new \SplFileInfo($item);
-
-			if($file->isDir() === true)
+			if($item->isDir() === true)
 			{
 				continue;
 			}
 
 			if(is_array($loadFiles) === true && empty($loadFiles) === false)
 			{
-				if(in_array($file->getFilename(), $loadFiles) === false)
+				if(in_array($item->getFilename(), $loadFiles) === false)
 				{
 					continue;
 				}
 			}
 
-			require_once $file;
+			require_once $item->__toString();
 
-			$className	=	str_replace(array('.php', '.php5', '.class'), array('', '', ''), $file->getFilename());
+			$className	=	str_replace(array('.php', '.php5', '.class'), array('', '', ''), $item->getFilename());
 
 			if(class_exists($className) === false)
 			{

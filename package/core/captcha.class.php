@@ -74,7 +74,7 @@ class captcha
 		$img_height	=	$imgHeight;
 		$expiration	=	7200;
 
-		if(empty($img_path) || empty($img_url))
+		if(empty($img_path) === true || empty($img_url) === true)
 		{
 			throw new \Exception('Error: image path or image url is empty');
 		}

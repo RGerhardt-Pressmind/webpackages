@@ -30,11 +30,11 @@ require_once 'init.php';
 
 class databaseTest extends \PHPUnit_Framework_TestCase
 {
-	private $dsn	=	'mysql:dbname=test;host=127.0.0.1;port=3307', $username = 'root', $password = '', $db;
+	private $username = 'root', $password = '', $db;
 
 	public function setUp()
 	{
-		$this->db	=	autoload::get('database', '\package\core\\', false, array('dsn' => $this->dsn, 'username' => $this->username, 'password' => $this->password, 'type' => 'mysql'));
+		$this->db	=	autoload::get('database', '\package\core\\', false, array('driver' => 'mysql', 'host' => '127.0.0.1', 'port' => 3307, 'username' => $this->username, 'password' => $this->password, 'database' => 'test'));
 	}
 
 	public function tearDown()

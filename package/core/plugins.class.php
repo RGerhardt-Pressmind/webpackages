@@ -51,6 +51,25 @@ class plugins implements IStatic
 	const BEFORE	=	'before';
 	const AFTER		=	'after';
 
+
+	/**
+	 * Destructor
+	 */
+	public function __destruct()
+	{
+		if(!empty(self::$definedPluginsClasses))
+		{
+			foreach(self::$definedPluginsClasses as $k => $class)
+			{
+				$class								=	null;
+				self::$definedPluginsClasses[$k]	=	null;
+
+				unset($class);
+				unset(self::$definedPluginsClasses[$k]);
+			}
+		}
+	}
+
 	/**
 	 * Zum initialisieren von Daten
 	 */
@@ -83,7 +102,7 @@ class plugins implements IStatic
 	 */
 	public static function hookShow($position, $classes, $methode, $args = array())
 	{
-		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
+		if(empty(self::$definedPluginsClasses) === false)
 		{
 			$pointer	=	$position.'_'.$classes.'_'.$methode.'_show';
 
@@ -110,7 +129,7 @@ class plugins implements IStatic
 	 */
 	public static function hookCall($position, $classes, $methode, $args = array())
 	{
-		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
+		if(empty(self::$definedPluginsClasses) === false)
 		{
 			$pointer	=	$position.'_'.$classes.'_'.$methode.'_call';
 

@@ -26,6 +26,7 @@
  */
 
 namespace package\core;
+use package\implement\IStatic;
 
 /**
  * Schneidet Bilder zu
@@ -37,8 +38,10 @@ namespace package\core;
  * @category	images
  * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class images
+class images implements IStatic
 {
+	public static function init(){}
+
 	/**
 	 * Erstellt ein Thumbnail eines Bildes, mit Bildausschnitt
 	 *

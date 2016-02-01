@@ -39,4 +39,22 @@ class version implements IStatic
 	const VERSION	=	'2.0.0'; //Versionsnummer
 	const REPO		=	'https://github.com/Robbyn666/webpackage/archive/master.zip'; // ZIP Download Link
 	const COMMITS	=	'https://api.github.com/repos/Robbyn666/webpackage/commits'; // API Link zu allen Commits von Robbyn666
+
+	/**
+	 * Kontrolliert den übergebenen Wert mit der installierten PHP Version.
+	 *
+	 * @param string $version Kontrolliert ob die übergebene PHP Version größer, kleiner oder gleich der installierten Version ist.
+	 * @return bool
+	 */
+	public static function is_php($version)
+	{
+		if(version_compare(PHP_VERSION, $version) >= 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

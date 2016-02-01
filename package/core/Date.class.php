@@ -570,12 +570,12 @@ class Date implements IStatic
 			}
 		}
 
-		if(empty($timezone))
+		if(empty($timezone) === true)
 		{
 			$timezone	=	TIMEZONE;
 		}
 
-		if($timezone == 'local' || $timezone === date_default_timezone_get())
+		if($timezone === 'local' || $timezone === date_default_timezone_get())
 		{
 			return time();
 		}
@@ -730,7 +730,7 @@ class Date implements IStatic
 			}
 		}
 
-		if($inTimestamp)
+		if($inTimestamp === true)
 		{
 			return $base->getTimestamp();
 		}
@@ -754,7 +754,7 @@ class Date implements IStatic
 		{
 			throw new \Exception('Error: DateTime or DateTimeZone not in php installed');
 		}
-		else if(function_exists('easter_days') === false)
+		elseif(function_exists('easter_days') === false)
 		{
 			throw new \Exception('Error: easter_days function in php not exists');
 		}
@@ -853,7 +853,7 @@ class Date implements IStatic
 		$holidays		=	array();
 		$allHolidays	=	self::get_all_holidays($year);
 
-		if($nation == self::NATION_GERMANY)
+		if($nation === self::NATION_GERMANY)
 		{
 			$gruendonnerstag	=	$allHolidays['maundyThursday']->format('Y-m-d');
 			$karfreitag			=	$allHolidays['goodFriday']->format('Y-m-d');
@@ -944,7 +944,7 @@ class Date implements IStatic
 				),
 			);
 		}
-		elseif($nation == self::NATION_AUSTRIAN)
+		elseif($nation === self::NATION_AUSTRIAN)
 		{
 			$holidays = array(
 				$year.'-01-01' => array(
@@ -992,7 +992,7 @@ class Date implements IStatic
 				),
 			);
 		}
-		elseif($nation == self::NATION_DENMARK)
+		elseif($nation === self::NATION_DENMARK)
 		{
 			$greatPrayerDay	=	clone $allHolidays['easterSunday'];
 			$greatPrayerDay->modify('+26 days');
@@ -1033,7 +1033,7 @@ class Date implements IStatic
 				)
 			);
 		}
-		elseif($nation == self::NATION_FRENCH)
+		elseif($nation === self::NATION_FRENCH)
 		{
 			$holidays = array(
 				$year.'-01-01'	=>	array(
@@ -1071,7 +1071,7 @@ class Date implements IStatic
 				)
 			);
 		}
-		elseif($nation == self::NATION_ITALIAN)
+		elseif($nation === self::NATION_ITALIAN)
 		{
 			$holidays = array(
 				$year.'-01-01'	=> 	array(
@@ -1112,7 +1112,7 @@ class Date implements IStatic
 				)
 			);
 		}
-		elseif($nation == self::NATION_NORWEGIAN)
+		elseif($nation === self::NATION_NORWEGIAN)
 		{
 			$holidays	=	array(
 				$year.'-01-01'	=>	array(
@@ -1150,7 +1150,7 @@ class Date implements IStatic
 				)
 			);
 		}
-		elseif($nation == self::NATION_POLISH)
+		elseif($nation === self::NATION_POLISH)
 		{
 			$holidays	=	array(
 				$year.'-01-01'	=>	array(
@@ -1191,7 +1191,7 @@ class Date implements IStatic
 				)
 			);
 		}
-		elseif($nation == self::NATION_SWEDISH)
+		elseif($nation === self::NATION_SWEDISH)
 		{
 			$midSummerDay = self::get_mid_summer_day($year);
         	$allSaintsDay = self::get_all_saints_day($year);
@@ -1406,7 +1406,7 @@ class Date implements IStatic
 			}
 		}
 
-		if(($year % 400) == 0 || (($year % 4) == 0 && ($year % 100) != 0))
+		if(($year % 400) === 0 || (($year % 4) === 0 && ($year % 100) !== 0))
 		{
 		   return true;
 		}
@@ -1450,7 +1450,7 @@ class Date implements IStatic
 			return 0;
 		}
 
-		if(empty($year))
+		if(empty($year) === true)
 		{
 			$year	=	date('Y');
 		}
