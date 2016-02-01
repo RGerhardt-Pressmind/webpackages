@@ -1,32 +1,46 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   curl.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * Kommunizieren mit cURL
+ *
+ * Wenn man eine bestimmte URL aufrufen möchte oder den aktuellen HTTP-Code einer Webseite haben möchte, nutzt man
+ * die PHP Extension cURL. Mit der Klasse curl ist es deutlich einfacher mit der Extension zu Kommunizieren. Bereits
+ * vordefinierte Methoden helfen Ihnen einfach bestimmte Bereiche abzufragen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	cURL
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class curl implements IStatic
 {
 	/**
@@ -40,6 +54,11 @@ class curl implements IStatic
 	public static $cookieActive = false;
 
 	/**
+	 * @var string Der Pfad zur Cookie Datei
+	 */
+	private static $COOKIE_FILE	=	'cookie.txt';
+
+	/**
 	 * Zum initialisieren von Daten
 	 */
 	public static function init(){}
@@ -47,11 +66,6 @@ class curl implements IStatic
 
 	/**
 	 * Kontrolliert ob die cURL Extension existiert
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0
 	 *
 	 * @return bool Gibt true zurück wenn die cURL Extension installiert ist und false wenn nicht
 	 */
@@ -78,11 +92,6 @@ class curl implements IStatic
 	 * @param array $postfields Irgendwelche Post Felder die übermittelt werden sollen
 	 * @param bool $ssl Wenn es sich um eine SSL Verbindung handelt kann man dies hier noch angeben
 	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
 	 * @return mixed
 	 * @throws \Exception Wenn die Extension nicht installiert ist.
 	 */
@@ -95,8 +104,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'getData', array($url, $postfields, $ssl));
-			$plugins	=	plugins::hookCall('before', 'curl', 'getData', array($url, $postfields, $ssl));
+			plugins::hookShow('before', 'curl', 'get_data', array($url, $postfields, $ssl));
+			$plugins	=	plugins::hookCall('before', 'curl', 'get_data', array($url, $postfields, $ssl));
 
 			if($plugins != null)
 			{
@@ -104,62 +113,41 @@ class curl implements IStatic
 			}
 		}
 
-		$curlPost = '';
+        $curlOptions = array(
+            CURLOPT_ENCODING 			=> 	'gzip,deflate',
+            CURLOPT_AUTOREFERER 		=>	1,
+            CURLOPT_CONNECTTIMEOUT 		=> 	120, // timeout on connect
+            CURLOPT_TIMEOUT 			=> 	120, // timeout on response
+            CURLOPT_URL 				=> 	$url,
+            CURLOPT_SSL_VERIFYPEER 		=> 	$ssl,
+            CURLOPT_SSL_VERIFYHOST 		=> 	$ssl,
+            CURLOPT_FOLLOWLOCATION 		=> 	true,
+            CURLOPT_MAXREDIRS 			=> 	9,
+            CURLOPT_RETURNTRANSFER 		=> 	1,
+            CURLOPT_HEADER 				=> 	0,
+            CURLOPT_USERAGENT 			=> 	'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+            CURLOPT_COOKIEFILE 			=> 	self::$COOKIE_FILE,
+            CURLOPT_COOKIEJAR 			=> 	self::$COOKIE_FILE,
+            CURLOPT_VERBOSE 			=> 	true,
+            CURLINFO_HEADER_OUT  		=> 	true,
+        );
 
-		if(is_array($postfields) === true && empty($postfields) === false)
-		{
-			foreach($postfields as $key => $option)
-			{
-				$curlPost .=	'&'.$key.'='.$option;
-			}
-		}
+        $curl = curl_init();
+        curl_setopt_array($curl, $curlOptions);
 
-		$curlPost	=	trim($curlPost, '&');
+        if(!empty($postfields))
+        {
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
+        }
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-		if(is_array($postfields) === true)
-		{
-			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
-		}
-
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,	120);
-		curl_setopt($ch, CURLOPT_TIMEOUT,			120);
-		curl_setopt($ch, CURLOPT_MAXREDIRS,			10);
-
-		if($ssl === true)
-		{
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-		}
-		else
-		{
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		}
-
-		if(empty(self::$userAgent) === false)
-		{
-			curl_setopt($ch, CURLOPT_USERAGENT, self::$userAgent);
-		}
-
-		if(self::$cookieActive === true)
-		{
-			curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-			curl_setopt($ch, CURLOPT_COOKIEJAR, ROOT.SEP.'cache'.SEP.'cookie.txt');
-		}
-
-		$data = curl_exec($ch);
-		curl_close($ch);
+        $data	=	curl_exec($curl);
+		curl_close($curl);
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'getData', array($data));
-			$plugins	=	plugins::hookCall('after', 'curl', 'getData', array($data));
+			plugins::hookShow('after', 'curl', 'get_data', array($data));
+			$plugins	=	plugins::hookCall('after', 'curl', 'get_data', array($data));
 
 			if($plugins != null)
 			{
@@ -172,17 +160,11 @@ class curl implements IStatic
 
 
 	/**
-	 * Gibt den Statuscode einer URL zurück
+	 * Gibt den HTTP-Statuscode einer URL zurück
 	 *
 	 * @param string $url Die HTTP Adresse die cURL aufrufen soll und der HTTP-Statuscode überprüft werden soll
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
-	 * @throws \Exception Wenn die Extension nicht installiert ist oder im Fehlerfall
 	 * @return int Gibt den HTTP-Statuscode zurück
+	 * @throws \Exception Wenn die Extension nicht installiert ist oder im Fehlerfall
 	 */
 	public static function get_status($url)
 	{
@@ -193,8 +175,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'getState', array($url));
-			$plugins	=	plugins::hookCall('before', 'curl', 'getState', array($url));
+			plugins::hookShow('before', 'curl', 'get_status', array($url));
+			$plugins	=	plugins::hookCall('before', 'curl', 'get_status', array($url));
 
 			if($plugins != null)
 			{
@@ -222,8 +204,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'getState', array((int)$httpcode));
-			$plugins	=	plugins::hookCall('after', 'curl', 'getState', array((int)$httpcode));
+			plugins::hookShow('after', 'curl', 'get_status', array((int)$httpcode));
+			$plugins	=	plugins::hookCall('after', 'curl', 'get_status', array((int)$httpcode));
 
 			if($plugins != null)
 			{
@@ -239,12 +221,6 @@ class curl implements IStatic
 	 * Gibt die Koordinaten einer Stadt zurück
 	 *
 	 * @param string $city Den Stadtnamen
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
 	 * @throws \Exception Wenn die Extension nicht installiert oder im Fehlerfall.
 	 */
@@ -257,8 +233,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'getCityCoordinates', array($city));
-			$plugins	=	plugins::hookCall('before', 'curl', 'getCityCoordinates', array($city));
+			plugins::hookShow('before', 'curl', 'get_city_coordinates', array($city));
+			$plugins	=	plugins::hookCall('before', 'curl', 'get_city_coordinates', array($city));
 
 			if($plugins != null)
 			{
@@ -294,8 +270,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'getCityCoordinates', array($data));
-			$plugins	=	plugins::hookCall('after', 'curl', 'getCityCoordinates', array($data));
+			plugins::hookShow('after', 'curl', 'get_city_coordinates', array($data));
+			$plugins	=	plugins::hookCall('after', 'curl', 'get_city_coordinates', array($data));
 
 			if($plugins != null)
 			{
@@ -308,12 +284,7 @@ class curl implements IStatic
 
 
 	/**
-	 * Gibt den Namen der Stadt zurück
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
+	 * Gibt den Namen der Stadt, Anhand der aktuellen IP-Adresse, zurück.
 	 *
 	 * @return string Gibt, Anhand der IP-Adresse, den Namen der Stadt zurück oder "Not found" wenn keine Stadt gefunden wurde
 	 */
@@ -321,8 +292,8 @@ class curl implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'getCityNameByIp');
-			$plugins	=	plugins::hookCall('before', 'curl', 'getCityNameByIp');
+			plugins::hookShow('before', 'curl', 'get_city_name_by_ip');
+			$plugins	=	plugins::hookCall('before', 'curl', 'get_city_name_by_ip');
 
 			if($plugins != null)
 			{
@@ -353,8 +324,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'getCityNameByIp', array($query));
-			$plugins	=	plugins::hookCall('after', 'curl', 'getCityNameByIp', array($query));
+			plugins::hookShow('after', 'curl', 'get_city_name_by_ip', array($query));
+			$plugins	=	plugins::hookCall('after', 'curl', 'get_city_name_by_ip', array($query));
 
 			if($plugins != null)
 			{

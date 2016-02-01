@@ -1,29 +1,42 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    @category   zip.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
+/**
+ * Zip Archive
+ *
+ * Mit der zip Klasse kann man ein ZIP-Archiv erstellen oder auslesen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	zip
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class zip
 {
 	/**
@@ -41,6 +54,21 @@ class zip
 		if(!file_exists($folder))
 		{
 			throw new \Exception($folder.' not exists');
+		}
+
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'zip', 'createZipArchive', array($folder, $destination, $zipName));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new \Exception('Error: SplFileInfo class not exists');
 		}
 
 		$folder	=	new \SplFileInfo($folder);
@@ -106,6 +134,21 @@ class zip
 	 */
 	public function addFileToZipArchive($rootFolder, $file, $zipArchive)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'zip', 'addFileToZipArchive', array($rootFolder, $file, $zipArchive));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new \Exception('Error: SplFileInfo class not exists');
+		}
+
 		$rootFolder	=	str_replace(array('/', '\\'), array(SEP, SEP), $rootFolder);
 		$file		=	str_replace(array('/', '\\'), array(SEP, SEP), $file);
 		$zipArchive	=	str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive);
@@ -153,6 +196,21 @@ class zip
 	 */
 	public function extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'zip', 'extractZipArchive', array($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new \Exception('Error: SplFileInfo class not exists');
+		}
+
 		$zipArchive			=	str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive);
 		$destinationFolder	=	str_replace(array('/', '\\'), array(SEP, SEP), $destinationFolder);
 

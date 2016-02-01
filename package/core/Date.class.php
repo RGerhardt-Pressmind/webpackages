@@ -1,32 +1,45 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    @category   Date.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * Feiertage, Datum miteinander vergleichen etc.
+ *
+ * Die Klasse kann die Feiertag von unterschiedlichen Ländern zurück geben. Die aktuelle Zeit in der richtigen
+ * Zeitzone oder einfach nur zur Formatierung eines Timestamps oder Datums.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	Date
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class Date implements IStatic
 {
 	/**
@@ -535,8 +548,8 @@ class Date implements IStatic
 	/**
 	 * Gibt den aktuellen Zeitstempel der Zeitzone zurück
 	 *
-	 * @param string $timezone
-	 * @return int
+	 * @param string $timezone Zeitzone. Standartmäßig die aus der constants.php
+	 * @return int Gibt den Zeitstempel in Sekunden zurück
 	 * @throws \Exception
 	 */
 	public static function now($timezone = TIMEZONE)
@@ -587,8 +600,8 @@ class Date implements IStatic
 	 * Gibt den Zeitstempel eines Datums zurück
 	 * unter Berücksichtigung der Zeitzone.
 	 *
-	 * @param string $date
-	 * @return int
+	 * @param string $date Das Datum in einem gängigen Format
+	 * @return int Gibt den Zeitstempel in Sekunden zurück.
 	 * @throws \Exception
 	 */
 	public static function get_timestamp_by_date($date)
@@ -629,8 +642,8 @@ class Date implements IStatic
 	 * Gibt das Datum eines Zeitstempels unter
 	 * Berücksichtigung der Zeitzone zurück.
 	 *
-	 * @param int $timestamp
-	 * @param string $format
+	 * @param int $timestamp Der Zeitstempel in Sekunden
+	 * @param string $format Das Format in das der Zeitstempel umgewandelt werden soll hierzu siehe auch http://php.net/manual/de/function.date.php
 	 *
 	 * @return string
 	 * @throws \Exception
@@ -674,10 +687,10 @@ class Date implements IStatic
 	/**
 	 * Gibt das Datum von Ostern eines bestimmten Jahres zurück
 	 *
-	 * @param int $year
-	 * @param bool $inTimestamp
+	 * @param int $year Das Jahr von dem die Ostertage zurück gegeben werden soll
+	 * @param bool $inTimestamp Ob die Ostertage in einem Datum oder als Zeitstempel zurück gegeben werden sollen
 	 *
-	 * @return string|int
+	 * @return string|int Datum mit Y-m-d oder als Zeitstempel in Sekunden
 	 * @throws \Exception
 	 */
 	public static function get_easter_day_by_year($year, $inTimestamp = false)
@@ -731,8 +744,8 @@ class Date implements IStatic
 	/**
 	 * Gibt alle Feiertage in einem Jahr zurück
 	 *
-	 * @param int $year
-	 * @return array
+	 * @param int $year Aus welchem Jahr die Feiertage zurück gegeben werden sollen
+	 * @return array Gibt alle Feiertage in einem assoziativen Array zurück
 	 * @throws \Exception
 	 */
 	private static function get_all_holidays($year)
@@ -820,9 +833,9 @@ class Date implements IStatic
 	/**
 	 * Gibt die Feiertage einer Nation in einem Jahr zurück
 	 *
-	 * @param int $year
-	 * @param string $nation
-	 * @return array
+	 * @param int $year Aus welchem Jahr die Feiertage zurück geben werden sollen
+	 * @param string $nation Aus welchem Land sollen die Feiertage zurück gegeben werden
+	 * @return array Gibt ein assoziatives Array der Feiertage des Landes zurück
 	 */
 	public static function get_nation_holidays_by_year($year, $nation = self::NATION_GERMANY)
 	{
@@ -1275,7 +1288,7 @@ class Date implements IStatic
 	/**
 	 * Gibt den Allerheiligen in Schweden zurück
 	 *
-	 * @param $year
+	 * @param int $year Das Jahr aus dem die Allerheiligen Feiertage zurück gegeben werden sollen
 	 * @return \DateTime
 	 * @throws \Exception
 	 */
@@ -1326,7 +1339,7 @@ class Date implements IStatic
 	/**
 	 * Gibt das Mittsommer Datum zurück
 	 *
-	 * @param $year
+	 * @param int $year Das Jahr aus dem die Mittsommer Feiertage zurück gegeben werden sollen
 	 * @return \DateTime
 	 * @throws \Exception
 	 */
@@ -1377,7 +1390,7 @@ class Date implements IStatic
 	/**
 	 * Ist ein bestimmtes Jahr ein Schaltjahr
 	 *
-	 * @param int $year
+	 * @param int $year Das Jahr das kontrolliert werden soll ob es ein Schaltjahr ist
 	 * @return bool
 	 */
 	public static function is_year_leap_year($year)
@@ -1407,8 +1420,8 @@ class Date implements IStatic
 	/**
 	 * Gibt die Anzahl der Tage eines Monats zurück
 	 *
-	 * @param int $month
-	 * @param int $year
+	 * @param int $month Das Monat aus dem die Anzahl zurück gegeben werden soll
+	 * @param int $year Das Jahr vom Monat
 	 * @param int $particular_calendar CAL_GREGORIAN | CAL_JULIAN | CAL_JEWISH | CAL_FRENCH | CAL_NUM_CALS
 	 *
 	 * @return int

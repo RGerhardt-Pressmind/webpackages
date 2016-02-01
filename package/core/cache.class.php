@@ -1,26 +1,47 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * Cachen von Dateien oder Daten
+ *
+ * Wenn man Daten / Dateien für eine längere Zeit Cachen möchte, ist die Cache Klasse die richtige Anlaufstelle.
+ * Sie speichert Daten aber auch z.b. Kompilierte PHP Dateien ab.
+ * Diese Cache Dateien sind komprimiert und können so schneller vom Server an den Browser des Benutzers zurück
+ * gesendet werden.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	Cache
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class cache implements IStatic
 {
 	/**
@@ -62,12 +83,6 @@ class cache implements IStatic
 	 * Setzt den Cache Pfad
 	 *
 	 * @param string $cachePath Der Ordner wo alle Gecachten Dateien abgespeichert werden sollen
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
 	 * @return boolean Gibt im Fehlerfall ein false zurück
 	 */
 	public static function set_cache_dir($cachePath)
@@ -95,12 +110,6 @@ class cache implements IStatic
 	 * Aktiviert / Deaktiviert den Cache
 	 *
 	 * @param bool $active Aktiviert bzw Deaktiviert den Cache
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0
-	 *
 	 * @return void
 	 */
 	public static function set_cache_active($active = false)
@@ -113,12 +122,6 @@ class cache implements IStatic
 	 * Setzt die Cache Extension
 	 *
 	 * @param string $extension Die Cache Extension ist die Dateiendung jeder Cache Datei
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0
-	 *
 	 * @throws \Exception Wenn der Parameter leer ist.
 	 * @return void
 	 */
@@ -142,12 +145,6 @@ class cache implements IStatic
 	 *
 	 * @param string $cache_name Der eindeutige Cache Name
 	 * @param string $content Der Inhalt der Cache Datei
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0
-	 *
 	 * @return bool
 	 */
 	public static function set_template_element($cache_name, $content)
@@ -170,16 +167,21 @@ class cache implements IStatic
 	 *
 	 * @param string $cache_name Der eindeutige Cache Name
 	 * @param int $lifetime Die maximale Lebensdauer der Cache Datei
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
 	 * @return bool|string Gibt den Link zur gecachten Datei zurück, false wenn Lebensdauer abgelaufen oder gecachte Datei nicht existiert
 	 */
 	public static function get_template_element($cache_name, $lifetime = 500)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookShow('before', 'cache', 'get_template_element', array($cache_name, $lifetime));
+			$plugin	=	plugins::hookCall('before', 'cache', 'setElget_template_elementement', array($cache_name, $lifetime));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		$cacheFile	=	self::$cacheDir.$cache_name.'.html';
 
 		if(file_exists($cacheFile) === false)
@@ -194,8 +196,20 @@ class cache implements IStatic
 			return false;
 		}
 
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookShow('after', 'cache', 'get_template_element', array($cacheFile));
+			$plugin	=	plugins::hookCall('after', 'cache', 'get_template_element', array($cacheFile));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		if(($filemtime + $lifetime) >= time() || $lifetime == 0)
 		{
+
 			return $cacheFile;
 		}
 		else
@@ -214,14 +228,8 @@ class cache implements IStatic
 	 * @param string $cache_name Eindeutiger Cache Name
 	 * @param mixed $content Inhalt der zu cachenden Datei
 	 * @param int $lifetime Die maximale Lebensdauer der Cache Datei
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
-	 * @throws \Exception Wenn der $cache_name leer ist
 	 * @return bool Wenn Cache erfolgreich erstellt true, wenn es Probleme gab false (z.b. Cache nicht aktiv oder wenn die Cache Datei nicht abgespeichert werden konnte)
+	 * @throws \Exception Wenn der $cache_name leer ist
 	 */
 	public static function set_element($cache_name, $content, $lifetime = 500)
 	{
@@ -278,14 +286,8 @@ class cache implements IStatic
 	 * Gibt das gültige Cache Element zurück
 	 *
 	 * @param string $cache_name Der eindeutige Name der gecachten Datei
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
-	 * @throws \Exception Wenn $cache_name leer ist.
 	 * @return mixed Gibt den Inhalt des Caches zurück, false wenn Datei nicht existiert oder Lebensdauer abgelaufen
+	 * @throws \Exception Wenn $cache_name leer ist.
 	 */
 	public static function get_element($cache_name)
 	{
@@ -344,14 +346,8 @@ class cache implements IStatic
 	 * Entfernt eine Cache Datei
 	 *
 	 * @param string $cache_name Eindeutiger Name der Cache Datei
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
-	 * @throws \Exception Wenn $cache_name leer ist.
 	 * @return bool Nach erfolgreichem löschen des Caches wird true zurück gegeben, bei einem Fehler false.
+	 * @throws \Exception Wenn $cache_name leer ist.
 	 */
 	public static function delete_element($cache_name)
 	{

@@ -1,30 +1,46 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   captcha.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
 
+/**
+ * Erstellen von Captcha Bildern
+ *
+ * Um seine Formulare vor Spam von sogenannten Bots abzusichern, kann man Captchas mit einrichten. Diese Klasse erstellt
+ * ein Bild wo eine bestimmte Anzahl von Zeichen zu sehen sind. Ihr Benutzer muss dieses Anzahl von Zeichen in ein dafür
+ * vorgesehenes Feld eintippen. Nachdem das Formular abgesendet wurde, können Sie die Eingabe des Benutzer mit den
+ * Daten, die die Klasse Captcha zurückliefert vergleichen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	Captcha
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class captcha
 {
 	/**
@@ -36,12 +52,6 @@ class captcha
 	 * @param int $fontSize Die Schriftgröße der Schriftart in Pixel
 	 * @param int $imgWidth Die Breite des Captchas in Pixeln
 	 * @param int $imgHeight Die Höhe des Captchas in Pixeln
-	 *
-	 * @author Robbyn Gerhardt <gerhardt@webpackages.de>
-	 * @copyright 2010-2016 webpackages
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @version 1.0.1
-	 *
 	 * @return array Gibt das fertige Captcha zurück
 	 * @throws \Exception Bei leeren Parametern oder im Fehlerfall
 	 */

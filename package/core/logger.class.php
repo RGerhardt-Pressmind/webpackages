@@ -29,8 +29,21 @@ namespace package\core;
 
 use package\implement\iLogger as iLogger;
 
+/**
+ * Schreibt log Dateien
+ *
+ * Mithilfe der logger Klasse kann man log Dateien schrieben, lesen oder auch löschen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	language
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class logger implements iLogger
 {
+	/**
+	 * @var string Der Name der log Datei. Standartmäßig log.txt
+	 */
 	public $filename	=	'log.txt';
 
 	/**

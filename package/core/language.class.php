@@ -1,31 +1,44 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   language.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
 use package\implement\IStatic;
 
+/**
+ * Übersetzt Begriffe
+ *
+ * Mit der language Klasse können einfach Begrifflichkeiten in andere Sprachen übersetzt werden.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	language
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class language implements IStatic
 {
 	private static $userLng, $lngPath, $defaultLng = 'de_DE', $gettext_reader;
@@ -303,7 +316,7 @@ class language implements IStatic
 	/**
 	 * Setzt die Benutzer Sprache
 	 *
-	 * @param string $lng
+	 * @param string $lng Der Sprachcode
 	 *
 	 * @return void
 	 */
@@ -328,7 +341,7 @@ class language implements IStatic
 	/**
 	 * Setzt den Sprach-Haupt-Ordner
 	 *
-	 * @param string $path
+	 * @param string $path Der Pfad zu den language Dateien
 	 *
 	 * @return void
 	 */
@@ -352,7 +365,7 @@ class language implements IStatic
 	/**
 	 * Setzt die Standard Sprache
 	 *
-	 * @param string $lng
+	 * @param string $lng Der Sprachcode
 	 *
 	 * @return void
 	 */
@@ -456,13 +469,13 @@ class language implements IStatic
 	/**
 	 * Gibt die Liste aller Sprachpakete zurück
 	 *
-	 * @return array
+	 * @return array Gibt alle Sprachcodes, die auf dem Server installiert sind zurück. Geht nur bei UNIX Systemen
 	 */
 	public static function getAllSystemLocales()
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin	=	plugins::hookCall('before', 'text', 'getLocale');
+			$plugin	=	plugins::hookCall('before', 'language', 'getAllSystemLocales');
 
 			if($plugin != null)
 			{
@@ -472,11 +485,14 @@ class language implements IStatic
 
 		if(OS == 'WIN')
 		{
-			$plugin	=	plugins::hookCall('after', 'text', 'getLocale', array(self::$allLocales));
-
-			if($plugin != null)
+			if(class_exists('\package\core\plugins') === true)
 			{
-				return $plugin;
+				$plugin	=	plugins::hookCall('after', 'language', 'getAllSystemLocales', array(self::$allLocales));
+
+				if($plugin != null)
+				{
+					return $plugin;
+				}
 			}
 
 			return self::$allLocales;
@@ -504,7 +520,7 @@ class language implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin	=	plugins::hookCall('after', 'text', 'getLocale', array($locale_data));
+			$plugin	=	plugins::hookCall('after', 'language', 'getAllSystemLocales', array($locale_data));
 
 			if($plugin != null)
 			{

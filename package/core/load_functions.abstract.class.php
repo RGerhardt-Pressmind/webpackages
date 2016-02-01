@@ -1,32 +1,45 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   load_functions.abstract.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
 use package\implement\iDynamic;
 use package\implement\IPlugin;
 
+/**
+ * Kernklasse die alle anderen Klassen lädt
+ *
+ * Die load_functions ist die Klasse die alle anderen Klassen / Plugins lädt.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	Initial
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 abstract class load_functions
 {
 	public static $LOAD_DATE			=	array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
@@ -34,7 +47,6 @@ abstract class load_functions
 	public static $LOAD_URL				=	array('isStatic' => false, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_BROWSER			=	array('isStatic' => false, 'class' => 'browser', 'writeInAttribute' => 'browser', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_VERSION			=	array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
-	public static $LOAD_DOWNLOAD		=	array('isStatic' => true, 'class' => 'download', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_ZIP				=	array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_FTP				=	array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\core\\');
 	public static $LOAD_BENCHMARK		=	array('isStatic' => true, 'class' => 'benchmark', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\');
@@ -55,7 +67,7 @@ abstract class load_functions
 	protected $phpmailer;
 
 	private	$allLoadClasses			=	array(), $defineDynamicClasses	=	array();
-	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'download', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'browser', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal');
+	private $notAllowedClassName	=	array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'browser', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal');
 
 
 	/**
@@ -96,7 +108,6 @@ abstract class load_functions
 				self::$LOAD_URL,
 				self::$LOAD_BROWSER,
 				self::$LOAD_VERSION,
-				self::$LOAD_DOWNLOAD,
 				self::$LOAD_ZIP,
 				self::$LOAD_FTP,
 				self::$LOAD_BENCHMARK,

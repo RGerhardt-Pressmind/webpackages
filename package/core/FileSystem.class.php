@@ -1,32 +1,45 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    @category   FileSystem.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * Greift aus das Dateisystem zu
+ *
+ * Durch die FileSystem Klasse kann man Daten auf dem Webserver verschieben, kopieren oder ganze Strukturen einfach
+ * löschen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	Filesystem
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class FileSystem implements IStatic
 {
 	/**
@@ -40,7 +53,7 @@ class FileSystem implements IStatic
 	 * können den falschen Wert zurück geben wenn safe_mode aktiv
 	 * ist.
 	 *
-	 * @param string $file
+	 * @param string $file Der Datei-/Ordnername der kontrolliert werden soll.
 	 * @return bool
 	 */
 	public static function is_really_writable($file)
@@ -90,9 +103,9 @@ class FileSystem implements IStatic
 	/**
 	 * Gibt den Inhalt eines Ordners zurück
 	 *
-	 * @param string $path
-	 * @param int $orderBack
-	 * @param bool $withData
+	 * @param string $path Der Pfad zum Ordner von dem der Inhalt zurück gegeben werden soll
+	 * @param int $orderBack Die Sortierung des Rückgabewertes aus der Klasse RecursiveIteratorIterator
+	 * @param bool $withData Ob der Rückgabewert auch detailierte Informationen der einzelnen Dateien / Ordner enthalten soll
 	 *
 	 * @return array|bool
 	 */
@@ -192,8 +205,8 @@ class FileSystem implements IStatic
 	/**
 	 * Löcht den Inhalt eines Ordners und gegebenfalls den Ordner selber
 	 *
-	 * @param string $path
-	 * @param bool $delete_dir
+	 * @param string $path Der Pfad zum Verzeichnis dessen Inhalt gelöscht werden soll
+	 * @param bool $delete_dir Ob das Verzeichnis anschließend auch gelöscht werden soll. Standartmäßig false
 	 *
 	 * @return bool
 	 */
@@ -267,8 +280,8 @@ class FileSystem implements IStatic
 	/**
 	 * Kopiert ein ganzes Verzeichnis
 	 *
-	 * @param string $source Relativer Pfad zum koopierenden Verzeichnis
-	 * @param string $dest Relativer Pfad zum Zielverzeichnis
+	 * @param string $source Relativer Pfad zum Verzeichnis das kopiert werden soll.
+	 * @param string $dest Relativer Pfad zum Zielverzeichnis wohin es kopiert werden soll.
 	 * @param int $chmod Ändert anschließend die Zugriffsrechte im Zielverzeichnis, wenn erlaubt. Standartmäßig "0755"
 	 * @return bool
 	 * @throws \Exception

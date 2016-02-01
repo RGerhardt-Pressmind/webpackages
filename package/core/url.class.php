@@ -1,32 +1,45 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    @category   url.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * URL Klasse
+ *
+ * Mittels der URL Klasse kann man die aktuelle URL herausbekommen, kontrollieren ob die PHP Extension mod_rewrite installiert ist oder
+ * einfache eine Ansammlung von Strings zu einer validen URL zusammenbauen lassen. All das und vieles mehr kann die URL Klasse.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	url
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class url implements IStatic
 {
 	public static $isModRewriteActiv = false, $useModRewrite = false, $useFileExtension = 'html';
@@ -53,7 +66,7 @@ class url implements IStatic
 	/**
 	 * Setzt ModRewrite auf aktiv oder inaktiv
 	 *
-	 * @param $mod
+	 * @param bool $mod Setzt das mod_rewrite auf true oder false (aktiv oder inaktiv)
 	 * @throws \Exception
 	 */
 	public static function set_use_mod_rewrite($mod)
@@ -70,7 +83,7 @@ class url implements IStatic
 	/**
 	 * Setzt eine Dateiendung
 	 *
-	 * @param string $extension
+	 * @param string $extension Setzt die Dateiendung für die mod_rewrite URL's
 	 * @throws \Exception
 	 */
 	public function set_use_file_extension($extension)
@@ -91,12 +104,22 @@ class url implements IStatic
 	 * Wandelt einen Link in ModRewrite um oder
 	 * gibt Ihn als normalen GET Text zurück
 	 *
-	 * @param string $httpRoot
-	 * @param array $parameters
+	 * @param string $httpRoot Die HTTP-Root URL vom Webserver (beispiel von google: http://www.google.de/)
+	 * @param array $parameters Die Parameter die übergeben werden sollen.
 	 * @return string $link
 	 */
 	public static function get_url_simple($httpRoot, $parameters)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'url', 'get_url_simple', array($httpRoot, $parameters));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		$link	=	$httpRoot;
 
 		if(!empty($parameters))
@@ -131,6 +154,16 @@ class url implements IStatic
 			}
 		}
 
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('after', 'url', 'get_url_simple', array($link));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		return $link;
 	}
 
@@ -139,13 +172,13 @@ class url implements IStatic
 	 * Validiert eine URL und gibt diese "Sauber" zurück
 	 *
 	 * @param string $url Die URL die Validiert werden soll. Erlaubt sind alle Buchstaben, Zahlen und $-_.+!*'{}|^~[]`#%/?@&= Zeichen
-	 * @return string
+	 * @return string Gibt den validierten String zurück
 	 */
 	public static function createValidUrlString($url)
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin	=	plugins::hookCall('before', 'template', 'createValidURL', array($url));
+			$plugin	=	plugins::hookCall('before', 'url', 'createValidUrlString', array($url));
 
 			if($plugin != null)
 			{
@@ -159,7 +192,7 @@ class url implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin	=	plugins::hookCall('after', 'template', 'createValidURL', array($url));
+			$plugin	=	plugins::hookCall('after', 'url', 'createValidUrlString', array($url));
 
 			if($plugin != null)
 			{
@@ -178,6 +211,16 @@ class url implements IStatic
 	 */
 	public static function getCurrentUrl()
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'url', 'getCurrentUrl', array());
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		if(isset($_SERVER['HTTP_HOST']) === true)
 		{
 			return (isset($_SERVER['HTTPS']) === true ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -191,11 +234,16 @@ class url implements IStatic
 	/**
 	 * Leitet den Browser auf die übergeben URL weiter
 	 *
-	 * @param string $url Die URL die aufgerufen werden soll.
+	 * @param string $url Die URL an denn der Aufruf weitergeleitet werden soll
 	 * @return void
 	 */
 	public static function loc($url)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookCall('before', 'url', 'loc', array($url));
+		}
+
 		header('Location: '.$url);
 		exit;
 	}
@@ -219,6 +267,11 @@ class url implements IStatic
 	 */
 	public static function back()
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookCall('before', 'url', 'back', array());
+		}
+
 		if(!empty($_SERVER['HTTP_REFERER']))
 		{
 			self::loc($_SERVER['HTTP_REFERER']);

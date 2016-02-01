@@ -1,34 +1,47 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   database.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
+/**
+ * Datenbankverbindung herstellen
+ *
+ * Mit der database Klasse können PDO Datenbankverbindungen hergestellt werden. Mit der aufgebauten Verbindung ist es möglich Daten auszulesen, zu schreiben, zu aktualisieren oder zu löschen.
+ * Unterstützt werden mysql, cubrid, dblib, firebird, informix, sqlsrv, oci, pgsql, sqlite und sqlite2
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	database
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class database extends \PDO
 {
 	/**
-	 * @var array Eine Liste aller erlaubten PDO Treiber die verwendet werden dürfen
+	 * @var array Eine Liste aller erlaubten PDO Treiber die verwendet werden dürfen. Erlaubt sind: mysql, cubrid, dblib, firebird, informix, sqlsrv, oci, pgsql, sqlite und sqlite2
 	 */
 	public static $allowedDrivers	=	array('mysql', 'cubrid', 'dblib', 'firebird', 'informix', 'sqlsrv', 'oci', 'pgsql', 'sqlite', 'sqlite2');
 
@@ -37,9 +50,11 @@ class database extends \PDO
 	 */
 	private $useDriver	=	'', $isInit = false;
 
+	private $databaseFunctions	=	'/(ABS|ACOS|ADDDATE|ADDTIME|AES_DECRYPT|AES_ENCRYPT|ANY_VALUE|ASCII|ASIN|ASYMMETRIC|ATAN|AVG|BENCHMARK|BETWEEN|BIN|BIT_AND|BIT_COUNT|BIT_LENGTH|BIT_OR|BIT_XOR|CAST|CEIL|CHAR|COALESCE|COERCIBILITY|COLLATION|COMPRESS|CONCAT|CONNECTION_ID|CONV|COS|COT|COUNT|CRC32|CREATE_|CURDATE|CURRENT_|CURTIME|DATABASE|DATE_|DATE|DAY|DECODE|DEFAULT|DEGREES|ELT|ENCODE|EXP|EXTRACT|FIELD|FIND_IN_SET|FLOOR|FORMAT|FOUND_|FROM_|GET_|GREATEST|GROUP_|GTID_|HEX|HOUR|IF|IN|IS_|ISNULL|JSON_|LAST_|LCASE|LEAST|LEFT|LENGTH|LIKE|LN|LOAD_|LOCAL|LOCATE|LOG|LOWER|LPAD|LTRIM|MAKE_|MAKEDATE|MAKETIME|MASTER_POS_WAIT|MATCH|MAX|MBR|MD5|MICROSECOND|MID|MIN|MLine|MOD|MONTH|MPointFrom|MPolyFrom|MultiLineString|MultiPoint|MultiPolygon|NAME_CONST|NOT BETWEEN|NOT IN|NOT LIKE|NOT REGEXP|NOT|NOW|NULLIF|OCT|OLD_PASSWORD|ORD|PERIOD_ADD|PERIOD_DIFF|PI|Point|Polygon|POSITION|POW|PROCEDURE ANALYSE|QUARTER|QUOTE|RADIANS|RAND|REGEXP|RELEASE_|REPEAT|REPLACE|REVERSE|RIGHT|RLIKE|ROUND|ROW_|RPAD|RPAD|RTRIM|SCHEMA|SEC_TO_TIME|SECOND|SESSION_USER|SHA|SIGN|SIN|SLEEP|SOUNDEX|SOUND_|SPACE|SQRT|ST_|STD|STDDEV|STR_TO_DATE|STRCMP|SUB|SUM|SYSDATE|SYSTEM_USER|TAN|TIME|TO_|TRIM|TRUNCATE|UCASE|UNCOMPRESS|UNHEX|UNIX|UpdateXML|UPPER|USER|UTC_|UUID|VALIDATE_PASSWORD_STRENGTH|VALUES|VAR_|VARIANCE|VERSION|WAIT_|WEEK|WEIGHT_STRING|XOR|YEAR)/';
+
 
 	/**
-	 * database constructor.
+	 * Am Konstruktor müssen dsn, username, password, options und driver übermittelt werden
 	 * @param array $para
 	 * @throws \Exception
 	 */
@@ -127,10 +142,10 @@ class database extends \PDO
 	/**
 	 * Führt den SQL Befehl aus und gibt ein gefundenes Resultat zurück
 	 *
-	 * @param string $sql Die SQL Anweisung die ausgeführt werden soll. Am besten eine wo nur ein Resultat zurück kommt
+	 * @param string $sql Füht einen SQL Befehl aus und gibt ein assoziatives Array zurück. quefetch sollte verwendet werden, wenn nur ein Ergebnis erwartet wird.
 	 *
-	 * @throws \Exception
-	 * @return array Gibt ein gefundenes Resultat zurück
+	 * @throws \Exception Wenn $sql leer ist
+	 * @return array Gibt das gefundene assoziative Array zurück
 	 */
 	public function quefetch($sql)
 	{
@@ -165,9 +180,9 @@ class database extends \PDO
 	/**
 	 * Führt einen SQL Befehle aus und gibt das assoziative Array zurück
 	 *
-	 * @param string $sql Der SQL Befehle. Hierbei sollte nur SELECT verwendet werden.
+	 * @param string $sql Gibt das Ergebniss einer SELECT Anweisung zurück. result_array sollte verwendet werden, wenn man mehr als ein Ergebnis erwartet
 	 *
-	 * @throws \Exception
+	 * @throws \Exception Wenn $sql leer ist oder $sql keine SELECT Anweisung enthält
 	 * @return array Gibt ein assoziatives Array zurück
 	 */
 	public function result_array($sql)
@@ -177,9 +192,9 @@ class database extends \PDO
 			return array();
 		}
 
-		if(is_string($sql) === false || empty($sql))
+		if(empty($sql))
 		{
-			throw new \Exception('pdo::result_array $sql is not a string or empty');
+			throw new \Exception('pdo::result_array $sql is empty');
 		}
 
 		preg_match_all('/(SELECT|select)/', $sql, $matches);
@@ -203,10 +218,10 @@ class database extends \PDO
 	/**
 	 * Führt mehrere SQL Befehle, Semikolon getrennt voneinander, aus.
 	 *
-	 * @param string $sql Die Liste, durch Semikolon getrennte, SQL Befehle.
+	 * @param string $sql Die Liste, durch Semikolon getrennte, SQL Befehle. Hier sollten nur update, insert oder delete Befehle übermittelt werden, da nur ein Boolean Wert zurück gegeben wird.
 	 *
 	 * @throws \Exception
-	 * @return boolean Gibt bei Erfolg ein true zurück ansonsten ein Exception
+	 * @return boolean Gibt bei Erfolg ein true zurück ansonsten ein Exception.
 	 */
 	public function multi_query($sql)
 	{
@@ -231,9 +246,9 @@ class database extends \PDO
 	}
 
 	/**
-	 * Gibt die aktuelle Client Version zurück
+	 * Gibt die aktuelle Datenbank Client Version zurück
 	 *
-	 * @return mixed Gibt die aktuelle Client Version zurück
+	 * @return mixed Gibt die aktuelle Client Version zurück oder ein false
 	 */
 	public function version()
 	{
@@ -291,7 +306,7 @@ class database extends \PDO
 	 * @param bool $isResultAssociative Ist das Resultat ein assoziatives oder mehrdimensionales Array oder ein Boolischer Wert
 	 * @param bool $getFirstResult Soll nur der zuerst gefundenen Wert als assoziatives Array zurück gegebene werden oder ein komplettes mehrdimensionales Array
 	 *
-	 * @throws \Exception
+	 * @throws \Exception Wenn $sql leer ist
 	 * @return mixed Gibt, je nach Parameter, ein Array oder einen Boolischen Wert zurück
 	 */
 	public function secQuery($sql, $execute, $isResultAssociative = true, $getFirstResult = false)
@@ -301,9 +316,9 @@ class database extends \PDO
 			return false;
 		}
 
-		if(is_string($sql) === false || empty($sql))
+		if(empty($sql))
 		{
-			throw new \Exception('pdo::secQuery: $sql is not a string or empty');
+			throw new \Exception('pdo::secQuery: $sql is empty');
 		}
 
 		try{
@@ -339,5 +354,225 @@ class database extends \PDO
 		}catch(\PDOException $e){
 			return false;
 		}
+	}
+
+
+	/**
+	 * Fügt einen Wert in eine Tabelle ein
+	 *
+	 * @param string $table Der Tabellenname in den geschrieben werden soll
+	 * @param array $setParameter Ein Assoziatives Array das den key und das value beinhaltet
+	 *
+	 * @return int|false Gibt den erzeugten Primary Key zurück, oder ein false im fehlerfall
+	 */
+	public function insertTable($table, $setParameter)
+	{
+		$insert	=	'
+		INSERT INTO
+			`'.$table.'`
+		SET
+		';
+
+		$execute	=	array();
+
+		foreach($setParameter as $key => $value)
+		{
+			if(preg_match($this->databaseFunctions, $key) !== 0)
+			{
+				$insert	.=	'
+				'.$key;
+			}
+			else
+			{
+				$insert	.=	'
+				`'.$key.'`';
+			}
+
+			if(preg_match($this->databaseFunctions, $value) !== 0)
+			{
+				$insert	.=	'	=	'.$value.',';
+			}
+			else
+			{
+				$execute[]	=	$value;
+
+				$insert	.=	'	=	?,';
+			}
+		}
+
+		$insert	=	trim($insert, ',').';';
+
+		$execInsert	=	$this->secQuery($insert, $execute, false, false);
+
+		if($execInsert === false)
+		{
+			return false;
+		}
+
+		return $this->lastInsertId();
+	}
+
+
+	/**
+	 * Aktualisiert einen oder mehrere Datensätze
+	 *
+	 * @param string $table Der Tabellenname in den Datensätze aktualisiert werden sollen
+	 * @param array $setParameter Enthält ein Assoziatives Array mit key als Feldnamen und value als
+	 * @param array $whereParameter
+	 * @param int $limit Die Anzahl zu aktualisierender Datensätze. Standartmäßig 0, heißt soviel wie man findet.
+	 * @return bool
+	 */
+	public function updateTable($table, $setParameter, $whereParameter, $limit = 0)
+	{
+		$update	=	'
+		UPDATE
+			`'.$table.'`
+		SET
+		';
+
+		$execute	=	array();
+
+		foreach($setParameter as $key => $value)
+		{
+			if(preg_match($this->databaseFunctions, $key) !== 0)
+			{
+				$update	.=	'
+				'.$key;
+			}
+			else
+			{
+				$update	.=	'
+				`'.$key.'`
+				';
+			}
+
+			if(preg_match($this->databaseFunctions, $value) !== 0)
+			{
+				$update	.=	'	=	'.$value.',';
+			}
+			else
+			{
+				$execute[]	=	$value;
+
+				$update	.=	'	=	?,';
+			}
+		}
+
+		$update	=	trim($update, ',');
+
+		if(!empty($whereParameter))
+		{
+			$update	.=	'
+			WHERE';
+
+			foreach($whereParameter as $key => $value)
+			{
+				if(preg_match($this->databaseFunctions, $key) !== 0)
+				{
+					$update	.=	'
+					'.$key;
+				}
+				else
+				{
+					$update	.=	'
+					`'.$key.'`
+					';
+				}
+
+				if(preg_match($this->databaseFunctions, $value)  !== 0)
+				{
+					$update	.=	'	=	'.$value.' AND';
+				}
+				else
+				{
+					$execute[]	=	$value;
+
+					$update	.=	'	=	? AND';
+				}
+			}
+
+			$update	=	trim($update, 'AND');
+		}
+
+		if($limit > 0)
+		{
+			$update	.=	' LIMIT '.$limit;
+		}
+
+		$update	.=	';';
+
+		$execUpdate	=	$this->secQuery($update, $execute, false, false);
+
+		if($execUpdate === false)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+
+	/**
+	 * Löscht Einträge aus einer Tabelle
+	 *
+	 * @param string $table Der Tabellenname
+	 * @param array $whereParameter Die Where Bedingungen. Welche Einträge sollen gelöscht werden.
+	 * @param int $limit Limit ist standartmäßig auf 0, heißt alle die gefunden werden löschen.
+	 *
+	 * @return bool
+	 */
+	public function deleteTable($table, $whereParameter, $limit = 0)
+	{
+		$execute	=	array();
+
+		$deleteTable	=	'
+		DELETE FROM
+			`'.$table.'`';
+
+		if(!empty($whereParameter))
+		{
+			$deleteTable	.=	'
+			WHERE
+			';
+			foreach($whereParameter as $key => $value)
+			{
+				if(preg_match($this->databaseFunctions, $key) !== 0)
+				{
+					$deleteTable	.=	'
+					'.$key.'';
+				}
+				else
+				{
+					$deleteTable	.=	'
+					`'.$key.'`';
+				}
+
+				if(preg_match($this->databaseFunctions, $value) !== 0)
+				{
+					$deleteTable	.=	' =	'.$value.' AND';
+				}
+				else
+				{
+					$execute[]	=	$value;
+					$deleteTable	.=	'	=	? AND';
+				}
+			}
+		}
+
+		$deleteTable	=	trim($deleteTable, 'AND');
+
+		if($limit > 0)
+		{
+			$deleteTable	.=	'
+			LIMIT '.$limit;
+		}
+
+		$deleteTable	.=	';';
+
+		$deleted	=	$this->secQuery($deleteTable, $execute, false, false);
+
+		return $deleted;
 	}
 }

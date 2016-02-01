@@ -1,34 +1,51 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   plugins.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
 use package\implement\IPlugin;
 use package\implement\IStatic;
 
+/**
+ * Initialisiert Plugins
+ *
+ * Die Plugins Klasse initialisiert andere Klassen von externen Personen. Diese können dann Ihren Code an
+ * anderen stellen des Frameworks einbinden.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	plugins
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class plugins implements IStatic
 {
+	/**
+	 * @var array Bereits definierte Plugins
+	 */
 	public static $definedPluginsClasses	=	array();
 
 	const BEFORE	=	'before';
@@ -122,7 +139,7 @@ class plugins implements IStatic
 	 * @param string $position Die Position im Template.
 	 * @param array $args Ein assoziatives Array an Parameters das das Plugin bekommen soll. Standartmäßig "array()"
 	 *
-	 * @return string Gibt ein String mit Inhalt vom Plugin zurück und gibt es aus.
+	 * @return void
 	 */
 	public static function hookTemplate($template, $position, $args = array())
 	{
@@ -143,8 +160,6 @@ class plugins implements IStatic
 				}
 			}
 		}
-
-		echo '';
 	}
 
 

@@ -1,30 +1,45 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   template.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
+/**
+ * Template Klasse
+ *
+ * Wenn man sogenannte Templates (Vorlagen) für sein Framework nutzen möchte, kommt die template Klasse zur Hilfe. Sie bindet verschiedene
+ * HTML / PHP Dateie zu einer Ausgabe zusammen. Gleichzeitig können Ihr auch Variablen übermittelt werden, die zu PHP-Variablen umgewandelt
+ * werden. Dabei kann man auch das intelligente Cache System nutzen um PHP Dateien nur einmal durch den PHP-Parser durchlaufen zu lassen.
+ * Hiermit kann man PHP und HTML / CSS Dateien voneinander trennen um einen saubereren und übersichtlichereren Code zu bekommen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	template
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class template
 {
 	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer, $skin;
@@ -124,6 +139,12 @@ class template
 		}
 
 		$templateFile	=	$this->tempDir.$this->skin.SEP.$template;
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new \Exception('Error: class SplFileInfo not exists');
+		}
+
 		$splFileInfo	=	new \SplFileInfo($templateFile);
 
 		$headerPath		=	$splFileInfo->getPath().SEP.$header;
@@ -136,7 +157,7 @@ class template
 				throw new \Exception('class cache not found');
 			}
 
-			$cacheName		=	md5($this->currentURL().'_'.$template.'_'.$header.'_'.$footer.'_'.md5(serialize($this->contentData))).'.cache';
+			$cacheName		=	md5(url::getCurrentUrl().'_'.$template.'_'.$header.'_'.$footer.'_'.md5(serialize($this->contentData))).'.cache';
 			$getTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)
@@ -207,6 +228,12 @@ class template
 		}
 
 		$templatePath	=	$this->tempDir.$this->skin.SEP.$template;
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new \Exception('Error: class SplFileInfo not exists');
+		}
+
 		$splFileInfo	=	new \SplFileInfo($templatePath);
 
 		$headerPath		=	$splFileInfo->getPath().SEP.$this->header;
@@ -219,7 +246,7 @@ class template
 				throw new \Exception('class cache not found');
 			}
 
-			$cacheName		=	md5($this->currentURL().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
+			$cacheName		=	md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
 			$getTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)
@@ -293,7 +320,7 @@ class template
 				throw new \Exception('Error: class cache not found');
 			}
 
-			$cacheName		=	md5($this->currentURL().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
+			$cacheName		=	md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
 			$getTemplate	=	cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)

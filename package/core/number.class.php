@@ -1,32 +1,44 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   number.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * Konvertieren von Zahlen
+ *
+ * Konvertiert bestimmte Zahlen und gibt diese richtig zurück
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	number
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class number implements IStatic
 {
 
@@ -34,6 +46,58 @@ class number implements IStatic
 	 * Zum initialisieren der Daten
 	 */
 	public static function init(){}
+
+
+	/**
+	 * Gibt die width und height Werte als Proportionales skalieren zurück. Hierbei müssen entweder gewünschte
+	 * Breite oder gewünschte Höhe angegeben werden, aber nicht beide.
+	 *
+	 * @param float $sourceWidth Original Breite
+	 * @param float $sourceHeight Original Höhe
+	 * @param float $destWidth Gewünschte Breite
+	 * @param float $destHeight Gewünschte Höhe
+	 *
+	 * @return array Gibt ein assoziatives array mit den neuen Werten zurück
+	 */
+	public static function scale_proportionally($sourceWidth, $sourceHeight, $destWidth = 0.00, $destHeight = 0.00)
+	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookShow('before', 'number', 'scale_proportionally', array($sourceWidth, $sourceHeight, $destWidth, $destHeight));
+			$plugins	=	plugins::hookCall('before', 'number', 'scale_proportionally', array($sourceWidth, $sourceHeight, $destWidth, $destHeight));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
+		if($destHeight >= $destWidth)
+		{
+			$backHeight	=	$destHeight;
+			$factor		=	$destHeight / $sourceHeight;
+			$backWidth	=	$sourceWidth * $factor;
+		}
+		else
+		{
+			$backWidth	=	$destWidth;
+			$factor		=	$destWidth / $sourceWidth;
+			$backHeight	=	$sourceHeight * $factor;
+		}
+
+		if(class_exists('\package\core\plugins') === true)
+		{
+			plugins::hookShow('after', 'number', 'scale_proportionally', array($backWidth, $backHeight));
+			$plugins	=	plugins::hookCall('after', 'number', 'scale_proportionally', array($backWidth, $backHeight));
+
+			if($plugins != null)
+			{
+				return $plugins;
+			}
+		}
+
+		return array('width' => $backWidth, 'height' => $backHeight);
+	}
 
 	/**
 	 * Wandelt eine Zahl in ein Computer Byte-Format um
@@ -172,8 +236,8 @@ class number implements IStatic
 	/**
 	 * Gibt, in Worten, die Different eines Datums aus
 	 *
-	 * @param object Ein Objekt das von der Methode "diff" kommt
-	 * @param boolean Ob kurze Begrifflichkeiten genutzt werden sollen beim genauen Wortlaut. Standartmäßig false.
+	 * @param object $diffDate Ein Objekt das von der Methode "diff" kommt
+	 * @param boolean $short Ob kurze Begrifflichkeiten genutzt werden sollen beim genauen Wortlaut. Standartmäßig false.
 	 *
 	 * @return string Gibt den Wortlaut der Differenz zurück.
 	 * @throws \Exception

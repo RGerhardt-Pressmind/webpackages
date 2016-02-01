@@ -1,32 +1,44 @@
 <?php
-/*
-    Copyright (C) 2016  <Robbyn Gerhardt>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    @category   text.class.php
-	@package    webpackages
-	@author     Robbyn Gerhardt <robbyn@worldwideboard.de>
-	@copyright  2010-2016 Webpackages
-	@license    http://www.gnu.org/licenses/
-*/
+/**
+ *  Copyright (C) 2010 - 2016  <Robbyn Gerhardt>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  @package	Webpackages
+ *  @subpackage core
+ *  @author	    Robbyn Gerhardt
+ *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
+ *  @link	    http://webpackages.de
+ *  @since	    Version 2.0.0
+ *  @filesource
+ */
 
 namespace package\core;
 
-
 use package\implement\IStatic;
 
+/**
+ * Textmanipulationen
+ *
+ * Wenn man einen bestimmten Satz kürzen möchte oder ein zufälligen String zurück haben möchte, kann man die text Klasse nutzen.
+ *
+ * @package		Webpackages
+ * @subpackage	core
+ * @category	text
+ * @author		Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class text implements IStatic
 {
 	/**
@@ -273,6 +285,16 @@ class text implements IStatic
 	 */
 	public static function random_string($type = 'normal', $length = 10)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'text', 'random_string', array($type, $length));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		switch ($type)
 		{
 			default:
@@ -314,7 +336,19 @@ class text implements IStatic
 			break;
 		}
 
-		return substr(str_shuffle(str_repeat($back, ceil($length / strlen($back)))), 0, $length);
+		$back	=	substr(str_shuffle(str_repeat($back, ceil($length / strlen($back)))), 0, $length);
+
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('after', 'text', 'random_string', array($back));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
+		return $back;
 	}
 
 
@@ -334,6 +368,16 @@ class text implements IStatic
 	 */
 	public static function reduce_double_slashes($str)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'text', 'reduce_double_slashes', array($str));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
 	}
 
@@ -346,6 +390,16 @@ class text implements IStatic
 	 */
 	public static function strip_quotes($str)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'text', 'strip_quotes', array($str));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		return str_replace(array('"', "'"), array('', ''), $str);
 	}
 
@@ -358,6 +412,16 @@ class text implements IStatic
 	 */
 	public static function trim_slashes($str)
 	{
+		if(class_exists('\package\core\plugins') === true)
+		{
+			$plugin	=	plugins::hookCall('before', 'text', 'trim_slashes', array($str));
+
+			if($plugin != null)
+			{
+				return $plugin;
+			}
+		}
+
 		return trim($str, '/');
 	}
 }

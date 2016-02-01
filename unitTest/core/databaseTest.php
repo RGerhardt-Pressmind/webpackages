@@ -164,4 +164,28 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals('UnitTest123', $getInfos['name']);
 	}
+
+
+	public function testUpdateTable()
+	{
+		$updated	=	$this->db->updateTable('unit_test', array('modified_date' => 'NOW()'), array('name' => 'UnitTest123'));
+
+		$this->assertTrue($updated);
+	}
+
+
+	public function testInsertTable()
+	{
+		$inserted	=	$this->db->insertTable('unit_test', array('name' => 'InsertTest', 'modified_date' => 'NOW()'));
+
+		$this->assertTrue(($inserted !== false));
+	}
+
+
+	public function testDeleteTable()
+	{
+		$deleted	=	$this->db->deleteTable('unit_test', array('name' => 'InsertTest'));
+
+		$this->assertTrue($deleted);
+	}
 }
