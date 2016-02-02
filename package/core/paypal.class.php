@@ -104,7 +104,7 @@ class paypal
 
       	$this->_errors	=	array();
 
-		if(empty($method))
+		if(empty($method) === true)
 		{
 			$this->_errors = array('API method is missing');
 		 	return false;

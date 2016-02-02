@@ -405,12 +405,12 @@ class language implements IStatic
 			}
 		}
 
-		if(empty(self::$lngPath))
+		if(empty(self::$lngPath) === true)
 		{
 			return false;
 		}
 
-		if(empty(self::$userLng))
+		if(empty(self::$userLng) === true)
 		{
 			self::$userLng	=	self::$defaultLng;
 		}
@@ -483,7 +483,7 @@ class language implements IStatic
 			}
 		}
 
-		if(OS == 'WIN')
+		if(OS === 'WIN')
 		{
 			if(class_exists('\package\core\plugins') === true)
 			{
@@ -507,12 +507,12 @@ class language implements IStatic
 		{
 			$l	=	trim($l);
 
-			if(empty($l) || $l == 'POSIX' || $l == 'C')
+			if(empty($l) === true || $l === 'POSIX' || $l === 'C')
 			{
 				continue;
 			}
 
-			if(strlen($l))
+			if(strlen($l) > 0)
 			{
 				$locale_data[]	=	$l;
 			}

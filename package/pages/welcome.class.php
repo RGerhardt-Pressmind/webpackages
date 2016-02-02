@@ -31,10 +31,10 @@ class welcome extends load_functions
 {
 	public function __construct()
 	{
-		//parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL));
-		parent::__construct(array());
-
 		\package\core\benchmark::start_point(true);
+
+		#parent::__construct(array());
+		parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL));
 	}
 
 

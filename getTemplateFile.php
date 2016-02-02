@@ -27,7 +27,7 @@
 
 require_once 'constants.php';
 
-if(!empty($_GET['t']))
+if(empty($_GET['t']) === false)
 {
 	$type	=	$_GET['t'];
 }
@@ -37,7 +37,7 @@ else
 	exit;
 }
 
-if(!empty($_GET['f']))
+if(empty($_GET['f']) === false)
 {
 	$filename	=	$_GET['f'];
 }
@@ -49,7 +49,7 @@ else
 
 $skin	=	'';
 
-if(!empty($_GET['s']))
+if(empty($_GET['s']) === false)
 {
 	$skin	=	$_GET['s'].SEP;
 }
@@ -57,7 +57,7 @@ if(!empty($_GET['s']))
 
 $dir	=	'';
 
-if(!empty($_GET['d']))
+if(empty($_GET['d']) === false)
 {
 	$dir	=	$_GET['d'].SEP;
 }
@@ -85,13 +85,25 @@ switch(strtolower($type))
 
 		$file	=	TEMPLATE_DIR.$skin.$dir.$filename.'.css';
 
-		if(file_exists($file))
+		if(file_exists($file) === true)
 		{
-			header('Content-type: text/css;charset: UTF-8');
-			header('Cache-Control: must-revalidate');
-			$offset = 60 * 60 ;
-			$ExpStr = 'Expires: '.gmdate('D, d M Y H:i:s', time() + $offset).' GMT';
-			header($ExpStr);
+			$etag	=	md5_file($file);
+			$date	=	date("F d Y H:i:s.", filemtime($file));
+
+			header("Access-Control-Allow-Origin: *");
+			header("Access-Control-Expose-Headers: ETag");
+			header("Access-Control-Expose-Headers: X-Content-Length-Uncompressed");
+			header("Access-Control-Expose-Headers: Content-Length");
+			header("Cache-Control: public");
+			header('Content-type: text/css');
+			header("ETag: $etag");
+			header("Last-Modified: $date");
+
+			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			{
+				header("HTTP/1.1 304 Not Modified");
+				exit;
+			}
 
 			if($withConvert === true)
 			{
@@ -119,13 +131,25 @@ switch(strtolower($type))
 
 		$file	=	TEMPLATE_DIR.$skin.$dir.$filename.'.js';
 
-		if(file_exists($file))
+		if(file_exists($file) === true)
 		{
-			header('Content-type: text/javascript;charset: UTF-8');
-			header('Cache-Control: must-revalidate');
-			$offset = 60 * 60 ;
-			$ExpStr = 'Expires: '.gmdate('D, d M Y H:i:s', time() + $offset).' GMT';
-			header($ExpStr);
+			$etag	=	md5_file($file);
+			$date	=	date("F d Y H:i:s.", filemtime($file));
+
+			header("Access-Control-Allow-Origin: *");
+			header("Access-Control-Expose-Headers: ETag");
+			header("Access-Control-Expose-Headers: X-Content-Length-Uncompressed");
+			header("Access-Control-Expose-Headers: Content-Length");
+			header("Cache-Control: public");
+			header('Content-type: text/javascript');
+			header("ETag: $etag");
+			header("Last-Modified: $date");
+
+			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			{
+				header("HTTP/1.1 304 Not Modified");
+				exit;
+			}
 
 			if($withConvert === true)
 			{
@@ -150,13 +174,25 @@ switch(strtolower($type))
 
 		$file	=	TEMPLATE_DIR.$skin.$dir.$filename;
 
-		if(file_exists($file))
+		if(file_exists($file) === true)
 		{
+			$etag	=	md5_file($file);
+			$date	=	date("F d Y H:i:s.", filemtime($file));
+
+			header("Access-Control-Allow-Origin: *");
+			header("Access-Control-Expose-Headers: ETag");
+			header("Access-Control-Expose-Headers: X-Content-Length-Uncompressed");
+			header("Access-Control-Expose-Headers: Content-Length");
+			header("Cache-Control: public");
 			header('Content-type: '.image_type_to_mime_type(exif_imagetype($file)));
-			header('Cache-Control: must-revalidate');
-			$offset = 60 * 60 ;
-			$ExpStr = 'Expires: '.gmdate('D, d M Y H:i:s', time() + $offset).' GMT';
-			header($ExpStr);
+			header("ETag: $etag");
+			header("Last-Modified: $date");
+
+			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			{
+				header("HTTP/1.1 304 Not Modified");
+				exit;
+			}
 
 			ob_start();
 

@@ -40,6 +40,24 @@ if(empty($_GET['m']) === false)
 	$m	=	\package\core\security::url('m', 'GET', 'string');
 }
 
+$class	=	searchInFolder(PAGE_DIR, $c);
+
+if($class !== null)
+{
+	if(method_exists($class, $m) === true)
+	{
+		$class->$m();
+	}
+	else
+	{
+		throw new Exception('Methode '.$m.' not exists');
+	}
+}
+else
+{
+	throw new Exception('Class '.$c.' not exists');
+}
+
 function searchInFolder($folder, $c)
 {
 	$directory	=	new \RecursiveDirectoryIterator($folder, \RecursiveDirectoryIterator::SKIP_DOTS);
@@ -54,44 +72,4 @@ function searchInFolder($folder, $c)
 	}
 
 	return null;
-}
-
-
-if($c == 'update')
-{
-	$install	=	\package\core\autoload::get('update');
-
-	if($m === 'hello')
-	{
-		$m	=	'step1';
-	}
-
-	if(method_exists($install, $m) === true)
-	{
-		$install->$m();
-	}
-	else
-	{
-		throw new Exception('Methode '.$m.' not exists');
-	}
-}
-else
-{
-	$class	=	searchInFolder(PAGE_DIR, $c);
-
-	if($class !== null)
-	{
-		if(method_exists($class, $m) === true)
-		{
-			$class->$m();
-		}
-		else
-		{
-			throw new Exception('Methode '.$m.' not exists');
-		}
-	}
-	else
-	{
-		throw new Exception('Class '.$c.' not exists');
-	}
 }

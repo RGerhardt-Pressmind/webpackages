@@ -58,7 +58,6 @@ if(defined('TIMEZONE') === true && empty(TIMEZONE) === false)
 }
 
 $myPaths	=	array();
-$myPaths[]	=	UPDATE_DIR;
 $myPaths[]	=	PACKAGE_DIR;
 $myPaths[]	=	SYSTEM_PATH;
 $myPaths[]	=	IMPLEMENT_DIR;

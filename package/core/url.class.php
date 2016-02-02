@@ -73,7 +73,7 @@ class url implements IStatic
 	{
 		self::$useModRewrite	=	(bool)$mod;
 
-		if(self::$useModRewrite && !self::$isModRewriteActiv)
+		if(self::$useModRewrite === true && self::$isModRewriteActiv === false)
 		{
 			throw new \Exception('apache has mod_rewrite not activated');
 		}
@@ -91,7 +91,7 @@ class url implements IStatic
 		$extension	=	trim($extension, '.');
 		$extension	=	trim($extension);
 
-		if(empty($extension))
+		if(empty($extension) === true)
 		{
 			throw new \Exception('mod_rewrite file extension is empty');
 		}
@@ -122,13 +122,13 @@ class url implements IStatic
 
 		$link	=	$httpRoot;
 
-		if(!empty($parameters))
+		if(empty($parameters) === false)
 		{
 			if(self::$useModRewrite === true)
 			{
 				foreach($parameters as $v)
 				{
-					if(is_int($v))
+					if(is_int($v) === true)
 					{
 						$link	=	trim($link, '/').'_'.$v.'/';
 					}
@@ -272,7 +272,7 @@ class url implements IStatic
 			plugins::hookCall('before', 'url', 'back', array());
 		}
 
-		if(!empty($_SERVER['HTTP_REFERER']))
+		if(empty($_SERVER['HTTP_REFERER']) === false)
 		{
 			self::loc($_SERVER['HTTP_REFERER']);
 		}

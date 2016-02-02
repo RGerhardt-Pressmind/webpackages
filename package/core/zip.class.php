@@ -51,7 +51,7 @@ class zip
 	 */
 	public function createZipArchive($folder, $destination, $zipName)
 	{
-		if(!file_exists($folder))
+		if(file_exists($folder) === false)
 		{
 			throw new \Exception($folder.' not exists');
 		}
@@ -71,7 +71,7 @@ class zip
 			throw new \Exception('Error: SplFileInfo class not exists');
 		}
 
-		$folder	=	new \SplFileInfo($folder);
+		$folder		=	new \SplFileInfo($folder);
 
 		$zipName	=	rtrim($zipName, '.zip');
 		$zipName	=	rtrim($zipName, '.');
@@ -79,9 +79,9 @@ class zip
 		$destination	=	str_replace(array('/', '\\'), array(SEP, SEP), $destination);
 		$destination	=	rtrim($destination, SEP).SEP;
 
-		if(!file_exists($destination))
+		if(file_exists($destination) === false)
 		{
-			if(!mkdir($destination, 0777, true))
+			if(mkdir($destination, 0777, true) === false)
 			{
 				throw new \Exception($destination.' can not created');
 			}
@@ -89,9 +89,9 @@ class zip
 
 		$zipFile	=	new \SplFileInfo($destination.$zipName.'.zip');
 
-		if(file_exists($zipFile->__toString()))
+		if(file_exists($zipFile->__toString()) === true)
 		{
-			if(!unlink($zipFile->__toString()))
+			if(unlink($zipFile->__toString()) === false)
 			{
 				throw new \Exception('Old zip file can not be removed');
 			}
@@ -101,6 +101,7 @@ class zip
 
 		if($zip->open($zipFile->__toString(), \ZipArchive::CREATE) !== true)
 		{
+			$zip->close();
 			throw new \Exception('ZipArchive can not write in destination folder '.$destination);
 		}
 
@@ -157,28 +158,32 @@ class zip
 		$rootFolder	=	new \SplFileInfo($rootFolder);
 		$zipArchive	=	new \SplFileInfo($zipArchive);
 
-		if(!file_exists($file))
+		if(file_exists($file) === false)
 		{
 			throw new \Exception('file '.$file->__toString().' not exists');
 		}
-		else if(!file_exists($zipArchive))
+		elseif(file_exists($zipArchive) === false)
 		{
 			throw new \Exception('zipArchive '.$zipArchive->__toString().' not exists');
 		}
 
 		$zip	=	new \ZipArchive();
 
-		if($zip->open($zipArchive->__toString()))
+		if($zip->open($zipArchive->__toString()) === true)
 		{
-			if(!$zip->addFile($file->__toString(), str_replace($rootFolder->__toString(), '', $file->__toString())))
+			if($zip->addFile($file->__toString(), str_replace($rootFolder->__toString(), '', $file->__toString())) === false)
 			{
+				$zip->close();
 				throw new \Exception('can not add file to zip archive');
 			}
 		}
 		else
 		{
+			$zip->close();
 			throw new \Exception('zipArchive can not be open');
 		}
+
+		$zip->close();
 
 		return true;
 	}
@@ -217,22 +222,23 @@ class zip
 		$zipArchive			=	new \SplFileInfo($zipArchive);
 		$destinationFolder	=	new \SplFileInfo($destinationFolder);
 
-		if(!file_exists($zipArchive))
+		if(file_exists($zipArchive) === false)
 		{
 			throw new \Exception('zip archive not exist '.$zipArchive->__toString());
 		}
 
-		if(!file_exists($destinationFolder->__toString()))
+		if(file_exists($destinationFolder->__toString()) === false)
 		{
 			mkdir($destinationFolder->__toString(), 0777, true);
 		}
 
 		$zip	=	new \ZipArchive();
 
-		if($zip->open($zipArchive->__toString()))
+		if($zip->open($zipArchive->__toString()) === true)
 		{
-			if(!$zip->extractTo($destinationFolder->__toString()))
+			if($zip->extractTo($destinationFolder->__toString()) === false)
 			{
+				$zip->close();
 				throw new \Exception('zip archive can not be extract');
 			}
 
@@ -240,13 +246,15 @@ class zip
 		}
 		else
 		{
+			$zip->close();
 			throw new \Exception('zip archive can not be open');
 		}
 
-		if($removeZipArchiveAfterExtract)
+		if($removeZipArchiveAfterExtract === true)
 		{
-			if(!unlink($zipArchive->__toString()))
+			if(unlink($zipArchive->__toString()) === false)
 			{
+				$zip->close();
 				throw new \Exception('zip archive can not be remove after extract');
 			}
 		}

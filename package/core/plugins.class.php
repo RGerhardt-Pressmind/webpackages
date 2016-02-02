@@ -57,7 +57,7 @@ class plugins implements IStatic
 	 */
 	public function __destruct()
 	{
-		if(!empty(self::$definedPluginsClasses))
+		if(empty(self::$definedPluginsClasses) === false)
 		{
 			foreach(self::$definedPluginsClasses as $k => $class)
 			{
@@ -162,7 +162,7 @@ class plugins implements IStatic
 	 */
 	public static function hookTemplate($template, $position, $args = array())
 	{
-		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
+		if(empty(self::$definedPluginsClasses) === false)
 		{
 			$methode	=	$template.'_'.$position;
 
@@ -191,7 +191,7 @@ class plugins implements IStatic
 	{
 		$back	=	array();
 
-		if(is_array(self::$definedPluginsClasses) === true && empty(self::$definedPluginsClasses) === false)
+		if(empty(self::$definedPluginsClasses) === false)
 		{
 			foreach(self::$definedPluginsClasses as $class)
 			{

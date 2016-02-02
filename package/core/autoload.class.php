@@ -87,8 +87,6 @@ class autoload
 		}
 		else
 		{
-			new $class_name();
-
 			return true;
 		}
     }

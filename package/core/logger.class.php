@@ -111,7 +111,7 @@ class logger implements iLogger
 			throw new \Exception('log file not exists');
 		}
 
-		$unlink	=	@unlink($filename);
+		$unlink	=	unlink($filename);
 
 		if(class_exists('\package\core\plugins') === true)
 		{
@@ -148,7 +148,7 @@ class logger implements iLogger
 			}
 		}
 
-		$read		=	@file_get_contents($filename);
+		$read		=	file_get_contents($filename);
 
 		if(class_exists('\package\core\plugins') === true)
 		{

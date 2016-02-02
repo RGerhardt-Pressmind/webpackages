@@ -55,6 +55,7 @@ class XML
 	 * Lädt ein XML String / Datei / URL
 	 *
 	 * @param string $xml
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function loadXML($xml)

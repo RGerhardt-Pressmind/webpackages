@@ -104,17 +104,14 @@ define('USE_MOD_REWRITE',	true);
  * Pfade im System
  */
 
-//Template Pfad
-define('TEMPLATE_DIR',			ROOT.SEP.'templates'.SEP);
-
 //Template Default Skin
 define('TEMPLATE_DEFAULT_SKIN',	'welcome');
 
-//Update Pfad
-define('UPDATE_DIR',			ROOT.SEP.'update'.SEP);
-
 //Package Pfad
 define('PACKAGE_DIR',			ROOT.SEP.'package'.SEP);
+
+//Template Pfad
+define('TEMPLATE_DIR',			PACKAGE_DIR.'templates'.SEP);
 
 //Core Pfad
 define('CORE_DIR',				PACKAGE_DIR.'core'.SEP);

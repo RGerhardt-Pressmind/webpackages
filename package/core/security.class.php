@@ -181,7 +181,7 @@ class security
 		{
 			case 'post':
 
-				if(!empty($_POST[$variable]))
+				if(empty($_POST[$variable]) === false)
 				{
 					$request	=	$_POST[$variable];
 				}
@@ -189,7 +189,7 @@ class security
 			break;
 			case 'get':
 
-				if(!empty($_GET[$variable]))
+				if(empty($_GET[$variable]) === false)
 				{
 					$request	=	$_GET[$variable];
 				}
@@ -197,7 +197,7 @@ class security
 			break;
 			case 'session':
 
-				if(!empty($_SESSION[$variable]))
+				if(empty($_SESSION[$variable]) === false)
 				{
 					$request	=	$_SESSION[$variable];
 				}
@@ -205,7 +205,7 @@ class security
 			break;
 			case 'cookie':
 
-				if(!empty($_COOKIE[$variable]))
+				if(empty($_COOKIE[$variable]) === false)
 				{
 					$request	=	$_COOKIE[$variable];
 				}
@@ -213,7 +213,7 @@ class security
 			break;
 			case 'server':
 
-				if(!empty($_SERVER[$variable]))
+				if(empty($_SERVER[$variable]) === false)
 				{
 					$request	=	$_SERVER[$variable];
 				}
@@ -221,7 +221,7 @@ class security
 			break;
 			case 'env':
 
-				if(!empty($_ENV[$variable]))
+				if(empty($_ENV[$variable]) === false)
 				{
 					$request	=	$_ENV[$variable];
 				}
@@ -230,7 +230,7 @@ class security
 			case 'request':
 			default:
 
-				if(!empty($_REQUEST[$variable]))
+				if(empty($_REQUEST[$variable]) === false)
 				{
 					$request	=	$_REQUEST[$variable];
 				}
@@ -349,7 +349,7 @@ class security
 	/**
 	 * Gibt den aktuellen MIME-Type zurück
 	 *
-	 * @param $path Der relative Pfad zur übeprüfenden Datei.
+	 * @param string $path Der relative Pfad zur übeprüfenden Datei.
 	 * @throws \Exception
 	 * @return bool|mixed Gibt MIME-Type zurück.
 	 */
@@ -482,7 +482,7 @@ class security
 		{
 			foreach($str as $key => $value)
 			{
-				$str[$key] = self::xss_clean($str[$key]);
+				$str[$key] = self::xss_clean($value);
 			}
 
 			return $str;
@@ -709,17 +709,17 @@ class security
 		);
 
 		// First, escape unclosed tags
-		if (empty($matches['closeTag']))
+		if(empty($matches['closeTag']) === true)
 		{
 			return '&lt;'.$matches[1];
 		}
 		// Is the element that we caught naughty? If so, escape it
-		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true))
+		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true) === true)
 		{
 			return '&lt;'.$matches[1].'&gt;';
 		}
 		// For other tags, see if their attributes are "evil" and strip those
-		elseif(isset($matches['attributes']))
+		elseif(isset($matches['attributes']) === true)
 		{
 			// We'll store the already fitlered attributes here
 			$attributes = array();

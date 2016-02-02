@@ -96,7 +96,7 @@ class images implements IStatic
 
 		$thumb	=	imagecreatetruecolor($width, $height);
 
-		if($destinationExtension == 'png')
+		if($destinationExtension === 'png')
 		{
 			//Transparenter Hintergrund anstatt Schwarzer
 			$color = imagecolorallocatealpha($thumb, 0, 0, 0, 127);

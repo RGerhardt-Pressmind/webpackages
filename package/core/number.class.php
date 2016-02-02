@@ -197,7 +197,7 @@ class number implements IStatic
 			}
 		}
 
-		if(empty($end))
+		if(empty($end) === true)
 		{
 			$end = time();
 		}

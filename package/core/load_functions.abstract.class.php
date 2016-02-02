@@ -130,27 +130,13 @@ abstract class load_functions
 		if(empty($loadClasses))
 		{
 			$loadClasses	=	array(
-				self::$LOAD_DATE,
-				self::$LOAD_FILE_SYSTEM,
 				self::$LOAD_URL,
-				self::$LOAD_VERSION,
-				self::$LOAD_ZIP,
-				self::$LOAD_FTP,
-				self::$LOAD_BENCHMARK,
 				self::$LOAD_TEMPLATE,
-				self::$LOAD_XML,
-				self::$LOAD_LOGGER,
-				self::$LOAD_ERROR,
 				self::$LOAD_DATABASE,
 				self::$LOAD_PLUGINS,
 				self::$LOAD_CACHE,
 				self::$LOAD_CURL,
-				self::$LOAD_TEXT,
-				self::$LOAD_NUMBER,
-				self::$LOAD_LANGUAGE,
-				self::$LOAD_PAYPAL,
-				self::$LOAD_IMAGES,
-				self::$LOAD_MAILER
+				self::$LOAD_LANGUAGE
 			);
 		}
 
@@ -158,7 +144,7 @@ abstract class load_functions
 
 		foreach($loadClasses as $classes)
 		{
-			if($classes['class'] == 'phpmailer')
+			if($classes['class'] === 'phpmailer')
 			{
 				//PHPMailer class load
 				if(class_exists('PHPMailer') === false)
@@ -173,7 +159,7 @@ abstract class load_functions
 			{
 				autoload::get($classes['class'], $classes['namespace'], true);
 
-				if(!empty($classes['namespace']))
+				if(empty($classes['namespace']) === false)
 				{
 					call_user_func($classes['namespace'].$classes['class'].'::init');
 				}
@@ -184,7 +170,7 @@ abstract class load_functions
 			}
 			else
 			{
-				if(!empty($classes['writeInAttribute']))
+				if(empty($classes['writeInAttribute']) === false)
 				{
 					$this->defineDynamicClasses[$classes['writeInAttribute']]	=	autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter']);
 				}
@@ -233,7 +219,7 @@ abstract class load_functions
 	 */
 	protected function load_install_plugins()
 	{
-		if(empty(PLUGIN_DIR) || class_exists('\package\plugins') === false)
+		if(empty(PLUGIN_DIR) === true || class_exists('\package\plugins') === false)
 		{
 			return;
 		}
@@ -308,7 +294,7 @@ abstract class load_functions
 	 */
 	protected function load_dynamic_classes($loadFiles = array())
 	{
-		if(empty(DYNAMIC_DIR))
+		if(empty(DYNAMIC_DIR) === true)
 		{
 			return array();
 		}
@@ -396,12 +382,12 @@ abstract class load_functions
 	 */
 	protected function is_user_logged_in()
 	{
-		if(empty($_SESSION['id_users']))
+		if(empty($_SESSION['id_users']) === true)
 		{
 			$_SESSION['id_users']	=	0;
 		}
 
-		if(empty($_COOKIE['id_users']))
+		if(empty($_COOKIE['id_users']) === true)
 		{
 			$_COOKIE['id_users']	=	0;
 		}
@@ -416,11 +402,7 @@ abstract class load_functions
 			}
 		}
 
-		if(!empty($_SESSION['id_users']))
-		{
-			return true;
-		}
-		elseif(!empty($_COOKIE['id_users']))
+		if(empty($_SESSION['id_users']) === false || empty($_COOKIE['id_users']) === false)
 		{
 			return true;
 		}

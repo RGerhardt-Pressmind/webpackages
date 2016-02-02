@@ -66,7 +66,7 @@ class text implements IStatic
 			}
 		}
 
-		if(empty(trim($str)))
+		if(empty(trim($str)) === true)
 		{
 			return $str;
 		}
@@ -147,7 +147,7 @@ class text implements IStatic
 			}
 		}
 
-		if(is_array($censored) === false || empty($censored))
+		if(empty($censored) === true)
 		{
 			return $str;
 		}
@@ -251,7 +251,7 @@ class text implements IStatic
 			}
 		}
 
-		if(empty($str))
+		if(empty($str) === true)
 		{
 			return '';
 		}
@@ -295,45 +295,33 @@ class text implements IStatic
 			}
 		}
 
-		switch ($type)
+		if($type === 'alnum')
 		{
-			default:
-			case 'normal':
-
-				$back	=	uniqid(mt_rand(), true);
-
-			break;
-			case 'alnum':
-
-				$back 	= 	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-			break;
-			case 'numeric':
-
-				$back	= 	'0123456789';
-
-			break;
-			case 'nozero':
-
-				$back 	= 	'123456789';
-
-			break;
-			case 'alpha':
-
-				$back 	= 	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-			break;
-			break;
-			case 'md5':
-
-				$back	=	md5(uniqid(mt_rand(), true));
-
-			break;
-			case 'sha1':
-
-				$back	=	sha1(uniqid(mt_rand(), true));
-
-			break;
+			$back 	= 	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		}
+		elseif($type === 'numeric')
+		{
+			$back	= 	'0123456789';
+		}
+		elseif($type === 'nozero')
+		{
+			$back 	= 	'123456789';
+		}
+		elseif($type == 'alpha')
+		{
+			$back 	= 	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		}
+		elseif($type === 'md5')
+		{
+			$back	=	md5(uniqid(mt_rand(), true));
+		}
+		elseif($type == 'sha1')
+		{
+			$back	=	sha1(uniqid(mt_rand(), true));
+		}
+		else
+		{
+			$back	=	uniqid(mt_rand(), true);
 		}
 
 		$back	=	substr(str_shuffle(str_repeat($back, ceil($length / strlen($back)))), 0, $length);

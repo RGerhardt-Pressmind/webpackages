@@ -330,7 +330,7 @@ class template
 			${$key}	=	$value;
 		}
 
-		$templatePath	=	$this->tempDir.$template;
+		$templatePath	=	$this->tempDir.$this->skin.SEP.$template;
 
 		if($cacheActive === true)
 		{
@@ -386,6 +386,6 @@ class template
 	 */
 	public function load_template_file($file, $type, $dir = '', $minify = true)
 	{
-		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.$this->skin.'&d='.$dir.'&c='.$minify;
+		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.$this->skin.'&d='.$dir.'&c='.(($minify === false) ? 'false' : 'true');
 	}
 } 
