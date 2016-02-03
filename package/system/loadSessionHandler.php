@@ -111,7 +111,7 @@ class NewSessionHandler implements SessionHandlerInterface
 		  `session_data` TEXT,
 		PRIMARY KEY (`session_id`));
 		';
-
+sdfsfdf
 		$this->database->exec($createTable);
 
 		session_set_save_handler(
