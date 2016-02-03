@@ -37,8 +37,8 @@ class version implements IStatic
 	public static function init(){}
 
 	const VERSION	=	'2.0.0'; //Versionsnummer
-	const REPO		=	'https://github.com/Robbyn666/webpackage/archive/master.zip'; // ZIP Download Link
-	const COMMITS	=	'https://api.github.com/repos/Robbyn666/webpackage/commits'; // API Link zu allen Commits von Robbyn666
+	const REPO		=	'https://github.com/Robbyn666/webpackages/archive/master.zip'; // ZIP Download Link
+	const COMMITS	=	'https://api.github.com/repos/Robbyn666/webpackages/commits'; // API Link zu allen Commits von Robbyn666
 
 	/**
 	 * Kontrolliert den übergebenen Wert mit der installierten PHP Version.
