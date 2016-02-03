@@ -251,12 +251,7 @@ class security
 	 */
 	protected static function _controllSecurity($request, $convert)
 	{
-		if(empty($request))
-		{
-			return '';
-		}
-
-		$param		=	self::xss_clean($request);
+		$param		=	$request;
 		$convert	=	strtolower($convert);
 
 		switch($convert)
@@ -294,7 +289,7 @@ class security
 
 				$param	=	filter_var($param, FILTER_VALIDATE_FLOAT);
 
-				if(Validater::isFloat($param) === false)
+				if($param === false)
 				{
 					return false;
 				}
@@ -307,7 +302,7 @@ class security
 
 				$param	=	filter_var($param, FILTER_VALIDATE_INT);
 
-				if(Validater::isInteger($param) === false)
+				if($param === false)
 				{
 					return false;
 				}
@@ -319,7 +314,7 @@ class security
 
 				$param	=	filter_var($param, FILTER_VALIDATE_BOOLEAN);
 
-				if(Validater::isBoolean($param) === false)
+				if($param === null)
 				{
 					return null;
 				}
@@ -330,13 +325,15 @@ class security
 			case 'string':
 			case 's':
 
+				$param	=	self::xss_clean($param);
 				$param	=	filter_var($param, FILTER_SANITIZE_STRING);
-				$param	=	trim($param);
 
-				if(Validater::isString($param) === false)
+				if($param === false)
 				{
 					return false;
 				}
+
+				$param	=	trim($param);
 
 			break;
 		}
@@ -472,22 +469,10 @@ class security
 	 * @link https://www.codeigniter.com/
 	 *
 	 * @param string $str Der String der von XSS gesäubert werden soll
-	 * @param boolean $is_image Ob es sich um ein Bild handelt
 	 * @return string $str
 	 */
-	protected static function xss_clean($str, $is_image = false)
+	protected static function xss_clean($str)
 	{
-		// Is the string an array?
-		if(is_array($str) === true)
-		{
-			foreach($str as $key => $value)
-			{
-				$str[$key] = self::xss_clean($value);
-			}
-
-			return $str;
-		}
-
 		// Remove Invisible Characters
 		$str = self::remove_invisible_characters($str);
 
@@ -500,11 +485,15 @@ class security
 		 *
 		 * Note: Use rawurldecode() so it does not remove plus signs
 		 */
-		do
+		while(true)
 		{
-			$str = rawurldecode($str);
+			if(preg_match('/%[0-9a-f]{2,}/i', $str) !== 1)
+			{
+				break;
+			}
+
+			$str	=	rawurldecode($str);
 		}
-		while(preg_match('/%[0-9a-f]{2,}/i', $str));
 
 		/*
 		 * Convert character entities to ASCII
@@ -515,6 +504,7 @@ class security
 		 */
 		$str = preg_replace_callback("/[^a-z0-9>]+[a-z0-9]+=([\'\"]).*?\\1/si", array('self', '_convert_attribute'), $str);
 		$str = preg_replace_callback('/<\w+.*/si', array('self', '_decode_entity'), $str);
+
 		// Remove Invisible Characters Again!
 		$str = self::remove_invisible_characters($str);
 
@@ -522,38 +512,13 @@ class security
 		 * Convert all tabs to spaces
 		 *
 		 * This prevents strings like this: ja	vascript
-		 * NOTE: we deal with spaces between characters later.
-		 * NOTE: preg_replace was found to be amazingly slow here on
 		 * large blocks of data, so we use str_replace.
 		 */
-		$str = str_replace("\t", ' ', $str);
-
-		// Capture converted string for later comparison
-		$converted_string = $str;
+		$str 	= 	str_replace("\t", ' ', $str);
 
 		// Remove Strings that are never allowed
-		$str = self::_do_never_allowed($str);
-
-		/*
-		 * Makes PHP tags safe
-		 *
-		 * Note: XML tags are inadvertently replaced too:
-		 *
-		 * <?xml
-		 *
-		 * But it doesn't seem to pose a problem.
-		 */
-		if($is_image === true)
-		{
-			// Images have a tendency to have the PHP short opening and
-			// closing tags every so often so we skip those and only
-			// do the long opening tags.
-			$str = preg_replace('/<\?(php)/i', '&lt;?\\1', $str);
-		}
-		else
-		{
-			$str = str_replace(array('<?', '?'.'>'), array('&lt;?', '?&gt;'), $str);
-		}
+		$str	=	self::_do_never_allowed($str);
+		$str 	= 	str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $str);
 
 		/*
 		 * Compact any exploded words
@@ -561,19 +526,12 @@ class security
 		 * This corrects words like:  j a v a s c r i p t
 		 * These words are compacted back to their correct state.
 		 */
-		$words = array(
-			'javascript', 'expression', 'vbscript', 'jscript', 'wscript',
-			'vbs', 'script', 'base64', 'applet', 'alert', 'document',
-			'write', 'cookie', 'window', 'confirm', 'prompt', 'eval'
-		);
+		$words = array('javascript', 'expression', 'vbscript', 'jscript', 'wscript','vbs', 'script', 'base64', 'applet', 'alert', 'document','write', 'cookie', 'window', 'confirm', 'prompt', 'eval');
 
 		foreach($words as $word)
 		{
-			$word = implode('\s*', str_split($word)).'\s*';
-
-			// We only want to do this when it is followed by a non-word character
-			// That way valid stuff like "dealer to" does not become "dealerto"
-			$str = preg_replace_callback('#('.substr($word, 0, -3).')(\W)#is', array('self', '_compact_exploded_words'), $str);
+			$word	=	implode('\s*', str_split($word)).'\s*';
+			$str	=	preg_replace_callback('#('.substr($word, 0, -3).')(\W)#is', array('self', '_compact_exploded_words'), $str);
 		}
 
 		/*
@@ -588,28 +546,32 @@ class security
 		 * ... however, remove_invisible_characters() above already strips the
 		 * hex-encoded ones, so we'll skip them below.
 		 */
-		do
-		{
-			$original = $str;
 
-			if(preg_match('/<a/i', $str))
+		while(true)
+		{
+			$original	=	$str;
+
+			if(preg_match('/<a/i', $str) === 1)
 			{
 				$str = preg_replace_callback('#<a[^a-z0-9>]+([^>]*?)(?:>|$)#si', array('self', '_js_link_removal'), $str);
 			}
 
-			if(preg_match('/<img/i', $str))
+			if(preg_match('/<img/i', $str) === 1)
 			{
 				$str = preg_replace_callback('#<img[^a-z0-9]+([^>]*?)(?:\s?/?>|$)#si', array('self', '_js_img_removal'), $str);
 			}
 
-			if(preg_match('/script|xss/i', $str))
+			if(preg_match('/script|xss/i', $str) === 1)
 			{
 				$str = preg_replace('#</*(?:script|xss).*?>#si', '[removed]', $str);
 			}
-		}
-		while($original !== $str);
 
-		unset($original);
+			if($original === $str)
+			{
+				unset($original);
+				break;
+			}
+		}
 
 		/*
 		 * Sanitize naughty HTML elements
@@ -633,17 +595,18 @@ class security
 			.')*)' // end optional attributes group
 			.'[^>]*)(?<closeTag>\>)?#isS';
 
-		// Note: It would be nice to optimize this for speed, BUT
-		//       only matching the naughty elements here results in
-		//       false positives and in turn - vulnerabilities!
-		do
-		{
-			$old_str = $str;
-			$str = preg_replace_callback($pattern, array('self', '_sanitize_naughty_html'), $str);
-		}
-		while($old_str !== $str);
 
-		unset($old_str);
+		while(true)
+		{
+			$old_str	=	$str;
+			$str 		= 	preg_replace_callback($pattern, array('self', '_sanitize_naughty_html'), $str);
+
+			if($old_str === $str)
+			{
+				unset($old_str);
+				break;
+			}
+		}
 
 		/*
 		 * Sanitize naughty scripting elements
@@ -657,30 +620,10 @@ class security
 		 * For example:	eval('some code')
 		 * Becomes:	eval&#40;'some code'&#41;
 		 */
-		$str = preg_replace(
-			'#(alert|prompt|confirm|cmd|passthru|eval|exec|expression|system|fopen|fsockopen|file|file_get_contents|readfile|unlink)(\s*)\((.*?)\)#si',
-			'\\1\\2&#40;\\3&#41;',
-			$str
-		);
+		$str = preg_replace('#(alert|prompt|confirm|cmd|passthru|eval|exec|expression|system|fopen|fsockopen|file|file_get_contents|readfile|unlink)(\s*)\((.*?)\)#si', '\\1\\2&#40;\\3&#41;', $str);
 
 		// Final clean up
-		// This adds a bit of extra precaution in case
-		// something got through the above filters
 		$str = self::_do_never_allowed($str);
-
-		/*
-		 * Images are Handled in a Special Way
-		 * - Essentially, we want to know that after all of the character
-		 * conversion is done whether any unwanted, likely XSS, code was found.
-		 * If not, we return TRUE, as the image is clean.
-		 * However, if the string post-conversion does not matched the
-		 * string post-removal of XSS, then it fails, as there was unwanted XSS
-		 * code found and removed/changed during processing.
-		 */
-		if($is_image === true)
-		{
-			return ($str === $converted_string);
-		}
 
 		return $str;
 	}
@@ -697,63 +640,37 @@ class security
 	 */
 	protected static function _sanitize_naughty_html($matches)
 	{
-		static $naughty_tags    = array(
-			'alert', 'prompt', 'confirm', 'applet', 'audio', 'basefont', 'base', 'behavior', 'bgsound',
-			'blink', 'body', 'embed', 'expression', 'form', 'frameset', 'frame', 'head', 'html', 'ilayer',
-			'iframe', 'input', 'button', 'select', 'isindex', 'layer', 'link', 'meta', 'keygen', 'object',
-			'plaintext', 'style', 'script', 'textarea', 'title', 'math', 'video', 'svg', 'xml', 'xss'
-		);
+		$naughty_tags		=	array('alert', 'prompt', 'confirm', 'applet', 'audio', 'basefont', 'base', 'behavior', 'bgsound', 'blink', 'body', 'embed', 'expression', 'form', 'frameset', 'frame', 'head', 'html', 'ilayer', 'iframe', 'input', 'button', 'select', 'isindex', 'layer', 'link', 'meta', 'keygen', 'object', 'plaintext', 'style', 'script', 'textarea', 'title', 'math', 'video', 'svg', 'xml', 'xss');
 
-		static $evil_attributes = array(
-			'on\w+', 'style', 'xmlns', 'formaction', 'form', 'xlink:href', 'FSCommand', 'seekSegmentTime'
-		);
+		$evil_attributes	=	array('on\w+', 'style', 'xmlns', 'formaction', 'form', 'xlink:href', 'FSCommand', 'seekSegmentTime');
 
 		// First, escape unclosed tags
 		if(empty($matches['closeTag']) === true)
 		{
 			return '&lt;'.$matches[1];
 		}
-		// Is the element that we caught naughty? If so, escape it
-		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true) === true)
+		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true) === true) // Is the element that we caught naughty? If so, escape it
 		{
 			return '&lt;'.$matches[1].'&gt;';
 		}
-		// For other tags, see if their attributes are "evil" and strip those
-		elseif(isset($matches['attributes']) === true)
+		elseif(isset($matches['attributes']) === true) // For other tags, see if their attributes are "evil" and strip those
 		{
-			// We'll store the already fitlered attributes here
-			$attributes = array();
+			$attributes	=	array();
 
-			// Attribute-catching pattern
-			$attributes_pattern = '#'
-				.'(?<name>[^\s\042\047>/=]+)' // attribute characters
-				// optional attribute-value
-				.'(?:\s*=(?<value>[^\s\042\047=><`]+|\s*\042[^\042]*\042|\s*\047[^\047]*\047|\s*(?U:[^\s\042\047=><`]*)))' // attribute-value separator
-				.'#i';
+			$attributes_pattern = '#(?<name>[^\s\042\047>/=]+)(?:\s*=(?<value>[^\s\042\047=><`]+|\s*\042[^\042]*\042|\s*\047[^\047]*\047|\s*(?U:[^\s\042\047=><`]*)))#i';
 
-			// Blacklist pattern for evil attribute names
 			$is_evil_pattern = '#^('.implode('|', $evil_attributes).')$#i';
 
-			// Each iteration filters a single attribute
-			do
+			while(true)
 			{
-				// Strip any non-alpha characters that may preceed an attribute.
-				// Browsers often parse these incorrectly and that has been a
-				// of numerous XSS issues we've had.
 				$matches['attributes'] = preg_replace('#^[^a-z]+#i', '', $matches['attributes']);
 
-				if(!preg_match($attributes_pattern, $matches['attributes'], $attribute, PREG_OFFSET_CAPTURE))
+				if(preg_match($attributes_pattern, $matches['attributes'], $attribute, PREG_OFFSET_CAPTURE) !== 1)
 				{
-					// No (valid) attribute found? Discard everything else inside the tag
 					break;
 				}
 
-				if(
-					// Is it indeed an "evil" attribute?
-					preg_match($is_evil_pattern, $attribute['name'][0])
-					// Or does it have an equals sign, but no value and not quoted? Strip that too!
-					|| (trim($attribute['value'][0]) === '')
-				)
+				if(preg_match($is_evil_pattern, $attribute['name'][0]) === 1 || (trim($attribute['value'][0]) === ''))
 				{
 					$attributes[] = 'xss=removed';
 				}
@@ -763,12 +680,15 @@ class security
 				}
 
 				$matches['attributes'] = substr($matches['attributes'], $attribute[0][1] + strlen($attribute[0][0]));
-			}
-			while($matches['attributes'] !== '');
 
-			$attributes = empty($attributes)
-				? ''
-				: ' '.implode(' ', $attributes);
+				if($matches['attributes'] === '')
+				{
+					break;
+				}
+			}
+
+			$attributes	=	(empty($attributes) === true ? '' : ' '.implode(' ', $attributes));
+
 			return '<'.$matches['slash'].$matches['tagName'].$attributes.'>';
 		}
 
@@ -801,9 +721,7 @@ class security
 	protected static function _do_never_allowed($str)
 	{
 		$neverAllowedStr	=	self::$_never_allowed_str;
-
-		$str	=	str_replace(array_keys($neverAllowedStr), $neverAllowedStr, $str);
-
+		$str				=	str_replace(array_keys($neverAllowedStr), $neverAllowedStr, $str);
 		$neverAllowedRegex	=	self::$_never_allowed_regex;
 
 		foreach($neverAllowedRegex as $regex)
@@ -870,25 +788,6 @@ class security
 
 
 	/**
-	 * Erzeugt einen XSS-Hash
-	 *
-	 * @return string
-	 */
-	public static function xss_hash()
-	{
-		if(self::$_xss_hash === null)
-		{
-			$rand = text::random_string('normal', '16');
-			self::$_xss_hash = ($rand === false)
-				? md5(uniqid(mt_rand(), true))
-				: bin2hex($rand);
-		}
-
-		return self::$_xss_hash;
-	}
-
-
-	/**
 	 * Entfernt leere Zeichen aus einem String
 	 *
 	 * @param string $str
@@ -907,9 +806,15 @@ class security
 
 		$non_displayables[]	=	'/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
 
-		do{
+		while(true)
+		{
 			$str	=	preg_replace($non_displayables, '', $str, -1, $count);
-		}while($count);
+
+			if($count === 0)
+			{
+				break;
+			}
+		}
 
 		return $str;
 	}
@@ -933,7 +838,7 @@ class security
 			}
 		}
 
-		if(isset($_SERVER['HTTP_USER_AGENT']) === true)
+		if(empty($_SERVER['HTTP_USER_AGENT']) === false)
 		{
 			foreach(self::$botlist as $bot)
 			{

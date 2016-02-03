@@ -8,7 +8,6 @@
     <title><?php echo \package\core\language::translate('webpackages - das Leistungsstärkste PHP Framework'); ?></title>
     <link href="<?php echo $this->load_template_file('bootstrap.min', 'css'); ?>" rel="stylesheet">
     <link href="<?php echo $this->load_template_file('font-awesome.min', 'css'); ?>" rel="stylesheet">
-    <link href="<?php echo $this->load_template_file('prettyPhoto', 'css'); ?>" rel="stylesheet">
     <link href="<?php echo $this->load_template_file('main', 'css'); ?>" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="<?php echo $this->load_template_file('html5shiv', 'js'); ?>"></script>
@@ -18,8 +17,16 @@
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
 	<div style="position: fixed; top: 0; right: 0; padding: 5px; background-color: #155273; z-index: 99999;">
-		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=de_DE'; ?>"><img src="<?php echo $this->load_template_file('flags/Germany.png', 'img', 'images'); ?>" title="Deutsch" alt="Deutsch" width="24" height="24"></a>
-		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=en_US'; ?>"><img src="<?php echo $this->load_template_file('flags/United-States.png', 'img', 'images'); ?>" title="English" alt="English" width="24" height="24"></a>
-		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=fr_FR'; ?>"><img src="<?php echo $this->load_template_file('flags/France.png', 'img', 'images'); ?>" title="Français" alt="Français" width="24" height="24"></a>
-		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=it_IT'; ?>"><img src="<?php echo $this->load_template_file('flags/Italy.png', 'img', 'images'); ?>" title="Italiano" alt="Italiano" width="24" height="24"></a>
+		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=de_DE'; ?>">
+			<img src="<?php echo $this->load_template_file('flags/Germany.png', 'img', 'images'); ?>" title="Deutsch" alt="Deutsch" width="24" height="24">
+		</a>
+		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=en_US'; ?>">
+			<img src="<?php echo $this->load_template_file('flags/United-States.png', 'img', 'images'); ?>" title="English" alt="English" width="24" height="24">
+		</a>
+		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=fr_FR'; ?>">
+			<img src="<?php echo $this->load_template_file('flags/France.png', 'img', 'images'); ?>" title="Français" alt="Français" width="24" height="24">
+		</a>
+		<a href="<?php echo HTTP.'index.php?c=welcome&m=change_language&lng=it_IT'; ?>">
+			<img src="<?php echo $this->load_template_file('flags/Italy.png', 'img', 'images'); ?>" title="Italiano" alt="Italiano" width="24" height="24">
+		</a>
 	</div>

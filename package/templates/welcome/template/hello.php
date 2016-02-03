@@ -32,7 +32,7 @@
 		<div class="col-md-4 text-center">
 			<i class="icon-refresh icon-4x" style="color: #2ecc71;"></i>
 			<p style="font-weight: bold; font-size: 2em;"><?php echo \package\core\language::translate('Schnelligkeit'); ?></p>
-			<p style="font-size: 1.1em;"><?php echo \package\core\language::translate('webpackages ist dank eines gut programmierten Kerns unglaublich schnell. Um Ihnen zu demonstrieren wie schnell, hier die aktuelle Ladezeit dieser Seite'); ?>: <strong><?php echo number_format(\package\core\benchmark::finish(), 4, ',', '.'); ?> <?php echo \package\core\language::translate('Sekunden'); ?></strong>.</p>
+			<p style="font-size: 1.1em;"><?php echo \package\core\language::translate('webpackages ist dank eines gut programmierten Kerns unglaublich schnell. Um Ihnen zu demonstrieren wie schnell, hier die aktuelle Ladezeit dieser Seite'); ?>: <strong><span id="loadTime"></span> <?php echo \package\core\language::translate('Sekunden'); ?></strong>.</p>
 		</div>
 		<div class="col-md-4 text-center">
 			<i class="icon-shield icon-4x" style="color: #4f7dd4;"></i>

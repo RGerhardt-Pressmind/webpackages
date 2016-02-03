@@ -47,15 +47,28 @@ class securityTest extends \PHPUnit_Framework_TestCase
 		//Boolean
 		$this->assertTrue(security::control('true', 'bool'));
 		$this->assertFalse(security::control('false', 'bool'));
+		$this->assertTrue(security::control('yes', 'bool'));
+		$this->assertFalse(security::control('no', 'bool'));
 		$this->assertTrue(security::control(true, 'bool'));
+		$this->assertFalse(security::control(false, 'bool'));
 
 		//Integer
-		$this->assertEmpty(security::control('abcd', 'int'));
-		$this->assertNotEmpty(security::control('1234', 'int'));
+		$this->assertFalse(security::control('abcd', 'int'));
+		$this->assertEquals(1234, security::control('1234', 'int'));
 
 		//Email
-		$this->assertEmpty(security::control('robbyn[at]test.de', 'email'));
-		$this->assertNotEmpty(security::control('robbyn@test.de', 'email'));
+		$this->assertFalse(security::control('robbyn[at]test.de', 'email'));
+		$this->assertEquals('robbyn@test.de', security::control('robbyn@test.de', 'email'));
+
+		//IP
+		$this->assertFalse(security::control('0.0.0', 'ip'));
+		$this->assertEquals('127.0.0.1', security::control('127.0.0.1', 'ip'));
+
+		//Float
+		$this->assertEquals(5.0, security::control('5', 'float'));
+		$this->assertFalse(security::control('abc', 'float'));
+		$this->assertEquals(12.45, security::control('12.45', 'float'));
+		$this->assertFalse(security::control('12,45', 'float'));
 	}
 
 

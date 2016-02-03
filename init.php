@@ -114,7 +114,6 @@ require 'IStatic.class.php';
 
 require 'version.class.php';
 require 'benchmark.class.php';
-require 'Validater.class.php';
 require 'security.class.php';
 require 'load_functions.abstract.class.php';
 
