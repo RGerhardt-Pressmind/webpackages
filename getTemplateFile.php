@@ -15,21 +15,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  @package	Webpackages
- *  @subpackage core
- *  @author	    Robbyn Gerhardt
- *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
- *  @link	    http://webpackages.de
- *  @since	    Version 2.0.0
- *  @filesource
+ * @package       Webpackages
+ * @subpackage    core
+ * @author        Robbyn Gerhardt
+ * @copyright     Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link          http://webpackages.de
+ * @since         Version 2.0.0
+ * @filesource
  */
 
 require_once 'constants.php';
 
 if(empty($_GET['t']) === false)
 {
-	$type	=	$_GET['t'];
+	$type = $_GET['t'];
 }
 else
 {
@@ -39,7 +39,7 @@ else
 
 if(empty($_GET['f']) === false)
 {
-	$filename	=	$_GET['f'];
+	$filename = $_GET['f'];
 }
 else
 {
@@ -47,30 +47,29 @@ else
 	exit;
 }
 
-$skin	=	'';
+$skin = '';
 
 if(empty($_GET['s']) === false)
 {
-	$skin	=	$_GET['s'].SEP;
+	$skin = $_GET['s'].SEP;
 }
 
-
-$dir	=	'';
+$dir = '';
 
 if(empty($_GET['d']) === false)
 {
-	$dir	=	$_GET['d'].SEP;
+	$dir = $_GET['d'].SEP;
 }
 else
 {
-	$dir	=	strtolower($type).SEP;
+	$dir = strtolower($type).SEP;
 }
 
-$withConvert	=	true;
+$withConvert = true;
 
 if(isset($_GET['c']) === true)
 {
-	$withConvert	=	($_GET['c'] == 'false') ? false : true;
+	$withConvert = ($_GET['c'] == 'false') ? false : true;
 }
 
 require_once LIB_DIR.'minify'.SEP.'src'.SEP.'Minify.php';
@@ -83,12 +82,12 @@ switch(strtolower($type))
 
 		require_once LIB_DIR.'minify'.SEP.'src'.SEP.'CSS.php';
 
-		$file	=	TEMPLATE_DIR.$skin.$dir.$filename.'.css';
+		$file = TEMPLATE_DIR.$skin.$dir.$filename.'.css';
 
 		if(file_exists($file) === true)
 		{
-			$etag	=	md5_file($file);
-			$date	=	date("F d Y H:i:s.", filemtime($file));
+			$etag = md5_file($file);
+			$date = date("F d Y H:i:s.", filemtime($file));
 
 			header("Access-Control-Allow-Origin: *");
 			header("Access-Control-Expose-Headers: ETag");
@@ -99,7 +98,7 @@ switch(strtolower($type))
 			header("ETag: $etag");
 			header("Last-Modified: $date");
 
-			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			if((empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) === false && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (empty($_SERVER['HTTP_IF_NONE_MATCH']) === false && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
 			{
 				header("HTTP/1.1 304 Not Modified");
 				exit;
@@ -107,12 +106,12 @@ switch(strtolower($type))
 
 			if($withConvert === true)
 			{
-				$minifier 	=	new \MatthiasMullie\Minify\CSS($file);
-				$output		=	$minifier->minify();
+				$minifier = new \MatthiasMullie\Minify\CSS($file);
+				$output   = $minifier->minify();
 			}
 			else
 			{
-				$output		=	file_get_contents($file);
+				$output = file_get_contents($file);
 			}
 
 			echo $output;
@@ -129,12 +128,12 @@ switch(strtolower($type))
 
 		require_once LIB_DIR.'minify'.SEP.'src'.SEP.'JS.php';
 
-		$file	=	TEMPLATE_DIR.$skin.$dir.$filename.'.js';
+		$file = TEMPLATE_DIR.$skin.$dir.$filename.'.js';
 
 		if(file_exists($file) === true)
 		{
-			$etag	=	md5_file($file);
-			$date	=	date("F d Y H:i:s.", filemtime($file));
+			$etag = md5_file($file);
+			$date = date("F d Y H:i:s.", filemtime($file));
 
 			header("Access-Control-Allow-Origin: *");
 			header("Access-Control-Expose-Headers: ETag");
@@ -145,7 +144,7 @@ switch(strtolower($type))
 			header("ETag: $etag");
 			header("Last-Modified: $date");
 
-			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			if((empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) === false && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (empty($_SERVER['HTTP_IF_NONE_MATCH']) === false && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
 			{
 				header("HTTP/1.1 304 Not Modified");
 				exit;
@@ -153,12 +152,12 @@ switch(strtolower($type))
 
 			if($withConvert === true)
 			{
-				$minifier	=	new \MatthiasMullie\Minify\JS($file);
-				$output	=	$minifier->minify();
+				$minifier = new \MatthiasMullie\Minify\JS($file);
+				$output   = $minifier->minify();
 			}
 			else
 			{
-				$output	= file_get_contents($file);
+				$output = file_get_contents($file);
 			}
 
 			echo $output;
@@ -172,12 +171,12 @@ switch(strtolower($type))
 	break;
 	case 'img':
 
-		$file	=	TEMPLATE_DIR.$skin.$dir.$filename;
+		$file = TEMPLATE_DIR.$skin.$dir.$filename;
 
 		if(file_exists($file) === true)
 		{
-			$etag	=	md5_file($file);
-			$date	=	date("F d Y H:i:s.", filemtime($file));
+			$etag = md5_file($file);
+			$date = date("F d Y H:i:s.", filemtime($file));
 
 			header("Access-Control-Allow-Origin: *");
 			header("Access-Control-Expose-Headers: ETag");
@@ -188,7 +187,7 @@ switch(strtolower($type))
 			header("ETag: $etag");
 			header("Last-Modified: $date");
 
-			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			if((empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) === false && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (empty($_SERVER['HTTP_IF_NONE_MATCH']) === false && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
 			{
 				header("HTTP/1.1 304 Not Modified");
 				exit;
@@ -198,13 +197,13 @@ switch(strtolower($type))
 
 			if(stripos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)
 			{
-			  ob_start('ob_gzhandler');
-			  echo file_get_contents($file);
-			  ob_end_flush();
+				ob_start('ob_gzhandler');
+				echo file_get_contents($file);
+				ob_end_flush();
 			}
 			else
 			{
-			  	echo file_get_contents($file);
+				echo file_get_contents($file);
 			}
 
 			header('Content-Length: '.ob_get_length());

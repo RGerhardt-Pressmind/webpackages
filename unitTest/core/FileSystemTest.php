@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  *  @package	Webpackages
- *  @subpackage core
+ *  @subpackage controllers
  *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
  *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -48,7 +48,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAllFiles()
 	{
-		$this->assertEquals('d836f5b875c7facb45646babd66a7380', md5(serialize(FileSystem::get_all_files(PLUGIN_DIR,\RecursiveIteratorIterator::SELF_FIRST))));
+		$this->assertEquals('027fe084e4f67c8eba252f3553a882ac', md5(serialize(FileSystem::get_all_files(PLUGIN_DIR,\RecursiveIteratorIterator::SELF_FIRST))));
 	}
 
 

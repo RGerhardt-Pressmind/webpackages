@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  *  @package	Webpackages
- *  @subpackage core
+ *  @subpackage controllers
  *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
  *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License

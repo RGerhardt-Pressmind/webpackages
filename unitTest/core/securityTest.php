@@ -89,7 +89,7 @@ class securityTest extends \PHPUnit_Framework_TestCase
 
 	public function testShaSec()
 	{
-		$this->assertEquals('b06044a633b3b57ee70e85a6140bb6b8ade1e534b480f7a2a20756b571e933a88d70ccf38ac39a3f9c07eaa44058bbd2de5168d92dbed18032e01112558f3fc3', security::sha_sec('Hello World'));
+		$this->assertEquals('f224c4b8d3507412a3b4f0a98fbacd3353287570fed4efb1907d0c20c1287de97abb204752498c032b40b70ec061ef72ce394bcf57e79157065a7e11f2ad5bcc', security::sha_sec('Hello World'));
 	}
 
 

@@ -15,136 +15,213 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  @package	Webpackages
- *  @subpackage core
- *  @author	    Robbyn Gerhardt
- *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
- *  @link	    http://webpackages.de
- *  @since	    Version 2.0.0
- *  @filesource
+ * @package       Webpackages
+ * @subpackage    controllers
+ * @author        Robbyn Gerhardt
+ * @copyright     Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link          http://webpackages.de
+ * @since         Version 2.0.0
+ * @filesource
  */
-
-
 
 if(isset($_SERVER['HTTP_HOST']))
 {
-	$base_url = (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
+	$base_url = (is_https() === true ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 }
 else
 {
 	$base_url = 'http://localhost/';
 }
 
-//HTTP(s) Adresse des Servers
+/**
+ * HTTP(s) Adresse des Webservers
+ */
 define('HTTP', $base_url);
 
-//Systemunabhängiger Seperator
+/**
+ * Systemunabhängiger Seperator
+ */
 define('SEP', DIRECTORY_SEPARATOR);#
 
-//Betriebssystem
+/**
+ * Betriebssystem kürzel
+ */
 define('OS', (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? 'WIN' : 'UNIX');
 
-//Verzeichniss zum httpdocs Ordner der Webadresse
+/**
+ * Das Hauptverzeichniss des Webservers
+ */
 define('ROOT', __DIR__);
 
-//Default Charset
-define('CHARSET',	'UTF-8');
+/**
+ * Standard Charset
+ */
+define('CHARSET', 'UTF-8');
 
-//Default Error-Reporting active / inactive
-define('ERROR_REPORTING',	true);
+/**
+ * Aktiviert / Deaktiviert das Error Reporting von PHP
+ */
+define('ERROR_REPORTING', true);
 
-//Default Timezone
-define('TIMEZONE',	'Europe/Berlin');
+/**
+ * Die Standard Zeitzone, falls keine gesetzt
+ */
+define('TIMEZONE', 'Europe/Berlin');
 
-//PDO Connection Type
-define('PDO_TYPE',	'mysql');
+/**
+ * Der Standard Datenbanktreiber
+ */
+define('PDO_TYPE', 'mysql');
 
-//PDO Host (Server)
-define('PDO_HOST',	'');
+/**
+ * Der Standard Datenbank Host
+ */
+define('PDO_HOST', '');
 
-//PDO Connection Username
-define('PDO_USERNAME',	'');
+/**
+ * Der Standard Datenbank Benutzername
+ */
+define('PDO_USERNAME', '');
 
-//PDO Connection Password
-define('PDO_PASSWORD',	'');
+/**
+ * Das Standard Datenbank Passwort
+ */
+define('PDO_PASSWORD', '');
 
-//PDO Connection Database
-define('PDO_DATABASE',	'');
+/**
+ * Die Standard Datenbank
+ */
+define('PDO_DATABASE', '');
 
-//PDO Connection Port
-define('PDO_PORT',	3306);
+/**
+ * Der Standard Datenbank Port
+ */
+define('PDO_PORT', 3306);
 
-//PDO Charset
+/**
+ * Das Standard Datenbank Charset
+ */
 define('PDO_CHARSET', 'utf8');
 
-//Cache - Datei Erweiterung
-define('CACHE_EXTENSION',	'.cache');
+/**
+ * Die Dateinamen Endung der Cache Dateien
+ */
+define('CACHE_EXTENSION', '.cache');
 
-//Sicherheitsschlüssel - einmalig - gegebenfalls zuvor ändern (!!! ACHTUNG !!! nach Verwendung nicht mehr verändern)
-define('SECURITY_KEY',	'BLc>bjG.(#nXjAjtbX?d%&dEB\x$fW6,Sc(<^2$u');
+/**
+ * Der Sicherheitsschlüssel für alle Verschlüsselungen im System (muss vor erstbenutzung gesetzt werden)
+ * (mindestens 20 Zeichen)
+ */
+define('SECURITY_KEY', 'pf349nf90sh(G/G§)(=F()"=(U=U§?F=§?J');
 
-//Template header default filename (only name not path)
-define('TEMPLATE_HEADER',	'header.php');
+/**
+ * Der Name des Template Headers (kein Pfad)
+ */
+define('TEMPLATE_HEADER', 'header.php');
 
-//Template footer default filename (only name not path)
-define('TEMPLATE_FOOTER',	'footer.php');
+/**
+ * Der Name des Template Footers (kein Pfad)
+ */
+define('TEMPLATE_FOOTER', 'footer.php');
 
-//Default langauge, Abhängig vom Server Paket
-define('DEFAULT_LANGUAGE',	'de_DE.UTF-8');
+/**
+ * Die Standard Sprache des Frameworks (dies muss als locale Variable auf dem Webserver zur Verfügung stehen)
+ * siehe auch http://php.net/manual/de/function.setlocale.php oder http://php.net/manual/de/class.locale.php
+ */
+define('DEFAULT_LANGUAGE', 'de_DE.UTF-8');
 
-//Use Session Save Handler
-define('USE_SESSION_SAVE_HANDLER',	true);
+/**
+ * Entscheidet ob Sessions in die Datenbank geschrieben werden
+ */
+define('USE_SESSION_SAVE_HANDLER', true);
 
-//Mod Rewrite URL nutzen
-define('USE_MOD_REWRITE',	true);
+/**
+ * Wandelt Links (die über die URL Klasse generiert werden) in mod_rewrite Links um wenn aktiv
+ */
+define('USE_MOD_REWRITE', true);
 
-
-/*
- * Pfade im System
+/**
+ * ############################
+ *
+ * Pfade zum System
+ *
+ * ############################
  */
 
-//Template Default Skin
-define('TEMPLATE_DEFAULT_SKIN',	'welcome');
+/**
+ * Framework Standard Skin (im Ordner package/views)
+ */
+define('TEMPLATE_DEFAULT_SKIN', 'welcome');
 
-//Package Pfad
-define('PACKAGE_DIR',			ROOT.SEP.'package'.SEP);
+/**
+ * Der Pfad zum Package Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('PACKAGE_DIR', ROOT.SEP.'package'.SEP);
 
-//Template Pfad
-define('TEMPLATE_DIR',			PACKAGE_DIR.'templates'.SEP);
+/**
+ * Pfad zum Template Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('TEMPLATE_DIR', PACKAGE_DIR.'views'.SEP);
 
-//Core Pfad
-define('CORE_DIR',				PACKAGE_DIR.'core'.SEP);
+/**
+ * Pfad zum Systemkern Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('CORE_DIR', PACKAGE_DIR.'controllers'.SEP);
 
-//System Pfad
-define('SYSTEM_PATH',			PACKAGE_DIR.'system'.SEP);
+/**
+ * Pfad zum System Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('SYSTEM_PATH', PACKAGE_DIR.'system'.SEP);
 
-//Cache Pfad
-define('CACHE_PATH',			SYSTEM_PATH.'cache'.SEP);
+/**
+ * Pfad zum Exception Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('EXCEPTION_DIR', SYSTEM_PATH.'exceptions'.SEP);
 
-//Sprachdateien Pfad
-define('LANGUAGE_PATH',			SYSTEM_PATH.'language'.SEP);
+/**
+ * Pfad zum Cache Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('CACHE_PATH', SYSTEM_PATH.'cache'.SEP);
 
-//Dynamische Klasse Pfad
-define('DYNAMIC_DIR',			PACKAGE_DIR.'dynamic'.SEP);
+/**
+ * Pfad zum Sprachdateien Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('LANGUAGE_PATH', SYSTEM_PATH.'language'.SEP);
 
-//Pages Pfad - Klassen zur Verarbeitung
-define('PAGE_DIR',				PACKAGE_DIR.'pages'.SEP);
+/**
+ * Pfad zum Dynamischen Klassen Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('DYNAMIC_DIR', SYSTEM_PATH.'dynamic'.SEP);
 
-//Plugin Pfad
-define('PLUGIN_DIR',			PACKAGE_DIR.'plugins'.SEP);
+/**
+ * Pfad zum Controler Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('PAGE_DIR', PACKAGE_DIR.'models'.SEP);
 
-//Implement Pfad
-define('IMPLEMENT_DIR',			PACKAGE_DIR.'implement'.SEP);
+/**
+ * Der Pfad zu dem Plugin Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('PLUGIN_DIR', SYSTEM_PATH.'plugins'.SEP);
 
-//Libraries Pfad
-define('LIB_DIR',				PACKAGE_DIR.'libs'.SEP);
+/**
+ * Der Pfad zum implement Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('IMPLEMENT_DIR', SYSTEM_PATH.'implement'.SEP);
 
-#### Konstanten Funktionen ####
+/**
+ * Der Pfad zum thirdParty Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('LIB_DIR', PACKAGE_DIR.'thirdParty'.SEP);
 
+/**
+ * Kontrolliert ob der Webserver HTTPS erlaubt
+ *
+ * @return bool Gibt bei verfügbaren Zertifikat true zurück ansonsten false
+ */
 function is_https()
 {
-	if((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off'))
+	if((empty($_SERVER['HTTPS']) === false && strtolower($_SERVER['HTTPS']) !== 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) === true && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') || (empty($_SERVER['HTTP_FRONT_END_HTTPS']) === false && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off'))
 	{
 		return true;
 	}

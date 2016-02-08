@@ -15,32 +15,32 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  @package	Webpackages
- *  @subpackage core
- *  @author	    Robbyn Gerhardt
- *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
- *  @link	    http://webpackages.de
- *  @since	    Version 2.0.0
- *  @filesource
+ * @package       Webpackages
+ * @subpackage    core
+ * @author        Robbyn Gerhardt
+ * @copyright     Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link          http://webpackages.de
+ * @since         Version 2.0.0
+ * @filesource
  */
 
 require 'init.php';
 
-$c	=	'welcome';
-$m	=	'hello';
+$c = 'welcome';
+$m = 'hello';
 
 if(empty($_GET['c']) === false)
 {
-	$c	=	\package\core\security::url('c', 'GET', 'string');
+	$c = \package\core\security::url('c', 'GET', 'string');
 }
 
 if(empty($_GET['m']) === false)
 {
-	$m	=	\package\core\security::url('m', 'GET', 'string');
+	$m = \package\core\security::url('m', 'GET', 'string');
 }
 
-$class	=	searchInFolder(PAGE_DIR, $c);
+$class = searchInFolder(PAGE_DIR, $c);
 
 if($class !== null)
 {
@@ -60,14 +60,17 @@ else
 
 function searchInFolder($folder, $c)
 {
-	$directory	=	new \RecursiveDirectoryIterator($folder, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+	$directory = new \RecursiveDirectoryIterator($folder, \RecursiveDirectoryIterator::SKIP_DOTS);
+	$iterator  = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 
-	foreach($iterator as $item)
+	if(iterator_count($iterator) > 0)
 	{
-		if($item->isFile() === true && $item->getFilename() == $c.'.class.php')
+		foreach($iterator as $item)
 		{
-			return	\package\core\autoload::get($c);
+			if($item->isFile() === true && $item->getFilename() == $c.'.class.php')
+			{
+				return \package\core\autoload::get($c);
+			}
 		}
 	}
 

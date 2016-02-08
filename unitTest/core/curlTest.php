@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  *  @package	Webpackages
- *  @subpackage core
+ *  @subpackage controllers
  *  @author	    Robbyn Gerhardt <gerhardt@webpackages.de>
  *  @copyright	Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -46,14 +46,14 @@ class curlTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetData()
 	{
-		$back	=	curl::get_data('http://webpackages.de/test/todo');
+		$back	=	curl::get_data('http://webpackages.de/todo');
 
 		$this->assertEquals('ok', $back);
 	}
 
 	public function testGetStatus()
 	{
-		$back	=	curl::get_status('http://webpackages.de/test/todo');
+		$back	=	curl::get_status('http://webpackages.de/todo');
 
 		$this->assertEquals(200, $back);
 	}
