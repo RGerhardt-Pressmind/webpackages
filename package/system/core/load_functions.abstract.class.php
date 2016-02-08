@@ -27,13 +27,22 @@
 
 namespace package\core;
 
-use package\implement\iDynamic;
+use package\implement\IModel;
 use package\implement\IPlugin;
 
 /**
  * Kernklasse die alle anderen Klassen lädt
  *
  * Die load_functions ist die Klasse die alle anderen Klassen / Plugins lädt.
+ *
+ * @property template $template
+ * @property zip      $zip
+ * @property ftp      $ftp
+ * @property XML      $xml
+ * @property logger   $logger
+ * @property errors   $error
+ * @property database $db
+ * @property paypal   $paypal
  *
  * @package        Webpackages
  * @subpackage     core
@@ -349,7 +358,7 @@ abstract class load_functions
 		{
 			$class = $t['class'];
 
-			if($class instanceof iDynamic)
+			if($class instanceof IModel)
 			{
 				$className = $class->getClassName();
 
