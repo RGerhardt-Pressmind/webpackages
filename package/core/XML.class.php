@@ -39,7 +39,7 @@ namespace package\core;
  */
 class XML
 {
-	private $xml = null;
+	private $xml = null, $xml_row = '';
 
 
 	/**
@@ -63,11 +63,6 @@ class XML
 		if(class_exists('\package\core\plugins') === true)
 		{
 			$plugin	=	plugins::hookCall('before', 'XML', 'loadXML', array($xml));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		//XML von einer URL laden

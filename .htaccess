@@ -4,6 +4,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
+    RewriteRule ^([^/]*)\.html$ /index.php?c=$1 [L]
     RewriteRule ^([^/]*)/([^/]*)\.html$ /index.php?c=$1&m=$2 [L]
 
     # If-Modified-Since (if php is not installed as cgi then comment lines below)
