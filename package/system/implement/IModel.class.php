@@ -25,35 +25,24 @@
  *  @filesource
  */
 
-class test implements \package\implement\iDynamic
+namespace package\implement;
+
+
+interface IModel
 {
-	private static $db;
+	/**
+	 * @return mixed Gibt den Namen der Klasse zurück. Unter diesem Namen kann man Ihn anschließend ausserhalb ansprechen.
+	 */
+	public function getClassName();
 
-	public function __get($varName)
-	{
-		return 1;
-	}
+	/**
+	 * @param array $allClasses Übergibt alle System Instanzen
+	 * @return void
+	 */
+	public function setAllClasses($allClasses);
 
-	public function getClassName()
-	{
-		return 'USER';
-	}
-
-	public function setAllClasses($allClasses)
-	{
-		if(!empty($allClasses['db']) && $allClasses['db'] instanceof \package\core\database)
-		{
-			self::$db	=	$allClasses['db'];
-		}
-	}
-
-
-	public function hello_body()
-	{
-		return 'Hallo Welt';
-	}
-
-	public function loadData()
-	{
-	}
+	/**
+	 * Wird direkt nach der Instanzierung aller Dynamischen Klassen aufgerufen.
+	 */
+	public function loadData();
 }

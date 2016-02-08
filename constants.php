@@ -160,6 +160,11 @@ define('TEMPLATE_DEFAULT_SKIN', 'welcome');
 define('PACKAGE_DIR', ROOT.SEP.'package'.SEP);
 
 /**
+ * Pfad zum System Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
+ */
+define('SYSTEM_PATH', PACKAGE_DIR.'system'.SEP);
+
+/**
  * Pfad zum Template Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
 define('TEMPLATE_DIR', PACKAGE_DIR.'views'.SEP);
@@ -167,12 +172,7 @@ define('TEMPLATE_DIR', PACKAGE_DIR.'views'.SEP);
 /**
  * Pfad zum Systemkern Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
-define('CORE_DIR', PACKAGE_DIR.'controllers'.SEP);
-
-/**
- * Pfad zum System Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
- */
-define('SYSTEM_PATH', PACKAGE_DIR.'system'.SEP);
+define('CORE_DIR', SYSTEM_PATH.'core'.SEP);
 
 /**
  * Pfad zum Exception Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
@@ -187,17 +187,17 @@ define('CACHE_PATH', SYSTEM_PATH.'cache'.SEP);
 /**
  * Pfad zum Sprachdateien Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
-define('LANGUAGE_PATH', SYSTEM_PATH.'language'.SEP);
+define('LANGUAGE_PATH', SYSTEM_PATH.'languages'.SEP);
 
 /**
  * Pfad zum Dynamischen Klassen Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
-define('DYNAMIC_DIR', SYSTEM_PATH.'dynamic'.SEP);
+define('DYNAMIC_DIR', SYSTEM_PATH.'models'.SEP);
 
 /**
  * Pfad zum Controler Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
-define('PAGE_DIR', PACKAGE_DIR.'models'.SEP);
+define('PAGE_DIR', PACKAGE_DIR.'controllers'.SEP);
 
 /**
  * Der Pfad zu dem Plugin Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
@@ -212,7 +212,7 @@ define('IMPLEMENT_DIR', SYSTEM_PATH.'implement'.SEP);
 /**
  * Der Pfad zum thirdParty Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
-define('LIB_DIR', PACKAGE_DIR.'thirdParty'.SEP);
+define('LIB_DIR', SYSTEM_PATH.'thirdParty'.SEP);
 
 /**
  * Kontrolliert ob der Webserver HTTPS erlaubt
