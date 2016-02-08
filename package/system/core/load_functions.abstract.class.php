@@ -93,6 +93,9 @@ abstract class load_functions
 
 	public static $LOAD_MAILER         = ['isStatic' => true, 'class' => 'phpmailer', 'writeInAttribute' => null, 'parameter' => [], 'namespace' => '\\'];
 
+	public static $LOAD_CAPTCHA         = ['isStatic' => true, 'class' => 'captcha', 'writeInAttribute' => null, 'parameter' => [], 'namespace' => '\package\core\\'];
+
+
 	private       $allLoadClasses      = [], $defineDynamicClasses = [];
 
 	private       $notAllowedClassName = ['autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal'];
