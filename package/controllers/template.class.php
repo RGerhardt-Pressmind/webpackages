@@ -65,7 +65,6 @@ class template
 	 */
 	public function __destruct()
 	{
-		$this->contentData = null;
 		$this->tempDir     = null;
 		$this->header      = null;
 		$this->footer      = null;
@@ -77,6 +76,8 @@ class template
 
 			unset(${$key});
 		}
+
+		$this->contentData = null;
 
 		unset($this->contentData);
 		unset($this->tempDir);
