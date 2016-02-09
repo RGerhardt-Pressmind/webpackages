@@ -33,8 +33,7 @@ class welcome extends load_functions
 	{
 		\package\core\benchmark::start_point(true);
 
-		#parent::__construct(array());
-		parent::__construct([load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL]);
+		parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL));
 	}
 
 	/**

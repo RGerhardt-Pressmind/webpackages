@@ -27,7 +27,7 @@
 
 require 'constants.php';
 
-if(empty(SECURITY_KEY) === true)
+if(SECURITY_KEY == '')
 {
 	throw new Exception('Error: SECURITY_KEY constants is empty');
 }
@@ -39,7 +39,7 @@ elseif(strlen(SECURITY_KEY) < 20)
 require SYSTEM_PATH.'controllExistsPaths.php';
 require SYSTEM_PATH.'loadSessionHandler.php';
 
-if(defined('USE_SESSION_SAVE_HANDLER') === false || USE_SESSION_SAVE_HANDLER === false || defined('PDO_HOST') === false || empty(PDO_HOST) === true)
+if(defined('USE_SESSION_SAVE_HANDLER') === false || USE_SESSION_SAVE_HANDLER === false || defined('PDO_HOST') === false || PDO_HOST == '')
 {
 	session_start();
 }
@@ -55,17 +55,17 @@ else
 	ini_set('display_errors', 0);
 }
 
-if(defined('CHARSET') === true && empty(CHARSET) === false)
+if(defined('CHARSET') === true && CHARSET != '')
 {
 	header('Content-Type: text/html; charset='.CHARSET);
 }
 
-if(defined('TIMEZONE') === true && empty(TIMEZONE) === false)
+if(defined('TIMEZONE') === true && TIMEZONE != '')
 {
 	date_default_timezone_set(TIMEZONE);
 }
 
-$myPaths   = [];
+$myPaths   = array();
 $myPaths[] = PACKAGE_DIR;
 $myPaths[] = SYSTEM_PATH;
 $myPaths[] = IMPLEMENT_DIR;
@@ -74,7 +74,7 @@ $myPaths[] = LIB_DIR;
 $myPaths[] = LIB_DIR.'PHPMailer';
 $myPaths[] = LIB_DIR.'minifiy';
 
-if(defined('PAGE_DIR') === true && empty(PAGE_DIR) === false)
+if(defined('PAGE_DIR') === true && PAGE_DIR != '')
 {
 	$myPaths[] = PAGE_DIR;
 
@@ -94,7 +94,7 @@ if(defined('PAGE_DIR') === true && empty(PAGE_DIR) === false)
 }
 
 //Alle Dynamischen Klassen in include_path aufnehmen
-if(defined('DYNAMIC_DIR') === true && empty(DYNAMIC_DIR) === false)
+if(defined('DYNAMIC_DIR') === true && DYNAMIC_DIR != '')
 {
 	$myPaths[] = DYNAMIC_DIR;
 
@@ -117,7 +117,7 @@ ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR
 
 
 //Alle Implements Klassen includieren
-if(defined('IMPLEMENT_DIR') === true && empty(IMPLEMENT_DIR) === false)
+if(defined('IMPLEMENT_DIR') === true && IMPLEMENT_DIR != '')
 {
 	$implements	=	new RecursiveDirectoryIterator(IMPLEMENT_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
 	$iterator	=	new RecursiveIteratorIterator($implements, RecursiveIteratorIterator::SELF_FIRST);
@@ -135,7 +135,7 @@ if(defined('IMPLEMENT_DIR') === true && empty(IMPLEMENT_DIR) === false)
 }
 
 //Alle Exceptions Klassen includieren
-if(defined('EXCEPTION_DIR') === true && empty(EXCEPTION_DIR) === false)
+if(defined('EXCEPTION_DIR') === true && EXCEPTION_DIR != '')
 {
 	$exceptions	=	new RecursiveDirectoryIterator(EXCEPTION_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
 	$iterator	=	new RecursiveIteratorIterator($exceptions, RecursiveIteratorIterator::SELF_FIRST);

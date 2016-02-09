@@ -63,8 +63,8 @@ class FileSystem implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'FileSystem', 'is_really_writable', [$file]);
-			$plugins = plugins::hookCall('before', 'FileSystem', 'is_really_writable', [$file]);
+			plugins::hookShow('before', 'FileSystem', 'is_really_writable', array($file));
+			$plugins = plugins::hookCall('before', 'FileSystem', 'is_really_writable', array($file));
 
 			if($plugins != null)
 			{
@@ -116,8 +116,8 @@ class FileSystem implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'FileSystem', 'get_all_files', [$path, $orderBack, $withData]);
-			$plugins = plugins::hookCall('before', 'FileSystem', 'get_all_files', [$path, $orderBack, $withData]);
+			plugins::hookShow('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
+			$plugins = plugins::hookCall('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
 
 			if($plugins != null)
 			{
@@ -133,7 +133,7 @@ class FileSystem implements IStatic
 		$directory = new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS);
 		$iterator  = new \RecursiveIteratorIterator($directory, (int)$orderBack);
 
-		$back = [];
+		$back = array();
 
 		if(iterator_count($iterator) > 0)
 		{
@@ -167,7 +167,7 @@ class FileSystem implements IStatic
 						}
 						else
 						{
-							$add                  = [];
+							$add                  = array();
 							$add['filepath']      = $toString;
 							$add['path']          = $getPath;
 							$add['filename']      = $file->getFilename();
@@ -183,7 +183,7 @@ class FileSystem implements IStatic
 				}
 			}
 
-			$newSort = [];
+			$newSort = array();
 
 			foreach($back as $file)
 			{
@@ -195,7 +195,7 @@ class FileSystem implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'get_all_files', [$back]);
+			$plugins = plugins::hookCall('after', 'FileSystem', 'get_all_files', array($back));
 
 			if($plugins != null)
 			{
@@ -218,8 +218,8 @@ class FileSystem implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'FileSystem', 'delete_files', [$path, $delete_dir]);
-			$plugins = plugins::hookCall('before', 'FileSystem', 'delete_files', [$path, $delete_dir]);
+			plugins::hookShow('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
+			$plugins = plugins::hookCall('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
 
 			if($plugins != null)
 			{
@@ -269,7 +269,7 @@ class FileSystem implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'delete_files', [$path, $delete_dir]);
+			$plugins = plugins::hookCall('after', 'FileSystem', 'delete_files', array($path, $delete_dir));
 
 			if($plugins != null)
 			{
@@ -295,8 +295,8 @@ class FileSystem implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'FileSystem', 'copyDirectory', [$source, $dest, $chmod]);
-			$plugins = plugins::hookCall('before', 'FileSystem', 'copyDirectory', [$source, $dest, $chmod]);
+			plugins::hookShow('before', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
+			$plugins = plugins::hookCall('before', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
 
 			if($plugins != null)
 			{
@@ -372,7 +372,7 @@ class FileSystem implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'copyDirectory', [$source, $dest, $chmod]);
+			$plugins = plugins::hookCall('after', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
 
 			if($plugins != null)
 			{
@@ -396,8 +396,8 @@ class FileSystem implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'FileSystem', 'renameDirectory', [$source, $dest, $chmod]);
-			$plugins = plugins::hookCall('before', 'FileSystem', 'renameDirectory', [$source, $dest, $chmod]);
+			plugins::hookShow('before', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
+			$plugins = plugins::hookCall('before', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
 
 			if($plugins != null)
 			{
@@ -488,7 +488,7 @@ class FileSystem implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'renameDirectory', [$source, $dest, $chmod]);
+			$plugins = plugins::hookCall('after', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
 
 			if($plugins != null)
 			{

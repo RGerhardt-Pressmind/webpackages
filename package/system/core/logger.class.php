@@ -60,8 +60,8 @@ class logger implements iLogger
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'logger', 'writeLog', [$msg, $code, $level]);
-			$plugins = plugins::hookCall('before', 'logger', 'writeLog', [$msg, $code, $level]);
+			plugins::hookShow('before', 'logger', 'writeLog', array($msg, $code, $level));
+			$plugins = plugins::hookCall('before', 'logger', 'writeLog', array($msg, $code, $level));
 
 			if($plugins != null)
 			{
@@ -97,8 +97,8 @@ class logger implements iLogger
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'logger', 'deleteLog', [$filename]);
-			$plugins = plugins::hookCall('before', 'logger', 'deleteLog', [$filename]);
+			plugins::hookShow('before', 'logger', 'deleteLog', array($filename));
+			$plugins = plugins::hookCall('before', 'logger', 'deleteLog', array($filename));
 
 			if($plugins != null)
 			{
@@ -115,8 +115,8 @@ class logger implements iLogger
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'logger', 'deleteLog', [$filename]);
-			$plugins = plugins::hookCall('after', 'logger', 'deleteLog', [$filename]);
+			plugins::hookShow('after', 'logger', 'deleteLog', array($filename));
+			$plugins = plugins::hookCall('after', 'logger', 'deleteLog', array($filename));
 
 			if($plugins != null)
 			{
@@ -139,8 +139,8 @@ class logger implements iLogger
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'logger', 'readLog', [$filename]);
-			$plugins = plugins::hookCall('before', 'logger', 'readLog', [$filename]);
+			plugins::hookShow('before', 'logger', 'readLog', array($filename));
+			$plugins = plugins::hookCall('before', 'logger', 'readLog', array($filename));
 
 			if($plugins != null)
 			{
@@ -157,8 +157,8 @@ class logger implements iLogger
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'logger', 'readLog', [$read]);
-			$plugins = plugins::hookCall('after', 'logger', 'readLog', [$read]);
+			plugins::hookShow('after', 'logger', 'readLog', array($read));
+			$plugins = plugins::hookCall('after', 'logger', 'readLog', array($read));
 
 			if($plugins != null)
 			{

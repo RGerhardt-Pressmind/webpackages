@@ -48,7 +48,7 @@ class url implements IStatic
 
 	public static function init()
 	{
-		if(function_exists('apache_get_modules'))
+		if(function_exists('apache_get_modules') === true)
 		{
 			$allModules = apache_get_modules();
 
@@ -115,7 +115,7 @@ class url implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'url', 'get_url_simple', [$httpRoot, $parameters]);
+			$plugin = plugins::hookCall('before', 'url', 'get_url_simple', array($httpRoot, $parameters));
 
 			if($plugin != null)
 			{
@@ -159,7 +159,7 @@ class url implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'url', 'get_url_simple', [$link]);
+			$plugin = plugins::hookCall('after', 'url', 'get_url_simple', array($link));
 
 			if($plugin != null)
 			{
@@ -182,7 +182,7 @@ class url implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'url', 'createValidUrlString', [$url]);
+			$plugin = plugins::hookCall('before', 'url', 'createValidUrlString', array($url));
 
 			if($plugin != null)
 			{
@@ -196,7 +196,7 @@ class url implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'url', 'createValidUrlString', [$url]);
+			$plugin = plugins::hookCall('after', 'url', 'createValidUrlString', array($url));
 
 			if($plugin != null)
 			{
@@ -216,7 +216,7 @@ class url implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'url', 'getCurrentUrl', []);
+			$plugin = plugins::hookCall('before', 'url', 'getCurrentUrl');
 
 			if($plugin != null)
 			{
@@ -245,7 +245,7 @@ class url implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookCall('before', 'url', 'loc', [$url]);
+			plugins::hookCall('before', 'url', 'loc', array($url));
 		}
 
 		header('Location: '.$url);
@@ -272,7 +272,7 @@ class url implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookCall('before', 'url', 'back', []);
+			plugins::hookCall('before', 'url', 'back');
 		}
 
 		if(empty($_SERVER['HTTP_REFERER']) === false)

@@ -62,7 +62,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'wordLimiter', [$str, $limit, $suffix]);
+			$plugin = plugins::hookCall('before', 'text', 'wordLimiter', array($str, $limit, $suffix));
 
 			if($plugin != null)
 			{
@@ -70,7 +70,7 @@ class text implements IStatic
 			}
 		}
 
-		if(empty(trim($str)) === true)
+		if(trim($str) == '')
 		{
 			return $str;
 		}
@@ -86,7 +86,7 @@ class text implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'text', 'wordLimiter', [$back]);
+			$plugin = plugins::hookCall('after', 'text', 'wordLimiter', array($back));
 
 			if($plugin != null)
 			{
@@ -110,7 +110,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'template', 'truncate', [$string, $limit, $suffix]);
+			$plugin = plugins::hookCall('before', 'template', 'truncate', array($string, $limit, $suffix));
 
 			if($plugin != null)
 			{
@@ -143,7 +143,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'wordCensor', [$str, $censored, $replacement]);
+			$plugin = plugins::hookCall('before', 'text', 'wordCensor', array($str, $censored, $replacement));
 
 			if($plugin != null)
 			{
@@ -174,7 +174,7 @@ class text implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'text', 'wordCensor', [$str]);
+			$plugin = plugins::hookCall('after', 'text', 'wordCensor', array($str));
 
 			if($plugin != null)
 			{
@@ -196,7 +196,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'highlightCode', [$str]);
+			$plugin = plugins::hookCall('before', 'text', 'highlightCode', array($str));
 
 			if($plugin != null)
 			{
@@ -204,9 +204,9 @@ class text implements IStatic
 			}
 		}
 
-		$str = str_replace(['&lt;', '&gt;'], ['<', '>'], $str);
+		$str = str_replace(array('&lt;', '&gt;'), array('<', '>'), $str);
 
-		$str = str_replace(['<?', '?>', '<%', '%>', '\\', '</script>'], ['phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'], $str);
+		$str = str_replace(array('<?', '?>', '<%', '%>', '\\', '</script>'), array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), $str);
 
 		$str = '<?php '.$str.' ?>'; // <?
 
@@ -216,11 +216,11 @@ class text implements IStatic
 		$str = preg_replace('/(<span style="color: #[A-Z0-9]+">.*?)\?&gt;<\/span>\n<\/span>\n<\/code>/is', "$1</span>\n</span>\n</code>", $str);
 		$str = preg_replace('/<span style="color: #[A-Z0-9]+"\><\/span>/i', '', $str);
 
-		$str = str_replace(['phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'], ['&lt;?', '?&gt;', '&lt;%', '%&gt;', '\\', '&lt;/script&gt;'], $str);
+		$str = str_replace(array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), array('&lt;?', '?&gt;', '&lt;%', '%&gt;', '\\', '&lt;/script&gt;'), $str);
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'text', 'highlightCode', [$str]);
+			$plugin = plugins::hookCall('after', 'text', 'highlightCode', array($str));
 
 			if($plugin != null)
 			{
@@ -245,7 +245,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'highlightPhrase', [$str, $phrase, $tag_open, $tag_close]);
+			$plugin = plugins::hookCall('before', 'text', 'highlightPhrase', array($str, $phrase, $tag_open, $tag_close));
 
 			if($plugin != null)
 			{
@@ -265,7 +265,7 @@ class text implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'text', 'highlightPhrase', [$str]);
+			$plugin = plugins::hookCall('after', 'text', 'highlightPhrase', array($str));
 
 			if($plugin != null)
 			{
@@ -288,7 +288,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'random_string', [$type, $length]);
+			$plugin = plugins::hookCall('before', 'text', 'random_string', array($type, $length));
 
 			if($plugin != null)
 			{
@@ -329,7 +329,7 @@ class text implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('after', 'text', 'random_string', [$back]);
+			$plugin = plugins::hookCall('after', 'text', 'random_string', array($back));
 
 			if($plugin != null)
 			{
@@ -359,7 +359,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'reduce_double_slashes', [$str]);
+			$plugin = plugins::hookCall('before', 'text', 'reduce_double_slashes', array($str));
 
 			if($plugin != null)
 			{
@@ -381,7 +381,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'strip_quotes', [$str]);
+			$plugin = plugins::hookCall('before', 'text', 'strip_quotes', array($str));
 
 			if($plugin != null)
 			{
@@ -389,7 +389,7 @@ class text implements IStatic
 			}
 		}
 
-		return str_replace(['"', "'"], ['', ''], $str);
+		return str_replace(array('"', "'"), array('', ''), $str);
 	}
 
 	/**
@@ -403,7 +403,7 @@ class text implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'text', 'trim_slashes', [$str]);
+			$plugin = plugins::hookCall('before', 'text', 'trim_slashes', array($str));
 
 			if($plugin != null)
 			{

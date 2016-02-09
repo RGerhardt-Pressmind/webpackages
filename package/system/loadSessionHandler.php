@@ -33,7 +33,7 @@ class NewSessionHandler implements SessionHandlerInterface
 
 	public function __construct()
 	{
-		if(empty(PDO_USERNAME) === true || empty(PDO_DATABASE) === true)
+		if(PDO_USERNAME == '' || PDO_DATABASE == '')
 		{
 			throw new Exception('Error: Database connection');
 		}
@@ -57,7 +57,7 @@ class NewSessionHandler implements SessionHandlerInterface
 
 			$addIn	=	true;
 
-			if(empty(PDO_PORT) === false)
+			if(PDO_PORT != '')
 			{
 				if($addIn === true && PDO_TYPE !== 'sqlsrv')
 				{
@@ -80,7 +80,7 @@ class NewSessionHandler implements SessionHandlerInterface
 				$addIn	=	true;
 			}
 
-			if(empty(PDO_DATABASE) === false)
+			if(PDO_DATABASE != '')
 			{
 				if($addIn === true)
 				{
@@ -91,7 +91,7 @@ class NewSessionHandler implements SessionHandlerInterface
 				$addIn	=	true;
 			}
 
-			if(empty(PDO_CHARSET) === false)
+			if(PDO_CHARSET != '')
 			{
 				if($addIn === true)
 				{

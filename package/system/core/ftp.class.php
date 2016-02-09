@@ -67,9 +67,9 @@ class ftp
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'connect', [$host, $ssl, $port, $timeout]);
+			plugins::hookShow('before', 'ftp', 'connect', array($host, $ssl, $port, $timeout));
 
-			$plugin = plugins::hookCall('before', 'ftp', 'connect', [$host, $ssl, $port, $timeout]);
+			$plugin = plugins::hookCall('before', 'ftp', 'connect', array($host, $ssl, $port, $timeout));
 
 			if($plugin != null)
 			{
@@ -88,7 +88,7 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'ftp', 'connect', [$this->_ftp]);
+			plugins::hookShow('after', 'ftp', 'connect', array($this->_ftp));
 		}
 
 		if($this->_ftp === false)
@@ -110,8 +110,8 @@ class ftp
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'login', [$this->_ftp, $username, $password]);
-			plugins::hookCall('before', 'ftp', 'login', [$this->_ftp, $username, $password]);
+			plugins::hookShow('before', 'ftp', 'login', array($this->_ftp, $username, $password));
+			plugins::hookCall('before', 'ftp', 'login', array($this->_ftp, $username, $password));
 		}
 
 		if($this->_ftp === false)
@@ -123,8 +123,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'ftp', 'login', [$login]);
-			$plugin = plugins::hookCall('after', 'ftp', 'login', [$login]);
+			plugins::hookShow('after', 'ftp', 'login', array($login));
+			$plugin = plugins::hookCall('after', 'ftp', 'login', array($login));
 
 			if($plugin != null)
 			{
@@ -175,8 +175,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'getRemoteFile', [$this->_ftp, $remoteFile, $localeFile]);
-			$plugin = plugins::hookCall('before', 'ftp', 'getRemoteFile', [$this->_ftp, $remoteFile, $localeFile]);
+			plugins::hookShow('before', 'ftp', 'getRemoteFile', array($this->_ftp, $remoteFile, $localeFile));
+			$plugin = plugins::hookCall('before', 'ftp', 'getRemoteFile', array($this->_ftp, $remoteFile, $localeFile));
 
 			if($plugin != null)
 			{
@@ -207,8 +207,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'modifiedTime', [$this->_ftp, $remoteFile, $timeFormat]);
-			$plugin = plugins::hookCall('before', 'ftp', 'modifiedTime', [$this->_ftp, $remoteFile, $timeFormat]);
+			plugins::hookShow('before', 'ftp', 'modifiedTime', array($this->_ftp, $remoteFile, $timeFormat));
+			$plugin = plugins::hookCall('before', 'ftp', 'modifiedTime', array($this->_ftp, $remoteFile, $timeFormat));
 
 			if($plugin != null)
 			{
@@ -241,8 +241,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'up', [$this->_ftp]);
-			$plugin = plugins::hookCall('before', 'ftp', 'up', [$this->_ftp]);
+			plugins::hookShow('before', 'ftp', 'up', array($this->_ftp));
+			$plugin = plugins::hookCall('before', 'ftp', 'up', array($this->_ftp));
 
 			if($plugin != null)
 			{
@@ -277,8 +277,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'isDir', [$this->_ftp, $remoteDirectory]);
-			$plugin = plugins::hookCall('before', 'ftp', 'isDir', [$this->_ftp, $remoteDirectory]);
+			plugins::hookShow('before', 'ftp', 'isDir', array($this->_ftp, $remoteDirectory));
+			$plugin = plugins::hookCall('before', 'ftp', 'isDir', array($this->_ftp, $remoteDirectory));
 
 			if($plugin != null)
 			{
@@ -326,8 +326,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'count', [$this->_ftp, $remoteDirectory, $type, $recursive]);
-			$plugin = plugins::hookCall('before', 'ftp', 'count', [$this->_ftp, $remoteDirectory, $type, $recursive]);
+			plugins::hookShow('before', 'ftp', 'count', array($this->_ftp, $remoteDirectory, $type, $recursive));
+			$plugin = plugins::hookCall('before', 'ftp', 'count', array($this->_ftp, $remoteDirectory, $type, $recursive));
 
 			if($plugin != null)
 			{
@@ -374,8 +374,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'isEmpty', [$this->_ftp, $remoteDirectory]);
-			$plugin = plugins::hookCall('before', 'ftp', 'isEmpty', [$this->_ftp, $remoteDirectory]);
+			plugins::hookShow('before', 'ftp', 'isEmpty', array($this->_ftp, $remoteDirectory));
+			$plugin = plugins::hookCall('before', 'ftp', 'isEmpty', array($this->_ftp, $remoteDirectory));
 
 			if($plugin != null)
 			{
@@ -413,8 +413,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'putFromPath', [$this->_ftp, $local_file]);
-			$plugin = plugins::hookCall('before', 'ftp', 'putFromPath', [$this->_ftp, $local_file]);
+			plugins::hookShow('before', 'ftp', 'putFromPath', array($this->_ftp, $local_file));
+			$plugin = plugins::hookCall('before', 'ftp', 'putFromPath', array($this->_ftp, $local_file));
 
 			if($plugin != null)
 			{
@@ -455,8 +455,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'putAll', [$this->_ftp, $source_directory, $target_directory, $mode]);
-			$plugin = plugins::hookCall('before', 'ftp', 'putAll', [$this->_ftp, $source_directory, $target_directory, $mode]);
+			plugins::hookShow('before', 'ftp', 'putAll', array($this->_ftp, $source_directory, $target_directory, $mode));
+			$plugin = plugins::hookCall('before', 'ftp', 'putAll', array($this->_ftp, $source_directory, $target_directory, $mode));
 
 			if($plugin != null)
 			{
@@ -517,8 +517,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'putFromString', [$this->_ftp, $remote_file, $content]);
-			$plugin = plugins::hookCall('before', 'ftp', 'putFromString', [$this->_ftp, $remote_file, $content]);
+			plugins::hookShow('before', 'ftp', 'putFromString', array($this->_ftp, $remote_file, $content));
+			$plugin = plugins::hookCall('before', 'ftp', 'putFromString', array($this->_ftp, $remote_file, $content));
 
 			if($plugin != null)
 			{
@@ -554,8 +554,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'dirSize', [$this->_ftp, $remoteDirectory, $recursive]);
-			$plugin = plugins::hookCall('before', 'ftp', 'dirSize', [$this->_ftp, $remoteDirectory, $recursive]);
+			plugins::hookShow('before', 'ftp', 'dirSize', array($this->_ftp, $remoteDirectory, $recursive));
+			$plugin = plugins::hookCall('before', 'ftp', 'dirSize', array($this->_ftp, $remoteDirectory, $recursive));
 
 			if($plugin != null)
 			{
@@ -597,8 +597,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'nlist', [$this->_ftp, $remoteDirectory, $recursive, $filter]);
-			$plugin = plugins::hookCall('before', 'ftp', 'nlist', [$this->_ftp, $remoteDirectory, $recursive, $filter]);
+			plugins::hookShow('before', 'ftp', 'nlist', array($this->_ftp, $remoteDirectory, $recursive, $filter));
+			$plugin = plugins::hookCall('before', 'ftp', 'nlist', array($this->_ftp, $remoteDirectory, $recursive, $filter));
 
 			if($plugin != null)
 			{
@@ -618,7 +618,7 @@ class ftp
 			throw new ftpException('Error: unable to list directory');
 		}
 
-		$result  = [];
+		$result  = array();
 		$dir_len = strlen($remoteDirectory);
 
 		if(($kdot = array_search('.', $files)) !== false)
@@ -645,7 +645,7 @@ class ftp
 
 		$flatten = function(array $arr) use (&$flatten)
 		{
-			$flat = [];
+			$flat = array();
 			foreach($arr as $v)
 			{
 				if(is_array($v))
@@ -712,8 +712,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'mkdir', [$this->_ftp, $remoteDirectory, $recursive]);
-			$plugin = plugins::hookCall('before', 'ftp', 'mkdir', [$this->_ftp, $remoteDirectory, $recursive]);
+			plugins::hookShow('before', 'ftp', 'mkdir', array($this->_ftp, $remoteDirectory, $recursive));
+			$plugin = plugins::hookCall('before', 'ftp', 'mkdir', array($this->_ftp, $remoteDirectory, $recursive));
 
 			if($plugin != null)
 			{
@@ -780,8 +780,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'remove', [$this->_ftp, $remoteFile]);
-			$plugin = plugins::hookCall('before', 'ftp', 'remove', [$this->_ftp, $remoteFile]);
+			plugins::hookShow('before', 'ftp', 'remove', array($this->_ftp, $remoteFile));
+			$plugin = plugins::hookCall('before', 'ftp', 'remove', array($this->_ftp, $remoteFile));
 
 			if($plugin != null)
 			{
@@ -815,8 +815,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'rmdir', [$this->_ftp, $remoteDirectory, $recursive]);
-			$plugin = plugins::hookCall('before', 'ftp', 'rmdir', [$this->_ftp, $remoteDirectory, $recursive]);
+			plugins::hookShow('before', 'ftp', 'rmdir', array($this->_ftp, $remoteDirectory, $recursive));
+			$plugin = plugins::hookCall('before', 'ftp', 'rmdir', array($this->_ftp, $remoteDirectory, $recursive));
 
 			if($plugin != null)
 			{
@@ -878,8 +878,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'cleanDir', [$this->_ftp, $remoteDirectory]);
-			$plugin = plugins::hookCall('before', 'ftp', 'cleanDir', [$this->_ftp, $remoteDirectory]);
+			plugins::hookShow('before', 'ftp', 'cleanDir', array($this->_ftp, $remoteDirectory));
+			$plugin = plugins::hookCall('before', 'ftp', 'cleanDir', array($this->_ftp, $remoteDirectory));
 
 			if($plugin != null)
 			{
@@ -923,8 +923,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'scanDir', [$this->_ftp, $remoteDirectory, $recursive]);
-			$plugin = plugins::hookCall('before', 'ftp', 'scanDir', [$this->_ftp, $remoteDirectory, $recursive]);
+			plugins::hookShow('before', 'ftp', 'scanDir', array($this->_ftp, $remoteDirectory, $recursive));
+			$plugin = plugins::hookCall('before', 'ftp', 'scanDir', array($this->_ftp, $remoteDirectory, $recursive));
 
 			if($plugin != null)
 			{
@@ -953,8 +953,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'rawlist', [$this->_ftp, $remoteDirectory, $recursive]);
-			$plugin = plugins::hookCall('before', 'ftp', 'rawlist', [$this->_ftp, $remoteDirectory, $recursive]);
+			plugins::hookShow('before', 'ftp', 'rawlist', array($this->_ftp, $remoteDirectory, $recursive));
+			$plugin = plugins::hookCall('before', 'ftp', 'rawlist', array($this->_ftp, $remoteDirectory, $recursive));
 
 			if($plugin != null)
 			{
@@ -968,7 +968,7 @@ class ftp
 		}
 
 		$list  = @ftp_rawlist($this->_ftp, $remoteDirectory);
-		$items = [];
+		$items = array();
 
 		if($recursive === false)
 		{
@@ -1070,8 +1070,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'parseRawList', [$this->_ftp, $rawlist]);
-			$plugin = plugins::hookCall('before', 'ftp', 'parseRawList', [$this->_ftp, $rawlist]);
+			plugins::hookShow('before', 'ftp', 'parseRawList', array($this->_ftp, $rawlist));
+			$plugin = plugins::hookCall('before', 'ftp', 'parseRawList', array($this->_ftp, $rawlist));
 
 			if($plugin != null)
 			{
@@ -1079,7 +1079,7 @@ class ftp
 			}
 		}
 
-		$items = [];
+		$items = array();
 		$path  = '';
 
 		foreach($rawlist as $key => $child)
@@ -1103,7 +1103,7 @@ class ftp
 				continue;
 			}
 
-			$item = ['permissions' => $chunks[0], 'number' => $chunks[1], 'owner' => $chunks[2], 'group' => $chunks[3], 'size' => $chunks[4], 'month' => $chunks[5], 'day' => $chunks[6], 'time' => $chunks[7], 'name' => $chunks[8], 'type' => $this->raw_to_type($chunks[0]),];
+			$item = array('permissions' => $chunks[0], 'number' => $chunks[1], 'owner' => $chunks[2], 'group' => $chunks[3], 'size' => $chunks[4], 'month' => $chunks[5], 'day' => $chunks[6], 'time' => $chunks[7], 'name' => $chunks[8], 'type' => $this->raw_to_type($chunks[0]),);
 
 			if($item['type'] == 'link')
 			{
@@ -1150,8 +1150,8 @@ class ftp
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'ftp', 'rawToType', [$this->_ftp, $permission]);
-			$plugin = plugins::hookCall('before', 'ftp', 'rawToType', [$this->_ftp, $permission]);
+			plugins::hookShow('before', 'ftp', 'rawToType', array($this->_ftp, $permission));
+			$plugin = plugins::hookCall('before', 'ftp', 'rawToType', array($this->_ftp, $permission));
 
 			if($plugin != null)
 			{

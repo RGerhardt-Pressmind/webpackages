@@ -47,7 +47,7 @@ class database extends \PDO
 	 * @var array Eine Liste aller erlaubten PDO Treiber die verwendet werden dürfen. Erlaubt sind: mysql, cubrid,
 	 *      dblib, firebird, informix, sqlsrv, oci, pgsql, sqlite und sqlite2
 	 */
-	public static $allowedDrivers = ['mysql', 'cubrid', 'dblib', 'firebird', 'informix', 'sqlsrv', 'oci', 'pgsql', 'sqlite', 'sqlite2'];
+	public static $allowedDrivers = array('mysql', 'cubrid', 'dblib', 'firebird', 'informix', 'sqlsrv', 'oci', 'pgsql', 'sqlite', 'sqlite2');
 
 	/**
 	 * @var string Der aktuell benutzte PDO Treiber
@@ -171,7 +171,7 @@ class database extends \PDO
 
 		if(empty($options) === true)
 		{
-			$options = [];
+			$options = array();
 		}
 
 		if(in_array($driver, self::$allowedDrivers) === false)
@@ -224,7 +224,7 @@ class database extends \PDO
 	{
 		if($this->isInit === false)
 		{
-			return [];
+			return array();
 		}
 
 		if(is_string($sql) === false || empty($sql) === true)
@@ -245,7 +245,7 @@ class database extends \PDO
 
 		if(is_array($stmt) === false || empty($stmt[0]) === true)
 		{
-			return [];
+			return array();
 		}
 		else
 		{
@@ -266,7 +266,7 @@ class database extends \PDO
 	{
 		if($this->isInit === false)
 		{
-			return [];
+			return array();
 		}
 
 		if(empty($sql) === true)
@@ -431,7 +431,7 @@ class database extends \PDO
 					}
 					else
 					{
-						return [];
+						return array();
 					}
 				}
 			}
@@ -463,7 +463,7 @@ class database extends \PDO
 		SET
 		';
 
-		$execute = [];
+		$execute = array();
 
 		foreach($setParameter as $key => $value)
 		{
@@ -521,7 +521,7 @@ class database extends \PDO
 		SET
 		';
 
-		$execute = [];
+		$execute = array();
 
 		foreach($setParameter as $key => $value)
 		{
@@ -615,7 +615,7 @@ class database extends \PDO
 	 */
 	public function deleteTable($table, $whereParameter, $limit = 0)
 	{
-		$execute = [];
+		$execute = array();
 
 		$deleteTable = '
 		DELETE FROM

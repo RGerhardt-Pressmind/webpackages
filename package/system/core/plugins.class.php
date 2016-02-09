@@ -46,7 +46,7 @@ class plugins implements IStatic
 	/**
 	 * @var array Bereits definierte Plugins
 	 */
-	public static $definedPluginsClasses = [];
+	public static $definedPluginsClasses = array();
 
 	const BEFORE = 'before';
 	const AFTER  = 'after';
@@ -103,7 +103,7 @@ class plugins implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function hookShow($position, $classes, $methode, $args = [])
+	public static function hookShow($position, $classes, $methode, $args = array())
 	{
 		if(empty(self::$definedPluginsClasses) === false)
 		{
@@ -113,7 +113,7 @@ class plugins implements IStatic
 			{
 				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
 				{
-					call_user_func_array([$class, $pointer], $args);
+					call_user_func_array(array($class, $pointer), $args);
 				}
 			}
 		}
@@ -130,7 +130,7 @@ class plugins implements IStatic
 	 *
 	 * @return mixed Gibt das Resultat des Plugins zurück und gibt es aus.
 	 */
-	public static function hookCall($position, $classes, $methode, $args = [])
+	public static function hookCall($position, $classes, $methode, $args = array())
 	{
 		if(empty(self::$definedPluginsClasses) === false)
 		{
@@ -140,7 +140,7 @@ class plugins implements IStatic
 			{
 				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
 				{
-					$plugin = call_user_func_array([$class, $pointer], $args);
+					$plugin = call_user_func_array(array($class, $pointer), $args);
 
 					if($plugin != null)
 					{
@@ -163,7 +163,7 @@ class plugins implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function hookTemplate($template, $position, $args = [])
+	public static function hookTemplate($template, $position, $args = array())
 	{
 		if(empty(self::$definedPluginsClasses) === false)
 		{
@@ -173,7 +173,7 @@ class plugins implements IStatic
 			{
 				if($class instanceof IPlugin && method_exists($class, $methode) === true)
 				{
-					$plugin = call_user_func_array([$class, $methode], $args);
+					$plugin = call_user_func_array(array($class, $methode), $args);
 
 					if($plugin != null)
 					{
@@ -191,7 +191,7 @@ class plugins implements IStatic
 	 */
 	public static function getAllDefinedPlugins()
 	{
-		$back = [];
+		$back = array();
 
 		if(empty(self::$definedPluginsClasses) === false)
 		{

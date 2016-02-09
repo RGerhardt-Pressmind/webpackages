@@ -54,10 +54,11 @@ class autoload
 	 * @param bool   $isStatic   Wenn es sich um eine statische Klasse handelt
 	 * @param array  $parameter  Parameter für den Konstruktor der Klasse. Er muss ein Assoziatives Array sein
 	 *
-	 * @throws autoloadException Wird ausgegeben wenn der Klassennamen leer ist oder die Klasse nicht geladen werden konnte
+	 * @throws autoloadException Wird ausgegeben wenn der Klassennamen leer ist oder die Klasse nicht geladen werden
+	 *                           konnte
 	 * @return mixed Gibt die Klasseninstanz zurück oder bei einer statischen Klasse ein true
 	 */
-	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = [])
+	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array())
 	{
 		if(empty($class_name) === true)
 		{

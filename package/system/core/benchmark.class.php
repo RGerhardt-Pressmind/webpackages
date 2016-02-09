@@ -55,7 +55,7 @@ class benchmark implements IStatic
 	/**
 	 * @var array Definiert die Start/End/Mittel Zeiten des Benchmark Ergebnisses
 	 */
-	private static $startTime, $endTime, $middleTime = [];
+	private static $startTime, $endTime, $middleTime = array();
 
 	/**
 	 * Zum initialisieren von Daten
@@ -123,12 +123,12 @@ class benchmark implements IStatic
 
 		if(empty(self::$middleTime) === false)
 		{
-			$diff = ['startTime' => self::$startTime, 'endTime' => self::$endTime, 'middleTime' => self::$middleTime, 'diff' => $diff];
+			$diff = array('startTime' => self::$startTime, 'endTime' => self::$endTime, 'middleTime' => self::$middleTime, 'diff' => $diff);
 		}
 
 		self::$startTime  = '';
 		self::$endTime    = '';
-		self::$middleTime = [];
+		self::$middleTime = array();
 
 		return $diff;
 	}

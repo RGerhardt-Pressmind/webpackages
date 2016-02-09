@@ -68,12 +68,12 @@ class cache implements IStatic
 	 */
 	public static function init()
 	{
-		if(empty(CACHE_PATH) === false)
+		if(CACHE_PATH != '')
 		{
 			self::set_cache_dir(CACHE_PATH);
 		}
 
-		if(empty(CACHE_EXTENSION) === false)
+		if(CACHE_EXTENSION != '')
 		{
 			self::set_cache_extension(CACHE_EXTENSION);
 		}
@@ -176,8 +176,8 @@ class cache implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'cache', 'get_template_element', [$cache_name, $lifetime]);
-			$plugin = plugins::hookCall('before', 'cache', 'setElget_template_elementement', [$cache_name, $lifetime]);
+			plugins::hookShow('before', 'cache', 'get_template_element', array($cache_name, $lifetime));
+			$plugin = plugins::hookCall('before', 'cache', 'setElget_template_elementement', array($cache_name, $lifetime));
 
 			if($plugin != null)
 			{
@@ -201,8 +201,8 @@ class cache implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'cache', 'get_template_element', [$cacheFile]);
-			$plugin = plugins::hookCall('after', 'cache', 'get_template_element', [$cacheFile]);
+			plugins::hookShow('after', 'cache', 'get_template_element', array($cacheFile));
+			$plugin = plugins::hookCall('after', 'cache', 'get_template_element', array($cacheFile));
 
 			if($plugin != null)
 			{
@@ -237,8 +237,8 @@ class cache implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'cache', 'setElement', [$cache_name, $content, $lifetime]);
-			$plugin = plugins::hookCall('before', 'cache', 'setElement', [$cache_name, $content, $lifetime]);
+			plugins::hookShow('before', 'cache', 'setElement', array($cache_name, $content, $lifetime));
+			$plugin = plugins::hookCall('before', 'cache', 'setElement', array($cache_name, $content, $lifetime));
 
 			if($plugin != null)
 			{
@@ -258,14 +258,14 @@ class cache implements IStatic
 			return false;
 		}
 
-		$serialize = @serialize(['lifetime' => (time() + $lifetime), 'content' => $content]);
+		$serialize = @serialize(array('lifetime' => (time() + $lifetime), 'content' => $content));
 		$cachePath = self::$cacheDir.$cache_name.self::$cacheExtension;
 		$saveFile  = @file_put_contents($cachePath, $serialize);
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'cache', 'setElement', [$cachePath]);
-			$plugin = plugins::hookCall('after', 'cache', 'setElement', [$cachePath]);
+			plugins::hookShow('after', 'cache', 'setElement', array($cachePath));
+			$plugin = plugins::hookCall('after', 'cache', 'setElement', array($cachePath));
 
 			if($plugin != null)
 			{
@@ -295,8 +295,8 @@ class cache implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'cache', 'getElement', [$cache_name]);
-			$plugin = plugins::hookCall('before', 'cache', 'getElement', [$cache_name]);
+			plugins::hookShow('before', 'cache', 'getElement', array($cache_name));
+			$plugin = plugins::hookCall('before', 'cache', 'getElement', array($cache_name));
 
 			if($plugin != null)
 			{
@@ -356,8 +356,8 @@ class cache implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'cache', 'deleteElement', [$cache_name]);
-			$plugins = plugins::hookCall('before', 'cache', 'deleteElement', [$cache_name]);
+			plugins::hookShow('before', 'cache', 'deleteElement', array($cache_name));
+			$plugins = plugins::hookCall('before', 'cache', 'deleteElement', array($cache_name));
 
 			if($plugins != null)
 			{
@@ -380,8 +380,8 @@ class cache implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'cache', 'deleteElement', [$filename, $remove]);
-			$plugins = plugins::hookCall('after', 'cache', 'deleteElement', [$filename, $remove]);
+			plugins::hookShow('after', 'cache', 'deleteElement', array($filename, $remove));
+			$plugins = plugins::hookCall('after', 'cache', 'deleteElement', array($filename, $remove));
 
 			if($plugins != null)
 			{

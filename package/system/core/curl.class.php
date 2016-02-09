@@ -91,7 +91,7 @@ class curl implements IStatic
 	 * @return mixed
 	 * @throws curlException Wenn die Extension nicht installiert ist.
 	 */
-	public static function get_data($url, $postfields = [], $ssl = false)
+	public static function get_data($url, $postfields = array(), $ssl = false)
 	{
 		if(self::curl_extension_exists() === false)
 		{
@@ -100,8 +100,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'get_data', [$url, $postfields, $ssl]);
-			$plugins = plugins::hookCall('before', 'curl', 'get_data', [$url, $postfields, $ssl]);
+			plugins::hookShow('before', 'curl', 'get_data', array($url, $postfields, $ssl));
+			$plugins = plugins::hookCall('before', 'curl', 'get_data', array($url, $postfields, $ssl));
 
 			if($plugins != null)
 			{
@@ -139,8 +139,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'get_data', [$data]);
-			$plugins = plugins::hookCall('after', 'curl', 'get_data', [$data]);
+			plugins::hookShow('after', 'curl', 'get_data', array($data));
+			$plugins = plugins::hookCall('after', 'curl', 'get_data', array($data));
 
 			if($plugins != null)
 			{
@@ -168,8 +168,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'get_status', [$url]);
-			$plugins = plugins::hookCall('before', 'curl', 'get_status', [$url]);
+			plugins::hookShow('before', 'curl', 'get_status', array($url));
+			$plugins = plugins::hookCall('before', 'curl', 'get_status', array($url));
 
 			if($plugins != null)
 			{
@@ -197,8 +197,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'get_status', [(int)$httpcode]);
-			$plugins = plugins::hookCall('after', 'curl', 'get_status', [(int)$httpcode]);
+			plugins::hookShow('after', 'curl', 'get_status', array((int)$httpcode));
+			$plugins = plugins::hookCall('after', 'curl', 'get_status', array((int)$httpcode));
 
 			if($plugins != null)
 			{
@@ -226,8 +226,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'curl', 'get_city_coordinates', [$city]);
-			$plugins = plugins::hookCall('before', 'curl', 'get_city_coordinates', [$city]);
+			plugins::hookShow('before', 'curl', 'get_city_coordinates', array($city));
+			$plugins = plugins::hookCall('before', 'curl', 'get_city_coordinates', array($city));
 
 			if($plugins != null)
 			{
@@ -258,13 +258,13 @@ class curl implements IStatic
 		}
 		else
 		{
-			$data = [];
+			$data = array();
 		}
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'get_city_coordinates', [$data]);
-			$plugins = plugins::hookCall('after', 'curl', 'get_city_coordinates', [$data]);
+			plugins::hookShow('after', 'curl', 'get_city_coordinates', array($data));
+			$plugins = plugins::hookCall('after', 'curl', 'get_city_coordinates', array($data));
 
 			if($plugins != null)
 			{
@@ -317,8 +317,8 @@ class curl implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'curl', 'get_city_name_by_ip', [$query]);
-			$plugins = plugins::hookCall('after', 'curl', 'get_city_name_by_ip', [$query]);
+			plugins::hookShow('after', 'curl', 'get_city_name_by_ip', array($query));
+			$plugins = plugins::hookCall('after', 'curl', 'get_city_name_by_ip', array($query));
 
 			if($plugins != null)
 			{

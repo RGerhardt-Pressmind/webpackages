@@ -60,7 +60,7 @@ class zip
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'zip', 'createZipArchive', [$folder, $destination, $zipName]);
+			$plugin = plugins::hookCall('before', 'zip', 'createZipArchive', array($folder, $destination, $zipName));
 
 			if($plugin != null)
 			{
@@ -78,7 +78,7 @@ class zip
 		$zipName = rtrim($zipName, '.zip');
 		$zipName = rtrim($zipName, '.');
 
-		$destination = str_replace(['/', '\\'], [SEP, SEP], $destination);
+		$destination = str_replace(array('/', '\\'), array(SEP, SEP), $destination);
 		$destination = rtrim($destination, SEP).SEP;
 
 		if(file_exists($destination) === false)
@@ -138,7 +138,7 @@ class zip
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'zip', 'addFileToZipArchive', [$rootFolder, $file, $zipArchive]);
+			$plugin = plugins::hookCall('before', 'zip', 'addFileToZipArchive', array($rootFolder, $file, $zipArchive));
 
 			if($plugin != null)
 			{
@@ -151,9 +151,9 @@ class zip
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
 
-		$rootFolder = str_replace(['/', '\\'], [SEP, SEP], $rootFolder);
-		$file       = str_replace(['/', '\\'], [SEP, SEP], $file);
-		$zipArchive = str_replace(['/', '\\'], [SEP, SEP], $zipArchive);
+		$rootFolder = str_replace(array('/', '\\'), array(SEP, SEP), $rootFolder);
+		$file       = str_replace(array('/', '\\'), array(SEP, SEP), $file);
+		$zipArchive = str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive);
 
 		$file       = new \SplFileInfo($file);
 		$rootFolder = new \SplFileInfo($rootFolder);
@@ -204,7 +204,7 @@ class zip
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'zip', 'extractZipArchive', [$zipArchive, $destinationFolder, $removeZipArchiveAfterExtract]);
+			$plugin = plugins::hookCall('before', 'zip', 'extractZipArchive', array($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract));
 
 			if($plugin != null)
 			{
@@ -217,8 +217,8 @@ class zip
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
 
-		$zipArchive        = str_replace(['/', '\\'], [SEP, SEP], $zipArchive);
-		$destinationFolder = str_replace(['/', '\\'], [SEP, SEP], $destinationFolder);
+		$zipArchive        = str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive);
+		$destinationFolder = str_replace(array('/', '\\'), array(SEP, SEP), $destinationFolder);
 
 		$zipArchive        = new \SplFileInfo($zipArchive);
 		$destinationFolder = new \SplFileInfo($destinationFolder);

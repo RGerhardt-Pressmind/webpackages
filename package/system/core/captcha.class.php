@@ -63,8 +63,8 @@ class captcha
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'captcha', 'createCaptcha', [$img_path, $img_url, $font_path]);
-			$plugins = plugins::hookCall('before', 'captcha', 'createCaptcha', [$img_path, $img_url, $font_path]);
+			plugins::hookShow('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
+			$plugins = plugins::hookCall('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
 
 			if($plugins != null)
 			{
@@ -249,12 +249,12 @@ class captcha
 
 		ImageDestroy($im);
 
-		$back = ['word' => $word, 'time' => $now, 'image' => $img, 'filepath' => $img_path.$img_name];
+		$back = array('word' => $word, 'time' => $now, 'image' => $img, 'filepath' => $img_path.$img_name);
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'captcha', 'createCaptcha', [$back]);
-			$plugins = plugins::hookCall('after', 'captcha', 'createCaptcha', [$back]);
+			plugins::hookShow('after', 'captcha', 'createCaptcha', array($back));
+			$plugins = plugins::hookCall('after', 'captcha', 'createCaptcha', array($back));
 
 			if($plugins != null)
 			{

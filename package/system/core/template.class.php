@@ -45,7 +45,7 @@ use package\exceptions\templateException;
  */
 class template
 {
-	protected $contentData = [], $caching = false, $gzip = true, $tempDir, $header, $footer, $skin;
+	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer, $skin;
 
 	/**
 	 * Setzt die Standard Werte
@@ -163,9 +163,12 @@ class template
 	{
 		ob_start();
 
-		foreach($this->contentData as $key => $value)
+		if(empty($this->contentData) === false)
 		{
-			${$key} = $value;
+			foreach($this->contentData as $key => $value)
+			{
+				${$key} = $value;
+			}
 		}
 
 		$templateFile = $this->tempDir.$this->skin.SEP.$template;
@@ -252,9 +255,12 @@ class template
 	{
 		ob_start();
 
-		foreach($this->contentData as $key => $value)
+		if(empty($this->contentData) === false)
 		{
-			${$key} = $value;
+			foreach($this->contentData as $key => $value)
+			{
+				${$key} = $value;
+			}
 		}
 
 		$templatePath = $this->tempDir.$this->skin.SEP.$template;
@@ -336,9 +342,12 @@ class template
 	{
 		ob_start();
 
-		foreach($this->contentData as $key => $value)
+		if(empty($this->contentData) === false)
 		{
-			${$key} = $value;
+			foreach($this->contentData as $key => $value)
+			{
+				${$key} = $value;
+			}
 		}
 
 		$templatePath = $this->tempDir.$this->skin.SEP.$template;

@@ -29,7 +29,7 @@ $controllPaths	=	array(LANGUAGE_PATH, CACHE_PATH, TEMPLATE_DIR, PACKAGE_DIR, DYN
 
 foreach($controllPaths as $path)
 {
-	if(!empty($path))
+	if($path != '')
 	{
 		if(is_dir($path) === false)
 		{

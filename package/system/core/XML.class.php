@@ -63,7 +63,7 @@ class XML
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookCall('before', 'XML', 'loadXML', [$xml]);
+			plugins::hookCall('before', 'XML', 'loadXML', array($xml));
 		}
 
 		//XML von einer URL laden
@@ -127,7 +127,7 @@ class XML
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'XML', 'toArray', [$this->xml]);
+			$plugin = plugins::hookCall('before', 'XML', 'toArray', array($this->xml));
 
 			if($plugin != null)
 			{
@@ -156,7 +156,7 @@ class XML
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'XML', 'toObject', [$this->xml]);
+			$plugin = plugins::hookCall('before', 'XML', 'toObject', array($this->xml));
 
 			if($plugin != null)
 			{
@@ -185,7 +185,7 @@ class XML
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			$plugin = plugins::hookCall('before', 'XML', 'getSimpleXML', [$this->xml]);
+			$plugin = plugins::hookCall('before', 'XML', 'getSimpleXML', array($this->xml));
 
 			if($plugin != null)
 			{
