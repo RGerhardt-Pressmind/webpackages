@@ -65,10 +65,10 @@ class template
 	 */
 	public function __destruct()
 	{
-		$this->tempDir     = null;
-		$this->header      = null;
-		$this->footer      = null;
-		$this->skin        = null;
+		$this->tempDir = null;
+		$this->header  = null;
+		$this->footer  = null;
+		$this->skin    = null;
 
 		foreach($this->contentData as $key => $value)
 		{

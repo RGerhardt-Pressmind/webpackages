@@ -213,7 +213,6 @@ class language implements IStatic
 		return gettext($text);
 	}
 
-
 	/**
 	 * Gibt die Liste aller Sprachpakete zurück
 	 *

@@ -239,7 +239,8 @@ class database extends \PDO
 		}
 		catch(\PDOException $e)
 		{
-			$this->error_info	=	$e->getMessage();
+			$this->error_info = $e->getMessage();
+
 			return false;
 		}
 
@@ -288,7 +289,8 @@ class database extends \PDO
 		}
 		catch(\PDOException $e)
 		{
-			$this->error_info	=	$e->getMessage();
+			$this->error_info = $e->getMessage();
+
 			return false;
 		}
 
@@ -322,7 +324,7 @@ class database extends \PDO
 		}
 		catch(\PDOException $e)
 		{
-			$this->error_info	=	$e->getMessage();
+			$this->error_info = $e->getMessage();
 			$this->rollBack();
 
 			return false;
@@ -442,7 +444,8 @@ class database extends \PDO
 		}
 		catch(\PDOException $e)
 		{
-			$this->error_info	=	$e->getMessage();
+			$this->error_info = $e->getMessage();
+
 			return false;
 		}
 	}
