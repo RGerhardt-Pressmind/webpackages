@@ -71,8 +71,6 @@ $myPaths[] = SYSTEM_PATH;
 $myPaths[] = IMPLEMENT_DIR;
 $myPaths[] = CORE_DIR;
 $myPaths[] = LIB_DIR;
-$myPaths[] = LIB_DIR.'gettext';
-$myPaths[] = LIB_DIR.'gettext'.SEP.'php5';
 $myPaths[] = LIB_DIR.'PHPMailer';
 $myPaths[] = LIB_DIR.'minifiy';
 
@@ -153,9 +151,6 @@ if(defined('EXCEPTION_DIR') === true && empty(EXCEPTION_DIR) === false)
 		}
 	}
 }
-
-require 'gettext_reader.php';
-require 'FileReader.php';
 
 require 'autoload.class.php';
 

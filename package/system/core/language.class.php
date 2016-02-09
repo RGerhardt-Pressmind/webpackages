@@ -41,7 +41,7 @@ use package\implement\IStatic;
  */
 class language implements IStatic
 {
-	private static $userLng, $lngPath, $defaultLng = 'de_DE', $gettext_reader;
+	private static $userLng, $lngPath, $defaultLng = 'de_DE', $loadLanguageFile;
 
 	/**
 	 * @var array Alle erlaubten locales
@@ -165,19 +165,14 @@ class language implements IStatic
 			self::$userLng = self::$defaultLng;
 		}
 
+		putenv('LC_ALL='.self::$userLng);
 		setlocale(LC_ALL, self::$userLng);
+
+		bindtextdomain(self::$userLng, self::$lngPath);
 
 		$folderName = explode('.', self::$userLng);
 
-		if($ignoreFileExists === false && file_exists(self::$lngPath.$folderName[0].SEP.self::$userLng.'.mo') === false)
-		{
-			return false;
-		}
-
-		$moFile = self::$lngPath.$folderName[0].SEP.self::$userLng.'.mo';
-
-		$localeFile           = new \FileReader($moFile);
-		self::$gettext_reader = new \gettext_reader($localeFile);
+		$moFile = self::$lngPath.$folderName[0].SEP.'LC_MESSAGES'.SEP.self::$userLng.'.mo';
 
 		if(class_exists('\package\core\plugins') === true)
 		{
@@ -213,8 +208,11 @@ class language implements IStatic
 			}
 		}
 
-		return self::$gettext_reader->translate($text);
+		textdomain(self::$userLng);
+
+		return gettext($text);
 	}
+
 
 	/**
 	 * Gibt die Liste aller Sprachpakete zurück
@@ -280,4 +278,4 @@ class language implements IStatic
 
 		return $locale_data;
 	}
-} 
+}
