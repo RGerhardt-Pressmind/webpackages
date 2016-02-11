@@ -162,14 +162,7 @@ class FileSystem extends initiator implements IStatic
 				}
 			}
 
-			$newSort = array();
-
-			foreach($back as $file)
-			{
-				$newSort[] = $file;
-			}
-
-			$back = $newSort;
+			sort($back);
 		}
 
 		return $back;
@@ -201,14 +194,14 @@ class FileSystem extends initiator implements IStatic
 				{
 					if($file->isFile() === true)
 					{
-						if(unlink($file->__toString()) === false)
+						if(@unlink($file->__toString()) === false)
 						{
 							return false;
 						}
 					}
 					elseif($file->isDir() === true)
 					{
-						if(rmdir($file->__toString()) === false)
+						if(@rmdir($file->__toString()) === false)
 						{
 							return false;
 						}
@@ -219,7 +212,7 @@ class FileSystem extends initiator implements IStatic
 
 		if($delete_dir === true)
 		{
-			if(rmdir($path) === false)
+			if(@rmdir($path) === false)
 			{
 				return false;
 			}
@@ -243,7 +236,10 @@ class FileSystem extends initiator implements IStatic
 	{
 		if(file_exists($dest) === false)
 		{
-			mkdir($dest, $chmod);
+			if(@mkdir($dest, $chmod) === false)
+			{
+				throw new \Exception('Error: directory '.$dest.' can not created');
+			}
 		}
 
 		if(is_dir($source) === true)
@@ -255,36 +251,33 @@ class FileSystem extends initiator implements IStatic
 			{
 				foreach($iterator as $file)
 				{
-					if($file instanceof \SplFileInfo)
+					if($file->isDir() === true)
 					{
-						if($file->isDir() === true)
-						{
-							$newPath = str_replace($source, $dest, $file->__toString());
+						$newPath = str_replace($source, $dest, $file->__toString());
 
-							if(file_exists($newPath) === false)
+						if(file_exists($newPath) === false)
+						{
+							if(@mkdir($newPath, $chmod, true) === false)
 							{
-								if(mkdir($newPath, $chmod, true) === false)
-								{
-									return false;
-								}
+								return false;
 							}
 						}
-						else
+					}
+					else
+					{
+						$newPath = str_replace($source, $dest, $file->__toString());
+						$copy    = @copy($file->__toString(), $newPath);
+
+						if($copy === false)
 						{
-							$newPath = str_replace($source, $dest, $file->__toString());
-							$copy    = copy($file->__toString(), $newPath);
+							return false;
+						}
 
-							if($copy === false)
-							{
-								return false;
-							}
+						$chmod = @chmod($newPath, $chmod);
 
-							$chmod = chmod($newPath, $chmod);
-
-							if($chmod === false)
-							{
-								return false;
-							}
+						if($chmod === false)
+						{
+							return false;
 						}
 					}
 				}
@@ -292,7 +285,7 @@ class FileSystem extends initiator implements IStatic
 		}
 		else
 		{
-			$copy = copy($source, $dest);
+			$copy = @copy($source, $dest);
 
 			if($copy === false)
 			{
@@ -318,12 +311,16 @@ class FileSystem extends initiator implements IStatic
 	 * @param int    $chmod  Ändert Anschließend die Zugriffsrechte, wenn erlaubt. Standartmäßig "0755"
 	 *
 	 * @return bool Gibt true bei Erfolg und false bei einem Fehler zurück.
+	 * @throws \Exception
 	 */
 	public static function _renameDirectory($source, $dest, $chmod = 0755)
 	{
 		if(file_exists($dest) === false)
 		{
-			mkdir($dest, $chmod, true);
+			if(@mkdir($dest, $chmod, true) === false)
+			{
+				throw new \Exception('Error: directory '.$dest.' can not created');
+			}
 		}
 
 		if(is_dir($source) === true)
@@ -335,43 +332,40 @@ class FileSystem extends initiator implements IStatic
 			{
 				foreach($iterator as $file)
 				{
-					if($file instanceof \SplFileInfo)
+					if($file->isFile() === true)
 					{
-						if($file->isFile() === true)
+						if(file_exists($file->getPath()) === false)
 						{
-							if(file_exists($file->getPath()) === false)
-							{
-								if(mkdir($file->getPath(), $chmod, true) === false)
-								{
-									return false;
-								}
-							}
-
-							$newPath = str_replace($source, $dest, $file->__toString());
-							$rename  = rename($file->__toString(), $newPath);
-
-							if($rename === false)
-							{
-								return false;
-							}
-
-							$chmod = chmod($newPath, $chmod);
-
-							if($chmod === false)
+							if(@mkdir($file->getPath(), $chmod, true) === false)
 							{
 								return false;
 							}
 						}
-						elseif($file->isDir() === true)
-						{
-							$newPath = str_replace($source, $dest, $file->__toString());
 
-							if(file_exists($newPath) === false)
+						$newPath = str_replace($source, $dest, $file->__toString());
+						$rename  = @rename($file->__toString(), $newPath);
+
+						if($rename === false)
+						{
+							return false;
+						}
+
+						$chmod = @chmod($newPath, $chmod);
+
+						if($chmod === false)
+						{
+							return false;
+						}
+					}
+					elseif($file->isDir() === true)
+					{
+						$newPath = str_replace($source, $dest, $file->__toString());
+
+						if(file_exists($newPath) === false)
+						{
+							if(@mkdir($newPath, $chmod, true) === false)
 							{
-								if(mkdir($newPath, $chmod, true) === false)
-								{
-									return false;
-								}
+								return false;
 							}
 						}
 					}
@@ -387,14 +381,14 @@ class FileSystem extends initiator implements IStatic
 		}
 		else
 		{
-			$rename = rename($source, $dest);
+			$rename = @rename($source, $dest);
 
 			if($rename === false)
 			{
 				return false;
 			}
 
-			$chmod = chmod($dest, $chmod);
+			$chmod = @chmod($dest, $chmod);
 
 			if($chmod === false)
 			{

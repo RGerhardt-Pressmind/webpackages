@@ -107,7 +107,7 @@ class errors extends initiator
 			throw new \Exception('Error: error code '.$errorCode.' not allowed. Allowed: '.implode(',', $this->callErrors));
 		}
 
-		header('HTTP 1.1/'.$errorCode.' '.$this->callErrors[$errorCode]);
+		header('HTTP 1.1/'.$errorCode.' '.$this->callErrors[$errorCode], true, $errorCode);
 		exit;
 	}
 }

@@ -42,7 +42,7 @@ define('HTTP', $base_url);
 /**
  * Systemunabhängiger Seperator
  */
-define('SEP', DIRECTORY_SEPARATOR);#
+define('SEP', DIRECTORY_SEPARATOR);
 
 /**
  * Betriebssystem kürzel
