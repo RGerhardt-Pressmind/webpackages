@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\securityException;
+use package\system\core\initiator;
 
 /**
  * Überprüft jeglichen Input eines Benutzer
@@ -40,22 +41,8 @@ use package\exceptions\securityException;
  * @category       security
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class security
+class security extends initiator
 {
-	/**
-	 * @var array Erlaubte Bildtypen
-	 */
-	public static $allowedImages = array(
-		'image/gif',
-		'image/jpeg',
-		'image/png'
-	);
-
-	/**
-	 * @var array Erlaubte Dateitypen
-	 */
-	public static $allowedFiles = array('application/zip');
-
 	/**
 	 * @var string Der XSS-Hash
 	 */
@@ -122,7 +109,7 @@ class security
 	);
 
 	/**
-	 * @var array Liste nicht erlaubter Schnippsel in Strings
+	 * @var array Liste nicht erlaubter Schnipsel in Strings
 	 */
 	protected static $_never_allowed_str = array(
 		'document.cookie' => '[removed]',
@@ -352,19 +339,8 @@ class security
 	 * @throws securityException
 	 * @return bool|mixed Gibt MIME-Type zurück.
 	 */
-	public static function get_mime_type($path)
+	public static function _get_mime_type($path)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow(plugins::BEFORE, __CLASS__, __METHOD__, array($path));
-			$plugins = plugins::hookCall('before', 'security', 'get_mime_type', array($path));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(function_exists('finfo_open') === false)
 		{
 			throw new securityException('finfo extensio not loaded');
@@ -374,17 +350,6 @@ class security
 		$mime_type = finfo_file($finfo, $path);
 
 		finfo_close($finfo);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'security', 'get_mime_type', array($mime_type));
-			$plugins = plugins::hookCall('after', 'security', 'get_mime_type', array($mime_type));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
 
 		return $mime_type;
 	}
@@ -397,19 +362,8 @@ class security
 	 * @throws securityException
 	 * @return mixed Gibt die Dateierweiterung zurück.
 	 */
-	public static function get_file_type($path)
+	public static function _get_file_type($path)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'security', 'get_file_type', array($path));
-			$plugins = plugins::hookCall('before', 'security', 'get_file_type', array($path));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(class_exists('\SplFileInfo') === false)
 		{
 			throw new securityException('Error: SplFileInfo in php not installed');
@@ -432,7 +386,7 @@ class security
 	 */
 	public static function shaSec($string)
 	{
-		return self::sha_sec($string);
+		return self::_sha_sec($string);
 	}
 
 	/**
@@ -443,19 +397,8 @@ class security
 	 * @throws securityException
 	 * @return string Gibt den SHA512 Verschlüsselten String zurück.
 	 */
-	public static function sha_sec($string)
+	public static function _sha_sec($string)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'security', 'sha_sec', array($string));
-			$plugins = plugins::hookCall('before', 'security', 'sha_sec', array($string));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(function_exists('hash_hmac') === false)
 		{
 			throw new securityException('hash extension not loaded');
@@ -469,10 +412,6 @@ class security
 	/**
 	 * Säubert einen String vor schädlichen XSS Code
 	 *
-	 * Based on Codeigniter
-	 *
-	 * @link https://www.codeigniter.com/
-	 *
 	 * @param string $str Der String der von XSS gesäubert werden soll
 	 *
 	 * @return string $str
@@ -485,11 +424,7 @@ class security
 		/*
 		 * URL Decode
 		 *
-		 * Just in case stuff like this is submitted:
-		 *
 		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">Google</a>
-		 *
-		 * Note: Use rawurldecode() so it does not remove plus signs
 		 */
 		while(true)
 		{
@@ -503,10 +438,6 @@ class security
 
 		/*
 		 * Convert character entities to ASCII
-		 *
-		 * This permits our tests below to work reliably.
-		 * We only convert entities that are within tags since
-		 * these are the ones that will pose security problems.
 		 */
 		$str = preg_replace_callback("/[^a-z0-9>]+[a-z0-9]+=([\'\"]).*?\\1/si", array(
 			'self',
@@ -517,14 +448,11 @@ class security
 			'_decode_entity'
 		), $str);
 
-		// Remove Invisible Characters Again!
+		// Remove Invisible Characters
 		$str = self::remove_invisible_characters($str);
 
 		/*
 		 * Convert all tabs to spaces
-		 *
-		 * This prevents strings like this: ja	vascript
-		 * large blocks of data, so we use str_replace.
 		 */
 		$str = str_replace("\t", ' ', $str);
 
@@ -540,9 +468,6 @@ class security
 
 		/*
 		 * Compact any exploded words
-		 *
-		 * This corrects words like:  j a v a s c r i p t
-		 * These words are compacted back to their correct state.
 		 */
 		$words = array(
 			'javascript',
@@ -578,12 +503,6 @@ class security
 		 * We used to do some version comparisons and use of stripos(),
 		 * but it is dog slow compared to these simplified non-capturing
 		 * preg_match(), especially if the pattern exists in the string
-		 *
-		 * Note: It was reported that not only space characters, but all in
-		 * the following pattern can be parsed as separators between a tag name
-		 * and its attributes: [\d\s"\'`;,\/\=\(\x00\x0B\x09\x0C]
-		 * ... however, remove_invisible_characters() above already strips the
-		 * hex-encoded ones, so we'll skip them below.
 		 */
 
 		while(true)
@@ -620,12 +539,6 @@ class security
 
 		/*
 		 * Sanitize naughty HTML elements
-		 *
-		 * If a tag containing any of the words in the list
-		 * below is found, the tag gets converted to entities.
-		 *
-		 * So this: <blink>
-		 * Becomes: &lt;blink&gt;
 		 */
 		$pattern = '#'.'<((?<slash>/*\s*)(?<tagName>[a-z0-9]+)(?=[^a-z0-9]|$)' // tag start and name, followed by a non-tag character
 			.'[^\s\042\047a-z0-9>/=]*' // a valid attribute character immediately after the tag would count as a separator
@@ -657,12 +570,6 @@ class security
 		/*
 		 * Sanitize naughty scripting elements
 		 *
-		 * Similar to above, only instead of looking for
-		 * tags it looks for PHP and JavaScript commands
-		 * that are disallowed. Rather than removing the
-		 * code, it simply converts the parenthesis to entities
-		 * rendering the code un-executable.
-		 *
 		 * For example:	eval('some code')
 		 * Becomes:	eval&#40;'some code'&#41;
 		 */
@@ -678,8 +585,6 @@ class security
 	 * Sanitize Naughty HTML
 	 *
 	 * Callback method for xss_clean() to remove naughty HTML elements.
-	 *
-	 * @used-by    CI_Security::xss_clean()
 	 *
 	 * @param    array $matches
 	 *
@@ -796,8 +701,6 @@ class security
 	 *
 	 * Callback method for xss_clean() to remove whitespace from
 	 * things like 'j a v a s c r i p t'.
-	 *
-	 * @used-by    CI_Security::xss_clean()
 	 *
 	 * @param    array $matches
 	 *
@@ -931,18 +834,8 @@ class security
 	 *
 	 * @return array Gibt ein assoziatives Array zurück mit Informationen über die Auswertung.
 	 */
-	public static function is_bot()
+	public static function _is_bot()
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('before', 'security', 'is_bot');
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(empty($_SERVER['HTTP_USER_AGENT']) === false)
 		{
 			foreach(self::$botlist as $bot)
@@ -968,18 +861,8 @@ class security
 	 *
 	 * @return mixed Gibt die Ip-Adresse zurück oder ein false wenn diese nicht ermittelt werden konnte.
 	 */
-	public static function get_ip_address()
+	public static function _get_ip_address()
 	{
-		if(class_exists('\package\plugins'))
-		{
-			$plugin = plugins::hookCall('before', 'security', 'get_ip_address');
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		$ipMethodes = self::$ipMethodes;
 
 		foreach($ipMethodes as $key)

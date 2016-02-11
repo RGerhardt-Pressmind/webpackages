@@ -27,6 +27,8 @@
 
 namespace package\core;
 
+use package\system\core\initiator;
+
 /**
  * Stellt Anfragen an die PayPal API
  *
@@ -37,7 +39,7 @@ namespace package\core;
  * @category       paypal
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class paypal
+class paypal extends initiator
 {
 	/**
 	 * @var array Letzte Fehlermeldung(en)
@@ -92,25 +94,8 @@ class paypal
 	 *
 	 * @return array / boolean Ergebniss als Array / boolean false bei Fehler
 	 */
-	public function request($method, $params = array())
+	public function _request($method, $params = array())
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'paypal', 'request', array(
-				$method,
-				$params
-			));
-			$plugins = plugins::hookCall('before', 'paypal', 'request', array(
-				$method,
-				$params
-			));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		$this->_errors = array();
 
 		if(empty($method) === true)
@@ -150,16 +135,6 @@ class paypal
 		curl_setopt_array($ch, $curlOptions);
 
 		$response = curl_exec($ch);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('after', 'paypal', 'request', array($response));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
 
 		if(curl_errno($ch))
 		{

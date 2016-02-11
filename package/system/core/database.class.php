@@ -336,7 +336,6 @@ class database extends \PDO
 		catch(\PDOException $e)
 		{
 			$this->error_info = $e->getMessage();
-			$this->rollBack();
 
 			return false;
 		}
@@ -381,15 +380,15 @@ class database extends \PDO
 			if($table === null && $v >= '8.1')
 			{
 				$sql = 'SELECT LASTVAL() as ins_id';
+
+				$row = $this->quefetch($sql);
+
+				return (int)$row['ins_id'];
 			}
 			else
 			{
 				return 0;
 			}
-
-			$row = $this->quefetch($sql);
-
-			return (int)$row['ins_id'];
 		}
 		else
 		{
@@ -407,10 +406,29 @@ class database extends \PDO
 	 * @param bool   $getFirstResult      Soll nur der zuerst gefundenen Wert als assoziatives Array zurück gegebene
 	 *                                    werden oder ein komplettes mehrdimensionales Array
 	 *
+	 * @deprecated
 	 * @throws databaseException Wenn $sql leer ist
 	 * @return mixed Gibt, je nach Parameter, ein Array oder einen Boolischen Wert zurück
 	 */
 	public function secQuery($sql, $execute, $isResultAssociative = true, $getFirstResult = false)
+	{
+		return self::safetyQuery($sql, $execute, $isResultAssociative, $getFirstResult);
+	}
+
+	/**
+	 * Füht einen SQL Befehl mittels "Prepared Statements" aus
+	 *
+	 * @param string $sql                 Der auszuführende SQL Befehl. Ersetzende Werte sind durch ein ? gesetzt
+	 * @param array  $execute             Die Liste der zu ersetzenden Werte im SQL Befehl
+	 * @param bool   $isResultAssociative Ist das Resultat ein assoziatives oder mehrdimensionales Array oder ein
+	 *                                    Boolischer Wert
+	 * @param bool   $getFirstResult      Soll nur der zuerst gefundenen Wert als assoziatives Array zurück gegebene
+	 *                                    werden oder ein komplettes mehrdimensionales Array
+	 *
+	 * @throws databaseException Wenn $sql leer ist
+	 * @return mixed Gibt, je nach Parameter, ein Array oder einen Boolischen Wert zurück
+	 */
+	public function safetyQuery($sql, $execute, $isResultAssociative = true, $getFirstResult = false)
 	{
 		if($this->isInit === false)
 		{
@@ -419,7 +437,7 @@ class database extends \PDO
 
 		if(empty($sql) === true)
 		{
-			throw new databaseException('Error: pdo::secQuery: $sql is empty');
+			throw new databaseException('Error: pdo::safetyQuery: $sql is empty');
 		}
 
 		try
@@ -506,7 +524,7 @@ class database extends \PDO
 
 		$insert = trim($insert, ',').';';
 
-		$execInsert = $this->secQuery($insert, $execute, false, false);
+		$execInsert = $this->safetyQuery($insert, $execute, false, false);
 
 		if($execInsert === false)
 		{
@@ -606,7 +624,7 @@ class database extends \PDO
 
 		$update .= ';';
 
-		$execUpdate = $this->secQuery($update, $execute, false, false);
+		$execUpdate = $this->safetyQuery($update, $execute, false, false);
 
 		if($execUpdate === false)
 		{
@@ -676,7 +694,7 @@ class database extends \PDO
 
 		$deleteTable .= ';';
 
-		$deleted = $this->secQuery($deleteTable, $execute, false, false);
+		$deleted = $this->safetyQuery($deleteTable, $execute, false, false);
 
 		return $deleted;
 	}

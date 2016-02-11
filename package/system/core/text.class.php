@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Textmanipulationen
@@ -40,7 +41,7 @@ use package\implement\IStatic;
  * @category       text
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class text implements IStatic
+class text extends initiator implements IStatic
 {
 	/**
 	 * Zum initiailisieren von Daten
@@ -58,18 +59,8 @@ class text implements IStatic
 	 *
 	 * @return string Gibt den gekürzten String zurück
 	 */
-	public static function word_limiter($str, $limit = 100, $suffix = '...')
+	public static function _word_limiter($str, $limit = 100, $suffix = '...')
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'wordLimiter', array($str, $limit, $suffix));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(trim($str) == '')
 		{
 			return $str;
@@ -84,16 +75,6 @@ class text implements IStatic
 
 		$back = rtrim($matches[0]).$suffix;
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'text', 'wordLimiter', array($back));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return $back;
 	}
 
@@ -106,18 +87,8 @@ class text implements IStatic
 	 *
 	 * @return string Gibt den gekürzten String zurück
 	 */
-	public static function truncate($string, $limit, $suffix = '...')
+	public static function _truncate($string, $limit, $suffix = '...')
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'template', 'truncate', array($string, $limit, $suffix));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		$len = strlen($string);
 
 		if($len > $limit)
@@ -139,18 +110,8 @@ class text implements IStatic
 	 *
 	 * @return string Gibt den zensierten String zurück
 	 */
-	public static function word_censor($str, $censored, $replacement = '')
+	public static function _word_censor($str, $censored, $replacement = '')
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'wordCensor', array($str, $censored, $replacement));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(empty($censored) === true)
 		{
 			return $str;
@@ -172,16 +133,6 @@ class text implements IStatic
 			}
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'text', 'wordCensor', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return trim($str);
 	}
 
@@ -192,18 +143,8 @@ class text implements IStatic
 	 *
 	 * @return mixed|string Gibt den String zurück.
 	 */
-	public static function highlight_code($str)
+	public static function _highlight_code($str)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'highlightCode', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		$str = str_replace(array('&lt;', '&gt;'), array('<', '>'), $str);
 
 		$str = str_replace(array('<?', '?>', '<%', '%>', '\\', '</script>'), array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), $str);
@@ -218,16 +159,6 @@ class text implements IStatic
 
 		$str = str_replace(array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), array('&lt;?', '?&gt;', '&lt;%', '%&gt;', '\\', '&lt;/script&gt;'), $str);
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'text', 'highlightCode', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return $str;
 	}
 
@@ -241,18 +172,8 @@ class text implements IStatic
 	 *
 	 * @return mixed|string
 	 */
-	public static function highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
+	public static function _highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'highlightPhrase', array($str, $phrase, $tag_open, $tag_close));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(empty($str) === true)
 		{
 			return '';
@@ -261,16 +182,6 @@ class text implements IStatic
 		if(empty($phrase) === false)
 		{
 			return preg_replace('/('.preg_quote($phrase, '/').')/i', $tag_open."\\1".$tag_close, $str);
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'text', 'highlightPhrase', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		return $str;
@@ -284,18 +195,8 @@ class text implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function random_string($type = 'normal', $length = 10)
+	public static function _random_string($type = 'normal', $length = 10)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'random_string', array($type, $length));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if($type === 'alnum')
 		{
 			$back = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -327,16 +228,6 @@ class text implements IStatic
 
 		$back = substr(str_shuffle(str_repeat($back, ceil($length / strlen($back)))), 0, $length);
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'text', 'random_string', array($back));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return $back;
 	}
 
@@ -355,18 +246,8 @@ class text implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function reduce_double_slashes($str)
+	public static function _reduce_double_slashes($str)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'reduce_double_slashes', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
 	}
 
@@ -377,18 +258,8 @@ class text implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function strip_quotes($str)
+	public static function _strip_quotes($str)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'strip_quotes', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return str_replace(array('"', "'"), array('', ''), $str);
 	}
 
@@ -399,18 +270,8 @@ class text implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function trim_slashes($str)
+	public static function _trim_slashes($str)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'text', 'trim_slashes', array($str));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return trim($str, '/');
 	}
 }

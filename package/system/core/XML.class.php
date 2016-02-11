@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\xmlException;
+use package\system\core\initiator;
 
 /**
  * XML Dateien / Strings validieren
@@ -39,7 +40,7 @@ use package\exceptions\xmlException;
  * @category       xml
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class XML
+class XML extends initiator
 {
 	private $xml = null;
 
@@ -59,13 +60,8 @@ class XML
 	 * @return void
 	 * @throws xmlException
 	 */
-	public function loadXML($xml)
+	public function _loadXML($xml)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookCall('before', 'XML', 'loadXML', array($xml));
-		}
-
 		//XML von einer URL laden
 		if(filter_var($xml, FILTER_VALIDATE_URL) !== false)
 		{
@@ -118,21 +114,11 @@ class XML
 	 * @return array Gibt das XML Objekt als Array Konvertiert zurück
 	 * @throws xmlException
 	 */
-	public function toArray()
+	public function _toArray()
 	{
 		if($this->xml === null)
 		{
 			throw new xmlException('Error: Not XML define');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'XML', 'toArray', array($this->xml));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		$xml = json_encode($this->xml);
@@ -147,21 +133,11 @@ class XML
 	 * @return object
 	 * @throws xmlException
 	 */
-	public function toObject()
+	public function _toObject()
 	{
 		if($this->xml === null)
 		{
 			throw new xmlException('Error: Not XML define');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'XML', 'toObject', array($this->xml));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		$xml = json_encode($this->xml);
@@ -176,21 +152,11 @@ class XML
 	 * @return \SimpleXMLElement
 	 * @throws xmlException
 	 */
-	public function getSimpleXML()
+	public function _getSimpleXML()
 	{
 		if($this->xml === null)
 		{
 			throw new xmlException('Error: Not XML define');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'XML', 'getSimpleXML', array($this->xml));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		return $this->xml;

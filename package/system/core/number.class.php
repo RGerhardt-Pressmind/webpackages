@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\numberException;
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Konvertieren von Zahlen
@@ -40,7 +41,7 @@ use package\implement\IStatic;
  * @category       number
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class number implements IStatic
+class number extends initiator implements IStatic
 {
 
 	/**
@@ -61,29 +62,8 @@ class number implements IStatic
 	 *
 	 * @return array Gibt ein assoziatives array mit den neuen Werten zurück
 	 */
-	public static function scale_proportionally($sourceWidth, $sourceHeight, $destWidth = 0.00, $destHeight = 0.00)
+	public static function _scale_proportionally($sourceWidth, $sourceHeight, $destWidth = 0.00, $destHeight = 0.00)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'number', 'scale_proportionally', array(
-				$sourceWidth,
-				$sourceHeight,
-				$destWidth,
-				$destHeight
-			));
-			$plugins = plugins::hookCall('before', 'number', 'scale_proportionally', array(
-				$sourceWidth,
-				$sourceHeight,
-				$destWidth,
-				$destHeight
-			));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if($destHeight >= $destWidth)
 		{
 			$backHeight = $destHeight;
@@ -95,23 +75,6 @@ class number implements IStatic
 			$backWidth  = $destWidth;
 			$factor     = $destWidth / $sourceWidth;
 			$backHeight = $sourceHeight * $factor;
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'number', 'scale_proportionally', array(
-				$backWidth,
-				$backHeight
-			));
-			$plugins = plugins::hookCall('after', 'number', 'scale_proportionally', array(
-				$backWidth,
-				$backHeight
-			));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
 		}
 
 		return array(
@@ -128,25 +91,8 @@ class number implements IStatic
 	 *
 	 * @return string Gibt den umgewandelten Wert zurück.
 	 */
-	public static function byte_format($num, $precision = 1)
+	public static function _byte_format($num, $precision = 1)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'number', 'byteFormat', array(
-				$num,
-				$precision
-			));
-			$plugins = plugins::hookCall('before', 'number', 'byteFormat', array(
-				$num,
-				$precision
-			));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if($num >= 1000000000000)
 		{
 			$num  = round($num / 1099511627776, $precision);
@@ -173,32 +119,10 @@ class number implements IStatic
 
 			$back = number_format($num).' '.$unit;
 
-			if(class_exists('\package\core\plugins') === true)
-			{
-				plugins::hookShow('after', 'number', 'byteFormat', array($back));
-				$plugins = plugins::hookCall('after', 'number', 'byteFormat', array($back));
-
-				if($plugins != null)
-				{
-					return $plugins;
-				}
-			}
-
 			return $back;
 		}
 
 		$back = number_format($num, $precision).' '.$unit;
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'number', 'byteFormat', array($back));
-			$plugins = plugins::hookCall('after', 'number', 'byteFormat', array($back));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
 
 		return $back;
 	}
@@ -215,25 +139,8 @@ class number implements IStatic
 	 *                Sekunden zurück.
 	 * @throws numberException
 	 */
-	public static function diff($start, $end = false)
+	public static function _diff($start, $end = false)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'number', 'diff', array(
-				$start,
-				$end
-			));
-			$plugins = plugins::hookCall('before', 'number', 'diff', array(
-				$start,
-				$end
-			));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
 			throw new numberException('Error: DateTime or DateTimeZone class not in php exists');
@@ -260,17 +167,6 @@ class number implements IStatic
 		$back->min   = $diff->format('%i');
 		$back->sec   = $diff->format('%s');
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'number', 'diff', array($back));
-			$plugins = plugins::hookCall('after', 'number', 'diff', array($back));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		return $back;
 	}
 
@@ -284,25 +180,8 @@ class number implements IStatic
 	 * @return string Gibt den Wortlaut der Differenz zurück.
 	 * @throws numberException
 	 */
-	public static function get_diff_value($diffDate, $short = false)
+	public static function _get_diff_value($diffDate, $short = false)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'number', 'getDiffValue', array(
-				$diffDate,
-				$short
-			));
-			$plugins = plugins::hookCall('before', 'number', 'getDiffValue', array(
-				$diffDate,
-				$short
-			));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		$return = '';
 
 		if(isset($diffDate->year) === false)
@@ -414,17 +293,6 @@ class number implements IStatic
 						$return = $diffDate->day.' '.(($diffDate->day == 1) ? language::translate('Tag') : language::translate('Tage')).' '.$diffDate->hour.' '.(($diffDate->hour == 1) ? language::translate('Stunde') : language::translate('Stunden'));
 					}
 				}
-			}
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'number', 'getDiffValue', array($return));
-			$plugins = plugins::hookCall('after', 'number', 'getDiffValue', array($return));
-
-			if($plugins != null)
-			{
-				return $plugins;
 			}
 		}
 

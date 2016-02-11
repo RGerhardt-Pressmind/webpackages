@@ -226,7 +226,10 @@ class cache extends initiator implements IStatic
 			return false;
 		}
 
-		$serialize = @serialize(array('lifetime' => (time() + $lifetime), 'content' => $content));
+		$serialize = @serialize(array(
+			'lifetime' => (time() + $lifetime),
+			'content' => $content
+		));
 		$cachePath = self::$cacheDir.$cache_name.self::$cacheExtension;
 		$saveFile  = @file_put_contents($cachePath, $serialize);
 

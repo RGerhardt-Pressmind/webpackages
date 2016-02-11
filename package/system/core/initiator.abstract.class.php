@@ -28,6 +28,16 @@ namespace package\system\core;
 
 use package\core\plugins;
 
+/**
+ * Initiator aller Hilfsklassen
+ *
+ * Der Initiator standartisiert Hilfsklassen und bindet in jede Methode einen Plugin Hook ein
+ *
+ * @package        Webpackages
+ * @subpackage     core
+ * @category       initiator
+ * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 abstract class initiator
 {
 	private static $reflectionClass;

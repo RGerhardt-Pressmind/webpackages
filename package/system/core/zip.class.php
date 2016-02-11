@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\zipException;
+use package\system\core\initiator;
 
 /**
  * Zip Archive
@@ -39,7 +40,7 @@ use package\exceptions\zipException;
  * @category       zip
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class zip
+class zip extends initiator
 {
 	/**
 	 * Erstellt ein ZipArchive
@@ -51,24 +52,13 @@ class zip
 	 * @return bool
 	 * @throws zipException
 	 */
-	public function createZipArchive($folder, $destination, $zipName)
+	public function _createZipArchive($folder, $destination, $zipName)
 	{
 		if(file_exists($folder) === false)
 		{
 			throw new zipException('Error: '.$folder.' not exists');
 		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'zip', 'createZipArchive', array($folder, $destination, $zipName));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
-		if(class_exists('\SplFileInfo') === false)
+		elseif(class_exists('\SplFileInfo') === false)
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
@@ -134,18 +124,8 @@ class zip
 	 * @return bool
 	 * @throws zipException
 	 */
-	public function addFileToZipArchive($rootFolder, $file, $zipArchive)
+	public function _addFileToZipArchive($rootFolder, $file, $zipArchive)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'zip', 'addFileToZipArchive', array($rootFolder, $file, $zipArchive));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(class_exists('\SplFileInfo') === false)
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
@@ -200,18 +180,8 @@ class zip
 	 * @return bool
 	 * @throws zipException
 	 */
-	public function extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false)
+	public function _extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'zip', 'extractZipArchive', array($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(class_exists('\SplFileInfo') === false)
 		{
 			throw new zipException('Error: SplFileInfo class not exists');

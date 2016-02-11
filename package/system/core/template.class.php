@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\templateException;
+use package\system\core\initiator;
 
 /**
  * Template Klasse
@@ -43,7 +44,7 @@ use package\exceptions\templateException;
  * @category       template
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class template
+class template extends initiator
 {
 	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer, $skin;
 
@@ -93,7 +94,7 @@ class template
 	 *
 	 * @return void
 	 */
-	public function setSkin($skin)
+	public function _setSkin($skin)
 	{
 		$this->skin = $skin;
 	}
@@ -105,7 +106,7 @@ class template
 	 *
 	 * @return void
 	 */
-	public function setHeaderFile($header)
+	public function _setHeaderFile($header)
 	{
 		$this->header = $header;
 	}
@@ -117,7 +118,7 @@ class template
 	 *
 	 * @return void
 	 */
-	public function setFooterFile($footer)
+	public function _setFooterFile($footer)
 	{
 		$this->footer = $footer;
 	}
@@ -129,7 +130,7 @@ class template
 	 *
 	 * @return void
 	 */
-	public function setTemplateDir($dir)
+	public function _setTemplateDir($dir)
 	{
 		$this->tempDir = $dir;
 	}
@@ -141,7 +142,7 @@ class template
 	 *
 	 * @return void
 	 */
-	public function setData(array $datas)
+	public function _setData(array $datas)
 	{
 		$this->contentData = array_merge($this->contentData, $datas);
 	}
@@ -159,7 +160,7 @@ class template
 	 * @return void
 	 * @throws templateException
 	 */
-	public function displayDH($template, $header, $footer, $cacheActive = false, $cacheExpiresTime = 0)
+	public function _displayDH($template, $header, $footer, $cacheActive = false, $cacheExpiresTime = 0)
 	{
 		ob_start();
 
@@ -251,7 +252,7 @@ class template
 	 * @return void
 	 * @throws templateException
 	 */
-	public function display($template, $cacheActive = false, $cacheExpiresTime = 0)
+	public function _display($template, $cacheActive = false, $cacheExpiresTime = 0)
 	{
 		ob_start();
 
@@ -338,7 +339,7 @@ class template
 	 * @return void
 	 * @throws templateException
 	 */
-	public function displayNP($template, $cacheActive = false, $cacheExpiresTime = 0)
+	public function _displayNP($template, $cacheActive = false, $cacheExpiresTime = 0)
 	{
 		ob_start();
 
@@ -403,7 +404,7 @@ class template
 	 *
 	 * @return mixed Gibt den Inhalt der Datei zurück
 	 */
-	public function load_template_file($file, $type, $dir = '', $minify = true)
+	public function _load_template_file($file, $type, $dir = '', $minify = true)
 	{
 		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.$this->skin.'&d='.$dir.'&c='.(($minify === false) ? 'false' : 'true');
 	}

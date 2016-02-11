@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\urlException;
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * URL Klasse
@@ -42,7 +43,7 @@ use package\implement\IStatic;
  * @category       url
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class url implements IStatic
+class url extends initiator implements IStatic
 {
 	public static $isModRewriteActiv = false, $useModRewrite = false, $useFileExtension = 'html';
 
@@ -72,7 +73,7 @@ class url implements IStatic
 	 *
 	 * @throws urlException
 	 */
-	public static function set_use_mod_rewrite($mod)
+	public static function _set_use_mod_rewrite($mod)
 	{
 		self::$useModRewrite = (bool)$mod;
 
@@ -89,7 +90,7 @@ class url implements IStatic
 	 *
 	 * @throws urlException
 	 */
-	public function set_use_file_extension($extension)
+	public function _set_use_file_extension($extension)
 	{
 		$extension = trim($extension, '.');
 		$extension = trim($extension);
@@ -111,18 +112,8 @@ class url implements IStatic
 	 *
 	 * @return string $link
 	 */
-	public static function get_url_simple($httpRoot, $parameters)
+	public static function _get_url_simple($httpRoot, $parameters)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'url', 'get_url_simple', array($httpRoot, $parameters));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		$link = $httpRoot;
 
 		if(empty($parameters) === false)
@@ -157,16 +148,6 @@ class url implements IStatic
 			}
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'url', 'get_url_simple', array($link));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		return $link;
 	}
 
@@ -178,31 +159,11 @@ class url implements IStatic
 	 *
 	 * @return string Gibt den validierten String zurück
 	 */
-	public static function createValidUrlString($url)
+	public static function _createValidUrlString($url)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'url', 'createValidUrlString', array($url));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		$url = strtolower($url);
 		$url = preg_replace('/\s/', '-', $url);
 		$url = filter_var($url, FILTER_SANITIZE_URL);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('after', 'url', 'createValidUrlString', array($url));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
 
 		return $url;
 	}
@@ -212,18 +173,8 @@ class url implements IStatic
 	 *
 	 * @return string Gibt die aktuelle URL zurück
 	 */
-	public static function getCurrentUrl()
+	public static function _getCurrentUrl()
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hookCall('before', 'url', 'getCurrentUrl');
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(empty($_SERVER['HTTP_HOST']) === false)
 		{
 			return (isset($_SERVER['HTTPS']) === true ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -241,13 +192,8 @@ class url implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function loc($url)
+	public static function _loc($url)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookCall('before', 'url', 'loc', array($url));
-		}
-
 		header('Location: '.$url);
 		exit;
 	}
@@ -257,7 +203,7 @@ class url implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function reload()
+	public static function _reload()
 	{
 		self::loc(self::getCurrentUrl());
 		exit;
@@ -268,13 +214,8 @@ class url implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function back()
+	public static function _back()
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookCall('before', 'url', 'back');
-		}
-
 		if(empty($_SERVER['HTTP_REFERER']) === false)
 		{
 			self::loc($_SERVER['HTTP_REFERER']);

@@ -28,8 +28,9 @@
 namespace package\core;
 
 use package\implement\IStatic;
+use package\system\core\initiator;
 
-class version implements IStatic
+class version extends initiator implements IStatic
 {
 	/**
 	 * Zum initialisieren von Daten
@@ -51,7 +52,7 @@ class version implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function is_php($version)
+	public static function _is_php($version)
 	{
 		if(version_compare(PHP_VERSION, $version) >= 0)
 		{

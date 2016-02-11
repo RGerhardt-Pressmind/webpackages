@@ -124,7 +124,12 @@ class benchmark extends initiator implements IStatic
 
 		if(empty(self::$middleTime) === false)
 		{
-			$diff = array('startTime' => self::$startTime, 'endTime' => self::$endTime, 'middleTime' => self::$middleTime, 'diff' => $diff);
+			$diff = array(
+				'startTime' => self::$startTime,
+				'endTime' => self::$endTime,
+				'middleTime' => self::$middleTime,
+				'diff' => $diff
+			);
 		}
 
 		self::$startTime  = '';
