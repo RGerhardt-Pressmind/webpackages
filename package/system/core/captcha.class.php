@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\captchaException;
+use package\system\core\initiator;
 
 /**
  * Erstellen von Captcha Bildern
@@ -42,7 +43,7 @@ use package\exceptions\captchaException;
  * @category       Captcha
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class captcha
+class captcha extends initiator
 {
 	/**
 	 * Erstellt ein Captcha
@@ -57,18 +58,17 @@ class captcha
 	 * @return array Gibt das fertige Captcha zurück
 	 * @throws captchaException Bei leeren Parametern oder im Fehlerfall
 	 */
-	public static function create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
+	public static function _create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
 	{
 		$fontSize = 5;
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
-			$plugins = plugins::hookCall('before', 'captcha', 'createCaptcha', array($img_path, $img_url, $font_path));
+			$plugin = plugins::hooks(plugins::BEFORE, self::getClassName(), __FUNCTION__, func_get_args());
 
-			if($plugins != null)
+			if($plugin != null)
 			{
-				return $plugins;
+				return $plugin;
 			}
 		}
 
@@ -249,16 +249,20 @@ class captcha
 
 		ImageDestroy($im);
 
-		$back = array('word' => $word, 'time' => $now, 'image' => $img, 'filepath' => $img_path.$img_name);
+		$back = array(
+			'word' => $word,
+			'time' => $now,
+			'image' => $img,
+			'filepath' => $img_path.$img_name
+		);
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'captcha', 'createCaptcha', array($back));
-			$plugins = plugins::hookCall('after', 'captcha', 'createCaptcha', array($back));
+			$plugin = plugins::hooks(plugins::AFTER, self::getClassName(), __FUNCTION__, array_merge(func_get_args(), $back));
 
-			if($plugins != null)
+			if($plugin != null)
 			{
-				return $plugins;
+				return $plugin;
 			}
 		}
 

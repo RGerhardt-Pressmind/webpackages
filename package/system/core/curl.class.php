@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\curlException;
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Kommunizieren mit cURL
@@ -42,7 +43,7 @@ use package\implement\IStatic;
  * @category       cURL
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class curl implements IStatic
+class curl extends initiator implements IStatic
 {
 	/**
 	 * @var bool Ist Cookie bei der cURL Anfrage Aktiv oder nicht
@@ -66,18 +67,8 @@ class curl implements IStatic
 	 *
 	 * @return bool Gibt true zurück wenn die cURL Extension installiert ist und false wenn nicht
 	 */
-	public static function curl_extension_exists()
+	public static function _curl_extension_exists()
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('before', 'curl', 'existCurl');
-
-			if($plugins != null)
-			{
-				return (bool)$plugins;
-			}
-		}
-
 		return function_exists('curl_init');
 	}
 
@@ -91,22 +82,11 @@ class curl implements IStatic
 	 * @return mixed
 	 * @throws curlException Wenn die Extension nicht installiert ist.
 	 */
-	public static function get_data($url, $postfields = array(), $ssl = false)
+	public static function _get_data($url, $postfields = array(), $ssl = false)
 	{
 		if(self::curl_extension_exists() === false)
 		{
 			throw new curlException('Error: curl extension not loaded');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'curl', 'get_data', array($url, $postfields, $ssl));
-			$plugins = plugins::hookCall('before', 'curl', 'get_data', array($url, $postfields, $ssl));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
 		}
 
 		$curl = curl_init();
@@ -137,17 +117,6 @@ class curl implements IStatic
 		$data = curl_exec($curl);
 		curl_close($curl);
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'curl', 'get_data', array($data));
-			$plugins = plugins::hookCall('after', 'curl', 'get_data', array($data));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		return $data;
 	}
 
@@ -159,22 +128,11 @@ class curl implements IStatic
 	 * @return int Gibt den HTTP-Statuscode zurück
 	 * @throws curlException Wenn die Extension nicht installiert ist oder im Fehlerfall
 	 */
-	public static function get_status($url)
+	public static function _get_status($url)
 	{
 		if(self::curl_extension_exists() === false)
 		{
 			throw new curlException('Error: curl extension not loaded');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'curl', 'get_status', array($url));
-			$plugins = plugins::hookCall('before', 'curl', 'get_status', array($url));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
 		}
 
 		$ch = curl_init($url);
@@ -195,17 +153,6 @@ class curl implements IStatic
 
 		curl_close($ch);
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'curl', 'get_status', array((int)$httpcode));
-			$plugins = plugins::hookCall('after', 'curl', 'get_status', array((int)$httpcode));
-
-			if($plugins != null)
-			{
-				return (int)$plugins;
-			}
-		}
-
 		return (int)$httpcode;
 	}
 
@@ -217,22 +164,11 @@ class curl implements IStatic
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
 	 * @throws curlException Wenn die Extension nicht installiert oder im Fehlerfall.
 	 */
-	public static function get_city_coordinates($city)
+	public static function _get_city_coordinates($city)
 	{
 		if(self::curl_extension_exists() === false)
 		{
 			throw new curlException('Error: curl extension not loaded');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'curl', 'get_city_coordinates', array($city));
-			$plugins = plugins::hookCall('before', 'curl', 'get_city_coordinates', array($city));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
 		}
 
 		$url = "http://maps.google.com/maps/api/geocode/json?address=".$city."&sensor=false";
@@ -261,17 +197,6 @@ class curl implements IStatic
 			$data = array();
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'curl', 'get_city_coordinates', array($data));
-			$plugins = plugins::hookCall('after', 'curl', 'get_city_coordinates', array($data));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		return $data;
 	}
 
@@ -281,50 +206,17 @@ class curl implements IStatic
 	 * @return string Gibt, Anhand der IP-Adresse, den Namen der Stadt zurück oder "Not found" wenn keine Stadt
 	 *                gefunden wurde
 	 */
-	public static function get_city_name_by_ip()
+	public static function _get_city_name_by_ip()
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'curl', 'get_city_name_by_ip');
-			$plugins = plugins::hookCall('before', 'curl', 'get_city_name_by_ip');
+		$ip = security::get_ip_address();
 
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
-		if(class_exists('\package\security') === true)
-		{
-			$ip = security::get_ip_address();
-
-			if(empty($ip) === true)
-			{
-				return 'Not found';
-			}
-		}
-		elseif(empty($_SERVER['REMOTE_ADDR']) === false)
-		{
-			$ip = $_SERVER['REMOTE_ADDR'];
-		}
-		else
+		if(empty($ip) === true)
 		{
 			return 'Not found';
 		}
 
 		$getData = self::get_data('http://ip-api.com/php/'.$ip);
 		$query   = unserialize($getData);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'curl', 'get_city_name_by_ip', array($query));
-			$plugins = plugins::hookCall('after', 'curl', 'get_city_name_by_ip', array($query));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
 
 		if(empty($query['status']) === false && $query['status'] == 'success')
 		{

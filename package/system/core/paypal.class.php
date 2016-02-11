@@ -50,7 +50,11 @@ class paypal
 	 *
 	 * @var array
 	 */
-	public $_credentials = array('USER' => 'seller_1297608781_biz_api1.lionite.com', 'PWD' => '1297608792', 'SIGNATURE' => 'A3g66.FS3NAf4mkHn3BDQdpo6JD.ACcPc4wMrInvUEqO3Uapovity47p');
+	public $_credentials = array(
+		'USER' => 'seller_1297608781_biz_api1.lionite.com',
+		'PWD' => '1297608792',
+		'SIGNATURE' => 'A3g66.FS3NAf4mkHn3BDQdpo6JD.ACcPc4wMrInvUEqO3Uapovity47p'
+	);
 
 	/**
 	 * API Zugrifsspunkt - Sandbox
@@ -92,8 +96,14 @@ class paypal
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'paypal', 'request', array($method, $params));
-			$plugins = plugins::hookCall('before', 'paypal', 'request', array($method, $params));
+			plugins::hookShow('before', 'paypal', 'request', array(
+				$method,
+				$params
+			));
+			$plugins = plugins::hookCall('before', 'paypal', 'request', array(
+				$method,
+				$params
+			));
 
 			if($plugins != null)
 			{
@@ -110,7 +120,10 @@ class paypal
 			return false;
 		}
 
-		$requestParams = array('METHOD' => $method, 'VERSION' => $this->_version) + $this->_credentials;
+		$requestParams = array(
+				'METHOD' => $method,
+				'VERSION' => $this->_version
+			) + $this->_credentials;
 
 		$request = http_build_query($requestParams + $params);
 
@@ -123,7 +136,15 @@ class paypal
 			$endpoint = $this->_endPoint_live;
 		}
 
-		$curlOptions = array(CURLOPT_URL => $endpoint, CURLOPT_VERBOSE => 1, CURLOPT_SSL_VERIFYPEER => true, CURLOPT_SSL_VERIFYHOST => 2, CURLOPT_RETURNTRANSFER => 1, CURLOPT_POST => 1, CURLOPT_POSTFIELDS => $request);
+		$curlOptions = array(
+			CURLOPT_URL => $endpoint,
+			CURLOPT_VERBOSE => 1,
+			CURLOPT_SSL_VERIFYPEER => true,
+			CURLOPT_SSL_VERIFYHOST => 2,
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_POST => 1,
+			CURLOPT_POSTFIELDS => $request
+		);
 
 		$ch = curl_init();
 		curl_setopt_array($ch, $curlOptions);

@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\benchmarkException;
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Zum Messen von Laufzeiten
@@ -40,7 +41,7 @@ use package\implement\IStatic;
  * @category       Benchmark
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class benchmark implements IStatic
+class benchmark extends initiator implements IStatic
 {
 	/**
 	 * Destructor

@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\ftpException;
+use package\system\core\initiator;
 
 /**
  * Kann auf FTP Server zugreifen
@@ -39,7 +40,7 @@ use package\exceptions\ftpException;
  * @category       FTP
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class ftp
+class ftp extends initiator
 {
 	private $_ftp;
 
@@ -63,20 +64,8 @@ class ftp
 	 * @return void
 	 * @throws ftpException
 	 */
-	public function connect($host, $ssl = false, $port = 21, $timeout = 90)
+	public function _connect($host, $ssl = false, $port = 21, $timeout = 90)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'connect', array($host, $ssl, $port, $timeout));
-
-			$plugin = plugins::hookCall('before', 'ftp', 'connect', array($host, $ssl, $port, $timeout));
-
-			if($plugin != null)
-			{
-				$this->_ftp = $plugin;
-			}
-		}
-
 		if($ssl === true)
 		{
 			$this->_ftp = @ftp_ssl_connect($host, $port, $timeout);
@@ -106,31 +95,14 @@ class ftp
 	 * @return void
 	 * @throws ftpException
 	 */
-	public function login($username, $password)
+	public function _login($username, $password)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'login', array($this->_ftp, $username, $password));
-			plugins::hookCall('before', 'ftp', 'login', array($this->_ftp, $username, $password));
-		}
-
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
 		$login = @ftp_login($this->_ftp, $username, $password);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'ftp', 'login', array($login));
-			$plugin = plugins::hookCall('after', 'ftp', 'login', array($login));
-
-			if($plugin != null)
-			{
-				$login = $plugin;
-			}
-		}
 
 		if($login === false)
 		{
@@ -144,7 +116,7 @@ class ftp
 	 * @return void
 	 * @throws ftpException
 	 */
-	public function set_passive_modus()
+	public function _set_passive_modus()
 	{
 		if($this->_ftp === false)
 		{
@@ -166,22 +138,11 @@ class ftp
 	 * @return bool
 	 * @throws ftpException
 	 */
-	public function get_remote_file($remoteFile, $localeFile)
+	public function _get_remote_file($remoteFile, $localeFile)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'getRemoteFile', array($this->_ftp, $remoteFile, $localeFile));
-			$plugin = plugins::hookCall('before', 'ftp', 'getRemoteFile', array($this->_ftp, $remoteFile, $localeFile));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		return @ftp_get($this->_ftp, $localeFile, $remoteFile, FTP_BINARY);
@@ -198,22 +159,11 @@ class ftp
 	 *                         String wenn ein Datumsformat angegeben wurde.
 	 * @throws ftpException
 	 */
-	public function modified_time($remoteFile, $timeFormat = null)
+	public function _modified_time($remoteFile, $timeFormat = null)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'modifiedTime', array($this->_ftp, $remoteFile, $timeFormat));
-			$plugin = plugins::hookCall('before', 'ftp', 'modifiedTime', array($this->_ftp, $remoteFile, $timeFormat));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		$time = ftp_mdtm($this->_ftp, $remoteFile);
@@ -232,22 +182,11 @@ class ftp
 	 * @return bool Gibt ein true zurück wenn der wechsel Erfolgt ist, ansonsten wird eine Exception geschmissen.
 	 * @throws ftpException
 	 */
-	public function up()
+	public function _up()
 	{
 		if($this->_ftp === false)
 		{
-			throw new ftpException('No connection');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'up', array($this->_ftp));
-			$plugin = plugins::hookCall('before', 'ftp', 'up', array($this->_ftp));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
+			throw new ftpException('Error: FTP not connected');
 		}
 
 		$result = @ftp_cdup($this->_ftp);
@@ -268,29 +207,18 @@ class ftp
 	 * @return bool Gibt ein true zurück wenn es sich um ein Ordner handelt und ein false wenn es keiner ist.
 	 * @throws ftpException
 	 */
-	public function is_dir($remoteDirectory = '.')
+	public function _is_dir($remoteDirectory = '.')
 	{
 		if($this->_ftp === false)
 		{
-			throw new ftpException('No connection');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'isDir', array($this->_ftp, $remoteDirectory));
-			$plugin = plugins::hookCall('before', 'ftp', 'isDir', array($this->_ftp, $remoteDirectory));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
+			throw new ftpException('Error: FTP not connected');
 		}
 
 		$pwd = @ftp_pwd($this->_ftp);
 
 		if($pwd === false)
 		{
-			throw new ftpException('Unable to resolve the current directory');
+			throw new ftpException('Error: Unable to resolve the current directory');
 		}
 
 		if(@ftp_chdir($this->_ftp, $remoteDirectory) === true)
@@ -317,22 +245,11 @@ class ftp
 	 * @return int
 	 * @throws ftpException
 	 */
-	public function count($remoteDirectory = '.', $type = null, $recursive = true)
+	public function _count($remoteDirectory = '.', $type = null, $recursive = true)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'count', array($this->_ftp, $remoteDirectory, $type, $recursive));
-			$plugin = plugins::hookCall('before', 'ftp', 'count', array($this->_ftp, $remoteDirectory, $type, $recursive));
-
-			if($plugin != null)
-			{
-				return (int)$plugin;
-			}
 		}
 
 		if($type === null)
@@ -365,22 +282,11 @@ class ftp
 	 * @return int Gibt die Anzahl an gefundenen Dateien im FTP Verzeichnis zurück
 	 * @throws ftpException
 	 */
-	public function is_empty($remoteDirectory)
+	public function _is_empty($remoteDirectory)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'isEmpty', array($this->_ftp, $remoteDirectory));
-			$plugin = plugins::hookCall('before', 'ftp', 'isEmpty', array($this->_ftp, $remoteDirectory));
-
-			if($plugin != null)
-			{
-				return (int)$plugin;
-			}
 		}
 
 		$countRemoveDirectory = $this->count($remoteDirectory, null, false);
@@ -404,22 +310,11 @@ class ftp
 	 * @return bool Wenn es erfolgreich hochgeladen wurde gibt es ein true zurück. Bei einem Fehler false.
 	 * @throws ftpException
 	 */
-	public function put_from_path($local_file)
+	public function _put_from_path($local_file)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'putFromPath', array($this->_ftp, $local_file));
-			$plugin = plugins::hookCall('before', 'ftp', 'putFromPath', array($this->_ftp, $local_file));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		$remote_file = basename($local_file);
@@ -446,22 +341,11 @@ class ftp
 	 * @return bool Gibt nach erfolgreichem hochladen ein true zurück oder ein false bei einem Fehler.
 	 * @throws ftpException
 	 */
-	public function put_all($source_directory, $target_directory, $mode = FTP_BINARY)
+	public function _put_all($source_directory, $target_directory, $mode = FTP_BINARY)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'putAll', array($this->_ftp, $source_directory, $target_directory, $mode));
-			$plugin = plugins::hookCall('before', 'ftp', 'putAll', array($this->_ftp, $source_directory, $target_directory, $mode));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		$d = dir($source_directory);
@@ -508,22 +392,11 @@ class ftp
 	 * @return bool Gibt nach erfolgreichem hochladen ein true und bei einem Fehler false zurück.
 	 * @throws ftpException
 	 */
-	public function put_from_string($remote_file, $content)
+	public function _put_from_string($remote_file, $content)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'putFromString', array($this->_ftp, $remote_file, $content));
-			$plugin = plugins::hookCall('before', 'ftp', 'putFromString', array($this->_ftp, $remote_file, $content));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		$handle = fopen('php://temp', 'w');
@@ -545,22 +418,11 @@ class ftp
 	 * @return int Gibt die Byte Größe des FTP Verzeichnises zurück
 	 * @throws ftpException
 	 */
-	public function dir_size($remoteDirectory = '.', $recursive = true)
+	public function _dir_size($remoteDirectory = '.', $recursive = true)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'dirSize', array($this->_ftp, $remoteDirectory, $recursive));
-			$plugin = plugins::hookCall('before', 'ftp', 'dirSize', array($this->_ftp, $remoteDirectory, $recursive));
-
-			if($plugin != null)
-			{
-				return (int)$plugin;
-			}
 		}
 
 		$items = $this->scan_dir($remoteDirectory, $recursive);
@@ -588,22 +450,11 @@ class ftp
 	 * @return array Gibt ein sortiertes mehrdimensionales Array zurück
 	 * @throws ftpException
 	 */
-	public function nlist($remoteDirectory = '.', $recursive = false, $filter = 'sort')
+	public function _nlist($remoteDirectory = '.', $recursive = false, $filter = 'sort')
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'nlist', array($this->_ftp, $remoteDirectory, $recursive, $filter));
-			$plugin = plugins::hookCall('before', 'ftp', 'nlist', array($this->_ftp, $remoteDirectory, $recursive, $filter));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		if($this->is_dir($remoteDirectory) === false)
@@ -703,22 +554,11 @@ class ftp
 	 * @return bool Gibt ein true zurück wenn alles erfolgreich angelegt wurde oder ein false wenn ein Fehler auftrat.
 	 * @throws ftpException
 	 */
-	public function mkdir($remoteDirectory, $recursive = false)
+	public function _mkdir($remoteDirectory, $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'mkdir', array($this->_ftp, $remoteDirectory, $recursive));
-			$plugin = plugins::hookCall('before', 'ftp', 'mkdir', array($this->_ftp, $remoteDirectory, $recursive));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		if($recursive === false || $this->is_dir($remoteDirectory) === true)
@@ -771,22 +611,11 @@ class ftp
 	 * @return bool Gibt ein true zurück wenn erfolgreich gelöscht und ein false wenn ein Fehler auftrat.
 	 * @throws ftpException
 	 */
-	public function remove($remoteFile)
+	public function _remove($remoteFile)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'remove', array($this->_ftp, $remoteFile));
-			$plugin = plugins::hookCall('before', 'ftp', 'remove', array($this->_ftp, $remoteFile));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		if($this->is_dir($remoteFile) === true)
@@ -806,22 +635,11 @@ class ftp
 	 * @return bool Gibt bei erfolgreicher löschung true ansonsten false zurück.
 	 * @throws ftpException
 	 */
-	public function rmdir($remoteDirectory, $recursive = false)
+	public function _rmdir($remoteDirectory, $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'rmdir', array($this->_ftp, $remoteDirectory, $recursive));
-			$plugin = plugins::hookCall('before', 'ftp', 'rmdir', array($this->_ftp, $remoteDirectory, $recursive));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		if($recursive === true)
@@ -869,22 +687,11 @@ class ftp
 	 * @return bool Bei erfolgreichen Reinigung gibt er true ansonsten false zurück.
 	 * @throws ftpException
 	 */
-	public function clean_dir($remoteDirectory)
+	public function _clean_dir($remoteDirectory)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'cleanDir', array($this->_ftp, $remoteDirectory));
-			$plugin = plugins::hookCall('before', 'ftp', 'cleanDir', array($this->_ftp, $remoteDirectory));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
 		}
 
 		if(!$files = $this->nlist($remoteDirectory))
@@ -914,22 +721,11 @@ class ftp
 	 * @return array Gibt ein mehrdimensionales Array mit allen gefundenen Dateien zurück
 	 * @throws ftpException
 	 */
-	public function scan_dir($remoteDirectory = '.', $recursive = false)
+	public function _scan_dir($remoteDirectory = '.', $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'scanDir', array($this->_ftp, $remoteDirectory, $recursive));
-			$plugin = plugins::hookCall('before', 'ftp', 'scanDir', array($this->_ftp, $remoteDirectory, $recursive));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		return $this->parse_raw_list($this->rawlist($remoteDirectory, $recursive));
@@ -944,22 +740,11 @@ class ftp
 	 * @return array Gibt eine Liste aller Dateien zurück
 	 * @throws ftpException
 	 */
-	public function rawlist($remoteDirectory = '.', $recursive = false)
+	public function _rawlist($remoteDirectory = '.', $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'rawlist', array($this->_ftp, $remoteDirectory, $recursive));
-			$plugin = plugins::hookCall('before', 'ftp', 'rawlist', array($this->_ftp, $remoteDirectory, $recursive));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		if($this->is_dir($remoteDirectory) === false)
@@ -1061,22 +846,11 @@ class ftp
 	 * @return array Gibt Details zu den einzelnen FTP-Dateien zurück
 	 * @throws ftpException
 	 */
-	public function parse_raw_list(array $rawlist)
+	public function _parse_raw_list(array $rawlist)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'parseRawList', array($this->_ftp, $rawlist));
-			$plugin = plugins::hookCall('before', 'ftp', 'parseRawList', array($this->_ftp, $rawlist));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		$items = array();
@@ -1103,7 +877,18 @@ class ftp
 				continue;
 			}
 
-			$item = array('permissions' => $chunks[0], 'number' => $chunks[1], 'owner' => $chunks[2], 'group' => $chunks[3], 'size' => $chunks[4], 'month' => $chunks[5], 'day' => $chunks[6], 'time' => $chunks[7], 'name' => $chunks[8], 'type' => $this->raw_to_type($chunks[0]),);
+			$item = array(
+				'permissions' => $chunks[0],
+				'number' => $chunks[1],
+				'owner' => $chunks[2],
+				'group' => $chunks[3],
+				'size' => $chunks[4],
+				'month' => $chunks[5],
+				'day' => $chunks[6],
+				'time' => $chunks[7],
+				'name' => $chunks[8],
+				'type' => $this->raw_to_type($chunks[0]),
+			);
 
 			if($item['type'] == 'link')
 			{
@@ -1141,22 +926,11 @@ class ftp
 	 * @return string Der umgewandelete, verständlichere, Typ kommt zurück.
 	 * @throws ftpException
 	 */
-	public function raw_to_type($permission)
+	public function _raw_to_type($permission)
 	{
 		if($this->_ftp === false)
 		{
 			throw new ftpException('Error: FTP not connected');
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'ftp', 'rawToType', array($this->_ftp, $permission));
-			$plugin = plugins::hookCall('before', 'ftp', 'rawToType', array($this->_ftp, $permission));
-
-			if($plugin != null)
-			{
-				return (string)$plugin;
-			}
 		}
 
 		if(is_string($permission) === false)

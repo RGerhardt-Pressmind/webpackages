@@ -152,6 +152,7 @@ if(defined('EXCEPTION_DIR') === true && EXCEPTION_DIR != '')
 	}
 }
 
+require 'initiator.abstract.class.php';
 require 'autoload.class.php';
 
 require 'version.class.php';

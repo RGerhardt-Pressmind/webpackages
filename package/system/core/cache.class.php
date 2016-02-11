@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\cacheException;
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Cachen von Dateien oder Daten
@@ -43,7 +44,7 @@ use package\implement\IStatic;
  * @category       Cache
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class cache implements IStatic
+class cache extends initiator implements IStatic
 {
 	/**
 	 * @var string Der Pfad zum Cache Verzeichnis
@@ -70,12 +71,12 @@ class cache implements IStatic
 	{
 		if(CACHE_PATH != '')
 		{
-			self::set_cache_dir(CACHE_PATH);
+			self::_set_cache_dir(CACHE_PATH);
 		}
 
 		if(CACHE_EXTENSION != '')
 		{
-			self::set_cache_extension(CACHE_EXTENSION);
+			self::_set_cache_extension(CACHE_EXTENSION);
 		}
 	}
 
@@ -86,7 +87,7 @@ class cache implements IStatic
 	 *
 	 * @return boolean Gibt im Fehlerfall ein false zurück
 	 */
-	public static function set_cache_dir($cachePath)
+	public static function _set_cache_dir($cachePath)
 	{
 		if(empty($cachePath) === true || is_dir($cachePath) === false)
 		{
@@ -114,7 +115,7 @@ class cache implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function set_cache_active($active = false)
+	public static function _set_cache_active($active = false)
 	{
 		self::$cacheActiv = $active;
 	}
@@ -127,7 +128,7 @@ class cache implements IStatic
 	 * @throws cacheException Wenn der Parameter leer ist.
 	 * @return void
 	 */
-	public static function set_cache_extension($extension = 'cache')
+	public static function _set_cache_extension($extension = 'cache')
 	{
 		if(empty($extension))
 		{
@@ -149,7 +150,7 @@ class cache implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function set_template_element($cache_name, $content)
+	public static function _set_template_element($cache_name, $content)
 	{
 		$isSave = @file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
 
@@ -172,19 +173,8 @@ class cache implements IStatic
 	 * @return bool|string Gibt den Link zur gecachten Datei zurück, false wenn Lebensdauer abgelaufen oder gecachte
 	 *                     Datei nicht existiert
 	 */
-	public static function get_template_element($cache_name, $lifetime = 500)
+	public static function _get_template_element($cache_name, $lifetime = 500)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'cache', 'get_template_element', array($cache_name, $lifetime));
-			$plugin = plugins::hookCall('before', 'cache', 'setElget_template_elementement', array($cache_name, $lifetime));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		$cacheFile = self::$cacheDir.$cache_name.'.html';
 
 		if(file_exists($cacheFile) === false)
@@ -197,17 +187,6 @@ class cache implements IStatic
 		if($filemtime === false)
 		{
 			return false;
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'cache', 'get_template_element', array($cacheFile));
-			$plugin = plugins::hookCall('after', 'cache', 'get_template_element', array($cacheFile));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
 		}
 
 		if(($filemtime + $lifetime) >= time() || $lifetime === 0)
@@ -233,19 +212,8 @@ class cache implements IStatic
 	 *              die Cache Datei nicht abgespeichert werden konnte)
 	 * @throws cacheException Wenn der $cache_name leer ist
 	 */
-	public static function set_element($cache_name, $content, $lifetime = 500)
+	public static function _set_element($cache_name, $content, $lifetime = 500)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'cache', 'setElement', array($cache_name, $content, $lifetime));
-			$plugin = plugins::hookCall('before', 'cache', 'setElement', array($cache_name, $content, $lifetime));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
-		}
-
 		if(empty($cache_name) === true)
 		{
 			throw new cacheException('Error: cache name is empty');
@@ -261,17 +229,6 @@ class cache implements IStatic
 		$serialize = @serialize(array('lifetime' => (time() + $lifetime), 'content' => $content));
 		$cachePath = self::$cacheDir.$cache_name.self::$cacheExtension;
 		$saveFile  = @file_put_contents($cachePath, $serialize);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'cache', 'setElement', array($cachePath));
-			$plugin = plugins::hookCall('after', 'cache', 'setElement', array($cachePath));
-
-			if($plugin != null)
-			{
-				return (bool)$plugin;
-			}
-		}
 
 		if($saveFile === false)
 		{
@@ -291,19 +248,8 @@ class cache implements IStatic
 	 * @return mixed Gibt den Inhalt des Caches zurück, false wenn Datei nicht existiert oder Lebensdauer abgelaufen
 	 * @throws cacheException Wenn $cache_name leer ist.
 	 */
-	public static function get_element($cache_name)
+	public static function _get_element($cache_name)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'cache', 'getElement', array($cache_name));
-			$plugin = plugins::hookCall('before', 'cache', 'getElement', array($cache_name));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
-
 		if(empty($cache_name) === true)
 		{
 			throw new cacheException('Error: cache name is empty');
@@ -352,19 +298,8 @@ class cache implements IStatic
 	 * @return bool Nach erfolgreichem löschen des Caches wird true zurück gegeben, bei einem Fehler false.
 	 * @throws cacheException Wenn $cache_name leer ist.
 	 */
-	public static function delete_element($cache_name)
+	public static function _delete_element($cache_name)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'cache', 'deleteElement', array($cache_name));
-			$plugins = plugins::hookCall('before', 'cache', 'deleteElement', array($cache_name));
-
-			if($plugins != null)
-			{
-				return (bool)$plugins;
-			}
-		}
-
 		if(empty($cache_name) === true)
 		{
 			throw new cacheException('Error: cache name is empty');
@@ -376,17 +311,6 @@ class cache implements IStatic
 		if(is_file($filename) === true)
 		{
 			$remove = @unlink($filename);
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'cache', 'deleteElement', array($filename, $remove));
-			$plugins = plugins::hookCall('after', 'cache', 'deleteElement', array($filename, $remove));
-
-			if($plugins != null)
-			{
-				return (bool)$plugins;
-			}
 		}
 
 		return $remove;

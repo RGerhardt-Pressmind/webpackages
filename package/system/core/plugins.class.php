@@ -77,6 +77,23 @@ class plugins implements IStatic
 	}
 
 	/**
+	 * Startet den Hook Call und Hook Show
+	 *
+	 * @param string $position
+	 * @param string $classes
+	 * @param string $methode
+	 * @param array  $args
+	 *
+	 * @return mixed
+	 */
+	public static function hooks($position, $classes, $methode, $args = array())
+	{
+		self::hookShow($position, $classes, $methode, $args);
+
+		return self::hookCall($position, $classes, $methode, $args);
+	}
+
+	/**
 	 * Geht alle Plugins durch und kontrolliert
 	 * ob eine Methode existiert die geöffnet
 	 * werden soll
@@ -113,7 +130,10 @@ class plugins implements IStatic
 			{
 				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
 				{
-					call_user_func_array(array($class, $pointer), $args);
+					call_user_func_array(array(
+						$class,
+						$pointer
+					), $args);
 				}
 			}
 		}
@@ -140,7 +160,10 @@ class plugins implements IStatic
 			{
 				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
 				{
-					$plugin = call_user_func_array(array($class, $pointer), $args);
+					$plugin = call_user_func_array(array(
+						$class,
+						$pointer
+					), $args);
 
 					if($plugin != null)
 					{
@@ -173,7 +196,10 @@ class plugins implements IStatic
 			{
 				if($class instanceof IPlugin && method_exists($class, $methode) === true)
 				{
-					$plugin = call_user_func_array(array($class, $methode), $args);
+					$plugin = call_user_func_array(array(
+						$class,
+						$methode
+					), $args);
 
 					if($plugin != null)
 					{

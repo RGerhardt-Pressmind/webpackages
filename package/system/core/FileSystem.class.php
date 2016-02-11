@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Greift aus das Dateisystem zu
@@ -40,7 +41,7 @@ use package\implement\IStatic;
  * @category       Filesystem
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class FileSystem implements IStatic
+class FileSystem extends initiator implements IStatic
 {
 	/**
 	 * Zum initialisieren von Daten
@@ -59,19 +60,8 @@ class FileSystem implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function is_really_writable($file)
+	public static function _is_really_writable($file)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'FileSystem', 'is_really_writable', array($file));
-			$plugins = plugins::hookCall('before', 'FileSystem', 'is_really_writable', array($file));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(OS === 'UNIX' && ini_get('safe_mode') === false)
 		{
 			return is_writable($file);
@@ -112,19 +102,8 @@ class FileSystem implements IStatic
 	 *
 	 * @return array|bool
 	 */
-	public static function get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
+	public static function _get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
-			$plugins = plugins::hookCall('before', 'FileSystem', 'get_all_files', array($path, $orderBack, $withData));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(is_dir($path) === false || file_exists($path) === false)
 		{
 			return false;
@@ -193,16 +172,6 @@ class FileSystem implements IStatic
 			$back = $newSort;
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'get_all_files', array($back));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		return $back;
 	}
 
@@ -214,19 +183,8 @@ class FileSystem implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function delete_files($path, $delete_dir = false)
+	public static function _delete_files($path, $delete_dir = false)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
-			$plugins = plugins::hookCall('before', 'FileSystem', 'delete_files', array($path, $delete_dir));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(is_dir($path) === false || file_exists($path) === false)
 		{
 			return false;
@@ -267,16 +225,6 @@ class FileSystem implements IStatic
 			}
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'delete_files', array($path, $delete_dir));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		return true;
 	}
 
@@ -291,19 +239,8 @@ class FileSystem implements IStatic
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public static function copyDirectory($source, $dest, $chmod = 0755)
+	public static function _copyDirectory($source, $dest, $chmod = 0755)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
-			$plugins = plugins::hookCall('before', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(file_exists($dest) === false)
 		{
 			mkdir($dest, $chmod);
@@ -370,16 +307,6 @@ class FileSystem implements IStatic
 			}
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'copyDirectory', array($source, $dest, $chmod));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		return true;
 	}
 
@@ -392,19 +319,8 @@ class FileSystem implements IStatic
 	 *
 	 * @return bool Gibt true bei Erfolg und false bei einem Fehler zurück.
 	 */
-	public static function renameDirectory($source, $dest, $chmod = 0755)
+	public static function _renameDirectory($source, $dest, $chmod = 0755)
 	{
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('before', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
-			$plugins = plugins::hookCall('before', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
-
-			if($plugins != null)
-			{
-				return $plugins;
-			}
-		}
-
 		if(file_exists($dest) === false)
 		{
 			mkdir($dest, $chmod, true);
@@ -483,16 +399,6 @@ class FileSystem implements IStatic
 			if($chmod === false)
 			{
 				return false;
-			}
-		}
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugins = plugins::hookCall('after', 'FileSystem', 'renameDirectory', array($source, $dest, $chmod));
-
-			if($plugins != null)
-			{
-				return $plugins;
 			}
 		}
 

@@ -45,7 +45,11 @@ class security
 	/**
 	 * @var array Erlaubte Bildtypen
 	 */
-	public static $allowedImages = array('image/gif', 'image/jpeg', 'image/png');
+	public static $allowedImages = array(
+		'image/gif',
+		'image/jpeg',
+		'image/png'
+	);
 
 	/**
 	 * @var array Erlaubte Dateitypen
@@ -60,22 +64,92 @@ class security
 	/**
 	 * @var array Liste aller bekannten Bots (stetig in Erweiterung)
 	 */
-	public static $botlist = array("Teoma", "alexa", "froogle", "Gigabot", "inktomi", "looksmart", "URL_Spider_SQL", "Firefly", "NationalDirectory", "Ask Jeeves", "TECNOSEEK", "InfoSeek", "WebFindBot", "girafabot", "crawler", "www.galaxy.com", "Googlebot", "Scooter", "Slurp", "msnbot", "appie", "FAST", "WebBug", "Spade", "ZyBorg", "rabaz", "Baiduspider", "Feedfetcher-Google", "TechnoratiSnoop", "Rankivabot", "Mediapartners-Google", "Sogou web spider", "WebAlta Crawler", "TweetmemeBot", "Butterfly", "Twitturls", "Me.dium", "Twiceler", "bing", "microsoft", "yahoo");
+	public static $botlist = array(
+		"Teoma",
+		"alexa",
+		"froogle",
+		"Gigabot",
+		"inktomi",
+		"looksmart",
+		"URL_Spider_SQL",
+		"Firefly",
+		"NationalDirectory",
+		"Ask Jeeves",
+		"TECNOSEEK",
+		"InfoSeek",
+		"WebFindBot",
+		"girafabot",
+		"crawler",
+		"www.galaxy.com",
+		"Googlebot",
+		"Scooter",
+		"Slurp",
+		"msnbot",
+		"appie",
+		"FAST",
+		"WebBug",
+		"Spade",
+		"ZyBorg",
+		"rabaz",
+		"Baiduspider",
+		"Feedfetcher-Google",
+		"TechnoratiSnoop",
+		"Rankivabot",
+		"Mediapartners-Google",
+		"Sogou web spider",
+		"WebAlta Crawler",
+		"TweetmemeBot",
+		"Butterfly",
+		"Twitturls",
+		"Me.dium",
+		"Twiceler",
+		"bing",
+		"microsoft",
+		"yahoo"
+	);
 
 	/**
 	 * @var array Liste aller erlaubten IP-Methoden
 	 */
-	public static $ipMethodes = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR');
+	public static $ipMethodes = array(
+		'HTTP_CLIENT_IP',
+		'HTTP_X_FORWARDED_FOR',
+		'HTTP_X_FORWARDED',
+		'HTTP_X_CLUSTER_CLIENT_IP',
+		'HTTP_FORWARDED_FOR',
+		'HTTP_FORWARDED',
+		'REMOTE_ADDR'
+	);
 
 	/**
 	 * @var array Liste nicht erlaubter Schnippsel in Strings
 	 */
-	protected static $_never_allowed_str = array('document.cookie' => '[removed]', 'document.write' => '[removed]', '.parentNode' => '[removed]', '.innerHTML' => '[removed]', '-moz-binding' => '[removed]', '<!--' => '&lt;!--', '-->' => '--&gt;', '<![CDATA[' => '&lt;![CDATA[', '<comment>' => '&lt;comment&gt;');
+	protected static $_never_allowed_str = array(
+		'document.cookie' => '[removed]',
+		'document.write' => '[removed]',
+		'.parentNode' => '[removed]',
+		'.innerHTML' => '[removed]',
+		'-moz-binding' => '[removed]',
+		'<!--' => '&lt;!--',
+		'-->' => '--&gt;',
+		'<![CDATA[' => '&lt;![CDATA[',
+		'<comment>' => '&lt;comment&gt;'
+	);
 
 	/**
 	 * @var array Liste nicht erlaubter Regex Funde in Strings (stetig in Erweiterung)
 	 */
-	protected static $_never_allowed_regex = array('javascript\s*:', '(document|(document\.)?window)\.(location|on\w*)', 'expression\s*(\(|&\#40;)', 'vbscript\s*:', 'wscript\s*:', 'jscript\s*:', 'vbs\s*:', 'Redirect\s+30\d', "([\"'])?data\s*:[^\\1]*?base64[^\\1]*?,[^\\1]*?\\1?");
+	protected static $_never_allowed_regex = array(
+		'javascript\s*:',
+		'(document|(document\.)?window)\.(location|on\w*)',
+		'expression\s*(\(|&\#40;)',
+		'vbscript\s*:',
+		'wscript\s*:',
+		'jscript\s*:',
+		'vbs\s*:',
+		'Redirect\s+30\d',
+		"([\"'])?data\s*:[^\\1]*?base64[^\\1]*?,[^\\1]*?\\1?"
+	);
 
 	/**
 	 * Kontrolliert eine Variable auf Sicherheit und Konvertiert diese zur Sicherheit auch in das gewünschte Format.
@@ -282,7 +356,7 @@ class security
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'security', 'get_mime_type', array($path));
+			plugins::hookShow(plugins::BEFORE, __CLASS__, __METHOD__, array($path));
 			$plugins = plugins::hookCall('before', 'security', 'get_mime_type', array($path));
 
 			if($plugins != null)
@@ -434,8 +508,14 @@ class security
 		 * We only convert entities that are within tags since
 		 * these are the ones that will pose security problems.
 		 */
-		$str = preg_replace_callback("/[^a-z0-9>]+[a-z0-9]+=([\'\"]).*?\\1/si", array('self', '_convert_attribute'), $str);
-		$str = preg_replace_callback('/<\w+.*/si', array('self', '_decode_entity'), $str);
+		$str = preg_replace_callback("/[^a-z0-9>]+[a-z0-9]+=([\'\"]).*?\\1/si", array(
+			'self',
+			'_convert_attribute'
+		), $str);
+		$str = preg_replace_callback('/<\w+.*/si', array(
+			'self',
+			'_decode_entity'
+		), $str);
 
 		// Remove Invisible Characters Again!
 		$str = self::remove_invisible_characters($str);
@@ -450,7 +530,13 @@ class security
 
 		// Remove Strings that are never allowed
 		$str = self::_do_never_allowed($str);
-		$str = str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $str);
+		$str = str_replace(array(
+			'<?',
+			'?>'
+		), array(
+			'&lt;?',
+			'?&gt;'
+		), $str);
 
 		/*
 		 * Compact any exploded words
@@ -458,12 +544,33 @@ class security
 		 * This corrects words like:  j a v a s c r i p t
 		 * These words are compacted back to their correct state.
 		 */
-		$words = array('javascript', 'expression', 'vbscript', 'jscript', 'wscript', 'vbs', 'script', 'base64', 'applet', 'alert', 'document', 'write', 'cookie', 'window', 'confirm', 'prompt', 'eval');
+		$words = array(
+			'javascript',
+			'expression',
+			'vbscript',
+			'jscript',
+			'wscript',
+			'vbs',
+			'script',
+			'base64',
+			'applet',
+			'alert',
+			'document',
+			'write',
+			'cookie',
+			'window',
+			'confirm',
+			'prompt',
+			'eval'
+		);
 
 		foreach($words as $word)
 		{
 			$word = implode('\s*', str_split($word)).'\s*';
-			$str  = preg_replace_callback('#('.substr($word, 0, -3).')(\W)#is', array('self', '_compact_exploded_words'), $str);
+			$str  = preg_replace_callback('#('.substr($word, 0, -3).')(\W)#is', array(
+				'self',
+				'_compact_exploded_words'
+			), $str);
 		}
 
 		/*
@@ -485,12 +592,18 @@ class security
 
 			if(preg_match('/<a/i', $str) === 1)
 			{
-				$str = preg_replace_callback('#<a[^a-z0-9>]+([^>]*?)(?:>|$)#si', array('self', '_js_link_removal'), $str);
+				$str = preg_replace_callback('#<a[^a-z0-9>]+([^>]*?)(?:>|$)#si', array(
+					'self',
+					'_js_link_removal'
+				), $str);
 			}
 
 			if(preg_match('/<img/i', $str) === 1)
 			{
-				$str = preg_replace_callback('#<img[^a-z0-9]+([^>]*?)(?:\s?/?>|$)#si', array('self', '_js_img_removal'), $str);
+				$str = preg_replace_callback('#<img[^a-z0-9]+([^>]*?)(?:\s?/?>|$)#si', array(
+					'self',
+					'_js_img_removal'
+				), $str);
 			}
 
 			if(preg_match('/script|xss/i', $str) === 1)
@@ -529,7 +642,10 @@ class security
 		while(true)
 		{
 			$old_str = $str;
-			$str     = preg_replace_callback($pattern, array('self', '_sanitize_naughty_html'), $str);
+			$str     = preg_replace_callback($pattern, array(
+				'self',
+				'_sanitize_naughty_html'
+			), $str);
 
 			if($old_str === $str)
 			{
@@ -571,9 +687,58 @@ class security
 	 */
 	protected static function _sanitize_naughty_html($matches)
 	{
-		$naughty_tags = array('alert', 'prompt', 'confirm', 'applet', 'audio', 'basefont', 'base', 'behavior', 'bgsound', 'blink', 'body', 'embed', 'expression', 'form', 'frameset', 'frame', 'head', 'html', 'ilayer', 'iframe', 'input', 'button', 'select', 'isindex', 'layer', 'link', 'meta', 'keygen', 'object', 'plaintext', 'style', 'script', 'textarea', 'title', 'math', 'video', 'svg', 'xml', 'xss');
+		$naughty_tags = array(
+			'alert',
+			'prompt',
+			'confirm',
+			'applet',
+			'audio',
+			'basefont',
+			'base',
+			'behavior',
+			'bgsound',
+			'blink',
+			'body',
+			'embed',
+			'expression',
+			'form',
+			'frameset',
+			'frame',
+			'head',
+			'html',
+			'ilayer',
+			'iframe',
+			'input',
+			'button',
+			'select',
+			'isindex',
+			'layer',
+			'link',
+			'meta',
+			'keygen',
+			'object',
+			'plaintext',
+			'style',
+			'script',
+			'textarea',
+			'title',
+			'math',
+			'video',
+			'svg',
+			'xml',
+			'xss'
+		);
 
-		$evil_attributes = array('on\w+', 'style', 'xmlns', 'formaction', 'form', 'xlink:href', 'FSCommand', 'seekSegmentTime');
+		$evil_attributes = array(
+			'on\w+',
+			'style',
+			'xmlns',
+			'formaction',
+			'form',
+			'xlink:href',
+			'FSCommand',
+			'seekSegmentTime'
+		);
 
 		// First, escape unclosed tags
 		if(empty($matches['closeTag']) === true)
@@ -716,7 +881,15 @@ class security
 	 */
 	protected static function _convert_attribute($match)
 	{
-		return str_replace(array('>', '<', '\\'), array('&gt;', '&lt;', '\\\\'), $match[0]);
+		return str_replace(array(
+			'>',
+			'<',
+			'\\'
+		), array(
+			'&gt;',
+			'&lt;',
+			'\\\\'
+		), $match[0]);
 	}
 
 	/**
@@ -776,12 +949,18 @@ class security
 			{
 				if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false)
 				{
-					return array('isBot' => true, 'version' => $bot);
+					return array(
+						'isBot' => true,
+						'version' => $bot
+					);
 				}
 			}
 		}
 
-		return array('isBot' => false, 'version' => '');
+		return array(
+			'isBot' => false,
+			'version' => ''
+		);
 	}
 
 	/**

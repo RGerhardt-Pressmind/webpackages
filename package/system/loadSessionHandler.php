@@ -250,7 +250,7 @@ class NewSessionHandler implements SessionHandlerInterface
 	}
 }
 
-if(defined('USE_SESSION_SAVE_HANDLER') === true && USE_SESSION_SAVE_HANDLER === true && defined('PDO_HOST') === true && empty(PDO_HOST) === false)
+if(defined('USE_SESSION_SAVE_HANDLER') === true && USE_SESSION_SAVE_HANDLER === true && defined('PDO_HOST') === true && PDO_HOST != '')
 {
 	new NewSessionHandler();
 }

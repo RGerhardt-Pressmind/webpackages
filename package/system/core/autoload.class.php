@@ -28,6 +28,7 @@
 namespace package\core;
 
 use package\exceptions\autoloadException;
+use package\system\core\initiator;
 
 /**
  * Zum dynamischen Aufrufen von Klassen
@@ -39,7 +40,7 @@ use package\exceptions\autoloadException;
  * @category       Autoload
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class autoload
+class autoload extends initiator
 {
 	/**
 	 * @const Der Klassensuffix unter den die Dateien abzuspeichern sind

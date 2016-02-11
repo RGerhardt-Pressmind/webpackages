@@ -65,8 +65,18 @@ class number implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'number', 'scale_proportionally', array($sourceWidth, $sourceHeight, $destWidth, $destHeight));
-			$plugins = plugins::hookCall('before', 'number', 'scale_proportionally', array($sourceWidth, $sourceHeight, $destWidth, $destHeight));
+			plugins::hookShow('before', 'number', 'scale_proportionally', array(
+				$sourceWidth,
+				$sourceHeight,
+				$destWidth,
+				$destHeight
+			));
+			$plugins = plugins::hookCall('before', 'number', 'scale_proportionally', array(
+				$sourceWidth,
+				$sourceHeight,
+				$destWidth,
+				$destHeight
+			));
 
 			if($plugins != null)
 			{
@@ -89,8 +99,14 @@ class number implements IStatic
 
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('after', 'number', 'scale_proportionally', array($backWidth, $backHeight));
-			$plugins = plugins::hookCall('after', 'number', 'scale_proportionally', array($backWidth, $backHeight));
+			plugins::hookShow('after', 'number', 'scale_proportionally', array(
+				$backWidth,
+				$backHeight
+			));
+			$plugins = plugins::hookCall('after', 'number', 'scale_proportionally', array(
+				$backWidth,
+				$backHeight
+			));
 
 			if($plugins != null)
 			{
@@ -98,7 +114,10 @@ class number implements IStatic
 			}
 		}
 
-		return array('width' => $backWidth, 'height' => $backHeight);
+		return array(
+			'width' => $backWidth,
+			'height' => $backHeight
+		);
 	}
 
 	/**
@@ -113,8 +132,14 @@ class number implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'number', 'byteFormat', array($num, $precision));
-			$plugins = plugins::hookCall('before', 'number', 'byteFormat', array($num, $precision));
+			plugins::hookShow('before', 'number', 'byteFormat', array(
+				$num,
+				$precision
+			));
+			$plugins = plugins::hookCall('before', 'number', 'byteFormat', array(
+				$num,
+				$precision
+			));
 
 			if($plugins != null)
 			{
@@ -194,8 +219,14 @@ class number implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'number', 'diff', array($start, $end));
-			$plugins = plugins::hookCall('before', 'number', 'diff', array($start, $end));
+			plugins::hookShow('before', 'number', 'diff', array(
+				$start,
+				$end
+			));
+			$plugins = plugins::hookCall('before', 'number', 'diff', array(
+				$start,
+				$end
+			));
 
 			if($plugins != null)
 			{
@@ -257,8 +288,14 @@ class number implements IStatic
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'number', 'getDiffValue', array($diffDate, $short));
-			$plugins = plugins::hookCall('before', 'number', 'getDiffValue', array($diffDate, $short));
+			plugins::hookShow('before', 'number', 'getDiffValue', array(
+				$diffDate,
+				$short
+			));
+			$plugins = plugins::hookCall('before', 'number', 'getDiffValue', array(
+				$diffDate,
+				$short
+			));
 
 			if($plugins != null)
 			{

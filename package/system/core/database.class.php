@@ -47,7 +47,18 @@ class database extends \PDO
 	 * @var array Eine Liste aller erlaubten PDO Treiber die verwendet werden dürfen. Erlaubt sind: mysql, cubrid,
 	 *      dblib, firebird, informix, sqlsrv, oci, pgsql, sqlite und sqlite2
 	 */
-	public static $allowedDrivers = array('mysql', 'cubrid', 'dblib', 'firebird', 'informix', 'sqlsrv', 'oci', 'pgsql', 'sqlite', 'sqlite2');
+	public static $allowedDrivers = array(
+		'mysql',
+		'cubrid',
+		'dblib',
+		'firebird',
+		'informix',
+		'sqlsrv',
+		'oci',
+		'pgsql',
+		'sqlite',
+		'sqlite2'
+	);
 
 	/**
 	 * @var string Der aktuell benutzte PDO Treiber

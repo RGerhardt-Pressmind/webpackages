@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\imagesException;
 use package\implement\IStatic;
+use package\system\core\initiator;
 
 /**
  * Schneidet Bilder zu
@@ -40,7 +41,7 @@ use package\implement\IStatic;
  * @category       images
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class images implements IStatic
+class images extends initiator implements IStatic
 {
 	public static function init()
 	{
@@ -63,7 +64,7 @@ class images implements IStatic
 	 * @return bool
 	 * @throws imagesException
 	 */
-	public static function createCroppedThumbnail($source, $width, $height, $savePath, $clipping_x = 0, $clipping_y = 0, $clipping_width = 0, $clipping_height = 0, $quality = 100)
+	public static function _createCroppedThumbnail($source, $width, $height, $savePath, $clipping_x = 0, $clipping_y = 0, $clipping_width = 0, $clipping_height = 0, $quality = 100)
 	{
 		$imagesize = getimagesize($source);
 

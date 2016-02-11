@@ -60,8 +60,16 @@ class logger implements iLogger
 	{
 		if(class_exists('\package\core\plugins') === true)
 		{
-			plugins::hookShow('before', 'logger', 'writeLog', array($msg, $code, $level));
-			$plugins = plugins::hookCall('before', 'logger', 'writeLog', array($msg, $code, $level));
+			plugins::hookShow('before', 'logger', 'writeLog', array(
+				$msg,
+				$code,
+				$level
+			));
+			$plugins = plugins::hookCall('before', 'logger', 'writeLog', array(
+				$msg,
+				$code,
+				$level
+			));
 
 			if($plugins != null)
 			{

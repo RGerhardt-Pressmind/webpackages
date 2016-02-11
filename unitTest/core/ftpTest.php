@@ -42,6 +42,7 @@ class ftpTest extends \PHPUnit_Framework_TestCase
 		try{
 			$this->ftp->connect($this->ftpServer);
 		}catch(\Exception $e){
+			echo $e->getMessage();
 			$this->assertTrue(false);
 		}
 

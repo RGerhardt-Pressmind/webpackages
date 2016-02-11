@@ -65,6 +65,6 @@ class languageTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetLocale()
 	{
-		$this->assertEquals('2a4101e9736e8950b56f261ae687529b', md5(serialize(language::getAllSystemLocales())));
+		$this->assertEquals('40cd750bba9870f18aada2478b24840a', md5(serialize(language::getAllSystemLocales())));
 	}
 }
