@@ -75,8 +75,6 @@ class database extends \PDO
 	 */
 	private $isInit            = false;
 
-	private $databaseFunctions = '/(ABS|ACOS|ADDDATE|ADDTIME|AES_DECRYPT|AES_ENCRYPT|ANY_VALUE|ASCII|ASIN|ASYMMETRIC|ATAN|AVG|BENCHMARK|BETWEEN|BIN|BIT_AND|BIT_COUNT|BIT_LENGTH|BIT_OR|BIT_XOR|CAST|CEIL|CHAR|COALESCE|COERCIBILITY|COLLATION|COMPRESS|CONCAT|CONNECTION_ID|CONV|COS|COT|COUNT|CRC32|CREATE_|CURDATE|CURRENT_|CURTIME|DATABASE|DATE_|DATE|DAY|DECODE|DEFAULT|DEGREES|ELT|ENCODE|EXP|EXTRACT|FIELD|FIND_IN_SET|FLOOR|FORMAT|FOUND_|FROM_|GET_|GREATEST|GROUP_|GTID_|HEX|HOUR|IF|IN|IS_|ISNULL|JSON_|LAST_|LCASE|LEAST|LEFT|LENGTH|LIKE|LN|LOAD_|LOCAL|LOCATE|LOG|LOWER|LPAD|LTRIM|MAKE_|MAKEDATE|MAKETIME|MASTER_POS_WAIT|MATCH|MAX|MBR|MD5|MICROSECOND|MID|MIN|MLine|MOD|MONTH|MPointFrom|MPolyFrom|MultiLineString|MultiPoint|MultiPolygon|NAME_CONST|NOT BETWEEN|NOT IN|NOT LIKE|NOT REGEXP|NOT|NOW|NULLIF|OCT|OLD_PASSWORD|ORD|PERIOD_ADD|PERIOD_DIFF|PI|Point|Polygon|POSITION|POW|PROCEDURE ANALYSE|QUARTER|QUOTE|RADIANS|RAND|REGEXP|RELEASE_|REPEAT|REPLACE|REVERSE|RIGHT|RLIKE|ROUND|ROW_|RPAD|RPAD|RTRIM|SCHEMA|SEC_TO_TIME|SECOND|SESSION_USER|SHA|SIGN|SIN|SLEEP|SOUNDEX|SOUND_|SPACE|SQRT|ST_|STD|STDDEV|STR_TO_DATE|STRCMP|SUB|SUM|SYSDATE|SYSTEM_USER|TAN|TIME|TO_|TRIM|TRUNCATE|UCASE|UNCOMPRESS|UNHEX|UNIX|UpdateXML|UPPER|USER|UTC_|UUID|VALIDATE_PASSWORD_STRENGTH|VALUES|VAR_|VARIANCE|VERSION|WAIT_|WEEK|WEIGHT_STRING|XOR|YEAR)/';
-
 	/**
 	 * Am Konstruktor müssen dsn, username, password, options und driver übermittelt werden
 	 *
@@ -499,7 +497,7 @@ class database extends \PDO
 
 		foreach($setParameter as $key => $value)
 		{
-			if(preg_match($this->databaseFunctions, $key) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
 			{
 				$insert .= '
 				'.$key;
@@ -510,7 +508,7 @@ class database extends \PDO
 				`'.$key.'`';
 			}
 
-			if(preg_match($this->databaseFunctions, $value) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
 			{
 				$insert .= '	=	'.$value.',';
 			}
@@ -557,7 +555,7 @@ class database extends \PDO
 
 		foreach($setParameter as $key => $value)
 		{
-			if(preg_match($this->databaseFunctions, $key) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
 			{
 				$update .= '
 				'.$key;
@@ -569,7 +567,7 @@ class database extends \PDO
 				';
 			}
 
-			if(preg_match($this->databaseFunctions, $value) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
 			{
 				$update .= '	=	'.$value.',';
 			}
@@ -590,7 +588,7 @@ class database extends \PDO
 
 			foreach($whereParameter as $key => $value)
 			{
-				if(preg_match($this->databaseFunctions, $key) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
 				{
 					$update .= '
 					'.$key;
@@ -602,7 +600,7 @@ class database extends \PDO
 					';
 				}
 
-				if(preg_match($this->databaseFunctions, $value) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
 				{
 					$update .= '	=	'.$value.' AND';
 				}
@@ -661,7 +659,7 @@ class database extends \PDO
 
 			foreach($whereParameter as $key => $value)
 			{
-				if(preg_match($this->databaseFunctions, $key) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
 				{
 					$deleteTable .= '
 					'.$key.'';
@@ -672,7 +670,7 @@ class database extends \PDO
 					`'.$key.'`';
 				}
 
-				if(preg_match($this->databaseFunctions, $value) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
 				{
 					$deleteTable .= ' =	'.$value.' AND';
 				}

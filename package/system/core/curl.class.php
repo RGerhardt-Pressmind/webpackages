@@ -159,17 +159,20 @@ class curl extends initiator implements IStatic
 	/**
 	 * Gibt die Koordinaten einer Stadt zurück
 	 *
-	 * @param string $city Den Stadtnamen
+	 * @param string $city        Den Stadtnamen
+	 * @param bool   $resultArray Kann man einstellen ob das Ergebnis als Array zurück kommen soll oder als Objekt
 	 *
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
 	 * @throws curlException Wenn die Extension nicht installiert oder im Fehlerfall.
 	 */
-	public static function _get_city_coordinates($city)
+	public static function _get_city_coordinates($city, $resultArray = false)
 	{
 		if(self::curl_extension_exists() === false)
 		{
 			throw new curlException('Error: curl extension not loaded');
 		}
+
+		$city = urlencode($city);
 
 		$url = "http://maps.google.com/maps/api/geocode/json?address=".$city."&sensor=false";
 
@@ -186,15 +189,23 @@ class curl extends initiator implements IStatic
 		$response = curl_exec($ch);
 		curl_close($ch);
 
-		$response_a = json_decode($response);
+		$response_a = json_decode($response, $resultArray);
 
-		if(empty($response_a->results[0]) === false)
+		$data = array();
+
+		if($resultArray === false)
 		{
-			$data = $response_a->results[0]->geometry->location;
+			if(empty($response_a->results[0]) === false)
+			{
+				$data = $response_a->results[0]->geometry->location;
+			}
 		}
 		else
 		{
-			$data = array();
+			if(empty($response_a['results'][0]) === false)
+			{
+				$data = $response_a['results'][0]['geometry']['location'];
+			}
 		}
 
 		return $data;

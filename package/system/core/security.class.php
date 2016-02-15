@@ -141,29 +141,31 @@ class security extends initiator
 	/**
 	 * Kontrolliert eine Variable auf Sicherheit und Konvertiert diese zur Sicherheit auch in das gewünschte Format.
 	 *
-	 * @param mixed  $variable Die Variable die überprüft werden soll.
-	 * @param string $convert  Der Typ in den der Rückgabewert konvertiert werden soll.
+	 * @param mixed   $variable           Die Variable die überprüft werden soll.
+	 * @param string  $convert            Der Typ in den der Rückgabewert konvertiert werden soll.
+	 * @param boolean $removeSQLFunctions Entfernt SQL Funktionen aus einem Wert
 	 *
 	 * @return mixed Gibt die konvertierte Variable zurück
 	 */
-	public static function control($variable, $convert = null)
+	public static function control($variable, $convert = null, $removeSQLFunctions = true)
 	{
 		$variable = trim($variable);
 
-		return self::_controllSecurity($variable, $convert);
+		return self::_controllSecurity($variable, $convert, $removeSQLFunctions);
 	}
 
 	/**
 	 * Sicherer Weg um $_GET, $_POST, $_SESSION, $_COOKIE, $_SERVER, $_ENV und $_REQUEST aufzufangen,
 	 * man sollte immer über diese Funktion Daten abrufen und prüfen lassen.
 	 *
-	 * @param string $variable Zu überprüfender Wert in $input
-	 * @param string $input    Die Quelle in der der Wert von $variable liegt.
-	 * @param string $convert  Der Typ in den der Rückgabewert konvertiert werden soll.
+	 * @param string  $variable           Zu überprüfender Wert in $input
+	 * @param string  $input              Die Quelle in der der Wert von $variable liegt.
+	 * @param string  $convert            Der Typ in den der Rückgabewert konvertiert werden soll.
+	 * @param boolean $removeSQLFunctions Entfernt SQL Funktionen aus einem Wert
 	 *
 	 * @return mixed Gibt den überprüften Wert konvertiert zurück.
 	 */
-	public static function url($variable, $input = null, $convert = null)
+	public static function url($variable, $input = null, $convert = null, $removeSQLFunctions = true)
 	{
 		$request = '';
 
@@ -228,18 +230,19 @@ class security extends initiator
 			break;
 		}
 
-		return self::_controllSecurity($request, $convert);
+		return self::_controllSecurity($request, $convert, $removeSQLFunctions);
 	}
 
 	/**
 	 * Sicherheitskontrolle einer Variable
 	 *
-	 * @param mixed  $request
-	 * @param string $convert
+	 * @param mixed   $request
+	 * @param string  $convert
+	 * @param boolean $removeSQLFunctions Entfernt SQL Funktionen aus einem Wert
 	 *
 	 * @return mixed
 	 */
-	protected static function _controllSecurity($request, $convert)
+	protected static function _controllSecurity($request, $convert, $removeSQLFunctions = true)
 	{
 		$param   = $request;
 		$convert = strtolower($convert);
@@ -316,6 +319,12 @@ class security extends initiator
 			case 's':
 
 				$param = self::xss_clean($param);
+
+				if($removeSQLFunctions === true)
+				{
+					$param = preg_replace(MYSQL_FUNCTIONS, '', $param, -1);
+				}
+
 				$param = filter_var($param, FILTER_SANITIZE_STRING);
 
 				if($param === false)
