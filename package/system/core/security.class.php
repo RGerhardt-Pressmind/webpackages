@@ -147,7 +147,7 @@ class security extends initiator
 	 *
 	 * @return mixed Gibt die konvertierte Variable zurück
 	 */
-	public static function control($variable, $convert = null, $removeSQLFunctions = true)
+	public static function control($variable, $convert = null, $removeSQLFunctions = false)
 	{
 		$variable = trim($variable);
 
@@ -165,7 +165,7 @@ class security extends initiator
 	 *
 	 * @return mixed Gibt den überprüften Wert konvertiert zurück.
 	 */
-	public static function url($variable, $input = null, $convert = null, $removeSQLFunctions = true)
+	public static function url($variable, $input = null, $convert = null, $removeSQLFunctions = false)
 	{
 		$request = '';
 
@@ -242,7 +242,7 @@ class security extends initiator
 	 *
 	 * @return mixed
 	 */
-	protected static function _controllSecurity($request, $convert, $removeSQLFunctions = true)
+	protected static function _controllSecurity($request, $convert, $removeSQLFunctions = false)
 	{
 		$param   = $request;
 		$convert = strtolower($convert);

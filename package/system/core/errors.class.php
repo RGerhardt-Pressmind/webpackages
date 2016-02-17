@@ -42,6 +42,9 @@ use package\system\core\initiator;
 class errors extends initiator
 {
 	public $callErrors = array(
+		100 => 'Continue', // 2.2.0
+		101 => 'Switching Protocols', // 2.2.0
+		102 => 'Processing',
 		200 => 'OK',
 		201 => 'Created',
 		202 => 'Accepted',
@@ -49,14 +52,20 @@ class errors extends initiator
 		204 => 'No Content',
 		205 => 'Reset Content',
 		206 => 'Parital Content',
+		207 => 'Multi-Status', // 2.2.0
+		208 => 'Already Reported', // 2.2.0
+		226 => 'IM Used', //2.2.0
 		300 => 'Multiple Choices',
 		301 => 'Moved Permanently',
 		302 => 'Found',
+		303 => 'See Other', //2.2.0
 		304 => 'Not Modified',
 		305 => 'Use Proxy',
 		307 => 'Temporary Redirect',
+		308 => 'Permanent Redirect', //2.2.0
 		400 => 'Bad Request',
 		401 => 'Unauthorized',
+		402 => 'Payment Required', //2.2.0
 		403 => 'Forbidden',
 		404 => 'Not Found',
 		405 => 'Method Not Allowed',
@@ -72,12 +81,31 @@ class errors extends initiator
 		415 => 'Unsupported Media Type',
 		416 => 'Requested Range Not Satisfiable',
 		417 => 'Expectation Failed',
+		418 => 'I’m a teapot', //2.2.0
+		420 => 'Policy Not Fulfilled', //2.2.0
+		421 => 'Misdirected Request', //2.2.0 -> eingeführt in HTTP/2.0
+		422 => 'Unprocessable Entity', //2.2.0
+		423 => 'Locked', //2.2.0
+		424 => 'Failed Dependency', //2.2.0
+		425 => 'Unordered Collection', //2.2.0
+		426 => 'Upgrade Required', //2.2.0
+		428 => 'Precondition Required', //2.2.0
+		429 => 'Too Many Requests', // 2.2.0
+		431 => 'Request Header Fields Too Large', // 2.2.0
+		444 => 'No Response', //2.2.0
+		449 => 'The request should be retried after doing the appropriate action', // 2.2.0
+		451 => 'Unavailable For Legal Reasons', // 2.2.0
 		500 => 'Internal Server Error',
 		501 => 'Not Implemented',
 		502 => 'Bad Gateway',
 		503 => 'Service Unavailable',
 		504 => 'Gateway Timeout',
-		505 => 'HTTP Version Not Supported'
+		505 => 'HTTP Version Not Supported',
+		506 => 'Variant Also Negotiates', //2.2.0
+		507 => 'Insufficient Storage', // 2.2.0
+		508 => 'Loop Detected', // 2.2.0
+		509 => 'Bandwidth Limit Exceeded', // 2.2.0
+		510 => 'Not Extended' // 2.2.0
 	);
 
 	/**
@@ -96,18 +124,19 @@ class errors extends initiator
 	 * Gibt einen HTTP-Statucode 1.1 Fehler aus
 	 *
 	 * @param int $errorCode Der HTTP-Statuscode
+	 * @param string $httpVersion Die HTTP Version des Header Calls. Standardmäßig 1.1
 	 *
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function _create_error($errorCode)
+	public function _create_error($errorCode, $httpVersion = '1.1')
 	{
 		if(empty($errorCode) === true || empty($this->callErrors[$errorCode]) === true)
 		{
 			throw new \Exception('Error: error code '.$errorCode.' not allowed. Allowed: '.implode(',', $this->callErrors));
 		}
 
-		header('HTTP 1.1/'.$errorCode.' '.$this->callErrors[$errorCode], true, $errorCode);
+		header('HTTP '.$httpVersion.'/'.$errorCode.' '.$this->callErrors[$errorCode], true, $errorCode);
 		exit;
 	}
 }

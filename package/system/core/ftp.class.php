@@ -682,6 +682,7 @@ class ftp extends initiator
 	/**
 	 * Löscht alle Dateien in einem FTP Ordner
 	 *
+	 * @deprecated
 	 * @param string $remoteDirectory Der interne FTP-Pfad zum Verzeichnis
 	 *
 	 * @return bool Bei erfolgreichen Reinigung gibt er true ansonsten false zurück.
