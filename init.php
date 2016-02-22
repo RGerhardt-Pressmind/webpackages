@@ -27,6 +27,17 @@
 
 require 'constants.php';
 
+if(defined('ERROR_REPORTING') === true && (ERROR_REPORTING === true || ERROR_REPORTING === 1))
+{
+	error_reporting(-1);
+	ini_set('display_errors', 1);
+}
+else
+{
+	error_reporting(0);
+	ini_set('display_errors', 0);
+}
+
 if(SECURITY_KEY == '')
 {
 	throw new Exception('Error: SECURITY_KEY constants is empty');
@@ -37,22 +48,15 @@ elseif(strlen(SECURITY_KEY) < 20)
 }
 
 require SYSTEM_PATH.'controllExistsPaths.php';
-require SYSTEM_PATH.'loadSessionHandler.php';
 
-if(defined('USE_SESSION_SAVE_HANDLER') === false || USE_SESSION_SAVE_HANDLER === false || defined('PDO_HOST') === false || PDO_HOST == '')
+if(class_exists('SessionHandlerInterface') === true)
+{
+	require SYSTEM_PATH.'loadSessionHandler.php';
+}
+
+if(class_exists('SessionHandlerInterface') === false || (defined('USE_SESSION_SAVE_HANDLER') === false || USE_SESSION_SAVE_HANDLER === false || defined('PDO_HOST') === false || PDO_HOST == ''))
 {
 	session_start();
-}
-
-if(defined('ERROR_REPORTING') === true && (ERROR_REPORTING === true || ERROR_REPORTING === 1))
-{
-	error_reporting(-1);
-	ini_set('display_errors', 1);
-}
-else
-{
-	error_reporting(0);
-	ini_set('display_errors', 0);
 }
 
 if(defined('CHARSET') === true && CHARSET != '')

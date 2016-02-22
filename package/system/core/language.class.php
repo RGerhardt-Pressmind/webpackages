@@ -427,13 +427,20 @@ class language extends initiator implements IStatic
 	 * Gibt die Liste aller Sprachpakete zurück
 	 *
 	 * @access public
+	 * @throws \Exception
 	 * @return array Gibt alle Sprachcodes, die auf dem Server installiert sind zurück. Geht nur bei UNIX Systemen
 	 */
 	public static function _getAllSystemLocales()
 	{
 		$locale_data = array();
 
-		$locales = exec('locale -a');
+		$locales = exec('locale -a 2>&1', $output, $return);
+
+		if($return)
+		{
+			throw new \Exception('Error: '.print_r($output));
+		}
+
 		$locales = explode("\n", $locales);
 
 		foreach($locales as $l)
