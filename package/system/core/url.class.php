@@ -38,6 +38,15 @@ use package\system\core\initiator;
  * installiert ist oder einfache eine Ansammlung von Strings zu einer validen URL zusammenbauen lassen. All das und
  * vieles mehr kann die URL Klasse.
  *
+ * @method static void set_use_mod_rewrite(bool $mod)
+ * @method static void set_use_file_extension(string $extension)
+ * @method static string get_url_simple(string $httpRoot, array $parameters)
+ * @method static string createValidUrlString(string $url)
+ * @method static string getCurrentUrl()
+ * @method static void loc(string $url)
+ * @method static void reload()
+ * @method static void back()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       url
@@ -73,7 +82,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @throws urlException
 	 */
-	public static function _set_use_mod_rewrite($mod)
+	protected static function _set_use_mod_rewrite($mod)
 	{
 		self::$useModRewrite = (bool)$mod;
 
@@ -90,7 +99,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @throws urlException
 	 */
-	public function _set_use_file_extension($extension)
+	protected function _set_use_file_extension($extension)
 	{
 		$extension = trim($extension, '.');
 		$extension = trim($extension);
@@ -112,7 +121,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @return string $link
 	 */
-	public static function _get_url_simple($httpRoot, $parameters)
+	protected static function _get_url_simple($httpRoot, $parameters)
 	{
 		$link = $httpRoot;
 
@@ -159,7 +168,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @return string Gibt den validierten String zurück
 	 */
-	public static function _createValidUrlString($url)
+	protected static function _createValidUrlString($url)
 	{
 		$url = strtolower($url);
 		$url = preg_replace('/\s/', '-', $url);
@@ -173,7 +182,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @return string Gibt die aktuelle URL zurück
 	 */
-	public static function _getCurrentUrl()
+	protected static function _getCurrentUrl()
 	{
 		if(empty($_SERVER['HTTP_HOST']) === false)
 		{
@@ -192,7 +201,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function _loc($url)
+	protected static function _loc($url)
 	{
 		header('Location: '.$url);
 		exit;
@@ -203,7 +212,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function _reload()
+	protected static function _reload()
 	{
 		self::loc(self::getCurrentUrl());
 		exit;
@@ -214,7 +223,7 @@ class url extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function _back()
+	protected static function _back()
 	{
 		if(empty($_SERVER['HTTP_REFERER']) === false)
 		{

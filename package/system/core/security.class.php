@@ -36,6 +36,17 @@ use package\system\core\initiator;
  * Mit der security Klasse kann man jegliche Form von Angriff über Eingaben des Benutzers aufhalten. Ob XSS oder
  * SQL Injections, die security Klasse überprüft diese und gibt sie gereinigt zurück.
  *
+ * @method static mixed control(string $variable, $convert = null, $removeSQLFunctions = false)
+ * @method static mixed url(string $variable, $input = null, $convert = null, $removeSQLFunctions = false)
+ * @method static mixed get_mime_type(string $path)
+ * @method static mixed get_file_type(string $path)
+ * @method static string shaSec(string $string)
+ * @method static string sha_sec(string $string)
+ * @method static string entity_decode(string $str, $charset = 'UTF-8')
+ * @method static string remove_invisible_characters(string $str, $url_encoded = true)
+ * @method static array is_bot()
+ * @method static mixed get_ip_address()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       security
@@ -147,7 +158,7 @@ class security extends initiator
 	 *
 	 * @return mixed Gibt die konvertierte Variable zurück
 	 */
-	public static function control($variable, $convert = null, $removeSQLFunctions = false)
+	protected static function _control($variable, $convert = null, $removeSQLFunctions = false)
 	{
 		$variable = trim($variable);
 
@@ -165,7 +176,7 @@ class security extends initiator
 	 *
 	 * @return mixed Gibt den überprüften Wert konvertiert zurück.
 	 */
-	public static function url($variable, $input = null, $convert = null, $removeSQLFunctions = false)
+	protected static function _url($variable, $input = null, $convert = null, $removeSQLFunctions = false)
 	{
 		$request = '';
 
@@ -348,7 +359,7 @@ class security extends initiator
 	 * @throws securityException
 	 * @return bool|mixed Gibt MIME-Type zurück.
 	 */
-	public static function _get_mime_type($path)
+	protected static function _get_mime_type($path)
 	{
 		if(function_exists('finfo_open') === false)
 		{
@@ -371,7 +382,7 @@ class security extends initiator
 	 * @throws securityException
 	 * @return mixed Gibt die Dateierweiterung zurück.
 	 */
-	public static function _get_file_type($path)
+	protected static function _get_file_type($path)
 	{
 		if(class_exists('\SplFileInfo') === false)
 		{
@@ -393,7 +404,7 @@ class security extends initiator
 	 * @throws securityException
 	 * @return string Gibt den SHA512 Verschlüsselten String zurück.
 	 */
-	public static function shaSec($string)
+	protected static function _shaSec($string)
 	{
 		return self::_sha_sec($string);
 	}
@@ -406,7 +417,7 @@ class security extends initiator
 	 * @throws securityException
 	 * @return string Gibt den SHA512 Verschlüsselten String zurück.
 	 */
-	public static function _sha_sec($string)
+	protected static function _sha_sec($string)
 	{
 		if(function_exists('hash_hmac') === false)
 		{
@@ -769,7 +780,7 @@ class security extends initiator
 	 *
 	 * @return    string
 	 */
-	public static function entity_decode($str, $charset = 'UTF-8')
+	protected static function _entity_decode($str, $charset = 'UTF-8')
 	{
 		if(stristr($str, '&') === false)
 		{
@@ -812,7 +823,7 @@ class security extends initiator
 	 *
 	 * @return mixed
 	 */
-	public static function remove_invisible_characters($str, $url_encoded = true)
+	protected static function _remove_invisible_characters($str, $url_encoded = true)
 	{
 		$non_displayables = array();
 
@@ -843,7 +854,7 @@ class security extends initiator
 	 *
 	 * @return array Gibt ein assoziatives Array zurück mit Informationen über die Auswertung.
 	 */
-	public static function _is_bot()
+	protected static function _is_bot()
 	{
 		if(empty($_SERVER['HTTP_USER_AGENT']) === false)
 		{
@@ -870,7 +881,7 @@ class security extends initiator
 	 *
 	 * @return mixed Gibt die Ip-Adresse zurück oder ein false wenn diese nicht ermittelt werden konnte.
 	 */
-	public static function _get_ip_address()
+	protected static function _get_ip_address()
 	{
 		$ipMethodes = self::$ipMethodes;
 

@@ -35,6 +35,11 @@ use package\system\core\initiator;
  *
  * Um eine XML Datei / String zu benutzen müssen Sie erst validiert und überprüft werden. Dies übernimmt die XML Klasse.
  *
+ * @method void loadXML(string $xml)
+ * @method array toArray()
+ * @method object toObject()
+ * @method \SimpleXMLElement getSimpleXML()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       xml
@@ -60,7 +65,7 @@ class XML extends initiator
 	 * @return void
 	 * @throws xmlException
 	 */
-	public function _loadXML($xml)
+	protected function _loadXML($xml)
 	{
 		//XML von einer URL laden
 		if(filter_var($xml, FILTER_VALIDATE_URL) !== false)
@@ -114,7 +119,7 @@ class XML extends initiator
 	 * @return array Gibt das XML Objekt als Array Konvertiert zurück
 	 * @throws xmlException
 	 */
-	public function _toArray()
+	protected function _toArray()
 	{
 		if($this->xml === null)
 		{
@@ -133,7 +138,7 @@ class XML extends initiator
 	 * @return object
 	 * @throws xmlException
 	 */
-	public function _toObject()
+	protected function _toObject()
 	{
 		if($this->xml === null)
 		{
@@ -152,7 +157,7 @@ class XML extends initiator
 	 * @return \SimpleXMLElement
 	 * @throws xmlException
 	 */
-	public function _getSimpleXML()
+	protected function _getSimpleXML()
 	{
 		if($this->xml === null)
 		{

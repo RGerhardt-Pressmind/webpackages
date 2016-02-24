@@ -30,6 +30,18 @@ namespace package\core;
 use package\implement\IStatic;
 use package\system\core\initiator;
 
+/**
+ * Version Klasse
+ *
+ * Verwaltet alles rum die fähigen Versionen für das Framework
+ *
+ * @method static bool is_php(string $version)
+ *
+ * @package        Webpackages
+ * @subpackage     core
+ * @category       template
+ * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
+ */
 class version extends initiator implements IStatic
 {
 	/**
@@ -52,7 +64,7 @@ class version extends initiator implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function _is_php($version)
+	protected static function _is_php($version)
 	{
 		if(version_compare(PHP_VERSION, $version) >= 0)
 		{

@@ -36,6 +36,8 @@ use package\system\core\initiator;
  *
  * Durch die images Klasse kann man Bilder auf ein bestimmtest Format zuschneiden.
  *
+ * @method static bool createCroppedThumbnail(string $source, float $width, float $height, string $savePath, float $clipping_x = 0, float $clipping_y = 0, float $clipping_width = 0, float $clipping_height = 0, int $quality = 100)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       images
@@ -51,20 +53,20 @@ class images extends initiator implements IStatic
 	 * Erstellt ein Thumbnail eines Bildes, mit Bildausschnitt
 	 *
 	 * @param string $source          Der relative Pfad zur Datei
-	 * @param int    $width           Beite des neuen Bildes
-	 * @param int    $height          Höhe des neuen Bildes
+	 * @param float  $width           Beite des neuen Bildes
+	 * @param float  $height          Höhe des neuen Bildes
 	 * @param string $savePath        Der Zielpfad des veränderten Ergebnisses
-	 * @param int    $clipping_x      X Position des Bildes im Ausschnitt
-	 * @param int    $clipping_y      Y Position des Bildes im Ausschnitt
-	 * @param int    $clipping_width  Breite des Bilders im Ausschnitt
-	 * @param int    $clipping_height Höhe des Bildes im Ausschnitt
+	 * @param float  $clipping_x      X Position des Bildes im Ausschnitt
+	 * @param float  $clipping_y      Y Position des Bildes im Ausschnitt
+	 * @param float  $clipping_width  Breite des Bilders im Ausschnitt
+	 * @param float  $clipping_height Höhe des Bildes im Ausschnitt
 	 * @param int    $quality         zwischen 0 (schlechteste Qualität, kleine Datei) und 100 (beste Qualität, größte
 	 *                                Datei)
 	 *
 	 * @return bool
 	 * @throws imagesException
 	 */
-	public static function _createCroppedThumbnail($source, $width, $height, $savePath, $clipping_x = 0, $clipping_y = 0, $clipping_width = 0, $clipping_height = 0, $quality = 100)
+	protected static function _createCroppedThumbnail($source, $width, $height, $savePath, $clipping_x = 0.00, $clipping_y = 0.00, $clipping_width = 0.00, $clipping_height = 0.00, $quality = 100)
 	{
 		$imagesize = getimagesize($source);
 

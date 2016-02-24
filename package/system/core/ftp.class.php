@@ -35,6 +35,29 @@ use package\system\core\initiator;
  *
  * Mit der FTP Klasse kann man auf FTP Server zugreifen und Daten hochladen, runterladen oder auch gelöscht werden.
  *
+ * @method void connect(string $host, $ssl = false, $port = 21, $timeout = 90)
+ * @method void login(string $username, string $password)
+ * @method void set_passive_modus()
+ * @method bool get_remote_file(string $remoteFile, string $localeFile)
+ * @method bool|int|string modified_time(string $remoteFile, $timeFormat = null)
+ * @method bool up()
+ * @method bool is_dir($remoteDirectory = '.')
+ * @method int count($remoteDirectory = '.', $type = null, $recursive = true)
+ * @method int is_empty(string $remoteDirectory)
+ * @method bool put_from_path(string $local_file)
+ * @method bool put_all(string $source_directory, string $target_directory, $mode = FTP_BINARY)
+ * @method bool put_from_string(string $remote_file, string $content)
+ * @method int dir_size($remoteDirectory = '.', $recursive = true)
+ * @method array nlist($remoteDirectory = '.', $recursive = false, $filter = 'sort')
+ * @method bool mkdir(string $remoteDirectory, $recursive = false)
+ * @method bool remove(string $remoteFile)
+ * @method bool rmdir(string $remoteDirectory, $recursive = false)
+ * @method bool clean_dir(string $remoteDirectory)
+ * @method array scan_dir($remoteDirectory = '.', $recursive = false)
+ * @method array rawlist($remoteDirectory = '.', $recursive = false)
+ * @method array parse_raw_list(array $rawlist)
+ * @method string raw_to_type(string $permission)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       FTP
@@ -64,7 +87,7 @@ class ftp extends initiator
 	 * @return void
 	 * @throws ftpException
 	 */
-	public function _connect($host, $ssl = false, $port = 21, $timeout = 90)
+	protected function _connect($host, $ssl = false, $port = 21, $timeout = 90)
 	{
 		if($ssl === true)
 		{
@@ -95,7 +118,7 @@ class ftp extends initiator
 	 * @return void
 	 * @throws ftpException
 	 */
-	public function _login($username, $password)
+	protected function _login($username, $password)
 	{
 		if($this->_ftp === false)
 		{
@@ -116,7 +139,7 @@ class ftp extends initiator
 	 * @return void
 	 * @throws ftpException
 	 */
-	public function _set_passive_modus()
+	protected function _set_passive_modus()
 	{
 		if($this->_ftp === false)
 		{
@@ -138,7 +161,7 @@ class ftp extends initiator
 	 * @return bool
 	 * @throws ftpException
 	 */
-	public function _get_remote_file($remoteFile, $localeFile)
+	protected function _get_remote_file($remoteFile, $localeFile)
 	{
 		if($this->_ftp === false)
 		{
@@ -159,7 +182,7 @@ class ftp extends initiator
 	 *                         String wenn ein Datumsformat angegeben wurde.
 	 * @throws ftpException
 	 */
-	public function _modified_time($remoteFile, $timeFormat = null)
+	protected function _modified_time($remoteFile, $timeFormat = null)
 	{
 		if($this->_ftp === false)
 		{
@@ -182,7 +205,7 @@ class ftp extends initiator
 	 * @return bool Gibt ein true zurück wenn der wechsel Erfolgt ist, ansonsten wird eine Exception geschmissen.
 	 * @throws ftpException
 	 */
-	public function _up()
+	protected function _up()
 	{
 		if($this->_ftp === false)
 		{
@@ -207,7 +230,7 @@ class ftp extends initiator
 	 * @return bool Gibt ein true zurück wenn es sich um ein Ordner handelt und ein false wenn es keiner ist.
 	 * @throws ftpException
 	 */
-	public function _is_dir($remoteDirectory = '.')
+	protected function _is_dir($remoteDirectory = '.')
 	{
 		if($this->_ftp === false)
 		{
@@ -245,7 +268,7 @@ class ftp extends initiator
 	 * @return int
 	 * @throws ftpException
 	 */
-	public function _count($remoteDirectory = '.', $type = null, $recursive = true)
+	protected function _count($remoteDirectory = '.', $type = null, $recursive = true)
 	{
 		if($this->_ftp === false)
 		{
@@ -282,7 +305,7 @@ class ftp extends initiator
 	 * @return int Gibt die Anzahl an gefundenen Dateien im FTP Verzeichnis zurück
 	 * @throws ftpException
 	 */
-	public function _is_empty($remoteDirectory)
+	protected function _is_empty($remoteDirectory)
 	{
 		if($this->_ftp === false)
 		{
@@ -310,7 +333,7 @@ class ftp extends initiator
 	 * @return bool Wenn es erfolgreich hochgeladen wurde gibt es ein true zurück. Bei einem Fehler false.
 	 * @throws ftpException
 	 */
-	public function _put_from_path($local_file)
+	protected function _put_from_path($local_file)
 	{
 		if($this->_ftp === false)
 		{
@@ -341,7 +364,7 @@ class ftp extends initiator
 	 * @return bool Gibt nach erfolgreichem hochladen ein true zurück oder ein false bei einem Fehler.
 	 * @throws ftpException
 	 */
-	public function _put_all($source_directory, $target_directory, $mode = FTP_BINARY)
+	protected function _put_all($source_directory, $target_directory, $mode = FTP_BINARY)
 	{
 		if($this->_ftp === false)
 		{
@@ -392,7 +415,7 @@ class ftp extends initiator
 	 * @return bool Gibt nach erfolgreichem hochladen ein true und bei einem Fehler false zurück.
 	 * @throws ftpException
 	 */
-	public function _put_from_string($remote_file, $content)
+	protected function _put_from_string($remote_file, $content)
 	{
 		if($this->_ftp === false)
 		{
@@ -418,7 +441,7 @@ class ftp extends initiator
 	 * @return int Gibt die Byte Größe des FTP Verzeichnises zurück
 	 * @throws ftpException
 	 */
-	public function _dir_size($remoteDirectory = '.', $recursive = true)
+	protected function _dir_size($remoteDirectory = '.', $recursive = true)
 	{
 		if($this->_ftp === false)
 		{
@@ -450,7 +473,7 @@ class ftp extends initiator
 	 * @return array Gibt ein sortiertes mehrdimensionales Array zurück
 	 * @throws ftpException
 	 */
-	public function _nlist($remoteDirectory = '.', $recursive = false, $filter = 'sort')
+	protected function _nlist($remoteDirectory = '.', $recursive = false, $filter = 'sort')
 	{
 		if($this->_ftp === false)
 		{
@@ -554,7 +577,7 @@ class ftp extends initiator
 	 * @return bool Gibt ein true zurück wenn alles erfolgreich angelegt wurde oder ein false wenn ein Fehler auftrat.
 	 * @throws ftpException
 	 */
-	public function _mkdir($remoteDirectory, $recursive = false)
+	protected function _mkdir($remoteDirectory, $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
@@ -611,7 +634,7 @@ class ftp extends initiator
 	 * @return bool Gibt ein true zurück wenn erfolgreich gelöscht und ein false wenn ein Fehler auftrat.
 	 * @throws ftpException
 	 */
-	public function _remove($remoteFile)
+	protected function _remove($remoteFile)
 	{
 		if($this->_ftp === false)
 		{
@@ -635,7 +658,7 @@ class ftp extends initiator
 	 * @return bool Gibt bei erfolgreicher löschung true ansonsten false zurück.
 	 * @throws ftpException
 	 */
-	public function _rmdir($remoteDirectory, $recursive = false)
+	protected function _rmdir($remoteDirectory, $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
@@ -688,7 +711,7 @@ class ftp extends initiator
 	 * @return bool Bei erfolgreichen Reinigung gibt er true ansonsten false zurück.
 	 * @throws ftpException
 	 */
-	public function _clean_dir($remoteDirectory)
+	protected function _clean_dir($remoteDirectory)
 	{
 		if($this->_ftp === false)
 		{
@@ -722,7 +745,7 @@ class ftp extends initiator
 	 * @return array Gibt ein mehrdimensionales Array mit allen gefundenen Dateien zurück
 	 * @throws ftpException
 	 */
-	public function _scan_dir($remoteDirectory = '.', $recursive = false)
+	protected function _scan_dir($remoteDirectory = '.', $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
@@ -741,7 +764,7 @@ class ftp extends initiator
 	 * @return array Gibt eine Liste aller Dateien zurück
 	 * @throws ftpException
 	 */
-	public function _rawlist($remoteDirectory = '.', $recursive = false)
+	protected function _rawlist($remoteDirectory = '.', $recursive = false)
 	{
 		if($this->_ftp === false)
 		{
@@ -847,7 +870,7 @@ class ftp extends initiator
 	 * @return array Gibt Details zu den einzelnen FTP-Dateien zurück
 	 * @throws ftpException
 	 */
-	public function _parse_raw_list(array $rawlist)
+	protected function _parse_raw_list(array $rawlist)
 	{
 		if($this->_ftp === false)
 		{
@@ -927,7 +950,7 @@ class ftp extends initiator
 	 * @return string Der umgewandelete, verständlichere, Typ kommt zurück.
 	 * @throws ftpException
 	 */
-	public function _raw_to_type($permission)
+	protected function _raw_to_type($permission)
 	{
 		if($this->_ftp === false)
 		{

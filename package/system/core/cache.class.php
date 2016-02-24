@@ -39,6 +39,13 @@ use package\system\core\initiator;
  * Diese Cache Dateien sind komprimiert und können so schneller vom Server an den Browser des Benutzers zurück
  * gesendet werden.
  *
+ * @method static void set_cache_extension($extension = 'cache')
+ * @method static bool set_template_element(string $cache_name, string $content)
+ * @method static bool|string get_template_element(string $cache_name, $lifetime = 500)
+ * @method static bool set_element(string $cache_name, string $content, $lifetime = 500)
+ * @method static mixed get_element(string $cache_name)
+ * @method static bool delete_element(string $cache_name)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       Cache
@@ -87,7 +94,7 @@ class cache extends initiator implements IStatic
 	 *
 	 * @return boolean Gibt im Fehlerfall ein false zurück
 	 */
-	public static function _set_cache_dir($cachePath)
+	protected static function _set_cache_dir($cachePath)
 	{
 		if(empty($cachePath) === true || is_dir($cachePath) === false)
 		{
@@ -115,7 +122,7 @@ class cache extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function _set_cache_active($active = false)
+	protected static function _set_cache_active($active = false)
 	{
 		self::$cacheActiv = $active;
 	}
@@ -128,7 +135,7 @@ class cache extends initiator implements IStatic
 	 * @throws cacheException Wenn der Parameter leer ist.
 	 * @return void
 	 */
-	public static function _set_cache_extension($extension = 'cache')
+	protected static function _set_cache_extension($extension = 'cache')
 	{
 		if(empty($extension))
 		{
@@ -150,7 +157,7 @@ class cache extends initiator implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function _set_template_element($cache_name, $content)
+	protected static function _set_template_element($cache_name, $content)
 	{
 		$isSave = @file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
 
@@ -173,7 +180,7 @@ class cache extends initiator implements IStatic
 	 * @return bool|string Gibt den Link zur gecachten Datei zurück, false wenn Lebensdauer abgelaufen oder gecachte
 	 *                     Datei nicht existiert
 	 */
-	public static function _get_template_element($cache_name, $lifetime = 500)
+	protected static function _get_template_element($cache_name, $lifetime = 500)
 	{
 		$cacheFile = self::$cacheDir.$cache_name.'.html';
 
@@ -212,7 +219,7 @@ class cache extends initiator implements IStatic
 	 *              die Cache Datei nicht abgespeichert werden konnte)
 	 * @throws cacheException Wenn der $cache_name leer ist
 	 */
-	public static function _set_element($cache_name, $content, $lifetime = 500)
+	protected static function _set_element($cache_name, $content, $lifetime = 500)
 	{
 		if(empty($cache_name) === true)
 		{
@@ -251,7 +258,7 @@ class cache extends initiator implements IStatic
 	 * @return mixed Gibt den Inhalt des Caches zurück, false wenn Datei nicht existiert oder Lebensdauer abgelaufen
 	 * @throws cacheException Wenn $cache_name leer ist.
 	 */
-	public static function _get_element($cache_name)
+	protected static function _get_element($cache_name)
 	{
 		if(empty($cache_name) === true)
 		{
@@ -301,7 +308,7 @@ class cache extends initiator implements IStatic
 	 * @return bool Nach erfolgreichem löschen des Caches wird true zurück gegeben, bei einem Fehler false.
 	 * @throws cacheException Wenn $cache_name leer ist.
 	 */
-	public static function _delete_element($cache_name)
+	protected static function _delete_element($cache_name)
 	{
 		if(empty($cache_name) === true)
 		{

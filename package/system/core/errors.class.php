@@ -34,6 +34,9 @@ use package\system\core\initiator;
  *
  * Mit der Klasse errors kann man leicht header Fehlermeldungen mittels HTTP-Statuscodes erzeugen
  *
+ * @method void createException(string $message)
+ * @method void create_error(int $errroCode, $httpVersion = '1.1')
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       Errors
@@ -42,8 +45,8 @@ use package\system\core\initiator;
 class errors extends initiator
 {
 	public $callErrors = array(
-		100 => 'Continue', // 2.2.0
-		101 => 'Switching Protocols', // 2.2.0
+		100 => 'Continue', 
+		101 => 'Switching Protocols', 
 		102 => 'Processing',
 		200 => 'OK',
 		201 => 'Created',
@@ -52,20 +55,20 @@ class errors extends initiator
 		204 => 'No Content',
 		205 => 'Reset Content',
 		206 => 'Parital Content',
-		207 => 'Multi-Status', // 2.2.0
-		208 => 'Already Reported', // 2.2.0
-		226 => 'IM Used', //2.2.0
+		207 => 'Multi-Status', 
+		208 => 'Already Reported', 
+		226 => 'IM Used', 
 		300 => 'Multiple Choices',
 		301 => 'Moved Permanently',
 		302 => 'Found',
-		303 => 'See Other', //2.2.0
+		303 => 'See Other', 
 		304 => 'Not Modified',
 		305 => 'Use Proxy',
 		307 => 'Temporary Redirect',
-		308 => 'Permanent Redirect', //2.2.0
+		308 => 'Permanent Redirect', 
 		400 => 'Bad Request',
 		401 => 'Unauthorized',
-		402 => 'Payment Required', //2.2.0
+		402 => 'Payment Required', 
 		403 => 'Forbidden',
 		404 => 'Not Found',
 		405 => 'Method Not Allowed',
@@ -81,31 +84,31 @@ class errors extends initiator
 		415 => 'Unsupported Media Type',
 		416 => 'Requested Range Not Satisfiable',
 		417 => 'Expectation Failed',
-		418 => 'I’m a teapot', //2.2.0
-		420 => 'Policy Not Fulfilled', //2.2.0
-		421 => 'Misdirected Request', //2.2.0 -> eingeführt in HTTP/2.0
-		422 => 'Unprocessable Entity', //2.2.0
-		423 => 'Locked', //2.2.0
-		424 => 'Failed Dependency', //2.2.0
-		425 => 'Unordered Collection', //2.2.0
-		426 => 'Upgrade Required', //2.2.0
-		428 => 'Precondition Required', //2.2.0
-		429 => 'Too Many Requests', // 2.2.0
-		431 => 'Request Header Fields Too Large', // 2.2.0
-		444 => 'No Response', //2.2.0
-		449 => 'The request should be retried after doing the appropriate action', // 2.2.0
-		451 => 'Unavailable For Legal Reasons', // 2.2.0
+		418 => 'I’m a teapot', 
+		420 => 'Policy Not Fulfilled', 
+		421 => 'Misdirected Request', //Eingeführt in HTTP/2.0
+		422 => 'Unprocessable Entity', 
+		423 => 'Locked', 
+		424 => 'Failed Dependency', 
+		425 => 'Unordered Collection', 
+		426 => 'Upgrade Required', 
+		428 => 'Precondition Required', 
+		429 => 'Too Many Requests', 
+		431 => 'Request Header Fields Too Large', 
+		444 => 'No Response', 
+		449 => 'The request should be retried after doing the appropriate action', 
+		451 => 'Unavailable For Legal Reasons', 
 		500 => 'Internal Server Error',
 		501 => 'Not Implemented',
 		502 => 'Bad Gateway',
 		503 => 'Service Unavailable',
 		504 => 'Gateway Timeout',
 		505 => 'HTTP Version Not Supported',
-		506 => 'Variant Also Negotiates', //2.2.0
-		507 => 'Insufficient Storage', // 2.2.0
-		508 => 'Loop Detected', // 2.2.0
-		509 => 'Bandwidth Limit Exceeded', // 2.2.0
-		510 => 'Not Extended' // 2.2.0
+		506 => 'Variant Also Negotiates', 
+		507 => 'Insufficient Storage', 
+		508 => 'Loop Detected', 
+		509 => 'Bandwidth Limit Exceeded', 
+		510 => 'Not Extended' 
 	);
 
 	/**
@@ -115,7 +118,7 @@ class errors extends initiator
 	 *
 	 * @throws \Exception
 	 */
-	public function _createException($message)
+	protected function _createException($message)
 	{
 		throw new \Exception($message);
 	}
@@ -129,7 +132,7 @@ class errors extends initiator
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function _create_error($errorCode, $httpVersion = '1.1')
+	protected function _create_error($errorCode, $httpVersion = '1.1')
 	{
 		if(empty($errorCode) === true || empty($this->callErrors[$errorCode]) === true)
 		{

@@ -34,6 +34,8 @@ use package\system\core\initiator;
  *
  * Mit der Klasse paypal kann man Anfragen und Bezahlungen anweisen oder abfragen.
  *
+ * @method array request(string $method, array $params = array())
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       paypal
@@ -94,7 +96,7 @@ class paypal extends initiator
 	 *
 	 * @return array / boolean Ergebniss als Array / boolean false bei Fehler
 	 */
-	public function _request($method, $params = array())
+	protected function _request($method, $params = array())
 	{
 		$this->_errors = array();
 

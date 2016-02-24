@@ -134,12 +134,22 @@ define('DEFAULT_LANGUAGE', 'de_DE.UTF-8');
 /**
  * Entscheidet ob Sessions in die Datenbank geschrieben werden
  */
-define('USE_SESSION_SAVE_HANDLER', true);
+define('USE_SESSION_SAVE_HANDLER', false);
 
 /**
  * Wandelt Links (die über die URL Klasse generiert werden) in mod_rewrite Links um wenn aktiv
  */
 define('USE_MOD_REWRITE', true);
+
+/**
+ * Standard Klasse beim Aufruf der Index
+ */
+define('DEFAULT_CLASS',	'welcome');
+
+/**
+ * Standard Methode beim Aufruf der Index
+ */
+define('DEFAULT_METHODE', 'hello');
 
 /**
  * ############################

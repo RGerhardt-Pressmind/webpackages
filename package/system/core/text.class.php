@@ -36,6 +36,16 @@ use package\system\core\initiator;
  * Wenn man einen bestimmten Satz kürzen möchte oder ein zufälligen String zurück haben möchte, kann man die text
  * Klasse nutzen.
  *
+ * @method static string word_limiter(string $str, $limit = 100, $suffix = '...')
+ * @method static string truncate(string $string, int $limit, $suffix = '...')
+ * @method static string word_censor(string $str, array $censored, $replacement = '')
+ * @method static mixed|string highlight_code(string $str)
+ * @method static mixed|string highlight_phrase(string $str, string $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
+ * @method static string random_string($type = 'normal', $length = 10)
+ * @method static string reduce_double_slashes(string $str)
+ * @method static string strip_quotes(string $str)
+ * @method static string trim_slashes(string $str)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       text
@@ -59,7 +69,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string Gibt den gekürzten String zurück
 	 */
-	public static function _word_limiter($str, $limit = 100, $suffix = '...')
+	protected static function _word_limiter($str, $limit = 100, $suffix = '...')
 	{
 		if(trim($str) == '')
 		{
@@ -87,7 +97,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string Gibt den gekürzten String zurück
 	 */
-	public static function _truncate($string, $limit, $suffix = '...')
+	protected static function _truncate($string, $limit, $suffix = '...')
 	{
 		$len = strlen($string);
 
@@ -110,7 +120,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string Gibt den zensierten String zurück
 	 */
-	public static function _word_censor($str, $censored, $replacement = '')
+	protected static function _word_censor($str, $censored, $replacement = '')
 	{
 		if(empty($censored) === true)
 		{
@@ -143,7 +153,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return mixed|string Gibt den String zurück.
 	 */
-	public static function _highlight_code($str)
+	protected static function _highlight_code($str)
 	{
 		$str = str_replace(array('&lt;', '&gt;'), array('<', '>'), $str);
 
@@ -172,7 +182,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return mixed|string
 	 */
-	public static function _highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
+	protected static function _highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
 	{
 		if(empty($str) === true)
 		{
@@ -195,7 +205,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function _random_string($type = 'normal', $length = 10)
+	protected static function _random_string($type = 'normal', $length = 10)
 	{
 		if($type === 'alnum')
 		{
@@ -246,7 +256,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function _reduce_double_slashes($str)
+	protected static function _reduce_double_slashes($str)
 	{
 		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
 	}
@@ -258,7 +268,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function _strip_quotes($str)
+	protected static function _strip_quotes($str)
 	{
 		return str_replace(array('"', "'"), array('', ''), $str);
 	}
@@ -270,7 +280,7 @@ class text extends initiator implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function _trim_slashes($str)
+	protected static function _trim_slashes($str)
 	{
 		return trim($str, '/');
 	}

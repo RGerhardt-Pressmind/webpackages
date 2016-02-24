@@ -35,6 +35,10 @@ use package\system\core\initiator;
  *
  * Mit der zip Klasse kann man ein ZIP-Archiv erstellen oder auslesen.
  *
+ * @method bool createZipArchive(string $folder, string $destination, string $zipName)
+ * @method bool addFileToZipArchive(string $rootFolder, string $file, string $zipArchive)
+ * @method bool extractZipArchive(string $zipArchive, string $destinationFolder, $removeZipArchiveAfterExtract = false)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       zip
@@ -52,7 +56,7 @@ class zip extends initiator
 	 * @return bool
 	 * @throws zipException
 	 */
-	public function _createZipArchive($folder, $destination, $zipName)
+	protected function _createZipArchive($folder, $destination, $zipName)
 	{
 		if(file_exists($folder) === false)
 		{
@@ -124,7 +128,7 @@ class zip extends initiator
 	 * @return bool
 	 * @throws zipException
 	 */
-	public function _addFileToZipArchive($rootFolder, $file, $zipArchive)
+	protected function _addFileToZipArchive($rootFolder, $file, $zipArchive)
 	{
 		if(class_exists('\SplFileInfo') === false)
 		{
@@ -180,7 +184,7 @@ class zip extends initiator
 	 * @return bool
 	 * @throws zipException
 	 */
-	public function _extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false)
+	protected function _extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false)
 	{
 		if(class_exists('\SplFileInfo') === false)
 		{

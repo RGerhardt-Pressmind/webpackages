@@ -36,6 +36,10 @@ use package\system\core\initiator;
  *
  * Mithilfe der logger Klasse kann man log Dateien schrieben, lesen oder auch löschen.
  *
+ * @method bool write_log(string $msg, int $code = 0, string $level = 'info')
+ * @method bool delete_log()
+ * @method string read_log()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       language

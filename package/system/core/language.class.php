@@ -35,6 +35,16 @@ use package\system\core\initiator;
  *
  * Mit der language Klasse können einfach Begrifflichkeiten in andere Sprachen übersetzt werden.
  *
+ * @method static void set_language(string $lng)
+ * @method static mixed get_language()
+ * @method static void set_language_path(string $path)
+ * @method static mixed get_language_path()
+ * @method static void set_default_language(string $lng)
+ * @method static string get_default_language()
+ * @method static boolean load_lang()
+ * @method static string translate(string $text)
+ * @method static array getAllSystemLocales()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       language
@@ -320,7 +330,7 @@ class language extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function set_language($lng)
+	protected static function _set_language($lng)
 	{
 		self::$userLng = $lng;
 		self::_load_lang(true);
@@ -331,7 +341,7 @@ class language extends initiator implements IStatic
 	 *
 	 * @return mixed
 	 */
-	public static function get_language()
+	protected static function _get_language()
 	{
 		return self::$userLng;
 	}
@@ -343,7 +353,7 @@ class language extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function set_language_path($path)
+	protected static function _set_language_path($path)
 	{
 		self::$lngPath = $path;
 	}
@@ -353,7 +363,7 @@ class language extends initiator implements IStatic
 	 *
 	 * @return mixed
 	 */
-	public static function get_language_path()
+	protected static function _get_language_path()
 	{
 		return self::$lngPath;
 	}
@@ -365,7 +375,7 @@ class language extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function set_default_language($lng)
+	protected static function _set_default_language($lng)
 	{
 		self::$defaultLng = $lng;
 	}
@@ -375,7 +385,7 @@ class language extends initiator implements IStatic
 	 *
 	 * @return string
 	 */
-	public static function get_default_language()
+	protected static function _get_default_language()
 	{
 		return self::$defaultLng;
 	}
@@ -383,12 +393,9 @@ class language extends initiator implements IStatic
 	/**
 	 * Lädt die Sprachfunktionalität
 	 *
-	 * @param bool $ignoreFileExists Soll ignorieren ob die Sprachdatei existiert oder nicht. Standartmäßig false.
-	 *
-	 * @access public
 	 * @return boolean
 	 */
-	public static function _load_lang($ignoreFileExists = false)
+	protected static function _load_lang()
 	{
 		if(empty(self::$lngPath) === true)
 		{
@@ -413,10 +420,9 @@ class language extends initiator implements IStatic
 	 *
 	 * @param string $text Der String der übersetzt/ersetzt werden soll
 	 *
-	 * @access public
 	 * @return mixed Gibt den übersetzten String zurück
 	 */
-	public static function _translate($text)
+	protected static function _translate($text)
 	{
 		textdomain(self::$userLng);
 
@@ -426,11 +432,10 @@ class language extends initiator implements IStatic
 	/**
 	 * Gibt die Liste aller Sprachpakete zurück
 	 *
-	 * @access public
 	 * @throws \Exception
 	 * @return array Gibt alle Sprachcodes, die auf dem Server installiert sind zurück. Geht nur bei UNIX Systemen
 	 */
-	public static function _getAllSystemLocales()
+	protected static function _getAllSystemLocales()
 	{
 		$locale_data = array();
 

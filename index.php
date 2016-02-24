@@ -27,8 +27,8 @@
 
 require 'init.php';
 
-$c = 'welcome';
-$m = 'hello';
+$c = DEFAULT_CLASS;
+$m = DEFAULT_METHODE;
 
 if(empty($_GET['c']) === false)
 {

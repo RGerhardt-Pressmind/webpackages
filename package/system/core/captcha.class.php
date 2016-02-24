@@ -38,6 +38,7 @@ use package\system\core\initiator;
  * vorgesehenes Feld eintippen. Nachdem das Formular abgesendet wurde, können Sie die Eingabe des Benutzer mit den
  * Daten, die die Klasse Captcha zurückliefert vergleichen.
  *
+ * @method static array create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
  * @package        Webpackages
  * @subpackage     controllers
  * @category       Captcha
@@ -58,19 +59,9 @@ class captcha extends initiator
 	 * @return array Gibt das fertige Captcha zurück
 	 * @throws captchaException Bei leeren Parametern oder im Fehlerfall
 	 */
-	public static function _create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
+	protected static function _create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
 	{
 		$fontSize = 5;
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hooks(plugins::BEFORE, self::getClassName(), __FUNCTION__, func_get_args());
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
 
 		$img_width  = $imgWidth;
 		$img_height = $imgHeight;
@@ -255,16 +246,6 @@ class captcha extends initiator
 			'image' => $img,
 			'filepath' => $img_path.$img_name
 		);
-
-		if(class_exists('\package\core\plugins') === true)
-		{
-			$plugin = plugins::hooks(plugins::AFTER, self::getClassName(), __FUNCTION__, array_merge(func_get_args(), $back));
-
-			if($plugin != null)
-			{
-				return $plugin;
-			}
-		}
 
 		return $back;
 	}

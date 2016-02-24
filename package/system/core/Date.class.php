@@ -37,6 +37,16 @@ use package\system\core\initiator;
  * Die Klasse kann die Feiertag von unterschiedlichen Ländern zurück geben. Die aktuelle Zeit in der richtigen
  * Zeitzone oder einfach nur zur Formatierung eines Timestamps oder Datums.
  *
+ * @method static int now($timezone = TIMEZONE)
+ * @method static int get_timestamp_by_date(string $date)
+ * @method static get_date_by_timestamp(int $timestamp, $format = 'Y-m-d')
+ * @method static string|int get_easter_day_by_year(int $year, $inTimestamp = false)
+ * @method static array get_nation_holidays_by_year(int $year, string $nation = self::NATION_GERMANY)
+ * @method static \DateTime get_all_saints_day(int $year)
+ * @method static \DateTime get_mid_summer_day(int $year)
+ * @method static bool is_year_leap_year(int $year)
+ * @method static int get_days_in_month(int $month, $year = 0, $particular_calendar = CAL_GREGORIAN)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       Date
@@ -554,7 +564,7 @@ class Date extends initiator implements IStatic
 	 * @return int Gibt den Zeitstempel in Sekunden zurück
 	 * @throws dateException
 	 */
-	public static function _now($timezone = TIMEZONE)
+	protected static function _now($timezone = TIMEZONE)
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -585,7 +595,7 @@ class Date extends initiator implements IStatic
 	 * @return int Gibt den Zeitstempel in Sekunden zurück.
 	 * @throws dateException
 	 */
-	public static function _get_timestamp_by_date($date)
+	protected static function _get_timestamp_by_date($date)
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -608,7 +618,7 @@ class Date extends initiator implements IStatic
 	 * @return string
 	 * @throws dateException
 	 */
-	public static function _get_date_by_timestamp($timestamp, $format = 'Y-m-d')
+	protected static function _get_date_by_timestamp($timestamp, $format = 'Y-m-d')
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -631,7 +641,7 @@ class Date extends initiator implements IStatic
 	 * @return string|int Datum mit Y-m-d oder als Zeitstempel in Sekunden
 	 * @throws dateException
 	 */
-	public static function _get_easter_day_by_year($year, $inTimestamp = false)
+	protected static function _get_easter_day_by_year($year, $inTimestamp = false)
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -732,7 +742,7 @@ class Date extends initiator implements IStatic
 	 *
 	 * @return array Gibt ein assoziatives Array der Feiertage des Landes zurück
 	 */
-	public static function _get_nation_holidays_by_year($year, $nation = self::NATION_GERMANY)
+	protected static function _get_nation_holidays_by_year($year, $nation = self::NATION_GERMANY)
 	{
 		$holidays    = array();
 		$allHolidays = self::get_all_holidays($year);
@@ -963,7 +973,7 @@ class Date extends initiator implements IStatic
 	 * @return \DateTime
 	 * @throws dateException
 	 */
-	public static function _get_all_saints_day($year)
+	protected static function _get_all_saints_day($year)
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -993,7 +1003,7 @@ class Date extends initiator implements IStatic
 	 * @return \DateTime
 	 * @throws dateException
 	 */
-	public static function _get_mid_summer_day($year)
+	protected static function _get_mid_summer_day($year)
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -1022,7 +1032,7 @@ class Date extends initiator implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function _is_year_leap_year($year)
+	protected static function _is_year_leap_year($year)
 	{
 		if(($year % 400) === 0 || (($year % 4) === 0 && ($year % 100) !== 0))
 		{
@@ -1044,7 +1054,7 @@ class Date extends initiator implements IStatic
 	 * @return int
 	 * @throws dateException
 	 */
-	public static function _get_days_in_month($month, $year = 0, $particular_calendar = CAL_GREGORIAN)
+	protected static function _get_days_in_month($month, $year = 0, $particular_calendar = CAL_GREGORIAN)
 	{
 		if(function_exists('cal_days_in_month') === false)
 		{

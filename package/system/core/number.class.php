@@ -36,6 +36,11 @@ use package\system\core\initiator;
  *
  * Konvertiert bestimmte Zahlen und gibt diese richtig zurück
  *
+ * @method static array scale_proportionally(float $sourceWidth, float $sourceHeight, $destWidth = 0.00, $destHeight = 0.00)
+ * @method static string byte_format(float $num, $precision = 1)
+ * @method static object diff(int $start, $end = false)
+ * @method static string get_diff_value(object $diffDate, $short = false)
+ *
  * @package        Webpackages
  * @subpackage     controllers
  * @category       number
@@ -62,7 +67,7 @@ class number extends initiator implements IStatic
 	 *
 	 * @return array Gibt ein assoziatives array mit den neuen Werten zurück
 	 */
-	public static function _scale_proportionally($sourceWidth, $sourceHeight, $destWidth = 0.00, $destHeight = 0.00)
+	protected static function _scale_proportionally($sourceWidth, $sourceHeight, $destWidth = 0.00, $destHeight = 0.00)
 	{
 		if($destHeight >= $destWidth)
 		{
@@ -91,7 +96,7 @@ class number extends initiator implements IStatic
 	 *
 	 * @return string Gibt den umgewandelten Wert zurück.
 	 */
-	public static function _byte_format($num, $precision = 1)
+	protected static function _byte_format($num, $precision = 1)
 	{
 		if($num >= 1000000000000)
 		{
@@ -139,7 +144,7 @@ class number extends initiator implements IStatic
 	 *                Sekunden zurück.
 	 * @throws numberException
 	 */
-	public static function _diff($start, $end = false)
+	protected static function _diff($start, $end = false)
 	{
 		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
 		{
@@ -180,7 +185,7 @@ class number extends initiator implements IStatic
 	 * @return string Gibt den Wortlaut der Differenz zurück.
 	 * @throws numberException
 	 */
-	public static function _get_diff_value($diffDate, $short = false)
+	protected static function _get_diff_value($diffDate, $short = false)
 	{
 		$return = '';
 

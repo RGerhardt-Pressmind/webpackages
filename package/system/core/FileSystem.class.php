@@ -36,6 +36,12 @@ use package\system\core\initiator;
  * Durch die FileSystem Klasse kann man Daten auf dem Webserver verschieben, kopieren oder ganze Strukturen einfach
  * löschen.
  *
+ * @method static bool is_really_writable(string $file)
+ * @method static array|bool get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
+ * @method static bool delete_files($path, $delete_dir = false)
+ * @method static bool copyDirectory($source, $dest, $chmod = 0755)
+ * @method static bool renameDirectory($source, $dest, $chmod = 0755)
+ *
  * @package        Webpackages
  * @subpackage     controllers
  * @category       Filesystem
@@ -60,7 +66,7 @@ class FileSystem extends initiator implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function _is_really_writable($file)
+	protected static function _is_really_writable($file)
 	{
 		if(OS === 'UNIX' && ini_get('safe_mode') === false)
 		{
@@ -102,7 +108,7 @@ class FileSystem extends initiator implements IStatic
 	 *
 	 * @return array|bool
 	 */
-	public static function _get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
+	protected static function _get_all_files($path, $orderBack = \RecursiveIteratorIterator::SELF_FIRST, $withData = false)
 	{
 		if(is_dir($path) === false || file_exists($path) === false)
 		{
@@ -176,7 +182,7 @@ class FileSystem extends initiator implements IStatic
 	 *
 	 * @return bool
 	 */
-	public static function _delete_files($path, $delete_dir = false)
+	protected static function _delete_files($path, $delete_dir = false)
 	{
 		if(is_dir($path) === false || file_exists($path) === false)
 		{
@@ -232,7 +238,7 @@ class FileSystem extends initiator implements IStatic
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public static function _copyDirectory($source, $dest, $chmod = 0755)
+	protected static function _copyDirectory($source, $dest, $chmod = 0755)
 	{
 		if(file_exists($dest) === false)
 		{
@@ -313,7 +319,7 @@ class FileSystem extends initiator implements IStatic
 	 * @return bool Gibt true bei Erfolg und false bei einem Fehler zurück.
 	 * @throws \Exception
 	 */
-	public static function _renameDirectory($source, $dest, $chmod = 0755)
+	protected static function _renameDirectory($source, $dest, $chmod = 0755)
 	{
 		if(file_exists($dest) === false)
 		{

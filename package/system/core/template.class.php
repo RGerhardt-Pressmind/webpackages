@@ -39,6 +39,15 @@ use package\system\core\initiator;
  * Dateien nur einmal durch den PHP-Parser durchlaufen zu lassen. Hiermit kann man PHP und HTML / CSS Dateien
  * voneinander trennen um einen saubereren und übersichtlichereren Code zu bekommen.
  *
+ * @method void setSkin(string $skin)
+ * @method void setHeaderFile(string $header)
+ * @method void setFooterFile(string $footer)
+ * @method void setTemplateDir(string $dir)
+ * @method void setData(array $datas)
+ * @method string getTemplatePath()
+ * @method void display(string $template, string $header = null, string $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
+ * @method mixed load_template_file(string $file, string $type, string $dir = '', $minify = true)
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       template
@@ -94,7 +103,7 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	public function _setSkin($skin)
+	protected function _setSkin($skin)
 	{
 		$this->skin = $skin;
 	}
@@ -106,7 +115,7 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	public function _setHeaderFile($header)
+	protected function _setHeaderFile($header)
 	{
 		$this->header = $header;
 	}
@@ -118,7 +127,7 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	public function _setFooterFile($footer)
+	protected function _setFooterFile($footer)
 	{
 		$this->footer = $footer;
 	}
@@ -130,7 +139,7 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	public function _setTemplateDir($dir)
+	protected function _setTemplateDir($dir)
 	{
 		$this->tempDir = $dir;
 	}
@@ -142,119 +151,41 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	public function _setData(array $datas)
+	protected function _setData(array $datas)
 	{
 		$this->contentData = array_merge($this->contentData, $datas);
 	}
 
 	/**
-	 * Lädt ein Template mit dynamischen Header und Footer Template.
+	 * Gibt den Pfad zum Template Verzeichnis zurück. Bestehend aus Template Pfad und Skin
 	 *
-	 * @param string $template         Der Pfad zum Template. Relativ zum angegebenen Template Verzeichnis.
-	 * @param string $header           Der Pfad zum Header Template. Relativ zum angegebenen Template Verzeichnis.
-	 * @param string $footer           Der Pfad zum Footer Template. Relativ zum angegebenen Template Verzeichnis.
-	 * @param bool   $cacheActive      Aktiviert bzw. Deaktiviert den Cache dieses aufgerufenen Templates.
-	 *                                 Standartmäßig false.
-	 * @param int    $cacheExpiresTime Die Cache Dauer. Unendlich = 0. Standartmäßig 0.
-	 *
-	 * @return void
-	 * @throws templateException
+	 * @return string
 	 */
-	public function _displayDH($template, $header, $footer, $cacheActive = false, $cacheExpiresTime = 0)
+	protected function _getTemplatePath()
 	{
-		ob_start();
-
-		if(empty($this->contentData) === false)
-		{
-			foreach($this->contentData as $key => $value)
-			{
-				${$key} = $value;
-			}
-		}
-
-		$templateFile = $this->tempDir.$this->skin.SEP.$template;
-
-		if(class_exists('\SplFileInfo') === false)
-		{
-			throw new templateException('Error: class SplFileInfo not exists');
-		}
-
-		$splFileInfo = new \SplFileInfo($templateFile);
-
-		$headerPath = $splFileInfo->getPath().SEP.$header;
-		$footerPath = $splFileInfo->getPath().SEP.$footer;
-
-		if($cacheActive === true)
-		{
-			if(class_exists('\package\cache') === false)
-			{
-				throw new templateException('class cache not found');
-			}
-
-			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.$header.'_'.$footer.'_'.md5(serialize($this->contentData))).'.cache';
-			$getTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
-
-			if($getTemplate !== false)
-			{
-				$loadHeader   = false;
-				$loadTemplate = $getTemplate;
-				$loadFooter   = false;
-			}
-			else
-			{
-				ob_start();
-
-				require $headerPath;
-				require $templateFile;
-				require $footerPath;
-
-				$setTemplateElement = cache::set_template_element($cacheName, ob_get_contents());
-
-				ob_end_clean();
-
-				if($setTemplateElement === false)
-				{
-					throw new templateException('setTemplateElement not write');
-				}
-
-				$loadHeader   = false;
-				$loadTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
-				$loadFooter   = false;
-			}
-		}
-		else
-		{
-			$loadHeader   = $headerPath;
-			$loadTemplate = $templateFile;
-			$loadFooter   = $footerPath;
-		}
-
-		if($loadHeader !== false)
-		{
-			require $loadHeader;
-		}
-
-		require $loadTemplate;
-
-		if($loadFooter !== false)
-		{
-			require $loadFooter;
-		}
+		return $this->tempDir.$this->skin.SEP;
 	}
 
 	/**
 	 * Lädt das angegebene Template mit standart Header und Footer Template
 	 *
 	 * @param string $template         Das aufzurufende Template. Relativ zum angegebenen Template Verzeichnis.
+	 * @param string $header			Dynamischer Header
+	 * @param string $footer			Dynamischer Footer
 	 * @param bool   $cacheActive      Aktiviert bzw. Deaktiviert den Template Cache.
 	 * @param int    $cacheExpiresTime Die Cache Dauer. Unendlich = 0. Standartmäßig 0.
 	 *
 	 * @return void
 	 * @throws templateException
 	 */
-	public function _display($template, $cacheActive = false, $cacheExpiresTime = 0)
+	protected function _display($template, $header = null, $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
 	{
 		ob_start();
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new templateException('Error: class SplFileInfo not exists');
+		}
 
 		if(empty($this->contentData) === false)
 		{
@@ -264,17 +195,35 @@ class template extends initiator
 			}
 		}
 
-		$templatePath = $this->tempDir.$this->skin.SEP.$template;
+		$templatePath = new \SplFileInfo($this->getTemplatePath().$template);
 
-		if(class_exists('\SplFileInfo') === false)
+		if(file_exists($templatePath->__toString()) === false)
 		{
-			throw new templateException('Error: class SplFileInfo not exists');
+			throw new templateException('Error: template '.$template.' not exist');
 		}
 
-		$splFileInfo = new \SplFileInfo($templatePath);
+		if($header != null)
+		{
+			$headerPath	=	$this->getTemplatePath().$header;
+		}
+		else
+		{
+			$headerPath = $templatePath->getPath().SEP.$this->header;
+		}
 
-		$headerPath = $splFileInfo->getPath().SEP.$this->header;
-		$footerPath = $splFileInfo->getPath().SEP.$this->footer;
+		if($footer != null)
+		{
+			$footerPath	=	$this->getTemplatePath().$this->footer;
+		}
+		else
+		{
+			$footerPath = $templatePath->getPath().SEP.$this->footer;
+		}
+
+		if(file_exists($headerPath) === false || file_exists($footerPath) === false)
+		{
+			throw new templateException('Error: header or footer template not exist');
+		}
 
 		if($cacheActive === true)
 		{
@@ -283,14 +232,12 @@ class template extends initiator
 				throw new templateException('class cache not found');
 			}
 
-			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
+			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData)));
 			$getTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
 
 			if($getTemplate !== false)
 			{
-				$loadTemplate = $getTemplate;
-				require $loadTemplate;
-
+				echo $getTemplate;
 				return;
 			}
 			else
@@ -298,7 +245,7 @@ class template extends initiator
 				ob_start();
 
 				require $headerPath;
-				require $templatePath;
+				require $templatePath->__toString();
 				require $footerPath;
 
 				$output = ob_get_contents();
@@ -317,81 +264,10 @@ class template extends initiator
 				return;
 			}
 		}
-		else
-		{
-			$loadTemplate = $this->tempDir.$this->skin.SEP.$template;
-		}
 
 		require $headerPath;
-
-		require $loadTemplate;
-
+		require $templatePath->__toString();
 		require $footerPath;
-	}
-
-	/**
-	 * Lädt das angegebene Template ohne Header und Footer Template
-	 *
-	 * @param string $template         Das anzuzeigende Template. Relativ zum angegebenen Template Verzeichnis.
-	 * @param bool   $cacheActive      Aktiviert bzw. Deaktiviert den Cache
-	 * @param int    $cacheExpiresTime Die Dauer des Caches. Unendlich = 0. Standartmäßig 0
-	 *
-	 * @return void
-	 * @throws templateException
-	 */
-	public function _displayNP($template, $cacheActive = false, $cacheExpiresTime = 0)
-	{
-		ob_start();
-
-		if(empty($this->contentData) === false)
-		{
-			foreach($this->contentData as $key => $value)
-			{
-				${$key} = $value;
-			}
-		}
-
-		$templatePath = $this->tempDir.$this->skin.SEP.$template;
-
-		if($cacheActive === true)
-		{
-			if(class_exists('\package\cache') === false)
-			{
-				throw new templateException('Error: class cache not found');
-			}
-
-			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData))).'.cache';
-			$getTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
-
-			if($getTemplate !== false)
-			{
-				$templatePath = $getTemplate;
-			}
-			else
-			{
-				ob_start();
-
-				require $this->tempDir.$this->skin.SEP.$template;
-
-				$setTemplateElement = cache::set_template_element($cacheName, ob_get_contents());
-
-				ob_end_clean();
-
-				if($setTemplateElement === false)
-				{
-					throw new templateException('setTemplateElement not write');
-				}
-
-				$templatePath = cache::get_template_element($cacheName, $cacheExpiresTime);
-
-				if($templatePath === false)
-				{
-					throw new templateException('template '.$template.' in cache not found');
-				}
-			}
-		}
-
-		require $templatePath;
 	}
 
 	/**
@@ -404,7 +280,7 @@ class template extends initiator
 	 *
 	 * @return mixed Gibt den Inhalt der Datei zurück
 	 */
-	public function _load_template_file($file, $type, $dir = '', $minify = true)
+	protected function _load_template_file($file, $type, $dir = '', $minify = true)
 	{
 		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.$this->skin.'&d='.$dir.'&c='.(($minify === false) ? 'false' : 'true');
 	}

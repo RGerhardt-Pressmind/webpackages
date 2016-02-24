@@ -38,6 +38,12 @@ use package\system\core\initiator;
  * die PHP Extension cURL. Mit der Klasse curl ist es deutlich einfacher mit der Extension zu Kommunizieren. Bereits
  * vordefinierte Methoden helfen Ihnen einfach bestimmte Bereiche abzufragen.
  *
+ * @method static bool curl_extension_exists()
+ * @method static mixed get_data(string $url, $postfields = array())
+ * @method static int get_status(string $url)
+ * @method static array get_city_coordinates(string $city, $resultArray = false)
+ * @method static string get_city_name_by_ip()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       cURL
@@ -67,7 +73,7 @@ class curl extends initiator implements IStatic
 	 *
 	 * @return bool Gibt true zurück wenn die cURL Extension installiert ist und false wenn nicht
 	 */
-	public static function _curl_extension_exists()
+	protected static function _curl_extension_exists()
 	{
 		return function_exists('curl_init');
 	}
@@ -82,7 +88,7 @@ class curl extends initiator implements IStatic
 	 * @return mixed
 	 * @throws curlException Wenn die Extension nicht installiert ist.
 	 */
-	public static function _get_data($url, $postfields = array(), $ssl = false)
+	protected static function _get_data($url, $postfields = array(), $ssl = false)
 	{
 		if(self::curl_extension_exists() === false)
 		{
@@ -128,7 +134,7 @@ class curl extends initiator implements IStatic
 	 * @return int Gibt den HTTP-Statuscode zurück
 	 * @throws curlException Wenn die Extension nicht installiert ist oder im Fehlerfall
 	 */
-	public static function _get_status($url)
+	protected static function _get_status($url)
 	{
 		if(self::curl_extension_exists() === false)
 		{
@@ -165,7 +171,7 @@ class curl extends initiator implements IStatic
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
 	 * @throws curlException Wenn die Extension nicht installiert oder im Fehlerfall.
 	 */
-	public static function _get_city_coordinates($city, $resultArray = false)
+	protected static function _get_city_coordinates($city, $resultArray = false)
 	{
 		if(self::curl_extension_exists() === false)
 		{
@@ -217,7 +223,7 @@ class curl extends initiator implements IStatic
 	 * @return string Gibt, Anhand der IP-Adresse, den Namen der Stadt zurück oder "Not found" wenn keine Stadt
 	 *                gefunden wurde
 	 */
-	public static function _get_city_name_by_ip()
+	protected static function _get_city_name_by_ip()
 	{
 		$ip = security::get_ip_address();
 

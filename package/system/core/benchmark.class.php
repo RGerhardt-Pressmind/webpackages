@@ -36,6 +36,11 @@ use package\system\core\initiator;
  *
  * Die Benchmark Klasse liest im Mikrosekunden Bereich wie schnell bestimmte Skripte brauchen um Ihre Aufgabe zu beenden
  *
+ * @method static void start_point($inSeconds = false)
+ * @method static void end_point($inSeconds = false)
+ * @method static void middle_point($inSeconds = false)
+ * @method static mixed finish()
+ *
  * @package        Webpackages
  * @subpackage     core
  * @category       Benchmark
@@ -73,7 +78,7 @@ class benchmark extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function start_point($inSeconds = false)
+	protected static function _start_point($inSeconds = false)
 	{
 		self::$startTime = microtime($inSeconds);
 	}
@@ -85,7 +90,7 @@ class benchmark extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function end_point($inSeconds = false)
+	protected static function _end_point($inSeconds = false)
 	{
 		self::$endTime = microtime($inSeconds);
 	}
@@ -97,7 +102,7 @@ class benchmark extends initiator implements IStatic
 	 *
 	 * @return void
 	 */
-	public static function middle_point($inSeconds = false)
+	protected static function _middle_point($inSeconds = false)
 	{
 		self::$middleTime[] = microtime($inSeconds);
 	}
@@ -109,7 +114,7 @@ class benchmark extends initiator implements IStatic
 	 * @return mixed Gibt die Differenz der gespeicherten Werte zurück.
 	 * @throws benchmarkException
 	 */
-	public static function finish()
+	protected static function _finish()
 	{
 		if(empty(self::$startTime) === true)
 		{
