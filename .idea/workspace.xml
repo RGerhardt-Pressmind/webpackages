@@ -4,31 +4,27 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- change htacces by cache and security">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/magicento.xml" />
+    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/commandLinePlugin/CommandLine.master.class.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/commandLinePlugin/config.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/googleImageSearch/GoogleImageSearch.master.class.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/googleImageSearch/config.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/package/system/languages/en_US/en_US.mo" afterPath="$PROJECT_DIR$/package/system/languages/en_US/LC_MESSAGES/en_US.mo" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/package/system/languages/en_US/en_US.po" afterPath="$PROJECT_DIR$/package/system/languages/en_US/LC_MESSAGES/en_US.po" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/package/system/languages/fr_FR/fr_FR.mo" afterPath="$PROJECT_DIR$/package/system/languages/fr_FR/LC_MESSAGES/fr_FR.mo" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/package/system/languages/fr_FR/fr_FR.po" afterPath="$PROJECT_DIR$/package/system/languages/fr_FR/LC_MESSAGES/fr_FR.po" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/package/system/languages/it_IT/it_IT.mo" afterPath="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES/it_IT.mo" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/package/system/languages/it_IT/it_IT.po" afterPath="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES/it_IT.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/Date.class.php" afterPath="$PROJECT_DIR$/package/system/core/Date.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/FileSystem.class.php" afterPath="$PROJECT_DIR$/package/system/core/FileSystem.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/XML.class.php" afterPath="$PROJECT_DIR$/package/system/core/XML.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/benchmark.class.php" afterPath="$PROJECT_DIR$/package/system/core/benchmark.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/cache.class.php" afterPath="$PROJECT_DIR$/package/system/core/cache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/captcha.class.php" afterPath="$PROJECT_DIR$/package/system/core/captcha.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/curl.class.php" afterPath="$PROJECT_DIR$/package/system/core/curl.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/errors.class.php" afterPath="$PROJECT_DIR$/package/system/core/errors.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/ftp.class.php" afterPath="$PROJECT_DIR$/package/system/core/ftp.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/images.class.php" afterPath="$PROJECT_DIR$/package/system/core/images.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/language.class.php" afterPath="$PROJECT_DIR$/package/system/core/language.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/logger.class.php" afterPath="$PROJECT_DIR$/package/system/core/logger.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/number.class.php" afterPath="$PROJECT_DIR$/package/system/core/number.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/paypal.class.php" afterPath="$PROJECT_DIR$/package/system/core/paypal.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/security.class.php" afterPath="$PROJECT_DIR$/package/system/core/security.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/template.class.php" afterPath="$PROJECT_DIR$/package/system/core/template.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/text.class.php" afterPath="$PROJECT_DIR$/package/system/core/text.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/url.class.php" afterPath="$PROJECT_DIR$/package/system/core/url.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/version.class.php" afterPath="$PROJECT_DIR$/package/system/core/version.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/zip.class.php" afterPath="$PROJECT_DIR$/package/system/core/zip.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/controllers/welcome.class.php" afterPath="$PROJECT_DIR$/package/controllers/welcome.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" afterPath="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" afterPath="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" afterPath="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" afterPath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/pluginsTest.php" afterPath="$PROJECT_DIR$/unitTest/core/pluginsTest.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,21 +57,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="template.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
+      <file leaf-file-name="welcome.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.1222527">
-              <caret line="202" column="9" selection-start-line="202" selection-start-column="9" selection-end-line="202" selection-end-column="9" />
+            <state vertical-scroll-proportion="-14.375">
+              <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cache.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package/system/core/cache.class.php">
+      <file leaf-file-name="FileSystemTest.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/unitTest/core/FileSystemTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.291667">
-              <caret line="182" column="57" selection-start-line="182" selection-start-column="57" selection-end-line="182" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.26373628">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -104,27 +100,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/package/controllers/images.class.php" />
-        <option value="$PROJECT_DIR$/package/controllers/logger.class.php" />
-        <option value="$PROJECT_DIR$/package/controllers/number.class.php" />
-        <option value="$PROJECT_DIR$/package/controllers/security.class.php" />
-        <option value="$PROJECT_DIR$/getTemplateFile.php" />
-        <option value="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" />
-        <option value="$PROJECT_DIR$/unitTest/core/curlTest.php" />
-        <option value="$PROJECT_DIR$/package/models/welcome.class.php" />
-        <option value="$PROJECT_DIR$/package/controllers/template.class.php" />
-        <option value="$PROJECT_DIR$/../webpackages-live/constants.php" />
-        <option value="$PROJECT_DIR$/package/system/implement/IModel.class.php" />
-        <option value="$PROJECT_DIR$/package/models/test.php" />
-        <option value="$PROJECT_DIR$/../webpackages live/constants.php" />
-        <option value="$PROJECT_DIR$/package/system/loadSessionHandler.php" />
-        <option value="$PROJECT_DIR$/unitTest/core/securityTest.php" />
-        <option value="$PROJECT_DIR$/unitTest/core/ftpTest.php" />
         <option value="$PROJECT_DIR$/unitTest/core/languageTest.php" />
         <option value="$PROJECT_DIR$/package/views/welcome/css/font-awesome.min.css" />
         <option value="$PROJECT_DIR$/package/views/welcome/css/main.css" />
-        <option value="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
-        <option value="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/plugins.class.php" />
         <option value="$PROJECT_DIR$/../webpackages Kopie/constants.php" />
         <option value="$PROJECT_DIR$/package/system/core/autoload.class.php" />
@@ -132,7 +110,6 @@
         <option value="$PROJECT_DIR$/package/system/controllExistsPaths.php" />
         <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
-        <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/package/system/core/cache.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/benchmark.class.php" />
@@ -155,6 +132,25 @@
         <option value="$PROJECT_DIR$/package/system/core/XML.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/zip.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/template.class.php" />
+        <option value="$PROJECT_DIR$/constants.php" />
+        <option value="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" />
+        <option value="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" />
+        <option value="$PROJECT_DIR$/unitTest/core/pluginsTest.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/commandLinePlugin/CommandLine.master.class.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/namespace.txt" />
+        <option value="$PROJECT_DIR$/package/controllers/welcome.class.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/googleImageSearch/namespace.txt" />
+        <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/googleImageSearch/GoogleImageSearch.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/commandLinePlugin/CommandLine.master.class.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/googleImageSearch/GoogleImageSearch.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/commandLinePlugin/namespace.txt" />
+        <option value="$PROJECT_DIR$/package/system/plugins/googleImageSearch/namespace.txt" />
+        <option value="$PROJECT_DIR$/package/system/plugins/commandLinePlugin/config.ini" />
+        <option value="$PROJECT_DIR$/package/system/plugins/googleImageSearch/config.ini" />
+        <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" />
+        <option value="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
+        <option value="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" />
       </list>
     </option>
   </component>
@@ -263,46 +259,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -337,19 +293,19 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/package/system" />
-      <recent name="$PROJECT_DIR$/package" />
-      <recent name="$PROJECT_DIR$/templates/welcome/template" />
-      <recent name="$PROJECT_DIR$/package/libs/minify/src" />
-      <recent name="$PROJECT_DIR$/templates/welcome" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/package" />
       <recent name="$PROJECT_DIR$/package/core" />
       <recent name="$PROJECT_DIR$/package/implement" />
       <recent name="$PROJECT_DIR$/testSuite/images" />
       <recent name="$PROJECT_DIR$/package/system" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/package/system/plugins" />
+      <recent name="$PROJECT_DIR$/package/system/plugins/testPlugin/commandLinePlugin" />
+      <recent name="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES" />
+      <recent name="$PROJECT_DIR$/package/system/languages/fr_FR/LC_MESSAGES" />
+      <recent name="$PROJECT_DIR$/package/system/languages/en_US/LC_MESSAGES" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.UnitTests">
@@ -436,12 +392,6 @@
       <created>1428613698586</created>
       <option name="number" value="Default" />
       <updated>1428613698586</updated>
-    </task>
-    <task id="LOCAL-00014" summary="0.4.1 / 13.04.2015&#10;==================&#10;* Add phpdocumentor&#10;* Add &quot;autoload.class.php&quot; documentation and example&#10;* Remove phpunit directory&#10;">
-      <created>1428953598723</created>
-      <option name="number" value="00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1428953598723</updated>
     </task>
     <task id="LOCAL-00015" summary="0.4.2 / 13.04.2015&#10;==================&#10;* Add all package Class Documentation&#10;* Remove cURL Class &quot;downloadUrl&quot; method&#10;* Change database class &quot;result_array&quot; method. allowed select commands&#10;* Change move template class &quot;truncate&quot; method to text class&#10;&#10;&#10;">
       <created>1429042367166</created>
@@ -731,28 +681,16 @@
       <option name="project" value="LOCAL" />
       <updated>1456268041916</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="- add method property class header&#10;- change template class load display">
+      <created>1456306669941</created>
+      <option name="number" value="00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1456306669943</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UnitTests - 2016.02.11 at 01h 00m 29s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.02.11 at 01h 01m 02s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.02.11 at 18h 57m 33s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.02.11 at 18h 58m 21s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.02.11 at 19h 08m 25s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.02.11 at 19h 15m 05s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="UnitTests - 2016.02.24 at 09h 31m 44s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -765,31 +703,49 @@
     <history-entry file="UnitTests - 2016.02.24 at 10h 18m 26s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="UnitTests - 2016.02.24 at 11h 50m 59s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.02.24 at 11h 51m 40s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.02.24 at 11h 52m 24s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.02.24 at 11h 52m 49s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.02.24 at 13h 33m 44s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.02.24 at 13h 34m 20s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29727793" sideWeight="0.4852753" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599232" sideWeight="0.5057307" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32266325" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39692703" sideWeight="0.49426934" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29727793" sideWeight="0.51472473" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29727793" sideWeight="0.4852753" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29727793" sideWeight="0.51472473" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39820743" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32352942" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650447" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -810,7 +766,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="0.4.10 / 28.09.2015&#10;==================&#10;* Fix start session by memcache&#10;* Fix get filteype&#10;* Fix function truncate to static function" />
     <MESSAGE value="0.5.0 / 28.09.2015&#10;==================&#10;* Add XML Class&#10;* Add Validater Class&#10;* Change Security Class with Validater Class&#10;* Change loadFunctions -&gt; initClasses&#10;* Fix init initialize folders&#10;" />
     <MESSAGE value="0.5.0 / 28.09.2015&#10;==================&#10;* Add XML Class&#10;* Add Validater Class&#10;* Change Security Class with Validater Class&#10;* Change loadFunctions -&gt; initClasses&#10;* Fix init initialize folders" />
     <MESSAGE value="0.5.0 / 28.09.2015&#10;==================&#10;* Fix XML class" />
@@ -835,7 +790,8 @@
     <MESSAGE value="- Add errors HTTP codes&#10;- ftp deprecated method&#10;- security add removeMysqlFunctions parameter" />
     <MESSAGE value="- Bugfixes controllExistsPaths&#10;- language class get all locales&#10;- init.php move error reporting activate&#10;- init.php control exists SessionHandler Class" />
     <MESSAGE value="- change htacces by cache and security" />
-    <option name="LAST_COMMIT_MESSAGE" value="- change htacces by cache and security" />
+    <MESSAGE value="- add method property class header&#10;- change template class load display" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add method property class header&#10;- change template class load display" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -844,97 +800,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/unitTest/core/curlTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36126372">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/implement/IModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61728394">
-          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/models/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50617284">
-          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8148148">
-          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/basic.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.791866">
-          <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/securityTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3325359">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/ftpTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.26236263">
-          <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/languageTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84752744">
-          <caret line="67" column="30" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/FileSystemTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.423445">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/css/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22664835">
-          <caret line="8" column="370" selection-start-line="8" selection-start-column="370" selection-end-line="8" selection-end-column="370" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/css/font-awesome.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.254121">
-          <caret line="0" column="401" selection-start-line="0" selection-start-column="401" selection-end-line="0" selection-end-column="401" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30082417">
-          <caret line="46" column="15" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/Core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3434066">
-          <caret line="340" column="9" selection-start-line="340" selection-start-column="9" selection-end-line="340" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -946,20 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/loadSessionHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27884614">
-          <caret line="227" column="7" selection-start-line="227" selection-start-column="7" selection-end-line="227" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44368133">
-          <caret line="57" column="71" selection-start-line="57" selection-start-column="71" selection-end-line="57" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -981,35 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45679012">
           <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7613169">
-          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33909574">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71153843">
-          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59203297">
-          <caret line="149" column="41" selection-start-line="149" selection-start-column="41" selection-end-line="149" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1098,14 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26785713">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/logger.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64972526">
@@ -1154,22 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/plugins.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0521978">
-          <caret line="112" column="30" selection-start-line="112" selection-start-column="30" selection-end-line="112" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7417582">
-          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/text.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="5.089286">
@@ -1212,26 +1010,207 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/initiator.abstract.class.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46703297">
-          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/cache.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.291667">
-          <caret line="182" column="57" selection-start-line="182" selection-start-column="57" selection-end-line="182" selection-end-column="57" />
+        <state vertical-scroll-proportion="1.1126374">
+          <caret line="54" column="1" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1222527">
-          <caret line="202" column="9" selection-start-line="202" selection-start-column="9" selection-end-line="202" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.23763736">
+          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/cache.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4052198">
+          <caret line="182" column="57" selection-start-line="182" selection-start-column="57" selection-end-line="182" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4739011">
+          <caret line="213" column="3" selection-start-line="213" selection-start-column="3" selection-end-line="213" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76648355">
+          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/initiator.abstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5673077">
+          <caret line="144" column="24" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/unitTest/core/pluginsTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6442308">
+          <caret line="50" column="2" selection-start-line="50" selection-start-column="2" selection-end-line="50" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/implement/IPlugin.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88873625">
+          <caret line="51" column="29" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/412E2EC5-71C4-405B-9A66-A8F36E54B7B2/CommandLine.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9478022">
+          <caret line="167" column="5" selection-start-line="119" selection-start-column="4" selection-end-line="167" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/googleImageSearch/classes/simple_html_dom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5563187">
+          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/1D82E50B-4FF3-40BA-ACEF-A2032C07A8CA/GoogleImageSearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.208334">
+          <caret line="197" column="5" selection-start-line="9" selection-start-column="4" selection-end-line="197" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/loadSessionHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.800824">
+          <caret line="233" column="21" selection-start-line="233" selection-start-column="21" selection-end-line="233" selection-end-column="21" />
+          <folding>
+            <marker date="1455230895000" expanded="true" signature="2324:2499" placeholder="CREATE TABLE... IF" />
+            <marker date="1455230895000" expanded="true" signature="3200:3307" placeholder="SELECT `sess... sessions" />
+            <marker date="1455230895000" expanded="true" signature="4379:4445" placeholder="DELETE FROM " />
+            <marker date="1455230895000" expanded="true" signature="4720:4858" placeholder="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/SessionHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20604396">
+          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0744681">
+          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44368133">
+          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/plugins.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.043956045">
+          <caret line="141" column="7" selection-start-line="141" selection-start-column="7" selection-end-line="141" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/commandLinePlugin/CommandLine.master.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.32967034">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41483516">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/googleImageSearch/GoogleImageSearch.master.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.166667">
+          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/commandLinePlugin/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.019946808">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/googleImageSearch/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.019946808">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.019946808">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7706044">
+          <caret line="490" column="49" selection-start-line="490" selection-start-column="49" selection-end-line="490" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.375">
+          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/unitTest/core/FileSystemTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26373628">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding />
         </state>
       </provider>

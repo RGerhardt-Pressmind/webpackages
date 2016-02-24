@@ -41,6 +41,17 @@ class testPlugin implements IPlugin
 
 	}
 
+	public function getClassName()
+	{
+		return 'testPlugin';
+	}
+
+
+	public function getS3Data()
+	{
+		return array('myInfos' => 'datas');
+	}
+
 	public function setAllClasses($allClasses)
 	{
 		if(isset($allClasses['db']) && $allClasses['db'] instanceof database)

@@ -417,7 +417,7 @@ abstract class load_functions
 	 */
 	protected function load_install_plugins()
 	{
-		if(PLUGIN_DIR == '' || class_exists('\package\plugins') === false)
+		if(PLUGIN_DIR == '' || class_exists('\package\core\plugins') === false)
 		{
 			return;
 		}
@@ -437,6 +437,8 @@ abstract class load_functions
 					$class->setAllClasses($allInitClasses);
 					$class->construct();
 
+					$this->defineDynamicClasses[$class->getClassName()] = $class;
+
 					plugins::$definedPluginsClasses[] = $class;
 				}
 			}
@@ -453,17 +455,15 @@ abstract class load_functions
 	protected function get_plugins($dir)
 	{
 		$directory = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
-		$iterator  = new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::LEAVES_ONLY);
+		$iterator  = new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::CHILD_FIRST);
 		$back      = array();
 
 		if(iterator_count($iterator) > 0)
 		{
 			foreach($iterator as $item)
 			{
-				if($item instanceof \SplFileInfo && stripos($item->getFilename(), '.master.class.php') !== false && $item->isDir() === false)
+				if(stripos($item->getFilename(), '.master.class.php') !== false && $item->isDir() === false)
 				{
-					require_once $item->__toString();
-
 					$className = str_replace(array(
 						'.php',
 						'.php4',
@@ -475,23 +475,41 @@ abstract class load_functions
 						'',
 						''
 					), $item->getFilename());
-					$className = 'package\plugins\\'.$className;
 
-					if(class_exists($className) === false)
+					$classNameNamespace	=	'';
+
+					if(file_exists($item->getPath().SEP.'config.ini') === true)
+					{
+						$config	=	parse_ini_file($item->getPath().SEP.'config.ini');
+
+						//Namespace definition
+						if(empty($config['namespace']) === false)
+						{
+							$classNameNamespace	=	trim($config['namespace'], '\\').'\\';
+						}
+
+						//Plugin aktiv oder nicht
+						if(isset($config['active']) === true && ($config['active'] === false || $config['active'] == 0))
+						{
+							continue;
+						}
+					}
+
+					require_once $item->__toString();
+
+					$classNameNamespace .= $className;
+
+					if(class_exists($classNameNamespace) === false)
 					{
 						continue;
 					}
 
-					$class = new $className();
+					$class = new $classNameNamespace();
 
 					$back[] = array(
-						'class_name' => $className,
+						'class_name' => $classNameNamespace,
 						'class' => $class
 					);
-				}
-				elseif($item->isDir() === true)
-				{
-					$back = array_merge($back, $this->get_plugins($item->__toString()));
 				}
 			}
 		}
@@ -516,7 +534,7 @@ abstract class load_functions
 		$allInitClasses = $this->get_all_init_classes();
 
 		$directory = new \RecursiveDirectoryIterator(DYNAMIC_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
-		$iterator  = new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::LEAVES_ONLY);
+		$iterator  = new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::CHILD_FIRST);
 
 		$back = array();
 

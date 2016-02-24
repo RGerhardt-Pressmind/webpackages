@@ -38,6 +38,13 @@ interface IPlugin
 	public function setAllClasses($allClasses);
 
 	/**
+	 * Der Name der zum Ansprechen des Plugins genutzt werden soll
+	 *
+	 * @return string
+	 */
+	public function getClassName();
+
+	/**
 	 * Wird direkt nach der Instanzierung alles Plugins aufgerufen.
 	 *
 	 * @return mixed

@@ -27,13 +27,16 @@
 
 use package\core\load_functions;
 
+/**
+ * @property \package\plugins\testPlugin $testPlugin
+ */
 class welcome extends load_functions
 {
 	public function __construct()
 	{
 		\package\core\benchmark::start_point(true);
 
-		parent::__construct(array(load_functions::$LOAD_TEMPLATE, load_functions::$LOAD_LANGUAGE, load_functions::$LOAD_URL));
+		parent::__construct();
 	}
 
 	/**

@@ -136,7 +136,14 @@ abstract class initiator
 	 */
 	public static function getClassName()
 	{
-		return self::$reflectionClass->getShortName();
+		if(self::$reflectionClass)
+		{
+			return self::$reflectionClass->getShortName();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -148,6 +155,13 @@ abstract class initiator
 	 */
 	public static function getConstant($constant = '')
 	{
-		return self::$reflectionClass->getConstant($constant);
+		if(self::$reflectionClass)
+		{
+			return self::$reflectionClass->getConstant($constant);
+		}
+		else
+		{
+			return null;
+		}
 	}
 }
