@@ -26,10 +26,13 @@
  */
 
 require_once 'constants.php';
+require_once CORE_DIR.'initiator.abstract.class.php';
+require_once CORE_DIR.'security.class.php';
 
 if(empty($_GET['t']) === false)
 {
-	$type = $_GET['t'];
+	$type = \package\core\security::url('t', 'GET', 'string');
+	$type = str_replace(array('../', './'), array('', ''), $type);
 }
 else
 {
@@ -39,7 +42,8 @@ else
 
 if(empty($_GET['f']) === false)
 {
-	$filename = $_GET['f'];
+	$filename = \package\core\security::url('f', 'GET', 'string');
+	$filename = str_replace(array('../', './'), array('', ''), $filename);
 }
 else
 {
@@ -51,14 +55,16 @@ $skin = '';
 
 if(empty($_GET['s']) === false)
 {
-	$skin = $_GET['s'].SEP;
+	$skin = \package\core\security::url('s', 'GET', 'string').SEP;
+	$skin = str_replace(array('../', './'), array('', ''), $skin);
 }
 
 $dir = '';
 
 if(empty($_GET['d']) === false)
 {
-	$dir = $_GET['d'].SEP;
+	$dir = \package\core\security::url('d', 'GET', 'string').SEP;
+	$dir = str_replace(array('../', './'), array('', ''), $dir);
 }
 else
 {
@@ -69,7 +75,7 @@ $withConvert = true;
 
 if(isset($_GET['c']) === true)
 {
-	$withConvert = ($_GET['c'] == 'false') ? false : true;
+	$withConvert = (\package\core\security::url('c', 'GET', 'bool') == false) ? false : true;
 }
 
 require_once LIB_DIR.'minify'.SEP.'src'.SEP.'Minify.php';

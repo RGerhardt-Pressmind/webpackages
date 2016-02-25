@@ -329,6 +329,15 @@ class security extends initiator
 			case 'string':
 			case 's':
 
+				if(is_array($param) === true)
+				{
+					return 'array()';
+				}
+				elseif(is_object($param) === true)
+				{
+					return 'std()';
+				}
+
 				$param = self::xss_clean($param);
 
 				if($removeSQLFunctions === true)

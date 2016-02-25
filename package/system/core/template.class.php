@@ -45,6 +45,7 @@ use package\system\core\initiator;
  * @method void setTemplateDir(string $dir)
  * @method void setData(array $datas)
  * @method string getTemplatePath()
+ * @method void displayPlugin(string $template, $cacheActive = false, $cacheExpiresTime = 0)
  * @method void display(string $template, string $header = null, string $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
  * @method mixed load_template_file(string $file, string $type, string $dir = '', $minify = true)
  *
@@ -164,6 +165,81 @@ class template extends initiator
 	protected function _getTemplatePath()
 	{
 		return $this->tempDir.$this->skin.SEP;
+	}
+
+	/**
+	 * Lädt den absolute angegebenen Template Pfad
+	 *
+	 * @param string	$template
+	 * @param bool 		$cacheActive
+	 * @param int  		$cacheExpiresTime
+	 *
+	 * @return void
+	 * @throws templateException
+	 */
+	protected function _displayPlugin($template, $cacheActive = false, $cacheExpiresTime = 0)
+	{
+		ob_start();
+
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new templateException('Error: class SplFileInfo not exists');
+		}
+
+		if(empty($this->contentData) === false)
+		{
+			foreach($this->contentData as $key => $value)
+			{
+				${$key} = $value;
+			}
+		}
+
+		$templatePath = new \SplFileInfo($template);
+
+		if(file_exists($templatePath->__toString()) === false)
+		{
+			throw new templateException('Error: template '.$template.' not exist');
+		}
+
+		if($cacheActive === true)
+		{
+			if(class_exists('\package\cache') === false)
+			{
+				throw new templateException('class cache not found');
+			}
+
+			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData)));
+			$getTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
+
+			if($getTemplate !== false)
+			{
+				echo $getTemplate;
+				return;
+			}
+			else
+			{
+				ob_start();
+
+				require $templatePath->__toString();
+
+				$output = ob_get_contents();
+
+				$setTemplateElement = cache::set_template_element($cacheName, $output);
+
+				ob_end_clean();
+
+				if($setTemplateElement === false)
+				{
+					throw new templateException('setTemplateElement not write');
+				}
+
+				echo $output;
+
+				return;
+			}
+		}
+
+		require $templatePath->__toString();
 	}
 
 	/**

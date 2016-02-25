@@ -4,8 +4,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    RewriteRule ^([^/]*)\.html$ /index.php?c=$1 [L]
-    RewriteRule ^([^/]*)/([^/]*)\.html$ /index.php?c=$1&m=$2 [L]
+    RewriteRule ^([^/]*)\.html$ index.php?c=$1 [L]
+    RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?c=$1&m=$2 [L]
 
     # If-Modified-Since (if php is not installed as cgi then comment lines below)
     RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
@@ -220,3 +220,7 @@
 # | Zeichensatz setzen
 # ----------------------------------------------------------------------
 AddDefaultCharset UTF-8
+
+#USER_CONTENT_BEGIN
+
+#USER_CONTENT_END

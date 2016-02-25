@@ -74,48 +74,22 @@ $myPaths[] = PACKAGE_DIR;
 $myPaths[] = SYSTEM_PATH;
 $myPaths[] = IMPLEMENT_DIR;
 $myPaths[] = CORE_DIR;
+$myPaths[] = PLUGIN_DIR;
 $myPaths[] = LIB_DIR;
 $myPaths[] = LIB_DIR.'PHPMailer';
 $myPaths[] = LIB_DIR.'minifiy';
 
 if(defined('PAGE_DIR') === true && PAGE_DIR != '')
 {
-	$myPaths[] = PAGE_DIR;
-
-	$director = new \RecursiveDirectoryIterator(PAGE_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator = new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::SELF_FIRST);
-
-	if(iterator_count($iterator) > 0)
-	{
-		foreach($iterator as $item)
-		{
-			if($item->isDir() === true)
-			{
-				$myPaths[] = $dir;
-			}
-		}
-	}
+	$myPaths	=	array_merge($myPaths, backAllPaths(PAGE_DIR));
 }
 
 //Alle Dynamischen Klassen in include_path aufnehmen
 if(defined('DYNAMIC_DIR') === true && DYNAMIC_DIR != '')
 {
-	$myPaths[] = DYNAMIC_DIR;
-
-	$director = new \RecursiveDirectoryIterator(DYNAMIC_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator = new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::SELF_FIRST);
-
-	if(iterator_count($iterator) > 0)
-	{
-		foreach($iterator as $item)
-		{
-			if($item->isDir() === true)
-			{
-				$myPaths[] = $dir;
-			}
-		}
-	}
+	$myPaths	=	array_merge($myPaths, backAllPaths(DYNAMIC_DIR));
 }
+
 
 ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR, $myPaths));
 
@@ -123,37 +97,13 @@ ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR
 //Alle Implements Klassen includieren
 if(defined('IMPLEMENT_DIR') === true && IMPLEMENT_DIR != '')
 {
-	$implements	=	new RecursiveDirectoryIterator(IMPLEMENT_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new RecursiveIteratorIterator($implements, RecursiveIteratorIterator::SELF_FIRST);
-
-	if(iterator_count($iterator) > 0)
-	{
-		foreach($iterator as $file)
-		{
-			if($file->isFile() && $file->getFilename() != '.htaccess')
-			{
-				require_once $file->__toString();
-			}
-		}
-	}
+	initializeDirectory(IMPLEMENT_DIR);
 }
 
 //Alle Exceptions Klassen includieren
 if(defined('EXCEPTION_DIR') === true && EXCEPTION_DIR != '')
 {
-	$exceptions	=	new RecursiveDirectoryIterator(EXCEPTION_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new RecursiveIteratorIterator($exceptions, RecursiveIteratorIterator::SELF_FIRST);
-
-	if(iterator_count($iterator) > 0)
-	{
-		foreach($iterator as $file)
-		{
-			if($file->isFile() && $file->getFilename() != '.htaccess')
-			{
-				require_once $file->__toString();
-			}
-		}
-	}
+	initializeDirectory(EXCEPTION_DIR);
 }
 
 require 'initiator.abstract.class.php';
