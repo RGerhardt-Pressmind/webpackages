@@ -40,7 +40,6 @@ use package\system\core\initiator;
  * @method static string truncate(string $string, int $limit, $suffix = '...')
  * @method static string word_censor(string $str, array $censored, $replacement = '')
  * @method static mixed|string highlight_code(string $str)
- * @method static mixed|string highlight_phrase(string $str, string $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
  * @method static string random_string($type = 'normal', $length = 10)
  * @method static string reduce_double_slashes(string $str)
  * @method static string strip_quotes(string $str)
@@ -168,31 +167,6 @@ class text extends initiator implements IStatic
 		$str = preg_replace('/<span style="color: #[A-Z0-9]+"\><\/span>/i', '', $str);
 
 		$str = str_replace(array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), array('&lt;?', '?&gt;', '&lt;%', '%&gt;', '\\', '&lt;/script&gt;'), $str);
-
-		return $str;
-	}
-
-	/**
-	 * Highlitet einen bestimmten Textausschnitt
-	 *
-	 * @param        $str
-	 * @param        $phrase
-	 * @param string $tag_open
-	 * @param string $tag_close
-	 *
-	 * @return mixed|string
-	 */
-	protected static function _highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
-	{
-		if(empty($str) === true)
-		{
-			return '';
-		}
-
-		if(empty($phrase) === false)
-		{
-			return preg_replace('/('.preg_quote($phrase, '/').')/i', $tag_open."\\1".$tag_close, $str);
-		}
 
 		return $str;
 	}

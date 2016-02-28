@@ -3,7 +3,7 @@
 		<div class="item active">
 			<div class="container">
 				<div class="carousel-content">
-					<h1><?php echo \package\core\language::translate('Kostenloses PHP Framework'); ?></h1>
+					<h1><?php echo \package\core\language::translate('PHP Framework'); ?></h1>
 					<p class="lead"><?php echo \package\core\language::translate('webpackages ist das beste und schnellste PHP Framework<br> das man zum erstellen von neuen PHP Projekten verwenden kann'); ?></p>
 				</div>
 			</div>
