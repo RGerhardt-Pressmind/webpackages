@@ -59,7 +59,7 @@ class zipTest extends \PHPUnit_Framework_TestCase
 
 	public function testExtractZipArchive()
 	{
-		$this->assertTrue($this->zip->extractZipArchive(CACHE_PATH.'UnitTest.zip', CACHE_PATH, true));
+		$this->assertTrue($this->zip->extractZipArchive(CACHE_PATH.'UnitTest.zip', CACHE_PATH, true, 'SecretPassword'));
 		$this->assertFileNotExists(CACHE_PATH.'UnitTest.zip');
 
 		autoload::get('FileSystem', '\package\core\\', true);

@@ -36,8 +36,10 @@ use package\system\core\initiator;
  * Mit der zip Klasse kann man ein ZIP-Archiv erstellen oder auslesen.
  *
  * @method bool createZipArchive(string $folder, string $destination, string $zipName)
- * @method bool addFileToZipArchive(string $rootFolder, string $file, string $zipArchive)
- * @method bool extractZipArchive(string $zipArchive, string $destinationFolder, $removeZipArchiveAfterExtract = false)
+ * @method bool removeFileFromZipArchive(string $file, string $zipArchive, string $zipArchivePassword = null)
+ * @method bool renameFileInZipArchive(string $oldName, string $newName, string $zipArchive, string $zipArchivePassword = null)
+ * @method bool addFileToZipArchive(string $rootFolder, string $file, string $zipArchive, string $zipArchivePassword = null)
+ * @method bool extractZipArchive(string $zipArchive, string $destinationFolder, $removeZipArchiveAfterExtract = false, string $zipArchivePassword = null)
  *
  * @package        Webpackages
  * @subpackage     core
@@ -119,16 +121,113 @@ class zip extends initiator
 	}
 
 	/**
+	 * Entfernt eine Datei aus einem ZIP-Archiv
+	 *
+	 * @param string $file Der relative Pfad zur Datei / Ordner im Zip Archiv
+	 * @param string $zipArchive Der Pfad zum Zip Archiv
+	 * @param string $zipArchivePassword Das Paswwort für das Zip Archiv, wenn vorhanden
+	 * @since v2.1.0
+	 *
+	 * @return bool
+	 * @throws zipException
+	 */
+	protected function _removeFileFromZipArchive($file, $zipArchive, $zipArchivePassword = null)
+	{
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new zipException('Error: SplFileInfo class not exists');
+		}
+
+		$zipArchive	=	new \SplFileInfo(str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive));
+
+		if(file_exists($zipArchive) === false)
+		{
+			throw new zipException('Error: Zip archive not exists');
+		}
+
+		$zip		=	new \ZipArchive();
+		$removeFile	=	false;
+
+		if($zip->open($zipArchive->__toString()) === true)
+		{
+			if($zipArchivePassword != null)
+			{
+				if($zip->setPassword($zipArchivePassword) === false)
+				{
+					$zip->close();
+					throw new zipException('Error: zip archive password is wrong');
+				}
+			}
+
+			$removeFile	=	$zip->deleteName($file);
+
+			$zip->close();
+		}
+
+		return $removeFile;
+	}
+
+	/**
+	 * Benennt eine Datei oder Ordner in einem Zip Archiv um
+	 *
+	 * @param string $oldName Der alte Name der Datei oder Ordner
+	 * @param string $newName Der neue Name der Datei oder Ordner
+	 * @param string $zipArchive Der absolute Pfad zum Zip Archiv
+	 * @param string $zipArchivePassword Das Passwort für das Zip Archiv, wenn vorhanden
+	 * @since v2.1.0
+	 *
+	 * @return bool
+	 * @throws zipException
+	 */
+	protected function _renameFileInZipArchive($oldName, $newName, $zipArchive, $zipArchivePassword = null)
+	{
+		if(class_exists('\SplFileInfo') === false)
+		{
+			throw new zipException('Error: SplFileInfo class not exists');
+		}
+
+		$zipArchive = new \SplFileInfo(str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive));
+
+		if(file_exists($zipArchive) === false)
+		{
+			throw new zipException('Error: Zip archive not exists');
+		}
+
+		$zip	=	new \ZipArchive();
+		$rename	=	false;
+
+		if($zip->open($zipArchive->__toString()) === true)
+		{
+			if($zipArchivePassword != null)
+			{
+				if($zip->setPassword($zipArchivePassword) === false)
+				{
+					$zip->close();
+					throw new zipException('Error: zip archive password is wrong');
+				}
+			}
+
+			$rename	=	$zip->renameName($oldName, $newName);
+
+			$zip->close();
+		}
+
+		return $rename;
+	}
+
+
+	/**
 	 * Fügt eine Datei in das ZipArchive hinzu
 	 *
 	 * @param string $rootFolder Das Root Verzeichnis des Webservers
 	 * @param string $file       Die Datei die dem Zip Archiv hinzugefügt werden soll
 	 * @param string $zipArchive Der Pfad zum Zip Archiv
+	 * @param string $zipArchivePassword Das Passwort für das Zip Archiv, wenn eins gesetzt
 	 *
 	 * @return bool
 	 * @throws zipException
 	 */
-	protected function _addFileToZipArchive($rootFolder, $file, $zipArchive)
+	protected function _addFileToZipArchive($rootFolder, $file, $zipArchive, $zipArchivePassword = null)
 	{
 		if(class_exists('\SplFileInfo') === false)
 		{
@@ -149,13 +248,22 @@ class zip extends initiator
 		}
 		elseif(file_exists($zipArchive) === false)
 		{
-			throw new zipException('Error: zipArchive '.$zipArchive->__toString().' not exists');
+			throw new zipException('Error: zip archive '.$zipArchive->__toString().' not exists');
 		}
 
 		$zip = new \ZipArchive();
 
 		if($zip->open($zipArchive->__toString()) === true)
 		{
+			if($zipArchivePassword != null)
+			{
+				if($zip->setPassword($zipArchivePassword) === false)
+				{
+					$zip->close();
+					throw new zipException('Error: zip archive password is wrong');
+				}
+			}
+
 			if($zip->addFile($file->__toString(), str_replace($rootFolder->__toString(), '', $file->__toString())) === false)
 			{
 				$zip->close();
@@ -164,11 +272,8 @@ class zip extends initiator
 		}
 		else
 		{
-			$zip->close();
-			throw new zipException('Error: zipArchive can not be open');
+			throw new zipException('Error: zip archive can not be open');
 		}
-
-		$zip->close();
 
 		return true;
 	}
@@ -180,11 +285,12 @@ class zip extends initiator
 	 * @param string $destinationFolder            Der Zielordner wo das Zip Archiv entpackt werden soll
 	 * @param bool   $removeZipArchiveAfterExtract Löschen nach erfolgreichem entpacken des Zip Archivs (true => Ja Zip
 	 *                                             Archiv löschen, Nein => Zip Archiv bestehen lassen)
+	 * @param string $zipArchivePassword		   Das Passwort für das Zip Archiv, wenn eins gesetzt (v2.1.0)
 	 *
 	 * @return bool
 	 * @throws zipException
 	 */
-	protected function _extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false)
+	protected function _extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false, $zipArchivePassword = null)
 	{
 		if(class_exists('\SplFileInfo') === false)
 		{
@@ -211,6 +317,15 @@ class zip extends initiator
 
 		if($zip->open($zipArchive->__toString()) === true)
 		{
+			if($zipArchivePassword != null)
+			{
+				if($zip->setPassword($zipArchivePassword) === false)
+				{
+					$zip->close();
+					throw new zipException('Error: zip archive password is wrong');
+				}
+			}
+
 			if($zip->extractTo($destinationFolder->__toString()) === false)
 			{
 				$zip->close();

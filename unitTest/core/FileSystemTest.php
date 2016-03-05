@@ -48,7 +48,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAllFiles()
 	{
-		$this->assertEquals('e3a30dc8ec6a85b82a8b8fbdb00ef09f', md5(serialize(FileSystem::get_all_files(PLUGIN_DIR,\RecursiveIteratorIterator::SELF_FIRST))));
+		$this->assertEquals('2bc091963bdce24bd5f8dd39d2842510', md5(serialize(FileSystem::get_all_files(PLUGIN_DIR,\RecursiveIteratorIterator::SELF_FIRST))));
 	}
 
 

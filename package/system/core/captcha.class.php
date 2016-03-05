@@ -38,7 +38,9 @@ use package\system\core\initiator;
  * vorgesehenes Feld eintippen. Nachdem das Formular abgesendet wurde, können Sie die Eingabe des Benutzer mit den
  * Daten, die die Klasse Captcha zurückliefert vergleichen.
  *
- * @method static array create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
+ * @method static array create_better_captcha(string $savePath, int $imageWidth = 200, int $imageHeight = 50, string $allowedLettersType = 'alpha', string $imageType = 'png', array $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), int $linesInCaptcha = 3, array $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), int $pointsInCaptcha = 1000, array $pointsInCaptchaColor= array('r' => 0, 'g' => 0, 'b' => 255))
+ * @method static array create_captcha($img_path = '', $img_url = '', $font_path = '', $imgWidth = 150, $imgHeight = 30)
+ *
  * @package        Webpackages
  * @subpackage     controllers
  * @category       Captcha
@@ -47,19 +49,158 @@ use package\system\core\initiator;
 class captcha extends initiator
 {
 	/**
+	 * Erstellt ein zufälliges Captcha Bild
+	 *
+	 * @param string $savePath Der Speicherort des Captchas
+	 * @param int $imageWidth Die Breite des Captcha Bildes
+	 * @param int $imageHeight Die Höhe des Captcha Bildes
+	 * @param string $allowedLettersType Erlaubt sind alnum, numeric, nozero und alpha
+	 * @param string $imageType Der Bildtype der erstellt werden soll. Erlaubt sind png, jpg oder gif
+	 * @param array $backgroundColor Der RGB Farben des Hintergrunds des Captcha Bildes
+	 * @param int $linesInCaptcha Die Anzahl der Linien die durch das Bild gehen sollen
+	 * @param array $linesInCaptchaColor Die RGB Farben der Linien
+	 * @param int $pointsInCaptcha Die Anzahl an Punkten die wilkürlich im Captcha platziert werden
+	 * @param array $pointsInCaptchaColor Die RGB Farben der Punkte
+	 *
+	 * @return array
+	 * @throws captchaException
+	 */
+	public static function _create_better_captcha($savePath = CACHE_PATH, $imageWidth = 200, $imageHeight = 50, $allowedLettersType = 'alpha', $imageType = 'png', $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), $linesInCaptcha = 3, $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), $pointsInCaptcha = 1000, $pointsInCaptchaColor= array('r' => 0, 'g' => 0, 'b' => 255))
+	{
+		if(extension_loaded('gd') === false)
+		{
+			throw new captchaException('Error: gd lib is not installed');
+		}
+
+		$image 			  = imagecreatetruecolor($imageWidth, $imageHeight);
+
+		if($image === false)
+		{
+			throw new captchaException("Cannot Initialize new GD image stream");
+		}
+
+		if(isset($linesInCaptchaColor['r']) === false || isset($linesInCaptchaColor['g']) === false || isset($linesInCaptchaColor['b']) === false)
+		{
+			throw new captchaException('Error: lines in captcha color is not valid. (array("r" => 0, "g" => 0, "b" => 0))');
+		}
+
+		if(isset($pointsInCaptchaColor['r']) === false || isset($pointsInCaptchaColor['g']) === false || isset($pointsInCaptchaColor['b']) === false)
+		{
+			throw new captchaException('Error: points in captcha color is not valid. (array("r" => 0, "g" => 0, "b" => 0))');
+		}
+
+		if(isset($backgroundColor['r']) === false || isset($backgroundColor['g']) === false || isset($backgroundColor['b']) === false)
+		{
+			throw new captchaException('Error background color is not valid. (array("r" => 0, "g" => 0, "b" => 0))');
+		}
+
+		$background_color = imagecolorallocate($image, $backgroundColor['r'], $backgroundColor['g'], $backgroundColor['b']);
+		$line_color       = imagecolorallocate($image, $linesInCaptchaColor['r'], $linesInCaptchaColor['g'], $linesInCaptchaColor['b']);
+		$pixel_color      = imagecolorallocate($image, $pointsInCaptchaColor['r'], $pointsInCaptchaColor['g'], $pointsInCaptchaColor['b']);
+		imagefilledrectangle($image, 0, 0, $imageWidth, $imageHeight, $background_color);
+
+		for($i = -1; ++$i < $linesInCaptcha;)
+		{
+			imageline($image, 0, rand() % $imageHeight, $imageWidth, rand() % $imageHeight, $line_color);
+		}
+
+		for($i = -1; ++$i < $pointsInCaptcha;)
+		{
+			imagesetpixel($image, rand() % $imageWidth, rand() % $imageHeight, $pixel_color);
+		}
+
+		$allowedLettersType	=	strtolower($allowedLettersType);
+
+		$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+		if($allowedLettersType == 'alnum')
+		{
+			$letters	=	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		}
+		elseif($allowedLettersType == 'numeric')
+		{
+			$letters	=	'0123456789';
+		}
+		elseif($allowedLettersType == 'nozero')
+		{
+			$letters	=	'123456789';
+		}
+
+		$len        = strlen($letters);
+		$text_color = imagecolorallocate($image, 0, 0, 0);
+		$word       = '';
+
+		$factorWidth	=	($imageWidth / 200) * 30;
+		$factorHeight	=	($imageHeight / 50) * 20;
+		$beginFactor	=	($imageWidth / 200) * 15;
+
+		for($i = -1; ++$i < 6;)
+		{
+			$letter = $letters[rand(0, $len - 1)];
+			imagestring($image, 7, $beginFactor + ($i * $factorWidth), $factorHeight, $letter, $text_color);
+			$word .= $letter;
+		}
+
+		$imgPath	=	$savePath;
+
+		if(file_exists($imgPath) === false)
+		{
+			mkdir($imgPath, 0755, true);
+		}
+
+		$imageName	=	md5(uniqid(mt_rand(), true));
+		$imgPath	.=	$imageName;
+
+		$imageType	=	strtolower($imageType);
+
+		if($imageType == 'png')
+		{
+			$imgPath	.=	'.png';
+
+			imagepng($image, $imgPath);
+		}
+		elseif($imageType == 'jpg' || $imageType == 'jpeg')
+		{
+			$imgPath	.=	'.jpg';
+
+			imagejpeg($image, $imgPath);
+		}
+		elseif($imageType == 'gif')
+		{
+			$imgPath	.=	'.gif';
+
+			imagegif($image, $imgPath);
+		}
+		else
+		{
+			imagedestroy($image);
+			throw new captchaException('Error: image type not allowed: '.$imageType);
+		}
+
+		imagedestroy($image);
+
+		return array(
+			'word'			=>	$word,
+			'name'			=>	$imageName,
+			'filepath'		=>	$imgPath
+		);
+	}
+
+	/**
 	 * Erstellt ein Captcha
 	 *
 	 * @param string $img_path  Der Ordner wo das Captcha abgelegt wird
 	 * @param string $img_url   Der HTTP Pfad zum abgelegten Captcha
 	 * @param string $font_path Eine Schriftart mit der das Captcha erstellt werden soll
-	 * @param int    $fontSize  Die Schriftgröße der Schriftart in Pixel
 	 * @param int    $imgWidth  Die Breite des Captchas in Pixeln
 	 * @param int    $imgHeight Die Höhe des Captchas in Pixeln
+	 *
+	 * @deprecated
 	 *
 	 * @return array Gibt das fertige Captcha zurück
 	 * @throws captchaException Bei leeren Parametern oder im Fehlerfall
 	 */
-	protected static function _create_captcha($img_path = '', $img_url = '', $font_path = '', $fontSize = 5, $imgWidth = 150, $imgHeight = 30)
+	protected static function _create_captcha($img_path = '', $img_url = '', $font_path = '', $imgWidth = 150, $imgHeight = 30)
 	{
 		$fontSize = 5;
 

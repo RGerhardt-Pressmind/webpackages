@@ -33,7 +33,7 @@ class NewSessionHandler implements SessionHandlerInterface
 
 	public function __construct()
 	{
-		if(PDO_USERNAME == '' || PDO_DATABASE == '')
+		if(PDO_DATABASE == '' || (PDO_USERNAME == '' && PDO_TYPE != 'sqlite' && PDO_TYPE != 'sqlite2'))
 		{
 			throw new Exception('Error: Database connection');
 		}

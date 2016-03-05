@@ -38,7 +38,7 @@ class captchaTest extends \PHPUnit_Framework_TestCase
 	{
 		autoload::get('captcha', '\package\core\\', true);
 
-		$back	=	captcha::create_captcha(CACHE_PATH, HTTP.'cache/', '', 40, 150, 30);
+		$back	=	captcha::create_better_captcha(CACHE_PATH, 300, 60);
 
 		$this->assertTrue(!empty($back['filepath']));
 

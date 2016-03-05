@@ -173,7 +173,7 @@ class database extends \PDO
 			$driver = $para['driver'];
 		}
 
-		if(empty($dsn) === true || empty($username) === true)
+		if(empty($dsn) === true || (empty($username) === true && $para['driver'] != 'sqlite' && $para['driver'] != 'sqlite2'))
 		{
 			return;
 		}

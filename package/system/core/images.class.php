@@ -36,6 +36,8 @@ use package\system\core\initiator;
  *
  * Durch die images Klasse kann man Bilder auf ein bestimmtest Format zuschneiden.
  *
+ * @method static int|bool getImageHeight(string $image)
+ * @method static int|bool getImageWidth(string $image)
  * @method static bool createCroppedThumbnail(string $source, float $width, float $height, string $savePath, float $clipping_x = 0, float $clipping_y = 0, float $clipping_width = 0, float $clipping_height = 0, int $quality = 100)
  *
  * @package        Webpackages
@@ -45,9 +47,78 @@ use package\system\core\initiator;
  */
 class images extends initiator implements IStatic
 {
+	private static $image, $image_type;
+
 	public static function init()
 	{
 	}
+
+	/**
+	 * Lädt die Bildressource rein
+	 *
+	 * @param string $img
+	 */
+	private static function loadImage($img)
+	{
+		$image_info       = getimagesize($img);
+		self::$image_type = $image_info[2];
+
+		if(self::$image_type == IMAGETYPE_JPEG)
+		{
+			self::$image = imagecreatefromjpeg($img);
+		}
+		elseif(self::$image_type == IMAGETYPE_GIF)
+		{
+			self::$image = imagecreatefromgif($img);
+		}
+		elseif(self::$image_type == IMAGETYPE_PNG)
+		{
+			self::$image = imagecreatefrompng($img);
+		}
+		else
+		{
+			self::$image	=	null;
+		}
+	}
+
+	/**
+	 * Gibt die Höhe eines Bildes zurück
+	 *
+	 * @param string $image
+	 *
+	 * @return int|bool
+	 */
+	protected static function _getImageHeight($image)
+	{
+		if(function_exists('imagesy') === false)
+		{
+			return false;
+		}
+
+		self::loadImage($image);
+
+		return imagesy(self::$image);
+	}
+
+	/**
+	 * Gibt die Breite eines Bildes zurück
+	 *
+	 * @param $image
+	 *
+	 * @return int|bool
+	 */
+	protected static function _getImageWidth($image)
+	{
+		if(function_exists('imagesx') === false)
+		{
+			return false;
+		}
+
+		self::loadImage($image);
+
+		return imagesx(self::$image);
+	}
+
 
 	/**
 	 * Erstellt ein Thumbnail eines Bildes, mit Bildausschnitt
