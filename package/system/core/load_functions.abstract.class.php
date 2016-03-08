@@ -526,7 +526,7 @@ abstract class load_functions
 	 */
 	protected function load_dynamic_classes($loadFiles = array())
 	{
-		if(DYNAMIC_DIR != '')
+		if(DYNAMIC_DIR == '')
 		{
 			return array();
 		}
