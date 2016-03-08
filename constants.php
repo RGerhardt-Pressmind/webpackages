@@ -144,7 +144,7 @@ define('USE_MOD_REWRITE', true);
 /**
  * Standard Klasse beim Aufruf der Index
  */
-define('DEFAULT_CLASS',	'welcome');
+define('DEFAULT_CLASS', 'welcome');
 
 /**
  * Standard Methode beim Aufruf der Index
@@ -202,7 +202,7 @@ define('LANGUAGE_PATH', SYSTEM_PATH.'languages'.SEP);
 /**
  * Pfad zum Dynamischen Klassen Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
-define('DYNAMIC_DIR', SYSTEM_PATH.'models'.SEP);
+define('DYNAMIC_DIR', PACKAGE_DIR.'models'.SEP);
 
 /**
  * Pfad zum Controler Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)

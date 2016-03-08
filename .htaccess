@@ -1,3 +1,7 @@
+#USER_CONTENT_BEGIN
+
+#USER_CONTENT_END
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
@@ -220,7 +224,3 @@
 # | Zeichensatz setzen
 # ----------------------------------------------------------------------
 AddDefaultCharset UTF-8
-
-#USER_CONTENT_BEGIN
-
-#USER_CONTENT_END

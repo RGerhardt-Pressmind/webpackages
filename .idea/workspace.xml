@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/update.php" afterPath="$PROJECT_DIR$/update.php" />
     </list>
     <ignored path="webpackage.iws" />
@@ -38,7 +40,28 @@
     <favorites_list name="webpackage" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/constants.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-23.208334">
+              <caret line="207" column="51" selection-start-line="207" selection-start-column="51" selection-end-line="207" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -87,7 +110,6 @@
         <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/backend.class.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" />
-        <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/bootstrap/config.ini" />
         <option value="$PROJECT_DIR$/package/system/plugins/bootstrap/bootstrap.master.class.php" />
@@ -110,8 +132,9 @@
         <option value="$PROJECT_DIR$/package/system/core/version.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/captcha.class.php" />
         <option value="$PROJECT_DIR$/unitTest/core/captchaTest.php" />
-        <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/update.php" />
+        <option value="$PROJECT_DIR$/constants.php" />
+        <option value="$PROJECT_DIR$/.htaccess" />
       </list>
     </option>
   </component>
@@ -187,7 +210,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -208,6 +230,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -240,19 +263,19 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/package" />
-      <recent name="$PROJECT_DIR$/package/core" />
-      <recent name="$PROJECT_DIR$/package/implement" />
-      <recent name="$PROJECT_DIR$/testSuite/images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/package/system/plugins" />
       <recent name="$PROJECT_DIR$/package/system/plugins/testPlugin/commandLinePlugin" />
       <recent name="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES" />
       <recent name="$PROJECT_DIR$/package/system/languages/fr_FR/LC_MESSAGES" />
       <recent name="$PROJECT_DIR$/package/system/languages/en_US/LC_MESSAGES" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/package" />
+      <recent name="$PROJECT_DIR$/package/core" />
+      <recent name="$PROJECT_DIR$/package/implement" />
+      <recent name="$PROJECT_DIR$/testSuite/images" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.UnitTests">
@@ -339,12 +362,6 @@
       <created>1428613698586</created>
       <option name="number" value="Default" />
       <updated>1428613698586</updated>
-    </task>
-    <task id="LOCAL-00019" summary="0.4.6 / 27.04.2015&#10;==================&#10;* Fix PDO Options&#10;* Fix Session and Cookie isset&#10;&#10;&#10;&#10;">
-      <created>1430150097202</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1430150097202</updated>
     </task>
     <task id="LOCAL-00020" summary="0.4.7 / 27.04.2015&#10;==================&#10;* Add Browser Class&#10;* Fix Unix get locale&#10;&#10;&#10;">
       <created>1430157035664</created>
@@ -634,13 +651,16 @@
       <option name="project" value="LOCAL" />
       <updated>1457165866108</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="- change update.php">
+      <created>1457456155701</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1457456155702</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UnitTests - 2016.03.04 at 17h 06m 23s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="UnitTests - 2016.03.04 at 17h 06m 36s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -668,18 +688,22 @@
     <history-entry file="UnitTests - 2016.03.04 at 17h 21m 30s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="UnitTests - 2016.03.08 at 18h 16m 14s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25286534" sideWeight="0.601023" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2636103" sideWeight="0.58056265" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599232" sideWeight="0.5057307" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32097188" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25286534" sideWeight="0.39897698" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2636103" sideWeight="0.41943735" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -690,7 +714,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32097188" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27272728" sideWeight="0.49426934" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32522407" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -713,7 +736,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="0.5.0 / 28.09.2015&#10;==================&#10;* Fix XML class" />
     <MESSAGE value="0.6.0 / 08.10.2015&#10;==================&#10;* Performance fix at all files&#10;* Fix curl get data post fields&#10;* Add createException method in error class&#10;* Change FTP class, more controls in system functions&#10;* Fix number getDiffValue function get seconds &#10;* Change template class, mor controls in system functions&#10;* Fix zip class readFiles function&#10;" />
     <MESSAGE value="0.7.0 / 12.12.2015&#10;==================&#10;* PHP 7 Supported&#10;* Remove deprecated pclzip.lib.php&#10;* Renamed error.class.php to errors.class.php (PHP 7)&#10;* Add Class mod_rewrite for valid urls&#10;* Change zip.class.php content to ZipArchive PHP Class&#10;* Minor bugfixes" />
     <MESSAGE value="0.7.1 / 12.12.2015&#10;==================&#10;* Bugfixes by mod_rewrite&#10;" />
@@ -738,7 +760,8 @@
     <MESSAGE value="- change plugin system&#10;- add plugins CommandLine and GoogleImageSearch" />
     <MESSAGE value="- bugfixes" />
     <MESSAGE value="- add new captcha methode&#10;- bugfix sqlite database connection&#10;- add getImageHeight &amp; getImageWidth methode in images class&#10;- add removeFileFromZipArchive &amp; renameFileInZipArchive methode in zip class&#10;- add update.php file for actually webpackages framework" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add new captcha methode&#10;- bugfix sqlite database connection&#10;- add getImageHeight &amp; getImageWidth methode in images class&#10;- add removeFileFromZipArchive &amp; renameFileInZipArchive methode in zip class&#10;- add update.php file for actually webpackages framework" />
+    <MESSAGE value="- change update.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="- change update.php" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -747,13 +770,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package/system/implement/IPlugin.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.88873625">
-          <caret line="51" column="29" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/412E2EC5-71C4-405B-9A66-A8F36E54B7B2/CommandLine.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9478022">
@@ -814,6 +830,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.88873625">
           <caret line="1191" column="9" selection-start-line="1191" selection-start-column="9" selection-end-line="1191" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -856,7 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33516484">
           <caret line="155" column="9" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -885,13 +901,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6090535">
           <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.1434264">
-          <caret line="205" column="22" selection-start-line="205" selection-start-column="22" selection-end-line="205" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1077,21 +1086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4629121">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8434067">
-          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/version.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48076922">
@@ -1099,10 +1093,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/todo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49867022">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12637363">
+          <caret line="29" column="55" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.208334">
+          <caret line="207" column="51" selection-start-line="207" selection-start-column="51" selection-end-line="207" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.01992032">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/update.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44368133">
-          <caret line="171" column="33" selection-start-line="171" selection-start-column="33" selection-end-line="171" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

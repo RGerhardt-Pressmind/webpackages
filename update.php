@@ -135,6 +135,15 @@ if(isset($_POST['update']) === true)
 
 					file_put_contents(INSTALL_DIR.'constants.php', $newConstants);
 
+					$newHtaccess	=	file_get_contents(INSTALL_DIR.'.htaccess');
+					$oldHtaccess	=	file_get_contents(ROOT.'.htaccess');
+
+					preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $oldHtaccess, $userHtaccess);
+
+					$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.$userHtaccess[2].'#USER_CONTENT_END', $newHtaccess);
+
+					file_put_contents(INSTALL_DIR.'.htaccess', $newHtaccess);
+
 					removeInitialFiles();
 					copyFileToRoot();
 
