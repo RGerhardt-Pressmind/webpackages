@@ -54,7 +54,7 @@ class version extends initiator implements IStatic
 	/**
 	 * Versionsnummer
 	 */
-	const VERSION = '2.1.1';
+	const VERSION = '2.1.2';
 
 	/**
 	 * Kontrolliert den übergebenen Wert mit der installierten PHP Version.
