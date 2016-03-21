@@ -141,7 +141,9 @@ if(isset($_POST['update']) === true)
 
 					preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $oldHtaccess, $userHtaccess);
 
-					$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.$userHtaccess[2].'#USER_CONTENT_END', $newHtaccess);
+					$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.str_replace(array('$'), array('||||'), $userHtaccess[2]).'#USER_CONTENT_END', $newHtaccess);
+
+					$newHtaccess	=	str_replace(array('||||'), array('$'), $newHtaccess);
 
 					file_put_contents(INSTALL_DIR.'.htaccess', $newHtaccess);
 
