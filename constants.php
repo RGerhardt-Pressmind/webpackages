@@ -200,6 +200,11 @@ define('CACHE_PATH', SYSTEM_PATH.'cache'.SEP);
 define('LANGUAGE_PATH', SYSTEM_PATH.'languages'.SEP);
 
 /**
+ * Wenn ein Template Sprachdateien mitliefert, sollen diese vorrangig verwendet werden
+ */
+define('USE_TEMPLATE_LANGUAGE_PATH',	true);
+
+/**
  * Pfad zum Dynamischen Klassen Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
 define('DYNAMIC_DIR', PACKAGE_DIR.'models'.SEP);

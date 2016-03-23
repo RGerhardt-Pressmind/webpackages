@@ -45,6 +45,7 @@ use package\system\core\initiator;
  * @method void setTemplateDir(string $dir)
  * @method void setData(array $datas)
  * @method string getTemplatePath()
+ * @method static string getPublicTemplatePath()
  * @method void displayPlugin(string $template, $cacheActive = false, $cacheExpiresTime = 0)
  * @method void display(string $template, string $header = null, string $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
  * @method mixed load_template_file(string $file, string $type, string $dir = '', $minify = true)
@@ -56,7 +57,8 @@ use package\system\core\initiator;
  */
 class template extends initiator
 {
-	protected $contentData = array(), $caching = false, $gzip = true, $tempDir, $header, $footer, $skin;
+	protected $contentData = array(), $caching = false, $gzip = true, $header, $footer;
+	protected static $tempDir, $skin;
 
 	/**
 	 * Setzt die Standard Werte
@@ -65,10 +67,22 @@ class template extends initiator
 	 */
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->setTemplateDir(TEMPLATE_DIR);
 		$this->setHeaderFile(TEMPLATE_HEADER);
 		$this->setFooterFile(TEMPLATE_FOOTER);
 		$this->setSkin(TEMPLATE_DEFAULT_SKIN);
+
+		if(USE_TEMPLATE_LANGUAGE_PATH === true && class_exists('\package\core\language') === true)
+		{
+			$templatePath	=	self::getPublicTemplatePath().'languages'.SEP;
+
+			if(file_exists($templatePath) === true)
+			{
+				language::set_language_path($templatePath);
+			}
+		}
 	}
 
 	/**
@@ -76,10 +90,10 @@ class template extends initiator
 	 */
 	public function __destruct()
 	{
-		$this->tempDir = null;
+		self::$tempDir = null;
 		$this->header  = null;
 		$this->footer  = null;
-		$this->skin    = null;
+		self::$skin    = null;
 
 		foreach($this->contentData as $key => $value)
 		{
@@ -94,7 +108,7 @@ class template extends initiator
 		unset($this->tempDir);
 		unset($this->header);
 		unset($this->footer);
-		unset($this->skin);
+		unset(self::$skin);
 	}
 
 	/**
@@ -106,7 +120,7 @@ class template extends initiator
 	 */
 	protected function _setSkin($skin)
 	{
-		$this->skin = $skin;
+		self::$skin = $skin;
 	}
 
 	/**
@@ -142,7 +156,7 @@ class template extends initiator
 	 */
 	protected function _setTemplateDir($dir)
 	{
-		$this->tempDir = $dir;
+		self::$tempDir = $dir;
 	}
 
 	/**
@@ -164,7 +178,17 @@ class template extends initiator
 	 */
 	protected function _getTemplatePath()
 	{
-		return $this->tempDir.$this->skin.SEP;
+		return self::_getPublicTemplatePath();
+	}
+
+	/**
+	 * Gibt den Pfad zum Template Verzeichnis zurück. Bestehend aus Template Pfad und Skin. Dieser kann auch ausserhalb geholt werden.
+	 *
+	 * @return string
+	 */
+	protected static function _getPublicTemplatePath()
+	{
+		return self::$tempDir.self::$skin.SEP;
 	}
 
 	/**
@@ -358,6 +382,6 @@ class template extends initiator
 	 */
 	protected function _load_template_file($file, $type, $dir = '', $minify = true)
 	{
-		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.$this->skin.'&d='.$dir.'&c='.(($minify === false) ? 'false' : 'true');
+		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.self::$skin.'&d='.$dir.'&c='.(($minify === false) ? 'false' : 'true');
 	}
 } 

@@ -314,13 +314,23 @@ class language extends initiator implements IStatic
 		{
 			self::set_language_path(LANGUAGE_PATH);
 		}
+		
+		if(USE_TEMPLATE_LANGUAGE_PATH === true && class_exists('\package\core\template') === true)
+		{
+			$templatePath	=	template::getPublicTemplatePath().'languages'.SEP;
+
+			if(file_exists($templatePath) === true)
+			{
+				self::set_language_path($templatePath);
+			}
+		}
 
 		if(DEFAULT_LANGUAGE != '')
 		{
 			self::set_default_language(DEFAULT_LANGUAGE);
 		}
 
-		self::_load_lang(true);
+		self::_load_lang();
 	}
 
 	/**
@@ -333,7 +343,7 @@ class language extends initiator implements IStatic
 	protected static function _set_language($lng)
 	{
 		self::$userLng = $lng;
-		self::_load_lang(true);
+		self::_load_lang();
 	}
 
 	/**
