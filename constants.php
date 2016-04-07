@@ -27,7 +27,7 @@
 
 if(isset($_SERVER['HTTP_HOST']))
 {
-	$base_url = (is_https() === true ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
+	$base_url = (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 }
 else
 {
@@ -202,7 +202,7 @@ define('LANGUAGE_PATH', SYSTEM_PATH.'languages'.SEP);
 /**
  * Wenn ein Template Sprachdateien mitliefert, sollen diese vorrangig verwendet werden
  */
-define('USE_TEMPLATE_LANGUAGE_PATH',	true);
+define('USE_TEMPLATE_LANGUAGE_PATH', true);
 
 /**
  * Pfad zum Dynamischen Klassen Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
@@ -236,7 +236,7 @@ define('LIB_DIR', SYSTEM_PATH.'thirdParty'.SEP);
  */
 function is_https()
 {
-	if((empty($_SERVER['HTTPS']) === false && strtolower($_SERVER['HTTPS']) !== 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) === true && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') || (empty($_SERVER['HTTP_FRONT_END_HTTPS']) === false && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off'))
+	if((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) != 'off'))
 	{
 		return true;
 	}
@@ -250,20 +250,19 @@ function is_https()
  */
 define('MYSQL_FUNCTIONS', '/(ABS|ACOS|ADDDATE|ADDTIME|AES_DECRYPT|AES_ENCRYPT|ANY_VALUE|ASCII|ASIN|ASYMMETRIC|ATAN|AVG|BENCHMARK|BETWEEN|BIN|BIT_AND|BIT_COUNT|BIT_LENGTH|BIT_OR|BIT_XOR|CAST|CEIL|CHAR|COALESCE|COERCIBILITY|COLLATION|COMPRESS|CONCAT|CONNECTION_ID|CONV|COS|COT|COUNT|CRC32|CREATE_|CURDATE|CURRENT_|CURTIME|DATABASE|DATE_|DATE|DAY|DECODE|DEFAULT|DEGREES|ELT|ENCODE|EXP|EXTRACT|FIELD|FIND_IN_SET|FLOOR|FORMAT|FOUND_|FROM_|GET_|GREATEST|GROUP_|GTID_|HEX|HOUR|IF|IN|IS_|ISNULL|JSON_|LAST_|LCASE|LEAST|LEFT|LENGTH|LIKE|LN|LOAD_|LOCAL|LOCATE|LOG|LOWER|LPAD|LTRIM|MAKE_|MAKEDATE|MAKETIME|MASTER_POS_WAIT|MATCH|MAX|MBR|MD5|MICROSECOND|MID|MIN|MLine|MOD|MONTH|MPointFrom|MPolyFrom|MultiLineString|MultiPoint|MultiPolygon|NAME_CONST|NOT BETWEEN|NOT IN|NOT LIKE|NOT REGEXP|NOT|NOW|NULLIF|OCT|OLD_PASSWORD|ORD|PERIOD_ADD|PERIOD_DIFF|PI|Point|Polygon|POSITION|POW|PROCEDURE ANALYSE|QUARTER|QUOTE|RADIANS|RAND|REGEXP|RELEASE_|REPEAT|REPLACE|REVERSE|RIGHT|RLIKE|ROUND|ROW_|RPAD|RPAD|RTRIM|SCHEMA|SEC_TO_TIME|SECOND|SESSION_USER|SHA|SIGN|SIN|SLEEP|SOUNDEX|SOUND_|SPACE|SQRT|ST_|STD|STDDEV|STR_TO_DATE|STRCMP|SUB|SUM|SYSDATE|SYSTEM_USER|TAN|TIME|TO_|TRIM|TRUNCATE|UCASE|UNCOMPRESS|UNHEX|UNIX|UpdateXML|UPPER|USER|UTC_|UUID|VALIDATE_PASSWORD_STRENGTH|VALUES|VAR_|VARIANCE|VERSION|WAIT_|WEEK|WEIGHT_STRING|XOR|YEAR)/');
 
-
 function backAllPaths($dir)
 {
-	$myPaths	=	array();
+	$myPaths   = array();
 	$myPaths[] = $dir;
 
 	$director = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator = new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::CHILD_FIRST);
+	$iterator = new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
 
 	if(iterator_count($iterator) > 0)
 	{
 		foreach($iterator as $item)
 		{
-			if($item->isDir() === true)
+			if($item->isDir())
 			{
 				$myPaths[] = $item->__toString();
 			}
@@ -273,11 +272,10 @@ function backAllPaths($dir)
 	return $myPaths;
 }
 
-
 function initializeDirectory($dir)
 {
-	$implements	=	new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new RecursiveIteratorIterator($implements, RecursiveIteratorIterator::CHILD_FIRST);
+	$implements = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+	$iterator   = new RecursiveIteratorIterator($implements, RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
 
 	if(iterator_count($iterator) > 0)
 	{

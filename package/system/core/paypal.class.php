@@ -100,7 +100,7 @@ class paypal extends initiator
 	{
 		$this->_errors = array();
 
-		if(empty($method) === true)
+		if(empty($method))
 		{
 			$this->_errors = array('API method is missing');
 
@@ -114,7 +114,7 @@ class paypal extends initiator
 
 		$request = http_build_query($requestParams + $params);
 
-		if($this->isDemo === true)
+		if($this->isDemo)
 		{
 			$endpoint = $this->_endPoint_sandbox;
 		}

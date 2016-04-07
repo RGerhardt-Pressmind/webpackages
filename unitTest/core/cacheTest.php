@@ -38,6 +38,7 @@ class cacheTest extends \PHPUnit_Framework_TestCase
 	{
 		autoload::get('cache', '\package\core\\', true);
 		cache::init();
+		cache::set_cache_active(true);
 	}
 
 	public function testSetTemplateElement()

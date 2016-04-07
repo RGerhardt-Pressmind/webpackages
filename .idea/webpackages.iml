@@ -6,33 +6,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP">
-        <CLASSES>
-          <root url="file://$USER_HOME$/vendor/composer" />
-          <root url="file://$USER_HOME$/vendor/matthiasmullie/minify" />
-          <root url="file://$USER_HOME$/vendor/matthiasmullie/path-converter" />
-          <root url="file://$USER_HOME$/vendor/phpdocumentor/reflection-docblock" />
-          <root url="file:///usr/local/Cellar/phpunit/5.1.0/libexec" />
-        </CLASSES>
-        <SOURCES>
-          <root url="file://$USER_HOME$/vendor/composer" />
-          <root url="file://$USER_HOME$/vendor/matthiasmullie/minify" />
-          <root url="file://$USER_HOME$/vendor/matthiasmullie/path-converter" />
-          <root url="file://$USER_HOME$/vendor/phpdocumentor/reflection-docblock" />
-          <root url="file:///usr/local/Cellar/phpunit/5.1.0/libexec" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar:///usr/local/Cellar/phpunit/5.1.0/libexec/phpunit-5.1.0.phar/" />
-        </CLASSES>
-        <SOURCES>
-          <root url="phar:///usr/local/Cellar/phpunit/5.1.0/libexec/phpunit-5.1.0.phar/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>

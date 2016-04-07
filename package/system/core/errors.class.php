@@ -134,7 +134,7 @@ class errors extends initiator
 	 */
 	protected function _create_error($errorCode, $httpVersion = '1.1')
 	{
-		if(empty($errorCode) === true || empty($this->callErrors[$errorCode]) === true)
+		if(empty($errorCode) || empty($this->callErrors[$errorCode]))
 		{
 			throw new \Exception('Error: error code '.$errorCode.' not allowed. Allowed: '.implode(',', $this->callErrors));
 		}

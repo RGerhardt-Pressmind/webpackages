@@ -56,7 +56,7 @@ class plugins implements IStatic
 	 */
 	public function __destruct()
 	{
-		if(empty(self::$definedPluginsClasses) === false)
+		if(!empty(self::$definedPluginsClasses))
 		{
 			foreach(self::$definedPluginsClasses as $k => $class)
 			{
@@ -122,13 +122,13 @@ class plugins implements IStatic
 	 */
 	public static function hookShow($position, $classes, $methode, $args = array())
 	{
-		if(empty(self::$definedPluginsClasses) === false)
+		if(!empty(self::$definedPluginsClasses))
 		{
 			$pointer = $position.'_'.$classes.'_'.$methode.'_show';
 
 			foreach(self::$definedPluginsClasses as $class)
 			{
-				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
+				if($class instanceof IPlugin && method_exists($class, $pointer))
 				{
 					call_user_func_array(array(
 						$class,
@@ -152,20 +152,20 @@ class plugins implements IStatic
 	 */
 	public static function hookCall($position, $classes, $methode, $args = array())
 	{
-		if(empty(self::$definedPluginsClasses) === false)
+		if(!empty(self::$definedPluginsClasses))
 		{
 			$pointer = $position.'_'.$classes.'_'.$methode.'_call';
 
 			foreach(self::$definedPluginsClasses as $class)
 			{
-				if($class instanceof IPlugin && method_exists($class, $pointer) === true)
+				if($class instanceof IPlugin && method_exists($class, $pointer))
 				{
 					$plugin = call_user_func_array(array(
 						$class,
 						$pointer
 					), $args);
 
-					if($plugin != null)
+					if($plugin)
 					{
 						return $plugin;
 					}
@@ -188,20 +188,20 @@ class plugins implements IStatic
 	 */
 	public static function hookTemplate($template, $position, $args = array())
 	{
-		if(empty(self::$definedPluginsClasses) === false)
+		if(!empty(self::$definedPluginsClasses))
 		{
 			$methode = $template.'_'.$position;
 
 			foreach(self::$definedPluginsClasses as $class)
 			{
-				if($class instanceof IPlugin && method_exists($class, $methode) === true)
+				if($class instanceof IPlugin && method_exists($class, $methode))
 				{
 					$plugin = call_user_func_array(array(
 						$class,
 						$methode
 					), $args);
 
-					if($plugin != null)
+					if($plugin)
 					{
 						echo $plugin;
 					}
@@ -219,7 +219,7 @@ class plugins implements IStatic
 	{
 		$back = array();
 
-		if(empty(self::$definedPluginsClasses) === false)
+		if(!empty(self::$definedPluginsClasses))
 		{
 			foreach(self::$definedPluginsClasses as $class)
 			{

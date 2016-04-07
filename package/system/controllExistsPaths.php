@@ -31,11 +31,11 @@ foreach($controllPaths as $path)
 {
 	if($path != '')
 	{
-		if(file_exists($path) === false)
+		if(!file_exists($path))
 		{
 			$save	=	mkdir($path, 0777, true);
 
-			if($save === false)
+			if(!$save)
 			{
 				throw new Exception('Folder '.$path.' cant not created');
 			}
@@ -43,7 +43,7 @@ foreach($controllPaths as $path)
 
 		$permission	=	substr(sprintf('%o', fileperms($path)), -4);
 
-		if($permission !== '0777' && $permission !== '777')
+		if($permission != '0777' && $permission != '777')
 		{
 			@chmod($path, 0777);
 		}

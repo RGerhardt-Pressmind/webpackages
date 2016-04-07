@@ -121,7 +121,7 @@ class text extends initiator implements IStatic
 	 */
 	protected static function _word_censor($str, $censored, $replacement = '')
 	{
-		if(empty($censored) === true)
+		if(empty($censored))
 		{
 			return $str;
 		}
@@ -132,7 +132,7 @@ class text extends initiator implements IStatic
 
 		foreach($censored as $badword)
 		{
-			if(empty($replacement) === false)
+			if(!empty($replacement))
 			{
 				$str = preg_replace("/({$delim})(".str_replace('\*', '\w*?', preg_quote($badword, '/')).")({$delim})/i", "\\1{$replacement}\\3", $str);
 			}
@@ -181,15 +181,15 @@ class text extends initiator implements IStatic
 	 */
 	protected static function _random_string($type = 'normal', $length = 10)
 	{
-		if($type === 'alnum')
+		if($type == 'alnum')
 		{
 			$back = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		}
-		elseif($type === 'numeric')
+		elseif($type == 'numeric')
 		{
 			$back = '0123456789';
 		}
-		elseif($type === 'nozero')
+		elseif($type == 'nozero')
 		{
 			$back = '123456789';
 		}
@@ -197,7 +197,7 @@ class text extends initiator implements IStatic
 		{
 			$back = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		}
-		elseif($type === 'md5')
+		elseif($type == 'md5')
 		{
 			$back = md5(uniqid(mt_rand(), true));
 		}

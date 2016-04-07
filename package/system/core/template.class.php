@@ -74,11 +74,11 @@ class template extends initiator
 		$this->setFooterFile(TEMPLATE_FOOTER);
 		$this->setSkin(TEMPLATE_DEFAULT_SKIN);
 
-		if(USE_TEMPLATE_LANGUAGE_PATH === true && class_exists('\package\core\language') === true)
+		if(USE_TEMPLATE_LANGUAGE_PATH && class_exists('\package\core\language'))
 		{
 			$templatePath	=	self::getPublicTemplatePath().'languages'.SEP;
 
-			if(file_exists($templatePath) === true)
+			if(file_exists($templatePath))
 			{
 				language::set_language_path($templatePath);
 			}
@@ -205,12 +205,12 @@ class template extends initiator
 	{
 		ob_start();
 
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new templateException('Error: class SplFileInfo not exists');
 		}
 
-		if(empty($this->contentData) === false)
+		if(!empty($this->contentData))
 		{
 			foreach($this->contentData as $key => $value)
 			{
@@ -220,14 +220,14 @@ class template extends initiator
 
 		$templatePath = new \SplFileInfo($template);
 
-		if(file_exists($templatePath->__toString()) === false)
+		if(!file_exists($templatePath->__toString()))
 		{
 			throw new templateException('Error: template '.$template.' not exist');
 		}
 
-		if($cacheActive === true)
+		if($cacheActive)
 		{
-			if(class_exists('\package\cache') === false)
+			if(!class_exists('\package\cache'))
 			{
 				throw new templateException('class cache not found');
 			}
@@ -235,7 +235,7 @@ class template extends initiator
 			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData)));
 			$getTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
 
-			if($getTemplate !== false)
+			if($getTemplate != false)
 			{
 				echo $getTemplate;
 				return;
@@ -252,7 +252,7 @@ class template extends initiator
 
 				ob_end_clean();
 
-				if($setTemplateElement === false)
+				if(!$setTemplateElement)
 				{
 					throw new templateException('setTemplateElement not write');
 				}
@@ -282,12 +282,12 @@ class template extends initiator
 	{
 		ob_start();
 
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new templateException('Error: class SplFileInfo not exists');
 		}
 
-		if(empty($this->contentData) === false)
+		if(!empty($this->contentData))
 		{
 			foreach($this->contentData as $key => $value)
 			{
@@ -297,7 +297,7 @@ class template extends initiator
 
 		$templatePath = new \SplFileInfo($this->getTemplatePath().$template);
 
-		if(file_exists($templatePath->__toString()) === false)
+		if(!file_exists($templatePath->__toString()))
 		{
 			throw new templateException('Error: template '.$template.' not exist');
 		}
@@ -320,14 +320,14 @@ class template extends initiator
 			$footerPath = $templatePath->getPath().SEP.$this->footer;
 		}
 
-		if(file_exists($headerPath) === false || file_exists($footerPath) === false)
+		if(!file_exists($headerPath) || !file_exists($footerPath))
 		{
 			throw new templateException('Error: header or footer template not exist');
 		}
 
-		if($cacheActive === true)
+		if($cacheActive)
 		{
-			if(class_exists('\package\cache') === false)
+			if(!class_exists('\package\cache'))
 			{
 				throw new templateException('class cache not found');
 			}
@@ -335,7 +335,7 @@ class template extends initiator
 			$cacheName   = md5(url::getCurrentUrl().'_'.$template.'_'.md5(serialize($this->contentData)));
 			$getTemplate = cache::get_template_element($cacheName, $cacheExpiresTime);
 
-			if($getTemplate !== false)
+			if($getTemplate != false)
 			{
 				echo $getTemplate;
 				return;
@@ -354,7 +354,7 @@ class template extends initiator
 
 				ob_end_clean();
 
-				if($setTemplateElement === false)
+				if(!$setTemplateElement)
 				{
 					throw new templateException('setTemplateElement not write');
 				}
@@ -382,6 +382,6 @@ class template extends initiator
 	 */
 	protected function _load_template_file($file, $type, $dir = '', $minify = true)
 	{
-		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.self::$skin.'&d='.$dir.'&c='.(($minify === false) ? 'false' : 'true');
+		return HTTP.'getTemplateFile.php?f='.$file.'&t='.$type.'&s='.self::$skin.'&d='.$dir.'&c='.((!$minify) ? 'false' : 'true');
 	}
 } 

@@ -89,7 +89,7 @@ class ftp extends initiator
 	 */
 	protected function _connect($host, $ssl = false, $port = 21, $timeout = 90)
 	{
-		if($ssl === true)
+		if($ssl)
 		{
 			$this->_ftp = @ftp_ssl_connect($host, $port, $timeout);
 		}
@@ -98,12 +98,7 @@ class ftp extends initiator
 			$this->_ftp = @ftp_connect($host, $port, $timeout);
 		}
 
-		if(class_exists('\package\core\plugins') === true)
-		{
-			plugins::hookShow('after', 'ftp', 'connect', array($this->_ftp));
-		}
-
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -120,14 +115,14 @@ class ftp extends initiator
 	 */
 	protected function _login($username, $password)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
 		$login = @ftp_login($this->_ftp, $username, $password);
 
-		if($login === false)
+		if(!$login)
 		{
 			throw new ftpException('Error: FTP login failed');
 		}
@@ -141,12 +136,12 @@ class ftp extends initiator
 	 */
 	protected function _set_passive_modus()
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if(@ftp_pasv($this->_ftp, true) === false)
+		if(!@ftp_pasv($this->_ftp, true))
 		{
 			throw new ftpException('Error: set passive mode not work');
 		}
@@ -163,7 +158,7 @@ class ftp extends initiator
 	 */
 	protected function _get_remote_file($remoteFile, $localeFile)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -184,14 +179,14 @@ class ftp extends initiator
 	 */
 	protected function _modified_time($remoteFile, $timeFormat = null)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
 		$time = ftp_mdtm($this->_ftp, $remoteFile);
 
-		if($time !== -1 && $timeFormat !== null)
+		if($time != -1 && $timeFormat != null)
 		{
 			return date($timeFormat, $time);
 		}
@@ -207,14 +202,14 @@ class ftp extends initiator
 	 */
 	protected function _up()
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
 		$result = @ftp_cdup($this->_ftp);
 
-		if($result === false)
+		if(!$result)
 		{
 			throw new ftpException('Error: FTP Unable to get parent folder');
 		}
@@ -232,19 +227,19 @@ class ftp extends initiator
 	 */
 	protected function _is_dir($remoteDirectory = '.')
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
 		$pwd = @ftp_pwd($this->_ftp);
 
-		if($pwd === false)
+		if(!$pwd)
 		{
 			throw new ftpException('Error: Unable to resolve the current directory');
 		}
 
-		if(@ftp_chdir($this->_ftp, $remoteDirectory) === true)
+		if(@ftp_chdir($this->_ftp, $remoteDirectory))
 		{
 			@ftp_chdir($this->_ftp, $pwd);
 
@@ -270,12 +265,12 @@ class ftp extends initiator
 	 */
 	protected function _count($remoteDirectory = '.', $type = null, $recursive = true)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if($type === null)
+		if($type == null)
 		{
 			$items = $this->nlist($remoteDirectory, $recursive);
 		}
@@ -288,7 +283,7 @@ class ftp extends initiator
 
 		foreach($items as $item)
 		{
-			if($type === null || $item['type'] == $type)
+			if($type == null || $item['type'] == $type)
 			{
 				++$count;
 			}
@@ -307,21 +302,14 @@ class ftp extends initiator
 	 */
 	protected function _is_empty($remoteDirectory)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
 		$countRemoveDirectory = $this->count($remoteDirectory, null, false);
 
-		if($countRemoveDirectory === 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return ($countRemoveDirectory == 0) ? true : false;
 	}
 
 	/**
@@ -335,7 +323,7 @@ class ftp extends initiator
 	 */
 	protected function _put_from_path($local_file)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -343,7 +331,7 @@ class ftp extends initiator
 		$remote_file = basename($local_file);
 		$handle      = fopen($local_file, 'r');
 
-		if(@ftp_fput($this->_ftp, $remote_file, $handle, FTP_BINARY) === true)
+		if(@ftp_fput($this->_ftp, $remote_file, $handle, FTP_BINARY))
 		{
 			rewind($handle);
 
@@ -366,7 +354,7 @@ class ftp extends initiator
 	 */
 	protected function _put_all($source_directory, $target_directory, $mode = FTP_BINARY)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -377,13 +365,13 @@ class ftp extends initiator
 		{
 			if($file != '.' && $file != '..')
 			{
-				if(is_dir($source_directory.'/'.$file) === true)
+				if(is_dir($source_directory.'/'.$file))
 				{
-					if(@ftp_chdir($this->_ftp, $target_directory.'/'.$file) === false)
+					if(!@ftp_chdir($this->_ftp, $target_directory.'/'.$file))
 					{
 						$ftpMkdir = @ftp_mkdir($this->_ftp, $target_directory.'/'.$file);
 
-						if($ftpMkdir === false)
+						if(!$ftpMkdir)
 						{
 							return false;
 						}
@@ -395,7 +383,7 @@ class ftp extends initiator
 				{
 					$ftpPut = @ftp_put($this->_ftp, $target_directory.'/'.$file, $source_directory.'/'.$file, $mode);
 
-					if($ftpPut === false)
+					if(!$ftpPut)
 					{
 						return false;
 					}
@@ -417,7 +405,7 @@ class ftp extends initiator
 	 */
 	protected function _put_from_string($remote_file, $content)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -443,7 +431,7 @@ class ftp extends initiator
 	 */
 	protected function _dir_size($remoteDirectory = '.', $recursive = true)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -453,7 +441,7 @@ class ftp extends initiator
 
 		foreach($items as $item)
 		{
-			if(empty($item['size']) === false)
+			if(!empty($item['size']))
 			{
 				$size += (int)$item['size'];
 			}
@@ -475,19 +463,19 @@ class ftp extends initiator
 	 */
 	protected function _nlist($remoteDirectory = '.', $recursive = false, $filter = 'sort')
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if($this->is_dir($remoteDirectory) === false)
+		if(!$this->is_dir($remoteDirectory))
 		{
 			throw new ftpException('Error: remote path is not directory');
 		}
 
 		$files = @ftp_nlist($this->_ftp, $remoteDirectory);
 
-		if($files === false)
+		if(!$files)
 		{
 			throw new ftpException('Error: unable to list directory');
 		}
@@ -495,17 +483,17 @@ class ftp extends initiator
 		$result  = array();
 		$dir_len = strlen($remoteDirectory);
 
-		if(($kdot = array_search('.', $files)) !== false)
+		if(($kdot = array_search('.', $files)) != false)
 		{
 			unset($files[$kdot]);
 		}
 
-		if(($kdot = array_search('..', $files)) !== false)
+		if(($kdot = array_search('..', $files)) != false)
 		{
 			unset($files[$kdot]);
 		}
 
-		if($recursive === false)
+		if(!$recursive)
 		{
 			foreach($files as $file)
 			{
@@ -520,6 +508,7 @@ class ftp extends initiator
 		$flatten = function(array $arr) use (&$flatten)
 		{
 			$flat = array();
+
 			foreach($arr as $v)
 			{
 				if(is_array($v))
@@ -539,12 +528,12 @@ class ftp extends initiator
 		{
 			$file = $remoteDirectory.'/'.$file;
 
-			if(strpos($file, $remoteDirectory, $dir_len) === 0)
+			if(strpos($file, $remoteDirectory, $dir_len) == 0)
 			{
 				$file = substr($file, $dir_len);
 			}
 
-			if($this->is_dir($file) === true)
+			if($this->is_dir($file))
 			{
 				$result[] = $file;
 				$items    = $flatten($this->nlist($file, true, $filter));
@@ -579,16 +568,16 @@ class ftp extends initiator
 	 */
 	protected function _mkdir($remoteDirectory, $recursive = false)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if($recursive === false || $this->is_dir($remoteDirectory) === true)
+		if(!$recursive || $this->is_dir($remoteDirectory))
 		{
 			$ftpMkdir = @ftp_mkdir($this->_ftp, $remoteDirectory);
 
-			if($ftpMkdir === false)
+			if(!$ftpMkdir)
 			{
 				return false;
 			}
@@ -604,11 +593,11 @@ class ftp extends initiator
 
 		foreach($parts as $part)
 		{
-			if(@ftp_chdir($this->_ftp, $part) === false)
+			if(!@ftp_chdir($this->_ftp, $part))
 			{
 				$ftpMkdir = @ftp_mkdir($this->_ftp, $part);
 
-				if($ftpMkdir === false)
+				if(!$ftpMkdir)
 				{
 					return false;
 				}
@@ -636,12 +625,12 @@ class ftp extends initiator
 	 */
 	protected function _remove($remoteFile)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if($this->is_dir($remoteFile) === true)
+		if($this->is_dir($remoteFile))
 		{
 			return false;
 		}
@@ -660,22 +649,22 @@ class ftp extends initiator
 	 */
 	protected function _rmdir($remoteDirectory, $recursive = false)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if($recursive === true)
+		if($recursive)
 		{
 			$files = $this->nlist($remoteDirectory, false, 'rsort');
 
 			foreach($files as $file)
 			{
-				if($this->is_dir($file) === false)
+				if(!$this->is_dir($file))
 				{
 					$remove = $this->remove($file);
 
-					if($remove === false)
+					if(!$remove)
 					{
 						return false;
 					}
@@ -684,14 +673,14 @@ class ftp extends initiator
 				{
 					$rmdir = $this->rmdir($file, true);
 
-					if($rmdir === false)
+					if(!$rmdir)
 					{
 						return false;
 					}
 
 					$rmdir = @ftp_rmdir($this->_ftp, $file);
 
-					if($rmdir === false)
+					if(!$rmdir)
 					{
 						return false;
 					}
@@ -713,7 +702,7 @@ class ftp extends initiator
 	 */
 	protected function _clean_dir($remoteDirectory)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -727,7 +716,7 @@ class ftp extends initiator
 		{
 			$remove = $this->remove($file);
 
-			if($remove === false)
+			if(!$remove)
 			{
 				return false;
 			}
@@ -747,7 +736,7 @@ class ftp extends initiator
 	 */
 	protected function _scan_dir($remoteDirectory = '.', $recursive = false)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -766,12 +755,12 @@ class ftp extends initiator
 	 */
 	protected function _rawlist($remoteDirectory = '.', $recursive = false)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if($this->is_dir($remoteDirectory) === false)
+		if(!$this->is_dir($remoteDirectory))
 		{
 			throw new ftpException('Error: "'.$remoteDirectory.'" is not a directory.');
 		}
@@ -779,7 +768,7 @@ class ftp extends initiator
 		$list  = @ftp_rawlist($this->_ftp, $remoteDirectory);
 		$items = array();
 
-		if($recursive === false)
+		if(!$recursive)
 		{
 			foreach($list as $item)
 			{
@@ -831,7 +820,7 @@ class ftp extends initiator
 
 			$path = $remoteDirectory.'/'.$chunks[8];
 
-			if(isset($chunks[9]) === true)
+			if(isset($chunks[9]))
 			{
 				$nbChunks = count($chunks);
 
@@ -872,7 +861,7 @@ class ftp extends initiator
 	 */
 	protected function _parse_raw_list(array $rawlist)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
@@ -884,12 +873,12 @@ class ftp extends initiator
 		{
 			$chunks = preg_split("/\s+/", $child);
 
-			if(empty($chunks[8]) === false && ($chunks[8] == '.' || $chunks[8] == '..'))
+			if(!empty($chunks[8]) && ($chunks[8] == '.' || $chunks[8] == '..'))
 			{
 				continue;
 			}
 
-			if(count($chunks) === 1)
+			if(count($chunks) == 1)
 			{
 				$len = strlen($chunks[0]);
 
@@ -919,7 +908,7 @@ class ftp extends initiator
 				$item['target'] = $chunks[10];
 			}
 
-			if(is_int($key) || strpos($key, $item['name']) === false)
+			if(is_int($key) || strpos($key, $item['name']) == false)
 			{
 				array_splice($chunks, 0, 8);
 
@@ -952,17 +941,17 @@ class ftp extends initiator
 	 */
 	protected function _raw_to_type($permission)
 	{
-		if($this->_ftp === false)
+		if(!$this->_ftp)
 		{
 			throw new ftpException('Error: FTP not connected');
 		}
 
-		if(is_string($permission) === false)
+		if(!is_string($permission))
 		{
 			throw new ftpException('Error: the "$permission" argument must be a string, "'.gettype($permission).'" given.');
 		}
 
-		if(empty($permission[0]) === true)
+		if(empty($permission[0]))
 		{
 			return 'unknown';
 		}

@@ -60,11 +60,11 @@ class zip extends initiator
 	 */
 	protected function _createZipArchive($folder, $destination, $zipName)
 	{
-		if(file_exists($folder) === false)
+		if(!file_exists($folder))
 		{
 			throw new zipException('Error: '.$folder.' not exists');
 		}
-		elseif(class_exists('\SplFileInfo') === false)
+		elseif(!class_exists('\SplFileInfo'))
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
@@ -77,9 +77,9 @@ class zip extends initiator
 		$destination = str_replace(array('/', '\\'), array(SEP, SEP), $destination);
 		$destination = rtrim($destination, SEP).SEP;
 
-		if(file_exists($destination) === false)
+		if(!file_exists($destination))
 		{
-			if(mkdir($destination, 0777, true) === false)
+			if(!mkdir($destination, 0777, true))
 			{
 				throw new zipException('Error: '.$destination.' can not created');
 			}
@@ -87,9 +87,9 @@ class zip extends initiator
 
 		$zipFile = new \SplFileInfo($destination.$zipName.'.zip');
 
-		if(file_exists($zipFile->__toString()) === true)
+		if(file_exists($zipFile->__toString()))
 		{
-			if(unlink($zipFile->__toString()) === false)
+			if(!unlink($zipFile->__toString()))
 			{
 				throw new zipException('Error: Old zip file can not be removed');
 			}
@@ -97,7 +97,7 @@ class zip extends initiator
 
 		$zip = new \ZipArchive();
 
-		if($zip->open($zipFile->__toString(), \ZipArchive::CREATE) !== true)
+		if($zip->open($zipFile->__toString(), \ZipArchive::CREATE) != true)
 		{
 			$zip->close();
 			throw new zipException('Error: ZipArchive can not write in destination folder '.$destination);
@@ -110,7 +110,7 @@ class zip extends initiator
 		{
 			foreach($iterator as $file)
 			{
-				if($file instanceof \SplFileInfo && $file->getFilename() != '.DS_Store' && $file->isDir() === false)
+				if($file->getFilename() != '.DS_Store' && !$file->isDir())
 				{
 					$zip->addFile($file->__toString(), str_replace($folder->__toString(), '', $file->__toString()));
 				}
@@ -133,14 +133,14 @@ class zip extends initiator
 	 */
 	protected function _removeFileFromZipArchive($file, $zipArchive, $zipArchivePassword = null)
 	{
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
 
 		$zipArchive	=	new \SplFileInfo(str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive));
 
-		if(file_exists($zipArchive) === false)
+		if(!file_exists($zipArchive))
 		{
 			throw new zipException('Error: Zip archive not exists');
 		}
@@ -148,11 +148,11 @@ class zip extends initiator
 		$zip		=	new \ZipArchive();
 		$removeFile	=	false;
 
-		if($zip->open($zipArchive->__toString()) === true)
+		if($zip->open($zipArchive->__toString()) == true)
 		{
 			if($zipArchivePassword != null)
 			{
-				if($zip->setPassword($zipArchivePassword) === false)
+				if(!$zip->setPassword($zipArchivePassword))
 				{
 					$zip->close();
 					throw new zipException('Error: zip archive password is wrong');
@@ -181,14 +181,14 @@ class zip extends initiator
 	 */
 	protected function _renameFileInZipArchive($oldName, $newName, $zipArchive, $zipArchivePassword = null)
 	{
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
 
 		$zipArchive = new \SplFileInfo(str_replace(array('/', '\\'), array(SEP, SEP), $zipArchive));
 
-		if(file_exists($zipArchive) === false)
+		if(!file_exists($zipArchive))
 		{
 			throw new zipException('Error: Zip archive not exists');
 		}
@@ -196,11 +196,11 @@ class zip extends initiator
 		$zip	=	new \ZipArchive();
 		$rename	=	false;
 
-		if($zip->open($zipArchive->__toString()) === true)
+		if($zip->open($zipArchive->__toString()) == true)
 		{
 			if($zipArchivePassword != null)
 			{
-				if($zip->setPassword($zipArchivePassword) === false)
+				if(!$zip->setPassword($zipArchivePassword))
 				{
 					$zip->close();
 					throw new zipException('Error: zip archive password is wrong');
@@ -229,7 +229,7 @@ class zip extends initiator
 	 */
 	protected function _addFileToZipArchive($rootFolder, $file, $zipArchive, $zipArchivePassword = null)
 	{
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
@@ -242,29 +242,29 @@ class zip extends initiator
 		$rootFolder = new \SplFileInfo($rootFolder);
 		$zipArchive = new \SplFileInfo($zipArchive);
 
-		if(file_exists($file) === false)
+		if(!file_exists($file))
 		{
 			throw new zipException('Error: file '.$file->__toString().' not exists');
 		}
-		elseif(file_exists($zipArchive) === false)
+		elseif(!file_exists($zipArchive))
 		{
 			throw new zipException('Error: zip archive '.$zipArchive->__toString().' not exists');
 		}
 
 		$zip = new \ZipArchive();
 
-		if($zip->open($zipArchive->__toString()) === true)
+		if($zip->open($zipArchive->__toString()) == true)
 		{
 			if($zipArchivePassword != null)
 			{
-				if($zip->setPassword($zipArchivePassword) === false)
+				if(!$zip->setPassword($zipArchivePassword))
 				{
 					$zip->close();
 					throw new zipException('Error: zip archive password is wrong');
 				}
 			}
 
-			if($zip->addFile($file->__toString(), str_replace($rootFolder->__toString(), '', $file->__toString())) === false)
+			if(!$zip->addFile($file->__toString(), str_replace($rootFolder->__toString(), '', $file->__toString())))
 			{
 				$zip->close();
 				throw new zipException('Error: can not add file to zip archive');
@@ -292,7 +292,7 @@ class zip extends initiator
 	 */
 	protected function _extractZipArchive($zipArchive, $destinationFolder, $removeZipArchiveAfterExtract = false, $zipArchivePassword = null)
 	{
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new zipException('Error: SplFileInfo class not exists');
 		}
@@ -303,30 +303,30 @@ class zip extends initiator
 		$zipArchive        = new \SplFileInfo($zipArchive);
 		$destinationFolder = new \SplFileInfo($destinationFolder);
 
-		if(file_exists($zipArchive) === false)
+		if(!file_exists($zipArchive))
 		{
 			throw new zipException('Error: zip archive not exist '.$zipArchive->__toString());
 		}
 
-		if(file_exists($destinationFolder->__toString()) === false)
+		if(!file_exists($destinationFolder->__toString()))
 		{
 			mkdir($destinationFolder->__toString(), 0777, true);
 		}
 
 		$zip = new \ZipArchive();
 
-		if($zip->open($zipArchive->__toString()) === true)
+		if($zip->open($zipArchive->__toString()) == true)
 		{
 			if($zipArchivePassword != null)
 			{
-				if($zip->setPassword($zipArchivePassword) === false)
+				if(!$zip->setPassword($zipArchivePassword))
 				{
 					$zip->close();
 					throw new zipException('Error: zip archive password is wrong');
 				}
 			}
 
-			if($zip->extractTo($destinationFolder->__toString()) === false)
+			if(!$zip->extractTo($destinationFolder->__toString()))
 			{
 				$zip->close();
 				throw new zipException('Error: zip archive can not be extract');
@@ -340,9 +340,9 @@ class zip extends initiator
 			throw new zipException('Error: zip archive can not be open');
 		}
 
-		if($removeZipArchiveAfterExtract === true)
+		if($removeZipArchiveAfterExtract)
 		{
-			if(unlink($zipArchive->__toString()) === false)
+			if(!unlink($zipArchive->__toString()))
 			{
 				$zip->close();
 				throw new zipException('Error: zip archive can not be remove after extract');

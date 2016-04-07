@@ -58,12 +58,12 @@ abstract class initiator
 	 */
 	public static function __callStatic($name, $arguments)
 	{
-		if(method_exists(get_called_class(), '_'.$name) === false)
+		if(!method_exists(get_called_class(), '_'.$name))
 		{
 			throw new \Exception('Error '.get_called_class().': static methode '.$name.' not exists');
 		}
 
-		if(class_exists('\package\core\plugins') === true)
+		if(class_exists('\package\core\plugins'))
 		{
 			$plugin = plugins::hooks(plugins::BEFORE, self::getClassName(), $name, $arguments);
 
@@ -75,7 +75,7 @@ abstract class initiator
 
 		$back	=	call_user_func_array(array(get_called_class(), '_'.$name), $arguments);
 
-		if(class_exists('\package\core\plugins') === true)
+		if(class_exists('\package\core\plugins'))
 		{
 			$plugin = plugins::hooks(plugins::AFTER, self::getClassName(), $name, $back);
 
@@ -99,12 +99,12 @@ abstract class initiator
 	 */
 	public function __call($name, $arguments)
 	{
-		if(method_exists(get_called_class(), '_'.$name) === false)
+		if(!method_exists(get_called_class(), '_'.$name))
 		{
 			throw new \Exception('Error '.get_called_class().': static methode '.$name.' not exists');
 		}
 
-		if(class_exists('\package\core\plugins') === true)
+		if(class_exists('\package\core\plugins'))
 		{
 			$plugin = plugins::hooks(plugins::BEFORE, self::getClassName(), $name, $arguments);
 
@@ -116,7 +116,7 @@ abstract class initiator
 
 		$back	=	call_user_func_array(array($this, '_'.$name), $arguments);
 
-		if(class_exists('\package\core\plugins') === true)
+		if(class_exists('\package\core\plugins'))
 		{
 			$plugin = plugins::hooks(plugins::AFTER, self::getClassName(), $name, $back);
 

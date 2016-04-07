@@ -116,18 +116,19 @@ class benchmark extends initiator implements IStatic
 	 */
 	protected static function _finish()
 	{
-		if(empty(self::$startTime) === true)
+		if(empty(self::$startTime))
 		{
 			throw new benchmarkException('Error: StartTime is empty');
 		}
-		elseif(empty(self::$endTime) === true)
+
+		if(empty(self::$endTime))
 		{
 			self::end_point(true);
 		}
 
 		$diff = (self::$endTime - self::$startTime);
 
-		if(empty(self::$middleTime) === false)
+		if(!empty(self::$middleTime))
 		{
 			$diff = array(
 				'startTime' => self::$startTime,

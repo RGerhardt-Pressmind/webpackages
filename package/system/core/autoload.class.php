@@ -61,30 +61,30 @@ class autoload extends initiator
 	 */
 	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array())
 	{
-		if(empty($class_name) === true)
+		if(empty($class_name))
 		{
 			throw new autoloadException('Error: $class_name is empty');
 		}
 
 		$pathToFile = $class_name.self::CLASS_SUFFIX;
 
-		if(empty($namespace) === false)
+		if(!empty($namespace))
 		{
 			$class_name = $namespace.$class_name;
 		}
 
 		//Wenn schon eingebunden, nicht erneut laden
-		if(class_exists($class_name) === false)
+		if(!class_exists($class_name))
 		{
 			require_once $pathToFile;
 		}
 
-		if(class_exists($class_name) === false)
+		if(!class_exists($class_name))
 		{
 			throw new autoloadException('Error: class '.$class_name.' not found');
 		}
 
-		if($isStatic === false)
+		if(!$isStatic)
 		{
 			return new $class_name($parameter);
 		}

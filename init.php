@@ -27,7 +27,7 @@
 
 require 'constants.php';
 
-if(defined('ERROR_REPORTING') === true && (ERROR_REPORTING === true || ERROR_REPORTING === 1))
+if(defined('ERROR_REPORTING') && (ERROR_REPORTING == true || ERROR_REPORTING == 1))
 {
 	error_reporting(-1);
 	ini_set('display_errors', 1);
@@ -49,22 +49,22 @@ elseif(strlen(SECURITY_KEY) < 20)
 
 require SYSTEM_PATH.'controllExistsPaths.php';
 
-if(class_exists('SessionHandlerInterface') === true)
+if(class_exists('SessionHandlerInterface'))
 {
 	require SYSTEM_PATH.'loadSessionHandler.php';
 }
 
-if(class_exists('SessionHandlerInterface') === false || (defined('USE_SESSION_SAVE_HANDLER') === false || USE_SESSION_SAVE_HANDLER === false || defined('PDO_HOST') === false || PDO_HOST == ''))
+if(!class_exists('SessionHandlerInterface') || (!defined('USE_SESSION_SAVE_HANDLER') || USE_SESSION_SAVE_HANDLER == false || !defined('PDO_HOST') || PDO_HOST == ''))
 {
 	session_start();
 }
 
-if(defined('CHARSET') === true && CHARSET != '')
+if(defined('CHARSET') && CHARSET != '')
 {
 	header('Content-Type: text/html; charset='.CHARSET);
 }
 
-if(defined('TIMEZONE') === true && TIMEZONE != '')
+if(defined('TIMEZONE') && TIMEZONE != '')
 {
 	date_default_timezone_set(TIMEZONE);
 }
@@ -79,13 +79,13 @@ $myPaths[] = LIB_DIR;
 $myPaths[] = LIB_DIR.'PHPMailer';
 $myPaths[] = LIB_DIR.'minifiy';
 
-if(defined('PAGE_DIR') === true && PAGE_DIR != '')
+if(defined('PAGE_DIR') && PAGE_DIR != '')
 {
 	$myPaths	=	array_merge($myPaths, backAllPaths(PAGE_DIR));
 }
 
 //Alle Dynamischen Klassen in include_path aufnehmen
-if(defined('DYNAMIC_DIR') === true && DYNAMIC_DIR != '')
+if(defined('DYNAMIC_DIR') && DYNAMIC_DIR != '')
 {
 	$myPaths	=	array_merge($myPaths, backAllPaths(DYNAMIC_DIR));
 }
@@ -95,13 +95,13 @@ ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR
 
 
 //Alle Implements Klassen includieren
-if(defined('IMPLEMENT_DIR') === true && IMPLEMENT_DIR != '')
+if(defined('IMPLEMENT_DIR') && IMPLEMENT_DIR != '')
 {
 	initializeDirectory(IMPLEMENT_DIR);
 }
 
 //Alle Exceptions Klassen includieren
-if(defined('EXCEPTION_DIR') === true && EXCEPTION_DIR != '')
+if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 {
 	initializeDirectory(EXCEPTION_DIR);
 }
@@ -114,7 +114,7 @@ require 'benchmark.class.php';
 require 'security.class.php';
 require 'load_functions.abstract.class.php';
 
-if(file_exists(ROOT.SEP.'dynamicInit.php') === true)
+if(file_exists(ROOT.SEP.'dynamicInit.php'))
 {
 	require ROOT.SEP.'dynamicInit.php';
 }

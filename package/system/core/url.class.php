@@ -58,7 +58,7 @@ class url extends initiator implements IStatic
 
 	public static function init()
 	{
-		if(function_exists('apache_get_modules') === true)
+		if(function_exists('apache_get_modules'))
 		{
 			$allModules = apache_get_modules();
 
@@ -86,7 +86,7 @@ class url extends initiator implements IStatic
 	{
 		self::$useModRewrite = (bool)$mod;
 
-		if(self::$useModRewrite === true && self::$isModRewriteActiv === false)
+		if(self::$useModRewrite && !self::$isModRewriteActiv)
 		{
 			throw new urlException('apache has mod_rewrite not activated');
 		}
@@ -104,7 +104,7 @@ class url extends initiator implements IStatic
 		$extension = trim($extension, '.');
 		$extension = trim($extension);
 
-		if(empty($extension) === true)
+		if(empty($extension))
 		{
 			throw new urlException('mod_rewrite file extension is empty');
 		}
@@ -125,13 +125,13 @@ class url extends initiator implements IStatic
 	{
 		$link = $httpRoot;
 
-		if(empty($parameters) === false)
+		if(!empty($parameters))
 		{
-			if(self::$useModRewrite === true)
+			if(self::$useModRewrite)
 			{
 				foreach($parameters as $v)
 				{
-					if(is_int($v) === true)
+					if(is_int($v))
 					{
 						$link = trim($link, '/').'_'.$v.'/';
 					}
@@ -186,13 +186,13 @@ class url extends initiator implements IStatic
 	 */
 	protected static function _getCurrentUrl()
 	{
-		if(empty($_SERVER['HTTP_HOST']) === false)
+		if(!empty($_SERVER['HTTP_HOST']))
 		{
-			return (isset($_SERVER['HTTPS']) === true ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			return (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		}
 		else
 		{
-			return ((isset($_SERVER['HTTPS']) === true) ? 'https' : 'http').'://localhost'.((isset($_SERVER['REQUEST_URI']) === true) ? $_SERVER['REQUEST_URI'] : '');
+			return ((isset($_SERVER['HTTPS'])) ? 'https' : 'http').'://localhost'.((isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '');
 		}
 	}
 
@@ -227,7 +227,7 @@ class url extends initiator implements IStatic
 	 */
 	protected static function _back()
 	{
-		if(empty($_SERVER['HTTP_REFERER']) === false)
+		if(!empty($_SERVER['HTTP_REFERER']))
 		{
 			self::loc($_SERVER['HTTP_REFERER']);
 		}

@@ -90,7 +90,7 @@ class images extends initiator implements IStatic
 	 */
 	protected static function _getImageHeight($image)
 	{
-		if(function_exists('imagesy') === false)
+		if(!function_exists('imagesy'))
 		{
 			return false;
 		}
@@ -109,7 +109,7 @@ class images extends initiator implements IStatic
 	 */
 	protected static function _getImageWidth($image)
 	{
-		if(function_exists('imagesx') === false)
+		if(!function_exists('imagesx'))
 		{
 			return false;
 		}
@@ -176,7 +176,7 @@ class images extends initiator implements IStatic
 
 		$thumb = imagecreatetruecolor($width, $height);
 
-		if($destinationExtension === 'png')
+		if($destinationExtension == 'png')
 		{
 			//Transparenter Hintergrund anstatt Schwarzer
 			$color = imagecolorallocatealpha($thumb, 0, 0, 0, 127);
@@ -196,7 +196,7 @@ class images extends initiator implements IStatic
 		{
 			case 'png':
 
-				if(imagepng($thumb, $savePath, $quality) === false)
+				if(!imagepng($thumb, $savePath, $quality))
 				{
 					throw new imagesException('Error: file not save png');
 				}
@@ -205,7 +205,7 @@ class images extends initiator implements IStatic
 			case 'jpg':
 			case 'jpeg':
 
-				if(imagejpeg($thumb, $savePath, $quality) === false)
+				if(!imagejpeg($thumb, $savePath, $quality))
 				{
 					throw new imagesException('Error: file not save jpg');
 				}
@@ -213,7 +213,7 @@ class images extends initiator implements IStatic
 			break;
 			case 'gif':
 
-				if(imagegif($thumb, $savePath) === false)
+				if(!imagegif($thumb, $savePath))
 				{
 					throw new imagesException('Error: file not save gif');
 				}

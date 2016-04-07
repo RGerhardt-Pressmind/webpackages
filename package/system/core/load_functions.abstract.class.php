@@ -273,7 +273,7 @@ abstract class load_functions
 	 */
 	public function __destruct()
 	{
-		if(empty($this->defineDynamicClasses) === false)
+		if(!empty($this->defineDynamicClasses))
 		{
 			foreach($this->defineDynamicClasses as $k => $class)
 			{
@@ -285,7 +285,7 @@ abstract class load_functions
 			}
 		}
 
-		if(empty($this->allLoadClasses) === false)
+		if(!empty($this->allLoadClasses))
 		{
 			foreach($this->allLoadClasses as $k => $class)
 			{
@@ -309,7 +309,7 @@ abstract class load_functions
 	 */
 	public function __get($varName)
 	{
-		if(isset($this->defineDynamicClasses[$varName]) === true)
+		if(isset($this->defineDynamicClasses[$varName]))
 		{
 			return $this->defineDynamicClasses[$varName];
 		}
@@ -328,7 +328,7 @@ abstract class load_functions
 	 */
 	public function __construct($loadClasses = array())
 	{
-		if(empty($loadClasses) === true)
+		if(empty($loadClasses))
 		{
 			$loadClasses = array(
 				self::$LOAD_URL,
@@ -345,10 +345,10 @@ abstract class load_functions
 
 		foreach($loadClasses as $classes)
 		{
-			if($classes['class'] === 'phpmailer')
+			if($classes['class'] == 'phpmailer')
 			{
 				//PHPMailer class load
-				if(class_exists('PHPMailer') === false)
+				if(!class_exists('PHPMailer'))
 				{
 					require 'PHPMailerAutoload.php';
 				}
@@ -356,11 +356,11 @@ abstract class load_functions
 				continue;
 			}
 
-			if($classes['isStatic'] === true)
+			if($classes['isStatic'])
 			{
 				autoload::get($classes['class'], $classes['namespace'], true);
 
-				if(empty($classes['namespace']) === false)
+				if(!empty($classes['namespace']))
 				{
 					call_user_func($classes['namespace'].$classes['class'].'::init');
 				}
@@ -371,7 +371,7 @@ abstract class load_functions
 			}
 			else
 			{
-				if(empty($classes['writeInAttribute']) === false)
+				if(!empty($classes['writeInAttribute']))
 				{
 					$this->defineDynamicClasses[$classes['writeInAttribute']] = autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter']);
 				}
@@ -401,7 +401,7 @@ abstract class load_functions
 
 		foreach($this->allLoadClasses as $cl)
 		{
-			if($cl['isStatic'] === false)
+			if(!$cl['isStatic'])
 			{
 				$back[$cl['writeInAttribute']] = $this->defineDynamicClasses[$cl['writeInAttribute']];
 			}
@@ -417,7 +417,7 @@ abstract class load_functions
 	 */
 	protected function load_install_plugins()
 	{
-		if(PLUGIN_DIR == '' || class_exists('\package\core\plugins') === false)
+		if(PLUGIN_DIR == '' || !class_exists('\package\core\plugins'))
 		{
 			return;
 		}
@@ -426,7 +426,7 @@ abstract class load_functions
 
 		$back = $this->get_plugins(PLUGIN_DIR);
 
-		if(empty($back) === false)
+		if(!empty($back))
 		{
 			foreach($back as $t)
 			{
@@ -462,7 +462,7 @@ abstract class load_functions
 		{
 			foreach($iterator as $item)
 			{
-				if(stripos($item->getFilename(), '.master.class.php') !== false && $item->isDir() === false)
+				if(stripos($item->getFilename(), '.master.class.php') != false && !$item->isDir())
 				{
 					$className = str_replace(array(
 						'.php',
@@ -478,18 +478,18 @@ abstract class load_functions
 
 					$classNameNamespace	=	'';
 
-					if(file_exists($item->getPath().SEP.'config.ini') === true)
+					if(file_exists($item->getPath().SEP.'config.ini'))
 					{
 						$config	=	parse_ini_file($item->getPath().SEP.'config.ini');
 
 						//Namespace definition
-						if(empty($config['namespace']) === false)
+						if(!empty($config['namespace']))
 						{
 							$classNameNamespace	=	trim($config['namespace'], '\\').'\\';
 						}
 
 						//Plugin aktiv oder nicht
-						if(isset($config['active']) === true && ($config['active'] === false || $config['active'] == 0))
+						if(isset($config['active']) && (!$config['active'] || $config['active'] == 0))
 						{
 							continue;
 						}
@@ -499,7 +499,7 @@ abstract class load_functions
 
 					$classNameNamespace .= $className;
 
-					if(class_exists($classNameNamespace) === false)
+					if(!class_exists($classNameNamespace))
 					{
 						continue;
 					}
@@ -542,14 +542,14 @@ abstract class load_functions
 		{
 			foreach($iterator as $item)
 			{
-				if($item->isDir() === true)
+				if($item->isDir())
 				{
 					continue;
 				}
 
-				if(is_array($loadFiles) === true && empty($loadFiles) === false)
+				if(is_array($loadFiles) && !empty($loadFiles))
 				{
-					if(in_array($item->getFilename(), $loadFiles) === false)
+					if(!in_array($item->getFilename(), $loadFiles))
 					{
 						continue;
 					}
@@ -567,7 +567,7 @@ abstract class load_functions
 					''
 				), $item->getFilename());
 
-				if(class_exists($className) === false)
+				if(!class_exists($className))
 				{
 					continue;
 				}
@@ -581,7 +581,7 @@ abstract class load_functions
 			}
 		}
 
-		if(empty($back) === false)
+		if(!empty($back))
 		{
 			foreach($back as $t)
 			{
@@ -591,7 +591,7 @@ abstract class load_functions
 				{
 					$className = $class->getClassName();
 
-					if(empty($className) === false && array_key_exists($className, $this->notAllowedClassName) === false)
+					if(!empty($className) && !array_key_exists($className, $this->notAllowedClassName))
 					{
 						$class->setAllClasses($allInitClasses);
 						$class->loadData();
@@ -614,7 +614,7 @@ abstract class load_functions
 	protected function load_default_functions()
 	{
 		//Load default functions
-		if(class_exists('\package\core\plugins') === true)
+		if(class_exists('\package\core\plugins'))
 		{
 			plugins::hookShow('before', 'load_functions', 'loadDefaultFunctions');
 			plugins::hookShow('after', 'load_functions', 'loadDefaultFunctions');

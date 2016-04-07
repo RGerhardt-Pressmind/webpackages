@@ -40,13 +40,13 @@ class NewSessionHandler implements SessionHandlerInterface
 
 		$dsn		=	PDO_TYPE.':';
 
-		if(PDO_TYPE === 'sqlite' || PDO_TYPE === 'sqlite2')
+		if(PDO_TYPE == 'sqlite' || PDO_TYPE == 'sqlite2')
 		{
 			$dsn	.=	PDO_DATABASE;
 		}
 		else
 		{
-			if(PDO_TYPE === 'sqlsrv')
+			if(PDO_TYPE == 'sqlsrv')
 			{
 				$dsn	.=	'Server='.PDO_HOST;
 			}
@@ -59,16 +59,16 @@ class NewSessionHandler implements SessionHandlerInterface
 
 			if(PDO_PORT != '')
 			{
-				if($addIn === true && PDO_TYPE !== 'sqlsrv')
+				if($addIn == true && PDO_TYPE != 'sqlsrv')
 				{
 					$dsn	.=	';';
 				}
 
-				if(PDO_TYPE === 'informix')
+				if(PDO_TYPE == 'informix')
 				{
 					$dsn	.=	'service='.PDO_PORT;
 				}
-				elseif(PDO_TYPE === 'sqlsrv')
+				elseif(PDO_TYPE == 'sqlsrv')
 				{
 					$dsn	.=	','.PDO_PORT;
 				}
@@ -82,7 +82,7 @@ class NewSessionHandler implements SessionHandlerInterface
 
 			if(PDO_DATABASE != '')
 			{
-				if($addIn === true)
+				if($addIn == true)
 				{
 					$dsn	.=	';';
 				}
@@ -93,7 +93,7 @@ class NewSessionHandler implements SessionHandlerInterface
 
 			if(PDO_CHARSET != '')
 			{
-				if($addIn === true)
+				if($addIn == true)
 				{
 					$dsn	.=	';';
 				}
@@ -157,9 +157,9 @@ class NewSessionHandler implements SessionHandlerInterface
 			`session_expires`	>	NOW();
 		';
 
-		$getDatas	=	$this->database->secQuery($getDatas, array($session_id), true, true);
+		$getDatas	=	$this->database->safetyQuery($getDatas, array($session_id), true, true);
 
-		if(empty($getDatas['session_data']) === false)
+		if(!empty($getDatas['session_data']))
 		{
         	return $getDatas['session_data'];
 		}
@@ -190,7 +190,7 @@ class NewSessionHandler implements SessionHandlerInterface
 			`session_data`		=	?
 		';
 
-       return $this->database->secQuery($writeData, array($session_id, $newDateTime, $session_data), false);
+       return $this->database->safetyQuery($writeData, array($session_id, $newDateTime, $session_data), false);
 	}
 
 	/**
@@ -222,7 +222,7 @@ class NewSessionHandler implements SessionHandlerInterface
 			1;
 		';
 
-		return $this->database->secQuery($removeSessionId, array($session_id), false);
+		return $this->database->safetyQuery($removeSessionId, array($session_id), false);
 	}
 
 	/**
@@ -250,7 +250,7 @@ class NewSessionHandler implements SessionHandlerInterface
 	}
 }
 
-if(defined('USE_SESSION_SAVE_HANDLER') === true && USE_SESSION_SAVE_HANDLER === true && defined('PDO_HOST') === true && PDO_HOST != '')
+if(defined('USE_SESSION_SAVE_HANDLER') && USE_SESSION_SAVE_HANDLER  && defined('PDO_HOST') && PDO_HOST != '')
 {
 	new NewSessionHandler();
 }

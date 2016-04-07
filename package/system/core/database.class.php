@@ -91,13 +91,13 @@ class database extends \PDO
 
 		$dsn = $para['driver'].':';
 
-		if($para['driver'] === 'sqlite' || $para['driver'] === 'sqlite2')
+		if($para['driver'] == 'sqlite' || $para['driver'] == 'sqlite2')
 		{
 			$dsn .= $para['database'];
 		}
 		else
 		{
-			if($para['driver'] === 'sqlsrv')
+			if($para['driver'] == 'sqlsrv')
 			{
 				$dsn .= 'Server='.$para['host'];
 			}
@@ -108,18 +108,18 @@ class database extends \PDO
 
 			$addIn = true;
 
-			if(empty($para['port']) === false)
+			if(!empty($para['port']))
 			{
-				if($addIn === true && $para['driver'] !== 'sqlsrv')
+				if($addIn && $para['driver'] != 'sqlsrv')
 				{
 					$dsn .= ';';
 				}
 
-				if($para['driver'] === 'informix')
+				if($para['driver'] == 'informix')
 				{
 					$dsn .= 'service='.$para['port'];
 				}
-				elseif($para['driver'] === 'sqlsrv')
+				elseif($para['driver'] == 'sqlsrv')
 				{
 					$dsn .= ','.$para['port'];
 				}
@@ -131,9 +131,9 @@ class database extends \PDO
 				$addIn = true;
 			}
 
-			if(empty($para['database']) === false)
+			if(!empty($para['database']))
 			{
-				if($addIn === true)
+				if($addIn)
 				{
 					$dsn .= ';';
 				}
@@ -142,7 +142,7 @@ class database extends \PDO
 				$addIn = true;
 			}
 
-			if(empty($para['charset']) === false)
+			if(!empty($para['charset']))
 			{
 				if($addIn === true)
 				{
@@ -153,64 +153,64 @@ class database extends \PDO
 			}
 		}
 
-		if(empty($para['username']) === false)
+		if(!empty($para['username']))
 		{
 			$username = $para['username'];
 		}
 
-		if(empty($para['password']) === false)
+		if(!empty($para['password']))
 		{
 			$passwd = $para['password'];
 		}
 
-		if(empty($para['options']) === false)
+		if(!empty($para['options']))
 		{
 			$options = $para['options'];
 		}
 
-		if(empty($para['driver']) === false)
+		if(!empty($para['driver']))
 		{
 			$driver = $para['driver'];
 		}
 
-		if(empty($dsn) === true || (empty($username) === true && $para['driver'] != 'sqlite' && $para['driver'] != 'sqlite2'))
+		if(empty($dsn) || (empty($username) && $para['driver'] != 'sqlite' && $para['driver'] != 'sqlite2'))
 		{
 			return;
 		}
 
-		if(empty($options) === true)
+		if(empty($options))
 		{
 			$options = array();
 		}
 
-		if(in_array($driver, self::$allowedDrivers) === false)
+		if(!in_array($driver, self::$allowedDrivers))
 		{
 			throw new databaseException('Error: database driver '.$driver.' not allowed. Allowed: '.implode(',', self::$allowedDrivers));
 		}
 
 		$this->useDriver = $driver;
 
-		if(isset($options[\PDO::ATTR_DEFAULT_FETCH_MODE]) === false)
+		if(!isset($options[\PDO::ATTR_DEFAULT_FETCH_MODE]))
 		{
 			$options[\PDO::ATTR_DEFAULT_FETCH_MODE] = \PDO::FETCH_ASSOC;
 		}
 
-		if(isset($options[\PDO::ATTR_ERRMODE]) === false)
+		if(!isset($options[\PDO::ATTR_ERRMODE]))
 		{
 			$options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
 		}
 
-		if(isset($options[\PDO::ATTR_EMULATE_PREPARES]) === false)
+		if(!isset($options[\PDO::ATTR_EMULATE_PREPARES]))
 		{
 			$options[\PDO::ATTR_EMULATE_PREPARES] = 0;
 		}
 
-		if(isset($options[\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY]) === false)
+		if(!isset($options[\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY]))
 		{
 			$options[\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = true;
 		}
 
-		if(isset($options[\PDO::ATTR_PERSISTENT]) === false)
+		if(!isset($options[\PDO::ATTR_PERSISTENT]))
 		{
 			$options[\PDO::ATTR_PERSISTENT] = true;
 		}
@@ -231,12 +231,12 @@ class database extends \PDO
 	 */
 	public function quefetch($sql)
 	{
-		if($this->isInit === false)
+		if(!$this->isInit)
 		{
 			return array();
 		}
 
-		if(is_string($sql) === false || empty($sql) === true)
+		if(!is_string($sql) || empty($sql))
 		{
 			throw new databaseException('Error: pdo::quefetch $sql is not a string or empty');
 		}
@@ -253,7 +253,7 @@ class database extends \PDO
 			return false;
 		}
 
-		if(is_array($stmt) === false || empty($stmt[0]) === true)
+		if(!is_array($stmt) || empty($stmt[0]))
 		{
 			return array();
 		}
@@ -274,19 +274,19 @@ class database extends \PDO
 	 */
 	public function result_array($sql)
 	{
-		if($this->isInit === false)
+		if(!$this->isInit)
 		{
 			return array();
 		}
 
-		if(empty($sql) === true)
+		if(empty($sql))
 		{
 			throw new databaseException('Error: pdo::result_array $sql is empty');
 		}
 
 		preg_match_all('/(SELECT|select)/', $sql, $matches);
 
-		if(empty($matches) === true)
+		if(empty($matches))
 		{
 			throw new databaseException('Error: pdo::result_array $sql is not select');
 		}
@@ -317,12 +317,12 @@ class database extends \PDO
 	 */
 	public function multi_query($sql)
 	{
-		if($this->isInit === false)
+		if(!$this->isInit)
 		{
 			return false;
 		}
 
-		if(is_string($sql) === false || empty($sql) === true)
+		if(!is_string($sql) || empty($sql))
 		{
 			throw new databaseException('Error: pdo::multi_query: $sql is not a string or empty');
 		}
@@ -348,7 +348,7 @@ class database extends \PDO
 	 */
 	public function version()
 	{
-		if($this->isInit === false)
+		if(!$this->isInit)
 		{
 			return false;
 		}
@@ -365,17 +365,17 @@ class database extends \PDO
 	 */
 	public function insert_id($name = null)
 	{
-		if($this->isInit === false)
+		if(!$this->isInit)
 		{
 			return 0;
 		}
 
-		if($this->useDriver === 'pgsql')
+		if($this->useDriver == 'pgsql')
 		{
 			$v     = $this->version();
 			$table = func_num_args() > 0 ? func_get_arg(0) : null;
 
-			if($table === null && $v >= '8.1')
+			if($table == null && $v >= '8.1')
 			{
 				$sql = 'SELECT LASTVAL() as ins_id';
 
@@ -428,12 +428,12 @@ class database extends \PDO
 	 */
 	public function safetyQuery($sql, $execute, $isResultAssociative = true, $getFirstResult = false)
 	{
-		if($this->isInit === false)
+		if(!$this->isInit)
 		{
 			return false;
 		}
 
-		if(empty($sql) === true)
+		if(empty($sql))
 		{
 			throw new databaseException('Error: pdo::safetyQuery: $sql is empty');
 		}
@@ -442,19 +442,19 @@ class database extends \PDO
 		{
 			$stmt = $this->prepare($sql);
 
-			if($isResultAssociative === true)
+			if($isResultAssociative)
 			{
 				$stmt->execute($execute);
 
 				$back = $stmt->fetchAll();
 
-				if($getFirstResult === false)
+				if(!$getFirstResult)
 				{
 					return $back;
 				}
 				else
 				{
-					if(empty($back[0]) === false)
+					if(!empty($back[0]))
 					{
 						return $back[0];
 					}
@@ -497,7 +497,7 @@ class database extends \PDO
 
 		foreach($setParameter as $key => $value)
 		{
-			if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
 			{
 				$insert .= '
 				'.$key;
@@ -508,7 +508,7 @@ class database extends \PDO
 				`'.$key.'`';
 			}
 
-			if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 			{
 				$insert .= '	=	'.$value.',';
 			}
@@ -524,7 +524,7 @@ class database extends \PDO
 
 		$execInsert = $this->safetyQuery($insert, $execute, false, false);
 
-		if($execInsert === false)
+		if(!$execInsert)
 		{
 			return false;
 		}
@@ -555,7 +555,7 @@ class database extends \PDO
 
 		foreach($setParameter as $key => $value)
 		{
-			if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
 			{
 				$update .= '
 				'.$key;
@@ -567,7 +567,7 @@ class database extends \PDO
 				';
 			}
 
-			if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
+			if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 			{
 				$update .= '	=	'.$value.',';
 			}
@@ -581,14 +581,14 @@ class database extends \PDO
 
 		$update = trim($update, ',');
 
-		if(empty($whereParameter) === false)
+		if(!empty($whereParameter))
 		{
 			$update .= '
 			WHERE';
 
 			foreach($whereParameter as $key => $value)
 			{
-				if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
 				{
 					$update .= '
 					'.$key;
@@ -600,7 +600,7 @@ class database extends \PDO
 					';
 				}
 
-				if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 				{
 					$update .= '	=	'.$value.' AND';
 				}
@@ -624,7 +624,7 @@ class database extends \PDO
 
 		$execUpdate = $this->safetyQuery($update, $execute, false, false);
 
-		if($execUpdate === false)
+		if(!$execUpdate)
 		{
 			return false;
 		}
@@ -651,7 +651,7 @@ class database extends \PDO
 		DELETE FROM
 			`'.$table.'`';
 
-		if(empty($whereParameter) === false)
+		if(!empty($whereParameter))
 		{
 			$deleteTable .= '
 			WHERE
@@ -659,7 +659,7 @@ class database extends \PDO
 
 			foreach($whereParameter as $key => $value)
 			{
-				if(preg_match(MYSQL_FUNCTIONS, $key) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
 				{
 					$deleteTable .= '
 					'.$key.'';
@@ -670,7 +670,7 @@ class database extends \PDO
 					`'.$key.'`';
 				}
 
-				if(preg_match(MYSQL_FUNCTIONS, $value) !== 0)
+				if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 				{
 					$deleteTable .= ' =	'.$value.' AND';
 				}

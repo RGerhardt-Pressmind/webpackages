@@ -146,12 +146,12 @@ class number extends initiator implements IStatic
 	 */
 	protected static function _diff($start, $end = false)
 	{
-		if(class_exists('\DateTime') === false || class_exists('\DateTimeZone') === false)
+		if(!class_exists('\DateTime') || !class_exists('\DateTimeZone'))
 		{
 			throw new numberException('Error: DateTime or DateTimeZone class not in php exists');
 		}
 
-		if(empty($end) === true)
+		if(empty($end))
 		{
 			$end = time();
 		}
@@ -189,34 +189,34 @@ class number extends initiator implements IStatic
 	{
 		$return = '';
 
-		if(isset($diffDate->year) === false)
+		if(!isset($diffDate->year))
 		{
 			throw new numberException('year not defined');
 		}
-		elseif(isset($diffDate->month) === false)
+		elseif(!isset($diffDate->month))
 		{
 			throw new numberException('month not defined');
 		}
-		elseif(isset($diffDate->day) === false)
+		elseif(!isset($diffDate->day))
 		{
 			throw new numberException('day not defined');
 		}
-		elseif(isset($diffDate->hour) === false)
+		elseif(!isset($diffDate->hour))
 		{
 			throw new numberException('hour not defined');
 		}
-		elseif(isset($diffDate->min) === false)
+		elseif(!isset($diffDate->min))
 		{
 			throw new numberException('minutes (min) not defined');
 		}
-		elseif(isset($diffDate->sec) === false)
+		elseif(!isset($diffDate->sec))
 		{
 			throw new numberException('secondy (sec) not defined');
 		}
 
-		if(class_exists('language') === false)
+		if(!class_exists('language'))
 		{
-			if(class_exists('\package\core\autoload') === true)
+			if(class_exists('\package\core\autoload'))
 			{
 				autoload::get('language', '\package\core\\', true);
 			}
@@ -244,16 +244,16 @@ class number extends initiator implements IStatic
 							}
 							else if($diffDate->sec == 1)
 							{
-								$return = $diffDate->sec.(($short === true) ? language::translate(' Sek.') : language::translate(' Sekunde'));
+								$return = $diffDate->sec.(($short) ? language::translate(' Sek.') : language::translate(' Sekunde'));
 							}
 							else
 							{
-								$return = $diffDate->sec.(($short === true) ? language::translate(' Sek.') : language::translate(' Sekunden'));
+								$return = $diffDate->sec.(($short) ? language::translate(' Sek.') : language::translate(' Sekunden'));
 							}
 						}
 						else
 						{
-							if($short === true)
+							if($short)
 							{
 								$return = $diffDate->min.' '.language::translate('Min.');
 							}
@@ -264,7 +264,7 @@ class number extends initiator implements IStatic
 
 							if($diffDate->sec > 0)
 							{
-								if($short === true)
+								if($short)
 								{
 									$return .= ' '.$diffDate->sec.' '.language::translate('Sek.');
 								}
@@ -277,7 +277,7 @@ class number extends initiator implements IStatic
 					}
 					else
 					{
-						if($short === true)
+						if($short)
 						{
 							$return = $diffDate->hour.' '.language::translate('Std.').' '.$diffDate->min.' '.language::translate('Min.');
 						}
@@ -289,7 +289,7 @@ class number extends initiator implements IStatic
 				}
 				else
 				{
-					if($short === true)
+					if($short)
 					{
 						$return = $diffDate->day.' '.(($diffDate->day == 1) ? language::translate('Tag') : language::translate('Tage')).' '.$diffDate->hour.' '.language::translate('Std.');
 					}

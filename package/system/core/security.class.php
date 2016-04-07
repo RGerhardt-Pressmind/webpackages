@@ -184,7 +184,7 @@ class security extends initiator
 		{
 			case 'post':
 
-				if(empty($_POST[$variable]) === false)
+				if(!empty($_POST[$variable]))
 				{
 					$request = $_POST[$variable];
 				}
@@ -192,7 +192,7 @@ class security extends initiator
 			break;
 			case 'get':
 
-				if(empty($_GET[$variable]) === false)
+				if(!empty($_GET[$variable]))
 				{
 					$request = $_GET[$variable];
 				}
@@ -200,7 +200,7 @@ class security extends initiator
 			break;
 			case 'session':
 
-				if(empty($_SESSION[$variable]) === false)
+				if(!empty($_SESSION[$variable]))
 				{
 					$request = $_SESSION[$variable];
 				}
@@ -208,7 +208,7 @@ class security extends initiator
 			break;
 			case 'cookie':
 
-				if(empty($_COOKIE[$variable]) === false)
+				if(!empty($_COOKIE[$variable]))
 				{
 					$request = $_COOKIE[$variable];
 				}
@@ -216,7 +216,7 @@ class security extends initiator
 			break;
 			case 'server':
 
-				if(empty($_SERVER[$variable]) === false)
+				if(!empty($_SERVER[$variable]))
 				{
 					$request = $_SERVER[$variable];
 				}
@@ -224,7 +224,7 @@ class security extends initiator
 			break;
 			case 'env':
 
-				if(empty($_ENV[$variable]) === false)
+				if(!empty($_ENV[$variable]))
 				{
 					$request = $_ENV[$variable];
 				}
@@ -233,7 +233,7 @@ class security extends initiator
 			case 'request':
 			default:
 
-				if(empty($_REQUEST[$variable]) === false)
+				if(!empty($_REQUEST[$variable]))
 				{
 					$request = $_REQUEST[$variable];
 				}
@@ -264,7 +264,7 @@ class security extends initiator
 
 				$param = filter_var($param, FILTER_VALIDATE_IP);
 
-				if($param === false)
+				if(!$param)
 				{
 					return false;
 				}
@@ -276,7 +276,7 @@ class security extends initiator
 
 				$param = filter_var($param, FILTER_VALIDATE_EMAIL);
 
-				if($param === false)
+				if(!$param)
 				{
 					return false;
 				}
@@ -293,7 +293,7 @@ class security extends initiator
 
 				$param = filter_var($param, FILTER_VALIDATE_FLOAT);
 
-				if($param === false)
+				if(!$param)
 				{
 					return false;
 				}
@@ -306,7 +306,7 @@ class security extends initiator
 
 				$param = filter_var($param, FILTER_VALIDATE_INT);
 
-				if($param === false)
+				if(!$param)
 				{
 					return false;
 				}
@@ -318,7 +318,7 @@ class security extends initiator
 
 				$param = filter_var($param, FILTER_VALIDATE_BOOLEAN);
 
-				if($param === null)
+				if($param == null && $param != false)
 				{
 					return null;
 				}
@@ -329,25 +329,25 @@ class security extends initiator
 			case 'string':
 			case 's':
 
-				if(is_array($param) === true)
+				if(is_array($param))
 				{
 					return 'array()';
 				}
-				elseif(is_object($param) === true)
+				elseif(is_object($param))
 				{
 					return 'std()';
 				}
 
 				$param = self::xss_clean($param);
 
-				if($removeSQLFunctions === true)
+				if($removeSQLFunctions)
 				{
 					$param = preg_replace(MYSQL_FUNCTIONS, '', $param, -1);
 				}
 
 				$param = filter_var($param, FILTER_SANITIZE_STRING);
 
-				if($param === false)
+				if(!$param)
 				{
 					return false;
 				}
@@ -370,7 +370,7 @@ class security extends initiator
 	 */
 	protected static function _get_mime_type($path)
 	{
-		if(function_exists('finfo_open') === false)
+		if(!function_exists('finfo_open'))
 		{
 			throw new securityException('finfo extensio not loaded');
 		}
@@ -393,7 +393,7 @@ class security extends initiator
 	 */
 	protected static function _get_file_type($path)
 	{
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new securityException('Error: SplFileInfo in php not installed');
 		}
@@ -428,7 +428,7 @@ class security extends initiator
 	 */
 	protected static function _sha_sec($string)
 	{
-		if(function_exists('hash_hmac') === false)
+		if(!function_exists('hash_hmac'))
 		{
 			throw new securityException('hash extension not loaded');
 		}
@@ -457,7 +457,7 @@ class security extends initiator
 		 */
 		while(true)
 		{
-			if(preg_match('/%[0-9a-f]{2,}/i', $str) !== 1)
+			if(preg_match('/%[0-9a-f]{2,}/i', $str) != 1)
 			{
 				break;
 			}
@@ -538,7 +538,7 @@ class security extends initiator
 		{
 			$original = $str;
 
-			if(preg_match('/<a/i', $str) === 1)
+			if(preg_match('/<a/i', $str) == 1)
 			{
 				$str = preg_replace_callback('#<a[^a-z0-9>]+([^>]*?)(?:>|$)#si', array(
 					'self',
@@ -546,7 +546,7 @@ class security extends initiator
 				), $str);
 			}
 
-			if(preg_match('/<img/i', $str) === 1)
+			if(preg_match('/<img/i', $str) == 1)
 			{
 				$str = preg_replace_callback('#<img[^a-z0-9]+([^>]*?)(?:\s?/?>|$)#si', array(
 					'self',
@@ -554,12 +554,12 @@ class security extends initiator
 				), $str);
 			}
 
-			if(preg_match('/script|xss/i', $str) === 1)
+			if(preg_match('/script|xss/i', $str) == 1)
 			{
 				$str = preg_replace('#</*(?:script|xss).*?>#si', '[removed]', $str);
 			}
 
-			if($original === $str)
+			if($original == $str)
 			{
 				unset($original);
 				break;
@@ -589,7 +589,7 @@ class security extends initiator
 				'_sanitize_naughty_html'
 			), $str);
 
-			if($old_str === $str)
+			if($old_str == $str)
 			{
 				unset($old_str);
 				break;
@@ -675,15 +675,15 @@ class security extends initiator
 		);
 
 		// First, escape unclosed tags
-		if(empty($matches['closeTag']) === true)
+		if(empty($matches['closeTag']))
 		{
 			return '&lt;'.$matches[1];
 		}
-		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true) === true) // Is the element that we caught naughty? If so, escape it
+		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true)) // Is the element that we caught naughty? If so, escape it
 		{
 			return '&lt;'.$matches[1].'&gt;';
 		}
-		elseif(isset($matches['attributes']) === true) // For other tags, see if their attributes are "evil" and strip those
+		elseif(isset($matches['attributes'])) // For other tags, see if their attributes are "evil" and strip those
 		{
 			$attributes = array();
 
@@ -695,12 +695,12 @@ class security extends initiator
 			{
 				$matches['attributes'] = preg_replace('#^[^a-z]+#i', '', $matches['attributes']);
 
-				if(preg_match($attributes_pattern, $matches['attributes'], $attribute, PREG_OFFSET_CAPTURE) !== 1)
+				if(preg_match($attributes_pattern, $matches['attributes'], $attribute, PREG_OFFSET_CAPTURE) != 1)
 				{
 					break;
 				}
 
-				if(preg_match($is_evil_pattern, $attribute['name'][0]) === 1 || (trim($attribute['value'][0]) === ''))
+				if(preg_match($is_evil_pattern, $attribute['name'][0]) == 1 || (trim($attribute['value'][0]) == ''))
 				{
 					$attributes[] = 'xss=removed';
 				}
@@ -711,13 +711,13 @@ class security extends initiator
 
 				$matches['attributes'] = substr($matches['attributes'], $attribute[0][1] + strlen($attribute[0][0]));
 
-				if($matches['attributes'] === '')
+				if($matches['attributes'] == '')
 				{
 					break;
 				}
 			}
 
-			$attributes = (empty($attributes) === true ? '' : ' '.implode(' ', $attributes));
+			$attributes = (empty($attributes) ? '' : ' '.implode(' ', $attributes));
 
 			return '<'.$matches['slash'].$matches['tagName'].$attributes.'>';
 		}
@@ -791,7 +791,7 @@ class security extends initiator
 	 */
 	protected static function _entity_decode($str, $charset = 'UTF-8')
 	{
-		if(stristr($str, '&') === false)
+		if(!stristr($str, '&'))
 		{
 			return $str;
 		}
@@ -836,7 +836,7 @@ class security extends initiator
 	{
 		$non_displayables = array();
 
-		if($url_encoded === true)
+		if($url_encoded)
 		{
 			$non_displayables[] = '/%0[0-8bcef]/';
 			$non_displayables[] = '/%1[0-9a-f]/';
@@ -848,7 +848,7 @@ class security extends initiator
 		{
 			$str = preg_replace($non_displayables, '', $str, -1, $count);
 
-			if($count === 0)
+			if($count == 0)
 			{
 				break;
 			}
@@ -865,11 +865,11 @@ class security extends initiator
 	 */
 	protected static function _is_bot()
 	{
-		if(empty($_SERVER['HTTP_USER_AGENT']) === false)
+		if(!empty($_SERVER['HTTP_USER_AGENT']))
 		{
 			foreach(self::$botlist as $bot)
 			{
-				if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false)
+				if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) != false)
 				{
 					return array(
 						'isBot' => true,
@@ -896,25 +896,25 @@ class security extends initiator
 
 		foreach($ipMethodes as $key)
 		{
-			if(empty($_SERVER[$key]) === false)
+			if(!empty($_SERVER[$key]))
 			{
 				foreach(explode(',', $_SERVER[$key]) as $ip)
 				{
 					$ip = trim($ip);
 
-					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false)
+					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) != false)
 					{
 						return $ip;
 					}
 				}
 			}
-			elseif(getenv($key) !== false)
+			elseif(getenv($key) != false)
 			{
 				foreach(explode(',', getenv($key)) as $ip)
 				{
 					$ip = trim($ip);
 
-					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false)
+					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) != false)
 					{
 						return $ip;
 					}

@@ -20,11 +20,11 @@ function copyFileToRoot()
 		{
 			if($file instanceof SplFileInfo)
 			{
-				if($file->isFile() === true)
+				if($file->isFile())
 				{
 					$newFilePath	=	new SplFileInfo(str_replace(INSTALL_DIR, ROOT.SEP, $file->__toString()));
 
-					if(file_exists($newFilePath->getPath()) === false)
+					if(!file_exists($newFilePath->getPath()))
 					{
 						mkdir($newFilePath->getPath(), 0755, true);
 					}
@@ -54,7 +54,7 @@ function removeInitialFiles()
 		{
 			if($file instanceof SplFileInfo)
 			{
-				if($file->isFile() === true)
+				if($file->isFile())
 				{
 					unlink($file->__toString());
 				}
@@ -77,7 +77,7 @@ function removeInitialFiles()
 		{
 			if($file instanceof SplFileInfo)
 			{
-				if($file->isFile() === true)
+				if($file->isFile())
 				{
 					unlink($file->__toString());
 				}
@@ -95,67 +95,93 @@ function removeInitialFiles()
 	unlink(INSTALL_DIR.'package'.SEP.'models'.SEP.'test.php');
 }
 
-if(isset($_POST['update']) === true)
+if(isset($_POST['update']))
 {
 	$url	=	'http://www.webpackages.de/autorisation.php';
 
-	$data	=	\package\core\curl::get_data($url);
+	$security_key	=	\package\core\security::url('security_key', 'POST', 'string');
 
-	if($data !== false)
+
+	if($security_key == SECURITY_KEY)
 	{
-		if(file_put_contents(ROOT.SEP.'webpackages.zip', $data) !== false)
+		$data			=	\package\core\curl::get_data($url);
+
+		if($data)
 		{
-			$zipArchive	=	new ZipArchive();
-
-			if($zipArchive->open(ROOT.SEP.'webpackages.zip') === true)
+			if(file_put_contents(ROOT.SEP.'webpackages.zip', $data) != false)
 			{
-				if($zipArchive->extractTo(INSTALL_DIR) === true)
+				$zipArchive	=	new ZipArchive();
+
+				if($zipArchive->open(ROOT.SEP.'webpackages.zip') == true)
 				{
-					$currentConstants	=	file_get_contents('constants.php');
-					$newConstants		=	file_get_contents(INSTALL_DIR.'constants.php');
-
-					preg_match_all("/define\\('(.*?)',\\s(.*?)\\);/m", $currentConstants, $matches);
-
-					$notAllowedUserConstants	=	array('HTTP', 'SEP', 'OS', 'ROOT', 'MYSQL_FUNCTIONS');
-
-					foreach($matches[1] as $k => $match)
+					if($zipArchive->extractTo(INSTALL_DIR))
 					{
-						$value	=	$matches[2][$k];
+						$currentConstants	=	file_get_contents('constants.php');
+						$newConstants		=	file_get_contents(INSTALL_DIR.'constants.php');
 
-						if(in_array($match, $notAllowedUserConstants) === false)
+						preg_match_all("/define\\('(.*?)',\\s(.*?)\\);/m", $currentConstants, $matches);
+
+						$notAllowedUserConstants	=	array('HTTP', 'SEP', 'OS', 'ROOT', 'MYSQL_FUNCTIONS');
+
+						foreach($matches[1] as $k => $match)
 						{
-							$newConstants	=	preg_replace('/define\(\''.$match.'\',\s(.*?)\);/m', 'define(\''.$match.'\', '.$value.');', $newConstants);
+							$value	=	$matches[2][$k];
 
+							if(!in_array($match, $notAllowedUserConstants))
+							{
+								$newConstants	=	preg_replace('/define\(\''.$match.'\',\s(.*?)\);/m', 'define(\''.$match.'\', '.$value.');', $newConstants);
+
+							}
 						}
+
+						preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $currentConstants, $userConstants);
+
+						$newConstants	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.$userConstants[2].'#USER_CONTENT_END', $newConstants);
+
+						file_put_contents(INSTALL_DIR.'constants.php', $newConstants);
+
+						$newHtaccess	=	file_get_contents(INSTALL_DIR.'.htaccess');
+						$oldHtaccess	=	file_get_contents(ROOT.SEP.'.htaccess');
+
+
+						preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $oldHtaccess, $userHtaccess);
+
+						$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.str_replace(array('$'), array('||||'), $userHtaccess[2]).'#USER_CONTENT_END', $newHtaccess);
+
+						$newHtaccess	=	str_replace(array('||||'), array('$'), $newHtaccess);
+
+						file_put_contents(INSTALL_DIR.'.htaccess', $newHtaccess);
+
+						removeInitialFiles();
+						copyFileToRoot();
+
+						unlink(ROOT.SEP.'webpackages.zip');
+
+						header('Location: '.HTTP);
 					}
-
-					preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $currentConstants, $userConstants);
-
-					$newConstants	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.$userConstants[2].'#USER_CONTENT_END', $newConstants);
-
-					file_put_contents(INSTALL_DIR.'constants.php', $newConstants);
-
-					$newHtaccess	=	file_get_contents(INSTALL_DIR.'.htaccess');
-					$oldHtaccess	=	file_get_contents(ROOT.SEP.'.htaccess');
-
-
-					preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $oldHtaccess, $userHtaccess);
-
-					$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.str_replace(array('$'), array('||||'), $userHtaccess[2]).'#USER_CONTENT_END', $newHtaccess);
-
-					$newHtaccess	=	str_replace(array('||||'), array('$'), $newHtaccess);
-
-					file_put_contents(INSTALL_DIR.'.htaccess', $newHtaccess);
-
-					removeInitialFiles();
-					copyFileToRoot();
-
-					unlink(ROOT.SEP.'webpackages.zip');
-
-					header('Location: '.HTTP);
+					else
+					{
+						$error = 'Das Update konnte mit ZipArchive nicht entpackt werden!';
+					}
+				}
+				else
+				{
+					$error = 'Das Update konnte mit ZipArchive nicht geöffnet werden!';
 				}
 			}
+			else
+			{
+				$error = 'Es bestehen keine Schreibrechte im Verzeichnis "'.ROOT.SEP.'"';
+			}
 		}
+		else
+		{
+			$error = 'Das Update konnte vom webpackages Server nicht geladen werden!';
+		}
+	}
+	else
+	{
+		$error	=	'Der Sicherheitsschlüssel ist nicht richtig!';
 	}
 }
 
@@ -173,6 +199,19 @@ $isActual	=	version_compare($current_version['current_version'], \package\core\v
 <body>
 	<div class="container">
 		<div class="row">
+			<?php
+			if(isset($error) === true)
+			{
+				echo '
+				<div class="col-md-12">
+					<br>
+					<div class="alert alert-danger">
+						<strong>Fehler!</strong> '.$error.'
+					</div>
+				</div>
+				';
+			}
+			?>
 			<div class="col-md-12">
 				<h3 class="text-center">webpackages Framework aktualisieren</h3>
 			</div>
@@ -185,6 +224,10 @@ $isActual	=	version_compare($current_version['current_version'], \package\core\v
 				{
 				?>
 				<form action="" method="post">
+					<div class="form-group">
+						<label>Sicherheitsschlüssel</label>
+						<input type="text" class="form-control" name="security_key">
+					</div>
 					<input type="hidden" name="update">
 					<p class="text-center"><button class="btn btn-success">Aktualisieren</button></p>
 				</form>

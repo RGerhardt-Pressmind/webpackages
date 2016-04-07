@@ -90,7 +90,7 @@ class curl extends initiator implements IStatic
 	 */
 	protected static function _get_data($url, $postfields = array(), $ssl = false)
 	{
-		if(self::curl_extension_exists() === false)
+		if(!self::curl_extension_exists())
 		{
 			throw new curlException('Error: curl extension not loaded');
 		}
@@ -114,7 +114,7 @@ class curl extends initiator implements IStatic
 		curl_setopt($curl, CURLOPT_VERBOSE, true);
 		curl_setopt($curl, CURLINFO_HEADER_OUT, true);
 
-		if(empty($postfields) === false)
+		if(!empty($postfields))
 		{
 			curl_setopt($curl, CURLOPT_POST, true);
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
@@ -136,7 +136,7 @@ class curl extends initiator implements IStatic
 	 */
 	protected static function _get_status($url)
 	{
-		if(self::curl_extension_exists() === false)
+		if(!self::curl_extension_exists())
 		{
 			throw new curlException('Error: curl extension not loaded');
 		}
@@ -173,7 +173,7 @@ class curl extends initiator implements IStatic
 	 */
 	protected static function _get_city_coordinates($city, $resultArray = false)
 	{
-		if(self::curl_extension_exists() === false)
+		if(!self::curl_extension_exists())
 		{
 			throw new curlException('Error: curl extension not loaded');
 		}
@@ -199,16 +199,16 @@ class curl extends initiator implements IStatic
 
 		$data = array();
 
-		if($resultArray === false)
+		if(!$resultArray)
 		{
-			if(empty($response_a->results[0]) === false)
+			if(!empty($response_a->results[0]))
 			{
 				$data = $response_a->results[0]->geometry->location;
 			}
 		}
 		else
 		{
-			if(empty($response_a['results'][0]) === false)
+			if(!empty($response_a['results'][0]))
 			{
 				$data = $response_a['results'][0]['geometry']['location'];
 			}
@@ -227,7 +227,7 @@ class curl extends initiator implements IStatic
 	{
 		$ip = security::get_ip_address();
 
-		if(empty($ip) === true)
+		if(empty($ip))
 		{
 			return 'Not found';
 		}
@@ -235,7 +235,7 @@ class curl extends initiator implements IStatic
 		$getData = self::get_data('http://ip-api.com/php/'.$ip);
 		$query   = unserialize($getData);
 
-		if(empty($query['status']) === false && $query['status'] == 'success')
+		if(!empty($query['status']) && $query['status'] == 'success')
 		{
 			return $query['city'];
 		}

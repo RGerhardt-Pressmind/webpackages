@@ -30,26 +30,26 @@ require 'init.php';
 $c = DEFAULT_CLASS;
 $m = DEFAULT_METHODE;
 
-if(empty($_GET['c']) === false)
+if(!empty($_GET['c']))
 {
 	$c = \package\core\security::url('c', 'GET', 'string');
 }
 
-if(empty($_GET['m']) === false)
+if(!empty($_GET['m']))
 {
 	$m = \package\core\security::url('m', 'GET', 'string');
 }
 
 $class = searchInFolder(PAGE_DIR, $c);
 
-if($class === null)
+if(!$class)
 {
 	$class	=	getPluginControler($c);
 }
 
-if($class !== null)
+if($class)
 {
-	if(method_exists($class, $m) === true)
+	if(method_exists($class, $m))
 	{
 		$class->$m();
 	}
@@ -72,7 +72,7 @@ function searchInFolder($folder, $c)
 	{
 		foreach($iterator as $item)
 		{
-			if($item->isFile() === true)
+			if($item->isFile())
 			{
 				if($item->getFilename() == $c.'.class.php')
 				{
@@ -95,23 +95,23 @@ function getPluginControler($c)
 	{
 		foreach($iterator as $item)
 		{
-			if($item->isFile() === true)
+			if($item->isFile())
 			{
 				if($item->getFilename() == $c.'.class.php')
 				{
 					$namespace	=	null;
 					$config		=	$item->getPath().SEP.'config.ini';
 
-					if(file_exists($config) === true)
+					if(file_exists($config))
 					{
 						$config	=	parse_ini_file($config);
 
-						if(isset($config['namespace']) === true)
+						if(isset($config['namespace']))
 						{
 							$namespace	=	trim($config['namespace'], '\\').'\\';
 						}
 
-						if(isset($config['active']) === true && ($config['active'] == 0 || $config['active'] == false))
+						if(isset($config['active']) && ($config['active'] == 0 || $config['active'] == false))
 						{
 							continue;
 						}

@@ -45,6 +45,7 @@ use package\system\core\initiator;
  * @method static bool set_element(string $cache_name, string $content, $lifetime = 500)
  * @method static mixed get_element(string $cache_name)
  * @method static bool delete_element(string $cache_name)
+ * @method static void set_cache_active(bool $active)
  *
  * @package        Webpackages
  * @subpackage     core
@@ -96,12 +97,12 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _set_cache_dir($cachePath)
 	{
-		if(empty($cachePath) === true || is_dir($cachePath) === false)
+		if(empty($cachePath) || !is_dir($cachePath))
 		{
 			return false;
 		}
 
-		if(file_exists($cachePath) === false)
+		if(!file_exists($cachePath))
 		{
 			self::$cacheDir = $cachePath;
 
@@ -161,7 +162,7 @@ class cache extends initiator implements IStatic
 	{
 		$isSave = @file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
 
-		if($isSave === false)
+		if($isSave == false)
 		{
 			return false;
 		}
@@ -184,19 +185,19 @@ class cache extends initiator implements IStatic
 	{
 		$cacheFile = self::$cacheDir.$cache_name.'.html';
 
-		if(file_exists($cacheFile) === false)
+		if(!file_exists($cacheFile))
 		{
 			return false;
 		}
 
 		$filemtime = @filemtime($cacheFile);
 
-		if($filemtime === false)
+		if($filemtime == false)
 		{
 			return false;
 		}
 
-		if(($filemtime + $lifetime) >= time() || $lifetime === 0)
+		if(($filemtime + $lifetime) >= time() || $lifetime == 0)
 		{
 			return $cacheFile;
 		}
@@ -221,15 +222,16 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _set_element($cache_name, $content, $lifetime = 500)
 	{
-		if(empty($cache_name) === true)
+		if(empty($cache_name))
 		{
 			throw new cacheException('Error: cache name is empty');
 		}
 
 		$cache_name = md5($cache_name);
 
-		if(empty($cache_name) === true || self::$cacheActiv === false)
+		if(empty($cache_name) || !self::$cacheActiv)
 		{
+			echo 1;exit;
 			return false;
 		}
 
@@ -237,10 +239,11 @@ class cache extends initiator implements IStatic
 			'lifetime' => (time() + $lifetime),
 			'content' => $content
 		));
+
 		$cachePath = self::$cacheDir.$cache_name.self::$cacheExtension;
 		$saveFile  = @file_put_contents($cachePath, $serialize);
 
-		if($saveFile === false)
+		if($saveFile == false)
 		{
 			return false;
 		}
@@ -260,7 +263,7 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _get_element($cache_name)
 	{
-		if(empty($cache_name) === true)
+		if(empty($cache_name))
 		{
 			throw new cacheException('Error: cache name is empty');
 		}
@@ -268,15 +271,15 @@ class cache extends initiator implements IStatic
 		$cache_name = md5($cache_name);
 		$filename   = self::$cacheDir.$cache_name.self::$cacheExtension;
 
-		if(is_file($filename) === true)
+		if(is_file($filename))
 		{
 			$getContent = @file_get_contents($filename);
 
-			if(empty($getContent) === false)
+			if(!empty($getContent))
 			{
 				$unserialize = @unserialize($getContent);
 
-				if($unserialize !== false && isset($unserialize['lifetime']) === true && $unserialize['lifetime'] >= time())
+				if($unserialize != false && isset($unserialize['lifetime']) && $unserialize['lifetime'] >= time())
 				{
 					return $unserialize['content'];
 				}
@@ -310,7 +313,7 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _delete_element($cache_name)
 	{
-		if(empty($cache_name) === true)
+		if(empty($cache_name))
 		{
 			throw new cacheException('Error: cache name is empty');
 		}
@@ -318,7 +321,7 @@ class cache extends initiator implements IStatic
 		$filename = self::$cacheDir.md5($cache_name).self::$cacheExtension;
 		$remove   = true;
 
-		if(is_file($filename) === true)
+		if(is_file($filename))
 		{
 			$remove = @unlink($filename);
 		}

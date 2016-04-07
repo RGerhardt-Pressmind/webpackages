@@ -68,11 +68,11 @@ class XML extends initiator
 	protected function _loadXML($xml)
 	{
 		//XML von einer URL laden
-		if(filter_var($xml, FILTER_VALIDATE_URL) !== false)
+		if(filter_var($xml, FILTER_VALIDATE_URL) != false)
 		{
 			$xmlData = curl::get_data($xml);
 
-			if(empty($xmlData) === false)
+			if(!empty($xmlData))
 			{
 				$this->xml = simplexml_load_string($xmlData);
 			}
@@ -80,7 +80,7 @@ class XML extends initiator
 			return;
 		}
 
-		if(class_exists('\SplFileInfo') === false)
+		if(!class_exists('\SplFileInfo'))
 		{
 			throw new xmlException('Error: Class SplFileInfo not exists');
 		}
@@ -88,11 +88,11 @@ class XML extends initiator
 		$xmlFile = new \SplFileInfo($xml);
 
 		// Wenn es eine lokale Datei ist, laden
-		if($xmlFile->isFile() === true)
+		if($xmlFile->isFile())
 		{
 			$xmlData = file_get_contents($xmlFile);
 
-			if($xmlData !== false)
+			if($xmlData != false)
 			{
 				$this->xml = simplexml_load_string($xmlData);
 			}
@@ -103,7 +103,7 @@ class XML extends initiator
 		//Kontrollieren ob es sich um ein XML String handelt
 		$result = simplexml_load_string($xml, 'SimpleXmlElement', LIBXML_NOERROR + LIBXML_ERR_FATAL + LIBXML_ERR_NONE);
 
-		if($result !== false)
+		if($result != false)
 		{
 			$this->xml = simplexml_load_string($xml);
 
@@ -121,7 +121,7 @@ class XML extends initiator
 	 */
 	protected function _toArray()
 	{
-		if($this->xml === null)
+		if($this->xml == null)
 		{
 			throw new xmlException('Error: Not XML define');
 		}
@@ -140,7 +140,7 @@ class XML extends initiator
 	 */
 	protected function _toObject()
 	{
-		if($this->xml === null)
+		if($this->xml == null)
 		{
 			throw new xmlException('Error: Not XML define');
 		}
@@ -159,7 +159,7 @@ class XML extends initiator
 	 */
 	protected function _getSimpleXML()
 	{
-		if($this->xml === null)
+		if($this->xml == null)
 		{
 			throw new xmlException('Error: Not XML define');
 		}

@@ -29,7 +29,7 @@ require_once 'constants.php';
 require_once CORE_DIR.'initiator.abstract.class.php';
 require_once CORE_DIR.'security.class.php';
 
-if(empty($_GET['t']) === false)
+if(!empty($_GET['t']))
 {
 	$type = \package\core\security::url('t', 'GET', 'string');
 	$type = str_replace(array('../', './'), array('', ''), $type);
@@ -40,7 +40,7 @@ else
 	exit;
 }
 
-if(empty($_GET['f']) === false)
+if(!empty($_GET['f']))
 {
 	$filename = \package\core\security::url('f', 'GET', 'string');
 	$filename = str_replace(array('../', './'), array('', ''), $filename);
@@ -53,7 +53,7 @@ else
 
 $skin = '';
 
-if(empty($_GET['s']) === false)
+if(!empty($_GET['s']))
 {
 	$skin = \package\core\security::url('s', 'GET', 'string').SEP;
 	$skin = str_replace(array('../', './'), array('', ''), $skin);
@@ -61,7 +61,7 @@ if(empty($_GET['s']) === false)
 
 $dir = '';
 
-if(empty($_GET['d']) === false)
+if(!empty($_GET['d']))
 {
 	$dir = \package\core\security::url('d', 'GET', 'string').SEP;
 	$dir = str_replace(array('../', './'), array('', ''), $dir);
@@ -73,9 +73,9 @@ else
 
 $withConvert = true;
 
-if(isset($_GET['c']) === true)
+if(isset($_GET['c']))
 {
-	$withConvert = (\package\core\security::url('c', 'GET', 'bool') == false) ? false : true;
+	$withConvert = \package\core\security::url('c', 'GET', 'bool');
 }
 
 require_once LIB_DIR.'minify'.SEP.'src'.SEP.'Minify.php';
@@ -90,7 +90,7 @@ switch(strtolower($type))
 
 		$file = TEMPLATE_DIR.$skin.$dir.$filename.'.css';
 
-		if(file_exists($file) === true)
+		if(file_exists($file))
 		{
 			$etag = md5_file($file);
 			$date = date("F d Y H:i:s.", filemtime($file));
@@ -104,13 +104,13 @@ switch(strtolower($type))
 			header("ETag: $etag");
 			header("Last-Modified: $date");
 
-			if((empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) === false && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (empty($_SERVER['HTTP_IF_NONE_MATCH']) === false && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
 			{
 				header("HTTP/1.1 304 Not Modified");
 				exit;
 			}
 
-			if($withConvert === true)
+			if($withConvert)
 			{
 				$minifier = new \MatthiasMullie\Minify\CSS($file);
 				$output   = $minifier->minify();
@@ -136,7 +136,7 @@ switch(strtolower($type))
 
 		$file = TEMPLATE_DIR.$skin.$dir.$filename.'.js';
 
-		if(file_exists($file) === true)
+		if(file_exists($file))
 		{
 			$etag = md5_file($file);
 			$date = date("F d Y H:i:s.", filemtime($file));
@@ -150,13 +150,13 @@ switch(strtolower($type))
 			header("ETag: $etag");
 			header("Last-Modified: $date");
 
-			if((empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) === false && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (empty($_SERVER['HTTP_IF_NONE_MATCH']) === false && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
 			{
 				header("HTTP/1.1 304 Not Modified");
 				exit;
 			}
 
-			if($withConvert === true)
+			if($withConvert)
 			{
 				$minifier = new \MatthiasMullie\Minify\JS($file);
 				$output   = $minifier->minify();
@@ -179,7 +179,7 @@ switch(strtolower($type))
 
 		$file = TEMPLATE_DIR.$skin.$dir.$filename;
 
-		if(file_exists($file) === true)
+		if(file_exists($file))
 		{
 			$etag = md5_file($file);
 			$date = date("F d Y H:i:s.", filemtime($file));
@@ -193,7 +193,7 @@ switch(strtolower($type))
 			header("ETag: $etag");
 			header("Last-Modified: $date");
 
-			if((empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) === false && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (empty($_SERVER['HTTP_IF_NONE_MATCH']) === false && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
+			if((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $date) || (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag))
 			{
 				header("HTTP/1.1 304 Not Modified");
 				exit;
@@ -201,7 +201,7 @@ switch(strtolower($type))
 
 			ob_start();
 
-			if(stripos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)
+			if(stripos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') != false)
 			{
 				ob_start('ob_gzhandler');
 				echo file_get_contents($file);

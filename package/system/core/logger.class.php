@@ -69,14 +69,7 @@ class logger extends initiator implements iLogger
 
 		$writeLog = @file_put_contents($filename, $time.' - '.$level.'('.$code.'): '.$msg."\r\n", FILE_APPEND);
 
-		if($writeLog === false)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return ((!$writeLog) ? false : true);
 	}
 
 	/**
@@ -89,7 +82,7 @@ class logger extends initiator implements iLogger
 	{
 		$filename = CACHE_PATH.$this->filename;
 
-		if(file_exists($filename) === false)
+		if(!file_exists($filename))
 		{
 			throw new loggerException('log file not exists');
 		}
@@ -111,7 +104,7 @@ class logger extends initiator implements iLogger
 
 		$read = @file_get_contents($filename);
 
-		if($read === false)
+		if($read == false)
 		{
 			throw new loggerException('Error: file('.$filename.') not read');
 		}
