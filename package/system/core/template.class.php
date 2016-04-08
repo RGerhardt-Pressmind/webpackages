@@ -105,10 +105,8 @@ class template extends initiator
 		$this->contentData = null;
 
 		unset($this->contentData);
-		unset($this->tempDir);
 		unset($this->header);
 		unset($this->footer);
-		unset(self::$skin);
 	}
 
 	/**
