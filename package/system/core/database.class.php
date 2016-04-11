@@ -47,18 +47,7 @@ class database extends \PDO
 	 * @var array Eine Liste aller erlaubten PDO Treiber die verwendet werden dürfen. Erlaubt sind: mysql, cubrid,
 	 *      dblib, firebird, informix, sqlsrv, oci, pgsql, sqlite und sqlite2
 	 */
-	public static $allowedDrivers = array(
-		'mysql',
-		'cubrid',
-		'dblib',
-		'firebird',
-		'informix',
-		'sqlsrv',
-		'oci',
-		'pgsql',
-		'sqlite',
-		'sqlite2'
-	);
+	public static $allowedDrivers = array('mysql', 'cubrid', 'dblib', 'firebird', 'informix', 'sqlsrv', 'oci', 'pgsql', 'sqlite', 'sqlite2');
 
 	/**
 	 * @var string Der aktuell benutzte PDO Treiber
@@ -73,7 +62,7 @@ class database extends \PDO
 	/**
 	 * @var bool Kontrolliert ob die Datenbank initialisiert ist
 	 */
-	private $isInit            = false;
+	private $isInit = false;
 
 	/**
 	 * Am Konstruktor müssen dsn, username, password, options und driver übermittelt werden
@@ -327,18 +316,68 @@ class database extends \PDO
 			throw new databaseException('Error: pdo::multi_query: $sql is not a string or empty');
 		}
 
+		$oldValue = $this->getAttribute(\PDO::ATTR_EMULATE_PREPARES);
+
+		$this->setAttribute(\PDO::ATTR_EMULATE_PREPARES, 0);
+
 		try
 		{
 			$this->exec($sql);
 		}
 		catch(\PDOException $e)
 		{
+			$this->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $oldValue);
+
 			$this->error_info = $e->getMessage();
 
 			return false;
 		}
 
+		$this->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $oldValue);
+
 		return true;
+	}
+
+	/**
+	 * Führt mehrere Querys sicher durch das Prepare Statement Verfahren aus
+	 *
+	 * @param string $sql
+	 * @param array  $execute
+	 *
+	 * @throws databaseException
+	 * @return bool
+	 */
+	public function multi_query_safety($sql, $execute = array())
+	{
+		if(!$this->isInit)
+		{
+			return false;
+		}
+
+		if(!is_string($sql) || empty($sql))
+		{
+			throw new databaseException('Error: pdo::multi_query_safety: $sql is not a string or empty');
+		}
+
+		$oldValue = $this->getAttribute(\PDO::ATTR_EMULATE_PREPARES);
+
+		$this->setAttribute(\PDO::ATTR_EMULATE_PREPARES, 1);
+
+		try
+		{
+			$stmt 	= 	$this->prepare($sql);
+			$back	=	$stmt->execute($execute);
+		}
+		catch(\PDOException $e)
+		{
+			$this->error_info = $e->getMessage();
+
+			$back	=	false;
+		}
+
+		$this->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $oldValue);
+
+		return $back;
 	}
 
 	/**
@@ -489,38 +528,34 @@ class database extends \PDO
 	{
 		$insert = '
 		INSERT INTO
-			`'.$table.'`
-		SET
+			'.$table.'
 		';
+
+		$keys	=	'(';
+		$values	=	'(';
 
 		$execute = array();
 
 		foreach($setParameter as $key => $value)
 		{
-			if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
-			{
-				$insert .= '
-				'.$key;
-			}
-			else
-			{
-				$insert .= '
-				`'.$key.'`';
-			}
+			$keys .= $key.',';
 
 			if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 			{
-				$insert .= '	=	'.$value.',';
+				$insert .= $value.',';
 			}
 			else
 			{
 				$execute[] = $value;
 
-				$insert .= '	=	?,';
+				$insert .= '?,';
 			}
 		}
 
-		$insert = trim($insert, ',').';';
+		$keys	=	trim($keys, ',').')';
+		$values	=	trim($values, ',').')';
+
+		$insert	.=	$keys.' VALUES'.$values.';';
 
 		$execInsert = $this->safetyQuery($insert, $execute, false, false);
 
@@ -547,7 +582,7 @@ class database extends \PDO
 	{
 		$update = '
 		UPDATE
-			`'.$table.'`
+			'.$table.'
 		SET
 		';
 
@@ -555,17 +590,9 @@ class database extends \PDO
 
 		foreach($setParameter as $key => $value)
 		{
-			if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
-			{
-				$update .= '
-				'.$key;
-			}
-			else
-			{
-				$update .= '
-				`'.$key.'`
-				';
-			}
+			$update .= '
+			'.$key.'
+			';
 
 			if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 			{
@@ -588,17 +615,9 @@ class database extends \PDO
 
 			foreach($whereParameter as $key => $value)
 			{
-				if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
-				{
-					$update .= '
-					'.$key;
-				}
-				else
-				{
-					$update .= '
-					`'.$key.'`
-					';
-				}
+				$update .= '
+				'.$key.'
+				';
 
 				if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 				{
@@ -649,7 +668,7 @@ class database extends \PDO
 
 		$deleteTable = '
 		DELETE FROM
-			`'.$table.'`';
+			'.$table;
 
 		if(!empty($whereParameter))
 		{
@@ -659,16 +678,8 @@ class database extends \PDO
 
 			foreach($whereParameter as $key => $value)
 			{
-				if(preg_match(MYSQL_FUNCTIONS, $key) > 0)
-				{
-					$deleteTable .= '
-					'.$key.'';
-				}
-				else
-				{
-					$deleteTable .= '
-					`'.$key.'`';
-				}
+				$deleteTable .= '
+				'.$key.'';
 
 				if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 				{

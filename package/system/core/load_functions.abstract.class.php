@@ -330,15 +330,7 @@ abstract class load_functions
 	{
 		if(empty($loadClasses))
 		{
-			$loadClasses = array(
-				self::$LOAD_URL,
-				self::$LOAD_TEMPLATE,
-				self::$LOAD_DATABASE,
-				self::$LOAD_PLUGINS,
-				self::$LOAD_CACHE,
-				self::$LOAD_CURL,
-				self::$LOAD_LANGUAGE
-			);
+			$loadClasses = self::getAllDefaultClasses();
 		}
 
 		$this->allLoadClasses = $loadClasses;
@@ -387,6 +379,24 @@ abstract class load_functions
 		$this->load_default_functions();
 
 		unset($loadClasses);
+	}
+
+	/**
+	 * Gibt alle Standard Klassen der Initialisierung zurück
+	 *
+	 * @return array
+	 */
+	public static function getAllDefaultClasses()
+	{
+		return array(
+			self::$LOAD_URL,
+			self::$LOAD_TEMPLATE,
+			self::$LOAD_DATABASE,
+			self::$LOAD_PLUGINS,
+			self::$LOAD_CACHE,
+			self::$LOAD_CURL,
+			self::$LOAD_LANGUAGE
+		);
 	}
 
 	/**
