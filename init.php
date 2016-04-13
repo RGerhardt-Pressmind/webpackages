@@ -27,7 +27,7 @@
 
 require 'constants.php';
 
-if(defined('ERROR_REPORTING') && (ERROR_REPORTING == true || ERROR_REPORTING == 1))
+if(defined('ERROR_REPORTING') && (ERROR_REPORTING || ERROR_REPORTING == 1))
 {
 	error_reporting(-1);
 	ini_set('display_errors', 1);
@@ -54,7 +54,7 @@ if(class_exists('SessionHandlerInterface'))
 	require SYSTEM_PATH.'loadSessionHandler.php';
 }
 
-if(!class_exists('SessionHandlerInterface') || (!defined('USE_SESSION_SAVE_HANDLER') || USE_SESSION_SAVE_HANDLER == false || !defined('PDO_HOST') || PDO_HOST == ''))
+if(!class_exists('SessionHandlerInterface') || (!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER || !defined('PDO_HOST') || PDO_HOST == ''))
 {
 	session_start();
 }

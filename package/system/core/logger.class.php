@@ -87,9 +87,7 @@ class logger extends initiator implements iLogger
 			throw new loggerException('log file not exists');
 		}
 
-		$unlink = @unlink($filename);
-
-		return $unlink;
+		return @unlink($filename);;
 	}
 
 	/**

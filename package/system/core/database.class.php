@@ -542,13 +542,13 @@ class database extends \PDO
 
 			if(preg_match(MYSQL_FUNCTIONS, $value) > 0)
 			{
-				$insert .= $value.',';
+				$values .= $value.',';
 			}
 			else
 			{
 				$execute[] = $value;
 
-				$insert .= '?,';
+				$values .= '?,';
 			}
 		}
 

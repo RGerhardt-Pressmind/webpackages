@@ -1,27 +1,5 @@
-- change directory structur
-- add benchmark class
-- add date class
-- add file system class
-- add images class
-- add number class
-- add paypal class
-- performance update plugins class
-- security update all methods
-- performance update template class
-- add text class
-- add url class
-- remove mod rewrite class
-- performance update xml class
-- minor bugfixes
-- performance update by load all classes
-- add more hooks
-- add php version method in version class
-- add "trim_slashes", "strip_quotes", "reduce_double_slashes" and "random_string" in text class
-- add load dynamic css, javascript and images in html with load_tempate_file method in template class
-- add "insert", "update" and "delete" methode in database class
-- change http header errors
-- remove GeneralFunctions class
-- remove validater class
-- remove browser class
-- remove download class
--
+2.4.0
+- images.class.php -> removeMetadata
+- images.class.php -> optimizedImage
+- curl.class.php -> downloadFile
+- autoload.class.php -> get add parameter inCache

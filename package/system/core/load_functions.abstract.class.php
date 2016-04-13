@@ -56,7 +56,8 @@ abstract class load_functions
 		'class' => 'Date',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_FILE_SYSTEM    = array(
@@ -64,7 +65,8 @@ abstract class load_functions
 		'class' => 'FileSystem',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_URL            = array(
@@ -72,7 +74,8 @@ abstract class load_functions
 		'class' => 'url',
 		'writeInAttribute' => 'url',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_VERSION        = array(
@@ -80,7 +83,8 @@ abstract class load_functions
 		'class' => 'version',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_ZIP            = array(
@@ -88,7 +92,8 @@ abstract class load_functions
 		'class' => 'zip',
 		'writeInAttribute' => 'zip',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_FTP            = array(
@@ -96,7 +101,8 @@ abstract class load_functions
 		'class' => 'ftp',
 		'writeInAttribute' => 'ftp',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_BENCHMARK      = array(
@@ -104,7 +110,8 @@ abstract class load_functions
 		'class' => 'benchmark',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_TEMPLATE       = array(
@@ -112,7 +119,8 @@ abstract class load_functions
 		'class' => 'template',
 		'writeInAttribute' => 'template',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_XML            = array(
@@ -120,7 +128,8 @@ abstract class load_functions
 		'class' => 'XML',
 		'writeInAttribute' => 'xml',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_LOGGER         = array(
@@ -128,7 +137,8 @@ abstract class load_functions
 		'class' => 'logger',
 		'writeInAttribute' => 'logger',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_ERROR          = array(
@@ -136,7 +146,8 @@ abstract class load_functions
 		'class' => 'errors',
 		'writeInAttribute' => 'error',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_DATABASE       = array(
@@ -152,7 +163,8 @@ abstract class load_functions
 			'port' => PDO_PORT,
 			'database' => PDO_DATABASE
 		),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_PLUGINS        = array(
@@ -160,7 +172,8 @@ abstract class load_functions
 		'class' => 'plugins',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_CACHE          = array(
@@ -168,7 +181,8 @@ abstract class load_functions
 		'class' => 'cache',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_CURL           = array(
@@ -176,7 +190,8 @@ abstract class load_functions
 		'class' => 'curl',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_TEXT           = array(
@@ -184,7 +199,8 @@ abstract class load_functions
 		'class' => 'text',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_NUMBER         = array(
@@ -192,7 +208,8 @@ abstract class load_functions
 		'class' => 'number',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_LANGUAGE       = array(
@@ -200,7 +217,8 @@ abstract class load_functions
 		'class' => 'language',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_PAYPAL         = array(
@@ -208,7 +226,8 @@ abstract class load_functions
 		'class' => 'paypal',
 		'writeInAttribute' => 'paypal',
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_IMAGES         = array(
@@ -216,7 +235,8 @@ abstract class load_functions
 		'class' => 'images',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_MAILER         = array(
@@ -224,7 +244,8 @@ abstract class load_functions
 		'class' => 'phpmailer',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\\'
+		'namespace' => '\\',
+		'inCache'	=>	true
 	);
 
 	public static $LOAD_CAPTCHA        = array(
@@ -232,7 +253,8 @@ abstract class load_functions
 		'class' => 'captcha',
 		'writeInAttribute' => null,
 		'parameter' => array(),
-		'namespace' => '\package\core\\'
+		'namespace' => '\package\core\\',
+		'inCache'	=>	true
 	);
 
 	private       $allLoadClasses      = array(), $defineDynamicClasses = array();
@@ -365,7 +387,14 @@ abstract class load_functions
 			{
 				if(!empty($classes['writeInAttribute']))
 				{
-					$this->defineDynamicClasses[$classes['writeInAttribute']] = autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter']);
+					$inCache	=	false;
+
+					if(!empty($classes['inCache']))
+					{
+						$inCache	=	true;
+					}
+
+					$this->defineDynamicClasses[$classes['writeInAttribute']] = autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter'], $inCache);
 				}
 				else
 				{
@@ -376,7 +405,6 @@ abstract class load_functions
 
 		$this->load_dynamic_classes();
 		$this->load_install_plugins();
-		$this->load_default_functions();
 
 		unset($loadClasses);
 	}
@@ -613,21 +641,5 @@ abstract class load_functions
 		}
 
 		return $back;
-	}
-
-	/**
-	 * Lädt standart Funktionen die immer kontrolliert
-	 * bzw. ausgeführt werden sollen
-	 *
-	 * @return void
-	 */
-	protected function load_default_functions()
-	{
-		//Load default functions
-		if(class_exists('\package\core\plugins'))
-		{
-			plugins::hookShow('before', 'load_functions', 'loadDefaultFunctions');
-			plugins::hookShow('after', 'load_functions', 'loadDefaultFunctions');
-		}
 	}
 }

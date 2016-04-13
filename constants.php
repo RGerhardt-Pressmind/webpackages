@@ -47,7 +47,7 @@ define('SEP', DIRECTORY_SEPARATOR);
 /**
  * Betriebssystem kürzel
  */
-define('OS', (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? 'WIN' : 'UNIX');
+define('OS', (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') ? 'WIN' : 'UNIX');
 
 /**
  * Das Hauptverzeichniss des Webservers

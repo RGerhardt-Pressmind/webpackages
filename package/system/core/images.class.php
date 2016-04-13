@@ -38,6 +38,8 @@ use package\system\core\initiator;
  *
  * @method static int|bool getImageHeight(string $image)
  * @method static int|bool getImageWidth(string $image)
+ * @method static bool optimizedImage(string $image)
+ * @method static bool removeMetadata(string $image)
  * @method static bool createCroppedThumbnail(string $source, float $width, float $height, string $savePath, float $clipping_x = 0, float $clipping_y = 0, float $clipping_width = 0, float $clipping_height = 0, int $quality = 100)
  *
  * @package        Webpackages
@@ -77,7 +79,7 @@ class images extends initiator implements IStatic
 		}
 		else
 		{
-			self::$image	=	null;
+			self::$image = null;
 		}
 	}
 
@@ -119,6 +121,130 @@ class images extends initiator implements IStatic
 		return imagesx(self::$image);
 	}
 
+	/**
+	 * Optimiert eine Medien Datei damit Sie weniger Speicher verbraucht aber
+	 * immer noch eine hohe Qualität besitzt.
+	 * Dabei werden auch Metadaten entfernt.
+	 *
+	 * @param string $source Der absolute Pfad zur Medien Datei
+	 * @param int $quality Die Kompressionsrate des Bildes (100 => hohe Qualität, niedrige Kompression -- 1 => niedriege Qualität, hohe Kompression)
+	 *
+	 * @return bool
+	 * @throws imagesException
+	 */
+	protected static function _optimizedImage($source, $quality = 85)
+	{
+		if(!file_exists($source))
+		{
+			throw new imagesException('Error: image '.$source.' not exist');
+		}
+
+		$imagesize = getimagesize($source);
+
+		$sourceType = $imagesize[2];
+
+		if($sourceType == 0)
+		{
+			throw new imagesException('Error: image type not supported ('.$source.')');
+		}
+
+		if($quality <= 0)
+		{
+			$quality	=	1;
+		}
+		elseif($quality > 100)
+		{
+			$quality	=	100;
+		}
+
+		if($sourceType == 1) // GIF
+		{
+			$img	=	imagecreatefromgif($source);
+			imagegif($img, $source);
+		}
+		elseif($sourceType == 2) // JPEG / JPG
+		{
+			$img	=	imagecreatefromjpeg($source);
+			imagejpeg($img, $source, $quality);
+		}
+		elseif($sourceType == 3) // PNG
+		{
+			$img	=	imagecreatefrompng($source);
+			imagepng($img, $source, $quality);
+		}
+		elseif($sourceType == 15) // WBMP
+		{
+			$img	=	imagecreatefromwbmp($source);
+			imagewbmp($img, $source);
+		}
+		elseif($sourceType == 16) // XBM
+		{
+			$img	=	imagecreatefromxbm($source);
+			imagexbm($img, $source);
+		}
+		else
+		{
+			throw new imagesException('Error: image type not supported ('.$source.')');
+		}
+
+		return imagedestroy($img);
+	}
+
+	/**
+	 * Entfernt alle Metadaten eines Bildes
+	 *
+	 * @param string $source Der absolute Pfad zum Bild. Erlaubte Bildtypen sind: jpg,gif ung png
+	 *
+	 * @return bool
+	 * @throws imagesException
+	 */
+	protected static function _removeMetadata($source)
+	{
+		if(!file_exists($source))
+		{
+			throw new imagesException('Error: image '.$source.' not exist');
+		}
+
+		$imagesize = getimagesize($source);
+
+		$sourceType = $imagesize[2];
+
+		if($sourceType >= 1 && $sourceType <= 3)
+		{
+			if(class_exists('\Imagick'))
+			{
+				$img = new \Imagick($source);
+				$img->stripImage();
+				$img->writeImage($source);
+				$img->clear();
+				$img->destroy();
+
+				return true;
+			}
+			else
+			{
+				if($sourceType == 1) // GIF
+				{
+					$img = imagecreatefromgif($source);
+					imagegif($img, $source);
+				}
+				elseif($sourceType == 2) // JPG
+				{
+					$img = imagecreatefromjpeg($source);
+					imagejpeg($img, $source, 100);
+				}
+				else // PNG
+				{
+					$img = imagecreatefrompng($source);
+					imagepng($img, $source, 100);
+				}
+
+				return imagedestroy($img);
+			}
+		}
+
+		return false;
+	}
 
 	/**
 	 * Erstellt ein Thumbnail eines Bildes, mit Bildausschnitt

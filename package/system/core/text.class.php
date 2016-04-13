@@ -36,6 +36,8 @@ use package\system\core\initiator;
  * Wenn man einen bestimmten Satz kürzen möchte oder ein zufälligen String zurück haben möchte, kann man die text
  * Klasse nutzen.
  *
+ * @method static string convertToUTF8(string $str, string $encoding)
+ * @method static string getCharacterEncoding(string $str)
  * @method static string word_limiter(string $str, $limit = 100, $suffix = '...')
  * @method static string truncate(string $string, int $limit, $suffix = '...')
  * @method static string word_censor(string $str, array $censored, $replacement = '')
@@ -55,8 +57,42 @@ class text extends initiator implements IStatic
 	/**
 	 * Zum initiailisieren von Daten
 	 */
-	public static function init()
+	public static function init(){}
+
+	/**
+	 * Wandelt ein String in ein UTF-8 String um
+	 *
+	 * @param string $str Der String der in die Zeichenkodierung UTF-8 Konvertiert werden soll
+	 * @param string $encoding Die Eingangszeichenkodierung des Strings. Die Ursprüngliche Zeichenkodierung.
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
+	protected static function _convertToUTF8($str, $encoding)
 	{
+		if(empty($encoding))
+		{
+			$encoding	=	self::getCharacterEncoding($str);
+		}
+
+		if(!$encoding)
+		{
+			throw new \Exception('Error: character encoding not supported (false)');
+		}
+
+		return @iconv($encoding, 'UTF-8', $str);
+	}
+
+	/**
+	 * Ermittelt die Zeichenkodierung eines Strings
+	 *
+	 * @param string $str Der String des Zeichenkodierung ermittelt werden soll.
+	 *
+	 * @return string|bool
+	 */
+	protected static function _getCharacterEncoding($str)
+	{
+		return mb_detect_encoding($str);
 	}
 
 	/**

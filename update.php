@@ -200,7 +200,7 @@ $isActual	=	version_compare($current_version['current_version'], \package\core\v
 	<div class="container">
 		<div class="row">
 			<?php
-			if(isset($error) === true)
+			if(isset($error))
 			{
 				echo '
 				<div class="col-md-12">

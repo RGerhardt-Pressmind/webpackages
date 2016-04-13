@@ -72,9 +72,7 @@ class plugins implements IStatic
 	/**
 	 * Zum initialisieren von Daten
 	 */
-	public static function init()
-	{
-	}
+	public static function init(){}
 
 	/**
 	 * Startet den Hook Call und Hook Show

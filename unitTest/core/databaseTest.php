@@ -181,7 +181,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$inserted	=	$this->db->insertTable('unit_test', array('name' => 'InsertTest', 'modified_date' => 'NOW()'));
 
-		$this->assertTrue(($inserted !== false));
+		$this->assertTrue(($inserted != false));
 	}
 
 

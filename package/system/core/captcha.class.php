@@ -33,12 +33,14 @@ use package\system\core\initiator;
 /**
  * Erstellen von Captcha Bildern
  *
- * Um seine Formulare vor Spam von sogenannten Bots abzusichern, kann man Captchas mit einrichten. Diese Klasse erstellt
- * ein Bild wo eine bestimmte Anzahl von Zeichen zu sehen sind. Ihr Benutzer muss dieses Anzahl von Zeichen in ein dafür
+ * Um seine Formulare vor Spam von sogenannten Bots abzusichern, kann man Captchas mit einrichten. Diese Klasse
+ * erstellt
+ * ein Bild wo eine bestimmte Anzahl von Zeichen zu sehen sind. Ihr Benutzer muss dieses Anzahl von Zeichen in ein
+ * dafür
  * vorgesehenes Feld eintippen. Nachdem das Formular abgesendet wurde, können Sie die Eingabe des Benutzer mit den
  * Daten, die die Klasse Captcha zurückliefert vergleichen.
  *
- * @method static array create_better_captcha(string $savePath, int $imageWidth = 200, int $imageHeight = 50, string $allowedLettersType = 'alpha', string $imageType = 'png', array $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), int $linesInCaptcha = 3, array $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), int $pointsInCaptcha = 1000, array $pointsInCaptchaColor= array('r' => 0, 'g' => 0, 'b' => 255))
+ * @method static array create_better_captcha(string $savePath, int $imageWidth = 200, int $imageHeight = 50, string $allowedLettersType = 'alpha', string $imageType = 'png', array $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), int $linesInCaptcha = 3, array $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), int $pointsInCaptcha = 1000, array $pointsInCaptchaColor = array('r' => 0, 'g' => 0, 'b' => 255))
  *
  * @package        Webpackages
  * @subpackage     controllers
@@ -50,28 +52,28 @@ class captcha extends initiator
 	/**
 	 * Erstellt ein zufälliges Captcha Bild
 	 *
-	 * @param string $savePath Der Speicherort des Captchas
-	 * @param int $imageWidth Die Breite des Captcha Bildes
-	 * @param int $imageHeight Die Höhe des Captcha Bildes
-	 * @param string $allowedLettersType Erlaubt sind alnum, numeric, nozero und alpha
-	 * @param string $imageType Der Bildtype der erstellt werden soll. Erlaubt sind png, jpg oder gif
-	 * @param array $backgroundColor Der RGB Farben des Hintergrunds des Captcha Bildes
-	 * @param int $linesInCaptcha Die Anzahl der Linien die durch das Bild gehen sollen
-	 * @param array $linesInCaptchaColor Die RGB Farben der Linien
-	 * @param int $pointsInCaptcha Die Anzahl an Punkten die wilkürlich im Captcha platziert werden
-	 * @param array $pointsInCaptchaColor Die RGB Farben der Punkte
+	 * @param string $savePath             Der Speicherort des Captchas
+	 * @param int    $imageWidth           Die Breite des Captcha Bildes
+	 * @param int    $imageHeight          Die Höhe des Captcha Bildes
+	 * @param string $allowedLettersType   Erlaubt sind alnum, numeric, nozero und alpha
+	 * @param string $imageType            Der Bildtype der erstellt werden soll. Erlaubt sind png, jpg oder gif
+	 * @param array  $backgroundColor      Der RGB Farben des Hintergrunds des Captcha Bildes
+	 * @param int    $linesInCaptcha       Die Anzahl der Linien die durch das Bild gehen sollen
+	 * @param array  $linesInCaptchaColor  Die RGB Farben der Linien
+	 * @param int    $pointsInCaptcha      Die Anzahl an Punkten die wilkürlich im Captcha platziert werden
+	 * @param array  $pointsInCaptchaColor Die RGB Farben der Punkte
 	 *
 	 * @return array
 	 * @throws captchaException
 	 */
-	public static function _create_better_captcha($savePath = CACHE_PATH, $imageWidth = 200, $imageHeight = 50, $allowedLettersType = 'alpha', $imageType = 'png', $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), $linesInCaptcha = 3, $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), $pointsInCaptcha = 1000, $pointsInCaptchaColor= array('r' => 0, 'g' => 0, 'b' => 255))
+	protected static function _create_better_captcha($savePath = CACHE_PATH, $imageWidth = 200, $imageHeight = 50, $allowedLettersType = 'alpha', $imageType = 'png', $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), $linesInCaptcha = 3, $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), $pointsInCaptcha = 1000, $pointsInCaptchaColor = array('r' => 0, 'g' => 0, 'b' => 255))
 	{
 		if(!extension_loaded('gd'))
 		{
 			throw new captchaException('Error: gd lib is not installed');
 		}
 
-		$image 			  = imagecreatetruecolor($imageWidth, $imageHeight);
+		$image = imagecreatetruecolor($imageWidth, $imageHeight);
 
 		if($image == false)
 		{
@@ -108,30 +110,30 @@ class captcha extends initiator
 			imagesetpixel($image, rand() % $imageWidth, rand() % $imageHeight, $pixel_color);
 		}
 
-		$allowedLettersType	=	strtolower($allowedLettersType);
+		$allowedLettersType = strtolower($allowedLettersType);
 
 		$letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
 		if($allowedLettersType == 'alnum')
 		{
-			$letters	=	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$letters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		}
 		elseif($allowedLettersType == 'numeric')
 		{
-			$letters	=	'0123456789';
+			$letters = '0123456789';
 		}
 		elseif($allowedLettersType == 'nozero')
 		{
-			$letters	=	'123456789';
+			$letters = '123456789';
 		}
 
 		$len        = strlen($letters);
 		$text_color = imagecolorallocate($image, 0, 0, 0);
 		$word       = '';
 
-		$factorWidth	=	($imageWidth / 200) * 30;
-		$factorHeight	=	($imageHeight / 50) * 20;
-		$beginFactor	=	($imageWidth / 200) * 15;
+		$factorWidth  = ($imageWidth / 200) * 30;
+		$factorHeight = ($imageHeight / 50) * 20;
+		$beginFactor  = ($imageWidth / 200) * 15;
 
 		for($i = -1; ++$i < 6;)
 		{
@@ -140,33 +142,33 @@ class captcha extends initiator
 			$word .= $letter;
 		}
 
-		$imgPath	=	$savePath;
+		$imgPath = $savePath;
 
 		if(!file_exists($imgPath))
 		{
 			mkdir($imgPath, 0755, true);
 		}
 
-		$imageName	=	md5(uniqid(mt_rand(), true));
-		$imgPath	.=	$imageName;
+		$imageName = md5(uniqid(mt_rand(), true));
+		$imgPath .= $imageName;
 
-		$imageType	=	strtolower($imageType);
+		$imageType = strtolower($imageType);
 
 		if($imageType == 'png')
 		{
-			$imgPath	.=	'.png';
+			$imgPath .= '.png';
 
 			imagepng($image, $imgPath);
 		}
 		elseif($imageType == 'jpg' || $imageType == 'jpeg')
 		{
-			$imgPath	.=	'.jpg';
+			$imgPath .= '.jpg';
 
 			imagejpeg($image, $imgPath);
 		}
 		elseif($imageType == 'gif')
 		{
-			$imgPath	.=	'.gif';
+			$imgPath .= '.gif';
 
 			imagegif($image, $imgPath);
 		}
@@ -178,10 +180,6 @@ class captcha extends initiator
 
 		imagedestroy($image);
 
-		return array(
-			'word'			=>	$word,
-			'name'			=>	$imageName,
-			'filepath'		=>	$imgPath
-		);
+		return array('word' => $word, 'name' => $imageName, 'filepath' => $imgPath);
 	}
 }

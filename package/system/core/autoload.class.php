@@ -43,6 +43,11 @@ use package\system\core\initiator;
 class autoload extends initiator
 {
 	/**
+	 * @var array Klassen die bereits einmal initialisiert wurden
+	 */
+	private static $cacheClasses = array();
+
+	/**
 	 * @const Der Klassensuffix unter den die Dateien abzuspeichern sind
 	 */
 	const CLASS_SUFFIX = '.class.php';
@@ -54,12 +59,14 @@ class autoload extends initiator
 	 * @param string $namespace  Wenn die Klasse einen Namespace besitzt, dann diesen angeben
 	 * @param bool   $isStatic   Wenn es sich um eine statische Klasse handelt
 	 * @param array  $parameter  Parameter für den Konstruktor der Klasse. Er muss ein Assoziatives Array sein
+	 * @param bool   $inCache    Kann eine Klasse in den Cache legen, um sie bei erneuter Initialisierung aus dem Cache
+	 *                           zu laden. Funktioniert nur bei nicht statischen Klassen.
 	 *
 	 * @throws autoloadException Wird ausgegeben wenn der Klassennamen leer ist oder die Klasse nicht geladen werden
 	 *                           konnte
 	 * @return mixed Gibt die Klasseninstanz zurück oder bei einer statischen Klasse ein true
 	 */
-	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array())
+	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array(), $inCache = true)
 	{
 		if(empty($class_name))
 		{
@@ -86,6 +93,15 @@ class autoload extends initiator
 
 		if(!$isStatic)
 		{
+			if($inCache)
+			{
+				if(!isset(self::$cacheClasses[$class_name]))
+				{
+					self::$cacheClasses[$class_name]	=	new $class_name($parameter);
+				}
+
+				return self::$cacheClasses[$class_name];
+			}
 			return new $class_name($parameter);
 		}
 		else

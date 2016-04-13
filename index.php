@@ -72,12 +72,9 @@ function searchInFolder($folder, $c)
 	{
 		foreach($iterator as $item)
 		{
-			if($item->isFile())
+			if($item->isFile() && $item->getFilename() == $c.'.class.php')
 			{
-				if($item->getFilename() == $c.'.class.php')
-				{
-					return \package\core\autoload::get($c);
-				}
+				return \package\core\autoload::get($c);
 			}
 		}
 	}
@@ -95,32 +92,29 @@ function getPluginControler($c)
 	{
 		foreach($iterator as $item)
 		{
-			if($item->isFile())
+			if($item->isFile() && $item->getFilename() == $c.'.class.php')
 			{
-				if($item->getFilename() == $c.'.class.php')
+				$namespace	=	null;
+				$config		=	$item->getPath().SEP.'config.ini';
+
+				if(file_exists($config))
 				{
-					$namespace	=	null;
-					$config		=	$item->getPath().SEP.'config.ini';
+					$config	=	parse_ini_file($config);
 
-					if(file_exists($config))
+					if(isset($config['namespace']))
 					{
-						$config	=	parse_ini_file($config);
-
-						if(isset($config['namespace']))
-						{
-							$namespace	=	trim($config['namespace'], '\\').'\\';
-						}
-
-						if(isset($config['active']) && ($config['active'] == 0 || $config['active'] == false))
-						{
-							continue;
-						}
+						$namespace	=	trim($config['namespace'], '\\').'\\';
 					}
 
-					require_once $item->__toString();
-
-					return \package\core\autoload::get($c, $namespace);
+					if(isset($config['active']) && ($config['active'] == 0 || $config['active'] == false))
+					{
+						continue;
+					}
 				}
+
+				require_once $item->__toString();
+
+				return \package\core\autoload::get($c, $namespace);
 			}
 		}
 	}

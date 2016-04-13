@@ -38,6 +38,7 @@ use package\system\core\initiator;
  * die PHP Extension cURL. Mit der Klasse curl ist es deutlich einfacher mit der Extension zu Kommunizieren. Bereits
  * vordefinierte Methoden helfen Ihnen einfach bestimmte Bereiche abzufragen.
  *
+ * @method static bool downloadFile(string $url, string $destination)
  * @method static bool curl_extension_exists()
  * @method static mixed get_data(string $url, $postfields = array())
  * @method static int get_status(string $url)
@@ -79,6 +80,39 @@ class curl extends initiator implements IStatic
 	}
 
 	/**
+	 * Lädt eine Datei herunter und speichert sie lokal auf den Webserver ab
+	 *
+	 * @param string $url Die URL von der Datei die heruntergeladen werden soll
+	 * @param string $destination Der absolute Pfad zum Speicherort
+	 *
+	 * @return bool
+	 * @throws curlException
+	 */
+	protected static function _downloadFile($url, $destination)
+	{
+		if(!self::curl_extension_exists())
+		{
+			throw new curlException('Error: curl extension not loaded');
+		}
+
+		$fp = fopen($destination, 'w+');
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+		curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_FILE, $fp);
+
+		curl_exec($ch);
+		curl_close($ch);
+		fclose($fp);
+
+		return (filesize($destination) > 0);
+	}
+
+	/**
 	 * Gibt Daten mittels cURL zurück
 	 *
 	 * @param string $url        Die HTTP Adresse die cURL aufrufen soll
@@ -106,7 +140,7 @@ class curl extends initiator implements IStatic
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $ssl);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 9);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HEADER, 0);
 		curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36');
 		curl_setopt($curl, CURLOPT_COOKIEFILE, self::$COOKIE_FILE);
@@ -145,7 +179,7 @@ class curl extends initiator implements IStatic
 
 		curl_setopt($ch, CURLOPT_HEADER, true);
 		curl_setopt($ch, CURLOPT_NOBODY, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -184,10 +218,10 @@ class curl extends initiator implements IStatic
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
