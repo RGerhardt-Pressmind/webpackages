@@ -86,7 +86,7 @@ class text extends initiator implements IStatic
 	/**
 	 * Ermittelt die Zeichenkodierung eines Strings
 	 *
-	 * @param string $str Der String des Zeichenkodierung ermittelt werden soll.
+	 * @param string $str Der String dessen Zeichenkodierung ermittelt werden soll.
 	 *
 	 * @return string|bool
 	 */

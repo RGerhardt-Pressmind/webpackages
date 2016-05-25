@@ -38,7 +38,7 @@ use package\system\core\initiator;
  *
  * @method static int|bool getImageHeight(string $image)
  * @method static int|bool getImageWidth(string $image)
- * @method static bool optimizedImage(string $image)
+ * @method static bool optimizedImage(string $image, int $quality = 85)
  * @method static bool removeMetadata(string $image)
  * @method static bool createCroppedThumbnail(string $source, float $width, float $height, string $savePath, float $clipping_x = 0, float $clipping_y = 0, float $clipping_width = 0, float $clipping_height = 0, int $quality = 100)
  *
