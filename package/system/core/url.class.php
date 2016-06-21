@@ -172,9 +172,9 @@ class url extends initiator implements IStatic
 	{
 		$url = strtolower($url);
 		$url = preg_replace('/\s/', '-', $url);
-		$url = str_replace(array('--'), array('-'), $url);
 		$url = preg_replace('/[^A-Za-z0-9\-\_]/', '', $url);
 		$url = filter_var($url, FILTER_SANITIZE_URL);
+		$url = preg_replace('/(-+)/', '-', $url);
 
 		return $url;
 	}
