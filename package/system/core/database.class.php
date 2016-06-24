@@ -232,8 +232,7 @@ class database extends \PDO
 
 		try
 		{
-			$stmt = $this->query($sql);
-			$stmt = $stmt->fetchAll();
+			$stmt = $this->query($sql)->fetchAll();
 		}
 		catch(\PDOException $e)
 		{
@@ -242,14 +241,12 @@ class database extends \PDO
 			return false;
 		}
 
-		if(!is_array($stmt) || empty($stmt[0]))
+		if(!empty($stmt))
 		{
-			return array();
+			return reset($stmt);
 		}
-		else
-		{
-			return $stmt[0];
-		}
+
+		return array();
 	}
 
 	/**
@@ -282,8 +279,7 @@ class database extends \PDO
 
 		try
 		{
-			$stmt   = $this->query($sql);
-			$return = $stmt->fetchAll();
+			$return   = $this->query($sql)->fetchAll();
 		}
 		catch(\PDOException $e)
 		{
@@ -365,8 +361,7 @@ class database extends \PDO
 
 		try
 		{
-			$stmt 	= 	$this->prepare($sql);
-			$back	=	$stmt->execute($execute);
+			$back 	= 	$this->prepare($sql)->execute($execute);
 		}
 		catch(\PDOException $e)
 		{
@@ -432,25 +427,7 @@ class database extends \PDO
 			return $this->lastInsertId($name);
 		}
 	}
-
-	/**
-	 * Füht einen SQL Befehl mittels "Prepared Statements" aus
-	 *
-	 * @param string $sql                 Der auszuführende SQL Befehl. Ersetzende Werte sind durch ein ? gesetzt
-	 * @param array  $execute             Die Liste der zu ersetzenden Werte im SQL Befehl
-	 * @param bool   $isResultAssociative Ist das Resultat ein assoziatives oder mehrdimensionales Array oder ein
-	 *                                    Boolischer Wert
-	 * @param bool   $getFirstResult      Soll nur der zuerst gefundenen Wert als assoziatives Array zurück gegebene
-	 *                                    werden oder ein komplettes mehrdimensionales Array
-	 *
-	 * @deprecated
-	 * @throws databaseException Wenn $sql leer ist
-	 * @return mixed Gibt, je nach Parameter, ein Array oder einen Boolischen Wert zurück
-	 */
-	public function secQuery($sql, $execute, $isResultAssociative = true, $getFirstResult = false)
-	{
-		return self::safetyQuery($sql, $execute, $isResultAssociative, $getFirstResult);
-	}
+	
 
 	/**
 	 * Füht einen SQL Befehl mittels "Prepared Statements" aus
@@ -493,9 +470,9 @@ class database extends \PDO
 				}
 				else
 				{
-					if(!empty($back[0]))
+					if(!empty($back))
 					{
-						return $back[0];
+						return reset($back);
 					}
 					else
 					{

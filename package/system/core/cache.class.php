@@ -102,7 +102,7 @@ class cache extends initiator implements IStatic
 			return false;
 		}
 
-		if(!file_exists($cachePath))
+		if(!is_file($cachePath))
 		{
 			self::$cacheDir = $cachePath;
 
@@ -160,9 +160,11 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _set_template_element($cache_name, $content)
 	{
-		$isSave = @file_put_contents(self::$cacheDir.$cache_name.'.html', $content);
+		$cachePath	=	self::$cacheDir.$cache_name.'.html';
 
-		if($isSave == false)
+		$isSave = @file_put_contents($cachePath, $content);
+
+		if($isSave == false || filesize($cachePath) == 0)
 		{
 			return false;
 		}
@@ -185,7 +187,7 @@ class cache extends initiator implements IStatic
 	{
 		$cacheFile = self::$cacheDir.$cache_name.'.html';
 
-		if(!file_exists($cacheFile))
+		if(!is_file($cacheFile))
 		{
 			return false;
 		}
@@ -231,7 +233,6 @@ class cache extends initiator implements IStatic
 
 		if(empty($cache_name) || !self::$cacheActiv)
 		{
-			echo 1;exit;
 			return false;
 		}
 
@@ -243,7 +244,7 @@ class cache extends initiator implements IStatic
 		$cachePath = self::$cacheDir.$cache_name.self::$cacheExtension;
 		$saveFile  = @file_put_contents($cachePath, $serialize);
 
-		if($saveFile == false)
+		if($saveFile == false || filesize($cachePath) == 0)
 		{
 			return false;
 		}
@@ -271,7 +272,7 @@ class cache extends initiator implements IStatic
 		$cache_name = md5($cache_name);
 		$filename   = self::$cacheDir.$cache_name.self::$cacheExtension;
 
-		if(is_file($filename))
+		if(is_file($filename) && filesize($filename) > 0)
 		{
 			$getContent = @file_get_contents($filename);
 

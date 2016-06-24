@@ -42,7 +42,7 @@ use package\system\core\initiator;
  * @method static bool curl_extension_exists()
  * @method static mixed get_data(string $url, $postfields = array())
  * @method static int get_status(string $url)
- * @method static array get_city_coordinates(string $city, $resultArray = false)
+ * @method static array get_city_coordinates(string $city, boolean $resultArray = false, string $googleApiKey = '')
  * @method static string get_city_name_by_ip()
  *
  * @package        Webpackages
@@ -201,25 +201,24 @@ class curl extends initiator implements IStatic
 	 *
 	 * @param string $city        Den Stadtnamen
 	 * @param bool   $resultArray Kann man einstellen ob das Ergebnis als Array zurück kommen soll oder als Objekt
+	 * @param string $googleApiKey Der API Key von Google
 	 *
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
 	 * @throws curlException Wenn die Extension nicht installiert oder im Fehlerfall.
 	 */
-	protected static function _get_city_coordinates($city, $resultArray = false)
+	protected static function _get_city_coordinates($city, $resultArray = false, $googleApiKey = '')
 	{
 		if(!self::curl_extension_exists())
 		{
 			throw new curlException('Error: curl extension not loaded');
 		}
 
-		$city = urlencode($city);
-
-		$url = "http://maps.google.com/maps/api/geocode/json?address=".$city."&sensor=false";
+		$url = "http://maps.google.com/maps/api/geocode/json?address=".rawurlencode($city)."&sensor=false".((!empty($googleApiKey)) ? '&key='.$googleApiKey : '');
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+		//curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120);

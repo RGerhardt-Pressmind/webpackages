@@ -44,6 +44,7 @@ use package\system\core\initiator;
  * @method void setFooterFile(string $footer)
  * @method void setTemplateDir(string $dir)
  * @method void setData(array $datas)
+ * @method void setSingleData(string $key, string $value)
  * @method string getTemplatePath()
  * @method static string getPublicTemplatePath()
  * @method void displayPlugin(string $template, $cacheActive = false, $cacheExpiresTime = 0)
@@ -167,6 +168,19 @@ class template extends initiator
 	protected function _setData(array $datas)
 	{
 		$this->contentData = array_merge($this->contentData, $datas);
+	}
+
+	/**
+	 * Setzt nur einen bestimmten Schlüssel mit Wert
+	 *
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return void
+	 */
+	protected function _setSingleData($key, $value)
+	{
+		$this->contentData	=	array_merge($this->contentData, array($key => $value));
 	}
 
 	/**

@@ -163,7 +163,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 			1;
 		';
 
-		$getInfos	=	$this->db->secQuery($getInfos, array('UnitTest123'), true, true);
+		$getInfos	=	$this->db->safetyQuery($getInfos, array('UnitTest123'), true, true);
 
 		$this->assertEquals('UnitTest123', $getInfos['name']);
 	}

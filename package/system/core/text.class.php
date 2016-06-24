@@ -36,6 +36,7 @@ use package\system\core\initiator;
  * Wenn man einen bestimmten Satz kürzen möchte oder ein zufälligen String zurück haben möchte, kann man die text
  * Klasse nutzen.
  *
+ * @method static string strip_tags_with_content(string $str, array $removeContentTags = array('table'))
  * @method static string convertToUTF8(string $str, string $encoding)
  * @method static string getCharacterEncoding(string $str)
  * @method static string word_limiter(string $str, $limit = 100, $suffix = '...')
@@ -58,6 +59,30 @@ class text extends initiator implements IStatic
 	 * Zum initiailisieren von Daten
 	 */
 	public static function init(){}
+
+	/**
+	 * Entfernt HTML Tags sauberer. Wenn eine Tabelle eingebaut ist,
+	 * wird diese samt Inhalt entfernt
+	 *
+	 * @param string $str
+	 * @param array $removeContentTags
+	 *
+	 * @return string
+	 */
+	protected static function _strip_tags_with_content($str, $removeContentTags = array('table'))
+	{
+		if(!empty($removeContentTags))
+		{
+			foreach($removeContentTags as $contentTag)
+			{
+				$str	=	preg_replace('/(<'.$contentTag.'(.*?)>(.*?)<\/'.$contentTag.'>)/sm', '', $str);
+			}
+		}
+
+		$str	=	strip_tags($str);
+
+		return $str;
+	}
 
 	/**
 	 * Wandelt ein String in ein UTF-8 String um

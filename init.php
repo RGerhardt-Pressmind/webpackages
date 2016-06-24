@@ -42,7 +42,11 @@ else
 	ini_set('display_errors', 0);
 }
 
-if(SECURITY_KEY == '')
+if(!defined('SECURITY_KEY'))
+{
+	throw new Exception('Error: constant SECURITY_KEY not exist');
+}
+elseif(SECURITY_KEY == '')
 {
 	throw new Exception('Error: SECURITY_KEY constants is empty');
 }

@@ -45,16 +45,18 @@ use package\system\core\initiator;
 class version extends initiator implements IStatic
 {
 	/**
+	 * Versionsnummer
+	 */
+	const VERSION = '2.5.0';
+	
+
+	/**
 	 * Zum initialisieren von Daten
 	 */
 	public static function init()
 	{
 	}
 
-	/**
-	 * Versionsnummer
-	 */
-	const VERSION = '2.4.0';
 
 	/**
 	 * Kontrolliert den übergebenen Wert mit der installierten PHP Version.

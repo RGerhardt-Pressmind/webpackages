@@ -31,9 +31,9 @@ foreach($controllPaths as $path)
 {
 	if($path != '')
 	{
-		if(!file_exists($path))
+		if(!is_dir($path))
 		{
-			$save	=	mkdir($path, 0777, true);
+			$save	=	mkdir($path, 0755, true);
 
 			if(!$save)
 			{

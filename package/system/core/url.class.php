@@ -40,6 +40,7 @@ use package\system\core\initiator;
  *
  * @method static void set_use_mod_rewrite(bool $mod)
  * @method static void set_use_file_extension(string $extension)
+ * @method static void loc_url_simple(array $parameters)
  * @method static string get_url_simple(string $httpRoot, array $parameters)
  * @method static string createValidUrlString(string $url)
  * @method static string getCurrentUrl()
@@ -106,10 +107,22 @@ class url extends initiator implements IStatic
 
 		if(empty($extension))
 		{
-			throw new urlException('mod_rewrite file extension is empty');
+			throw new urlException('set_use_file_extension file extension is empty');
 		}
 
 		self::$useFileExtension = $extension;
+	}
+
+	/**
+	 * Leitet auf eine Webseite direkt weiter.
+	 * Ausgehende von der Konstante HTTP
+	 *
+	 * @param array $parameters Die Parameter die übergeben werden sollen.
+	 * @return void
+	 */
+	protected static function __loc_url_simple($parameters)
+	{
+		self::loc(self::get_url_simple(HTTP, $parameters));
 	}
 
 	/**
@@ -171,6 +184,7 @@ class url extends initiator implements IStatic
 	protected static function _createValidUrlString($url)
 	{
 		$url = strtolower($url);
+		$url = str_replace(array('ü', 'ä', 'ö', 'ß'), array('ue', 'ae', 'oe', 'ss'), $url);
 		$url = preg_replace('/\s/', '-', $url);
 		$url = preg_replace('/[^A-Za-z0-9\-\_]/', '', $url);
 		$url = filter_var($url, FILTER_SANITIZE_URL);
@@ -217,7 +231,6 @@ class url extends initiator implements IStatic
 	protected static function _reload()
 	{
 		self::loc(self::getCurrentUrl());
-		exit;
 	}
 
 	/**
