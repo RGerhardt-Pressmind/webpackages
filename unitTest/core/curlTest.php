@@ -39,6 +39,15 @@ class curlTest extends \PHPUnit_Framework_TestCase
 		autoload::get('curl', '\package\core\\', true);
 	}
 
+	public function testDownload()
+	{
+		curl::downloadFile('http://webpackages.de/todo', CACHE_PATH.'todo');
+
+		$this->assertTrue(file_exists(CACHE_PATH.'todo'));
+
+		@unlink(CACHE_PATH.'todo');
+	}
+
 	public function testCurlExtensionExists()
 	{
 		$this->assertTrue(curl::curl_extension_exists());

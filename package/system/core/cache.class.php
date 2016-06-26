@@ -102,7 +102,7 @@ class cache extends initiator implements IStatic
 			return false;
 		}
 
-		if(!is_file($cachePath))
+		if(!file_exists($cachePath))
 		{
 			self::$cacheDir = $cachePath;
 

@@ -152,6 +152,45 @@ define('DEFAULT_CLASS', 'welcome');
 define('DEFAULT_METHODE', 'hello');
 
 /**
+ * E-Mail Server (Host Adresse)
+ */
+define('MAIL_HOST',		'');
+
+/**
+ * Handelt es sich bei der E-Mail Verbindung
+ * um eine SMTP Verbindung
+ */
+define('MAIL_IS_SMTP',	false);
+
+/**
+ * Erfolgt eine SMTP Authentifizierung
+ */
+define('MAIL_SMTP_AUTH',	false);
+
+/**
+ * E-Mail Verschlüsselung z.b. 'tls'
+ */
+define('MAIL_SMTP_SECURE',	'');
+
+/**
+ * Benutzername für die E-Mail Anmeldung
+ */
+define('MAIL_USERNAME',	'');
+
+/**
+ * Passwort für die E-Mail Anmeldung
+ */
+define('MAIL_PASSWORD',	'');
+
+/**
+ * Der E-Mail Port
+ */
+define('MAIL_PORT',	25);
+
+
+
+
+/**
  * ############################
  *
  * Pfade zum System
@@ -230,6 +269,11 @@ define('IMPLEMENT_DIR', SYSTEM_PATH.'implement'.SEP);
 define('LIB_DIR', SYSTEM_PATH.'thirdParty'.SEP);
 
 /**
+ * Der Pfad zu den valueObjects
+ */
+define('VALUE_OBJECTS', SYSTEM_PATH.'valueObjects'.SEP);
+
+/**
  * Kontrolliert ob der Webserver HTTPS erlaubt
  *
  * @return bool Gibt bei verfügbaren Zertifikat true zurück ansonsten false
@@ -250,32 +294,11 @@ function is_https()
  */
 define('MYSQL_FUNCTIONS', '/(ABS|ACOS|ADDDATE|ADDTIME|AES_DECRYPT|AES_ENCRYPT|ANY_VALUE|ASCII|ASIN|ASYMMETRIC|ATAN|AVG|BENCHMARK|BETWEEN|BIN|BIT_AND|BIT_COUNT|BIT_LENGTH|BIT_OR|BIT_XOR|CAST|CEIL|CHAR|COALESCE|COERCIBILITY|COLLATION|COMPRESS|CONCAT|CONNECTION_ID|CONV|COS|COT|COUNT|CRC32|CREATE_|CURDATE|CURRENT_|CURTIME|DATABASE|DATE_|DATE|DAY|DECODE|DEFAULT|DEGREES|ELT|ENCODE|EXP|EXTRACT|FIELD|FIND_IN_SET|FLOOR|FORMAT|FOUND_|FROM_|GET_|GREATEST|GROUP_|GTID_|HEX|HOUR|IF|IN|IS_|ISNULL|JSON_|LAST_|LCASE|LEAST|LEFT|LENGTH|LIKE|LN|LOAD_|LOCAL|LOCATE|LOG|LOWER|LPAD|LTRIM|MAKE_|MAKEDATE|MAKETIME|MASTER_POS_WAIT|MATCH|MAX|MBR|MD5|MICROSECOND|MID|MIN|MLine|MOD|MONTH|MPointFrom|MPolyFrom|MultiLineString|MultiPoint|MultiPolygon|NAME_CONST|NOT BETWEEN|NOT IN|NOT LIKE|NOT REGEXP|NOT|NOW|NULLIF|OCT|OLD_PASSWORD|ORD|PERIOD_ADD|PERIOD_DIFF|PI|Point|Polygon|POSITION|POW|PROCEDURE ANALYSE|QUARTER|QUOTE|RADIANS|RAND|REGEXP|RELEASE_|REPEAT|REPLACE|REVERSE|RIGHT|RLIKE|ROUND|ROW_|RPAD|RPAD|RTRIM|SCHEMA|SEC_TO_TIME|SECOND|SESSION_USER|SHA|SIGN|SIN|SLEEP|SOUNDEX|SOUND_|SPACE|SQRT|ST_|STD|STDDEV|STR_TO_DATE|STRCMP|SUB|SUM|SYSDATE|SYSTEM_USER|TAN|TIME|TO_|TRIM|TRUNCATE|UCASE|UNCOMPRESS|UNHEX|UNIX|UpdateXML|UPPER|USER|UTC_|UUID|VALIDATE_PASSWORD_STRENGTH|VALUES|VAR_|VARIANCE|VERSION|WAIT_|WEEK|WEIGHT_STRING|XOR|YEAR)/');
 
-function backAllPaths($dir)
-{
-	$myPaths   = array();
-	$myPaths[] = $dir;
-
-	$director = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator = new \RecursiveIteratorIterator($director, \RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
-
-	if(iterator_count($iterator) > 0)
-	{
-		foreach($iterator as $item)
-		{
-			if($item->isDir())
-			{
-				$myPaths[] = $item->__toString();
-			}
-		}
-	}
-
-	return $myPaths;
-}
 
 function initializeDirectory($dir)
 {
-	$implements = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator   = new RecursiveIteratorIterator($implements, RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
+	$directory  = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+	$iterator   = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
 
 	if(iterator_count($iterator) > 0)
 	{
@@ -287,6 +310,28 @@ function initializeDirectory($dir)
 			}
 		}
 	}
+}
+
+
+function getAllSubDirectorys($dir)
+{
+	$directory	=	new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+	$iterator	=	new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::CHILD_FIRST);
+
+	$allSubDirs	=	array();
+
+	if(iterator_count($iterator) > 0)
+	{
+		foreach($iterator as $file)
+		{
+			if($file->isDir())
+			{
+				$allSubDirs[]	=	$file->__toString();
+			}
+		}
+	}
+
+	return $allSubDirs;
 }
 
 

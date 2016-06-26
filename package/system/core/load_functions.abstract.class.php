@@ -290,6 +290,7 @@ abstract class load_functions
 		'paypal'
 	);
 
+
 	/**
 	 * Destructor
 	 */
@@ -359,17 +360,6 @@ abstract class load_functions
 
 		foreach($loadClasses as $classes)
 		{
-			if($classes['class'] == 'phpmailer')
-			{
-				//PHPMailer class load
-				if(!class_exists('PHPMailer'))
-				{
-					require 'PHPMailerAutoload.php';
-				}
-
-				continue;
-			}
-
 			if($classes['isStatic'])
 			{
 				autoload::get($classes['class'], $classes['namespace'], true);
@@ -597,9 +587,11 @@ abstract class load_functions
 
 				$className = str_replace(array(
 					'.php',
+					'.php4',
 					'.php5',
 					'.class'
 				), array(
+					'',
 					'',
 					'',
 					''

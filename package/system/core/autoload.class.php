@@ -58,7 +58,7 @@ class autoload extends initiator
 	 * @param string $class_name Der Klassenname der aufzurufenen Klasse
 	 * @param string $namespace  Wenn die Klasse einen Namespace besitzt, dann diesen angeben
 	 * @param bool   $isStatic   Wenn es sich um eine statische Klasse handelt
-	 * @param array  $parameter  Parameter für den Konstruktor der Klasse. Er muss ein Assoziatives Array sein
+	 * @param object $parameter  Parameter für den Konstruktor der Klasse. Er muss ein Assoziatives Array sein
 	 * @param bool   $inCache    Kann eine Klasse in den Cache legen, um sie bei erneuter Initialisierung aus dem Cache
 	 *                           zu laden. Funktioniert nur bei nicht statischen Klassen.
 	 *
@@ -66,7 +66,7 @@ class autoload extends initiator
 	 *                           konnte
 	 * @return mixed Gibt die Klasseninstanz zurück oder bei einer statischen Klasse ein true
 	 */
-	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = array(), $inCache = true)
+	public static function get($class_name, $namespace = null, $isStatic = false, $parameter = null, $inCache = true)
 	{
 		if(empty($class_name))
 		{

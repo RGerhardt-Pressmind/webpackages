@@ -39,6 +39,14 @@ class textTest extends \PHPUnit_Framework_TestCase
 		autoload::get('text', '\package\core\\', true);
 	}
 
+	public function testStrip_tags_with_content()
+	{
+		$html	=	'Hallo<table><tr><td>wie geht es</td></tr></table>Welt';
+		$html	=	text::strip_tags_with_content($html, array('table'));
+
+		$this->assertEquals($html, 'HalloWelt');
+	}
+
 
 	public function testWordLimiter()
 	{

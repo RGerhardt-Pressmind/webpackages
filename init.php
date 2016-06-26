@@ -77,30 +77,14 @@ if(defined('TIMEZONE') && TIMEZONE != '')
 	date_default_timezone_set(TIMEZONE);
 }
 
-$myPaths   = array();
-$myPaths[] = PACKAGE_DIR;
-$myPaths[] = SYSTEM_PATH;
-$myPaths[] = IMPLEMENT_DIR;
-$myPaths[] = CORE_DIR;
-$myPaths[] = PLUGIN_DIR;
-$myPaths[] = LIB_DIR;
-$myPaths[] = LIB_DIR.'PHPMailer';
-$myPaths[] = LIB_DIR.'minifiy';
+$systemPath	=	array();
 
-if(defined('PAGE_DIR') && PAGE_DIR != '')
+if(defined('PACKAGE_DIR') && PACKAGE_DIR != '')
 {
-	$myPaths	=	array_merge($myPaths, backAllPaths(PAGE_DIR));
+	$systemPath   = getAllSubDirectorys(PACKAGE_DIR);
 }
 
-//Alle Dynamischen Klassen in include_path aufnehmen
-if(defined('DYNAMIC_DIR') && DYNAMIC_DIR != '')
-{
-	$myPaths	=	array_merge($myPaths, backAllPaths(DYNAMIC_DIR));
-}
-
-
-ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR, $myPaths));
-
+ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR, $systemPath));
 
 //Alle Implements Klassen includieren
 if(defined('IMPLEMENT_DIR') && IMPLEMENT_DIR != '')
@@ -113,6 +97,9 @@ if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 {
 	initializeDirectory(EXCEPTION_DIR);
 }
+
+//Alle Value Objekt Klassen includiere
+initializeDirectory(VALUE_OBJECTS);
 
 require 'initiator.abstract.class.php';
 require 'autoload.class.php';

@@ -120,6 +120,37 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testMultiSafetyQuery()
+	{
+		$insertOne	=	'
+		INSERT INTO
+			`unit_test`
+		SET
+			`name`	=	?
+		;
+		';
+
+		$insertTwo	=	'
+		INSERT INTO
+			`unit_test`
+		SET
+			`name`	=	?
+		;
+		';
+
+		$this->assertTrue($this->db->multi_query_safety($insertOne.$insertTwo, array('Insert1', 'Insert2')));
+
+		$deleteIn	=	'
+		DELETE FROM
+			`unit_test`
+		WHERE
+			`name` IN("Insert1", "Insert2")
+		';
+
+		$this->assertEquals(2, $this->db->exec($deleteIn));
+	}
+
+
 	public function testVersion()
 	{
 		$this->assertTrue((stripos($this->db->version(), 'mysqlnd') !== false));
@@ -150,7 +181,7 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSecQuery()
+	public function testSafetyQuery()
 	{
 		$getInfos	=	'
 		SELECT
@@ -166,6 +197,23 @@ class databaseTest extends \PHPUnit_Framework_TestCase
 		$getInfos	=	$this->db->safetyQuery($getInfos, array('UnitTest123'), true, true);
 
 		$this->assertEquals('UnitTest123', $getInfos['name']);
+
+
+
+		$getInfos	=	'
+		SELECT
+			`name`
+		FROM
+			`unit_test`
+		WHERE
+			`name`	=	?
+		LIMIT
+			1;
+		';
+
+		$getInfos	=	$this->db->safetyQuery($getInfos, array('UnitTest123'), true, false);
+
+		$this->assertEquals('UnitTest123', $getInfos[0]['name']);
 	}
 
 
