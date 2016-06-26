@@ -5,149 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/images/phpmailer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/images/phpmailer_mini.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/wrapping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/core/phpMailer.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/exceptions/phpMailerException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/.scrutinizer.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/VERSION" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/changelog.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.phpmaileroauth.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.phpmaileroauthgoogle.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/composer.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/Callback_function_notes.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/DomainKeys_notes.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/Note_for_SMTP_debugging.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/extending.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/faq.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/generatedocs.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/docs/pop3_article.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/DKIM.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/code_generator.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/contents.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/contentsutf8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/exceptions.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/gmail.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/gmail_xoauth.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/mail.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/mailing_list.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/pop_before_smtp.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/scripts/XRegExp.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/scripts/shAutoloader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/scripts/shBrushPhp.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/scripts/shCore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/scripts/shLegacy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/send_file_upload.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/send_multiple_file_upload.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/sendmail.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/signed-mail.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/smtp.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/smtp_check.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/smtp_no_auth.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/ssl_options.phps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCore.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreDefault.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreDjango.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreEclipse.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreEmacs.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreFadeToGrey.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreMDUltra.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreMidnight.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shCoreRDark.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeAppleScript.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeDefault.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeDjango.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeEclipse.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeEmacs.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeFadeToGrey.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeMDUltra.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeMidnight.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeRDark.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/examples/styles/shThemeVisualStudio.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/extras/EasyPeasyICS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/extras/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/extras/htmlfilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/extras/ntlm_sasl_client.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/get_oauth_token.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-am.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ar.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-az.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-be.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-bg.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-br.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ca.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ch.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-cz.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-de.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-dk.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-el.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-eo.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-es.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-et.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-fa.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-fi.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-fo.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-fr.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-gl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-he.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-hr.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-hu.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-id.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-it.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ja.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ka.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ko.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-lt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-lv.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ms.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-nl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-no.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-pl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-pt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ro.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-ru.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-se.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-sk.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-sl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-sr.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-tr.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-uk.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-vi.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-zh.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/language/phpmailer.lang-zh_cn.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/bootstrap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/fakepopserver.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/fakesendmail.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/phpmailerLangTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/phpmailerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/runfakepopserver.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/test_callback.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/test/testbootstrap-dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/travis.phpunit.xml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAddress.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAttachment.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOPHPMailer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/unitTest/core/PHPMailerTestTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/controllExistsPaths.php" afterPath="$PROJECT_DIR$/package/system/controllExistsPaths.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/autoload.class.php" afterPath="$PROJECT_DIR$/package/system/core/autoload.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/cache.class.php" afterPath="$PROJECT_DIR$/package/system/core/cache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.phpmailer.php" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.phpmailer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.pop3.php" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.pop3.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.smtp.php" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/class.smtp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/curlTest.php" afterPath="$PROJECT_DIR$/unitTest/core/curlTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/databaseTest.php" afterPath="$PROJECT_DIR$/unitTest/core/databaseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unitTest/core/textTest.php" afterPath="$PROJECT_DIR$/unitTest/core/textTest.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -179,7 +37,20 @@
     <favorites_list name="webpackage" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="url.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package/system/core/url.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+              <folding>
+                <marker date="1466772377000" expanded="true" signature="6373:6406" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -605,14 +476,7 @@
       <workItem from="1466168488361" duration="1395000" />
       <workItem from="1466505767770" duration="241000" />
       <workItem from="1466770770911" duration="7998000" />
-      <workItem from="1466934281016" duration="4140000" />
-    </task>
-    <task id="LOCAL-00032" summary="- bugfixes">
-      <created>1453285782428</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1453285782428</updated>
+      <workItem from="1466934281016" duration="7425000" />
     </task>
     <task id="LOCAL-00033" summary="- Change System Folder &#10;- Add Code Folder&#10;- Add Date class&#10;- Add FileSystem class&#10;- constant OS change Linux to Unix&#10;- init session_start change&#10;&#10;">
       <created>1453419615205</created>
@@ -950,16 +814,17 @@
       <option name="project" value="LOCAL" />
       <updated>1466773777545</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="- load_functions remove phpMailer &#10;- add phpMailer helperclass&#10;- update phpMailer thirdParty Framework&#10;- add valueObjects for phpMailer&#10;- add phpMailer constants&#10;- change include_path function">
+      <created>1466940516661</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1466940516662</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PHPMailerTestTest_testSend - 2016.06.26 at 12h 13m 24s.xml">
-      <configuration name="PHPMailerTestTest.testSend" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="UnitTests - 2016.06.26 at 12h 13m 04s.xml">
-      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="UnitTests - 2016.06.26 at 12h 13m 59s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -984,16 +849,22 @@
     <history-entry file="UnitTests - 2016.06.26 at 13h 21m 18s.xml">
       <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="UnitTests - 2016.06.26 at 15h 07m 07s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="UnitTests - 2016.06.26 at 15h 07m 53s.xml">
+      <configuration name="UnitTests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38389000" />
+    <option name="totallyTimeSpent" value="41674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1173" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27985075" sideWeight="0.67160034" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27985075" sideWeight="0.67160034" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599232" sideWeight="0.5057307" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1057,7 +928,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- last bugfix v2.0 beta" />
     <MESSAGE value="- workspace update" />
     <MESSAGE value="-" />
     <MESSAGE value="v2.1.0" />
@@ -1082,7 +952,8 @@
     <MESSAGE value="- add security headers&#10;- add redirect by ssl" />
     <MESSAGE value="- bugfix valid url string" />
     <MESSAGE value="- cache control filesize by write&#10;- curl get_city_coordinates add google api key&#10;- template add methode setSingleData&#10;- text add methode strip_tags_with_content&#10;- url add methode loc_url_simple&#10;- minor changes&#10;- many bugfixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="- cache control filesize by write&#10;- curl get_city_coordinates add google api key&#10;- template add methode setSingleData&#10;- text add methode strip_tags_with_content&#10;- url add methode loc_url_simple&#10;- minor changes&#10;- many bugfixes" />
+    <MESSAGE value="- load_functions remove phpMailer &#10;- add phpMailer helperclass&#10;- update phpMailer thirdParty Framework&#10;- add valueObjects for phpMailer&#10;- add phpMailer constants&#10;- change include_path function" />
+    <option name="LAST_COMMIT_MESSAGE" value="- load_functions remove phpMailer &#10;- add phpMailer helperclass&#10;- update phpMailer thirdParty Framework&#10;- add valueObjects for phpMailer&#10;- add phpMailer constants&#10;- change include_path function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1091,22 +962,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2081">
-          <caret line="308" column="27" selection-start-line="308" selection-start-column="27" selection-end-line="308" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/plugins.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="53" column="7" selection-start-line="53" selection-start-column="7" selection-end-line="53" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/language.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="417">
@@ -1146,14 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/number.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="148" column="60" selection-start-line="148" selection-start-column="60" selection-end-line="148" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/paypal.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1080">
@@ -1166,6 +1013,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,6 +1029,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1252,6 +1101,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,14 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="579">
           <caret line="315" column="28" selection-start-line="315" selection-start-column="9" selection-end-line="315" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/cache.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1375,14 +1217,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/curl.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="40" column="35" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
@@ -1412,37 +1246,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/database.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="345" column="38" selection-start-line="345" selection-start-column="20" selection-end-line="345" selection-end-column="38" />
-          <folding>
-            <marker date="1466772740000" expanded="true" signature="11372:11387" ph="INSERT INTO ${$table}" />
-            <marker date="1466772740000" expanded="true" signature="13963:13978" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/unitTest/core/DateTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/Date.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="59" column="752" selection-start-line="59" selection-start-column="752" selection-end-line="59" selection-end-column="752" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/FileSystem.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -1455,53 +1262,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/phpMailer.class.php">
+    <entry file="file://$PROJECT_DIR$/unitTest/core/textTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        <state relative-caret-position="585">
+          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/version.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/cache.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/curl.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/database.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="361" column="11" selection-start-line="361" selection-start-column="11" selection-end-line="361" selection-end-column="11" />
+          <folding>
+            <marker date="1466772740000" expanded="true" signature="11372:11387" ph="INSERT INTO ${$table}" />
+            <marker date="1466772740000" expanded="true" signature="13963:13978" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/Date.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/FileSystem.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/ftp.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
+        <state relative-caret-position="525">
+          <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/number.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1920">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/phpMailer.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="692">
+          <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/text.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="38" column="48" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="48" />
+        <state relative-caret-position="540">
+          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/url.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
+        <state relative-caret-position="435">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
           <folding>
             <marker date="1466772377000" expanded="true" signature="6373:6406" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTest/core/textTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
