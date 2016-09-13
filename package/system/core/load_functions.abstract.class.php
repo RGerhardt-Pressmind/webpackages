@@ -624,6 +624,20 @@ abstract class load_functions
 					if(!empty($className) && !array_key_exists($className, $this->notAllowedClassName))
 					{
 						$class->setAllClasses($allInitClasses);
+					}
+				}
+			}
+
+			foreach($back as $t)
+			{
+				$class = $t['class'];
+
+				if($class instanceof IModel)
+				{
+					$className = $class->getClassName();
+
+					if(!empty($className) && !array_key_exists($className, $this->notAllowedClassName))
+					{
 						$class->loadData();
 
 						$this->defineDynamicClasses[$className] = $class;

@@ -120,9 +120,9 @@ class url extends initiator implements IStatic
 	 * @param array $parameters Die Parameter die übergeben werden sollen.
 	 * @return void
 	 */
-	protected static function __loc_url_simple($parameters)
+	protected static function _loc_url_simple($parameters)
 	{
-		self::loc(self::get_url_simple(HTTP, $parameters));
+		self::_loc(self::_get_url_simple(HTTP, $parameters));
 	}
 
 	/**
