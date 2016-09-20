@@ -65,7 +65,7 @@ else
 
 function searchInFolder($folder, $c)
 {
-	$directory = new \RecursiveDirectoryIterator($folder, \RecursiveDirectoryIterator::SKIP_DOTS);
+	$directory = new RecursiveDirectoryIterator($folder, RecursiveDirectoryIterator::SKIP_DOTS);
 	$iterator  = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 
 	if(iterator_count($iterator) > 0)
@@ -85,7 +85,7 @@ function searchInFolder($folder, $c)
 
 function getPluginControler($c)
 {
-	$directory = new \RecursiveDirectoryIterator(PLUGIN_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
+	$directory = new RecursiveDirectoryIterator(PLUGIN_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
 	$iterator  = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 
 	if(iterator_count($iterator) > 0)

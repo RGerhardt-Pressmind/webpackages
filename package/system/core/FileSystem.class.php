@@ -54,6 +54,7 @@ class FileSystem extends initiator implements IStatic
 	 */
 	public static function init()
 	{
+		//@void
 	}
 
 	/**
@@ -212,10 +213,7 @@ class FileSystem extends initiator implements IStatic
 
 		if($delete_dir)
 		{
-			if(!@rmdir($path))
-			{
-				return false;
-			}
+			return @rmdir($path);
 		}
 
 		return true;
@@ -292,12 +290,7 @@ class FileSystem extends initiator implements IStatic
 				return false;
 			}
 
-			$chmod = chmod($dest, $chmod);
-
-			if(!$chmod)
-			{
-				return false;
-			}
+			return chmod($dest, $chmod);
 		}
 
 		return true;
@@ -388,12 +381,7 @@ class FileSystem extends initiator implements IStatic
 				return false;
 			}
 
-			$chmod = @chmod($dest, $chmod);
-
-			if(!$chmod)
-			{
-				return false;
-			}
+			return @chmod($dest, $chmod);
 		}
 
 		return true;

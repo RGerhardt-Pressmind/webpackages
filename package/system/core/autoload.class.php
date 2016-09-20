@@ -102,6 +102,7 @@ class autoload extends initiator
 
 				return self::$cacheClasses[$class_name];
 			}
+
 			return new $class_name($parameter);
 		}
 		else

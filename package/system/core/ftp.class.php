@@ -309,7 +309,7 @@ class ftp extends initiator
 
 		$countRemoveDirectory = $this->count($remoteDirectory, null, false);
 
-		return ($countRemoveDirectory == 0) ? true : false;
+		return ($countRemoveDirectory == 0);
 	}
 
 	/**
@@ -575,16 +575,7 @@ class ftp extends initiator
 
 		if(!$recursive || $this->is_dir($remoteDirectory))
 		{
-			$ftpMkdir = @ftp_mkdir($this->_ftp, $remoteDirectory);
-
-			if(!$ftpMkdir)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+			return @ftp_mkdir($this->_ftp, $remoteDirectory);
 		}
 
 		$result = false;

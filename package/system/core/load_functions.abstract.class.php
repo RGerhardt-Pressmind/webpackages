@@ -29,20 +29,22 @@ namespace package\core;
 
 use package\implement\IModel;
 use package\implement\IPlugin;
+use package\system\core\restClient;
 
 /**
  * Kernklasse die alle anderen Klassen lädt
  *
  * Die load_functions ist die Klasse die alle anderen Klassen / Plugins lädt.
  *
- * @property template $template
- * @property zip      $zip
- * @property ftp      $ftp
- * @property XML      $xml
- * @property logger   $logger
- * @property errors   $error
- * @property database $db
- * @property paypal   $paypal
+ * @property template   $template
+ * @property zip        $zip
+ * @property ftp        $ftp
+ * @property XML        $xml
+ * @property logger     $logger
+ * @property errors     $error
+ * @property database   $db
+ * @property paypal     $paypal
+ * @property restClient $rest
  *
  * @package        Webpackages
  * @subpackage     core
@@ -51,245 +53,55 @@ use package\implement\IPlugin;
  */
 abstract class load_functions
 {
-	public static $LOAD_DATE           = array(
-		'isStatic' => true,
-		'class' => 'Date',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_DATE           = array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_FILE_SYSTEM    = array(
-		'isStatic' => true,
-		'class' => 'FileSystem',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_FILE_SYSTEM    = array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_URL            = array(
-		'isStatic' => true,
-		'class' => 'url',
-		'writeInAttribute' => 'url',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_URL            = array('isStatic' => true, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_VERSION        = array(
-		'isStatic' => true,
-		'class' => 'version',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_VERSION        = array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_ZIP            = array(
-		'isStatic' => false,
-		'class' => 'zip',
-		'writeInAttribute' => 'zip',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_ZIP            = array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_FTP            = array(
-		'isStatic' => false,
-		'class' => 'ftp',
-		'writeInAttribute' => 'ftp',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_FTP            = array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_BENCHMARK      = array(
-		'isStatic' => true,
-		'class' => 'benchmark',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_BENCHMARK      = array('isStatic' => true, 'class' => 'benchmark', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_TEMPLATE       = array(
-		'isStatic' => false,
-		'class' => 'template',
-		'writeInAttribute' => 'template',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_TEMPLATE       = array('isStatic' => false, 'class' => 'template', 'writeInAttribute' => 'template', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_XML            = array(
-		'isStatic' => false,
-		'class' => 'XML',
-		'writeInAttribute' => 'xml',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_XML            = array('isStatic' => false, 'class' => 'XML', 'writeInAttribute' => 'xml', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_LOGGER         = array(
-		'isStatic' => false,
-		'class' => 'logger',
-		'writeInAttribute' => 'logger',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_LOGGER         = array('isStatic' => false, 'class' => 'logger', 'writeInAttribute' => 'logger', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_ERROR          = array(
-		'isStatic' => false,
-		'class' => 'errors',
-		'writeInAttribute' => 'error',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_ERROR          = array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_DATABASE       = array(
-		'isStatic' => false,
-		'class' => 'database',
-		'writeInAttribute' => 'db',
-		'parameter' => array(
-			'driver' => PDO_TYPE,
-			'host' => PDO_HOST,
-			'username' => PDO_USERNAME,
-			'password' => PDO_PASSWORD,
-			'charset' => PDO_CHARSET,
-			'port' => PDO_PORT,
-			'database' => PDO_DATABASE
-		),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_DATABASE       = array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('driver' => PDO_TYPE, 'host' => PDO_HOST, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'charset' => PDO_CHARSET, 'port' => PDO_PORT, 'database' => PDO_DATABASE), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_PLUGINS        = array(
-		'isStatic' => true,
-		'class' => 'plugins',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_PLUGINS        = array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_CACHE          = array(
-		'isStatic' => true,
-		'class' => 'cache',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_CACHE          = array('isStatic' => true, 'class' => 'cache', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_CURL           = array(
-		'isStatic' => true,
-		'class' => 'curl',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_CURL           = array('isStatic' => true, 'class' => 'curl', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_TEXT           = array(
-		'isStatic' => true,
-		'class' => 'text',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_TEXT           = array('isStatic' => true, 'class' => 'text', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_NUMBER         = array(
-		'isStatic' => true,
-		'class' => 'number',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_NUMBER         = array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_LANGUAGE       = array(
-		'isStatic' => true,
-		'class' => 'language',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_LANGUAGE       = array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_PAYPAL         = array(
-		'isStatic' => false,
-		'class' => 'paypal',
-		'writeInAttribute' => 'paypal',
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_PAYPAL         = array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_IMAGES         = array(
-		'isStatic' => true,
-		'class' => 'images',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_IMAGES         = array('isStatic' => true, 'class' => 'images', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_MAILER         = array(
-		'isStatic' => true,
-		'class' => 'phpmailer',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_MAILER         = array('isStatic' => true, 'class' => 'phpmailer', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\\', 'inCache' => true);
 
-	public static $LOAD_CAPTCHA        = array(
-		'isStatic' => true,
-		'class' => 'captcha',
-		'writeInAttribute' => null,
-		'parameter' => array(),
-		'namespace' => '\package\core\\',
-		'inCache'	=>	true
-	);
+	public static $LOAD_CAPTCHA        = array('isStatic' => true, 'class' => 'captcha', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
+
+	public static $LOAD_REST_CLIENT    = array('isStatic' => false, 'class' => 'restClient', 'writeInAttribute' => 'rest', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
 	private       $allLoadClasses      = array(), $defineDynamicClasses = array();
 
-	private       $notAllowedClassName = array(
-		'autoload',
-		'cache',
-		'captcha',
-		'curl',
-		'database',
-		'pdo',
-		'error',
-		'errors',
-		'GeneralFunctions',
-		'load_functions',
-		'logger',
-		'number',
-		'security',
-		'template',
-		'text',
-		'phpmailer',
-		'db',
-		'database',
-		'session',
-		'ftp',
-		'zip',
-		'xml',
-		'Validater',
-		'url',
-		'date',
-		'Date',
-		'fileSystem',
-		'paypal'
-	);
-
+	private       $notAllowedClassName = array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal', 'restClient');
 
 	/**
 	 * Destructor
@@ -377,11 +189,11 @@ abstract class load_functions
 			{
 				if(!empty($classes['writeInAttribute']))
 				{
-					$inCache	=	false;
+					$inCache = false;
 
 					if(!empty($classes['inCache']))
 					{
-						$inCache	=	true;
+						$inCache = true;
 					}
 
 					$this->defineDynamicClasses[$classes['writeInAttribute']] = autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter'], $inCache);
@@ -406,15 +218,7 @@ abstract class load_functions
 	 */
 	public static function getAllDefaultClasses()
 	{
-		return array(
-			self::$LOAD_URL,
-			self::$LOAD_TEMPLATE,
-			self::$LOAD_DATABASE,
-			self::$LOAD_PLUGINS,
-			self::$LOAD_CACHE,
-			self::$LOAD_CURL,
-			self::$LOAD_LANGUAGE
-		);
+		return array(self::$LOAD_URL, self::$LOAD_TEMPLATE, self::$LOAD_DATABASE, self::$LOAD_PLUGINS, self::$LOAD_CACHE, self::$LOAD_CURL, self::$LOAD_LANGUAGE);
 	}
 
 	/**
@@ -492,28 +296,18 @@ abstract class load_functions
 			{
 				if(stripos($item->getFilename(), '.master.class.php') != false && !$item->isDir())
 				{
-					$className = str_replace(array(
-						'.php',
-						'.php4',
-						'.php5',
-						'.master.class'
-					), array(
-						'',
-						'',
-						'',
-						''
-					), $item->getFilename());
+					$className = str_replace(array('.php', '.php4', '.php5', '.master.class'), array('', '', '', ''), $item->getFilename());
 
-					$classNameNamespace	=	'';
+					$classNameNamespace = '';
 
 					if(file_exists($item->getPath().SEP.'config.ini'))
 					{
-						$config	=	parse_ini_file($item->getPath().SEP.'config.ini');
+						$config = parse_ini_file($item->getPath().SEP.'config.ini');
 
 						//Namespace definition
 						if(!empty($config['namespace']))
 						{
-							$classNameNamespace	=	trim($config['namespace'], '\\').'\\';
+							$classNameNamespace = trim($config['namespace'], '\\').'\\';
 						}
 
 						//Plugin aktiv oder nicht
@@ -523,21 +317,21 @@ abstract class load_functions
 						}
 					}
 
-					require_once $item->__toString();
-
 					$classNameNamespace .= $className;
 
 					if(!class_exists($classNameNamespace))
 					{
-						continue;
+						require_once $item->__toString();
+
+						if(!class_exists($classNameNamespace))
+						{
+							continue;
+						}
 					}
 
 					$class = new $classNameNamespace();
 
-					$back[] = array(
-						'class_name' => $classNameNamespace,
-						'class' => $class
-					);
+					$back[] = array('class_name' => $classNameNamespace, 'class' => $class);
 				}
 			}
 		}
@@ -583,31 +377,21 @@ abstract class load_functions
 					}
 				}
 
-				require_once $item->__toString();
-
-				$className = str_replace(array(
-					'.php',
-					'.php4',
-					'.php5',
-					'.class'
-				), array(
-					'',
-					'',
-					'',
-					''
-				), $item->getFilename());
+				$className = str_replace(array('.php', '.php4', '.php5', '.class'), array('', '', '', ''), $item->getFilename());
 
 				if(!class_exists($className))
 				{
-					continue;
+					require_once $item->__toString();
+
+					if(!class_exists($className))
+					{
+						continue;
+					}
 				}
 
 				$class = new $className();
 
-				$back[] = array(
-					'class_name' => $className,
-					'class' => $class
-				);
+				$back[] = array('class_name' => $className, 'class' => $class);
 			}
 		}
 

@@ -97,7 +97,7 @@ class Date extends initiator implements IStatic
 	}
 
 	/**
-	 * Gibt den aktuellen Zeitstempel der Zeitzone zurück
+	 * Gibt den aktuellen Zeitstempel der angegebenen Zeitzone zurück
 	 *
 	 * @param string $timezone Zeitzone. Standartmäßig die aus der constants.php
 	 *
@@ -399,14 +399,7 @@ class Date extends initiator implements IStatic
 	 */
 	protected static function _is_year_leap_year($year)
 	{
-		if(($year % 400) == 0 || (($year % 4) == 0 && ($year % 100) != 0))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return (($year % 400) == 0 || (($year % 4) == 0 && ($year % 100) != 0));
 	}
 
 	/**

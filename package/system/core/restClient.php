@@ -26,7 +26,21 @@
 
 namespace package\system\core;
 
-class restApiClient
+/**
+ * REST Klasse
+ *
+ * Stellt Rest API Anfragen an Systeme und gibt dessen Ergebnisse zurück.
+ * Möglich sind GET, PUT, POST und DELETE Anfragen. Je nach System,
+ * welches man Ansprechen möchte, können positive sowie negative
+ * Ergebnisse zurück gegeben werden.
+ *
+ * @method mixed call(string $url, string $method = 'GET', array $data = array(), array $params = array())
+ * @method mixed get(string $url, array $params = array())
+ * @method mixed post(string $url, array $data = array(), array $params = array())
+ * @method mixed put(string $url, array $data = array(), array $params = array())
+ * @method mixed delete(string $url, array $params = array())
+ */
+class restClient extends initiator
 {
 	const METHODE_GET    = 'GET';
 	const METHODE_PUT    = 'PUT';
@@ -41,6 +55,8 @@ class restApiClient
 
 	public function __construct($apiUrl, $username, $apiKey)
 	{
+		parent::__construct();
+
 		$this->apiUrl	=	rtrim($apiUrl, '/').'/';
 		$this->cURL 	=	curl_init();
 
@@ -52,7 +68,7 @@ class restApiClient
 	}
 
 	/**
-	 * Ruft
+	 * Ruft eine Rest Anfrage auf
 	 *
 	 * @param        $url
 	 * @param string $method
@@ -62,17 +78,19 @@ class restApiClient
 	 * @return mixed|void
 	 * @throws \Exception
 	 */
-	public function call($url, $method = self::METHODE_GET, $data = array(), $params = array())
+	protected function _call($url, $method = self::METHODE_GET, $data = array(), $params = array())
 	{
 		if(!in_array($method, $this->validMethods))
 		{
 			throw new \Exception('Invalid HTTP-Methode: '.$method);
 		}
 		$queryString = '';
+
 		if(!empty($params))
 		{
 			$queryString = http_build_query($params);
 		}
+
 		$url        = rtrim($url, '?').'?';
 		$url        = $this->apiUrl.$url.$queryString;
 		$dataString = json_encode($data);
@@ -80,61 +98,86 @@ class restApiClient
 		curl_setopt($this->cURL, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($this->cURL, CURLOPT_POSTFIELDS, $dataString);
 		$result   = curl_exec($this->cURL);
-		$httpCode = curl_getinfo($this->cURL, CURLINFO_HTTP_CODE);
 
-		return $this->prepareResponse($result, $httpCode);
+		return $this->prepareResponse($result);
 	}
 
-	public function get($url, $params = array())
+	/**
+	 * Ruft eine GET Rest Anfrage auf
+	 *
+	 * @param string $url
+	 * @param array $params
+	 *
+	 * @return mixed|void
+	 */
+	protected function _get($url, $params = array())
 	{
 		return $this->call($url, self::METHODE_GET, array(), $params);
 	}
 
-	public function post($url, $data = array(), $params = array())
+	/**
+	 * Ruft eine POST Rest Anfrage auf
+	 *
+	 * @param string $url
+	 * @param array $data
+	 * @param array $params
+	 *
+	 * @return mixed|void
+	 */
+	protected function _post($url, $data = array(), $params = array())
 	{
 		return $this->call($url, self::METHODE_POST, $data, $params);
 	}
 
-	public function put($url, $data = array(), $params = array())
+	/**
+	 * Ruft eine PUT Rest Anfrage auf
+	 *
+	 * @param string $url
+	 * @param array $data
+	 * @param array $params
+	 *
+	 * @return mixed|void
+	 */
+	protected function _put($url, $data = array(), $params = array())
 	{
 		return $this->call($url, self::METHODE_PUT, $data, $params);
 	}
 
-	public function delete($url, $params = array())
+	/**
+	 * Ruft eine DELETE Rest Anfrage auf
+	 *
+	 * @param string $url
+	 * @param array $params
+	 *
+	 * @return mixed|void
+	 */
+	protected function _delete($url, $params = array())
 	{
 		return $this->call($url, self::METHODE_DELETE, array(), $params);
 	}
 
-	protected function prepareResponse($result, $httpCode)
+	/**
+	 * Gibt das azsgewertete Ergebnisse zurück
+	 *
+	 * @param $result
+	 *
+	 * @return mixed|string
+	 */
+	protected function prepareResponse($result)
 	{
-		echo "<h2>HTTP: $httpCode</h2>";
 		if(null === $decodedResult = json_decode($result, true))
 		{
 			$jsonErrors = array(JSON_ERROR_NONE => 'Es ist kein Fehler aufgetreten', JSON_ERROR_DEPTH => 'Die maximale Stacktiefe wurde erreicht', JSON_ERROR_CTRL_CHAR => 'Steuerzeichenfehler, möglicherweise fehlerhaft kodiert', JSON_ERROR_SYNTAX => 'Syntaxfehler',);
-			echo "<h2>Could not decode json</h2>";
-			echo "json_last_error: ".$jsonErrors[json_last_error()];
-			echo "<br>Raw:<br>";
-			echo "<pre>".print_r($result, true)."</pre>";
 
-			return;
+			return $jsonErrors[json_last_error()];
 		}
 		if(!isset($decodedResult['success']))
 		{
-			echo "Invalid Response";
-
-			return;
+			return 'Invalid Response';
 		}
 		if(!$decodedResult['success'])
 		{
-			echo "<h2>No Success</h2>";
-			echo "<p>".$decodedResult['message']."</p>";
-
-			return;
-		}
-		echo "<h2>Success</h2>";
-		if(isset($decodedResult['data']))
-		{
-			echo "<pre>".print_r($decodedResult['data'], true)."</pre>";
+			return 'No Success: '.$decodedResult['message'];
 		}
 
 		return $decodedResult;

@@ -216,7 +216,7 @@ class database extends \PDO
 	 *                    werden, wenn nur ein Ergebnis erwartet wird.
 	 *
 	 * @throws databaseException Wenn $sql leer ist
-	 * @return array Gibt das gefundene assoziative Array zurück
+	 * @return array|bool Gibt das gefundene assoziative Array zurück oder ein false bei einem Fehler
 	 */
 	public function quefetch($sql)
 	{
@@ -256,7 +256,7 @@ class database extends \PDO
 	 *                    man mehr als ein Ergebnis erwartet
 	 *
 	 * @throws databaseException Wenn $sql leer ist oder $sql keine SELECT Anweisung enthält
-	 * @return array Gibt ein assoziatives Array zurück
+	 * @return array| bool Gibt ein assoziatives Array zurück oder ein false bei einem Fehler
 	 */
 	public function result_array($sql)
 	{
@@ -298,7 +298,7 @@ class database extends \PDO
 	 *                    delete Befehle übermittelt werden, da nur ein Boolean Wert zurück gegeben wird.
 	 *
 	 * @throws databaseException
-	 * @return boolean Gibt bei Erfolg ein true zurück ansonsten ein Exception.
+	 * @return boolean Gibt bei Erfolg ein true zurück ansonsten ein false oder Exception.
 	 */
 	public function multi_query($sql)
 	{

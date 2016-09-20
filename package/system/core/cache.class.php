@@ -106,7 +106,7 @@ class cache extends initiator implements IStatic
 		{
 			self::$cacheDir = $cachePath;
 
-			return mkdir(self::$cacheDir, 0777, true);
+			return mkdir(self::$cacheDir, 0755, true);
 		}
 		else
 		{

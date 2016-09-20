@@ -79,7 +79,7 @@ class zip extends initiator
 
 		if(!file_exists($destination))
 		{
-			if(!mkdir($destination, 0777, true))
+			if(!mkdir($destination, 0755, true))
 			{
 				throw new zipException('Error: '.$destination.' can not created');
 			}
@@ -310,7 +310,7 @@ class zip extends initiator
 
 		if(!file_exists($destinationFolder->__toString()))
 		{
-			mkdir($destinationFolder->__toString(), 0777, true);
+			mkdir($destinationFolder->__toString(), 0755, true);
 		}
 
 		$zip = new \ZipArchive();

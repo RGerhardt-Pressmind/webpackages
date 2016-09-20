@@ -94,7 +94,7 @@ class paypal extends initiator
 	 * @param string $method string API Methode zur Anfrage
 	 * @param array  $params Zusätzliche Anforderungsparameter
 	 *
-	 * @return array / boolean Ergebniss als Array / boolean false bei Fehler
+	 * @return array | boolean Ergebniss als Array / boolean false bei Fehler
 	 */
 	protected function _request($method, $params = array())
 	{

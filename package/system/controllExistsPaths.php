@@ -43,9 +43,9 @@ foreach($controllPaths as $path)
 
 		$permission	=	substr(sprintf('%o', fileperms($path)), -4);
 
-		if($permission != '0777' && $permission != '777')
+		if($permission != '0755' && $permission != '755')
 		{
-			@chmod($path, 0777);
+			@chmod($path, 0755);
 		}
 
 		clearstatcache();
