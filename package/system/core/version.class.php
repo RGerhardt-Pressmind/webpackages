@@ -47,7 +47,7 @@ class version extends initiator implements IStatic
 	/**
 	 * Versionsnummer
 	 */
-	const VERSION = '2.5.0';
+	const VERSION = '2.6.0';
 	
 
 	/**
