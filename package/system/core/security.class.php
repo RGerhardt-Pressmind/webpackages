@@ -38,6 +38,10 @@ use package\system\core\initiator;
  *
  * @method static mixed control(string $variable, $convert = null, $removeSQLFunctions = false)
  * @method static mixed url(string $variable, $input = null, $convert = null, $removeSQLFunctions = false)
+ * @method static string|bool create_csrf_token(string $token_name, $token_duration = 0);
+ * @method static bool exists_csrf_token(string $token_name)
+ * @method static string|bool get_csrf_token(string $token_name, bool $remove_token_after = false)
+ * @method static bool remove_csrf_token(string $token_name)
  * @method static mixed get_mime_type(string $path)
  * @method static mixed get_file_type(string $path)
  * @method static string shaSec(string $string)
@@ -123,15 +127,15 @@ class security extends initiator
 	 * @var array Liste nicht erlaubter Schnipsel in Strings
 	 */
 	protected static $_never_allowed_str = array(
-		'document.cookie' => '[removed]',
-		'document.write' => '[removed]',
-		'.parentNode' => '[removed]',
-		'.innerHTML' => '[removed]',
-		'-moz-binding' => '[removed]',
-		'<!--' => '&lt;!--',
-		'-->' => '--&gt;',
-		'<![CDATA[' => '&lt;![CDATA[',
-		'<comment>' => '&lt;comment&gt;'
+		'document.cookie'	=> '[removed]',
+		'document.write'	=> '[removed]',
+		'.parentNode'		=> '[removed]',
+		'.innerHTML'		=> '[removed]',
+		'-moz-binding'		=> '[removed]',
+		'<!--'				=> '&lt;!--',
+		'-->'				=> '--&gt;',
+		'<![CDATA['			=> '&lt;![CDATA[',
+		'<comment>'			=> '&lt;comment&gt;'
 	);
 
 	/**
@@ -140,11 +144,11 @@ class security extends initiator
 	protected static $_never_allowed_regex = array(
 		'javascript\s*:',
 		'(document|(document\.)?window)\.(location|on\w*)',
-		'expression\s*(\(|&\#40;)',
-		'vbscript\s*:',
-		'wscript\s*:',
-		'jscript\s*:',
-		'vbs\s*:',
+		'expression\s*(\(|&\#40;)', // CSS and IE
+		'vbscript\s*:', // IE, surprise!
+		'wscript\s*:', // IE
+		'jscript\s*:', // IE
+		'vbs\s*:', // IE
 		'Redirect\s+30\d',
 		"([\"'])?data\s*:[^\\1]*?base64[^\\1]*?,[^\\1]*?\\1?"
 	);
@@ -243,6 +247,91 @@ class security extends initiator
 
 		return self::_controllSecurity($request, $convert, $removeSQLFunctions);
 	}
+
+	/**
+	 * Erstellt einen CSRF Token, für die
+	 * anschließende Kontrolle.
+	 *
+	 * @param string $token_name
+	 * @param int $token_duration
+	 *
+	 * @return string|bool
+	 */
+	protected static function _create_csrf_token($token_name, $token_duration = 0)
+	{
+		if(empty($token_name))
+		{
+			return false;
+		}
+
+		$token	=	md5(uniqid(mt_rand(), true));
+
+		if($token_duration <= 0)
+		{
+			$token_duration	=	60*60;
+		}
+
+		if(setcookie($token_name, $token, (time() + $token_duration)))
+		{
+			return $token;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Kontrolliert ob der Token beim Benutzer existiert
+	 *
+	 * @param string $token_name
+	 *
+	 * @return bool
+	 */
+	protected function _exists_csrf_token($token_name)
+	{
+		return isset($_COOKIE[$token_name]);
+	}
+
+	/**
+	 * Gibt den Token zurück oder ein false wenn er nicht existiert
+	 *
+	 * @param string $token_name
+	 *
+	 * @return string|bool
+	 */
+	protected function _get_csrf_token($token_name, $remove_token_after = false)
+	{
+		if(!empty($_COOKIE[$token_name]))
+		{
+			$token	=	$_COOKIE[$token_name];
+
+			if($remove_token_after)
+			{
+				$this->_remove_csrf_token($token_name);
+			}
+
+			return $token;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Entfernt den Token
+	 *
+	 * @param $token_name
+	 *
+	 * @return bool
+	 */
+	protected function _remove_csrf_token($token_name)
+	{
+		if(!empty($_COOKIE[$token_name]))
+		{
+			unset($_COOKIE[$token_name]);
+		}
+
+		return setcookie($token_name, '', (time() - 1));
+	}
+
 
 	/**
 	 * Sicherheitskontrolle einer Variable
