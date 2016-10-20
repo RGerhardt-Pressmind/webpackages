@@ -30,6 +30,8 @@ header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: sameorigin");
 header('Content-Security-Policy: default-src * \'self\'; script-src * \'self\' \'unsafe-inline\'; style-src * \'self\' \'unsafe-inline\'; img-src * \'self\'; font-src * \'self\'; connect-src * \'self\'; media-src \'self\'; object-src \'self\'; child-src \'self\'; frame-src * \'self\'; form-action \'self\'; reflected-xss block;');
 
+ini_set('session.cookie_httponly', 1);
+
 require 'constants.php';
 
 if(defined('ERROR_REPORTING') && (ERROR_REPORTING || ERROR_REPORTING == 1))
