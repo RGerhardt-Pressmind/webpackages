@@ -217,11 +217,6 @@ class template extends initiator
 	{
 		ob_start();
 
-		if(!class_exists('\SplFileInfo'))
-		{
-			throw new templateException('Error: class SplFileInfo not exists');
-		}
-
 		if(!empty($this->contentData))
 		{
 			foreach($this->contentData as $key => $value)
@@ -230,9 +225,7 @@ class template extends initiator
 			}
 		}
 
-		$templatePath = new \SplFileInfo($template);
-
-		if(!file_exists($templatePath->__toString()))
+		if(!file_exists($template))
 		{
 			throw new templateException('Error: template '.$template.' not exist');
 		}
@@ -256,7 +249,7 @@ class template extends initiator
 			{
 				ob_start();
 
-				require $templatePath->__toString();
+				require $template;
 
 				$output = ob_get_contents();
 
@@ -275,7 +268,7 @@ class template extends initiator
 			}
 		}
 
-		require $templatePath->__toString();
+		require $template;
 	}
 
 	/**
@@ -294,11 +287,6 @@ class template extends initiator
 	{
 		ob_start();
 
-		if(!class_exists('\SplFileInfo'))
-		{
-			throw new templateException('Error: class SplFileInfo not exists');
-		}
-
 		if(!empty($this->contentData))
 		{
 			foreach($this->contentData as $key => $value)
@@ -307,9 +295,9 @@ class template extends initiator
 			}
 		}
 
-		$templatePath = new \SplFileInfo($this->getTemplatePath().$template);
+		$templatePath = $this->getTemplatePath().$template;
 
-		if(!file_exists($templatePath->__toString()))
+		if(!file_exists($templatePath))
 		{
 			throw new templateException('Error: template '.$template.' not exist');
 		}
@@ -320,7 +308,7 @@ class template extends initiator
 		}
 		else
 		{
-			$headerPath = $templatePath->getPath().SEP.$this->header;
+			$headerPath = $templatePath.SEP.$this->header;
 		}
 
 		if($footer != null)
@@ -329,7 +317,7 @@ class template extends initiator
 		}
 		else
 		{
-			$footerPath = $templatePath->getPath().SEP.$this->footer;
+			$footerPath = $templatePath.SEP.$this->footer;
 		}
 
 		if(!file_exists($headerPath) || !file_exists($footerPath))
@@ -357,7 +345,7 @@ class template extends initiator
 				ob_start();
 
 				require $headerPath;
-				require $templatePath->__toString();
+				require $templatePath;
 				require $footerPath;
 
 				$output = ob_get_contents();
@@ -378,7 +366,7 @@ class template extends initiator
 		}
 
 		require $headerPath;
-		require $templatePath->__toString();
+		require $templatePath;
 		require $footerPath;
 	}
 

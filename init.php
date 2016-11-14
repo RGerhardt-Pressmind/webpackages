@@ -28,7 +28,9 @@
 header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: sameorigin");
-header('Content-Security-Policy: default-src * \'self\'; script-src * \'self\' \'unsafe-inline\'; style-src * \'self\' \'unsafe-inline\'; img-src * \'self\'; font-src * \'self\'; connect-src * \'self\'; media-src \'self\'; object-src \'self\'; child-src \'self\'; frame-src * \'self\'; form-action \'self\'; reflected-xss block;');
+
+//@todo - Hier muss eine bessere Variante herhalten, es kommt vermehrt zu Problemen mit externen JavaScript Programmen
+#header('Content-Security-Policy: default-src * \'self\'; script-src * \'self\' \'unsafe-inline\'; style-src * \'self\' \'unsafe-inline\'; img-src * \'self\'; font-src * \'self\'; connect-src * \'self\'; media-src \'self\'; object-src \'self\'; child-src \'self\'; frame-src * \'self\'; form-action \'self\'; reflected-xss block;');
 
 ini_set('session.cookie_httponly', 1);
 

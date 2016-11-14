@@ -447,9 +447,8 @@ class language extends initiator implements IStatic
 	 */
 	protected static function _getAllSystemLocales()
 	{
-		$locale_data = array();
-
-		$locales = exec('locale -a 2>&1', $output, $return);
+		$locale_data	= array();
+		$locales 		= exec('locale -a 2>&1', $output, $return);
 
 		if($return)
 		{

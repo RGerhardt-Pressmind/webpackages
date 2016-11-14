@@ -131,7 +131,9 @@ class text extends initiator implements IStatic
 	 */
 	protected static function _word_limiter($str, $limit = 100, $suffix = '...')
 	{
-		if(trim($str) == '')
+		$str	=	trim($str);
+
+		if($str == '')
 		{
 			return $str;
 		}
@@ -215,11 +217,9 @@ class text extends initiator implements IStatic
 	 */
 	protected static function _highlight_code($str)
 	{
-		$str = str_replace(array('&lt;', '&gt;'), array('<', '>'), $str);
+		$str = str_replace(array('&lt;', '&gt;', '<?', '?>', '<%', '%>', '\\', '</script>'), array('<', '>', 'phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), $str);
 
-		$str = str_replace(array('<?', '?>', '<%', '%>', '\\', '</script>'), array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), $str);
-
-		$str = '<?php '.$str.' ?>'; // <?
+		$str = '<?php '.$str.' ?>';
 
 		$str = highlight_string($str, true);
 

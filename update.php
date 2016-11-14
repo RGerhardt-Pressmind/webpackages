@@ -99,7 +99,7 @@ if(isset($_POST['update']))
 {
 	$url	=	'http://www.webpackages.de/autorisation.php';
 
-	$security_key	=	\package\core\security::url('security_key', 'POST', 'string');
+	$security_key	=	$_POST['security_key'];
 
 
 	if($security_key == SECURITY_KEY)

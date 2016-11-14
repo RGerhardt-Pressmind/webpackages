@@ -136,7 +136,7 @@ class errors extends initiator
 	{
 		if(empty($errorCode) || empty($this->callErrors[$errorCode]))
 		{
-			throw new \Exception('Error: error code '.$errorCode.' not allowed. Allowed: '.implode(',', $this->callErrors));
+			throw new \Exception('Error: error code "'.$errorCode.'" not allowed. Allowed: '.implode(',', $this->callErrors));
 		}
 
 		header('HTTP '.$httpVersion.'/'.$errorCode.' '.$this->callErrors[$errorCode], true, $errorCode);
