@@ -83,7 +83,7 @@ class autoload extends initiator
 		//Wenn schon eingebunden, nicht erneut laden
 		if(!class_exists($class_name))
 		{
-			require_once $pathToFile;
+			require $pathToFile;
 		}
 
 		if(!class_exists($class_name))

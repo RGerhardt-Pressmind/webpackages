@@ -33,11 +33,9 @@ foreach($controllPaths as $path)
 	{
 		if(!is_dir($path))
 		{
-			$save	=	mkdir($path, 0755, true);
-
-			if(!$save)
+			if(!mkdir($path, 0755, true))
 			{
-				throw new Exception('Folder '.$path.' cant not created');
+				throw new Exception('Folder "'.$path.'" can not created');
 			}
 		}
 
@@ -45,7 +43,7 @@ foreach($controllPaths as $path)
 
 		if($permission != '0755' && $permission != '755')
 		{
-			@chmod($path, 0755);
+			chmod($path, 0755);
 		}
 
 		clearstatcache();

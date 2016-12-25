@@ -51,10 +51,6 @@ if(!defined('SECURITY_KEY'))
 {
 	throw new Exception('Error: constant SECURITY_KEY not exist');
 }
-elseif(SECURITY_KEY == '')
-{
-	throw new Exception('Error: SECURITY_KEY constants is empty');
-}
 elseif(strlen(SECURITY_KEY) < 20)
 {
 	throw new Exception('Error: SECURITY_KEY constants must be at least 20 characters');

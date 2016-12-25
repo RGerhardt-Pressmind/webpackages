@@ -1,5 +1,8 @@
-2.4.0
-- images.class.php -> removeMetadata
-- images.class.php -> optimizedImage
-- curl.class.php -> downloadFile
-- autoload.class.php -> get add parameter inCache
+Performance:
+
+Schnellste Variante um zu kontrollieren ob ein Array leer ist:
+
+1. (bool)$array
+2. empty($array)
+
+

@@ -55,12 +55,12 @@ if($class)
 	}
 	else
 	{
-		throw new Exception('Methode '.$m.' not exists');
+		throw new Exception('Methode "'.$m.'" in class "'.$c.'" not exists');
 	}
 }
 else
 {
-	throw new Exception('Class '.$c.' not exists');
+	throw new Exception('Class "'.$c.'" not exists');
 }
 
 function searchInFolder($folder, $c)
