@@ -1,8 +1,0 @@
-Performance:
-
-Schnellste Variante um zu kontrollieren ob ein Array leer ist:
-
-1. (bool)$array
-2. empty($array)
-
-
