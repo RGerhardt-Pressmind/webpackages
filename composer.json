@@ -1,0 +1,19 @@
+{
+    "name": "webpackages",
+    "type": "library",
+    "description": "webpackages ist das schnellste, einfachste und sicherste datenbankbasierte MVC PHP Framework auf dem Markt.",
+    "keywords": ["mvc","datenbank","php","framework","php datenbank framework","php datenbank","schnellste php framework"],
+    "homepage": "https://www.webpackages.de/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robbyn Gerhardt",
+            "email": "gerhardt@webpackages.de",
+            "homepage": "http://robbyn-gerhardt.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
