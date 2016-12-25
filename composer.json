@@ -1,6 +1,7 @@
 {
     "name": "robbyn666/webpackages",
     "type": "project",
+    "minimum-stability": "dev",
     "description": "webpackages ist das schnellste, einfachste und sicherste datenbankbasierte MVC PHP Framework auf dem Markt.",
     "keywords": ["mvc","datenbank","php","framework","php datenbank framework","php datenbank","schnellste php framework"],
     "homepage": "https://www.webpackages.de/",
