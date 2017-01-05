@@ -4,16 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- change phpmailer load">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/getTemplateFile.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
+    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/controllers/welcome.class.php" afterPath="$PROJECT_DIR$/package/controllers/welcome.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/template.class.php" afterPath="$PROJECT_DIR$/package/system/core/template.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/package/views/welcome/css/font-awesome.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/css/main.css" afterPath="$PROJECT_DIR$/package/views/welcome/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/js/main.js" afterPath="$PROJECT_DIR$/package/views/welcome/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/template/footer.php" afterPath="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/template/header.php" afterPath="$PROJECT_DIR$/package/views/welcome/template/header.php" />
@@ -51,8 +43,8 @@
       <file leaf-file-name="init.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/init.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
+            <state relative-caret-position="132">
+              <caret line="83" column="1" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -68,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="template.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="template.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="307">
@@ -78,21 +70,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="footer.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="update.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="215" column="77" lean-forward="false" selection-start-line="215" selection-start-column="77" selection-end-line="215" selection-end-column="77" />
+              <folding>
+                <element signature="e#5802#5808#1#HTML" expanded="true" />
+                <element signature="e#7042#7048#1#HTML" expanded="true" />
+                <marker date="1483629365000" expanded="true" signature="5541:5654" ph="..." />
+                <marker date="1483629365000" expanded="true" signature="5589:5643" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package/views/welcome/template/footer.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="10" column="60" lean-forward="false" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/constants.php">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package/views/welcome/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="218" column="30" lean-forward="false" selection-start-line="218" selection-start-column="30" selection-end-line="218" selection-end-column="30" />
+            <state relative-caret-position="381">
+              <caret line="57" column="44" lean-forward="false" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -164,7 +171,6 @@
         <option value="$PROJECT_DIR$/package/system/core/paypal.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/zip.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/version.class.php" />
-        <option value="$PROJECT_DIR$/update.php" />
         <option value="$PROJECT_DIR$/package/system/core/text.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/logger.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/language.class.php" />
@@ -182,12 +188,13 @@
         <option value="$PROJECT_DIR$/package/system/core/template.class.php" />
         <option value="$PROJECT_DIR$/package/.htaccess" />
         <option value="$PROJECT_DIR$/.htaccess" />
-        <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/package/views/welcome/css/main.css" />
         <option value="$PROJECT_DIR$/package/views/welcome/css/font-awesome.min.css" />
-        <option value="$PROJECT_DIR$/package/views/welcome/template/header.php" />
-        <option value="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
+        <option value="$PROJECT_DIR$/update.php" />
+        <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/package/views/welcome/js/main.js" />
+        <option value="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
+        <option value="$PROJECT_DIR$/package/views/welcome/template/header.php" />
       </list>
     </option>
   </component>
@@ -510,21 +517,7 @@
       <workItem from="1482667275992" duration="2226000" />
       <workItem from="1482674049365" duration="4671000" />
       <workItem from="1483292468157" duration="6000" />
-      <workItem from="1483613081526" duration="5307000" />
-    </task>
-    <task id="LOCAL-00058" summary="v2.1.0">
-      <created>1455214465191</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1455214465191</updated>
-    </task>
-    <task id="LOCAL-00059" summary="- Add remove mysql functions from string">
-      <created>1455562207947</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1455562207949</updated>
+      <workItem from="1483613081526" duration="7137000" />
     </task>
     <task id="LOCAL-00060" summary="- Add errors HTTP codes&#10;- ftp deprecated method&#10;- security add removeMysqlFunctions parameter">
       <created>1455734688629</created>
@@ -855,7 +848,21 @@
       <option name="project" value="LOCAL" />
       <updated>1483626092058</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="- remove getTemplateFile.php&#10;- add HTTP_SKIN constant&#10;- add rewrite skin path&#10;- change default statistic">
+      <created>1483628853857</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1483628853858</updated>
+    </task>
+    <task id="LOCAL-00108" summary="- change update.php&#10;- change constants.php">
+      <created>1483629530207</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1483629530207</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -891,7 +898,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74722000" />
+    <option name="totallyTimeSpent" value="76552000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -940,8 +947,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- add new captcha methode&#10;- bugfix sqlite database connection&#10;- add getImageHeight &amp; getImageWidth methode in images class&#10;- add removeFileFromZipArchive &amp; renameFileInZipArchive methode in zip class&#10;- add update.php file for actually webpackages framework" />
-    <MESSAGE value="- change update.php" />
     <MESSAGE value="- bugfixes constants.php&#10;- bugfixes update.php" />
     <MESSAGE value="-bugfix read models" />
     <MESSAGE value="-bugfix createValidUrlString" />
@@ -965,7 +970,9 @@
     <MESSAGE value="- add auto security by _GET and _POST requests" />
     <MESSAGE value="- remove unitTest from git repository" />
     <MESSAGE value="- change copyright year from 2016 to 2017" />
-    <option name="LAST_COMMIT_MESSAGE" value="- change copyright year from 2016 to 2017" />
+    <MESSAGE value="- remove getTemplateFile.php&#10;- add HTTP_SKIN constant&#10;- add rewrite skin path&#10;- change default statistic" />
+    <MESSAGE value="- change update.php&#10;- change constants.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="- change update.php&#10;- change constants.php" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -974,13 +981,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package/system/core/XML.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-708">
-          <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/zip.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -1214,14 +1214,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/vendor/robbyn666/webpackages/package/system/core/security.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
@@ -1270,14 +1262,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/vendor/robbyn666/webpackages/package/system/core/template.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7">
@@ -1294,26 +1278,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="118" column="83" lean-forward="true" selection-start-line="118" selection-start-column="83" selection-end-line="118" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="218" column="30" lean-forward="false" selection-start-line="218" selection-start-column="30" selection-end-line="218" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -1350,14 +1318,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="38" lean-forward="false" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/views/welcome/template/hello.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-138">
@@ -1366,10 +1326,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="313" column="27" lean-forward="true" selection-start-line="313" selection-start-column="27" selection-end-line="313" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="215" column="77" lean-forward="false" selection-start-line="215" selection-start-column="77" selection-end-line="215" selection-end-column="77" />
+          <folding>
+            <element signature="e#5802#5808#1#HTML" expanded="true" />
+            <element signature="e#7042#7048#1#HTML" expanded="true" />
+            <marker date="1483629365000" expanded="true" signature="5541:5654" ph="..." />
+            <marker date="1483629365000" expanded="true" signature="5589:5643" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="83" column="1" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="216" column="65" lean-forward="false" selection-start-line="216" selection-start-column="65" selection-end-line="216" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/vendor/robbyn666/webpackages/package/system/core/benchmark.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-888">
+          <caret line="41" column="3" lean-forward="false" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package/views/welcome/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="381">
+          <caret line="57" column="44" lean-forward="false" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1377,15 +1398,7 @@
     <entry file="file://$PROJECT_DIR$/package/views/welcome/template/footer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="10" column="60" lean-forward="false" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="313" column="27" lean-forward="true" selection-start-line="313" selection-start-column="27" selection-end-line="313" selection-end-column="27" />
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>

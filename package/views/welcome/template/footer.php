@@ -13,8 +13,9 @@
 	<script src="<?php echo HTTP_SKIN.'js/fusioncharts.js'; ?>"></script>
     <script src="<?php echo HTTP_SKIN.'js/fusioncharts.charts.js'; ?>"></script>
     <script src="<?php echo HTTP_SKIN.'js/main.js'; ?>"></script>
+
 	<?php
-	echo '<script type="text/javascript">var loadTime	=	"'.number_format(\package\core\benchmark::finish(), 4, '.', '').'"</script>';
+	echo '<script type="text/javascript">var loadTimeVar	=	'.str_replace(',', '.', \package\core\benchmark::finish()).'</script>';
 	?>
 </body>
 </html>

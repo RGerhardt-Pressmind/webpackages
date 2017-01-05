@@ -9,6 +9,11 @@
     <link href="<?php echo HTTP_SKIN.'css/bootstrap.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo HTTP_SKIN.'css/font-awesome.min.css'; ?>" rel="stylesheet">
     <link href="<?php echo HTTP_SKIN.'css/main.css'; ?>" rel="stylesheet">
+
+	<script>
+		var currentTime	=	new Date();
+	</script>
+
     <!--[if lt IE 9]>
     <script src="<?php echo HTTP_SKIN.'js/html5shiv.js'; ?>"></script>
     <script src="<?php echo HTTP_SKIN.'js/respond.min.js'; ?>"></script>

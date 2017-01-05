@@ -51,11 +51,11 @@ jQuery(function($) {
 						},
 						{
 							"label": "slim",
-							"value": "0.5372"
+							"value": "0.6372"
 						},
 						{
 							"label": "webpackages",
-							"value": "0.147"
+							"value": "0.4475"
 						}
 					]
 				}
@@ -131,6 +131,10 @@ jQuery(function($) {
 			pause: false
 		});
 
-		$('#loadTime').html(loadTime);
+		var addTime =   new Date();
+
+		loadTimeVar    =   loadTimeVar + (addTime.getTime() / 1000) - (currentTime.getTime() / 1000);
+
+		$('#loadTime').html(loadTimeVar.toFixed(4));
 	});
 });
