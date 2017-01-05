@@ -5,26 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/DateTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/PHPMailerTestTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/XMLTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/autoloadTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/benchmarkTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/cacheTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/captchaTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/curlTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/databaseTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/ftpTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/languageTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/loggerTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/numberTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/pluginsTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/securityTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/textTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/urlTest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/zipTest.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/getTemplateFile.php" afterPath="$PROJECT_DIR$/getTemplateFile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,23 +41,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="constants.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/constants.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="179" column="3" lean-forward="true" selection-start-line="179" selection-start-column="3" selection-end-line="179" selection-end-column="3" />
+            <state relative-caret-position="169">
+              <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="security.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="security.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="216" column="57" lean-forward="true" selection-start-line="216" selection-start-column="57" selection-end-line="216" selection-end-column="57" />
+            <state relative-caret-position="30">
+              <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="48" />
               <folding>
-                <marker date="1483616781000" expanded="true" signature="6851:6961" ph="{...}" />
+                <marker date="1483626002000" expanded="true" signature="6851:6961" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -82,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/init.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="504">
-              <caret line="110" column="44" lean-forward="true" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
+              <caret line="110" column="44" lean-forward="false" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -99,6 +84,20 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Copyright (C) 2010 - 2016</find>
+      <find>Copyright (c) 2010 - 2016,</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Copyright (C) 2010 - 2017</replace>
+      <replace>Copyright (c) 2010 - 2017,</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/package</dir>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,7 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/package/system/core/number.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/XML.class.php" />
         <option value="$PROJECT_DIR$/package/system/loadSessionHandler.php" />
         <option value="$PROJECT_DIR$/unitTest/core/cacheTest.php" />
@@ -159,9 +157,10 @@
         <option value="$PROJECT_DIR$/todo" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/README.MD" />
-        <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/package/system/core/security.class.php" />
+        <option value="$PROJECT_DIR$/package/controllers/welcome.class.php" />
+        <option value="$PROJECT_DIR$/constants.php" />
       </list>
     </option>
   </component>
@@ -187,9 +186,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
     <option name="width" value="1440" />
-    <option name="height" value="874" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -276,6 +274,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -470,21 +469,7 @@
       <workItem from="1482667275992" duration="2226000" />
       <workItem from="1482674049365" duration="4671000" />
       <workItem from="1483292468157" duration="6000" />
-      <workItem from="1483613081526" duration="2330000" />
-    </task>
-    <task id="LOCAL-00055" summary="- workspace update">
-      <created>1455039154260</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1455039154260</updated>
-    </task>
-    <task id="LOCAL-00056" summary="-">
-      <created>1455039410241</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1455039410241</updated>
+      <workItem from="1483613081526" duration="2588000" />
     </task>
     <task id="LOCAL-00057" summary="v2.1.0">
       <created>1455148917170</created>
@@ -815,7 +800,21 @@
       <option name="project" value="LOCAL" />
       <updated>1483616909674</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="- remove unitTest from git repository">
+      <created>1483625839397</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1483625839397</updated>
+    </task>
+    <task id="LOCAL-00105" summary="- change copyright year from 2016 to 2017">
+      <created>1483626020964</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1483626020964</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -851,19 +850,20 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71745000" />
+    <option name="totallyTimeSpent" value="72003000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="874" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27005732" sideWeight="0.48976982" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27005732" sideWeight="0.49036145" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25903615" sideWeight="0.5057307" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32409638" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3253012" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27005732" sideWeight="0.5102302" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27005732" sideWeight="0.50963855" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -877,7 +877,6 @@
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31325302" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2719704" sideWeight="0.49426934" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32439926" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39820743" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -900,8 +899,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- change plugin system&#10;- add plugins CommandLine and GoogleImageSearch" />
-    <MESSAGE value="- bugfixes" />
     <MESSAGE value="- add new captcha methode&#10;- bugfix sqlite database connection&#10;- add getImageHeight &amp; getImageWidth methode in images class&#10;- add removeFileFromZipArchive &amp; renameFileInZipArchive methode in zip class&#10;- add update.php file for actually webpackages framework" />
     <MESSAGE value="- change update.php" />
     <MESSAGE value="- bugfixes constants.php&#10;- bugfixes update.php" />
@@ -925,7 +922,9 @@
     <MESSAGE value="- remove todo file" />
     <MESSAGE value="-add readme.md" />
     <MESSAGE value="- add auto security by _GET and _POST requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add auto security by _GET and _POST requests" />
+    <MESSAGE value="- remove unitTest from git repository" />
+    <MESSAGE value="- change copyright year from 2016 to 2017" />
+    <option name="LAST_COMMIT_MESSAGE" value="- change copyright year from 2016 to 2017" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -938,13 +937,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="67" lean-forward="false" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1185,8 +1177,8 @@
             <element signature="e#11388#12031#0#PHP" expanded="false" />
             <element signature="e#12581#13608#0#PHP" expanded="false" />
             <element signature="e#13937#14655#0#PHP" expanded="false" />
-            <marker date="1474323607000" expanded="true" signature="11458:11473" ph="INSERT INTO ${$table}" />
-            <marker date="1474323607000" expanded="true" signature="14049:14064" ph="DELETE FROM " />
+            <marker date="1483626002000" expanded="true" signature="11458:11473" ph="INSERT INTO ${$table}" />
+            <marker date="1483626002000" expanded="true" signature="14049:14064" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -1312,26 +1304,34 @@
     <entry file="file://$PROJECT_DIR$/init.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
-          <caret line="110" column="44" lean-forward="true" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="179" column="3" lean-forward="true" selection-start-line="179" selection-start-column="3" selection-end-line="179" selection-end-column="3" />
+          <caret line="110" column="44" lean-forward="false" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="216" column="57" lean-forward="true" selection-start-line="216" selection-start-column="57" selection-end-line="216" selection-end-column="57" />
+        <state relative-caret-position="30">
+          <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="48" />
           <folding>
-            <marker date="1483616781000" expanded="true" signature="6851:6961" ph="{...}" />
+            <marker date="1483626002000" expanded="true" signature="6851:6961" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="57" lean-forward="false" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

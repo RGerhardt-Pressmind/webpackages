@@ -18,7 +18,7 @@
  * @package       Webpackages
  * @subpackage    controllers
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2016, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
  * @since         Version 2.0.0
