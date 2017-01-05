@@ -97,7 +97,7 @@ function removeInitialFiles()
 
 if(isset($_POST['update']))
 {
-	$url	=	'http://www.webpackages.de/autorisation.php';
+	$url	=	'https://www.webpackages.de/autorisation.php';
 
 	$security_key	=	$_POST['security_key'];
 
@@ -213,30 +213,54 @@ $isActual	=	version_compare($current_version['current_version'], \package\core\v
 			}
 			?>
 			<div class="col-md-12">
-				<h3 class="text-center">webpackages Framework aktualisieren</h3>
+				<h3 class="text-center">Update webpackages framework</h3><br>
 			</div>
 			<div class="col-md-4">&nbsp;</div>
 			<div class="col-md-4">
-				<p class="text-center"><strong>Ihre Version:</strong> <?php echo 'v'.\package\core\version::VERSION; ?></p>
-				<p class="text-center"><strong>Aktuellste Version:</strong> <?php echo 'v'.$current_version['current_version']; ?></p>
+				<div class="row">
+					<div class="col-md-6">
+						<strong>Your version:</strong>
+					</div>
+					<div class="col-md-6 text-right">
+						<?php echo 'v'.\package\core\version::VERSION; ?>
+					</div>
+				</div>
+				<br>
+
+				<div class="row">
+					<div class="col-md-6">
+						<strong>Newest version:</strong>
+					</div>
+					<div class="col-md-6 text-right">
+						<?php echo 'v'.$current_version['current_version']; ?>
+					</div>
+				</div>
+				<br>
+
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<a href="https://www.webpackages.de/changelog.html" target="_blank">Go to changelog</a>
+					</div>
+				</div>
 				<?php
 				if($isActual > 0)
 				{
 				?>
-				<form action="" method="post">
-					<div class="form-group">
-						<label>Sicherheitsschlüssel</label>
-						<input type="text" class="form-control" name="security_key">
-					</div>
-					<input type="hidden" name="update">
-					<p class="text-center"><button class="btn btn-success">Aktualisieren</button></p>
-				</form>
+					<form action="" method="post">
+						<div class="form-group">
+							<label>Security Key</label>
+							<input type="text" class="form-control" name="security_key">
+						</div>
+						<input type="hidden" name="update">
+						<p class="text-center"><button class="btn btn-success">Update</button></p>
+					</form>
 				<?php
 				}
 				else
 				{
 				?>
-				<p class="text-center"><span class="btn btn-primary">keine Aktualisierung möglich</span></p>
+					<br>
+					<p class="text-center"><span class="btn btn-primary">No updates available</span></p>
 				<?php
 				}
 				?>

@@ -214,7 +214,7 @@ define('AUTO_SECURE_EXCEPTIONS', '');
 define('TEMPLATE_DEFAULT_SKIN', 'welcome');
 
 /**
- * Der URL Pfad zum Skin
+ * Der URL Pfad zum Skin um css oder javascript Dateien leichter einzubinden
  */
 define('HTTP_SKIN', HTTP.'skin/'.TEMPLATE_DEFAULT_SKIN.'/');
 
