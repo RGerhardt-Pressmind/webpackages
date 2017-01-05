@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webpackages.iml" afterPath="$PROJECT_DIR$/.idea/webpackages.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/DateTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/FileSystemTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/PHPMailerTestTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/XMLTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/autoloadTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/benchmarkTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/cacheTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/captchaTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/curlTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/databaseTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/ftpTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/languageTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/loggerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/numberTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/pluginsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/securityTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/textTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/urlTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/unitTest/core/zipTest.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/security.class.php" afterPath="$PROJECT_DIR$/package/system/core/security.class.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +69,8 @@
       <file leaf-file-name="security.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="224" column="0" lean-forward="true" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="216" column="57" lean-forward="true" selection-start-line="216" selection-start-column="57" selection-end-line="216" selection-end-column="57" />
               <folding>
                 <marker date="1483616781000" expanded="true" signature="6851:6961" ph="{...}" />
               </folding>
@@ -223,60 +238,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webpackages" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -509,14 +470,7 @@
       <workItem from="1482667275992" duration="2226000" />
       <workItem from="1482674049365" duration="4671000" />
       <workItem from="1483292468157" duration="6000" />
-      <workItem from="1483613081526" duration="1063000" />
-    </task>
-    <task id="LOCAL-00054" summary="- workspace update">
-      <created>1455039110771</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1455039110771</updated>
+      <workItem from="1483613081526" duration="2330000" />
     </task>
     <task id="LOCAL-00055" summary="- workspace update">
       <created>1455039154260</created>
@@ -854,7 +808,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482690712457</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="- add auto security by _GET and _POST requests">
+      <created>1483616909672</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1483616909674</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -890,7 +851,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70478000" />
+    <option name="totallyTimeSpent" value="71745000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
@@ -939,7 +900,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- add method property class header&#10;- change template class load display" />
     <MESSAGE value="- change plugin system&#10;- add plugins CommandLine and GoogleImageSearch" />
     <MESSAGE value="- bugfixes" />
     <MESSAGE value="- add new captcha methode&#10;- bugfix sqlite database connection&#10;- add getImageHeight &amp; getImageWidth methode in images class&#10;- add removeFileFromZipArchive &amp; renameFileInZipArchive methode in zip class&#10;- add update.php file for actually webpackages framework" />
@@ -964,7 +924,8 @@
     <MESSAGE value="- add composer.json" />
     <MESSAGE value="- remove todo file" />
     <MESSAGE value="-add readme.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="-add readme.md" />
+    <MESSAGE value="- add auto security by _GET and _POST requests" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add auto security by _GET and _POST requests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1366,8 +1327,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="224" column="0" lean-forward="true" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="216" column="57" lean-forward="true" selection-start-line="216" selection-start-column="57" selection-end-line="216" selection-end-column="57" />
           <folding>
             <marker date="1483616781000" expanded="true" signature="6851:6961" ph="{...}" />
           </folding>
