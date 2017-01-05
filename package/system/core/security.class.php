@@ -36,6 +36,7 @@ use package\system\core\initiator;
  * Mit der security Klasse kann man jegliche Form von Angriff über Eingaben des Benutzers aufhalten. Ob XSS oder
  * SQL Injections, die security Klasse überprüft diese und gibt sie gereinigt zurück.
  *
+ * @method static mixed autoSecurity(array $exceptionValues)
  * @method static mixed control(string $variable, $convert = null, $removeSQLFunctions = false)
  * @method static mixed url(string $variable, $input = null, $convert = null, $removeSQLFunctions = false)
  * @method static string|bool create_csrf_token(string $token_name, $token_duration = 0);
@@ -153,6 +154,44 @@ class security extends initiator
 		"([\"'])?data\s*:[^\\1]*?base64[^\\1]*?,[^\\1]*?\\1?"
 	);
 
+	private static $hasControl = array('post' => array(), 'get' => array());
+
+	/**
+	 * Kontrolliert alle einkommenden Anfragen einmal auf schädlichen Code durch
+	 *
+	 * @param array $exceptionValues
+	 * @return void
+	 */
+	protected static function _autoSecurity($exceptionValues)
+	{
+		if(!empty($_GET))
+		{
+			foreach($_GET as $key => $value)
+			{
+				if(!in_array($key, $exceptionValues))
+				{
+					self::$hasControl['get'][$key] = gettype($value);
+
+					$_GET[$key]	=	self::control($key, self::$hasControl['get'][$key]);
+				}
+			}
+		}
+
+		if(!empty($_POST))
+		{
+			foreach($_POST as $key => $value)
+			{
+				if(!in_array($key, $exceptionValues))
+				{
+					self::$hasControl['post'][$key]	=	gettype($value);
+
+					$_POST[$key]	=	self::control($key, self::$hasControl['post'][$key]);
+				}
+			}
+		}
+	}
+
+
 	/**
 	 * Kontrolliert eine Variable auf Sicherheit und Konvertiert diese zur Sicherheit auch in das gewünschte Format.
 	 *
@@ -182,9 +221,23 @@ class security extends initiator
 	 */
 	protected static function _url($variable, $input = null, $convert = null, $removeSQLFunctions = false)
 	{
+		$input	=	strtolower($input);
+
+		if(AUTO_SECURE == true && isset(self::$hasControl[$input][$variable]) && self::$hasControl[$input][$variable] == $convert)
+		{
+			if($input == 'get')
+			{
+				return $_GET[$variable];
+			}
+			else
+			{
+				return $_POST[$variable];
+			}
+		}
+
 		$request = '';
 
-		switch(strtolower($input))
+		switch($input)
 		{
 			case 'post':
 

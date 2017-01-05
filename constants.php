@@ -187,6 +187,16 @@ define('MAIL_PASSWORD',	'');
  */
 define('MAIL_PORT',	25);
 
+/**
+ * Automatische Sicherheitsüberprüfung
+ */
+define('AUTO_SECURE', true);
+
+/**
+ * Ausnahmen bei der Überprüfung der Automatischen Sicherheit
+ * Hier werden dann Kommasepariert die POST, GET etc. Anfragen eingetragen
+ */
+define('AUTO_SECURE_EXCEPTIONS', '');
 
 
 

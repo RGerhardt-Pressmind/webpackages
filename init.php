@@ -110,6 +110,11 @@ require 'benchmark.class.php';
 require 'security.class.php';
 require 'load_functions.abstract.class.php';
 
+if(defined('AUTO_SECURE') && AUTO_SECURE == true)
+{
+	\package\core\security::autoSecurity(explode(',', AUTO_SECURE_EXCEPTIONS));
+}
+
 if(file_exists(ROOT.SEP.'dynamicInit.php'))
 {
 	require ROOT.SEP.'dynamicInit.php';

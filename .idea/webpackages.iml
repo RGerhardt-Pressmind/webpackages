@@ -16,5 +16,17 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://$USER_HOME$/vendor/composer" />
+          <root url="file://$USER_HOME$/vendor/robbyn666/webpackages" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$USER_HOME$/vendor/composer" />
+          <root url="file://$USER_HOME$/vendor/robbyn666/webpackages" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
