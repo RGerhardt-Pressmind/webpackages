@@ -214,6 +214,11 @@ define('AUTO_SECURE_EXCEPTIONS', '');
 define('TEMPLATE_DEFAULT_SKIN', 'welcome');
 
 /**
+ * Der URL Pfad zum Skin
+ */
+define('HTTP_SKIN', HTTP.'skin/'.TEMPLATE_DEFAULT_SKIN.'/');
+
+/**
  * Der Pfad zum Package Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
  */
 define('PACKAGE_DIR', ROOT.SEP.'package'.SEP);

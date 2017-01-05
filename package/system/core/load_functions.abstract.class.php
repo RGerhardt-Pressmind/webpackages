@@ -29,7 +29,9 @@ namespace package\core;
 
 use package\implement\IModel;
 use package\implement\IPlugin;
+use package\system\core\phpMailer;
 use package\system\core\restClient;
+use package\system\valueObjects\phpMailer\VOPHPMailer;
 
 /**
  * Kernklasse die alle anderen Klassen lädt
@@ -172,6 +174,13 @@ abstract class load_functions
 
 		foreach($loadClasses as $classes)
 		{
+			if($classes['class'] == 'phpmailer')
+			{
+				//PHPMailer seperat laden
+				$this->loadPHPMailer();
+				continue;
+			}
+
 			if($classes['isStatic'])
 			{
 				autoload::get($classes['class'], $classes['namespace'], true);
@@ -210,6 +219,37 @@ abstract class load_functions
 
 		unset($loadClasses);
 	}
+
+
+	/**
+	 * Lädt die PHPMailer Klasse
+	 *
+	 * @return void
+	 */
+	private function loadPHPMailer()
+	{
+		require_once 'phpMailer.class.php';
+		require_once 'VOMailAddress.php';
+		require_once 'VOMailAttachment.php';
+		require_once 'VOPHPMailer.php';
+
+		$this->phpmailer	=	null;
+
+		if(MAIL_HOST != '' && MAIL_USERNAME != '' && MAIL_PASSWORD != '')
+		{
+			$voPHPMailer				=	new VOPHPMailer();
+			$voPHPMailer->host			=	MAIL_HOST;
+			$voPHPMailer->username		=	MAIL_USERNAME;
+			$voPHPMailer->password		=	MAIL_PASSWORD;
+			$voPHPMailer->port			=	MAIL_PORT;
+			$voPHPMailer->is_smtp		=	MAIL_IS_SMTP;
+			$voPHPMailer->is_smtp_auth	=	MAIL_SMTP_AUTH;
+			$voPHPMailer->smtp_secure	=	MAIL_SMTP_SECURE;
+
+			$this->phpmailer			=	new phpMailer($voPHPMailer);
+		}
+	}
+
 
 	/**
 	 * Gibt alle Standard Klassen der Initialisierung zurück

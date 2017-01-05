@@ -295,7 +295,7 @@ class template extends initiator
 			}
 		}
 
-		$templatePath = $this->getTemplatePath().$template;
+		$templatePath = new \SplFileInfo($this->getTemplatePath().$template);
 
 		if(!file_exists($templatePath))
 		{
@@ -308,7 +308,7 @@ class template extends initiator
 		}
 		else
 		{
-			$headerPath = $templatePath.SEP.$this->header;
+			$headerPath = $templatePath->getPath().SEP.$this->header;
 		}
 
 		if($footer != null)
@@ -317,12 +317,12 @@ class template extends initiator
 		}
 		else
 		{
-			$footerPath = $templatePath.SEP.$this->footer;
+			$footerPath = $templatePath->getPath().SEP.$this->footer;
 		}
 
 		if(!file_exists($headerPath) || !file_exists($footerPath))
 		{
-			throw new templateException('Error: header or footer template not exist');
+			throw new templateException('Error: header or footer template not exist ('.$headerPath.' - '.$footerPath.')');
 		}
 
 		if($cacheActive)
@@ -345,7 +345,7 @@ class template extends initiator
 				ob_start();
 
 				require $headerPath;
-				require $templatePath;
+				require $templatePath->__toString();
 				require $footerPath;
 
 				$output = ob_get_contents();
@@ -366,7 +366,7 @@ class template extends initiator
 		}
 
 		require $headerPath;
-		require $templatePath;
+		require $templatePath->__toString();
 		require $footerPath;
 	}
 

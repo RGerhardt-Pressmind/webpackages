@@ -42,20 +42,20 @@ jQuery(function($) {
 
 					"data": [
 						{
-							"label": "codeigniter-3.0",
-							"value": "1.1947"
+							"label": "codeigniter",
+							"value": "1.0295"
 						},
 						{
-							"label": "slim-2.6",
-							"value": "1.0474"
+							"label": "symfony",
+							"value": "0.7184"
 						},
 						{
-							"label": "symfony-2.6",
-							"value": "0.9173"
+							"label": "slim",
+							"value": "0.5372"
 						},
 						{
-							"label": "webpackages 2.0",
-							"value": "0.8241"
+							"label": "webpackages",
+							"value": "0.147"
 						}
 					]
 				}
@@ -104,20 +104,20 @@ jQuery(function($) {
 
 					"data": [
 						{
-							"label": "codeigniter-3.0",
-							"value": "3.8812"
+							"label": "codeigniter",
+							"value": "3.1395"
 						},
 						{
-							"label": "slim-2.6",
-							"value": "2.5256"
+							"label": "slim",
+							"value": "2.3194"
 						},
 						{
-							"label": "symfony-2.6",
-							"value": "1.3424"
+							"label": "symfony",
+							"value": "1.1947"
 						},
 						{
-							"label": "webpackages 2.0",
-							"value": "0.7957"
+							"label": "webpackages",
+							"value": "0.4284"
 						}
 					]
 				}

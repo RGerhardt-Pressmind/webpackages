@@ -102,6 +102,6 @@ class welcome extends load_functions
 			\package\core\language::set_language($_SESSION['default_lng']);
 		}
 
-		$this->template->display('template/hello.php', false);
+		$this->template->display('template/hello.php');
 	}
 }
