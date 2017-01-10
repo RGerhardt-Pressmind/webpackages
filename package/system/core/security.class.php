@@ -938,10 +938,37 @@ class security extends initiator
 			return $str;
 		}
 
-		$str = html_entity_decode($str, ENT_COMPAT, $charset);
-		$str = preg_replace('~&#x(0*[0-9a-f]{2,5})~ei', 'chr(hexdec("\\1"))', $str);
+		$_entities	=	array_map('strtolower', get_html_translation_table(HTML_ENTITIES, ENT_COMPAT | ENT_HTML5));
 
-		return preg_replace('~&#([0-9]{2,4})~e', 'chr(\\1)', $str);
+		do
+		{
+			$str_compare = $str;
+
+			if(preg_match_all('/&[a-z]{2,}(?![a-z;])/i', $str, $matches))
+			{
+				$replace = array();
+				$matches = array_unique(array_map('strtolower', $matches[0]));
+
+				foreach($matches as &$match)
+				{
+					if(($char = array_search($match.';', $_entities, true)) !== false)
+					{
+						$replace[$match] = $char;
+					}
+				}
+
+				$str = str_replace(array_keys($replace), array_values($replace), $str);
+			}
+
+			$str = html_entity_decode(
+				preg_replace('/(&#(?:x0*[0-9a-f]{2,5}(?![0-9a-f;])|(?:0*\d{2,4}(?![0-9;]))))/iS', '$1;', $str),
+				ENT_COMPAT | ENT_HTML5,
+				$charset
+			);
+		}
+		while($str_compare !== $str);
+
+		return $str;
 	}
 
 	/**
