@@ -136,7 +136,8 @@ class security extends initiator
 		'<!--'				=> '&lt;!--',
 		'-->'				=> '--&gt;',
 		'<![CDATA['			=> '&lt;![CDATA[',
-		'<comment>'			=> '&lt;comment&gt;'
+		'<comment>'			=> '&lt;comment&gt;',
+		'<%'              	=> '&lt;&#37;'
 	);
 
 	/**
@@ -583,28 +584,42 @@ class security extends initiator
 	/**
 	 * Säubert einen String vor schädlichen XSS Code
 	 *
-	 * @param string $str Der String der von XSS gesäubert werden soll
+	 * @param string|string[] $str Der String der von XSS gesäubert werden soll
 	 *
 	 * @return string $str
 	 */
 	protected static function xss_clean($str)
 	{
+		// Is string a array
+		if(is_array($str))
+		{
+			while(list($key) = each($str))
+			{
+				$str[$key] = self::xss_clean($str[$key]);
+			}
+
+			return $str;
+		}
+
 		// Remove Invisible Characters
 		$str = self::remove_invisible_characters($str);
 
 		/*
 		 * URL Decode
 		 *
-		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">Google</a>
+		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">webpackages</a>
 		 */
-		while(true)
+		if(strpos($str, '%') !== false)
 		{
-			if(preg_match('/%[0-9a-f]{2,}/i', $str) != 1)
+			while(true)
 			{
-				break;
-			}
+				$str = rawurldecode($str);
 
-			$str = rawurldecode($str);
+				if(preg_match('/%[0-9a-f]{2,}/i', $str) != 1)
+				{
+					break;
+				}
+			}
 		}
 
 		/*
@@ -629,6 +644,10 @@ class security extends initiator
 
 		// Remove Strings that are never allowed
 		$str = self::_do_never_allowed($str);
+
+		//Kommt oft in Bildern vor
+		$str = preg_replace('/<\?(php)/i', '&lt;?\\1', $str);
+
 		$str = str_replace(array(
 			'<?',
 			'?>'
@@ -663,6 +682,7 @@ class security extends initiator
 		foreach($words as $word)
 		{
 			$word = implode('\s*', str_split($word)).'\s*';
+
 			$str  = preg_replace_callback('#('.substr($word, 0, -3).')(\W)#is', array(
 				'self',
 				'_compact_exploded_words'
@@ -750,6 +770,68 @@ class security extends initiator
 		$str = self::_do_never_allowed($str);
 
 		return $str;
+	}
+
+	/**
+	 * JS Links entfernen
+	 *
+	 * Entfernt vielleicht infizierte a Tags
+	 *
+	 * @param array $match
+	 * @return string
+	 */
+	protected static function _js_link_removal($match)
+	{
+		return str_replace(
+			$match[1],
+			preg_replace(
+				'#href=.*?(?:(?:alert|prompt|confirm)(?:\(|&\#40;)|javascript:|livescript:|mocha:|charset=|window\.|document\.|\.cookie|<script|<xss|d\s*a\s*t\s*a\s*:)#si',
+				'',
+				self::_filter_attributes($match[1])
+			),
+			$match[0]
+		);
+	}
+
+	/**
+	 * JS Bilder entfernen
+	 *
+	 * Entfernt vielleicht infizierte img Tags
+	 *
+	 * @param array	$match
+	 * @return	string
+	 */
+	protected static function _js_img_removal($match)
+	{
+		return str_replace(
+			$match[1],
+			preg_replace(
+				'#src=.*?(?:(?:alert|prompt|confirm|eval)(?:\(|&\#40;)|javascript:|livescript:|mocha:|charset=|window\.|document\.|\.cookie|<script|<xss|base64\s*,)#si',
+				'',
+				self::_filter_attributes($match[1])
+			),
+			$match[0]
+		);
+	}
+
+	/**
+	 * Filtert Attribute
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	protected function _filter_attributes($str)
+	{
+		$out = '';
+		if (preg_match_all('#\s*[a-z\-]+\s*=\s*(\042|\047)([^\\1]*?)\\1#is', $str, $matches))
+		{
+			foreach ($matches[0] as $match)
+			{
+				$out .= preg_replace('#/\*.*?\*/#s', '', $match);
+			}
+		}
+
+		return $out;
 	}
 
 	/**
@@ -912,6 +994,8 @@ class security extends initiator
 	 */
 	protected static function _decode_entity($match)
 	{
+		$match = preg_replace('|\&([a-z\_0-9\-]+)\=([a-z\_0-9\-/]+)|i', 'XSS\\1=\\2', $match[0]);
+
 		return self::entity_decode($match[0], strtoupper('UTF-8'));
 	}
 
