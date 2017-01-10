@@ -172,7 +172,7 @@ class security extends initiator
 				{
 					self::$hasControl['get'][$key] = gettype($value);
 
-					$_GET[$key]	=	self::control($key, self::$hasControl['get'][$key]);
+					$_GET[$key]	=	self::control($_GET[$key], self::$hasControl['get'][$key]);
 				}
 			}
 		}
@@ -185,7 +185,7 @@ class security extends initiator
 				{
 					self::$hasControl['post'][$key]	=	gettype($value);
 
-					$_POST[$key]	=	self::control($key, self::$hasControl['post'][$key]);
+					$_POST[$key]	=	self::control($_POST[$key], self::$hasControl['post'][$key]);
 				}
 			}
 		}
