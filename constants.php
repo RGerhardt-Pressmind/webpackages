@@ -100,7 +100,7 @@ define('PDO_CHARSET', 'utf8');
 /**
  * PDO Optionen die bei der Datenbank Verbindung definert werden können
  */
-define('PDO_OPTIONS',	array());
+define('PDO_OPTIONS',	'');
 
 /**
  * Die Dateinamen Endung der Cache Dateien
