@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -67,109 +67,86 @@ class database extends \PDO
 	/**
 	 * Am Konstruktor müssen dsn, username, password, options und driver übermittelt werden
 	 *
-	 * @param array $para
+	 * @param         $driver
+	 * @param         $host
+	 * @param         $username
+	 * @param         $password
+	 * @param string  $database
+	 * @param int     $port
+	 * @param string  $charset
+	 * @param array   $options
 	 *
 	 * @throws databaseException
 	 */
-	public function __construct($para)
+	public function __construct($driver, $host, $username, $password, $database = '', $port = 3306, $charset = 'utf8', $options = array())
 	{
-		$username = '';
-		$passwd   = '';
-		$options  = null;
-		$driver   = 'mysql';
+		$dsn = $driver.':';
 
-		$dsn = $para['driver'].':';
-
-		if($para['driver'] == 'sqlite' || $para['driver'] == 'sqlite2')
+		if($driver == 'sqlite' || $driver == 'sqlite2')
 		{
-			$dsn .= $para['database'];
+			$dsn .= $database;
 		}
 		else
 		{
-			if($para['driver'] == 'sqlsrv')
+			if($driver == 'sqlsrv')
 			{
-				$dsn .= 'Server='.$para['host'];
+				$dsn .= 'Server='.$host;
 			}
 			else
 			{
-				$dsn .= 'host='.$para['host'];
+				$dsn .= 'host='.$host;
 			}
 
 			$addIn = true;
 
-			if(!empty($para['port']))
+			if(!empty($port))
 			{
-				if($addIn && $para['driver'] != 'sqlsrv')
+				if($addIn && $driver != 'sqlsrv')
 				{
 					$dsn .= ';';
 				}
 
-				if($para['driver'] == 'informix')
+				if($driver == 'informix')
 				{
-					$dsn .= 'service='.$para['port'];
+					$dsn .= 'service='.$port;
 				}
-				elseif($para['driver'] == 'sqlsrv')
+				elseif($driver == 'sqlsrv')
 				{
-					$dsn .= ','.$para['port'];
+					$dsn .= ','.$port;
 				}
 				else
 				{
-					$dsn .= 'port='.$para['port'];
+					$dsn .= 'port='.$port;
 				}
 
 				$addIn = true;
 			}
 
-			if(!empty($para['database']))
+			if(!empty($database))
 			{
 				if($addIn)
 				{
 					$dsn .= ';';
 				}
 
-				$dsn .= 'dbname='.$para['database'];
+				$dsn .= 'dbname='.$database;
 				$addIn = true;
 			}
 
-			if(!empty($para['charset']))
+			if(!empty($charset))
 			{
 				if($addIn === true)
 				{
 					$dsn .= ';';
 				}
 
-				$dsn .= 'charset='.$para['charset'];
+				$dsn .= 'charset='.$charset;
 			}
 		}
 
-		if(!empty($para['username']))
-		{
-			$username = $para['username'];
-		}
-
-		if(!empty($para['password']))
-		{
-			$passwd = $para['password'];
-		}
-
-		if(!empty($para['options']))
-		{
-			$options = $para['options'];
-		}
-
-		if(!empty($para['driver']))
-		{
-			$driver = $para['driver'];
-		}
-
-		if(empty($dsn) || (empty($username) && $para['driver'] != 'sqlite' && $para['driver'] != 'sqlite2'))
+		if((empty($username) && $driver != 'sqlite' && $driver != 'sqlite2'))
 		{
 			return;
-		}
-
-		if(empty($options))
-		{
-			$options = array();
 		}
 
 		if(!in_array($driver, self::$allowedDrivers))
@@ -204,7 +181,7 @@ class database extends \PDO
 			$options[\PDO::ATTR_PERSISTENT] = true;
 		}
 
-		parent::__construct($dsn, $username, $passwd, $options);
+		parent::__construct($dsn, $username, $password, $options);
 
 		$this->isInit = true;
 	}
@@ -270,9 +247,7 @@ class database extends \PDO
 			throw new databaseException('Error: pdo::result_array $sql is empty');
 		}
 
-		preg_match_all('/(SELECT|select)/', $sql, $matches);
-
-		if(empty($matches))
+		if(preg_match('/(select)/', strtolower($sql)) === false)
 		{
 			throw new databaseException('Error: pdo::result_array $sql is not select');
 		}

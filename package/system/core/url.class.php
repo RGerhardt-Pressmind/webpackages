@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -41,8 +41,10 @@ use package\system\core\initiator;
  * @method static void set_use_mod_rewrite(bool $mod)
  * @method static void set_use_file_extension(string $extension)
  * @method static void loc_url_simple(array $parameters)
- * @method static string get_url_simple(string $httpRoot, array $parameters)
+ * @method static string get_url_simple(string $httpRoot, array $parameters) @deprecated
+ * @method static string get_modify_url(array $parameters, string $http_host = null)
  * @method static string createValidUrlString(string $url)
+ * @method static mixed get_host_from_url(string $url)
  * @method static string getCurrentUrl()
  * @method static void loc(string $url)
  * @method static void reload()
@@ -122,12 +124,14 @@ class url extends initiator implements IStatic
 	 */
 	protected static function _loc_url_simple($parameters)
 	{
-		self::_loc(self::_get_url_simple(HTTP, $parameters));
+		self::_loc(self::get_modify_url($parameters));
 	}
 
 	/**
 	 * Wandelt einen Link in ModRewrite um oder
 	 * gibt Ihn als normalen GET Text zurück
+	 *
+	 * @deprecated
 	 *
 	 * @param string $httpRoot   Die HTTP-Root URL vom Webserver (beispiel von google: http://www.google.de/)
 	 * @param array  $parameters Die Parameter die übergeben werden sollen.
@@ -136,7 +140,20 @@ class url extends initiator implements IStatic
 	 */
 	protected static function _get_url_simple($httpRoot, $parameters)
 	{
-		$link = $httpRoot;
+		return self::get_modify_url($parameters, $httpRoot);
+	}
+
+	/**
+	 * Wandelt eine URL, je nach Einstellung, in eine lesbare URL um (mod_rewrite)
+	 *
+	 * @param array $parameters
+	 * @param null $http_host
+	 *
+	 * @return string
+	 */
+	protected static function _get_modify_url($parameters, $http_host = null)
+	{
+		$link = (empty($http_host) ? HTTP : $http_host);
 
 		if(!empty($parameters))
 		{
@@ -200,14 +217,7 @@ class url extends initiator implements IStatic
 	 */
 	protected static function _getCurrentUrl()
 	{
-		if(!empty($_SERVER['HTTP_HOST']))
-		{
-			return (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-		}
-		else
-		{
-			return ((isset($_SERVER['HTTPS'])) ? 'https' : 'http').'://localhost'.((isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '');
-		}
+		return ((isset($_SERVER['HTTPS'])) ? 'https' : 'http').'://'.(!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost').''.((isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '');
 	}
 
 	/**
@@ -221,6 +231,18 @@ class url extends initiator implements IStatic
 	{
 		header('Location: '.$url);
 		exit;
+	}
+
+	/**
+	 * Gibt aus einer URL denn Host zurück
+	 *
+	 * @param string $url
+	 *
+	 * @return mixed
+	 */
+	protected static function _get_host_from_url($url)
+	{
+		return parse_url($url, PHP_URL_HOST);
 	}
 
 	/**

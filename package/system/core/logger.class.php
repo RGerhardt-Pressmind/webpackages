@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -67,9 +67,9 @@ class logger extends initiator implements iLogger
 
 		$time = date('d.m.Y H:i:s');
 
-		$writeLog = file_put_contents($filename, $time.' - '.$level.'('.$code.'): '.$msg."\r\n", FILE_APPEND);
+		$writeLog = @file_put_contents($filename, $time.' - '.$level.'('.$code.'): '.$msg."\r\n", FILE_APPEND);
 
-		return ((!$writeLog) ? false : true);
+		return (!$writeLog ? false : true);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class logger extends initiator implements iLogger
 			throw new loggerException('log file not exists');
 		}
 
-		return unlink($filename);;
+		return @unlink($filename);
 	}
 
 	/**
@@ -100,9 +100,9 @@ class logger extends initiator implements iLogger
 	{
 		$filename = CACHE_PATH.$this->filename;
 
-		$read = file_get_contents($filename);
+		$read = @file_get_contents($filename);
 
-		if($read == false)
+		if($read === false)
 		{
 			throw new loggerException('Error: file('.$filename.') not read');
 		}

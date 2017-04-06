@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -54,7 +54,7 @@ class FileSystem extends initiator implements IStatic
 	 */
 	public static function init()
 	{
-		//@void
+		//not use
 	}
 
 	/**
@@ -290,7 +290,7 @@ class FileSystem extends initiator implements IStatic
 				return false;
 			}
 
-			return chmod($dest, $chmod);
+			return @chmod($dest, $chmod);
 		}
 
 		return true;

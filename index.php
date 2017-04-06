@@ -21,9 +21,13 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
+
+use package\core\security;
+use package\core\autoload;
+use package\core\plugins;
 
 require 'init.php';
 
@@ -32,12 +36,12 @@ $m = DEFAULT_METHODE;
 
 if(!empty($_GET['c']))
 {
-	$c = \package\core\security::url('c', 'GET', 'string');
+	$c = security::url('c');
 }
 
 if(!empty($_GET['m']))
 {
-	$m = \package\core\security::url('m', 'GET', 'string');
+	$m = security::url('m');
 }
 
 $class = searchInFolder(PAGE_DIR, $c);
@@ -51,7 +55,31 @@ if($class)
 {
 	if(method_exists($class, $m))
 	{
+		$parameter	=	array('class' => $c, 'method' => $m);
+
+		$content	=	plugins::hookBefore($c, null, $m, $parameter);
+
+		if(!empty($content))
+		{
+			if(!is_bool($content))
+			{
+				echo $content;
+			}
+
+
+			exit;
+		}
+
+		ob_start();
 		$class->$m();
+		$content	=	ob_get_contents();
+		ob_end_clean();
+
+		echo $content;
+
+		$parameter['content']	=	$content;
+
+		plugins::hookAfter($c, null, $m, $parameter);
 	}
 	else
 	{
@@ -74,7 +102,7 @@ function searchInFolder($folder, $c)
 		{
 			if($item->isFile() && $item->getFilename() == $c.'.class.php')
 			{
-				return \package\core\autoload::get($c);
+				return autoload::get($c);
 			}
 		}
 	}
@@ -114,7 +142,7 @@ function getPluginControler($c)
 
 				require_once $item->__toString();
 
-				return \package\core\autoload::get($c, $namespace);
+				return autoload::get($c, $namespace);
 			}
 		}
 	}

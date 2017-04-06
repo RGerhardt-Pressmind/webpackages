@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\implement\IPlugin;
 use package\implement\IStatic;
+use package\system\valueObjects\plugins\VOApplyPlugin;
 
 /**
  * Initialisiert Plugins
@@ -48,8 +49,10 @@ class plugins implements IStatic
 	 */
 	public static $definedPluginsClasses = array();
 
-	const BEFORE = 'before';
-	const AFTER  = 'after';
+	/**
+	 * @var VOApplyPlugin[]
+	 */
+	public static $definedHooks	=	array();
 
 	/**
 	 * Destructor
@@ -66,108 +69,53 @@ class plugins implements IStatic
 				unset($class);
 				unset(self::$definedPluginsClasses[$k]);
 			}
+
+			self::$definedHooks	=	array();
 		}
 	}
 
 	/**
-	 * Zum initialisieren von Daten
-	 */
-	public static function init(){}
-
-	/**
-	 * Startet den Hook Call und Hook Show
+	 * Führt die Plugins vor dem Call der Funktion/Methode aus
 	 *
-	 * @param string $position
-	 * @param string $classes
-	 * @param string $methode
-	 * @param array  $args
+	 * @param $class
+	 * @param $class_with_namespace
+	 * @param $methode
+	 * @param $arguments
 	 *
 	 * @return mixed
 	 */
-	public static function hooks($position, $classes, $methode, $args = array())
+	public static function hookBefore($class, $class_with_namespace, $methode, $arguments)
 	{
-		self::hookShow($position, $classes, $methode, $args);
+		$collect	=	array();
 
-		return self::hookCall($position, $classes, $methode, $args);
-	}
-
-	/**
-	 * Geht alle Plugins durch und kontrolliert
-	 * ob eine Methode existiert die geöffnet
-	 * werden soll
-	 *
-	 * Ein Hook arbeitet immer nach dem selben Prinzip
-	 *
-	 * $position
-	 *    before,after
-	 *
-	 * $classes
-	 *    Klassenname
-	 *
-	 * $pointer
-	 *    Methode
-	 *
-	 * $args
-	 *    Übergebene Parameter
-	 *
-	 * @param string $position Die Position im Skript. Kann nur Konstante BEFORE oder AFTER sein.
-	 * @param string $classes  Der Name der Klasse in dem das Plugin aufgerufen werden soll.
-	 * @param string $methode  Die Methode in der zuvor definierten Klasse in der das Plugin aufgerufen werden soll.
-	 * @param array  $args     Ein assoziatives Array an Parameters das das Plugin bekommen soll. Standartmäßig
-	 *                         "array()"
-	 *
-	 * @return void
-	 */
-	public static function hookShow($position, $classes, $methode, $args = array())
-	{
-		if(!empty(self::$definedPluginsClasses))
+		if(!empty(self::$definedHooks))
 		{
-			$pointer = $position.'_'.$classes.'_'.$methode.'_show';
-
-			foreach(self::$definedPluginsClasses as $class)
+			foreach(self::$definedHooks as $hook)
 			{
-				if($class instanceof IPlugin && method_exists($class, $pointer))
+				if($hook->call_position == 'BEFORE' && ($hook->class == $class || $hook->class == $class_with_namespace || $hook->all_dynamic_class) && ($hook->methode == $methode || $hook->all_dynamic_method))
 				{
-					call_user_func_array(array(
-						$class,
-						$pointer
-					), $args);
+					$back	=	call_user_func_array($hook->call, $arguments);
+
+					if($hook->replace_default_function)
+					{
+						if(!empty($back))
+						{
+							$collect[]	=	$back;
+						}
+					}
 				}
 			}
 		}
-	}
 
-	/**
-	 * Öffnet einen Ankerpunkt und gibt das Resultat zurück und nimmt dies in die Verarbeitung auf
-	 *
-	 * @param string $position Die Position im Skript. Kann nur Konstante BEFORE oder AFTER sein.
-	 * @param string $classes  Der Name der Klasse in dem das Plugin aufgerufen werden soll.
-	 * @param string $methode  Die Methode in der zuvor definierten Klasse in der das Plugin aufgerufen werden soll.
-	 * @param array  $args     Ein assoziatives Array an Parameters das das Plugin bekommen soll. Standartmäßig
-	 *                         "array()"
-	 *
-	 * @return mixed Gibt das Resultat des Plugins zurück und gibt es aus.
-	 */
-	public static function hookCall($position, $classes, $methode, $args = array())
-	{
-		if(!empty(self::$definedPluginsClasses))
+		if(!empty($collect))
 		{
-			$pointer = $position.'_'.$classes.'_'.$methode.'_call';
-
-			foreach(self::$definedPluginsClasses as $class)
+			if(count($collect) == 1)
 			{
-				if($class instanceof IPlugin && method_exists($class, $pointer))
-				{
-					$plugin = call_user_func_array(array(
-						$class,
-						$pointer
-					), $args);
-
-					if($plugin)
-					{
-						return $plugin;
-					}
-				}
+				return $collect[0];
+			}
+			else
+			{
+				return $collect;
 			}
 		}
 
@@ -175,38 +123,58 @@ class plugins implements IStatic
 	}
 
 	/**
-	 * Definiert einen Anker im Template und liefert die Ausgabe.
+	 * Führt die Plugins nach dem Call der Funktion/Methode aus
 	 *
-	 * @param string $template Der Template Name bei dem es ausgegeben werden soll.
-	 * @param string $position Die Position im Template.
-	 * @param array  $args     Ein assoziatives Array an Parameters das das Plugin bekommen soll. Standartmäßig
-	 *                         "array()"
+	 * @param $class
+	 * @param $class_with_namespace
+	 * @param $methode
+	 * @param $arguments
 	 *
-	 * @return void
+	 * @return mixed
 	 */
-	public static function hookTemplate($template, $position, $args = array())
+	public static function hookAfter($class, $class_with_namespace, $methode, $arguments)
 	{
-		if(!empty(self::$definedPluginsClasses))
+		$collect	=	array();
+
+		if(!empty(self::$definedHooks))
 		{
-			$methode = $template.'_'.$position;
-
-			foreach(self::$definedPluginsClasses as $class)
+			foreach(self::$definedHooks as $hook)
 			{
-				if($class instanceof IPlugin && method_exists($class, $methode))
+				if($hook->call_position == 'AFTER' && ($hook->class == $class || $hook->class == $class_with_namespace || $hook->all_dynamic_class) && ($hook->methode == $methode || $hook->all_dynamic_method))
 				{
-					$plugin = call_user_func_array(array(
-						$class,
-						$methode
-					), $args);
+					echo 222;
+					$back	=	call_user_func_array($hook->call, $arguments);
 
-					if($plugin)
+					if($hook->replace_default_function)
 					{
-						echo $plugin;
+						if(!empty($back))
+						{
+							$collect[]	=	$back;
+						}
 					}
 				}
 			}
 		}
+
+		if(!empty($collect))
+		{
+			if(count($collect) == 1)
+			{
+				return $collect[0];
+			}
+			else
+			{
+				return $collect;
+			}
+		}
+
+		return null;
 	}
+
+	/**
+	 * Zum initialisieren von Daten
+	 */
+	public static function init(){}
 
 	/**
 	 * Gibt alle definierten Plugins zurück

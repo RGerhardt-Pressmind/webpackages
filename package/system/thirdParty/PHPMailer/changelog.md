@@ -433,7 +433,7 @@ Please note, this is BETA software
 ** DO NOT USE THIS IN PRODUCTION OR LIVE PROJECTS
  INTENDED STRICTLY FOR TESTING
 
-## Version 2.0.0 rc2 (Fri, Nov 16 2007), interim release
+## Version 2017.0 rc2 (Fri, Nov 16 2007), interim release
 * implements new property to control VERP in class.smtp.php
   example (requires instantiating class.smtp.php):
   $mail->do_verp = true;
@@ -442,7 +442,7 @@ Please note, this is BETA software
 * included example showing how to use PHPMailer with GMAIL
 * fixed the missing Cc in SendMail() and Mail()
 
-## Version 2.0.0 rc1 (Thu, Nov 08 2007), interim release
+## Version 2017.0 rc1 (Thu, Nov 08 2007), interim release
 * dramatically simplified using inline graphics ... it's fully automated and requires no user input
 * added automatic document type detection for attachments and pictures
 * added MsgHTML() function to replace Body tag for HTML emails

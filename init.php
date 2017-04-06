@@ -21,16 +21,15 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
+
+use package\core\security;
 
 header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: sameorigin");
-
-//@todo - Hier muss eine bessere Variante herhalten, es kommt vermehrt zu Problemen mit externen JavaScript Programmen
-#header('Content-Security-Policy: default-src * \'self\'; script-src * \'self\' \'unsafe-inline\'; style-src * \'self\' \'unsafe-inline\'; img-src * \'self\'; font-src * \'self\'; connect-src * \'self\'; media-src \'self\'; object-src \'self\'; child-src \'self\'; frame-src * \'self\'; form-action \'self\'; reflected-xss block;');
 
 ini_set('session.cookie_httponly', 1);
 
@@ -102,17 +101,26 @@ if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 //Alle Value Objekt Klassen includiere
 initializeDirectory(VALUE_OBJECTS);
 
+require 'database.class.php';
+require 'load_functions.abstract.class.php';
+
+if(PLUGIN_DIR != '')
+{
+	require 'plugins.class.php';
+
+	initializePlugins();
+}
+
 require 'initiator.abstract.class.php';
 require 'autoload.class.php';
 
 require 'version.class.php';
 require 'benchmark.class.php';
 require 'security.class.php';
-require 'load_functions.abstract.class.php';
 
 if(defined('AUTO_SECURE') && AUTO_SECURE == true)
 {
-	\package\core\security::autoSecurity(explode(',', AUTO_SECURE_EXCEPTIONS));
+	security::autoSecurity(explode(',', AUTO_SECURE_EXCEPTIONS));
 }
 
 if(file_exists(ROOT.SEP.'dynamicInit.php'))

@@ -6,7 +6,7 @@ define('INSTALL_DIR',	ROOT.SEP.'update_webpackages'.SEP);
 \package\core\autoload::get('curl', 'package\core\\', true);
 \package\core\autoload::get('version', 'package\core\\', true);
 
-$current_version	=	\package\core\curl::get_data('http://www.webpackages.de/getCurrentVersion.php');
+$current_version	=	\package\core\curl::get_data('https://www.webpackages.de/getCurrentVersion.php');
 $current_version	=	json_decode($current_version, true);
 
 function copyFileToRoot()
@@ -161,27 +161,27 @@ if(isset($_POST['update']))
 					}
 					else
 					{
-						$error = 'Das Update konnte mit ZipArchive nicht entpackt werden!';
+						$error = 'The update could not be unpacked with ZipArchive!';
 					}
 				}
 				else
 				{
-					$error = 'Das Update konnte mit ZipArchive nicht geöffnet werden!';
+					$error = 'The update could not be opened with ZipArchive!';
 				}
 			}
 			else
 			{
-				$error = 'Es bestehen keine Schreibrechte im Verzeichnis "'.ROOT.SEP.'"';
+				$error = 'There are no write permissions in the directory: "'.ROOT.SEP.'"';
 			}
 		}
 		else
 		{
-			$error = 'Das Update konnte vom webpackages Server nicht geladen werden!';
+			$error = 'The update could not be loaded by the webpackages server!';
 		}
 	}
 	else
 	{
-		$error	=	'Der Sicherheitsschlüssel ist nicht richtig!';
+		$error	=	'The security key is not correct!';
 	}
 }
 

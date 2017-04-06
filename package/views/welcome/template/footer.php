@@ -8,11 +8,11 @@
         </div>
     </footer><!--/#footer-->
 
-    <script src="<?php echo HTTP_SKIN.'js/jquery.js'; ?>"></script>
-    <script src="<?php echo HTTP_SKIN.'js/bootstrap.min.js' ?>"></script>
-	<script src="<?php echo HTTP_SKIN.'js/fusioncharts.js'; ?>"></script>
-    <script src="<?php echo HTTP_SKIN.'js/fusioncharts.charts.js'; ?>"></script>
-    <script src="<?php echo HTTP_SKIN.'js/main.js'; ?>"></script>
+    <script src="<?php echo \package\core\template::getJsUrl('jquery.js'); ?>"></script>
+    <script src="<?php echo \package\core\template::getJsUrl('bootstrap.min.js'); ?>"></script>
+	<script src="<?php echo \package\core\template::getJsUrl('fusioncharts.js'); ?>"></script>
+    <script src="<?php echo \package\core\template::getJsUrl('fusioncharts.charts.js'); ?>"></script>
+    <script src="<?php echo \package\core\template::getJsUrl('main.js'); ?>"></script>
 
 	<?php
 	echo '<script type="text/javascript">var loadTimeVar	=	'.str_replace(',', '.', \package\core\benchmark::finish()).'</script>';

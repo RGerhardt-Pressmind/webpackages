@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -41,7 +41,7 @@ use package\system\core\initiator;
  * @method static int get_timestamp_by_date(string $date)
  * @method static get_date_by_timestamp(int $timestamp, $format = 'Y-m-d')
  * @method static string|int get_easter_day_by_year(int $year, $inTimestamp = false)
- * @method static array get_nation_holidays_by_year(int $year, string $nation = self::NATION_GERMANY)
+ * @method static array get_nation_holidays_by_year(int $year, string $nation = 'NATION_GERMANY')
  * @method static \DateTime get_all_saints_day(int $year)
  * @method static \DateTime get_mid_summer_day(int $year)
  * @method static bool is_year_leap_year(int $year)

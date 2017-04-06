@@ -21,14 +21,15 @@
  *  @copyright	Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
  *  @link	    http://webpackages.de
- *  @since	    Version 2.0.0
+ *  @since	    Version 2017.0
  *  @filesource
  */
 
 namespace package\implement;
 
+use package\system\valueObjects\plugins\VOApplyPlugin;
 
-interface IPlugin 
+interface IPlugin
 {
 	/**
 	 * Übergibt alle Systemklassen
@@ -50,4 +51,11 @@ interface IPlugin
 	 * @return mixed
 	 */
 	public function construct();
+
+	/**
+	 * Gibt die Instanzierungen der Plugins zurück, wo Sie aufgerufen werden
+	 *
+	 * @return VOApplyPlugin[]
+	 */
+	public function getApplyPlugin();
 }

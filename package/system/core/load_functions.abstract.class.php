@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -77,7 +77,7 @@ abstract class load_functions
 
 	public static $LOAD_ERROR          = array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	public static $LOAD_DATABASE       = array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db', 'parameter' => array('driver' => PDO_TYPE, 'host' => PDO_HOST, 'username' => PDO_USERNAME, 'password' => PDO_PASSWORD, 'charset' => PDO_CHARSET, 'port' => PDO_PORT, 'database' => PDO_DATABASE), 'namespace' => '\package\core\\', 'inCache' => true);
+	public static $LOAD_DATABASE       = array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db');
 
 	public static $LOAD_PLUGINS        = array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
@@ -178,6 +178,12 @@ abstract class load_functions
 			{
 				//PHPMailer seperat laden
 				$this->loadPHPMailer();
+				continue;
+			}
+			else if($classes['class'] == 'database')
+			{
+				$this->defineDynamicClasses[$classes['writeInAttribute']] = new database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, PDO_OPTIONS);
+
 				continue;
 			}
 
@@ -294,26 +300,19 @@ abstract class load_functions
 			return;
 		}
 
-		$allInitClasses = $this->get_all_init_classes();
-
-		$back = $this->get_plugins(PLUGIN_DIR);
-
-		if(!empty($back))
+		if(!empty(plugins::$definedPluginsClasses))
 		{
-			foreach($back as $t)
+			$allInitClasses = $this->get_all_init_classes();
+
+			foreach(plugins::$definedPluginsClasses as $v)
 			{
-				if($t['class'] instanceof IPlugin)
+				if($v instanceof IPlugin)
 				{
-					$class = $t['class'];
-
-					$class->setAllClasses($allInitClasses);
-					$class->construct();
-
-					$this->defineDynamicClasses[$class->getClassName()] = $class;
-
-					plugins::$definedPluginsClasses[] = $class;
+					$v->setAllClasses($allInitClasses);
 				}
 			}
+
+			$this->defineDynamicClasses	=	array_merge($this->defineDynamicClasses, plugins::$definedPluginsClasses);
 		}
 	}
 
@@ -324,7 +323,7 @@ abstract class load_functions
 	 *
 	 * @return array
 	 */
-	protected function get_plugins($dir)
+	public static function get_plugins($dir)
 	{
 		$directory = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
 		$iterator  = new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::CHILD_FIRST);

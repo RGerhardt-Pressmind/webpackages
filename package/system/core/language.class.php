@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -417,8 +417,21 @@ class language extends initiator implements IStatic
 			self::$userLng = self::$defaultLng;
 		}
 
-		putenv('LC_ALL='.self::$userLng);
-		setlocale(LC_ALL, self::$userLng);
+		if(defined('LC') && LC != '')
+		{
+			$lcs=	explode(',', LC);
+
+			foreach($lcs as $lc)
+			{
+				putenv($lc.'='.self::$userLng);
+				setlocale(constant($lc), self::$userLng);
+			}
+		}
+		else
+		{
+			putenv('LC_ALL='.self::$userLng);
+			setlocale(LC_ALL, self::$userLng);
+		}
 
 		bindtextdomain(self::$userLng, self::$lngPath);
 
@@ -448,6 +461,12 @@ class language extends initiator implements IStatic
 	protected static function _getAllSystemLocales()
 	{
 		$locale_data	= array();
+
+		if(OS != 'UNIX')
+		{
+			return array();
+		}
+
 		$locales 		= exec('locale -a 2>&1', $output, $return);
 
 		if($return)

@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -38,7 +38,7 @@ use package\system\core\initiator;
  *
  * @method static mixed autoSecurity(array $exceptionValues)
  * @method static mixed control(string $variable, $convert = null, $removeSQLFunctions = false)
- * @method static mixed url(string $variable, $input = null, $convert = null, $removeSQLFunctions = false)
+ * @method static mixed url(string $variable, $input = 'get', $convert = 'string', $removeSQLFunctions = false)
  * @method static string|bool create_csrf_token(string $token_name, $token_duration = 0);
  * @method static bool exists_csrf_token(string $token_name)
  * @method static string|bool get_csrf_token(string $token_name, bool $remove_token_after = false)
@@ -165,28 +165,25 @@ class security extends initiator
 	 */
 	protected static function _autoSecurity($exceptionValues)
 	{
-		if(!empty($_GET))
+		$controlVariables	=	array(
+			'get'		=>	'_GET',
+			'post'		=>	'_POST',
+			'session'	=>	'_SESSION',
+			'request'	=>	'_REQUEST'
+		);
+
+		foreach($controlVariables as $key => $variable)
 		{
-			foreach($_GET as $key => $value)
+			if(!empty($GLOBALS[$variable]))
 			{
-				if(!in_array($key, $exceptionValues))
+				foreach($GLOBALS[$variable] as $k => $v)
 				{
-					self::$hasControl['get'][$key] = gettype($value);
+					if(!in_array($k, $exceptionValues))
+					{
+						self::$hasControl[$key][$k]	=	gettype($v);
 
-					$_GET[$key]	=	self::control($_GET[$key], self::$hasControl['get'][$key]);
-				}
-			}
-		}
-
-		if(!empty($_POST))
-		{
-			foreach($_POST as $key => $value)
-			{
-				if(!in_array($key, $exceptionValues))
-				{
-					self::$hasControl['post'][$key]	=	gettype($value);
-
-					$_POST[$key]	=	self::control($_POST[$key], self::$hasControl['post'][$key]);
+						$GLOBALS[$variable][$k]	=	self::control($v, self::$hasControl[$key][$k]);
+					}
 				}
 			}
 		}
@@ -204,7 +201,10 @@ class security extends initiator
 	 */
 	protected static function _control($variable, $convert = null, $removeSQLFunctions = false)
 	{
-		$variable = trim($variable);
+		if(is_string($variable))
+		{
+			$variable = trim($variable);
+		}
 
 		return self::_controllSecurity($variable, $convert, $removeSQLFunctions);
 	}
@@ -220,83 +220,35 @@ class security extends initiator
 	 *
 	 * @return mixed Gibt den überprüften Wert konvertiert zurück.
 	 */
-	protected static function _url($variable, $input = null, $convert = null, $removeSQLFunctions = false)
+	protected static function _url($variable, $input = 'get', $convert = 'string', $removeSQLFunctions = false)
 	{
-		$input	=	strtolower($input);
+		$input		=	strtolower($input);
+
+		$controlVariables	=	array(
+			'get'		=>	'_GET',
+			'post'		=>	'_POST',
+			'session'	=>	'_SESSION',
+			'request'	=>	'_REQUEST',
+			'cookie'	=>	'_COOKIE',
+			'server'	=>	'_SERVER',
+			'env'		=>	'_ENV',
+		);
+
+		if(!isset($controlVariables[$input]))
+		{
+			return false;
+		}
 
 		if(AUTO_SECURE == true && isset(self::$hasControl[$input][$variable]) && self::$hasControl[$input][$variable] == $convert)
 		{
-			if($input == 'get')
-			{
-				return $_GET[$variable];
-			}
-			else
-			{
-				return $_POST[$variable];
-			}
+			return $GLOBALS[$controlVariables[$input]][$variable];
 		}
 
 		$request = '';
 
-		switch($input)
+		if(!empty($GLOBALS[$controlVariables[$input]][$variable]))
 		{
-			case 'post':
-
-				if(!empty($_POST[$variable]))
-				{
-					$request = $_POST[$variable];
-				}
-
-			break;
-			case 'get':
-
-				if(!empty($_GET[$variable]))
-				{
-					$request = $_GET[$variable];
-				}
-
-			break;
-			case 'session':
-
-				if(!empty($_SESSION[$variable]))
-				{
-					$request = $_SESSION[$variable];
-				}
-
-			break;
-			case 'cookie':
-
-				if(!empty($_COOKIE[$variable]))
-				{
-					$request = $_COOKIE[$variable];
-				}
-
-			break;
-			case 'server':
-
-				if(!empty($_SERVER[$variable]))
-				{
-					$request = $_SERVER[$variable];
-				}
-
-			break;
-			case 'env':
-
-				if(!empty($_ENV[$variable]))
-				{
-					$request = $_ENV[$variable];
-				}
-
-			break;
-			case 'request':
-			default:
-
-				if(!empty($_REQUEST[$variable]))
-				{
-					$request = $_REQUEST[$variable];
-				}
-
-			break;
+			$request	=	$GLOBALS[$controlVariables[$input]][$variable];
 		}
 
 		return self::_controllSecurity($request, $convert, $removeSQLFunctions);
@@ -349,6 +301,7 @@ class security extends initiator
 	 * Gibt den Token zurück oder ein false wenn er nicht existiert
 	 *
 	 * @param string $token_name
+	 * @param bool $remove_token_after
 	 *
 	 * @return string|bool
 	 */
@@ -398,109 +351,49 @@ class security extends initiator
 	 */
 	protected static function _controllSecurity($request, $convert, $removeSQLFunctions = false)
 	{
-		$param   = $request;
 		$convert = strtolower($convert);
 
-		switch($convert)
+		$filterIn = array('ip' => FILTER_VALIDATE_IP, 'mail' => FILTER_VALIDATE_EMAIL, 'email' => FILTER_VALIDATE_EMAIL, 'e' => FILTER_VALIDATE_EMAIL, 'number' => FILTER_VALIDATE_FLOAT, 'num' => FILTER_VALIDATE_FLOAT, 'dec' => FILTER_VALIDATE_FLOAT, 'decimal' => FILTER_VALIDATE_FLOAT, 'double' => FILTER_VALIDATE_FLOAT, 'float' => FILTER_VALIDATE_FLOAT, 'floatval' => FILTER_VALIDATE_FLOAT, 'n' => FILTER_VALIDATE_FLOAT, 'integer' => FILTER_VALIDATE_INT, 'int' => FILTER_VALIDATE_INT, 'long' => FILTER_VALIDATE_INT, 'i' => FILTER_VALIDATE_INT, 'boolean' => FILTER_VALIDATE_BOOLEAN, 'bool' => FILTER_VALIDATE_BOOLEAN, 'b' => FILTER_VALIDATE_BOOLEAN, 'string' => FILTER_SANITIZE_STRING, 'str' => FILTER_SANITIZE_STRING, 's' => FILTER_SANITIZE_STRING);
+
+		if(!isset($filterIn[$convert]))
 		{
-			case 'ip':
-
-				$param = filter_var($param, FILTER_VALIDATE_IP);
-
-				if(!$param)
-				{
-					return false;
-				}
-
-			break;
-			case 'mail':
-			case 'email':
-			case 'e':
-
-				$param = filter_var($param, FILTER_VALIDATE_EMAIL);
-
-				if(!$param)
-				{
-					return false;
-				}
-
-			break;
-			case 'number':
-			case 'num':
-			case 'dec':
-			case 'decimal':
-			case 'double':
-			case 'float':
-			case 'floatval':
-			case 'n':
-
-				$param = filter_var($param, FILTER_VALIDATE_FLOAT);
-
-				if(!$param)
-				{
-					return false;
-				}
-
-			break;
-			case 'integer':
-			case 'int':
-			case 'long':
-			case 'i':
-
-				$param = filter_var($param, FILTER_VALIDATE_INT);
-
-				if(!$param)
-				{
-					return false;
-				}
-
-			break;
-			case 'boolean':
-			case 'bool':
-			case 'b':
-
-				$param = filter_var($param, FILTER_VALIDATE_BOOLEAN);
-
-				if($param == null && $param != false)
-				{
-					return null;
-				}
-
-			break;
-			default:
-			case 'str':
-			case 'string':
-			case 's':
-
-				if(is_array($param))
-				{
-					return 'array()';
-				}
-				elseif(is_object($param))
-				{
-					return 'std()';
-				}
-
-				$param = self::xss_clean($param);
-
-				if($removeSQLFunctions)
-				{
-					$param = preg_replace(MYSQL_FUNCTIONS, '', $param, -1);
-				}
-
-				$param = filter_var($param, FILTER_SANITIZE_STRING);
-
-				if(!$param)
-				{
-					return false;
-				}
-
-				$param = trim($param);
-
-			break;
+			return false;
 		}
 
-		return $param;
+		$isString	=	($convert == 'string' || $convert == 'str' || $convert == 's');
+
+		if($isString)
+		{
+			if(is_array($isString))
+			{
+				return 'array()';
+			}
+			elseif(is_object($isString))
+			{
+				return 'std()';
+			}
+		}
+
+		$request	=	filter_var($request, $filterIn[$convert]);
+
+		if($request === false || $request == null)
+		{
+			return false;
+		}
+
+		if($isString)
+		{
+			$request = self::xss_clean($request);
+
+			if($removeSQLFunctions)
+			{
+				$request = preg_replace(MYSQL_FUNCTIONS, '', $request, -1);
+			}
+
+			$request = trim($request);
+		}
+
+		return $request;
 	}
 
 	/**
@@ -1120,9 +1013,11 @@ class security extends initiator
 	{
 		if(!empty($_SERVER['HTTP_USER_AGENT']))
 		{
+			$http_user_agent	=	strtolower($_SERVER['HTTP_USER_AGENT']);
+
 			foreach(self::$botlist as $bot)
 			{
-				if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) != false)
+				if(strpos($http_user_agent, strtolower($bot)) !== false)
 				{
 					return array(
 						'isBot' => true,
@@ -1155,7 +1050,7 @@ class security extends initiator
 				{
 					$ip = trim($ip);
 
-					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) != false)
+					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false)
 					{
 						return $ip;
 					}
@@ -1167,7 +1062,7 @@ class security extends initiator
 				{
 					$ip = trim($ip);
 
-					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) != false)
+					if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false)
 					{
 						return $ip;
 					}

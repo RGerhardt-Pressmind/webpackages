@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -60,6 +60,11 @@ class welcome extends load_functions
 	 */
 	public function hello()
 	{
+		if(class_exists('\package\system\plugins\tinyImages\tinyImages'))
+		{
+			\package\system\plugins\tinyImages\tinyImages::optimizeImage(TEMPLATE_DIR.TEMPLATE_DEFAULT_SKIN.SEP.'images'.SEP.'slider-bg.jpg', 95, 100);
+		}
+
 		if(!empty($_SESSION['default_lng']))
 		{
 			\package\core\language::set_language($_SESSION['default_lng']);

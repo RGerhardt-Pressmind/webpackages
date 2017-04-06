@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -36,6 +36,7 @@ use package\system\core\initiator;
  *
  * @method void createException(string $message)
  * @method void create_error(int $errroCode, $httpVersion = '1.1')
+ * @method void create_own_error(int $errroCode, string $msg, $httpVersion = '1.1')
  *
  * @package        Webpackages
  * @subpackage     core
@@ -140,6 +141,21 @@ class errors extends initiator
 		}
 
 		header('HTTP '.$httpVersion.'/'.$errorCode.' '.$this->callErrors[$errorCode], true, $errorCode);
+		exit;
+	}
+
+	/**
+	 * Generiert einen eigenen Fehlercode mit Nachricht
+	 *
+	 * @param int    $errorCode
+	 * @param string $msg
+	 * @param string $httpVersion
+	 *
+	 * @return void
+	 */
+	protected function _create_own_error($errorCode, $msg, $httpVersion = '1.1')
+	{
+		header('HTTP '.$httpVersion.'/'.$errorCode.' '.$msg, true, $errorCode);
 		exit;
 	}
 }

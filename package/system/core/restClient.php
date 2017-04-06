@@ -20,7 +20,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -57,8 +57,8 @@ class restClient extends initiator
 	{
 		parent::__construct();
 
-		$this->apiUrl	=	rtrim($apiUrl, '/').'/';
-		$this->cURL 	=	curl_init();
+		$this->apiUrl = rtrim($apiUrl, '/').'/';
+		$this->cURL   = curl_init();
 
 		curl_setopt($this->cURL, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($this->cURL, CURLOPT_FOLLOWLOCATION, false);
@@ -75,7 +75,7 @@ class restClient extends initiator
 	 * @param array  $data
 	 * @param array  $params
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 * @throws \Exception
 	 */
 	protected function _call($url, $method = self::METHODE_GET, $data = array(), $params = array())
@@ -97,7 +97,7 @@ class restClient extends initiator
 		curl_setopt($this->cURL, CURLOPT_URL, $url);
 		curl_setopt($this->cURL, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($this->cURL, CURLOPT_POSTFIELDS, $dataString);
-		$result   = curl_exec($this->cURL);
+		$result = curl_exec($this->cURL);
 
 		return $this->prepareResponse($result);
 	}
@@ -106,9 +106,9 @@ class restClient extends initiator
 	 * Ruft eine GET Rest Anfrage auf
 	 *
 	 * @param string $url
-	 * @param array $params
+	 * @param array  $params
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	protected function _get($url, $params = array())
 	{
@@ -119,10 +119,10 @@ class restClient extends initiator
 	 * Ruft eine POST Rest Anfrage auf
 	 *
 	 * @param string $url
-	 * @param array $data
-	 * @param array $params
+	 * @param array  $data
+	 * @param array  $params
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	protected function _post($url, $data = array(), $params = array())
 	{
@@ -133,10 +133,10 @@ class restClient extends initiator
 	 * Ruft eine PUT Rest Anfrage auf
 	 *
 	 * @param string $url
-	 * @param array $data
-	 * @param array $params
+	 * @param array  $data
+	 * @param array  $params
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	protected function _put($url, $data = array(), $params = array())
 	{
@@ -147,9 +147,9 @@ class restClient extends initiator
 	 * Ruft eine DELETE Rest Anfrage auf
 	 *
 	 * @param string $url
-	 * @param array $params
+	 * @param array  $params
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	protected function _delete($url, $params = array())
 	{

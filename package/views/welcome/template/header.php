@@ -6,17 +6,17 @@
     <meta name="description" content="webpackages ist das Leistungsstärkste PHP Framework zum erstellen von PHP Projekten.">
     <meta name="author" content="webpackages">
     <title><?php echo \package\core\language::translate('webpackages - das Leistungsstärkste PHP Framework'); ?></title>
-    <link href="<?php echo HTTP_SKIN.'css/bootstrap.min.css'; ?>" rel="stylesheet">
-    <link href="<?php echo HTTP_SKIN.'css/font-awesome.min.css'; ?>" rel="stylesheet">
-    <link href="<?php echo HTTP_SKIN.'css/main.css'; ?>" rel="stylesheet">
+    <link href="<?php echo \package\core\template::getCssUrl('bootstrap.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo \package\core\template::getCssUrl('font-awesome.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo \package\core\template::getCssUrl('main.css'); ?>" rel="stylesheet">
 
 	<script>
 		var currentTime	=	new Date();
 	</script>
 
     <!--[if lt IE 9]>
-    <script src="<?php echo HTTP_SKIN.'js/html5shiv.js'; ?>"></script>
-    <script src="<?php echo HTTP_SKIN.'js/respond.min.js'; ?>"></script>
+    <script src="<?php echo \package\core\template::getJsUrl('html5shiv.js'); ?>"></script>
+    <script src="<?php echo \package\core\template::getJsUrl('respond.min.js'); ?>"></script>
     <![endif]-->
 </head><!--/head-->
 

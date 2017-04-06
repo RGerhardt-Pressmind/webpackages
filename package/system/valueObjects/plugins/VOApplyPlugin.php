@@ -24,9 +24,59 @@
  * @filesource
  */
 
-namespace package\exceptions;
+namespace package\system\valueObjects\plugins;
 
-class imagesException extends \Exception
+class VOApplyPlugin
 {
+	const BEFORE	=	'BEFORE';
+	const AFTER		=	'AFTER';
 
+	/**
+	 * Der Klassennamen in dem das Plugin aufgerufen werden soll
+	 *
+	 * @var string
+	 */
+	public $class	=	'';
+
+	/**
+	 * Die Methode in der Klasse in dem das Plugin aufgerufen werden soll
+	 *
+	 * @var string
+	 */
+	public $methode	=	'';
+
+	/**
+	 * Die Funktion/Klasse(Methode) die aufgerufen werden soll, die das Plugin enthält
+	 *
+	 * @var mixed
+	 */
+	public $call;
+
+	/**
+	 * Wann das Plugin ausgeführt werden soll, vor dem Funktionsaufruf oder anschließend
+	 *
+	 * @var string
+	 */
+	public $call_position = self::BEFORE;
+
+	/**
+	 * Entscheidet ob es die Standard Funktion mit der Plugin Funktion überschreibt
+	 *
+	 * @var bool
+	 */
+	public $replace_default_function	=	true;
+
+	/**
+	 * Alle Klassen
+	 *
+	 * @var bool
+	 */
+	public $all_dynamic_class	=	false;
+
+	/**
+	 * Alle Methoden in einer Klasse
+	 *
+	 * @var bool
+	 */
+	public $all_dynamic_method	=	false;
 }

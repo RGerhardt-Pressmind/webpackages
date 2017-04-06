@@ -21,18 +21,11 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
-if(isset($_SERVER['HTTP_HOST']))
-{
-	$base_url = (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
-}
-else
-{
-	$base_url = 'http://localhost/';
-}
+$base_url = (is_https() ? 'https' : 'http').'://'.(!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost').substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 
 /**
  * HTTP(s) Adresse des Webservers
@@ -105,6 +98,11 @@ define('PDO_PORT', 3306);
 define('PDO_CHARSET', 'utf8');
 
 /**
+ * PDO Optionen die bei der Datenbank Verbindung definert werden können
+ */
+define('PDO_OPTIONS',	array());
+
+/**
  * Die Dateinamen Endung der Cache Dateien
  */
 define('CACHE_EXTENSION', '.cache');
@@ -130,6 +128,11 @@ define('TEMPLATE_FOOTER', 'footer.php');
  * siehe auch http://php.net/manual/de/function.setlocale.php oder http://php.net/manual/de/class.locale.php
  */
 define('DEFAULT_LANGUAGE', 'de_DE.UTF-8');
+
+/**
+ * Ist Zuständig welche Einstellungen vom setlocale betroffen sind
+ */
+define('LC',	'LC_COLLATE,LC_CTYPE,LC_MONETARY,LC_NUMERIC,LC_TIME,LC_MESSAGES');
 
 /**
  * Entscheidet ob Sessions in die Datenbank geschrieben werden
@@ -212,6 +215,11 @@ define('AUTO_SECURE_EXCEPTIONS', '');
  * Framework Standard Skin (im Ordner package/views)
  */
 define('TEMPLATE_DEFAULT_SKIN', 'welcome');
+
+/**
+ * Wenn ein Kindtemplate angelegt ist, dann zuerst dort nachsehen und Daten abholen (z.b. welcome-child)
+ */
+define('USE_TEMPLATE_CHILDS',	true);
 
 /**
  * Der URL Pfad zum Skin um css oder javascript Dateien leichter einzubinden
@@ -347,6 +355,39 @@ function getAllSubDirectorys($dir)
 	}
 
 	return $allSubDirs;
+}
+
+
+function initializePlugins()
+{
+	if(PLUGIN_DIR == '' || !class_exists('\package\core\plugins'))
+	{
+		return;
+	}
+
+	$back = \package\core\load_functions::get_plugins(PLUGIN_DIR);
+
+	if(!empty($back))
+	{
+		foreach($back as $t)
+		{
+			if($t['class'] instanceof \package\implement\IPlugin)
+			{
+				$class = $t['class'];
+
+				$class->construct();
+
+				$applyPlugin	=	$class->getApplyPlugin();
+
+				if(!empty($applyPlugin) && is_array($applyPlugin))
+				{
+					\package\core\plugins::$definedHooks	=	array_merge(\package\core\plugins::$definedHooks, $applyPlugin);
+				}
+
+				\package\core\plugins::$definedPluginsClasses[$class->getClassName()] = $class;
+			}
+		}
+	}
 }
 
 

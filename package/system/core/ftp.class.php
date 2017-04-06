@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -686,6 +686,7 @@ class ftp extends initiator
 	 * Löscht alle Dateien in einem FTP Ordner
 	 *
 	 * @deprecated
+	 *
 	 * @param string $remoteDirectory Der interne FTP-Pfad zum Verzeichnis
 	 *
 	 * @return bool Bei erfolgreichen Reinigung gibt er true ansonsten false zurück.
@@ -881,18 +882,7 @@ class ftp extends initiator
 				continue;
 			}
 
-			$item = array(
-				'permissions' => $chunks[0],
-				'number' => $chunks[1],
-				'owner' => $chunks[2],
-				'group' => $chunks[3],
-				'size' => $chunks[4],
-				'month' => $chunks[5],
-				'day' => $chunks[6],
-				'time' => $chunks[7],
-				'name' => $chunks[8],
-				'type' => $this->raw_to_type($chunks[0]),
-			);
+			$item = array('permissions' => $chunks[0], 'number' => $chunks[1], 'owner' => $chunks[2], 'group' => $chunks[3], 'size' => $chunks[4], 'month' => $chunks[5], 'day' => $chunks[6], 'time' => $chunks[7], 'name' => $chunks[8], 'type' => $this->raw_to_type($chunks[0]),);
 
 			if($item['type'] == 'link')
 			{

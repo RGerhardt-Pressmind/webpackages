@@ -20,13 +20,14 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
 namespace package\system\core;
 
 use package\core\plugins;
+use package\system\valueObjects\plugins\VOApplyPlugin;
 
 /**
  * Initiator aller Hilfsklassen
@@ -63,25 +64,38 @@ abstract class initiator
 			throw new \Exception('Error '.get_called_class().': static methode '.$name.' not exists');
 		}
 
-		if(class_exists('\package\core\plugins'))
+		// Kontrollieren ob das Plugin Modul geladen ist
+		if(!empty(plugins::$definedHooks))
 		{
-			$plugin = plugins::hooks(plugins::BEFORE, self::getClassName(), $name, $arguments);
-
-			if($plugin != null)
+			foreach(plugins::$definedHooks as $hook)
 			{
-				return $plugin;
+				if($hook->call_position == VOApplyPlugin::BEFORE && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
+				{
+					$back	=	call_user_func_array($hook->call, $arguments);
+
+					if($hook->replace_default_function && !empty($back))
+					{
+						return $back;
+					}
+				}
 			}
 		}
 
 		$back	=	call_user_func_array(array(get_called_class(), '_'.$name), $arguments);
 
-		if(class_exists('\package\core\plugins'))
+		if(!empty(plugins::$definedHooks))
 		{
-			$plugin = plugins::hooks(plugins::AFTER, self::getClassName(), $name, $back);
-
-			if($plugin != null)
+			foreach(plugins::$definedHooks as $hook)
 			{
-				return $plugin;
+				if($hook->call_position == VOApplyPlugin::AFTER && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
+				{
+					$replace	=	call_user_func_array($hook->call, array($back));
+
+					if($hook->replace_default_function && !empty($replace))
+					{
+						$back	=	$replace;
+					}
+				}
 			}
 		}
 
@@ -104,25 +118,41 @@ abstract class initiator
 			throw new \Exception('Error '.get_called_class().': static methode '.$name.' not exists');
 		}
 
-		if(class_exists('\package\core\plugins'))
-		{
-			$plugin = plugins::hooks(plugins::BEFORE, self::getClassName(), $name, $arguments);
+		$args	=	array('class' => self::getClassName(), 'method' => $name);
 
-			if($plugin != null)
+		if(!empty(plugins::$definedHooks))
+		{
+			foreach(plugins::$definedHooks as $hook)
 			{
-				return $plugin;
+				if($hook->call_position == VOApplyPlugin::BEFORE && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
+				{
+					$back	=	call_user_func_array($hook->call, $args);
+
+					if($hook->replace_default_function && !empty($back))
+					{
+						return $back;
+					}
+				}
 			}
 		}
 
 		$back	=	call_user_func_array(array($this, '_'.$name), $arguments);
 
-		if(class_exists('\package\core\plugins'))
+		if(!empty(plugins::$definedHooks))
 		{
-			$plugin = plugins::hooks(plugins::AFTER, self::getClassName(), $name, $back);
+			$args['content']	=	$back;
 
-			if($plugin != null)
+			foreach(plugins::$definedHooks as $hook)
 			{
-				return $plugin;
+				if($hook->call_position == VOApplyPlugin::AFTER && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
+				{
+					$replace	=	call_user_func_array($hook->call, $args);
+
+					if($hook->replace_default_function && !empty($replace))
+					{
+						$back	=	$replace;
+					}
+				}
 			}
 		}
 

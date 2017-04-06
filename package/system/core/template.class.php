@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -46,7 +46,11 @@ use package\system\core\initiator;
  * @method void setData(array $datas)
  * @method void setSingleData(string $key, string $value)
  * @method string getTemplatePath()
+ * @method static string getCssUrl(string $file)
+ * @method static string getJsUrl(string $file)
+ * @method string getTemplateChildPath()
  * @method static string getPublicTemplatePath()
+ * @method static string getPublicTemplateChildPath()
  * @method void displayPlugin(string $template, $cacheActive = false, $cacheExpiresTime = 0)
  * @method void display(string $template, string $header = null, string $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
  * @method mixed load_template_file(string $file, string $type, string $dir = '', $minify = true)
@@ -194,6 +198,26 @@ class template extends initiator
 	}
 
 	/**
+	 * Gibt den Pfad zum Template Child zurück
+	 *
+	 * @return string
+	 */
+	protected function _getTemplateChildPath()
+	{
+		return self::_getPublicTemplateChildPath();
+	}
+
+	/**
+	 * Gibt den Pfad zum Template Child zurück
+	 *
+	 * @return string
+	 */
+	protected static function _getPublicTemplateChildPath()
+	{
+		return self::$tempDir.self::$skin.'-child'.SEP;
+	}
+
+	/**
 	 * Gibt den Pfad zum Template Verzeichnis zurück. Bestehend aus Template Pfad und Skin. Dieser kann auch ausserhalb geholt werden.
 	 *
 	 * @return string
@@ -271,6 +295,41 @@ class template extends initiator
 		require $template;
 	}
 
+
+	/**
+	 * Gibt den CSS Pfad zurück
+	 *
+	 * @param string $file
+	 * @return string
+	 */
+	protected static function _getCssUrl($file)
+	{
+		if(file_exists(self::_getPublicTemplateChildPath().'css'.SEP.$file))
+		{
+			return trim(HTTP_SKIN, '/').'-child/css/'.$file;
+		}
+
+		return HTTP_SKIN.'css/'.$file;
+	}
+
+	/**
+	 * Gibt den JavaScript Pfad zurück
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	protected static function _getJsUrl($file)
+	{
+		if(file_exists(self::_getPublicTemplateChildPath().'js'.SEP.$file))
+		{
+			return trim(HTTP_SKIN, '/').'-child/js/'.$file;
+		}
+
+		return HTTP_SKIN.'js/'.$file;
+	}
+
+
 	/**
 	 * Lädt das angegebene Template mit standart Header und Footer Template
 	 *
@@ -280,7 +339,7 @@ class template extends initiator
 	 * @param bool   $cacheActive      Aktiviert bzw. Deaktiviert den Template Cache.
 	 * @param int    $cacheExpiresTime Die Cache Dauer. Unendlich = 0. Standartmäßig 0.
 	 *
-	 * @return void
+	 * @return mixed
 	 * @throws templateException
 	 */
 	protected function _display($template, $header = null, $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
@@ -295,16 +354,30 @@ class template extends initiator
 			}
 		}
 
-		$templatePath = new \SplFileInfo($this->getTemplatePath().$template);
+		if(file_exists($this->getTemplateChildPath().$template))
+		{
+			$templatePath = new \SplFileInfo($this->getTemplateChildPath().$template);
+		}
+		else
+		{
+			$templatePath = new \SplFileInfo($this->getTemplatePath().$template);
+		}
 
 		if(!file_exists($templatePath))
 		{
-			throw new templateException('Error: template '.$template.' not exist');
+			throw new templateException('Error: template '.$templatePath.' not exist');
 		}
 
 		if($header != null)
 		{
-			$headerPath	=	$this->getTemplatePath().$header;
+			if(file_exists($this->getTemplateChildPath().$header))
+			{
+				$headerPath	=	$this->getTemplateChildPath().$header;
+			}
+			else
+			{
+				$headerPath	=	$this->getTemplatePath().$header;
+			}
 		}
 		else
 		{
@@ -313,7 +386,14 @@ class template extends initiator
 
 		if($footer != null)
 		{
-			$footerPath	=	$this->getTemplatePath().$this->footer;
+			if(file_exists($this->getTemplateChildPath().$this->footer))
+			{
+				$footerPath	=	$this->getTemplateChildPath().$this->footer;
+			}
+			else
+			{
+				$footerPath	=	$this->getTemplatePath().$this->footer;
+			}
 		}
 		else
 		{
@@ -338,7 +418,7 @@ class template extends initiator
 			if($getTemplate != false)
 			{
 				echo $getTemplate;
-				return;
+				return $getTemplate;
 			}
 			else
 			{
@@ -361,13 +441,20 @@ class template extends initiator
 
 				echo $output;
 
-				return;
+				return $output;
 			}
 		}
 
+		ob_start();
 		require $headerPath;
 		require $templatePath->__toString();
 		require $footerPath;
+		$output	=	ob_get_contents();
+		ob_end_clean();
+
+		echo $output;
+
+		return $output;
 	}
 
 	/**

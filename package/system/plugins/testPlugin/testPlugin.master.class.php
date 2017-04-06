@@ -15,22 +15,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  @package	Webpackages
- *  @subpackage core
- *  @author	    Robbyn Gerhardt
- *  @copyright	Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
- *  @link	    http://webpackages.de
- *  @since	    Version 2.0.0
- *  @filesource
+ * @package       Webpackages
+ * @subpackage    core
+ * @author        Robbyn Gerhardt
+ * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link          http://webpackages.de
+ * @since         Version 2017.0
+ * @filesource
  */
 
 namespace package\plugins;
 
-
 use package\core\database;
 use package\core\template;
 use package\implement\IPlugin;
+use package\system\valueObjects\plugins\VOApplyPlugin;
 
 class testPlugin implements IPlugin
 {
@@ -38,7 +38,6 @@ class testPlugin implements IPlugin
 
 	public function construct()
 	{
-
 	}
 
 	public function getClassName()
@@ -46,45 +45,71 @@ class testPlugin implements IPlugin
 		return 'testPlugin';
 	}
 
-
-	public function getS3Data()
+	/**
+	 * Gibt die Instanzierung zurück
+	 *
+	 * @return VOApplyPlugin[]
+	 */
+	public function getApplyPlugin()
 	{
-		return array('myInfos' => 'datas');
+		$applyPlugin = array();
+
+		$plugin                           = new VOApplyPlugin();
+		$plugin->class                    = 'welcome';
+		$plugin->methode                  = 'change_language';
+		$plugin->replace_default_function = true;
+		$plugin->call                     = array($this, 'change_language');
+
+		$applyPlugin[] = $plugin;
+
+		return $applyPlugin;
+	}
+
+	/**
+	 * Übernimmt die Funktion der Methode
+	 * welcome:change_language und ersetzt
+	 * Sie durch diese
+	 *
+	 * @return bool
+	 */
+	public function change_language()
+	{
+		$lng = \package\core\security::url('lng', 'GET', 'string');
+
+		$_SESSION['default_lng'] = $lng;
+
+		echo '<p id="call_from_plugin">Call from plugin ... wait 5 seconds</p>';
+
+		echo '
+		<script type="text/javascript">
+		var x	=	4;
+		
+		setInterval(function() {
+		    console.log("Foo");
+		  	document.getElementById("call_from_plugin").innerHTML	=	"Call from plugin ... wait "+x+" seconds";
+		  	
+		  	--x;
+		}, 1000);
+		
+		setTimeout(function() {
+		  location.href = "'.HTTP.'";
+		}, 5000);
+		</script>
+		';
+
+		return true;
 	}
 
 	public function setAllClasses($allClasses)
 	{
 		if(isset($allClasses['db']) && $allClasses['db'] instanceof database)
 		{
-			$this->db		=	$allClasses['db'];
+			$this->db = $allClasses['db'];
 		}
 
 		if(isset($allClasses['template']) && $allClasses['template'] instanceof template)
 		{
-			$this->template	=	$allClasses['template'];
+			$this->template = $allClasses['template'];
 		}
-	}
-
-
-	public function before_pluginTest_testHookShow_show($hello, $world)
-	{
-		$foo	=	$hello.' - '.$world;
-
-		file_put_contents(CACHE_PATH.'unitTestPlugin.txt', $foo);
-	}
-
-
-	public function simple_UnitTest($hello, $world)
-	{
-		return $hello.' '.$world;
-	}
-
-
-	/**
-	 * Template Test Klasse
-	 */
-	public function before_pluginTest_testHookCall_call($hello, $world)
-	{
-		return 'Ich bin ein Plugin "'.$hello.' '.$world.'"';
 	}
 }

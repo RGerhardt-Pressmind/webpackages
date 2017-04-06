@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2.0.0
+ * @since         Version 2017.0
  * @filesource
  */
 
@@ -135,7 +135,7 @@ class number extends initiator implements IStatic
 	/**
 	 * Errechnet die Differenz aus zwei Timestamps
 	 *
-	 * @param int      $start Startdatum im UNIX Timestamp Format
+	 * @param mixed      $start Startdatum im UNIX Timestamp Format
 	 * @param bool|int $end   Das Enddatum mit dem das Startdatum verglichen werden soll im UNIX Timestamp Format.
 	 *                        Alternativ kann man auch den Boolischen Wert false setzen. Somit wird der aktuelle UNIX
 	 *                        Timestamp genommen. Standartmäßig false.
@@ -149,6 +149,11 @@ class number extends initiator implements IStatic
 		if(!class_exists('\DateTime') || !class_exists('\DateTimeZone'))
 		{
 			throw new numberException('Error: DateTime or DateTimeZone class not in php exists');
+		}
+
+		if(is_string($start) || (int)$start == 0)
+		{
+			$start	=	strtotime($start);
 		}
 
 		if(empty($end))
@@ -228,62 +233,48 @@ class number extends initiator implements IStatic
 			language::init();
 		}
 
-		if($diffDate->year == 0)
+		if($diffDate->year == 0 && $diffDate->month == 0)
 		{
-			if($diffDate->month == 0)
+			if($diffDate->day == 0)
 			{
-				if($diffDate->day == 0)
+				if($diffDate->hour == 0)
 				{
-					if($diffDate->hour == 0)
+					if($diffDate->min == 0)
 					{
-						if($diffDate->min == 0)
+						if($diffDate->sec == 0)
 						{
-							if($diffDate->sec == 0)
-							{
-								$return = language::translate('Jetzt');
-							}
-							else if($diffDate->sec == 1)
-							{
-								$return = $diffDate->sec.(($short) ? language::translate(' Sek.') : language::translate(' Sekunde'));
-							}
-							else
-							{
-								$return = $diffDate->sec.(($short) ? language::translate(' Sek.') : language::translate(' Sekunden'));
-							}
+							$return = language::translate('Jetzt');
+						}
+						else if($diffDate->sec == 1)
+						{
+							$return = $diffDate->sec.(($short) ? language::translate(' Sek.') : language::translate(' Sekunde'));
 						}
 						else
 						{
-							if($short)
-							{
-								$return = $diffDate->min.' '.language::translate('Min.');
-							}
-							else
-							{
-								$return = $diffDate->min.' '.(($diffDate->min == 1) ? language::translate('Minute') : language::translate('Minuten'));
-							}
-
-							if($diffDate->sec > 0)
-							{
-								if($short)
-								{
-									$return .= ' '.$diffDate->sec.' '.language::translate('Sek.');
-								}
-								else
-								{
-									$return .= ' '.$diffDate->sec.' '.(($diffDate->sec == 1) ? language::translate('Sekunde') : language::translate('Sekunden'));
-								}
-							}
+							$return = $diffDate->sec.(($short) ? language::translate(' Sek.') : language::translate(' Sekunden'));
 						}
 					}
 					else
 					{
 						if($short)
 						{
-							$return = $diffDate->hour.' '.language::translate('Std.').' '.$diffDate->min.' '.language::translate('Min.');
+							$return = $diffDate->min.' '.language::translate('Min.');
 						}
 						else
 						{
-							$return = $diffDate->hour.' '.(($diffDate->hour == 1) ? language::translate('Stunde') : language::translate('Stunden')).' '.$diffDate->min.' '.(($diffDate->min == 1) ? language::translate('Minute') : language::translate('Minuten'));
+							$return = $diffDate->min.' '.(($diffDate->min == 1) ? language::translate('Minute') : language::translate('Minuten'));
+						}
+
+						if($diffDate->sec > 0)
+						{
+							if($short)
+							{
+								$return .= ' '.$diffDate->sec.' '.language::translate('Sek.');
+							}
+							else
+							{
+								$return .= ' '.$diffDate->sec.' '.(($diffDate->sec == 1) ? language::translate('Sekunde') : language::translate('Sekunden'));
+							}
 						}
 					}
 				}
@@ -291,12 +282,23 @@ class number extends initiator implements IStatic
 				{
 					if($short)
 					{
-						$return = $diffDate->day.' '.(($diffDate->day == 1) ? language::translate('Tag') : language::translate('Tage')).' '.$diffDate->hour.' '.language::translate('Std.');
+						$return = $diffDate->hour.' '.language::translate('Std.').' '.$diffDate->min.' '.language::translate('Min.');
 					}
 					else
 					{
-						$return = $diffDate->day.' '.(($diffDate->day == 1) ? language::translate('Tag') : language::translate('Tage')).' '.$diffDate->hour.' '.(($diffDate->hour == 1) ? language::translate('Stunde') : language::translate('Stunden'));
+						$return = $diffDate->hour.' '.(($diffDate->hour == 1) ? language::translate('Stunde') : language::translate('Stunden')).' '.$diffDate->min.' '.(($diffDate->min == 1) ? language::translate('Minute') : language::translate('Minuten'));
 					}
+				}
+			}
+			else
+			{
+				if($short)
+				{
+					$return = $diffDate->day.' '.(($diffDate->day == 1) ? language::translate('Tag') : language::translate('Tage')).' '.$diffDate->hour.' '.language::translate('Std.');
+				}
+				else
+				{
+					$return = $diffDate->day.' '.(($diffDate->day == 1) ? language::translate('Tag') : language::translate('Tage')).' '.$diffDate->hour.' '.(($diffDate->hour == 1) ? language::translate('Stunde') : language::translate('Stunden'));
 				}
 			}
 		}
