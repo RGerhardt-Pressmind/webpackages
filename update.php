@@ -97,14 +97,12 @@ function removeInitialFiles()
 
 if(isset($_POST['update']))
 {
-	$url	=	'https://www.webpackages.de/autorisation.php';
-
 	$security_key	=	$_POST['security_key'];
 
 
 	if($security_key == SECURITY_KEY)
 	{
-		$data			=	\package\core\curl::get_data($url);
+		$data			=	\package\core\curl::downloadFile($current_version['url'], ROOT.SEP.'webpackages.zip');
 
 		if($data)
 		{
