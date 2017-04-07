@@ -91,6 +91,30 @@ function removeInitialFiles()
 		rmdir(INSTALL_DIR.'package'.SEP.'system'.SEP.'plugins'.SEP.'testPlugin');
 	}
 
+
+	$languagePackage	=	new RecursiveDirectoryIterator(INSTALL_DIR.'package'.SEP.'system'.SEP.'languages'.SEP, RecursiveDirectoryIterator::SKIP_DOTS);
+	$iterator	=	new RecursiveIteratorIterator($languagePackage, RecursiveIteratorIterator::CHILD_FIRST);
+
+	if(iterator_count($iterator) > 0)
+	{
+		foreach($iterator as $file)
+		{
+			if($file instanceof SplFileInfo)
+			{
+				if($file->isFile())
+				{
+					unlink($file->__toString());
+				}
+				else
+				{
+					rmdir($file->__toString());
+				}
+			}
+		}
+
+		rmdir(INSTALL_DIR.'package'.SEP.'system'.SEP.'languages');
+	}
+
 	unlink(INSTALL_DIR.'package'.SEP.'controllers'.SEP.'welcome.class.php');
 	unlink(INSTALL_DIR.'package'.SEP.'models'.SEP.'test.php');
 }

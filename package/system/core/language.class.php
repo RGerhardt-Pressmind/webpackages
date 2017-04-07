@@ -467,16 +467,14 @@ class language extends initiator implements IStatic
 			return array();
 		}
 
-		$locales 		= exec('locale -a 2>&1', $output, $return);
+		exec('locale -a', $output, $return);
 
 		if($return)
 		{
 			throw new \Exception('Error: '.print_r($output));
 		}
 
-		$locales = explode("\n", $locales);
-
-		foreach($locales as $l)
+		foreach($output as $l)
 		{
 			$l = trim($l);
 
