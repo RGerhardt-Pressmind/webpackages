@@ -79,4 +79,9 @@ class VOApplyPlugin
 	 * @var bool
 	 */
 	public $all_dynamic_method	=	false;
+
+	/**
+	 * @var string
+	 */
+	public $hook_key;
 }

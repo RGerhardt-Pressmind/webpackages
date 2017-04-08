@@ -142,7 +142,6 @@ class plugins implements IStatic
 			{
 				if($hook->call_position == 'AFTER' && ($hook->class == $class || $hook->class == $class_with_namespace || $hook->all_dynamic_class) && ($hook->methode == $methode || $hook->all_dynamic_method))
 				{
-					echo 222;
 					$back	=	call_user_func_array($hook->call, $arguments);
 
 					if($hook->replace_default_function)
@@ -170,6 +169,29 @@ class plugins implements IStatic
 
 		return null;
 	}
+
+	/**
+	 * Ruft alle Plugins auf, die mit dem hook_key verbunden sind
+	 *
+	 * @param string $hook_key
+	 * @param array $arguments
+	 * @return mixed
+	 */
+	public static function callHook($hook_key, $arguments)
+	{
+		if(!empty(self::$definedHooks))
+		{
+			foreach(self::$definedHooks as $hook)
+			{
+				if($hook->hook_key == $hook_key)
+				{
+					call_user_func_array($hook->call, $arguments);
+				}
+			}
+		}
+	}
+
+
 
 	/**
 	 * Zum initialisieren von Daten

@@ -24,6 +24,7 @@
 <section class="container">
 	<div class="row" style="margin-top: 4em;">
 		<div class="col-md-12">
+			<?php \package\core\plugins::callHook('hello_template', array()); ?>
 			<p class="text-center" style="font-size: 1.68em;"><?php echo \package\core\language::translate('Wir von <strong>webpackages</strong> schaffen Vertrauen.<br>Denn unser PHP Framework schafft für Sie das unmögliche. Ein PHP Projekte mit einer Leichtigkeit und Freude umzusetzen und dabei noch Professionel sein.'); ?></p>
 		</div>
 	</div>

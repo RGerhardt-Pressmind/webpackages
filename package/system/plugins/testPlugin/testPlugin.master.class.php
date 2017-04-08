@@ -62,7 +62,18 @@ class testPlugin implements IPlugin
 
 		$applyPlugin[] = $plugin;
 
+		$plugin           = new VOApplyPlugin();
+		$plugin->call     = array($this, 'hello_template');
+		$plugin->hook_key = 'hello_template';
+
+		$applyPlugin[] = $plugin;
+
 		return $applyPlugin;
+	}
+
+	public function hello_template()
+	{
+		echo '<div class="col-md-12 text-center">Call fom testPlugin</div>';
 	}
 
 	/**

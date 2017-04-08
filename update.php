@@ -68,30 +68,6 @@ function removeInitialFiles()
 		rmdir(INSTALL_DIR.'package'.SEP.'views'.SEP.'welcome');
 	}
 
-	$testPlugin	=	new RecursiveDirectoryIterator(INSTALL_DIR.'package'.SEP.'system'.SEP.'plugins'.SEP.'testPlugin', RecursiveDirectoryIterator::SKIP_DOTS);
-	$iterator	=	new RecursiveIteratorIterator($testPlugin, RecursiveIteratorIterator::CHILD_FIRST);
-
-	if(iterator_count($iterator) > 0)
-	{
-		foreach($iterator as $file)
-		{
-			if($file instanceof SplFileInfo)
-			{
-				if($file->isFile())
-				{
-					unlink($file->__toString());
-				}
-				else
-				{
-					rmdir($file->__toString());
-				}
-			}
-		}
-
-		rmdir(INSTALL_DIR.'package'.SEP.'system'.SEP.'plugins'.SEP.'testPlugin');
-	}
-
-
 	$languagePackage	=	new RecursiveDirectoryIterator(INSTALL_DIR.'package'.SEP.'system'.SEP.'languages'.SEP, RecursiveDirectoryIterator::SKIP_DOTS);
 	$iterator	=	new RecursiveIteratorIterator($languagePackage, RecursiveIteratorIterator::CHILD_FIRST);
 
