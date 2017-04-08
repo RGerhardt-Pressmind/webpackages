@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- fix PDO">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/tinyImages/pngquant/UNIX/pngquant" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/tinyImages/pngquant/UNIX/pngquant-openmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/tinyImages/pngquant/UNIX/pngquant-ppc" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/changelog" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/redis/config.ini" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/redis/redis.master.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/tinyImages/pngquant/UNIX/COPYRIGHT" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package/system/plugins/tinyImages/pngquant/UNIX/README.md" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/package/system/plugins/tinyImages/config.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/package/system/plugins/tinyImages/tinyImages.master.class.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/core/plugins.class.php" afterPath="$PROJECT_DIR$/package/system/core/plugins.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" afterPath="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/system/valueObjects/plugins/VOApplyPlugin.php" afterPath="$PROJECT_DIR$/package/system/valueObjects/plugins/VOApplyPlugin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/template/hello.php" afterPath="$PROJECT_DIR$/package/views/welcome/template/hello.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/update.php" afterPath="$PROJECT_DIR$/update.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/controllers/welcome.class.php" afterPath="$PROJECT_DIR$/package/controllers/welcome.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome-child/css/main.css" afterPath="$PROJECT_DIR$/package/views/welcome-child/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/views/welcome/css/main.css" afterPath="$PROJECT_DIR$/package/views/welcome/css/main.css" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,24 +65,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="constants.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/constants.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="91" column="3" lean-forward="true" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
+            <state relative-caret-position="196">
+              <caret line="86" column="3" lean-forward="true" selection-start-line="86" selection-start-column="3" selection-end-line="86" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="template.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
+      <file leaf-file-name="hello.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package/views/welcome/template/hello.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-              <folding>
-                <element signature="e#6317#7402#0#PHP" expanded="false" />
-              </folding>
+            <state relative-caret-position="132">
+              <caret line="26" column="75" lean-forward="false" selection-start-line="26" selection-start-column="75" selection-end-line="26" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package/views/welcome-child/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -97,6 +100,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1080">
               <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="welcome.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="73" column="13" lean-forward="true" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -192,12 +205,9 @@
         <option value="$PROJECT_DIR$/package/system/core/number.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/restClient.php" />
         <option value="$PROJECT_DIR$/package/system/core/version.class.php" />
-        <option value="$PROJECT_DIR$/package/controllers/welcome.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/url.class.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" />
-        <option value="$PROJECT_DIR$/package/views/welcome/css/main.css" />
         <option value="$PROJECT_DIR$/package/system/core/security.class.php" />
-        <option value="$PROJECT_DIR$/package/views/welcome-child/css/main.css" />
         <option value="$PROJECT_DIR$/package/views/welcome/template/header.php" />
         <option value="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
         <option value="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
@@ -213,6 +223,9 @@
         <option value="$PROJECT_DIR$/package/views/welcome/template/hello.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/redis/config.ini" />
         <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" />
+        <option value="$PROJECT_DIR$/package/controllers/welcome.class.php" />
+        <option value="$PROJECT_DIR$/package/views/welcome-child/css/main.css" />
+        <option value="$PROJECT_DIR$/package/views/welcome/css/main.css" />
       </list>
     </option>
   </component>
@@ -309,6 +322,14 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="welcome-child" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -372,7 +393,41 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="welcome" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webpackages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webpackages" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="package" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="welcome" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -391,10 +446,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="system" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -483,6 +534,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="package" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webpackages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webpackages" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="package" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -761,14 +830,7 @@
       <workItem from="1491484136017" duration="11332000" />
       <workItem from="1491518254438" duration="60000" />
       <workItem from="1491544021807" duration="383000" />
-      <workItem from="1491640260151" duration="706000" />
-    </task>
-    <task id="LOCAL-00068" summary="- change update.php">
-      <created>1457456155701</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1457456155702</updated>
+      <workItem from="1491640260151" duration="970000" />
     </task>
     <task id="LOCAL-00069" summary="- bugfixes constants.php&#10;- bugfixes update.php">
       <created>1457466736987</created>
@@ -1106,7 +1168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491544180763</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="- fix override plugin by update&#10;- add method callHook by plugin.class.php">
+      <created>1491641061810</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1491641061811</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1142,7 +1211,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117214000" />
+    <option name="totallyTimeSpent" value="117478000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1208,7 +1277,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- add autoload class $inCache parameter&#10;- fix captcha class the create_better_captcha methode&#10;- add curl class downloadFile methode&#10;- fix database class the insertTable methode&#10;- add images class the optimizedImage methode&#10;- add images class the removeMetadata methode&#10;- add text class the convertToUTF8 methode&#10;- add text class the getCharacterEncoding methode&#10;- change loadfunctions class with autoload get inCache methode&#10;- minor changes" />
     <MESSAGE value="- add security headers&#10;- add redirect by ssl" />
     <MESSAGE value="- bugfix valid url string" />
     <MESSAGE value="- cache control filesize by write&#10;- curl get_city_coordinates add google api key&#10;- template add methode setSingleData&#10;- text add methode strip_tags_with_content&#10;- url add methode loc_url_simple&#10;- minor changes&#10;- many bugfixes" />
@@ -1233,7 +1301,8 @@
     <MESSAGE value="- change update.php" />
     <MESSAGE value="- fix PDO_OPTIONS array error" />
     <MESSAGE value="- fix override language package by update&#10;- fix &quot;locale -a&quot; by unix systems" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fix override language package by update&#10;- fix &quot;locale -a&quot; by unix systems" />
+    <MESSAGE value="- fix override plugin by update&#10;- add method callHook by plugin.class.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix override plugin by update&#10;- add method callHook by plugin.class.php" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1419,31 +1488,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/core/security.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="569">
           <caret line="40" column="80" lean-forward="false" selection-start-line="40" selection-start-column="80" selection-end-line="40" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome-child/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1480,16 +1528,6 @@
         <state relative-caret-position="1080">
           <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-          <folding>
-            <element signature="e#6317#7402#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1602,14 +1640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/hello.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="26" column="75" lean-forward="false" selection-start-line="26" selection-start-column="75" selection-end-line="26" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/plugins/redis/config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1630,10 +1660,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-188">
+          <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+          <folding>
+            <element signature="e#6317#7402#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="91" column="3" lean-forward="true" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
+        <state relative-caret-position="196">
+          <caret line="86" column="3" lean-forward="true" selection-start-line="86" selection-start-column="3" selection-end-line="86" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="73" column="13" lean-forward="true" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/hello.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="26" column="75" lean-forward="false" selection-start-line="26" selection-start-column="75" selection-end-line="26" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/views/welcome/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="681">
+          <caret line="49" column="44" lean-forward="false" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/views/welcome-child/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
           <folding />
         </state>
       </provider>

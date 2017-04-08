@@ -60,11 +60,6 @@ class welcome extends load_functions
 	 */
 	public function hello()
 	{
-		if(class_exists('\package\system\plugins\tinyImages\tinyImages'))
-		{
-			\package\system\plugins\tinyImages\tinyImages::optimizeImage(TEMPLATE_DIR.TEMPLATE_DEFAULT_SKIN.SEP.'images'.SEP.'slider-bg.jpg', 95, 100);
-		}
-
 		if(!empty($_SESSION['default_lng']))
 		{
 			\package\core\language::set_language($_SESSION['default_lng']);

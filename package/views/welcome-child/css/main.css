@@ -47,7 +47,7 @@ a:focus {
   z-index: 99999;
 }
 #main-slider {
-  background-image: url('../../welcome/images/slider-bg95_100.jpg');
+  background-image: url('../../welcome/images/slider-bg.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 50%;
