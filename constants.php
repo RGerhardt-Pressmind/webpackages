@@ -98,11 +98,6 @@ define('PDO_PORT', 3306);
 define('PDO_CHARSET', 'utf8');
 
 /**
- * PDO Optionen die bei der Datenbank Verbindung definert werden können
- */
-define('PDO_OPTIONS',	'');
-
-/**
  * Die Dateinamen Endung der Cache Dateien
  */
 define('CACHE_EXTENSION', '.cache');

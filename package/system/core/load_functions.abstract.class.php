@@ -176,13 +176,13 @@ abstract class load_functions
 		{
 			if($classes['class'] == 'phpmailer')
 			{
-				//PHPMailer seperat laden
+				//PHPMailer seperat ladenn
 				$this->loadPHPMailer();
 				continue;
 			}
 			else if($classes['class'] == 'database')
 			{
-				$this->defineDynamicClasses[$classes['writeInAttribute']] = new database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, PDO_OPTIONS);
+				$this->defineDynamicClasses[$classes['writeInAttribute']] = new database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array());
 
 				continue;
 			}
