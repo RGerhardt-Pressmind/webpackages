@@ -1,8 +1,6 @@
 <?php
 require_once 'init.php';
 
-define('INSTALL_DIR',	ROOT.SEP.'update_webpackages'.SEP);
-
 \package\core\autoload::get('curl', 'package\core\\', true);
 \package\core\autoload::get('version', 'package\core\\', true);
 
@@ -110,7 +108,9 @@ if(isset($_POST['update']))
 
 			if($zipArchive->open(ROOT.SEP.'webpackages.zip') == true)
 			{
-				if($zipArchive->extractTo(INSTALL_DIR))
+				define('INSTALL_DIR',	ROOT.SEP.'update_webpackages'.SEP.'webpackages-'.$current_version['current_version'].SEP);
+
+				if($zipArchive->extractTo(ROOT.SEP.'update_webpackages'.SEP))
 				{
 					$currentConstants	=	file_get_contents('constants.php');
 					$newConstants		=	file_get_contents(INSTALL_DIR.'constants.php');
