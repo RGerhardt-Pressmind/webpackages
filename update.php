@@ -102,74 +102,67 @@ if(isset($_POST['update']))
 
 	if($security_key == SECURITY_KEY)
 	{
-		$data			=	\package\core\curl::downloadFile($current_version['url'], ROOT.SEP.'webpackages.zip');
+		\package\core\curl::downloadFile($current_version['url'], ROOT.SEP.'webpackages.zip');
 
-		if($data)
+		if(file_exists(ROOT.SEP.'webpackages.zip'))
 		{
-			if(file_put_contents(ROOT.SEP.'webpackages.zip', $data) != false)
+			$zipArchive	=	new ZipArchive();
+
+			if($zipArchive->open(ROOT.SEP.'webpackages.zip') == true)
 			{
-				$zipArchive	=	new ZipArchive();
-
-				if($zipArchive->open(ROOT.SEP.'webpackages.zip') == true)
+				if($zipArchive->extractTo(INSTALL_DIR))
 				{
-					if($zipArchive->extractTo(INSTALL_DIR))
+					$currentConstants	=	file_get_contents('constants.php');
+					$newConstants		=	file_get_contents(INSTALL_DIR.'constants.php');
+
+					preg_match_all("/define\\('(.*?)',\\s(.*?)\\);/m", $currentConstants, $matches);
+
+					$notAllowedUserConstants	=	array('HTTP', 'SEP', 'OS', 'ROOT', 'MYSQL_FUNCTIONS');
+
+					foreach($matches[1] as $k => $match)
 					{
-						$currentConstants	=	file_get_contents('constants.php');
-						$newConstants		=	file_get_contents(INSTALL_DIR.'constants.php');
+						$value	=	$matches[2][$k];
 
-						preg_match_all("/define\\('(.*?)',\\s(.*?)\\);/m", $currentConstants, $matches);
-
-						$notAllowedUserConstants	=	array('HTTP', 'SEP', 'OS', 'ROOT', 'MYSQL_FUNCTIONS');
-
-						foreach($matches[1] as $k => $match)
+						if(!in_array($match, $notAllowedUserConstants))
 						{
-							$value	=	$matches[2][$k];
+							$newConstants	=	preg_replace('/define\(\''.$match.'\',\s(.*?)\);/m', 'define(\''.$match.'\', '.$value.');', $newConstants);
 
-							if(!in_array($match, $notAllowedUserConstants))
-							{
-								$newConstants	=	preg_replace('/define\(\''.$match.'\',\s(.*?)\);/m', 'define(\''.$match.'\', '.$value.');', $newConstants);
-
-							}
 						}
-
-						preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $currentConstants, $userConstants);
-
-						$newConstants	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.$userConstants[2].'#USER_CONTENT_END', $newConstants);
-
-						file_put_contents(INSTALL_DIR.'constants.php', $newConstants);
-
-						$newHtaccess	=	file_get_contents(INSTALL_DIR.'.htaccess');
-						$oldHtaccess	=	file_get_contents(ROOT.SEP.'.htaccess');
-
-
-						preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $oldHtaccess, $userHtaccess);
-
-						$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.str_replace(array('$'), array('||||'), $userHtaccess[2]).'#USER_CONTENT_END', $newHtaccess);
-
-						$newHtaccess	=	str_replace(array('||||'), array('$'), $newHtaccess);
-
-						file_put_contents(INSTALL_DIR.'.htaccess', $newHtaccess);
-
-						removeInitialFiles();
-						copyFileToRoot();
-
-						unlink(ROOT.SEP.'webpackages.zip');
-
-						header('Location: '.HTTP);
 					}
-					else
-					{
-						$error = 'The update could not be unpacked with ZipArchive!';
-					}
+
+					preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $currentConstants, $userConstants);
+
+					$newConstants	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.$userConstants[2].'#USER_CONTENT_END', $newConstants);
+
+					file_put_contents(INSTALL_DIR.'constants.php', $newConstants);
+
+					$newHtaccess	=	file_get_contents(INSTALL_DIR.'.htaccess');
+					$oldHtaccess	=	file_get_contents(ROOT.SEP.'.htaccess');
+
+
+					preg_match("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", $oldHtaccess, $userHtaccess);
+
+					$newHtaccess	=	preg_replace("/(^#USER_CONTENT_BEGIN)(.*?)(#USER_CONTENT_END$)/mis", '#USER_CONTENT_BEGIN'.str_replace(array('$'), array('||||'), $userHtaccess[2]).'#USER_CONTENT_END', $newHtaccess);
+
+					$newHtaccess	=	str_replace(array('||||'), array('$'), $newHtaccess);
+
+					file_put_contents(INSTALL_DIR.'.htaccess', $newHtaccess);
+
+					removeInitialFiles();
+					copyFileToRoot();
+
+					unlink(ROOT.SEP.'webpackages.zip');
+
+					header('Location: '.HTTP);
 				}
 				else
 				{
-					$error = 'The update could not be opened with ZipArchive!';
+					$error = 'The update could not be unpacked with ZipArchive!';
 				}
 			}
 			else
 			{
-				$error = 'There are no write permissions in the directory: "'.ROOT.SEP.'"';
+				$error = 'The update could not be opened with ZipArchive!';
 			}
 		}
 		else
