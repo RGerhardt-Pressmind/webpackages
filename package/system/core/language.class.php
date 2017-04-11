@@ -423,8 +423,11 @@ class language extends initiator implements IStatic
 
 			foreach($lcs as $lc)
 			{
-				putenv($lc.'='.self::$userLng);
-				setlocale(constant($lc), self::$userLng);
+				if(defined($lc))
+				{
+					putenv($lc.'='.self::$userLng);
+					setlocale(constant($lc), self::$userLng);
+				}
 			}
 		}
 		else
