@@ -89,8 +89,6 @@ ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR
 //Alle Value Objekt Klassen includiere
 initializeDirectory(VALUE_OBJECTS);
 
-require 'plugins.class.php';
-
 //Alle Implements Klassen includieren
 if(defined('IMPLEMENT_DIR') && IMPLEMENT_DIR != '')
 {
@@ -102,6 +100,8 @@ if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 {
 	initializeDirectory(EXCEPTION_DIR);
 }
+
+require 'plugins.class.php';
 
 require 'database.class.php';
 require 'load_functions.abstract.class.php';
