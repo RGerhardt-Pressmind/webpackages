@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
@@ -88,24 +88,46 @@ class text extends initiator implements IStatic
 	 * Wandelt ein String in ein UTF-8 String um
 	 *
 	 * @param string $str Der String der in die Zeichenkodierung UTF-8 Konvertiert werden soll
-	 * @param string $encoding Die Eingangszeichenkodierung des Strings. Die Ursprüngliche Zeichenkodierung.
 	 *
 	 * @return string
 	 * @throws \Exception
 	 */
-	protected static function _convertToUTF8($str, $encoding)
+	protected static function _convertToUTF8($str)
 	{
-		if(empty($encoding))
+		if(strpos($str, 'Â') !== false || strpos($str, 'Ã') !== false || strpos($str, 'Ã') !== false || strpos($str, 'â') !== false)
 		{
-			$encoding	=	self::getCharacterEncoding($str);
+			return iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $str);
 		}
 
-		if(!$encoding)
+		$before	=	$str;
+		$after	=	iconv('UTF-8', 'UTF-8//IGNORE', $str);
+
+		if(strlen($before) != strlen($after))
 		{
-			throw new \Exception('Error: character encoding not supported (false)');
+			$str	=	self::_remove_bs($str);
 		}
 
-		return @iconv($encoding, 'UTF-8', $str);
+		return iconv('UTF-8', 'UTF-8//IGNORE', $str);
+	}
+
+	/**
+	 * Remove bs
+	 *
+	 * @param $str
+	 *
+	 * @return mixed
+	 */
+	private static function _remove_bs($str)
+	{
+		$before		=	utf8_encode($str);
+		$search		=	array('é', 'è', 'ê', 'â', 'á', 'à', 'û', 'ú', 'ù', 'î', 'í', 'ì', 'ó', 'ò', 'ô');
+		$replace	=	array('!!e!!', '""e""', '§§e§§', '§§a§§', '!!a!!', '""a""', '§§u§§', '!!u!!', '""u""', '$$i$$', '!!i!!', '$$i$$', '!!o!!', '""o""', '§§o§§');
+
+		$rep		=	str_replace($search, $replace, $before);
+
+		$after		=	utf8_decode($rep);
+
+		return str_replace($replace, $search, $after);
 	}
 
 	/**

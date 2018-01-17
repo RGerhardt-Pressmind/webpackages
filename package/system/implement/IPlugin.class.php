@@ -21,7 +21,7 @@
  *  @copyright	Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  *  @license	http://opensource.org/licenses/gpl-license.php GNU Public License
  *  @link	    http://webpackages.de
- *  @since	    Version 2017.0
+ *  @since	    Version 2018.0
  *  @filesource
  */
 
@@ -37,20 +37,6 @@ interface IPlugin
 	 * @param array $allClasses Übergibt alle Instanzierten Systemklassen
 	 */
 	public function setAllClasses($allClasses);
-
-	/**
-	 * Der Name der zum Ansprechen des Plugins genutzt werden soll
-	 *
-	 * @return string
-	 */
-	public function getClassName();
-
-	/**
-	 * Wird direkt nach der Instanzierung alles Plugins aufgerufen.
-	 *
-	 * @return mixed
-	 */
-	public function construct();
 
 	/**
 	 * Gibt die Instanzierungen der Plugins zurück, wo Sie aufgerufen werden

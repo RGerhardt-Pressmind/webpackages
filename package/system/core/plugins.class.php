@@ -21,14 +21,13 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
 namespace package\core;
 
 use package\implement\IPlugin;
-use package\implement\IStatic;
 use package\system\valueObjects\plugins\VOApplyPlugin;
 
 /**
@@ -42,7 +41,7 @@ use package\system\valueObjects\plugins\VOApplyPlugin;
  * @category       plugins
  * @author         Robbyn Gerhardt <gerhardt@webpackages.de>
  */
-class plugins implements IStatic
+class plugins
 {
 	/**
 	 * @var array Bereits definierte Plugins
@@ -53,6 +52,15 @@ class plugins implements IStatic
 	 * @var VOApplyPlugin[]
 	 */
 	public static $definedHooks	=	array();
+
+	/**
+	 * @var array
+	 */
+	private static $definedActions	=	array();
+
+
+	public static $callDynamicInfos	=	array();
+
 
 	/**
 	 * Destructor
@@ -75,18 +83,58 @@ class plugins implements IStatic
 	}
 
 	/**
+	 * Defined action
+	 *
+	 * @param string $key
+	 * @param string|array $call
+	 * @param int $priority
+	 *
+	 * @return void
+	 */
+	public static function setAction($key, $call, $priority = 10)
+	{
+		$hash		=	(is_string($call) ? $call : serialize($call));
+		$uniqName	=	$priority.md5($key.$hash);
+
+		self::$definedActions[$key][$uniqName]	=	array('key' => $key, 'call' => $call, 'priority' => $priority);
+	}
+
+	/**
+	 * Call action
+	 *
+	 * @param string $key
+	 * @param mixed $args
+	 *
+	 * @return void
+	 */
+	public static function callAction($key, $args = '')
+	{
+		if(!empty(self::$definedActions[$key]))
+		{
+			$args	=	array_merge(self::$callDynamicInfos, array('args' => $args));
+
+			foreach(self::$definedActions[$key] as $value)
+			{
+				call_user_func($value['call'], $args);
+			}
+		}
+	}
+
+
+	/**
 	 * Führt die Plugins vor dem Call der Funktion/Methode aus
 	 *
 	 * @param $class
 	 * @param $class_with_namespace
 	 * @param $methode
 	 * @param $arguments
+	 * @deprecated
 	 *
 	 * @return mixed
 	 */
 	public static function hookBefore($class, $class_with_namespace, $methode, $arguments)
 	{
-		$collect	=	array();
+		/*$collect	=	array();
 
 		if(!empty(self::$definedHooks))
 		{
@@ -117,7 +165,7 @@ class plugins implements IStatic
 			{
 				return $collect;
 			}
-		}
+		}*/
 
 		return null;
 	}
@@ -129,12 +177,13 @@ class plugins implements IStatic
 	 * @param $class_with_namespace
 	 * @param $methode
 	 * @param $arguments
+	 * @deprecated
 	 *
 	 * @return mixed
 	 */
 	public static function hookAfter($class, $class_with_namespace, $methode, $arguments)
 	{
-		$collect	=	array();
+		/*$collect	=	array();
 
 		if(!empty(self::$definedHooks))
 		{
@@ -165,7 +214,7 @@ class plugins implements IStatic
 			{
 				return $collect;
 			}
-		}
+		}*/
 
 		return null;
 	}
@@ -175,11 +224,12 @@ class plugins implements IStatic
 	 *
 	 * @param string $hook_key
 	 * @param array $arguments
+	 * @deprecated
 	 * @return mixed
 	 */
 	public static function callHook($hook_key, $arguments)
 	{
-		if(!empty(self::$definedHooks))
+		/*if(!empty(self::$definedHooks))
 		{
 			foreach(self::$definedHooks as $hook)
 			{
@@ -188,7 +238,7 @@ class plugins implements IStatic
 					call_user_func_array($hook->call, $arguments);
 				}
 			}
-		}
+		}*/
 	}
 
 
@@ -196,7 +246,13 @@ class plugins implements IStatic
 	/**
 	 * Zum initialisieren von Daten
 	 */
-	public static function init(){}
+	public static function init()
+	{
+		if(!empty($_REQUEST['action']))
+		{
+			self::callAction('wp_ajax_'.$_REQUEST['action']);
+		}
+	}
 
 	/**
 	 * Gibt alle definierten Plugins zurück

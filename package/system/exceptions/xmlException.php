@@ -20,7 +20,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 

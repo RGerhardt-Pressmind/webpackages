@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
@@ -101,7 +101,7 @@ abstract class load_functions
 
 	public static $LOAD_REST_CLIENT    = array('isStatic' => false, 'class' => 'restClient', 'writeInAttribute' => 'rest', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
 
-	private       $allLoadClasses      = array(), $defineDynamicClasses = array();
+	private       $allLoadClasses      = array(), $defineDynamicClasses = array(), $reflectionClass = null;
 
 	private       $notAllowedClassName = array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal', 'restClient');
 
@@ -170,6 +170,8 @@ abstract class load_functions
 			$loadClasses = self::getAllDefaultClasses();
 		}
 
+		$this->reflectionClass	=	new \ReflectionClass(get_called_class());
+
 		$this->allLoadClasses = $loadClasses;
 
 		foreach($loadClasses as $classes)
@@ -225,7 +227,6 @@ abstract class load_functions
 
 		unset($loadClasses);
 	}
-
 
 	/**
 	 * Lädt die PHPMailer Klasse
@@ -338,6 +339,7 @@ abstract class load_functions
 					$className = str_replace(array('.php', '.php4', '.php5', '.master.class'), array('', '', '', ''), $item->getFilename());
 
 					$classNameNamespace = '';
+					$classNameClean		= $className;
 
 					if(file_exists($item->getPath().SEP.'config.ini'))
 					{
@@ -370,7 +372,7 @@ abstract class load_functions
 
 					$class = new $classNameNamespace();
 
-					$back[] = array('class_name' => $classNameNamespace, 'class' => $class);
+					$back[] = array('class_name' => $classNameNamespace, 'class' => $class, 'class_name_other_namespace' => $classNameClean);
 				}
 			}
 		}

@@ -22,7 +22,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 class test implements \package\implement\IModel

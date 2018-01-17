@@ -20,14 +20,13 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
 namespace package\system\core;
 
 use package\core\plugins;
-use package\system\valueObjects\plugins\VOApplyPlugin;
 
 /**
  * Initiator aller Hilfsklassen
@@ -64,40 +63,25 @@ abstract class initiator
 			throw new \Exception('Error '.get_called_class().': static methode '.$name.' not exists');
 		}
 
-		// Kontrollieren ob das Plugin Modul geladen ist
-		if(!empty(plugins::$definedHooks))
-		{
-			foreach(plugins::$definedHooks as $hook)
-			{
-				if($hook->call_position == VOApplyPlugin::BEFORE && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
-				{
-					$back	=	call_user_func_array($hook->call, $arguments);
+		$className	=	self::getClassName();
 
-					if($hook->replace_default_function && !empty($back))
-					{
-						return $back;
-					}
-				}
-			}
+		if(empty($className))
+		{
+			$className	=	explode("\\", get_called_class());
+			$className	=	array_pop($className);
 		}
+
+		if(substr($className, 0, 1) != '_')
+		{
+			$className	=	'_'.$className;
+		}
+
+		plugins::callAction('wp'.$className.'_'.$name, $arguments);
+		plugins::callAction('wp'.$className.'_'.$name.'_before', $arguments);
 
 		$back	=	call_user_func_array(array(get_called_class(), '_'.$name), $arguments);
 
-		if(!empty(plugins::$definedHooks))
-		{
-			foreach(plugins::$definedHooks as $hook)
-			{
-				if($hook->call_position == VOApplyPlugin::AFTER && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
-				{
-					$replace	=	call_user_func_array($hook->call, array($back));
-
-					if($hook->replace_default_function && !empty($replace))
-					{
-						$back	=	$replace;
-					}
-				}
-			}
-		}
+		plugins::callAction('wp'.$className.'_'.$name.'_after', array_merge($arguments, array($back)));
 
 		return $back;
 	}
@@ -118,43 +102,25 @@ abstract class initiator
 			throw new \Exception('Error '.get_called_class().': static methode '.$name.' not exists');
 		}
 
-		$args	=	array('class' => self::getClassName(), 'method' => $name);
+		$className	=	self::getClassName();
 
-		if(!empty(plugins::$definedHooks))
+		if(empty($className))
 		{
-			foreach(plugins::$definedHooks as $hook)
-			{
-				if($hook->call_position == VOApplyPlugin::BEFORE && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
-				{
-					$back	=	call_user_func_array($hook->call, $args);
-
-					if($hook->replace_default_function && !empty($back))
-					{
-						return $back;
-					}
-				}
-			}
+			$className	=	explode("\\", get_called_class());
+			$className	=	array_pop($className);
 		}
+
+		if(substr($className, 0, 1) != '_')
+		{
+			$className	=	'_'.$className;
+		}
+
+		plugins::callAction('wp'.$className.'_'.$name, $arguments);
+		plugins::callAction('wp'.$className.'_'.$name.'_before', $arguments);
 
 		$back	=	call_user_func_array(array($this, '_'.$name), $arguments);
 
-		if(!empty(plugins::$definedHooks))
-		{
-			$args['content']	=	$back;
-
-			foreach(plugins::$definedHooks as $hook)
-			{
-				if($hook->call_position == VOApplyPlugin::AFTER && ($hook->class == self::getClassName() || $hook->class == get_called_class()) && $hook->methode == $name)
-				{
-					$replace	=	call_user_func_array($hook->call, $args);
-
-					if($hook->replace_default_function && !empty($replace))
-					{
-						$back	=	$replace;
-					}
-				}
-			}
-		}
+		plugins::callAction('wp'.$className.'_'.$name.'_after', array_merge($arguments, array($back)));
 
 		return $back;
 	}

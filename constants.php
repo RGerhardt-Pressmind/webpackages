@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
@@ -320,9 +320,12 @@ function initializeDirectory($dir)
 
 	if(iterator_count($iterator) > 0)
 	{
+		/**
+		 * @var SplFileInfo $file
+		 */
 		foreach($iterator as $file)
 		{
-			if($file->isFile() && $file->getFilename() != '.htaccess')
+			if($file->isFile() && $file->getExtension() == 'php')
 			{
 				require_once $file->__toString();
 			}
@@ -340,6 +343,9 @@ function getAllSubDirectorys($dir)
 
 	if(iterator_count($iterator) > 0)
 	{
+		/**
+		 * @var SplFileInfo $file
+		 */
 		foreach($iterator as $file)
 		{
 			if($file->isDir())
@@ -370,8 +376,6 @@ function initializePlugins()
 			{
 				$class = $t['class'];
 
-				$class->construct();
-
 				$applyPlugin	=	$class->getApplyPlugin();
 
 				if(!empty($applyPlugin) && is_array($applyPlugin))
@@ -379,7 +383,7 @@ function initializePlugins()
 					\package\core\plugins::$definedHooks	=	array_merge(\package\core\plugins::$definedHooks, $applyPlugin);
 				}
 
-				\package\core\plugins::$definedPluginsClasses[$class->getClassName()] = $class;
+				\package\core\plugins::$definedPluginsClasses[$t['class_name_other_namespace']] = $class;
 			}
 		}
 	}

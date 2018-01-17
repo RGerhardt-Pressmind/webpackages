@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
@@ -86,6 +86,11 @@ if(defined('PACKAGE_DIR') && PACKAGE_DIR != '')
 
 ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR, $systemPath));
 
+//Alle Value Objekt Klassen includiere
+initializeDirectory(VALUE_OBJECTS);
+
+require 'plugins.class.php';
+
 //Alle Implements Klassen includieren
 if(defined('IMPLEMENT_DIR') && IMPLEMENT_DIR != '')
 {
@@ -98,16 +103,11 @@ if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 	initializeDirectory(EXCEPTION_DIR);
 }
 
-//Alle Value Objekt Klassen includiere
-initializeDirectory(VALUE_OBJECTS);
-
 require 'database.class.php';
 require 'load_functions.abstract.class.php';
 
 if(PLUGIN_DIR != '')
 {
-	require 'plugins.class.php';
-
 	initializePlugins();
 }
 
@@ -117,6 +117,8 @@ require 'autoload.class.php';
 require 'version.class.php';
 require 'benchmark.class.php';
 require 'security.class.php';
+
+\package\core\plugins::callAction('wp_init');
 
 if(defined('AUTO_SECURE') && AUTO_SECURE == true)
 {

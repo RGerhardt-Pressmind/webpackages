@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
@@ -55,9 +55,12 @@ if($class)
 {
 	if(method_exists($class, $m))
 	{
-		$parameter	=	array('class' => $c, 'method' => $m);
+		plugins::callAction('wp_'.$c.'_'.$m);
+		plugins::callAction('wp_'.$c.'_'.$m.'_before');
 
-		$content	=	plugins::hookBefore($c, null, $m, $parameter);
+		plugins::$callDynamicInfos	=	array('class' => $c, 'methode' => $m);
+
+		plugins::callAction('wp_all_dynamic_before', array($c, $m));
 
 		if(!empty($content))
 		{
@@ -77,9 +80,8 @@ if($class)
 
 		echo $content;
 
-		$parameter['content']	=	$content;
-
-		plugins::hookAfter($c, null, $m, $parameter);
+		plugins::callAction('wp_'.$c.'_'.$m.'_after', array($content));
+		plugins::callAction('wp_all_dynamic_after', array($c, $m, $content));
 	}
 	else
 	{

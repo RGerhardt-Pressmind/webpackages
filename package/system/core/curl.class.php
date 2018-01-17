@@ -21,7 +21,7 @@
  * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2017.0
+ * @since         Version 2018.0
  * @filesource
  */
 
@@ -42,8 +42,8 @@ use package\system\core\initiator;
  * @method static bool curl_extension_exists()
  * @method static mixed get_data(string $url, $postfields = array())
  * @method static int get_status(string $url)
- * @method static array get_city_coordinates(string $city, boolean $resultArray = false, string $googleApiKey = '')
- * @method static string get_city_name_by_ip()
+ * @method @deprecated static array get_city_coordinates(string $city, boolean $resultArray = false, string $googleApiKey = '')
+ * @method @deprecated static string get_city_name_by_ip()
  *
  * @package        Webpackages
  * @subpackage     core
@@ -207,49 +207,11 @@ class curl extends initiator implements IStatic
 	 * @param string $googleApiKey Der API Key von Google
 	 *
 	 * @return array Gibt Längen und Breitengrade der Stadt zurück
-	 * @throws curlException Wenn die Extension nicht installiert oder im Fehlerfall.
+	 * @deprecated
 	 */
 	protected static function _get_city_coordinates($city, $resultArray = false, $googleApiKey = '')
 	{
-		if(!self::curl_extension_exists())
-		{
-			throw new curlException('Error: curl extension not loaded');
-		}
-
-		$url = "http://maps.google.com/maps/api/geocode/json?address=".rawurlencode($city)."&sensor=false".((!empty($googleApiKey)) ? '&key='.$googleApiKey : '');
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 120);
-		curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-
-		$response = curl_exec($ch);
-		curl_close($ch);
-
-		$response_a = json_decode($response, $resultArray);
-
-		$data = array();
-
-		if(!$resultArray)
-		{
-			if(!empty($response_a->results[0]))
-			{
-				$data = $response_a->results[0]->geometry->location;
-			}
-		}
-		else
-		{
-			if(!empty($response_a['results'][0]))
-			{
-				$data = $response_a['results'][0]['geometry']['location'];
-			}
-		}
-
-		return $data;
+		return array();
 	}
 
 	/**
@@ -260,23 +222,6 @@ class curl extends initiator implements IStatic
 	 */
 	protected static function _get_city_name_by_ip()
 	{
-		$ip = security::get_ip_address();
-
-		if(empty($ip))
-		{
-			return 'Not found';
-		}
-
-		$getData = self::get_data('http://ip-api.com/php/'.$ip);
-		$query   = unserialize($getData);
-
-		if(!empty($query['status']) && $query['status'] == 'success')
-		{
-			return $query['city'];
-		}
-		else
-		{
-			return 'Not found';
-		}
+		return '';
 	}
 } 
