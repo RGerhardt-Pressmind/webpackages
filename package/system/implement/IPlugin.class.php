@@ -27,8 +27,6 @@
 
 namespace package\implement;
 
-use package\system\valueObjects\plugins\VOApplyPlugin;
-
 interface IPlugin
 {
 	/**

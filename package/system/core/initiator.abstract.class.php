@@ -76,12 +76,33 @@ abstract class initiator
 			$className	=	'_'.$className;
 		}
 
-		plugins::callAction('wp'.$className.'_'.$name, $arguments);
-		plugins::callAction('wp'.$className.'_'.$name.'_before', $arguments);
+		plugins::callAction('wp'.$className.'_'.$name, array('parameter' => $arguments));
+		plugins::callAction('wp'.$className.'_'.$name.'_before', array('parameter' => $arguments));
+
+		$arguments	=	plugins::callFilter('wp'.$className.'_'.$name, array('parameter' => $arguments));
+
+		if(isset($arguments['parameter']))
+		{
+			$arguments	=	$arguments['parameter'];
+		}
+
+		$arguments	=	plugins::callFilter('wp'.$className.'_'.$name.'_before', array('parameter' => $arguments));
+
+		if(isset($arguments['parameter']))
+		{
+			$arguments	=	$arguments['parameter'];
+		}
 
 		$back	=	call_user_func_array(array(get_called_class(), '_'.$name), $arguments);
 
-		plugins::callAction('wp'.$className.'_'.$name.'_after', array_merge($arguments, array($back)));
+		plugins::callAction('wp'.$className.'_'.$name.'_after', array_merge(array('parameter' => $arguments), array($back)));
+
+		$return	=	plugins::callFilter('wp'.$className.'_'.$name.'_after', array_merge(array('parameter' => $arguments), array('return' => $back)));
+
+		if(isset($return['return']))
+		{
+			$back	=	$return['return'];
+		}
 
 		return $back;
 	}
@@ -115,12 +136,33 @@ abstract class initiator
 			$className	=	'_'.$className;
 		}
 
-		plugins::callAction('wp'.$className.'_'.$name, $arguments);
-		plugins::callAction('wp'.$className.'_'.$name.'_before', $arguments);
+		plugins::callAction('wp'.$className.'_'.$name, array('parameter' => $arguments));
+		plugins::callAction('wp'.$className.'_'.$name.'_before', array('parameter' => $arguments));
+
+		$arguments	=	plugins::callFilter('wp'.$className.'_'.$name, array('parameter' => $arguments));
+
+		if(isset($arguments['parameter']))
+		{
+			$arguments	=	$arguments['parameter'];
+		}
+
+		$arguments	=	plugins::callFilter('wp'.$className.'_'.$name.'_before', array('parameter' => $arguments));
+
+		if(isset($arguments['parameter']))
+		{
+			$arguments	=	$arguments['parameter'];
+		}
 
 		$back	=	call_user_func_array(array($this, '_'.$name), $arguments);
 
-		plugins::callAction('wp'.$className.'_'.$name.'_after', array_merge($arguments, array($back)));
+		plugins::callAction('wp'.$className.'_'.$name.'_after', array_merge(array('parameter' => $arguments), array($back)));
+
+		$return	=	plugins::callFilter('wp'.$className.'_'.$name.'_after', array_merge(array('parameter' => $arguments), array('return' => $back)));
+
+		if(isset($return['return']))
+		{
+			$back	=	$return['return'];
+		}
 
 		return $back;
 	}

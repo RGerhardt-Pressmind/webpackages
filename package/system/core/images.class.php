@@ -36,6 +36,9 @@ use package\system\core\initiator;
  *
  * Durch die images Klasse kann man Bilder auf ein bestimmtest Format zuschneiden.
  *
+ * @method static string|bool getImageUrlByName(string $name)
+ * @method static bool downloadImageAndSave(string $url, string $name, bool $overrite = false)
+ * @method static bool saveImage(string $name, string $content, bool $overrite = false)
  * @method static int|bool getImageHeight(string $image)
  * @method static int|bool getImageWidth(string $image)
  * @method static bool optimizedImage(string $image, int $quality = 85)
@@ -53,6 +56,71 @@ class images extends initiator implements IStatic
 
 	public static function init()
 	{
+	}
+
+	/**
+	 * Get image url by name
+	 *
+	 * @param string $name
+	 *
+	 * @return string|bool
+	 */
+	protected static function _getImageUrlByName($name)
+	{
+		if(file_exists(CACHE_PATH.'images'.SEP.$name))
+		{
+			return HTTP.'images/'.$name;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Download image and save
+	 *
+	 * @param string 	$url
+	 * @param string 	$name
+	 * @param bool 		$overrite
+	 *
+	 * @return bool
+	 */
+	protected static function _downloadImageAndSave($url, $name, $overrite = false)
+	{
+		if(!file_exists(CACHE_PATH.'images'.SEP))
+		{
+			mkdir(CACHE_PATH.'images'.SEP, 0755, true);
+		}
+
+		if($overrite === false && file_exists(CACHE_PATH.'images'.SEP.$name))
+		{
+			return true;
+		}
+
+		return curl::downloadFile($url, CACHE_PATH.'images'.SEP.$name);
+	}
+
+	/**
+	 * Save image in cache
+	 *
+	 * @param string $name
+	 * @param string $content
+	 * @param bool $overrite
+	 *
+	 * @return bool
+	 */
+	protected static function _saveImage($name, $content, $overrite = false)
+	{
+		if(!file_exists(CACHE_PATH.'images'.SEP))
+		{
+			mkdir(CACHE_PATH.'images'.SEP, 0755, true);
+		}
+
+		if($overrite === false && file_exists(CACHE_PATH.'images'.SEP.$name))
+		{
+			return true;
+		}
+
+		return (file_put_contents(CACHE_PATH.'images'.SEP.$name, $content) !== false);
 	}
 
 	/**
@@ -157,27 +225,27 @@ class images extends initiator implements IStatic
 			$quality	=	100;
 		}
 
-		if($sourceType == 1) // GIF
+		if($sourceType == IMAGETYPE_GIF) // GIF
 		{
 			$img	=	imagecreatefromgif($source);
 			imagegif($img, $source);
 		}
-		elseif($sourceType == 2) // JPEG / JPG
+		elseif($sourceType == IMAGETYPE_JPEG) // JPEG / JPG
 		{
 			$img	=	imagecreatefromjpeg($source);
 			imagejpeg($img, $source, $quality);
 		}
-		elseif($sourceType == 3) // PNG
+		elseif($sourceType == IMAGETYPE_PNG) // PNG
 		{
 			$img	=	imagecreatefrompng($source);
 			imagepng($img, $source, $quality);
 		}
-		elseif($sourceType == 15) // WBMP
+		elseif($sourceType == IMAGETYPE_WBMP) // WBMP
 		{
 			$img	=	imagecreatefromwbmp($source);
 			imagewbmp($img, $source);
 		}
-		elseif($sourceType == 16) // XBM
+		elseif($sourceType == IMAGETYPE_XBM) // XBM
 		{
 			$img	=	imagecreatefromxbm($source);
 			imagexbm($img, $source);
@@ -276,17 +344,17 @@ class images extends initiator implements IStatic
 		//1 = GIF, 2 = JPG, 3 = PNG, 4 = SWF, 5 = PSD, 6 = BMP, 7 = TIFF(intel byte order), 8 = TIFF(motoral byte order), 9 = JPC, 10 = JP2, 11 =  JPX, 12 => JB2, 13 = SWC, 14 = IFF, 15 = WBMP, 16 = XBM
 		switch($sourceType)
 		{
-			case 1: //GIF
+			case IMAGETYPE_GIF: //GIF
 
 				$image = imagecreatefromgif($source);
 
 			break;
-			case 2: // JPG
+			case IMAGETYPE_JPEG: // JPG
 
 				$image = imagecreatefromjpeg($source);
 
 			break;
-			case 3: // PNG
+			case IMAGETYPE_PNG: // PNG
 
 				$image = imagecreatefrompng($source);
 

@@ -28,7 +28,6 @@
 namespace package\core;
 
 use package\implement\IPlugin;
-use package\system\valueObjects\plugins\VOApplyPlugin;
 
 /**
  * Initialisiert Plugins
@@ -49,7 +48,7 @@ class plugins
 	public static $definedPluginsClasses = array();
 
 	/**
-	 * @var VOApplyPlugin[]
+	 * @var array
 	 */
 	public static $definedHooks	=	array();
 
@@ -58,7 +57,14 @@ class plugins
 	 */
 	private static $definedActions	=	array();
 
+	/**
+	 * @var array
+	 */
+	private static $definedFilter	=	array();
 
+	/**
+	 * @var array
+	 */
 	public static $callDynamicInfos	=	array();
 
 
@@ -83,6 +89,24 @@ class plugins
 	}
 
 	/**
+	 * Set filter
+	 *
+	 * @param string		$key
+	 * @param string|array 	$call
+	 * @param int 			$priority
+	 *
+	 * @return void
+	 */
+	public static function setFilter($key, $call, $priority = 10)
+	{
+		$hash		=	(is_string($call) ? $call : serialize($call));
+		$uniqName	=	$priority.md5($key.$hash);
+
+		self::$definedFilter[$key][$uniqName][]	=	array('key' => $key, 'call' => $call, 'priority' => $priority);
+	}
+
+
+	/**
 	 * Defined action
 	 *
 	 * @param string $key
@@ -96,8 +120,33 @@ class plugins
 		$hash		=	(is_string($call) ? $call : serialize($call));
 		$uniqName	=	$priority.md5($key.$hash);
 
-		self::$definedActions[$key][$uniqName]	=	array('key' => $key, 'call' => $call, 'priority' => $priority);
+		self::$definedActions[$key][$uniqName][]	=	array('key' => $key, 'call' => $call, 'priority' => $priority);
 	}
+
+	/**
+	 * Call filter
+	 *
+	 * @param string $key
+	 * @param mixed $args
+	 *
+	 * @return mixed
+	 */
+	public static function callFilter($key, $args = '')
+	{
+		if(!empty(self::$definedFilter[$key]))
+		{
+			foreach(self::$definedFilter[$key] as $values)
+			{
+				foreach($values as $value)
+				{
+					$args	=	call_user_func($value['call'], $args);
+				}
+			}
+		}
+
+		return $args;
+	}
+
 
 	/**
 	 * Call action
@@ -113,9 +162,12 @@ class plugins
 		{
 			$args	=	array_merge(self::$callDynamicInfos, array('args' => $args));
 
-			foreach(self::$definedActions[$key] as $value)
+			foreach(self::$definedActions[$key] as $values)
 			{
-				call_user_func($value['call'], $args);
+				foreach($values as $value)
+				{
+					call_user_func($value['call'], $args);
+				}
 			}
 		}
 	}
@@ -124,121 +176,36 @@ class plugins
 	/**
 	 * Führt die Plugins vor dem Call der Funktion/Methode aus
 	 *
-	 * @param $class
-	 * @param $class_with_namespace
-	 * @param $methode
-	 * @param $arguments
 	 * @deprecated
 	 *
 	 * @return mixed
 	 */
-	public static function hookBefore($class, $class_with_namespace, $methode, $arguments)
+	public static function hookBefore()
 	{
-		/*$collect	=	array();
-
-		if(!empty(self::$definedHooks))
-		{
-			foreach(self::$definedHooks as $hook)
-			{
-				if($hook->call_position == 'BEFORE' && ($hook->class == $class || $hook->class == $class_with_namespace || $hook->all_dynamic_class) && ($hook->methode == $methode || $hook->all_dynamic_method))
-				{
-					$back	=	call_user_func_array($hook->call, $arguments);
-
-					if($hook->replace_default_function)
-					{
-						if(!empty($back))
-						{
-							$collect[]	=	$back;
-						}
-					}
-				}
-			}
-		}
-
-		if(!empty($collect))
-		{
-			if(count($collect) == 1)
-			{
-				return $collect[0];
-			}
-			else
-			{
-				return $collect;
-			}
-		}*/
-
 		return null;
 	}
 
 	/**
 	 * Führt die Plugins nach dem Call der Funktion/Methode aus
 	 *
-	 * @param $class
-	 * @param $class_with_namespace
-	 * @param $methode
-	 * @param $arguments
 	 * @deprecated
 	 *
 	 * @return mixed
 	 */
-	public static function hookAfter($class, $class_with_namespace, $methode, $arguments)
+	public static function hookAfter()
 	{
-		/*$collect	=	array();
-
-		if(!empty(self::$definedHooks))
-		{
-			foreach(self::$definedHooks as $hook)
-			{
-				if($hook->call_position == 'AFTER' && ($hook->class == $class || $hook->class == $class_with_namespace || $hook->all_dynamic_class) && ($hook->methode == $methode || $hook->all_dynamic_method))
-				{
-					$back	=	call_user_func_array($hook->call, $arguments);
-
-					if($hook->replace_default_function)
-					{
-						if(!empty($back))
-						{
-							$collect[]	=	$back;
-						}
-					}
-				}
-			}
-		}
-
-		if(!empty($collect))
-		{
-			if(count($collect) == 1)
-			{
-				return $collect[0];
-			}
-			else
-			{
-				return $collect;
-			}
-		}*/
-
 		return null;
 	}
 
 	/**
 	 * Ruft alle Plugins auf, die mit dem hook_key verbunden sind
 	 *
-	 * @param string $hook_key
-	 * @param array $arguments
 	 * @deprecated
 	 * @return mixed
 	 */
-	public static function callHook($hook_key, $arguments)
+	public static function callHook()
 	{
-		/*if(!empty(self::$definedHooks))
-		{
-			foreach(self::$definedHooks as $hook)
-			{
-				if($hook->hook_key == $hook_key)
-				{
-					call_user_func_array($hook->call, $arguments);
-				}
-			}
-		}*/
+		return null;
 	}
 
 

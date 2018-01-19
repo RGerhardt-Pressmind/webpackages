@@ -14,6 +14,8 @@
 
     RewriteRule ^skin/(.*) package/views/$1
 
+    RewriteRule ^images/(.*) package/system/cache/images/$1
+
     RewriteRule ^([^/]*)\.html$ index.php?c=$1 [L]
     RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?c=$1&m=$2 [L]
 
