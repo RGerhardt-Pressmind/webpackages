@@ -226,6 +226,8 @@ abstract class load_functions
 		$this->load_install_plugins();
 
 		unset($loadClasses);
+
+		plugins::callAction('wp_init_load_functions');
 	}
 
 	/**

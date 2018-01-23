@@ -51,6 +51,7 @@ use package\system\core\initiator;
  * @method static string getJsUrl(string $file)
  * @method static string getJsPath(string $file)
  * @method static string getImageUrl(string $file)
+ * @method static string getViewPath(string $file)
  * @method string getTemplateChildPath()
  * @method static string getPublicTemplatePath()
  * @method static string getPublicTemplateChildPath()
@@ -370,6 +371,23 @@ class template extends initiator
 		}
 
 		return self::_getPublicTemplatePath().'css'.SEP.$file;
+	}
+
+	/**
+	 * Get view path back
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	protected static function _getViewPath($file)
+	{
+		if(file_exists(self::_getPublicTemplateChildPath().$file))
+		{
+			return self::_getPublicTemplateChildPath().$file;
+		}
+
+		return self::_getPublicTemplatePath().$file;
 	}
 
 	/**

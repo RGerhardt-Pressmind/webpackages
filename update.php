@@ -115,7 +115,7 @@ if(isset($_POST['update']))
 					$currentConstants	=	file_get_contents('constants.php');
 					$newConstants		=	file_get_contents(INSTALL_DIR.'constants.php');
 
-					preg_match_all("/define\\('(.*?)',\\s(.*?)\\);/m", $currentConstants, $matches);
+					preg_match_all('/define\(\'(.*?)\',\s(.*?)\);/', $currentConstants, $matches);
 
 					$notAllowedUserConstants	=	array('HTTP', 'SEP', 'OS', 'ROOT', 'MYSQL_FUNCTIONS');
 
