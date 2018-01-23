@@ -4,76 +4,22 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- fix PDO">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- add getCssPath method&#10;- add getJsPath method&#10;- add getImageUrl method&#10;- add appendScript method&#10;- add getScripts method&#10;- add appendStyle method&#10;- add getStyles method&#10;- change inactivate redis plugin&#10;- remove .htaccess from system path&#10;- change debug footer/header">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/constants.php" afterPath="$PROJECT_DIR$/constants.php" />
-      <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change beforePath="$PROJECT_DIR$/init.php" afterPath="$PROJECT_DIR$/init.php" />
       <change beforePath="$PROJECT_DIR$/package/controllers/welcome.class.php" afterPath="$PROJECT_DIR$/package/controllers/welcome.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/models/test.php" afterPath="$PROJECT_DIR$/package/models/test.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/controllExistsPaths.php" afterPath="$PROJECT_DIR$/package/system/controllExistsPaths.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/Date.class.php" afterPath="$PROJECT_DIR$/package/system/core/Date.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/FileSystem.class.php" afterPath="$PROJECT_DIR$/package/system/core/FileSystem.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/XML.class.php" afterPath="$PROJECT_DIR$/package/system/core/XML.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/autoload.class.php" afterPath="$PROJECT_DIR$/package/system/core/autoload.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/benchmark.class.php" afterPath="$PROJECT_DIR$/package/system/core/benchmark.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/cache.class.php" afterPath="$PROJECT_DIR$/package/system/core/cache.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/captcha.class.php" afterPath="$PROJECT_DIR$/package/system/core/captcha.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/curl.class.php" afterPath="$PROJECT_DIR$/package/system/core/curl.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/database.class.php" afterPath="$PROJECT_DIR$/package/system/core/database.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/errors.class.php" afterPath="$PROJECT_DIR$/package/system/core/errors.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/ftp.class.php" afterPath="$PROJECT_DIR$/package/system/core/ftp.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/images.class.php" afterPath="$PROJECT_DIR$/package/system/core/images.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" afterPath="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/language.class.php" afterPath="$PROJECT_DIR$/package/system/core/language.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" afterPath="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/logger.class.php" afterPath="$PROJECT_DIR$/package/system/core/logger.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/number.class.php" afterPath="$PROJECT_DIR$/package/system/core/number.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/paypal.class.php" afterPath="$PROJECT_DIR$/package/system/core/paypal.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/phpMailer.class.php" afterPath="$PROJECT_DIR$/package/system/core/phpMailer.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/plugins.class.php" afterPath="$PROJECT_DIR$/package/system/core/plugins.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/restClient.php" afterPath="$PROJECT_DIR$/package/system/core/restClient.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/security.class.php" afterPath="$PROJECT_DIR$/package/system/core/security.class.php" />
+      <change beforePath="$PROJECT_DIR$/package/system/.htaccess" afterPath="" />
       <change beforePath="$PROJECT_DIR$/package/system/core/template.class.php" afterPath="$PROJECT_DIR$/package/system/core/template.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/text.class.php" afterPath="$PROJECT_DIR$/package/system/core/text.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/url.class.php" afterPath="$PROJECT_DIR$/package/system/core/url.class.php" />
       <change beforePath="$PROJECT_DIR$/package/system/core/version.class.php" afterPath="$PROJECT_DIR$/package/system/core/version.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/core/zip.class.php" afterPath="$PROJECT_DIR$/package/system/core/zip.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/autoloadException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/autoloadException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/benchmarkException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/benchmarkException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/cacheException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/cacheException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/captchaException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/captchaException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/curlException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/curlException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/databaseException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/databaseException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/dateException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/dateException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/ftpException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/ftpException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/imagesException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/imagesException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/loggerException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/loggerException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/numberException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/numberException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/phpMailerException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/phpMailerException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/securityException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/securityException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/templateException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/templateException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/urlException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/urlException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/xmlException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/xmlException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/exceptions/zipException.php" afterPath="$PROJECT_DIR$/package/system/exceptions/zipException.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/implement/IModel.class.php" afterPath="$PROJECT_DIR$/package/system/implement/IModel.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" afterPath="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/implement/IStatic.class.php" afterPath="$PROJECT_DIR$/package/system/implement/IStatic.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/implement/iLogger.class.php" afterPath="$PROJECT_DIR$/package/system/implement/iLogger.class.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/loadSessionHandler.php" afterPath="$PROJECT_DIR$/package/system/loadSessionHandler.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/changelog.md" afterPath="$PROJECT_DIR$/package/system/thirdParty/PHPMailer/changelog.md" />
-      <change beforePath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAddress.php" afterPath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAddress.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAttachment.php" afterPath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAttachment.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOPHPMailer.php" afterPath="$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOPHPMailer.php" />
-      <change beforePath="$PROJECT_DIR$/package/system/valueObjects/plugins/VOApplyPlugin.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/package/views/welcome/template/hello.php" afterPath="$PROJECT_DIR$/package/views/welcome/template/hello.php" />
+      <change beforePath="$PROJECT_DIR$/package/system/plugins/redis/config.ini" afterPath="$PROJECT_DIR$/package/system/plugins/redis/config.ini" />
+      <change beforePath="$PROJECT_DIR$/package/views/welcome/template/footer.php" afterPath="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
+      <change beforePath="$PROJECT_DIR$/package/views/welcome/template/header.php" afterPath="$PROJECT_DIR$/package/views/welcome/template/header.php" />
     </list>
     <ignored path="webpackage.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
+    <ignored path=".idea/codeStyles/codeStyleConfig.xml" />
+    <ignored path=".idea/codeStyles/Project.xml" />
+    <ignored path="changelog" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +27,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$USER_HOME$/composer.json</pharConfigPath>
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -99,34 +45,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plugins.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package/system/core/plugins.class.php">
+      <file leaf-file-name="template.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3180">
-              <caret line="212" column="16" lean-forward="false" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
+            <state relative-caret-position="105">
+              <caret line="420" column="25" lean-forward="true" selection-start-line="420" selection-start-column="25" selection-end-line="420" selection-end-column="25" />
               <folding>
-                <marker date="1516145173204" expanded="true" signature="5540:5970" ph="{...}" />
-                <marker date="1516145173204" expanded="true" signature="5733:5968" ph="{...}" />
+                <element signature="e#6968#8053#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
+      <file leaf-file-name="header.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package/views/welcome/template/header.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="75" column="19" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="load_functions.abstract.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="168" column="9" lean-forward="true" selection-start-line="168" selection-start-column="9" selection-end-line="168" selection-end-column="9" />
+            <state relative-caret-position="105">
+              <caret line="7" column="50" lean-forward="true" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -135,8 +70,18 @@
       <file leaf-file-name="welcome.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1095">
-              <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
+            <state relative-caret-position="143">
+              <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="version.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package/system/core/version.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="584">
+              <caret line="42" column="44" lean-forward="true" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -174,6 +119,12 @@
       <find>definedPluginsClasses</find>
       <find>get_plugins</find>
       <find>Version 2.0.0</find>
+      <find>TEMPLATE_DEFAULT_SKIN</find>
+      <find>getCssUrl</find>
+      <find>appendScript</find>
+      <find>getScripts</find>
+      <find>getStyles</find>
+      <find>slider-b</find>
     </findStrings>
     <replaceStrings>
       <replace>Copyright (C) 2010 - 2017</replace>
@@ -202,15 +153,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/package/system/core/cache.class.php" />
-        <option value="$PROJECT_DIR$/package/system/core/captcha.class.php" />
-        <option value="$PROJECT_DIR$/package/system/core/paypal.class.php" />
-        <option value="$PROJECT_DIR$/package/system/core/zip.class.php" />
-        <option value="$PROJECT_DIR$/todo" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/README.MD" />
         <option value="$PROJECT_DIR$/package/.htaccess" />
-        <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/package/views/welcome/css/font-awesome.min.css" />
         <option value="$PROJECT_DIR$/package/views/welcome/js/main.js" />
         <option value="$PROJECT_DIR$/debug.php" />
@@ -223,36 +167,43 @@
         <option value="$PROJECT_DIR$/package/system/core/FileSystem.class.php" />
         <option value="$PROJECT_DIR$/package/system/controllExistsPaths.php" />
         <option value="$PROJECT_DIR$/package/system/core/ftp.class.php" />
-        <option value="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/tinyImages/tinyImages.master.class.php" />
-        <option value="$PROJECT_DIR$/init.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/tinyImages/config.ini" />
         <option value="$PROJECT_DIR$/package/system/core/logger.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/number.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/restClient.php" />
-        <option value="$PROJECT_DIR$/package/system/core/version.class.php" />
         <option value="$PROJECT_DIR$/package/system/core/url.class.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" />
         <option value="$PROJECT_DIR$/package/system/core/security.class.php" />
-        <option value="$PROJECT_DIR$/package/views/welcome/template/header.php" />
-        <option value="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
-        <option value="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/package/system/plugins/redis/redis.master.class.php" />
-        <option value="$PROJECT_DIR$/package/system/core/template.class.php" />
         <option value="$PROJECT_DIR$/changelog" />
         <option value="$PROJECT_DIR$/package/system/core/language.class.php" />
         <option value="$PROJECT_DIR$/update.php" />
         <option value="$PROJECT_DIR$/package/system/valueObjects/plugins/VOApplyPlugin.php" />
-        <option value="$PROJECT_DIR$/package/system/core/plugins.class.php" />
         <option value="$PROJECT_DIR$/package/views/welcome/template/hello.php" />
-        <option value="$PROJECT_DIR$/package/system/plugins/redis/config.ini" />
         <option value="$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" />
-        <option value="$PROJECT_DIR$/package/controllers/welcome.class.php" />
         <option value="$PROJECT_DIR$/package/views/welcome-child/css/main.css" />
         <option value="$PROJECT_DIR$/package/views/welcome/css/main.css" />
         <option value="$PROJECT_DIR$/constants.php" />
         <option value="$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php" />
+        <option value="$PROJECT_DIR$/init.php" />
+        <option value="$PROJECT_DIR$/package/system/loadSessionHandler.php" />
+        <option value="$PROJECT_DIR$/package/system/implement/IPlugin.class.php" />
+        <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="$PROJECT_DIR$/package/system/plugins/skin/config.ini" />
+        <option value="$PROJECT_DIR$/package/system/core/plugins.class.php" />
+        <option value="$PROJECT_DIR$/package/system/core/benchmark.class.php" />
+        <option value="$PROJECT_DIR$/package/system/core/initiator.abstract.class.php" />
+        <option value="$PROJECT_DIR$/package/system/core/images.class.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/skin/skin.master.class.php" />
+        <option value="$PROJECT_DIR$/package/system/plugins/redis/config.ini" />
+        <option value="$PROJECT_DIR$/package/system/.htaccess" />
+        <option value="$PROJECT_DIR$/package/views/welcome/template/footer.php" />
+        <option value="$PROJECT_DIR$/package/controllers/welcome.class.php" />
+        <option value="$PROJECT_DIR$/package/views/welcome/template/header.php" />
+        <option value="$PROJECT_DIR$/package/system/core/template.class.php" />
+        <option value="$PROJECT_DIR$/package/system/core/version.class.php" />
       </list>
     </option>
   </component>
@@ -318,6 +269,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -325,12 +277,101 @@
               <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
               <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="system" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="system" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="cache" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="system" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="core" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="system" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="plugins" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="system" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="plugins" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="redis" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="system" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="plugins" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="skin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="welcome" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="welcome" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="images" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="welcome-child" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webpackages" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webpackages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="package" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="welcome-child" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -339,8 +380,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="recentsLimit" value="5" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -363,6 +403,11 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -599,28 +644,11 @@
       <workItem from="1491640260151" duration="1879000" />
       <workItem from="1491729821098" duration="45000" />
       <workItem from="1491845124207" duration="24000" />
-      <workItem from="1516211036437" duration="78000" />
-    </task>
-    <task id="LOCAL-00070" summary="-bugfix read models">
-      <created>1457467461528</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1457467461528</updated>
-    </task>
-    <task id="LOCAL-00071" summary="-bugfix createValidUrlString">
-      <created>1458584546086</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1458584546087</updated>
-    </task>
-    <task id="LOCAL-00072" summary="End v2.1.2">
-      <created>1458585605800</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1458585605800</updated>
+      <workItem from="1516211036437" duration="408000" />
+      <workItem from="1516213045598" duration="544000" />
+      <workItem from="1516276415531" duration="5638000" />
+      <workItem from="1516356983160" duration="5096000" />
+      <workItem from="1516695373269" duration="197000" />
     </task>
     <task id="LOCAL-00073" summary="- Add dynamic template language files">
       <created>1458718459828</created>
@@ -944,7 +972,28 @@
       <option name="project" value="LOCAL" />
       <updated>1491641314610</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="- update to 2018.0&#10;- add better plugin system&#10;- update convert to utf8">
+      <created>1516211179454</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1516211179455</updated>
+    </task>
+    <task id="LOCAL-00120" summary="- fix">
+      <created>1516213075252</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1516213075252</updated>
+    </task>
+    <task id="LOCAL-00121" summary="- add methode getImageUrlByName&#10;- add methode downloadImageAndSave&#10;- add methode saveImage&#10;- add methode setFilter&#10;- add methode callFilter&#10;- add htaccess rule for images&#10;- add test plugin skin">
+      <created>1516351181919</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1516351181919</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -980,20 +1029,20 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118534000" />
+    <option name="totallyTimeSpent" value="130339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24749643" sideWeight="0.3796856" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26180258" sideWeight="0.7509069" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25903615" sideWeight="0.5057307" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2719704" sideWeight="0.49426934" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3253012" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24749643" sideWeight="0.62031436" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26180258" sideWeight="0.2490931" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39820743" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1046,9 +1095,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- bugfix valid url string" />
-    <MESSAGE value="- cache control filesize by write&#10;- curl get_city_coordinates add google api key&#10;- template add methode setSingleData&#10;- text add methode strip_tags_with_content&#10;- url add methode loc_url_simple&#10;- minor changes&#10;- many bugfixes" />
-    <MESSAGE value="- load_functions remove phpMailer &#10;- add phpMailer helperclass&#10;- update phpMailer thirdParty Framework&#10;- add valueObjects for phpMailer&#10;- add phpMailer constants&#10;- change include_path function" />
     <MESSAGE value="- performance optimizations&#10;- add restClient class&#10;- change chmod 0777 to chmod 0755&#10;- many bugfixes" />
     <MESSAGE value="- add security functions:&#10;create_csrf_token()&#10;exists_csrf_token()&#10;get_csrf_toke()&#10;remove_csrf_token()&#10;" />
     <MESSAGE value="- add Content-Security-Policy" />
@@ -1071,7 +1117,10 @@
     <MESSAGE value="- fix override language package by update&#10;- fix &quot;locale -a&quot; by unix systems" />
     <MESSAGE value="- fix override plugin by update&#10;- add method callHook by plugin.class.php" />
     <MESSAGE value="- fix tinyImages plugin bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fix tinyImages plugin bug" />
+    <MESSAGE value="- update to 2018.0&#10;- add better plugin system&#10;- update convert to utf8" />
+    <MESSAGE value="- fix" />
+    <MESSAGE value="- add methode getImageUrlByName&#10;- add methode downloadImageAndSave&#10;- add methode saveImage&#10;- add methode setFilter&#10;- add methode callFilter&#10;- add htaccess rule for images&#10;- add test plugin skin" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add methode getImageUrlByName&#10;- add methode downloadImageAndSave&#10;- add methode saveImage&#10;- add methode setFilter&#10;- add methode callFilter&#10;- add htaccess rule for images&#10;- add test plugin skin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1080,131 +1129,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package/system/core/errors.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/FileSystem.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="374" column="12" lean-forward="true" selection-start-line="374" selection-start-column="12" selection-end-line="374" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/ftp.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7092">
-          <caret line="688" column="6" lean-forward="true" selection-start-line="688" selection-start-column="6" selection-end-line="688" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/images.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4425">
-          <caret line="22" column="39" lean-forward="true" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/Core/Core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="340" column="9" lean-forward="false" selection-start-line="340" selection-start-column="9" selection-end-line="340" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/controllExistsPaths.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/autoload.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="78" column="9" lean-forward="true" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/implement/IPlugin.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="52" column="20" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/tinyImages/config.ini" />
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/tinyImages/tinyImages.master.class.php" />
-    <entry file="file://$PROJECT_DIR$/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="98" column="1" lean-forward="true" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/logger.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/number.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="245" column="66" lean-forward="false" selection-start-line="245" selection-start-column="66" selection-end-line="245" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/paypal.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-855">
-          <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/phpMailer.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-616">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/restClient.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="85" column="9" lean-forward="true" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/filter/filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="82" column="69" lean-forward="false" selection-start-line="82" selection-start-column="69" selection-end-line="82" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="79" column="9" lean-forward="false" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/system/valueObjects/phpMailer/VOMailAddress.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/benchmark.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="127" column="0" lean-forward="true" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1222,13 +1150,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/XML.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/redis/Redis.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -1243,28 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/initiator.abstract.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="75" column="67" lean-forward="false" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/redis/redis.master.class.php" />
     <entry file="file://$PROJECT_DIR$/package/system/core/url.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-227">
@@ -1276,13 +1175,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2659">
           <caret line="100" column="9" lean-forward="true" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/version.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1317,62 +1209,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="86" column="17" lean-forward="true" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/changelog" />
-    <entry file="file://$PROJECT_DIR$/package/system/valueObjects/plugins/VOApplyPlugin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="83" column="18" lean-forward="false" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="11" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/redis/config.ini" />
-    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-188">
-          <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
-          <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/valueObjects/plugins/VOApplyPlugin.php" />
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/config.ini" />
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/testPlugin/testPlugin.master.class.php" />
     <entry file="file://$PROJECT_DIR$/package/views/welcome/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="681">
           <caret line="49" column="44" lean-forward="false" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package/views/welcome-child/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="34" column="8" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -1383,36 +1226,247 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/plugins.class.php">
+    <entry file="file://$PROJECT_DIR$/changelog">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3180">
-          <caret line="212" column="16" lean-forward="false" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
-          <folding>
-            <marker date="1516145173204" expanded="true" signature="5540:5970" ph="{...}" />
-            <marker date="1516145173204" expanded="true" signature="5733:5968" ph="{...}" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class 2.php" />
+    <entry file="file://$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/autoload.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="65" column="39" lean-forward="true" selection-start-line="65" selection-start-column="39" selection-end-line="65" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/controllExistsPaths.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/languages/en_US/LC_MESSAGES/en_US.mo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/languages/en_US/LC_MESSAGES/en_US.po">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/implement/iLogger.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/implement/IPlugin.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/curl.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-625">
+          <caret line="45" column="45" lean-forward="true" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/skin/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="11" lean-forward="true" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        <state relative-caret-position="482">
+          <caret line="211" column="29" lean-forward="false" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/plugins.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="143" column="13" lean-forward="true" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/benchmark.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="79" column="7" lean-forward="true" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/redis/redis.master.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/XML.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/initiator.abstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="49" column="7" lean-forward="true" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" column="19" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+        <state relative-caret-position="190">
+          <caret line="51" column="1" lean-forward="true" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/loadSessionHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/skin/skin.master.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/images.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-293">
+          <caret line="25" column="3" lean-forward="true" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="94" column="18" lean-forward="false" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/ftp.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="65" column="24" lean-forward="false" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/cache/js/132af0d0e77ed7e6b7e7ec681efd1f6f.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3002">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/.htaccess" />
+    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="11" column="58" lean-forward="false" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package/system/core/load_functions.abstract.class.php">
+    <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="168" column="9" lean-forward="true" selection-start-line="168" selection-start-column="9" selection-end-line="168" selection-end-column="9" />
+        <state relative-caret-position="240">
+          <caret line="16" column="59" lean-forward="true" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/views/welcome-child/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/cache/css/36088e84500757b779a46bbb6b31ff7f.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="8" column="857" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="857" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/plugins/redis/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/template.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="420" column="25" lean-forward="true" selection-start-line="420" selection-start-column="25" selection-end-line="420" selection-end-column="25" />
+          <folding>
+            <element signature="e#6968#8053#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/views/welcome/template/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="50" lean-forward="true" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/controllers/welcome.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package/system/core/version.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="42" column="44" lean-forward="true" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
           <folding />
         </state>
       </provider>

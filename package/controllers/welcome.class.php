@@ -27,9 +27,6 @@
 
 use package\core\load_functions;
 
-/**
- * @property \package\plugins\testPlugin $testPlugin
- */
 class welcome extends load_functions
 {
 	public function __construct()
@@ -37,6 +34,16 @@ class welcome extends load_functions
 		\package\core\benchmark::start_point(true);
 
 		parent::__construct();
+
+		\package\core\template::appendScript('jquery', \package\core\template::getJsPath('jquery.js'), '', 10, 'footer');
+		\package\core\template::appendScript('bootstrap', \package\core\template::getJsPath('bootstrap.min.js'), '', 10, 'footer');
+		\package\core\template::appendScript('fusioncharts', \package\core\template::getJsPath('fusioncharts.js'), '', 10, 'footer');
+		\package\core\template::appendScript('fusioncharts.charts', \package\core\template::getJsPath('fusioncharts.charts.js'), '', 10, 'footer');
+		\package\core\template::appendScript('main', \package\core\template::getJsPath('main.js'), '', 10, 'footer');
+
+		\package\core\template::appendStyle('bootstrap', \package\core\template::getCssPath('bootstrap.min.css'));
+		\package\core\template::appendStyle('font-awesome', \package\core\template::getCssPath('font-awesome.min.css'));
+		\package\core\template::appendStyle('main', \package\core\template::getCssPath('main.css'));
 	}
 
 	/**
