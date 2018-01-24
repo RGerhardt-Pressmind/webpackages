@@ -153,6 +153,11 @@ if(isset($_POST['update']))
 
 					unlink(ROOT.SEP.'webpackages.zip');
 
+					if(file_exists(SYSTEM_PATH.'.htaccess'))
+					{
+						unlink(SYSTEM_PATH.'.htaccess');
+					}
+
 					header('Location: '.HTTP);
 				}
 				else

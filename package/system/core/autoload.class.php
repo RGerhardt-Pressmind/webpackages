@@ -110,4 +110,37 @@ class autoload extends initiator
 			return true;
 		}
 	}
+
+	/**
+	 * Load static class
+	 *
+	 * @param string $class
+	 *
+	 * @return void
+	 */
+	public static function loadStatic($class)
+	{
+		if(strpos($class, '\\') !== false)
+		{
+			$classname	=	explode('\\', $class);
+			$classname	=	array_pop($classname);
+		}
+		else
+		{
+			$classname	=	$class;
+			$class		=	'\package\core\\'.$class;
+		}
+
+		$pathToFile = CORE_DIR.$classname.self::CLASS_SUFFIX;
+
+		if(file_exists($pathToFile) && !class_exists($class))
+		{
+			require_once $pathToFile;
+
+			if(method_exists($class, 'init'))
+			{
+				call_user_func($class.'::init');
+			}
+		}
+	}
 }

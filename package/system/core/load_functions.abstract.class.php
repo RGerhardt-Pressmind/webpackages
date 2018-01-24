@@ -55,55 +55,92 @@ use package\system\valueObjects\phpMailer\VOPHPMailer;
  */
 abstract class load_functions
 {
-	public static $LOAD_DATE           = array('isStatic' => true, 'class' => 'Date', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
+	public static $LOAD_CLASSES	=	array(
+		'Date'	=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'FileSystem'	=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'url'			=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'version'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'zip'			=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'ftp'			=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'benchmark'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'template'		=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'XML'			=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'logger'		=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'error'			=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'cache'			=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'curl'			=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'text'			=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'number'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'language'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'paypal'		=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		),
+		'images'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'captcha'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
+		),
+		'restClient'	=>	array(
+			'isStatic'	=>	false,
+			'namespace'	=>	'\package\core\\'
+		)
+	);
 
-	public static $LOAD_FILE_SYSTEM    = array('isStatic' => true, 'class' => 'FileSystem', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
+	private $allLoadClasses	= array(), $defineDynamicClasses = array(), $reflectionClass = null;
 
-	public static $LOAD_URL            = array('isStatic' => true, 'class' => 'url', 'writeInAttribute' => 'url', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_VERSION        = array('isStatic' => true, 'class' => 'version', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_ZIP            = array('isStatic' => false, 'class' => 'zip', 'writeInAttribute' => 'zip', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_FTP            = array('isStatic' => false, 'class' => 'ftp', 'writeInAttribute' => 'ftp', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_BENCHMARK      = array('isStatic' => true, 'class' => 'benchmark', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_TEMPLATE       = array('isStatic' => false, 'class' => 'template', 'writeInAttribute' => 'template', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_XML            = array('isStatic' => false, 'class' => 'XML', 'writeInAttribute' => 'xml', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_LOGGER         = array('isStatic' => false, 'class' => 'logger', 'writeInAttribute' => 'logger', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_ERROR          = array('isStatic' => false, 'class' => 'errors', 'writeInAttribute' => 'error', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_DATABASE       = array('isStatic' => false, 'class' => 'database', 'writeInAttribute' => 'db');
-
-	public static $LOAD_PLUGINS        = array('isStatic' => true, 'class' => 'plugins', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_CACHE          = array('isStatic' => true, 'class' => 'cache', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_CURL           = array('isStatic' => true, 'class' => 'curl', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_TEXT           = array('isStatic' => true, 'class' => 'text', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_NUMBER         = array('isStatic' => true, 'class' => 'number', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_LANGUAGE       = array('isStatic' => true, 'class' => 'language', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_PAYPAL         = array('isStatic' => false, 'class' => 'paypal', 'writeInAttribute' => 'paypal', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_IMAGES         = array('isStatic' => true, 'class' => 'images', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_MAILER         = array('isStatic' => true, 'class' => 'phpmailer', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\\', 'inCache' => true);
-
-	public static $LOAD_CAPTCHA        = array('isStatic' => true, 'class' => 'captcha', 'writeInAttribute' => null, 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	public static $LOAD_REST_CLIENT    = array('isStatic' => false, 'class' => 'restClient', 'writeInAttribute' => 'rest', 'parameter' => array(), 'namespace' => '\package\core\\', 'inCache' => true);
-
-	private       $allLoadClasses      = array(), $defineDynamicClasses = array(), $reflectionClass = null;
-
-	private       $notAllowedClassName = array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal', 'restClient');
+	private $notAllowedClassName = array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal', 'restClient');
 
 	/**
 	 * Destructor
@@ -152,6 +189,18 @@ abstract class load_functions
 		}
 		else
 		{
+			if(isset(self::$LOAD_CLASSES[$varName]))
+			{
+				$classes	=	self::$LOAD_CLASSES[$varName];
+
+				if(!$classes['isStatic'])
+				{
+					$this->defineDynamicClasses[$varName]	=	autoload::get($varName, $classes['namespace'], false);
+
+					return $this->defineDynamicClasses[$varName];
+				}
+			}
+
 			throw new \Exception('Error: variable '.$varName.' not exists');
 		}
 	}
@@ -159,68 +208,23 @@ abstract class load_functions
 	/**
 	 * Hier können alle Notwendigen Klassen geladen werden
 	 *
-	 * @param array $loadClasses Lädt die angegebene Liste an Klassen
-	 *
 	 * @throws \Exception
+	 * @return void
 	 */
-	public function __construct($loadClasses = array())
+	public function __construct()
 	{
-		if(empty($loadClasses))
-		{
-			$loadClasses = self::getAllDefaultClasses();
-		}
-
 		$this->reflectionClass	=	new \ReflectionClass(get_called_class());
 
-		$this->allLoadClasses = $loadClasses;
-
-		foreach($loadClasses as $classes)
+		if(PDO_HOST != '' && PDO_USERNAME != '' && PDO_DATABASE != '')
 		{
-			if($classes['class'] == 'phpmailer')
-			{
-				//PHPMailer seperat ladenn
-				$this->loadPHPMailer();
-				continue;
-			}
-			else if($classes['class'] == 'database')
-			{
-				$this->defineDynamicClasses[$classes['writeInAttribute']] = new database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array());
-
-				continue;
-			}
-
-			if($classes['isStatic'])
-			{
-				autoload::get($classes['class'], $classes['namespace'], true);
-
-				if(!empty($classes['namespace']))
-				{
-					call_user_func($classes['namespace'].$classes['class'].'::init');
-				}
-				else
-				{
-					call_user_func($classes['class'].'::init');
-				}
-			}
-			else
-			{
-				if(!empty($classes['writeInAttribute']))
-				{
-					$inCache = false;
-
-					if(!empty($classes['inCache']))
-					{
-						$inCache = true;
-					}
-
-					$this->defineDynamicClasses[$classes['writeInAttribute']] = autoload::get($classes['class'], $classes['namespace'], false, $classes['parameter'], $inCache);
-				}
-				else
-				{
-					throw new \Exception('Error: class '.$classes['class'].' has not attribute');
-				}
-			}
+			$this->defineDynamicClasses['db'] = new database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array());
 		}
+
+		$this->defineDynamicClasses['template']	=	autoload::get('template', '\package\core\\', false);
+
+		$this->loadPHPMailer();
+
+		spl_autoload_register('package\core\autoload::loadStatic');
 
 		$this->load_dynamic_classes();
 		$this->load_install_plugins();
@@ -237,15 +241,17 @@ abstract class load_functions
 	 */
 	private function loadPHPMailer()
 	{
-		require_once 'phpMailer.class.php';
-		require_once 'VOMailAddress.php';
-		require_once 'VOMailAttachment.php';
-		require_once 'VOPHPMailer.php';
+		plugins::callAction('wp_load_functions_load_php_mailer');
 
 		$this->phpmailer	=	null;
 
 		if(MAIL_HOST != '' && MAIL_USERNAME != '' && MAIL_PASSWORD != '')
 		{
+			require_once 'phpMailer.class.php';
+			require_once 'VOMailAddress.php';
+			require_once 'VOMailAttachment.php';
+			require_once 'VOPHPMailer.php';
+
 			$voPHPMailer				=	new VOPHPMailer();
 			$voPHPMailer->host			=	MAIL_HOST;
 			$voPHPMailer->username		=	MAIL_USERNAME;
@@ -263,11 +269,12 @@ abstract class load_functions
 	/**
 	 * Gibt alle Standard Klassen der Initialisierung zurück
 	 *
+	 * @deprecated
 	 * @return array
 	 */
 	public static function getAllDefaultClasses()
 	{
-		return array(self::$LOAD_URL, self::$LOAD_TEMPLATE, self::$LOAD_DATABASE, self::$LOAD_PLUGINS, self::$LOAD_CACHE, self::$LOAD_CURL, self::$LOAD_LANGUAGE);
+		return null;
 	}
 
 	/**

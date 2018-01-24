@@ -104,12 +104,10 @@ if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 require 'plugins.class.php';
 
 require 'database.class.php';
+
 require 'load_functions.abstract.class.php';
 
-if(PLUGIN_DIR != '')
-{
-	initializePlugins();
-}
+initializePlugins();
 
 require 'initiator.abstract.class.php';
 require 'autoload.class.php';
