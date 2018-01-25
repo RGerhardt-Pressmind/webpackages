@@ -437,7 +437,17 @@ class template extends initiator
 					{
 						if(file_exists($value['path']))
 						{
-							$content	.=	file_get_contents($value['path']);
+							$file	=	new \SplFileInfo($value['path']);
+
+							if($file->getExtension() == 'less')
+							{
+								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
+								$back	.=	'<link rel="stylesheet/less" href="'.$url.'">';
+							}
+							else
+							{
+								$content	.=	"\n".file_get_contents($value['path']);
+							}
 						}
 					}
 				}
@@ -447,7 +457,7 @@ class template extends initiator
 				file_put_contents(CACHE_PATH.'css'.SEP.$singlFilename, $content);
 			}
 
-			$back	=	'
+			$back	.=	'
 			<link rel="stylesheet" href="'.HTTP.'package/system/cache/css/'.$singlFilename.'">
 			';
 		}
@@ -523,7 +533,7 @@ class template extends initiator
 					{
 						if(file_exists($value['path']))
 						{
-							$content	.=	file_get_contents($value['path']);
+							$content	.=	"\n".file_get_contents($value['path']);
 						}
 					}
 				}

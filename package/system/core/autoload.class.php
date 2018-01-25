@@ -45,7 +45,7 @@ class autoload extends initiator
 	/**
 	 * @var array Klassen die bereits einmal initialisiert wurden
 	 */
-	private static $cacheClasses = array();
+	public static $cacheClasses = array();
 
 	/**
 	 * @const Der Klassensuffix unter den die Dateien abzuspeichern sind
@@ -78,6 +78,14 @@ class autoload extends initiator
 		if(!empty($namespace))
 		{
 			$class_name = $namespace.$class_name;
+		}
+
+		if(isset(self::$cacheClasses[$class_name]))
+		{
+			if(!$isStatic)
+			{
+				return self::$cacheClasses[$class_name];
+			}
 		}
 
 		//Wenn schon eingebunden, nicht erneut laden

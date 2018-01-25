@@ -217,7 +217,7 @@ abstract class load_functions
 
 		if(PDO_HOST != '' && PDO_USERNAME != '' && PDO_DATABASE != '')
 		{
-			$this->defineDynamicClasses['db'] = new database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array());
+			$this->defineDynamicClasses['db'] = autoload::get('db');
 		}
 
 		$this->defineDynamicClasses['template']	=	autoload::get('template', '\package\core\\', false);
@@ -312,16 +312,6 @@ abstract class load_functions
 
 		if(!empty(plugins::$definedPluginsClasses))
 		{
-			$allInitClasses = $this->get_all_init_classes();
-
-			foreach(plugins::$definedPluginsClasses as $v)
-			{
-				if($v instanceof IPlugin)
-				{
-					$v->setAllClasses($allInitClasses);
-				}
-			}
-
 			$this->defineDynamicClasses	=	array_merge($this->defineDynamicClasses, plugins::$definedPluginsClasses);
 		}
 	}
@@ -447,21 +437,6 @@ abstract class load_functions
 
 		if(!empty($back))
 		{
-			foreach($back as $t)
-			{
-				$class = $t['class'];
-
-				if($class instanceof IModel)
-				{
-					$className = $class->getClassName();
-
-					if(!empty($className) && !array_key_exists($className, $this->notAllowedClassName))
-					{
-						$class->setAllClasses($allInitClasses);
-					}
-				}
-			}
-
 			foreach($back as $t)
 			{
 				$class = $t['class'];

@@ -376,12 +376,12 @@ function initializePlugins()
 			{
 				$class = $t['class'];
 
-				$applyPlugin	=	$class->getApplyPlugin();
+				/*$applyPlugin	=	$class->getApplyPlugin();
 
 				if(!empty($applyPlugin) && is_array($applyPlugin))
 				{
 					\package\core\plugins::$definedHooks	=	array_merge(\package\core\plugins::$definedHooks, $applyPlugin);
-				}
+				}*/
 
 				\package\core\plugins::$definedPluginsClasses[$t['class_name_other_namespace']] = $class;
 			}

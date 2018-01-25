@@ -51,28 +51,28 @@ if(!$class)
 	$class	=	getPluginControler($c);
 }
 
+plugins::callAction('wp_'.$c.'_'.$m);
+plugins::callAction('wp_'.$c.'_'.$m.'_before');
+
+plugins::$callDynamicInfos	=	array('class' => $c, 'methode' => $m);
+
+plugins::callAction('wp_all_dynamic_before', array($c, $m));
+
+if(!empty($content))
+{
+	if(!is_bool($content))
+	{
+		echo $content;
+	}
+
+
+	exit;
+}
+
 if($class)
 {
 	if(method_exists($class, $m))
 	{
-		plugins::callAction('wp_'.$c.'_'.$m);
-		plugins::callAction('wp_'.$c.'_'.$m.'_before');
-
-		plugins::$callDynamicInfos	=	array('class' => $c, 'methode' => $m);
-
-		plugins::callAction('wp_all_dynamic_before', array($c, $m));
-
-		if(!empty($content))
-		{
-			if(!is_bool($content))
-			{
-				echo $content;
-			}
-
-
-			exit;
-		}
-
 		ob_start();
 		$class->$m();
 		$content	=	ob_get_contents();
