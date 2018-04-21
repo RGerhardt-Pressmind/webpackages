@@ -29,17 +29,4 @@ namespace package\implement;
 
 interface IPlugin
 {
-	/**
-	 * Übergibt alle Systemklassen
-	 *
-	 * @param array $allClasses Übergibt alle Instanzierten Systemklassen
-	 */
-	public function setAllClasses($allClasses);
-
-	/**
-	 * Gibt die Instanzierungen der Plugins zurück, wo Sie aufgerufen werden
-	 *
-	 * @return VOApplyPlugin[]
-	 */
-	public function getApplyPlugin();
 }

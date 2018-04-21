@@ -55,8 +55,10 @@ use package\system\core\initiator;
  * @method string getTemplateChildPath()
  * @method static string getPublicTemplatePath()
  * @method static string getPublicTemplateChildPath()
+ * @method static void removeScript(string $nameRemove, string $positionRemove = null)
  * @method static void appendScript(string $name, string $path, string $version = '', int $priority = 10, string $position = 'header')
  * @method static string getScripts(string $position = 'header', bool $single = true)
+ * @method static void removeStyle(string $nameRemove, string $positionRemove = null)
  * @method static void appendStyle(string $name, string $path, string $version = '', int $priority = 10, string $position = 'header')
  * @method static string getStyles(string $position, bool $singleFile = true)
  * @method void displayPlugin(string $template, $cacheActive = false, $cacheExpiresTime = 0)
@@ -391,6 +393,42 @@ class template extends initiator
 	}
 
 	/**
+	 * Remove style from append list
+	 *
+	 * @param string $nameRemove
+	 * @param string $positionRemove
+	 *
+	 * @return void
+	 */
+	protected static function _removeStyle($nameRemove, $positionRemove = null)
+	{
+		if(!empty(self::$appendStyles))
+		{
+			foreach(self::$appendStyles as $position => $prioritys)
+			{
+				if($positionRemove !== null)
+				{
+					if($position !== $positionRemove)
+					{
+						continue;
+					}
+				}
+
+				foreach($prioritys as $priority => $names)
+				{
+					foreach($names as $name => $value)
+					{
+						if($name === $nameRemove)
+						{
+							unset(self::$appendStyles[$position][$priority][$name]);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * Collected styles
 	 *
 	 * @param string $name
@@ -483,6 +521,43 @@ class template extends initiator
 		}
 
 		return $back;
+	}
+
+
+	/**
+	 * Remove script from append list
+	 *
+	 * @param string $nameRemove
+	 * @param string $positionRemove
+	 *
+	 * @return void
+	 */
+	protected static function _removeScript($nameRemove, $positionRemove = null)
+	{
+		if(!empty(self::$appendScripts))
+		{
+			foreach(self::$appendScripts as $position => $prioritys)
+			{
+				if($positionRemove !== null)
+				{
+					if($position !== $positionRemove)
+					{
+						continue;
+					}
+				}
+
+				foreach($prioritys as $priority => $names)
+				{
+					foreach($names as $name => $value)
+					{
+						if($name === $nameRemove)
+						{
+							unset(self::$appendScripts[$position][$priority][$name]);
+						}
+					}
+				}
+			}
+		}
 	}
 
 

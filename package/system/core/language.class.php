@@ -407,7 +407,7 @@ class language extends initiator implements IStatic
 	 */
 	protected static function _load_lang()
 	{
-		if(empty(self::$lngPath))
+		if(empty(self::$lngPath) || !function_exists('bindtextdomain'))
 		{
 			return false;
 		}
@@ -436,7 +436,7 @@ class language extends initiator implements IStatic
 			setlocale(LC_ALL, self::$userLng);
 		}
 
-		bindtextdomain(self::$userLng, self::$lngPath);
+		\bindtextdomain(self::$userLng, self::$lngPath);
 
 		return true;
 	}
@@ -450,6 +450,11 @@ class language extends initiator implements IStatic
 	 */
 	protected static function _translate($text)
 	{
+		if(!function_exists('textdomain'))
+		{
+			return $text;
+		}
+
 		textdomain(self::$userLng);
 
 		return gettext($text);

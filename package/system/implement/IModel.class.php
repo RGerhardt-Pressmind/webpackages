@@ -36,12 +36,6 @@ interface IModel
 	public function getClassName();
 
 	/**
-	 * @param array $allClasses Übergibt alle System Instanzen
-	 * @return void
-	 */
-	public function setAllClasses($allClasses);
-
-	/**
 	 * Wird direkt nach der Instanzierung aller Dynamischen Klassen aufgerufen.
 	 */
 	public function loadData();
