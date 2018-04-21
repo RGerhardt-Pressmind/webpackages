@@ -469,6 +469,8 @@ class template extends initiator
 			{
 				$content	=	'';
 
+				ksort(self::$appendStyles[$position]);
+
 				foreach(self::$appendStyles[$position] as $prioritys)
 				{
 					foreach($prioritys as $name => $value)
@@ -503,6 +505,8 @@ class template extends initiator
 		{
 			if(!empty(self::$appendStyles[$position]))
 			{
+				ksort(self::$appendStyles[$position]);
+
 				foreach(self::$appendStyles[$position] as $prioritys)
 				{
 					foreach($prioritys as $name => $value)
@@ -602,6 +606,8 @@ class template extends initiator
 			{
 				$content	=	'';
 
+				ksort(self::$appendScripts[$position]);
+
 				foreach(self::$appendScripts[$position] as $prioritys)
 				{
 					foreach($prioritys as $name => $value)
@@ -624,6 +630,8 @@ class template extends initiator
 		{
 			if(!empty(self::$appendScripts[$position]))
 			{
+				ksort(self::$appendScripts[$position]);
+
 				foreach(self::$appendScripts[$position] as $prioritys)
 				{
 					foreach($prioritys as $name => $value)
