@@ -13,6 +13,7 @@
     RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     RewriteRule ^skin/(.*) package/views/$1
+    RewriteRule ^cache/(.*) package/system/cache/$1
 
     RewriteRule ^images/(.*) package/system/cache/images/$1
 

@@ -492,14 +492,17 @@ class template extends initiator
 					}
 				}
 
-				$content	=	preg_replace('/(\.\.\/)+(welcome\/)?/', HTTP_SKIN, $content);
+				$content	=	preg_replace('/(\.\.\/)+('.TEMPLATE_DEFAULT_SKIN.'\/)?/', HTTP_SKIN, $content);
 
 				file_put_contents(CACHE_PATH.'css'.SEP.$singlFilename, $content);
 			}
 
-			$back	.=	'
-			<link rel="stylesheet" href="'.HTTP.'package/system/cache/css/'.$singlFilename.'">
-			';
+			if(file_exists(CACHE_PATH.'css'.SEP.$singlFilename) && filesize(CACHE_PATH.'css'.SEP.$singlFilename) > 5)
+			{
+				$back	.=	'
+				<link rel="stylesheet" href="'.HTTP.'cache/css/'.$singlFilename.'">
+				';
+			}
 		}
 		else
 		{
@@ -622,9 +625,12 @@ class template extends initiator
 				file_put_contents(CACHE_PATH.'js'.SEP.$singlFilename, $content);
 			}
 
-			$back	=	'
-			<script type="text/javascript" src="'.HTTP.'package/system/cache/js/'.$singlFilename.'"></script>
-			';
+			if(file_exists(CACHE_PATH.'js'.SEP.$singlFilename) && filesize(CACHE_PATH.'js'.SEP.$singlFilename) > 5)
+			{
+				$back	=	'
+				<script type="text/javascript" src="'.HTTP.'cache/js/'.$singlFilename.'"></script>
+				';
+			}
 		}
 		else
 		{
