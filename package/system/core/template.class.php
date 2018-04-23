@@ -416,11 +416,14 @@ class template extends initiator
 
 				foreach($prioritys as $priority => $names)
 				{
-					foreach($names as $name => $value)
+					foreach($names as $n)
 					{
-						if($name === $nameRemove)
+						foreach($n as $name => $value)
 						{
-							unset(self::$appendStyles[$position][$priority][$name]);
+							if($name === $nameRemove)
+							{
+								unset(self::$appendStyles[$position][$priority][$name]);
+							}
 						}
 					}
 				}
@@ -441,7 +444,12 @@ class template extends initiator
 	 */
 	protected static function _appendStyle($name, $path, $version = '', $priority = 10, $position = 'header')
 	{
-		self::$appendStyles[$position][$priority][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position);
+		if(!isset(self::$appendStyles[$position][$priority]))
+		{
+			self::$appendStyles[$position][$priority]	=	array();
+		}
+
+		self::$appendStyles[$position][$priority][][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position);
 	}
 
 	/**
@@ -473,20 +481,23 @@ class template extends initiator
 
 				foreach(self::$appendStyles[$position] as $prioritys)
 				{
-					foreach($prioritys as $name => $value)
+					foreach($prioritys as $priority)
 					{
-						if(file_exists($value['path']))
+						foreach($priority as $name => $value)
 						{
-							$file	=	new \SplFileInfo($value['path']);
+							if(file_exists($value['path']))
+							{
+								$file	=	new \SplFileInfo($value['path']);
 
-							if($file->getExtension() == 'less')
-							{
-								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
-								$back	.=	'<link rel="stylesheet/less" href="'.$url.'">';
-							}
-							else
-							{
-								$content	.=	"\n".file_get_contents($value['path']);
+								if($file->getExtension() == 'less')
+								{
+									$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
+									$back	.=	'<link rel="stylesheet/less" href="'.$url.'">';
+								}
+								else
+								{
+									$content	.=	"\n".file_get_contents($value['path']);
+								}
 							}
 						}
 					}
@@ -512,15 +523,18 @@ class template extends initiator
 
 				foreach(self::$appendStyles[$position] as $prioritys)
 				{
-					foreach($prioritys as $name => $value)
+					foreach($prioritys as $priority)
 					{
-						if(file_exists($value['path']))
+						foreach($priority as $name => $value)
 						{
-							$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
+							if(file_exists($value['path']))
+							{
+								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
 
-							$back	.=	'
-							<link rel="stylesheet" href="'.$url.'">
-							';
+								$back	.=	'
+								<link rel="stylesheet" href="'.$url.'">
+								';
+							}
 						}
 					}
 				}
@@ -555,11 +569,14 @@ class template extends initiator
 
 				foreach($prioritys as $priority => $names)
 				{
-					foreach($names as $name => $value)
+					foreach($names as $n)
 					{
-						if($name === $nameRemove)
+						foreach($n as $name => $value)
 						{
-							unset(self::$appendScripts[$position][$priority][$name]);
+							if($name === $nameRemove)
+							{
+								unset(self::$appendScripts[$position][$priority][$name]);
+							}
 						}
 					}
 				}
@@ -581,7 +598,12 @@ class template extends initiator
 	 */
 	protected static function _appendScript($name, $path, $version = '', $priority = 10, $position = 'header')
 	{
-		self::$appendScripts[$position][$priority][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position);
+		if(!isset(self::$appendScripts[$position][$priority]))
+		{
+			self::$appendScripts[$position][$priority]	=	array();
+		}
+
+		self::$appendScripts[$position][$priority][][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position);
 	}
 
 	/**
@@ -613,11 +635,14 @@ class template extends initiator
 
 				foreach(self::$appendScripts[$position] as $prioritys)
 				{
-					foreach($prioritys as $name => $value)
+					foreach($prioritys as $priority)
 					{
-						if(file_exists($value['path']))
+						foreach($priority as $name => $value)
 						{
-							$content	.=	"\n".file_get_contents($value['path']);
+							if(file_exists($value['path']))
+							{
+								$content	.=	"\n".file_get_contents($value['path']);
+							}
 						}
 					}
 				}
@@ -640,15 +665,18 @@ class template extends initiator
 
 				foreach(self::$appendScripts[$position] as $prioritys)
 				{
-					foreach($prioritys as $name => $value)
+					foreach($prioritys as $priority)
 					{
-						if(file_exists($value['path']))
+						foreach($priority as $name => $value)
 						{
-							$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
+							if(file_exists($value['path']))
+							{
+								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
 
-							$back	.=	'
-							<script type="text/javascript" src="'.$url.'"></script>
-							';
+								$back	.=	'
+								<script type="text/javascript" src="'.$url.'"></script>
+								';
+							}
 						}
 					}
 				}
