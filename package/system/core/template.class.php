@@ -29,6 +29,7 @@ namespace package\core;
 
 use package\exceptions\templateException;
 use package\system\core\initiator;
+use package\system\core\minify;
 
 /**
  * Template Klasse
@@ -56,10 +57,10 @@ use package\system\core\initiator;
  * @method static string getPublicTemplatePath()
  * @method static string getPublicTemplateChildPath()
  * @method static void removeScript(string $nameRemove, string $positionRemove = null)
- * @method static void appendScript(string $name, string $path, string $version = '', int $priority = 10, string $position = 'header')
+ * @method static void appendScript(string $name, string $path, string $version = '', int $priority = 10, string $position = 'header', bool $minify = false)
  * @method static string getScripts(string $position = 'header', bool $single = true)
  * @method static void removeStyle(string $nameRemove, string $positionRemove = null)
- * @method static void appendStyle(string $name, string $path, string $version = '', int $priority = 10, string $position = 'header')
+ * @method static void appendStyle(string $name, string $path, string $version = '', int $priority = 10, string $position = 'header', bool $minify = false)
  * @method static string getStyles(string $position, bool $singleFile = true)
  * @method void displayPlugin(string $template, $cacheActive = false, $cacheExpiresTime = 0)
  * @method void display(string $template, string $header = null, string $footer = null, $cacheActive = false, $cacheExpiresTime = 0)
@@ -439,17 +440,18 @@ class template extends initiator
 	 * @param string $version
 	 * @param int    $priority
 	 * @param string $position
+	 * @param bool $minify
 	 *
 	 * @return void
 	 */
-	protected static function _appendStyle($name, $path, $version = '', $priority = 10, $position = 'header')
+	protected static function _appendStyle($name, $path, $version = '', $priority = 10, $position = 'header', $minify = false)
 	{
 		if(!isset(self::$appendStyles[$position][$priority]))
 		{
 			self::$appendStyles[$position][$priority]	=	array();
 		}
 
-		self::$appendStyles[$position][$priority][][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position);
+		self::$appendStyles[$position][$priority][][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position, 'minify' => $minify);
 	}
 
 	/**
@@ -496,16 +498,19 @@ class template extends initiator
 								}
 								else
 								{
-									$content	.=	"\n".file_get_contents($value['path']);
+									$content	.=	($value['minify'] ? minify::minifyCss(file_get_contents($value['path'])) : file_get_contents($value['path']))."\n";
 								}
 							}
 						}
 					}
 				}
 
-				$content	=	preg_replace('/(\.\.\/)+('.TEMPLATE_DEFAULT_SKIN.'\/)?/', HTTP_SKIN, $content);
+				if(!empty($content))
+				{
+					$content	=	preg_replace('/(\.\.\/)+('.TEMPLATE_DEFAULT_SKIN.'\/)?/', HTTP_SKIN, $content);
 
-				file_put_contents(CACHE_PATH.'css'.SEP.$singlFilename, $content);
+					file_put_contents(CACHE_PATH.'css'.SEP.$singlFilename, $content);
+				}
 			}
 
 			if(file_exists(CACHE_PATH.'css'.SEP.$singlFilename) && filesize(CACHE_PATH.'css'.SEP.$singlFilename) > 5)
@@ -529,6 +534,16 @@ class template extends initiator
 						{
 							if(file_exists($value['path']))
 							{
+								if($value['minify'])
+								{
+									$newFile		=	minify::minifyCss(file_get_contents($value['path']));
+									$newFilename	=	CACHE_PATH.'css'.SEP.md5($newFile).'.css';
+
+									file_put_contents($newFilename, $newFile);
+
+									$value['path']	=	$newFilename;
+								}
+
 								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
 
 								$back	.=	'
@@ -593,17 +608,18 @@ class template extends initiator
 	 * @param string $version
 	 * @param int    $priority
 	 * @param string $position -> header => <header> or footer => </body> end
+	 * @param bool $minify
 	 *
 	 * @return void
 	 */
-	protected static function _appendScript($name, $path, $version = '', $priority = 10, $position = 'header')
+	protected static function _appendScript($name, $path, $version = '', $priority = 10, $position = 'header', $minify = false)
 	{
 		if(!isset(self::$appendScripts[$position][$priority]))
 		{
 			self::$appendScripts[$position][$priority]	=	array();
 		}
 
-		self::$appendScripts[$position][$priority][][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position);
+		self::$appendScripts[$position][$priority][][$name]	=	array('name' => $name, 'path' => $path, 'version' => $version, 'position' => $position, 'minify' => $minify);
 	}
 
 	/**
@@ -641,13 +657,33 @@ class template extends initiator
 						{
 							if(file_exists($value['path']))
 							{
-								$content	.=	"\n".file_get_contents($value['path']);
+								$file	=	new \SplFileInfo($value['path']);
+
+								if($file->getExtension() == 'php')
+								{
+									ob_start();
+
+									require_once $file->__toString();
+
+									$fileContent	=	ob_get_contents();
+
+									ob_end_clean();
+
+									$content	.=	($value['minify'] ? minify::minifyJs($fileContent) : $fileContent)."\n";
+								}
+								else
+								{
+									$content	.=	($value['minify'] ? minify::minifyJs(file_get_contents($value['path'])) : file_get_contents($value['path']))."\n";
+								}
 							}
 						}
 					}
 				}
 
-				file_put_contents(CACHE_PATH.'js'.SEP.$singlFilename, $content);
+				if(!empty($content))
+				{
+					file_put_contents(CACHE_PATH.'js'.SEP.$singlFilename, $content);
+				}
 			}
 
 			if(file_exists(CACHE_PATH.'js'.SEP.$singlFilename) && filesize(CACHE_PATH.'js'.SEP.$singlFilename) > 5)
@@ -671,6 +707,28 @@ class template extends initiator
 						{
 							if(file_exists($value['path']))
 							{
+								$file	=	new \SplFileInfo($value['path']);
+
+								if($file->getExtension() == 'php')
+								{
+									ob_start();
+
+									require_once $file->__toString();
+
+									$fileContent	=	ob_get_contents();
+
+									ob_end_clean();
+
+									$newFilename	=	CACHE_PATH.'js'.SEP.md5($fileContent).'.js';
+
+									if(!file_exists($newFilename))
+									{
+										file_put_contents($newFilename, ($value['minify'] ? minify::minifyJs($fileContent) : $fileContent));
+									}
+
+									$value['path']	=	$newFilename;
+								}
+
 								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
 
 								$back	.=	'

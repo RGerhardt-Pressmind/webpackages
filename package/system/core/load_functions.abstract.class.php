@@ -135,12 +135,16 @@ abstract class load_functions
 		'restClient'	=>	array(
 			'isStatic'	=>	false,
 			'namespace'	=>	'\package\core\\'
+		),
+		'minify'		=>	array(
+			'isStatic'	=>	true,
+			'namespace'	=>	'\package\core\\'
 		)
 	);
 
 	private $allLoadClasses	= array(), $defineDynamicClasses = array(), $reflectionClass = null;
 
-	private $notAllowedClassName = array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal', 'restClient');
+	private $notAllowedClassName = array('autoload', 'cache', 'captcha', 'curl', 'database', 'pdo', 'error', 'errors', 'GeneralFunctions', 'load_functions', 'logger', 'number', 'security', 'template', 'text', 'phpmailer', 'db', 'database', 'session', 'ftp', 'zip', 'xml', 'Validater', 'url', 'date', 'Date', 'fileSystem', 'paypal', 'restClient', 'minify');
 
 	/**
 	 * Destructor
