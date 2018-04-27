@@ -200,6 +200,7 @@ class url extends initiator implements IStatic
 	 */
 	protected static function _createValidUrlString($url)
 	{
+		$url = str_replace(array('Ü', 'Ä', 'Ö', 'ß'), array('Ue', 'Ae', 'Oe', 'ss'), $url);
 		$url = strtolower($url);
 		$url = str_replace(array('ü', 'ä', 'ö', 'ß'), array('ue', 'ae', 'oe', 'ss'), $url);
 		$url = preg_replace('/\s/', '-', $url);

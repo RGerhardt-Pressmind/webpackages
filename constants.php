@@ -188,7 +188,7 @@ define('MAIL_PORT',	25);
 /**
  * Automatische Sicherheitsüberprüfung
  */
-define('AUTO_SECURE', true);
+define('AUTO_SECURE', false);
 
 /**
  * Ausnahmen bei der Überprüfung der Automatischen Sicherheit

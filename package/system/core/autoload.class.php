@@ -75,17 +75,20 @@ class autoload extends initiator
 
 		$pathToFile = $class_name.self::CLASS_SUFFIX;
 
+		$otherNamespace	=	$class_name;
+
 		if(!empty($namespace))
 		{
 			$class_name = $namespace.$class_name;
 		}
 
-		if(isset(self::$cacheClasses[$class_name]))
+		if(isset(self::$cacheClasses[$class_name]) && !$isStatic)
 		{
-			if(!$isStatic)
-			{
-				return self::$cacheClasses[$class_name];
-			}
+			return self::$cacheClasses[$class_name];
+		}
+		else if(isset(self::$cacheClasses[$otherNamespace]) && !$isStatic)
+		{
+			return self::$cacheClasses[$otherNamespace];
 		}
 
 		//Wenn schon eingebunden, nicht erneut laden
@@ -105,7 +108,12 @@ class autoload extends initiator
 			{
 				if(!isset(self::$cacheClasses[$class_name]))
 				{
-					self::$cacheClasses[$class_name]	=	new $class_name($parameter);
+					self::$cacheClasses[$class_name]		=	new $class_name($parameter);
+
+					if($class_name !== $otherNamespace)
+					{
+						self::$cacheClasses[$otherNamespace]	=	self::$cacheClasses[$class_name];
+					}
 				}
 
 				return self::$cacheClasses[$class_name];

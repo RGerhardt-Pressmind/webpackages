@@ -17,8 +17,8 @@
 
     RewriteRule ^images/(.*) package/system/cache/images/$1
 
-    RewriteRule ^([^/]*)\.html$ index.php?c=$1 [L]
-    RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?c=$1&m=$2 [L]
+    RewriteRule ^([^/]*)\.html$ index.php?c=$1&%{QUERY_STRING} [L]
+    RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?c=$1&m=$2&%{QUERY_STRING} [L]
 
     # If-Modified-Since (if php is not installed as cgi then comment lines below)
     RewriteRule .* - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
