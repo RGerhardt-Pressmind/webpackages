@@ -110,7 +110,7 @@ require 'autoload.class.php';
 
 if(PDO_HOST != '' && PDO_USERNAME != '' && PDO_DATABASE != '')
 {
-	\package\core\autoload::$cacheClasses['db']	=	new \package\core\database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array());
+	\package\core\autoload::$cacheClasses['db']	=	new \package\core\database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array(\PDO::ATTR_EMULATE_PREPARES => 1));
 }
 
 require 'load_functions.abstract.class.php';
