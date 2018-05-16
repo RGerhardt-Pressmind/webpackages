@@ -46,6 +46,7 @@ use package\system\core\initiator;
  * @method static mixed get_mime_type(string $path)
  * @method static mixed get_file_type(string $path)
  * @method static string shaSec(string $string)
+ * @method static string|string[] xss_clean(string|string[] $str)
  * @method static string sha_sec(string $string)
  * @method static string entity_decode(string $str, $charset = 'UTF-8')
  * @method static string remove_invisible_characters(string $str, $url_encoded = true)
@@ -122,37 +123,6 @@ class security extends initiator
 		'HTTP_FORWARDED_FOR',
 		'HTTP_FORWARDED',
 		'REMOTE_ADDR'
-	);
-
-	/**
-	 * @var array Liste nicht erlaubter Schnipsel in Strings
-	 */
-	protected static $_never_allowed_str = array(
-		'document.cookie'	=> '[removed]',
-		'document.write'	=> '[removed]',
-		'.parentNode'		=> '[removed]',
-		'.innerHTML'		=> '[removed]',
-		'-moz-binding'		=> '[removed]',
-		'<!--'				=> '&lt;!--',
-		'-->'				=> '--&gt;',
-		'<![CDATA['			=> '&lt;![CDATA[',
-		'<comment>'			=> '&lt;comment&gt;',
-		'<%'              	=> '&lt;&#37;'
-	);
-
-	/**
-	 * @var array Liste nicht erlaubter Regex Funde in Strings (stetig in Erweiterung)
-	 */
-	protected static $_never_allowed_regex = array(
-		'javascript\s*:',
-		'(document|(document\.)?window)\.(location|on\w*)',
-		'expression\s*(\(|&\#40;)', // CSS and IE
-		'vbscript\s*:', // IE, surprise!
-		'wscript\s*:', // IE
-		'jscript\s*:', // IE
-		'vbs\s*:', // IE
-		'Redirect\s+30\d',
-		"([\"'])?data\s*:[^\\1]*?base64[^\\1]*?,[^\\1]*?\\1?"
 	);
 
 	private static $hasControl = array('post' => array(), 'get' => array());
@@ -481,416 +451,43 @@ class security extends initiator
 	 *
 	 * @return string $str
 	 */
-	protected static function xss_clean($str)
+	protected static function _xss_clean($data)
 	{
-		// Is string a array
-		if(is_array($str))
-		{
-			while(list($key) = each($str))
-			{
-				$str[$key] = self::xss_clean($str[$key]);
-			}
+		// Fix &entity\n;
+        $data = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $data);
+        $data = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $data);
+        $data = preg_replace('/(&#x*[0-9A-F]+);*/iu', '$1;', $data);
+        $data = html_entity_decode($data, ENT_COMPAT, 'UTF-8');
 
-			return $str;
-		}
+        // Remove any attribute starting with "on" or xmlns
+        $data = preg_replace('#(<[^>]+?[\x00-\x20"\'])(?:on|xmlns)[^>]*+>#iu', '$1>', $data);
 
-		// Remove Invisible Characters
-		$str = self::remove_invisible_characters($str);
+        // Remove javascript: and vbscript: protocols
+        $data = preg_replace('#([a-z]*)[\x00-\x20]*=[\x00-\x20]*([`\'"]*)[\x00-\x20]*j[\x00-\x20]*a[\x00-\x20]*v[\x00-\x20]*a[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2nojavascript...', $data);
+        $data = preg_replace('#([a-z]*)[\x00-\x20]*=([\'"]*)[\x00-\x20]*v[\x00-\x20]*b[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2novbscript...', $data);
+        $data = preg_replace('#([a-z]*)[\x00-\x20]*=([\'"]*)[\x00-\x20]*-moz-binding[\x00-\x20]*:#u', '$1=$2nomozbinding...', $data);
 
-		/*
-		 * URL Decode
-		 *
-		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">webpackages</a>
-		 */
-		if(strpos($str, '%') !== false)
-		{
-			while(true)
-			{
-				$str = rawurldecode($str);
+        // Only works in IE: <span style="width: expression(alert('Ping!'));"></span>
+        $data = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"]*.*?expression[\x00-\x20]*\([^>]*+>#i', '$1>', $data);
+        $data = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"]*.*?behaviour[\x00-\x20]*\([^>]*+>#i', '$1>', $data);
+        $data = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"]*.*?s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:*[^>]*+>#iu', '$1>', $data);
 
-				if(preg_match('/%[0-9a-f]{2,}/i', $str) != 1)
-				{
-					break;
-				}
-			}
-		}
+        // Remove namespaced elements (we do not need them)
+        $data = preg_replace('#</*\w+:\w[^>]*+>#i', '', $data);
 
-		/*
-		 * Convert character entities to ASCII
-		 */
-		$str = preg_replace_callback("/[^a-z0-9>]+[a-z0-9]+=([\'\"]).*?\\1/si", array(
-			'self',
-			'_convert_attribute'
-		), $str);
-		$str = preg_replace_callback('/<\w+.*/si', array(
-			'self',
-			'_decode_entity'
-		), $str);
+        do
+        {
+                // Remove really unwanted tags
+                $old_data = $data;
+                $data = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $data);
+        }
+        while ($old_data !== $data);
 
-		// Remove Invisible Characters
-		$str = self::remove_invisible_characters($str);
-
-		/*
-		 * Convert all tabs to spaces
-		 */
-		$str = str_replace("\t", ' ', $str);
-
-		// Remove Strings that are never allowed
-		$str = self::_do_never_allowed($str);
-
-		//Kommt oft in Bildern vor
-		$str = preg_replace('/<\?(php)/i', '&lt;?\\1', $str);
-
-		$str = str_replace(array(
-			'<?',
-			'?>'
-		), array(
-			'&lt;?',
-			'?&gt;'
-		), $str);
-
-		/*
-		 * Compact any exploded words
-		 */
-		$words = array(
-			'javascript',
-			'expression',
-			'vbscript',
-			'jscript',
-			'wscript',
-			'vbs',
-			'script',
-			'base64',
-			'applet',
-			'alert',
-			'document',
-			'write',
-			'cookie',
-			'window',
-			'confirm',
-			'prompt',
-			'eval'
-		);
-
-		foreach($words as $word)
-		{
-			$word = implode('\s*', str_split($word)).'\s*';
-
-			$str  = preg_replace_callback('#('.substr($word, 0, -3).')(\W)#is', array(
-				'self',
-				'_compact_exploded_words'
-			), $str);
-		}
-
-		/*
-		 * Remove disallowed Javascript in links or img tags
-		 * We used to do some version comparisons and use of stripos(),
-		 * but it is dog slow compared to these simplified non-capturing
-		 * preg_match(), especially if the pattern exists in the string
-		 */
-
-		while(true)
-		{
-			$original = $str;
-
-			if(preg_match('/<a/i', $str) == 1)
-			{
-				$str = preg_replace_callback('#<a[^a-z0-9>]+([^>]*?)(?:>|$)#si', array(
-					'self',
-					'_js_link_removal'
-				), $str);
-			}
-
-			if(preg_match('/<img/i', $str) == 1)
-			{
-				$str = preg_replace_callback('#<img[^a-z0-9]+([^>]*?)(?:\s?/?>|$)#si', array(
-					'self',
-					'_js_img_removal'
-				), $str);
-			}
-
-			if(preg_match('/script|xss/i', $str) == 1)
-			{
-				$str = preg_replace('#</*(?:script|xss).*?>#si', '[removed]', $str);
-			}
-
-			if($original == $str)
-			{
-				unset($original);
-				break;
-			}
-		}
-
-		/*
-		 * Sanitize naughty HTML elements
-		 */
-		$pattern = '#'.'<((?<slash>/*\s*)(?<tagName>[a-z0-9]+)(?=[^a-z0-9]|$)' // tag start and name, followed by a non-tag character
-			.'[^\s\042\047a-z0-9>/=]*' // a valid attribute character immediately after the tag would count as a separator
-			// optional attributes
-			.'(?<attributes>(?:[\s\042\047/=]*' // non-attribute characters, excluding > (tag close) for obvious reasons
-			.'[^\s\042\047>/=]+' // attribute characters
-			// optional attribute-value
-			.'(?:\s*=' // attribute-value separator
-			.'(?:[^\s\042\047=><`]+|\s*\042[^\042]*\042|\s*\047[^\047]*\047|\s*(?U:[^\s\042\047=><`]*))' // single, double or non-quoted value
-			.')?' // end optional attribute-value group
-			.')*)' // end optional attributes group
-			.'[^>]*)(?<closeTag>\>)?#isS';
-
-		while(true)
-		{
-			$old_str = $str;
-			$str     = preg_replace_callback($pattern, array(
-				'self',
-				'_sanitize_naughty_html'
-			), $str);
-
-			if($old_str == $str)
-			{
-				unset($old_str);
-				break;
-			}
-		}
-
-		/*
-		 * Sanitize naughty scripting elements
-		 *
-		 * For example:	eval('some code')
-		 * Becomes:	eval&#40;'some code'&#41;
-		 */
-		$str = preg_replace('#(alert|prompt|confirm|cmd|passthru|eval|exec|expression|system|fopen|fsockopen|file|file_get_contents|readfile|unlink)(\s*)\((.*?)\)#si', '\\1\\2&#40;\\3&#41;', $str);
-
-		// Final clean up
-		$str = self::_do_never_allowed($str);
-
-		return $str;
+        // we are done...
+        return $data;
 	}
 
-	/**
-	 * JS Links entfernen
-	 *
-	 * Entfernt vielleicht infizierte a Tags
-	 *
-	 * @param array $match
-	 * @return string
-	 */
-	protected static function _js_link_removal($match)
-	{
-		return str_replace(
-			$match[1],
-			preg_replace(
-				'#href=.*?(?:(?:alert|prompt|confirm)(?:\(|&\#40;)|javascript:|livescript:|mocha:|charset=|window\.|document\.|\.cookie|<script|<xss|d\s*a\s*t\s*a\s*:)#si',
-				'',
-				self::_filter_attributes($match[1])
-			),
-			$match[0]
-		);
-	}
 
-	/**
-	 * JS Bilder entfernen
-	 *
-	 * Entfernt vielleicht infizierte img Tags
-	 *
-	 * @param array	$match
-	 * @return	string
-	 */
-	protected static function _js_img_removal($match)
-	{
-		return str_replace(
-			$match[1],
-			preg_replace(
-				'#src=.*?(?:(?:alert|prompt|confirm|eval)(?:\(|&\#40;)|javascript:|livescript:|mocha:|charset=|window\.|document\.|\.cookie|<script|<xss|base64\s*,)#si',
-				'',
-				self::_filter_attributes($match[1])
-			),
-			$match[0]
-		);
-	}
-
-	/**
-	 * Filtert Attribute
-	 *
-	 * @param string $str
-	 * @return string
-	 */
-	protected function _filter_attributes($str)
-	{
-		$out = '';
-		if (preg_match_all('#\s*[a-z\-]+\s*=\s*(\042|\047)([^\\1]*?)\\1#is', $str, $matches))
-		{
-			foreach ($matches[0] as $match)
-			{
-				$out .= preg_replace('#/\*.*?\*/#s', '', $match);
-			}
-		}
-
-		return $out;
-	}
-
-	/**
-	 * Sanitize Naughty HTML
-	 *
-	 * Callback method for xss_clean() to remove naughty HTML elements.
-	 *
-	 * @param    array $matches
-	 *
-	 * @return    string
-	 */
-	protected static function _sanitize_naughty_html($matches)
-	{
-		$naughty_tags = array(
-			'alert',
-			'prompt',
-			'confirm',
-			'applet',
-			'audio',
-			'basefont',
-			'base',
-			'behavior',
-			'bgsound',
-			'blink',
-			'body',
-			'embed',
-			'expression',
-			'form',
-			'frameset',
-			'frame',
-			'head',
-			'html',
-			'ilayer',
-			'iframe',
-			'input',
-			'button',
-			'select',
-			'isindex',
-			'layer',
-			'link',
-			'meta',
-			'keygen',
-			'object',
-			'plaintext',
-			'style',
-			'script',
-			'textarea',
-			'title',
-			'math',
-			'video',
-			'svg',
-			'xml',
-			'xss'
-		);
-
-		$evil_attributes = array(
-			'on\w+',
-			'style',
-			'xmlns',
-			'formaction',
-			'form',
-			'xlink:href',
-			'FSCommand',
-			'seekSegmentTime'
-		);
-
-		// First, escape unclosed tags
-		if(empty($matches['closeTag']))
-		{
-			return '&lt;'.$matches[1];
-		}
-		elseif(in_array(strtolower($matches['tagName']), $naughty_tags, true)) // Is the element that we caught naughty? If so, escape it
-		{
-			return '&lt;'.$matches[1].'&gt;';
-		}
-		elseif(isset($matches['attributes'])) // For other tags, see if their attributes are "evil" and strip those
-		{
-			$attributes = array();
-
-			$attributes_pattern = '#(?<name>[^\s\042\047>/=]+)(?:\s*=(?<value>[^\s\042\047=><`]+|\s*\042[^\042]*\042|\s*\047[^\047]*\047|\s*(?U:[^\s\042\047=><`]*)))#i';
-
-			$is_evil_pattern = '#^('.implode('|', $evil_attributes).')$#i';
-
-			while(true)
-			{
-				$matches['attributes'] = preg_replace('#^[^a-z]+#i', '', $matches['attributes']);
-
-				if(preg_match($attributes_pattern, $matches['attributes'], $attribute, PREG_OFFSET_CAPTURE) != 1)
-				{
-					break;
-				}
-
-				if(preg_match($is_evil_pattern, $attribute['name'][0]) == 1 || (trim($attribute['value'][0]) == ''))
-				{
-					$attributes[] = 'xss=removed';
-				}
-				else
-				{
-					$attributes[] = $attribute[0][0];
-				}
-
-				$matches['attributes'] = substr($matches['attributes'], $attribute[0][1] + strlen($attribute[0][0]));
-
-				if($matches['attributes'] == '')
-				{
-					break;
-				}
-			}
-
-			$attributes = (empty($attributes) ? '' : ' '.implode(' ', $attributes));
-
-			return '<'.$matches['slash'].$matches['tagName'].$attributes.'>';
-		}
-
-		return $matches[0];
-	}
-
-	/**
-	 * Compact Exploded Words
-	 *
-	 * Callback method for xss_clean() to remove whitespace from
-	 * things like 'j a v a s c r i p t'.
-	 *
-	 * @param    array $matches
-	 *
-	 * @return    string
-	 */
-	protected static function _compact_exploded_words($matches)
-	{
-		return preg_replace('/\s+/s', '', $matches[1]).$matches[2];
-	}
-
-	/**
-	 * Nicht erlaubte Regex Funde werden hier durchgespielt
-	 *
-	 * @param string
-	 *
-	 * @return string
-	 */
-	protected static function _do_never_allowed($str)
-	{
-		$neverAllowedStr   = self::$_never_allowed_str;
-		$str               = str_replace(array_keys($neverAllowedStr), $neverAllowedStr, $str);
-		$neverAllowedRegex = self::$_never_allowed_regex;
-
-		foreach($neverAllowedRegex as $regex)
-		{
-			$str = preg_replace('#'.$regex.'#is', '[removed]', $str);
-		}
-
-		return $str;
-	}
-
-	/**
-	 * HTML Entity Decode Callback
-	 *
-	 * @param array
-	 *
-	 * @return string
-	 */
-	protected static function _decode_entity($match)
-	{
-		$match = preg_replace('|\&([a-z\_0-9\-]+)\=([a-z\_0-9\-/]+)|i', 'XSS\\1=\\2', $match[0]);
-
-		return self::entity_decode($match[0], strtoupper('UTF-8'));
-	}
 
 	/**
 	 * HTML Entities Decode
@@ -948,27 +545,6 @@ class security extends initiator
 		return $str;
 	}
 
-	/**
-	 * Attribute Conversion
-	 *
-	 * Used as a callback for XSS Clean
-	 *
-	 * @param    array
-	 *
-	 * @return    string
-	 */
-	protected static function _convert_attribute($match)
-	{
-		return str_replace(array(
-			'>',
-			'<',
-			'\\'
-		), array(
-			'&gt;',
-			'&lt;',
-			'\\\\'
-		), $match[0]);
-	}
 
 	/**
 	 * Entfernt leere Zeichen aus einem String

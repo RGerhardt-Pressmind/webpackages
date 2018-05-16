@@ -40,13 +40,14 @@ use package\system\core\initiator;
  *
  * @method static void set_use_mod_rewrite(bool $mod)
  * @method static void set_use_file_extension(string $extension)
- * @method static void loc_url_simple(array $parameters)
+ * @method static void loc_url_simple(array $parameters, int $header = 200)
  * @method static string get_url_simple(string $httpRoot, array $parameters) @deprecated
  * @method static string get_modify_url(array $parameters, string $http_host = null)
  * @method static string createValidUrlString(string $url)
  * @method static mixed get_host_from_url(string $url)
  * @method static string getCurrentUrl()
- * @method static void loc(string $url)
+ * @method static string getHeaderDescription(int $header)
+ * @method static void loc(string $url, int $header = 200)
  * @method static void reload()
  * @method static void back()
  *
@@ -120,11 +121,13 @@ class url extends initiator implements IStatic
 	 * Ausgehende von der Konstante HTTP
 	 *
 	 * @param array $parameters Die Parameter die übergeben werden sollen.
+	 * @param int $header send header
+	 *
 	 * @return void
 	 */
-	protected static function _loc_url_simple($parameters)
+	protected static function _loc_url_simple($parameters, $header = 0)
 	{
-		self::_loc(self::get_modify_url($parameters));
+		self::_loc(self::get_modify_url($parameters), $header);
 	}
 
 	/**
@@ -225,14 +228,45 @@ class url extends initiator implements IStatic
 	 * Leitet den Browser auf die übergeben URL weiter
 	 *
 	 * @param string $url Die URL an denn der Aufruf weitergeleitet werden soll
+	 * @param int $header send header
 	 *
 	 * @return void
 	 */
-	protected static function _loc($url)
+	protected static function _loc($url, $header = 0)
 	{
-		header('Location: '.$url);
+		if(!empty($header))
+		{
+			$protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
+
+			if (!in_array($protocol, array('HTTP/1.1', 'HTTP/2', 'HTTP/2.0')))
+			{
+				$protocol = 'HTTP/1.0';
+			}
+
+			header($protocol.' '.$header.' '.self::getHeaderDescription($header), true, $header);
+		}
+
+		header('Location: '.$url, true, $header);
 		exit;
 	}
+
+	/**
+	 * Get header description back
+	 *
+	 * @param int $header
+	 *
+	 * @return string
+	 */
+	protected static function _getHeaderDescription($header)
+	{
+		/**
+		 * @var errors $errorClass
+		 */
+		$errorClass	=	autoload::get('errors', '\package\core\\');
+
+		return (isset($errorClass->callErrors[$header]) ? $errorClass->callErrors[$header] : '');
+	}
+
 
 	/**
 	 * Gibt aus einer URL denn Host zurück

@@ -455,7 +455,7 @@ class language extends initiator implements IStatic
 			return $text;
 		}
 
-		textdomain(self::$userLng);
+		\textdomain(self::$userLng);
 
 		return gettext($text);
 	}
