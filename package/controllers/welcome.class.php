@@ -26,24 +26,29 @@
  */
 
 use package\core\load_functions;
+use package\core\benchmark;
+use package\core\template;
+use package\core\security;
+use package\core\url;
+use package\core\language;
 
 class welcome extends load_functions
 {
 	public function __construct()
 	{
-		\package\core\benchmark::start_point(true);
+		benchmark::start_point(true);
 
 		parent::__construct();
 
-		\package\core\template::appendScript('jquery', \package\core\template::getJsPath('jquery.js'), '', 10, 'footer');
-		\package\core\template::appendScript('bootstrap', \package\core\template::getJsPath('bootstrap.min.js'), '', 10, 'footer');
-		\package\core\template::appendScript('fusioncharts', \package\core\template::getJsPath('fusioncharts.js'), '', 10, 'footer');
-		\package\core\template::appendScript('fusioncharts.charts', \package\core\template::getJsPath('fusioncharts.charts.js'), '', 10, 'footer');
-		\package\core\template::appendScript('main', \package\core\template::getJsPath('main.js'), '', 10, 'footer');
+		template::appendScript('jquery', template::getJsPath('jquery.js'), '', 10, 'footer');
+		template::appendScript('bootstrap', template::getJsPath('bootstrap.min.js'), '', 10, 'footer');
+		template::appendScript('fusioncharts', template::getJsPath('fusioncharts.js'), '', 10, 'footer');
+		template::appendScript('fusioncharts.charts', template::getJsPath('fusioncharts.charts.js'), '', 10, 'footer');
+		template::appendScript('main', template::getJsPath('main.js'), '', 10, 'footer');
 
-		\package\core\template::appendStyle('bootstrap', \package\core\template::getCssPath('bootstrap.min.css'));
-		\package\core\template::appendStyle('font-awesome', \package\core\template::getCssPath('font-awesome.min.css'));
-		\package\core\template::appendStyle('main', \package\core\template::getCssPath('main.css'));
+		template::appendStyle('bootstrap', template::getCssPath('bootstrap.min.css'));
+		template::appendStyle('font-awesome', template::getCssPath('font-awesome.min.css'));
+		template::appendStyle('main', template::getCssPath('main.css'));
 	}
 
 	/**
@@ -53,11 +58,11 @@ class welcome extends load_functions
 	 */
 	public function change_language()
 	{
-		$lng = \package\core\security::url('lng', 'GET', 'string');
+		$lng = security::url('lng', 'GET', 'string');
 
 		$_SESSION['default_lng'] = $lng;
 
-		\package\core\url::loc(HTTP);
+		url::loc(HTTP);
 	}
 
 	/**
@@ -69,7 +74,7 @@ class welcome extends load_functions
 	{
 		if(!empty($_SESSION['default_lng']))
 		{
-			\package\core\language::set_language($_SESSION['default_lng']);
+			language::set_language($_SESSION['default_lng']);
 		}
 		else
 		{
@@ -106,7 +111,7 @@ class welcome extends load_functions
 				break;
 			}
 
-			\package\core\language::set_language($_SESSION['default_lng']);
+			language::set_language($_SESSION['default_lng']);
 		}
 
 		$this->template->display('template/hello.php');

@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
  *
@@ -25,7 +24,11 @@
  * @since         Version 2018.0
  * @filesource
  */
-class test implements \package\implement\IModel
+
+use package\core\autoload;
+use package\implement\IModel;
+
+class test implements IModel
 {
 	private static $db;
 
@@ -41,7 +44,7 @@ class test implements \package\implement\IModel
 
 	public function setAllClasses($allClasses)
 	{
-		self::$db	=	\package\core\autoload::get('db');
+		self::$db	=	autoload::get('db');
 	}
 
 	public function hello_body()
