@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,19 +16,18 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package       Webpackages
- * @subpackage    controllers
+ * @subpackage    core
  * @author        Robbyn Gerhardt <gerhardt@webpackages.de>
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-namespace package\core;
+namespace package\system\core;
 
-use package\exceptions\autoloadException;
-use package\system\core\initiator;
+use package\system\exceptions\autoloadException;
 
 /**
  * Zum dynamischen Aufrufen von Klassen
@@ -144,7 +143,7 @@ class autoload extends initiator
 		else
 		{
 			$classname	=	$class;
-			$class		=	'\package\core\\'.$class;
+			$class		=	'\package\system\core\\'.$class;
 		}
 
 		$pathToFile = CORE_DIR.$classname.self::CLASS_SUFFIX;

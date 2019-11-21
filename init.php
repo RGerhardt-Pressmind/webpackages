@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@
  * @package       Webpackages
  * @subpackage    controllers
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-use package\core\security;
+use package\system\core\security;
 
 header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protection: 1; mode=block");
@@ -57,15 +57,7 @@ elseif(strlen(SECURITY_KEY) < 20)
 
 require SYSTEM_PATH.'controllExistsPaths.php';
 
-if(class_exists('SessionHandlerInterface'))
-{
-	require SYSTEM_PATH.'loadSessionHandler.php';
-}
-
-if(!class_exists('SessionHandlerInterface') || (!defined('USE_SESSION_SAVE_HANDLER') || !USE_SESSION_SAVE_HANDLER || !defined('PDO_HOST') || PDO_HOST == ''))
-{
-	session_start();
-}
+session_start();
 
 if(defined('CHARSET') && CHARSET != '')
 {
@@ -84,8 +76,6 @@ if(defined('PACKAGE_DIR') && PACKAGE_DIR != '')
 	$systemPath   = getAllSubDirectorys(PACKAGE_DIR);
 }
 
-ini_set('include_path', get_include_path().PATH_SEPARATOR.implode(PATH_SEPARATOR, $systemPath));
-
 //Alle Value Objekt Klassen includiere
 initializeDirectory(VALUE_OBJECTS);
 
@@ -101,27 +91,16 @@ if(defined('EXCEPTION_DIR') && EXCEPTION_DIR != '')
 	initializeDirectory(EXCEPTION_DIR);
 }
 
-require 'plugins.class.php';
-
-require 'database.class.php';
-
-require 'initiator.abstract.class.php';
-require 'autoload.class.php';
+spl_autoload_register('autoload_functions');
 
 if(PDO_HOST != '' && PDO_USERNAME != '' && PDO_DATABASE != '')
 {
-	\package\core\autoload::$cacheClasses['db']	=	new \package\core\database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array(\PDO::ATTR_EMULATE_PREPARES => 1));
+	\package\system\core\autoload::$cacheClasses['db']	=	new \package\system\core\database(PDO_TYPE, PDO_HOST, PDO_USERNAME, PDO_PASSWORD, PDO_DATABASE, PDO_PORT, PDO_CHARSET, array(\PDO::ATTR_EMULATE_PREPARES => 1));
 }
-
-require 'load_functions.abstract.class.php';
 
 initializePlugins();
 
-require 'version.class.php';
-require 'benchmark.class.php';
-require 'security.class.php';
-
-\package\core\plugins::callAction('wp_init');
+\package\system\core\plugins::callAction('wp_init');
 
 if(defined('AUTO_SECURE') && AUTO_SECURE == true)
 {
@@ -131,4 +110,26 @@ if(defined('AUTO_SECURE') && AUTO_SECURE == true)
 if(file_exists(ROOT.SEP.'dynamicInit.php'))
 {
 	require ROOT.SEP.'dynamicInit.php';
+}
+
+function autoload_functions($class)
+{
+	$class	=	str_replace('\\', SEP, $class);
+
+	if(file_exists(ROOT.SEP.$class.'.php'))
+	{
+		require_once ROOT.SEP.$class.'.php';
+	}
+	else if(file_exists(ROOT.SEP.$class.'.class.php'))
+	{
+		require_once ROOT.SEP.$class.'.class.php';
+	}
+	else if(file_exists(ROOT.SEP.$class.'.master.class.php'))
+	{
+		require_once ROOT.SEP.$class.'.master.class.php';
+	}
+	else
+	{
+		print_r(debug_backtrace());exit;
+	}
 }

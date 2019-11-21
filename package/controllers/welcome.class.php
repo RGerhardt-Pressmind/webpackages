@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,19 +18,21 @@
  * @package       Webpackages
  * @subpackage    core
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-use package\core\load_functions;
-use package\core\benchmark;
-use package\core\template;
-use package\core\security;
-use package\core\url;
-use package\core\language;
+namespace package\controllers;
+
+use package\system\core\load_functions;
+use package\system\core\benchmark;
+use package\system\core\template;
+use package\system\core\security;
+use package\system\core\url;
+use package\system\core\language;
 
 class welcome extends load_functions
 {
@@ -40,15 +42,32 @@ class welcome extends load_functions
 
 		parent::__construct();
 
-		template::appendScript('jquery', template::getJsPath('jquery.js'), '', 10, 'footer');
-		template::appendScript('bootstrap', template::getJsPath('bootstrap.min.js'), '', 10, 'footer');
-		template::appendScript('fusioncharts', template::getJsPath('fusioncharts.js'), '', 10, 'footer');
-		template::appendScript('fusioncharts.charts', template::getJsPath('fusioncharts.charts.js'), '', 10, 'footer');
-		template::appendScript('main', template::getJsPath('main.js'), '', 10, 'footer');
+		$this->loadScripts();
+		$this->loadStyles();
+	}
 
-		template::appendStyle('bootstrap', template::getCssPath('bootstrap.min.css'));
-		template::appendStyle('font-awesome', template::getCssPath('font-awesome.min.css'));
-		template::appendStyle('main', template::getCssPath('main.css'));
+	/**
+	 * Load styles to template header
+	 */
+	private function loadStyles()
+	{
+		template::appendStyle('bootstrap', template::getCssPath('bootstrap.min.css'), '', 10, template::POSITION_HEADER, true);
+		template::appendStyle('font-awesome', template::getCssPath('font-awesome.min.css'), '', 10, template::POSITION_HEADER, true);
+		template::appendStyle('main', template::getCssPath('main.css'), '', 10, template::POSITION_HEADER, true);
+	}
+
+	/**
+	 * Load scripts to template header
+	 *
+	 * @return void
+	 */
+	private function loadScripts()
+	{
+		template::appendScript('jquery', template::getJsPath('jquery.js'), '', 10, template::POSITION_FOOTER);
+		template::appendScript('bootstrap', template::getJsPath('bootstrap.min.js'), '', 10, template::POSITION_FOOTER, true);
+		template::appendScript('fusioncharts', template::getJsPath('fusioncharts.js'), '', 10, template::POSITION_FOOTER);
+		template::appendScript('fusioncharts.charts', template::getJsPath('fusioncharts.charts.js'), '', 10, template::POSITION_FOOTER, true);
+		template::appendScript('main', template::getJsPath('main.js'), '', 10, template::POSITION_FOOTER, true);
 	}
 
 	/**
@@ -114,6 +133,9 @@ class welcome extends load_functions
 			language::set_language($_SESSION['default_lng']);
 		}
 
+		$this->template->setData([
+			'USER'	=>	$this->USER
+		]);
 		$this->template->display('template/hello.php');
 	}
 }

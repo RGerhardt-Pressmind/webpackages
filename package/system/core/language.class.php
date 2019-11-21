@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,17 +18,16 @@
  * @package       Webpackages
  * @subpackage    core
  * @author        Robbyn Gerhardt <gerhardt@webpackages.de>
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-namespace package\core;
+namespace package\system\core;
 
-use package\implement\IStatic;
-use package\system\core\initiator;
+use package\system\implement\IStatic;
 
 /**
  * Übersetzt Begriffe
@@ -315,7 +314,7 @@ class language extends initiator implements IStatic
 			self::set_language_path(LANGUAGE_PATH);
 		}
 		
-		if(USE_TEMPLATE_LANGUAGE_PATH && class_exists('\package\core\template'))
+		if(USE_TEMPLATE_LANGUAGE_PATH && class_exists('\package\system\core\template'))
 		{
 			$templatePath	=	template::getPublicTemplatePath().'languages'.SEP;
 

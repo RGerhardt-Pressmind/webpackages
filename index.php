@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,16 +18,15 @@
  * @package       Webpackages
  * @subpackage    core
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-use package\core\security;
-use package\core\autoload;
-use package\core\plugins;
+use package\system\core\security;
+use package\system\core\plugins;
 
 require 'init.php';
 
@@ -100,11 +99,16 @@ function searchInFolder($folder, $c)
 
 	if(iterator_count($iterator) > 0)
 	{
+		/**
+		 * @var SplFileInfo $item
+		 */
 		foreach($iterator as $item)
 		{
 			if($item->isFile() && $item->getFilename() == $c.'.class.php')
 			{
-				return autoload::get($c);
+				$className	=	str_replace([ROOT.SEP, SEP], ['', '\\'], $item->getPath()).'\\'.$c;
+
+				return new $className();
 			}
 		}
 	}
@@ -120,31 +124,29 @@ function getPluginControler($c)
 
 	if(iterator_count($iterator) > 0)
 	{
+		/**
+		 * @var SplFileInfo $item
+		 */
 		foreach($iterator as $item)
 		{
-			if($item->isFile() && $item->getFilename() == $c.'.class.php')
+			if($item->isFile() && ($item->getFilename() == $c.'.master.class.php' || $item->getFilename() == $c.'.class.php'))
 			{
-				$namespace	=	null;
+				$namespace	=	str_replace([ROOT.SEP, SEP], ['', '\\'], $item->getPath()).'\\';
 				$config		=	$item->getPath().SEP.'config.ini';
 
 				if(file_exists($config))
 				{
 					$config	=	parse_ini_file($config);
 
-					if(isset($config['namespace']))
-					{
-						$namespace	=	trim($config['namespace'], '\\').'\\';
-					}
-
 					if(isset($config['active']) && ($config['active'] == 0 || $config['active'] == false))
 					{
 						continue;
 					}
+
+					$className	=	$namespace.$c;
+
+					return new $className();
 				}
-
-				require_once $item->__toString();
-
-				return autoload::get($c, $namespace);
 			}
 		}
 	}

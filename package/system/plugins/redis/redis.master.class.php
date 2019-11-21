@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       Webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @link          http://webpackages.de
  * @since         Version 2.0.0
@@ -26,8 +26,8 @@
 
 namespace package\system\plugins\redis;
 
-use package\core\plugins;
-use package\implement\IPlugin;
+use package\system\core\plugins;
+use package\system\implement\IPlugin;
 
 class redis implements IPlugin
 {
@@ -53,7 +53,7 @@ class redis implements IPlugin
 	{
 		if(class_exists('\Redis'))
 		{
-			$this->ini = parse_ini_file(__DIR__.SEP.'config.ini');
+			$this->ini = parse_ini_file(dirname(__FILE__).SEP.'config.ini');
 
 			$this->redis = new \Redis();
 

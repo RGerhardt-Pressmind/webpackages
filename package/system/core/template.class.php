@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,18 +18,16 @@
  * @package       Webpackages
  * @subpackage    core
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-namespace package\core;
+namespace package\system\core;
 
-use package\exceptions\templateException;
-use package\system\core\initiator;
-use package\system\core\minify;
+use package\system\exceptions\templateException;
 
 /**
  * Template Klasse
@@ -79,6 +77,9 @@ class template extends initiator
 
 	private static $appendScripts = array(), $appendStyles = array();
 
+	const POSITION_HEADER	=	'header';
+	const POSITION_FOOTER	=	'footer';
+
 	/**
 	 * Setzt die Standard Werte
 	 *
@@ -93,7 +94,7 @@ class template extends initiator
 		$this->setFooterFile(TEMPLATE_FOOTER);
 		$this->setSkin(TEMPLATE_DEFAULT_SKIN);
 
-		if(USE_TEMPLATE_LANGUAGE_PATH && class_exists('\package\core\language'))
+		if(USE_TEMPLATE_LANGUAGE_PATH && class_exists('\package\system\core\language'))
 		{
 			$templatePath	=	self::getPublicTemplatePath().'languages'.SEP;
 
@@ -462,7 +463,7 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	protected static function _appendStyle($name, $path, $version = '', $priority = 10, $position = 'header', $minify = false)
+	protected static function _appendStyle($name, $path, $version = '', $priority = 10, $position = self::POSITION_HEADER, $minify = false)
 	{
 		if(!isset(self::$appendStyles[$position][$priority]))
 		{
@@ -649,7 +650,7 @@ class template extends initiator
 	 *
 	 * @return void
 	 */
-	protected static function _appendScript($name, $path, $version = '', $priority = 10, $position = 'header', $minify = false)
+	protected static function _appendScript($name, $path, $version = '', $priority = 10, $position = self::POSITION_HEADER, $minify = false)
 	{
 		if(!isset(self::$appendScripts[$position][$priority]))
 		{
@@ -667,7 +668,7 @@ class template extends initiator
 	 *
 	 * @return string
 	 */
-	protected static function _getScripts($position = 'header', $singleFile = true)
+	protected static function _getScripts($position = self::POSITION_HEADER, $singleFile = true)
 	{
 		$back	=	'';
 
@@ -706,11 +707,11 @@ class template extends initiator
 
 									ob_end_clean();
 
-									$content	.=	($value['minify'] ? minify::minifyJs($fileContent) : $fileContent)."\n";
+									$content	.=	($value['minify'] ? minify::minifyJs($fileContent) : $fileContent)."\r\n";
 								}
 								else
 								{
-									$content	.=	($value['minify'] ? minify::minifyJs(file_get_contents($value['path'])) : file_get_contents($value['path']))."\n";
+									$content	.=	($value['minify'] ? minify::minifyJs(file_get_contents($value['path'])) : file_get_contents($value['path']))."\r\n";
 								}
 							}
 						}

@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
  * @package       Webpackages
  * @subpackage    controllers
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
@@ -130,14 +130,9 @@ define('DEFAULT_LANGUAGE', 'de_DE.UTF-8');
 define('LC',	'LC_COLLATE,LC_CTYPE,LC_MONETARY,LC_NUMERIC,LC_TIME,LC_MESSAGES');
 
 /**
- * Entscheidet ob Sessions in die Datenbank geschrieben werden
- */
-define('USE_SESSION_SAVE_HANDLER', false);
-
-/**
  * Wandelt Links (die über die URL Klasse generiert werden) in mod_rewrite Links um wenn aktiv
  */
-define('USE_MOD_REWRITE', true);
+define('USE_MOD_REWRITE', false);
 
 /**
  * Standard Klasse beim Aufruf der Index
@@ -219,7 +214,14 @@ define('USE_TEMPLATE_CHILDS',	true);
 /**
  * Der URL Pfad zum Skin um css oder javascript Dateien leichter einzubinden
  */
-define('HTTP_SKIN', HTTP.'skin/'.TEMPLATE_DEFAULT_SKIN.'/');
+if(USE_MOD_REWRITE)
+{
+	define('HTTP_SKIN', HTTP.'skin/'.TEMPLATE_DEFAULT_SKIN.'/');
+}
+else
+{
+	define('HTTP_SKIN', HTTP.'package/views/'.TEMPLATE_DEFAULT_SKIN.'/');
+}
 
 /**
  * Der Pfad zum Package Verzeichnis (wenn mehrere Frameworks installiert, kann man hier einen Default setzen)
@@ -361,18 +363,18 @@ function getAllSubDirectorys($dir)
 
 function initializePlugins()
 {
-	if(PLUGIN_DIR == '' || !class_exists('\package\core\plugins'))
+	if(PLUGIN_DIR == '' || !class_exists('\package\system\core\plugins'))
 	{
 		return;
 	}
 
-	$back = \package\core\load_functions::get_plugins(PLUGIN_DIR);
+	$back = \package\system\core\load_functions::get_plugins(PLUGIN_DIR);
 
 	if(!empty($back))
 	{
 		foreach($back as $t)
 		{
-			if($t['class'] instanceof \package\implement\IPlugin)
+			if($t['class'] instanceof \package\system\implement\IPlugin)
 			{
 				$class = $t['class'];
 
@@ -381,7 +383,7 @@ function initializePlugins()
 					$class->getApplyPlugin();
 				}
 
-				\package\core\plugins::$definedPluginsClasses[$t['class_name_other_namespace']] = $class;
+				\package\system\core\plugins::$definedPluginsClasses[$t['class_name_other_namespace']] = $class;
 			}
 		}
 	}

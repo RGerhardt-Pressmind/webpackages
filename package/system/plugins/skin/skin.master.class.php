@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2018  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,23 @@
  *
  * @package       Webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2018, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @link          http://webpackages.de
  * @since         Version 2.0.0
  * @filesource
  */
 
-class skin implements \package\implement\IPlugin
+namespace package\system\plugins\skin;
+
+use package\system\core\plugins;
+use package\system\implement\IPlugin;
+
+class skin implements IPlugin
 {
 	public function getApplyPlugin()
 	{
-		\package\core\plugins::setFilter('wp_template_setSkin', array($this, 'setSkin'));
+		plugins::setFilter('wp_template_setSkin', array($this, 'setSkin'));
 	}
 
 	/**

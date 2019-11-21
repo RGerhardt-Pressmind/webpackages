@@ -9,8 +9,8 @@
     </footer><!--/#footer-->
 
 	<?php
-	echo \package\core\template::getScripts('footer', true);
-	echo '<script type="text/javascript">var loadTimeVar	=	'.str_replace(',', '.', \package\core\benchmark::finish()).'</script>';
+	echo \package\system\core\template::getScripts('footer', true);
+	echo '<script type="text/javascript">var loadTimeVar	=	'.str_replace(',', '.', \package\system\core\benchmark::finish()).'</script>';
 	?>
 </body>
 </html>

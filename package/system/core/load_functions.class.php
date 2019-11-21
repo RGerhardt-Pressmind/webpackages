@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,19 +18,16 @@
  * @package       Webpackages
  * @subpackage    core
  * @author        Robbyn Gerhardt <gerhardt@webpackages.de>
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-namespace package\core;
+namespace package\system\core;
 
-use package\implement\IModel;
-use package\implement\IPlugin;
-use package\system\core\phpMailer;
-use package\system\core\restClient;
+use package\system\implement\IModel;
 use package\system\valueObjects\phpMailer\VOPHPMailer;
 
 /**
@@ -58,87 +55,87 @@ abstract class load_functions
 	public static $LOAD_CLASSES	=	array(
 		'Date'	=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'FileSystem'	=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'url'			=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'version'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'zip'			=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'ftp'			=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'benchmark'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'template'		=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'XML'			=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'logger'		=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'error'			=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'cache'			=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'curl'			=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'text'			=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'number'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'language'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'paypal'		=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'images'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'captcha'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'restClient'	=>	array(
 			'isStatic'	=>	false,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		),
 		'minify'		=>	array(
 			'isStatic'	=>	true,
-			'namespace'	=>	'\package\core\\'
+			'namespace'	=>	'\package\system\core\\'
 		)
 	);
 
@@ -199,7 +196,9 @@ abstract class load_functions
 
 				if(!$classes['isStatic'])
 				{
-					$this->defineDynamicClasses[$varName]	=	autoload::get($varName, $classes['namespace'], false);
+					$classname	=	$classes['namespace'].$varName;
+
+					$this->defineDynamicClasses[$varName]	=	new $classname();
 
 					return $this->defineDynamicClasses[$varName];
 				}
@@ -224,11 +223,9 @@ abstract class load_functions
 			$this->defineDynamicClasses['db'] = autoload::get('db');
 		}
 
-		$this->defineDynamicClasses['template']	=	autoload::get('template', '\package\core\\', false);
+		$this->defineDynamicClasses['template']	=	new template();
 
 		$this->loadPHPMailer();
-
-		spl_autoload_register('package\core\autoload::loadStatic');
 
 		$this->load_dynamic_classes();
 		$this->load_install_plugins();
@@ -265,42 +262,10 @@ abstract class load_functions
 			$voPHPMailer->is_smtp_auth	=	MAIL_SMTP_AUTH;
 			$voPHPMailer->smtp_secure	=	MAIL_SMTP_SECURE;
 
-			$this->phpmailer			=	new phpMailer($voPHPMailer);
+			$this->phpmailer			=	new \phpMailer($voPHPMailer);
 		}
 	}
 
-
-	/**
-	 * Gibt alle Standard Klassen der Initialisierung zurück
-	 *
-	 * @deprecated
-	 * @return array
-	 */
-	public static function getAllDefaultClasses()
-	{
-		return null;
-	}
-
-	/**
-	 * Gibt alle Klassen in einem Array zurück
-	 * die an dritte weitergegeben werden können
-	 *
-	 * @return array
-	 */
-	private function get_all_init_classes()
-	{
-		$back = array();
-
-		foreach($this->allLoadClasses as $cl)
-		{
-			if(!$cl['isStatic'])
-			{
-				$back[$cl['writeInAttribute']] = $this->defineDynamicClasses[$cl['writeInAttribute']];
-			}
-		}
-
-		return $back;
-	}
 
 	/**
 	 * Lädt alle, im Plugin Ordner, zur Verfügungn stehenden Plugins
@@ -309,11 +274,6 @@ abstract class load_functions
 	 */
 	protected function load_install_plugins()
 	{
-		if(PLUGIN_DIR == '' || !class_exists('\package\core\plugins'))
-		{
-			return;
-		}
-
 		if(!empty(plugins::$definedPluginsClasses))
 		{
 			$this->defineDynamicClasses	=	array_merge($this->defineDynamicClasses, plugins::$definedPluginsClasses);
@@ -335,24 +295,21 @@ abstract class load_functions
 
 		if(iterator_count($iterator) > 0)
 		{
+			/**
+			 * @var \SplFileInfo $item
+			 */
 			foreach($iterator as $item)
 			{
 				if(stripos($item->getFilename(), '.master.class.php') != false && !$item->isDir())
 				{
 					$className = str_replace(array('.php', '.php4', '.php5', '.master.class'), array('', '', '', ''), $item->getFilename());
 
-					$classNameNamespace = '';
+					$classNameNamespace = str_replace([ROOT.SEP, SEP], ['', '\\'], $item->getPath()).'\\';
 					$classNameClean		= $className;
 
 					if(file_exists($item->getPath().SEP.'config.ini'))
 					{
 						$config = parse_ini_file($item->getPath().SEP.'config.ini');
-
-						//Namespace definition
-						if(!empty($config['namespace']))
-						{
-							$classNameNamespace = trim($config['namespace'], '\\').'\\';
-						}
 
 						//Plugin aktiv oder nicht
 						if(isset($config['active']) && (!$config['active'] || $config['active'] == 0))
@@ -362,16 +319,6 @@ abstract class load_functions
 					}
 
 					$classNameNamespace .= $className;
-
-					if(!class_exists($classNameNamespace))
-					{
-						require_once $item->__toString();
-
-						if(!class_exists($classNameNamespace))
-						{
-							continue;
-						}
-					}
 
 					$class = new $classNameNamespace();
 
@@ -397,8 +344,6 @@ abstract class load_functions
 			return array();
 		}
 
-		$allInitClasses = $this->get_all_init_classes();
-
 		$directory = new \RecursiveDirectoryIterator(DYNAMIC_DIR, \RecursiveDirectoryIterator::SKIP_DOTS);
 		$iterator  = new \RecursiveIteratorIterator($directory, \RecursiveIteratorIterator::CHILD_FIRST);
 
@@ -406,6 +351,9 @@ abstract class load_functions
 
 		if(iterator_count($iterator) > 0)
 		{
+			/**
+			 * @var \SplFileInfo $item
+			 */
 			foreach($iterator as $item)
 			{
 				if($item->isDir())
@@ -421,23 +369,16 @@ abstract class load_functions
 					}
 				}
 
-				$className = str_replace(array('.php', '.php4', '.php5', '.class'), array('', '', '', ''), $item->getFilename());
+				$namespace	=	str_replace([ROOT.SEP, SEP], ['', '\\'], $item->getPath())."\\";
 
-				if(!class_exists($className))
-				{
-					require_once $item->__toString();
-
-					if(!class_exists($className))
-					{
-						continue;
-					}
-				}
+				$className = $namespace.str_replace(array('.php', '.php4', '.php5', '.class'), array('', '', '', ''), $item->getFilename());
 
 				$class = new $className();
 
 				$back[] = array('class_name' => $className, 'class' => $class);
 			}
 		}
+
 
 		if(!empty($back))
 		{
@@ -458,6 +399,7 @@ abstract class load_functions
 				}
 			}
 		}
+
 
 		return $back;
 	}

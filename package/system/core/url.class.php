@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2017  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,18 +18,17 @@
  * @package       Webpackages
  * @subpackage    core
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2017, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
+ * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
  * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link          http://webpackages.de
- * @since         Version 2018.0
+ * @since         Version 2020.0
  * @filesource
  */
 
-namespace package\core;
+namespace package\system\core;
 
-use package\exceptions\urlException;
-use package\implement\IStatic;
-use package\system\core\initiator;
+use package\system\exceptions\urlException;
+use package\system\implement\IStatic;
 
 /**
  * URL Klasse
@@ -262,7 +261,7 @@ class url extends initiator implements IStatic
 		/**
 		 * @var errors $errorClass
 		 */
-		$errorClass	=	autoload::get('errors', '\package\core\\');
+		$errorClass	=	autoload::get('errors', '\package\system\core\\');
 
 		return (isset($errorClass->callErrors[$header]) ? $errorClass->callErrors[$header] : '');
 	}

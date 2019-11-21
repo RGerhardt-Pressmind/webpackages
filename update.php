@@ -1,10 +1,10 @@
 <?php
 require_once 'init.php';
 
-\package\core\autoload::get('curl', 'package\core\\', true);
-\package\core\autoload::get('version', 'package\core\\', true);
+\package\system\core\autoload::get('curl', 'package\core\\', true);
+\package\system\core\autoload::get('version', 'package\core\\', true);
 
-$current_version	=	\package\core\curl::get_data('https://www.webpackages.de/getCurrentVersion.php');
+$current_version	=	\package\system\core\curl::get_data('https://www.webpackages.de/getCurrentVersion.php');
 $current_version	=	json_decode($current_version, true);
 
 function copyFileToRoot()
@@ -100,7 +100,7 @@ if(isset($_POST['update']))
 
 	if($security_key == SECURITY_KEY)
 	{
-		\package\core\curl::downloadFile($current_version['url'], ROOT.SEP.'webpackages.zip');
+		\package\system\core\curl::downloadFile($current_version['url'], ROOT.SEP.'webpackages.zip');
 
 		if(file_exists(ROOT.SEP.'webpackages.zip'))
 		{
@@ -181,7 +181,7 @@ if(isset($_POST['update']))
 	}
 }
 
-$isActual	=	version_compare($current_version['current_version'], \package\core\version::VERSION);
+$isActual	=	version_compare($current_version['current_version'], \package\system\core\version::VERSION);
 ?>
 
 <!doctype html>
@@ -218,7 +218,7 @@ $isActual	=	version_compare($current_version['current_version'], \package\core\v
 						<strong>Your version:</strong>
 					</div>
 					<div class="col-md-6 text-right">
-						<?php echo 'v'.\package\core\version::VERSION; ?>
+						<?php echo 'v'.\package\system\core\version::VERSION; ?>
 					</div>
 				</div>
 				<br>
