@@ -41,6 +41,7 @@ use package\system\core\minify;
  * voneinander trennen um einen saubereren und übersichtlichereren Code zu bekommen.
  *
  * @method void setSkin(string $skin)
+ * @method string getHTTPSkin()
  * @method void setHeaderFile(string $header)
  * @method void setFooterFile(string $footer)
  * @method void setTemplateDir(string $dir)
@@ -137,6 +138,23 @@ class template extends initiator
 	protected function _setSkin($skin)
 	{
 		self::$skin = $skin;
+	}
+
+	/**
+	 * Get HTTP Skin path
+	 *
+	 * @return string
+	 */
+	protected function _getHTTPSkin()
+	{
+		if(USE_MOD_REWRITE)
+		{
+			return HTTP.'skin/'.self::$skin.'/';
+		}
+		else
+		{
+			return HTTP.'package/views/'.self::$skin.'/';
+		}
 	}
 
 	/**
@@ -507,7 +525,15 @@ class template extends initiator
 
 				if(!empty($content))
 				{
-					$content	=	preg_replace('/(\.\.\/)+('.TEMPLATE_DEFAULT_SKIN.'\/)?/', HTTP_SKIN, $content);
+					if(USE_MOD_REWRITE)
+					{
+						$content	=	preg_replace('/(\.\.\/)+('.self::$skin.'\/)?/', HTTP.'skin/'.self::$skin.'/', $content);
+					}
+					else
+					{
+						$content	=	preg_replace('/(\.\.\/)+('.self::$skin.'\/)?/', HTTP.'package/views/'.self::$skin.'/', $content);
+					}
+
 
 					file_put_contents(CACHE_PATH.'css'.SEP.$singlFilename, $content);
 				}
@@ -515,9 +541,18 @@ class template extends initiator
 
 			if(file_exists(CACHE_PATH.'css'.SEP.$singlFilename) && filesize(CACHE_PATH.'css'.SEP.$singlFilename) > 5)
 			{
-				$back	.=	'
-				<link rel="stylesheet" href="'.HTTP.'cache/css/'.$singlFilename.'">
-				';
+				if(USE_MOD_REWRITE)
+				{
+					$back	.=	'
+					<link rel="stylesheet" href="'.HTTP.'cache/css/'.$singlFilename.'">
+					';
+				}
+				else
+				{
+					$back	.=	'
+					<link rel="stylesheet" href="'.HTTP.'package/system/cache/css/'.$singlFilename.'">
+					';
+				}
 			}
 		}
 		else
@@ -546,8 +581,10 @@ class template extends initiator
 
 								$url	=	str_replace(array(ROOT.SEP, SEP), array(HTTP, '/'), $value['path']);
 
+								$file	=	new \SplFileInfo($value['path']);
+
 								$back	.=	'
-								<link rel="stylesheet" href="'.$url.'">
+								<link rel="'.(($file->getExtension() == 'less') ? 'stylesheet/less' : 'stylesheet').'" href="'.$url.'">
 								';
 							}
 						}
@@ -688,9 +725,18 @@ class template extends initiator
 
 			if(file_exists(CACHE_PATH.'js'.SEP.$singlFilename) && filesize(CACHE_PATH.'js'.SEP.$singlFilename) > 5)
 			{
-				$back	=	'
-				<script type="text/javascript" src="'.HTTP.'cache/js/'.$singlFilename.'"></script>
-				';
+				if(USE_MOD_REWRITE)
+				{
+					$back	=	'
+					<script type="text/javascript" src="'.HTTP.'cache/js/'.$singlFilename.'"></script>
+					';
+				}
+				else
+				{
+					$back	=	'
+					<script type="text/javascript" src="'.HTTP.'package/system/cache/js/'.$singlFilename.'"></script>
+					';
+				}
 			}
 		}
 		else

@@ -41,10 +41,7 @@ class test implements \package\implement\IModel
 
 	public function setAllClasses($allClasses)
 	{
-		if(!empty($allClasses['db']) && $allClasses['db'] instanceof \package\core\database)
-		{
-			self::$db = $allClasses['db'];
-		}
+		self::$db	=	\package\core\autoload::get('db');
 	}
 
 	public function hello_body()
