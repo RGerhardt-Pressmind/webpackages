@@ -39,7 +39,7 @@ use package\system\exceptions\captchaException;
  * vorgesehenes Feld eintippen. Nachdem das Formular abgesendet wurde, können Sie die Eingabe des Benutzer mit den
  * Daten, die die Klasse Captcha zurückliefert vergleichen.
  *
- * @method static array create_better_captcha(string $savePath, int $imageWidth = 200, int $imageHeight = 50, string $allowedLettersType = 'alpha', string $imageType = 'png', array $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), int $linesInCaptcha = 3, array $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), int $pointsInCaptcha = 1000, array $pointsInCaptchaColor = array('r' => 0, 'g' => 0, 'b' => 255))
+ * @method static array create_captcha(string $savePath, int $imageWidth = 200, int $imageHeight = 50, string $allowedLettersType = 'alpha', string $imageType = 'png', array $backgroundColor = ['r' => 255, 'g' => 255, 'b' => 255], int $linesInCaptcha = 3, array $linesInCaptchaColor = ['r' => 64, 'g' => 64, 'b' => 64], int $pointsInCaptcha = 1000, array $pointsInCaptchaColor = ['r' => 0, 'g' => 0, 'b' => 255])
  *
  * @package        Webpackages
  * @subpackage     controllers
@@ -65,12 +65,19 @@ class captcha extends initiator
 	 * @return array
 	 * @throws captchaException
 	 */
-	protected static function _create_better_captcha($savePath = CACHE_PATH, $imageWidth = 200, $imageHeight = 50, $allowedLettersType = 'alpha', $imageType = 'png', $backgroundColor = array('r' => 255, 'g' => 255, 'b' => 255), $linesInCaptcha = 3, $linesInCaptchaColor = array('r' => 64, 'g' => 64, 'b' => 64), $pointsInCaptcha = 1000, $pointsInCaptchaColor = array('r' => 0, 'g' => 0, 'b' => 255))
+	protected static function _create_captcha($savePath = CACHE_PATH, $imageWidth = 200, $imageHeight = 50, $allowedLettersType = 'alpha', $imageType = 'png', $backgroundColor = ['r' => 255, 'g' => 255, 'b' => 255], $linesInCaptcha = 3, $linesInCaptchaColor = ['r' => 64, 'g' => 64, 'b' => 64], $pointsInCaptcha = 1000, $pointsInCaptchaColor = ['r' => 0, 'g' => 0, 'b' => 255])
 	{
 		if(!extension_loaded('gd'))
 		{
 			throw new captchaException('Error: gd lib is not installed');
 		}
+
+		if(!file_exists($savePath))
+		{
+			mkdir($savePath, 0755, true);
+		}
+
+		$savePath	=	rtrim(rtrim($savePath, SEP), '/').SEP;
 
 		$image = imagecreatetruecolor($imageWidth, $imageHeight);
 
@@ -97,6 +104,7 @@ class captcha extends initiator
 		$background_color = imagecolorallocate($image, $backgroundColor['r'], $backgroundColor['g'], $backgroundColor['b']);
 		$line_color       = imagecolorallocate($image, $linesInCaptchaColor['r'], $linesInCaptchaColor['g'], $linesInCaptchaColor['b']);
 		$pixel_color      = imagecolorallocate($image, $pointsInCaptchaColor['r'], $pointsInCaptchaColor['g'], $pointsInCaptchaColor['b']);
+
 		imagefilledrectangle($image, 0, 0, $imageWidth, $imageHeight, $background_color);
 
 		for($i = -1; ++$i < $linesInCaptcha;)
@@ -149,7 +157,7 @@ class captcha extends initiator
 		}
 
 		$imageName = md5(uniqid(mt_rand(), true));
-		$imgPath .= $imageName;
+		$imgPath   .= $imageName;
 
 		$imageType = strtolower($imageType);
 
@@ -179,6 +187,6 @@ class captcha extends initiator
 
 		imagedestroy($image);
 
-		return array('word' => $word, 'name' => $imageName, 'filepath' => $imgPath);
+		return ['word' => $word, 'name' => $imageName, 'filepath' => $imgPath];
 	}
 }
