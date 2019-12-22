@@ -45,6 +45,10 @@ use package\system\implement\IStatic;
  * @method static mixed get_element(string $cache_name)
  * @method static bool delete_element(string $cache_name)
  * @method static void set_cache_active(bool $active)
+ * @method static void set_cache_dir(string $cachePath)
+ * @method static string get_cache_dir()
+ * @method static string get_cache_extension()
+ * @method static bool delete_template_element(string $cache_name)
  *
  * @package        Webpackages
  * @subpackage     core
@@ -61,7 +65,7 @@ class cache extends initiator implements IStatic
 	/**
 	 * @var bool Die Angabe ob der Cache aktiv ist oder nicht
 	 */
-	private static $cacheActiv;
+	private static $cacheActiv	=	true;
 
 	/**
 	 * @var string Die Dateiendung einer jeden Cache Datei
@@ -88,6 +92,26 @@ class cache extends initiator implements IStatic
 	}
 
 	/**
+	 * Gibt die cache Erweiterung zurück
+	 *
+	 * @return string
+	 */
+	protected static function _get_cache_extension()
+	{
+		return self::$cacheExtension;
+	}
+
+	/**
+	 * Gibt das Cache Verzeichnis zurück
+	 *
+	 * @return string
+	 */
+	protected static function _get_cache_dir()
+	{
+		return self::$cacheDir;
+	}
+
+	/**
 	 * Setzt den Cache Pfad
 	 *
 	 * @param string $cachePath Der Ordner wo alle Gecachten Dateien abgespeichert werden sollen
@@ -96,7 +120,7 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _set_cache_dir($cachePath)
 	{
-		if(empty($cachePath) || !is_dir($cachePath))
+		if(empty($cachePath))
 		{
 			return false;
 		}
@@ -105,14 +129,15 @@ class cache extends initiator implements IStatic
 		{
 			self::$cacheDir = $cachePath;
 
-			return mkdir(self::$cacheDir, 0755, true);
+			if(!mkdir(self::$cacheDir, 0755, true))
+			{
+				return false;
+			}
 		}
-		else
-		{
-			self::$cacheDir = $cachePath;
 
-			return true;
-		}
+		self::$cacheDir = $cachePath;
+
+		return true;
 	}
 
 	/**
@@ -159,18 +184,14 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _set_template_element($cache_name, $content)
 	{
-		$cachePath	=	self::$cacheDir.$cache_name.'.html';
-
-		$isSave = @file_put_contents($cachePath, $content);
-
-		if($isSave == false || filesize($cachePath) == 0)
+		if(!self::$cacheActiv)
 		{
 			return false;
 		}
-		else
-		{
-			return true;
-		}
+
+		$cachePath	=	self::$cacheDir.$cache_name.'.html';
+
+		return (@file_put_contents($cachePath, $content) !== false && filesize($cachePath) > 0);
 	}
 
 	/**
@@ -184,6 +205,11 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _get_template_element($cache_name, $lifetime = 500)
 	{
+		if(!self::$cacheActiv)
+		{
+			return false;
+		}
+
 		$cacheFile = self::$cacheDir.$cache_name.'.html';
 
 		if(!is_file($cacheFile))
@@ -193,19 +219,19 @@ class cache extends initiator implements IStatic
 
 		$filemtime = @filemtime($cacheFile);
 
-		if($filemtime == false)
+		if($filemtime === false)
 		{
+			@unlink($cacheFile);
 			return false;
 		}
 
-		if(($filemtime + $lifetime) >= time() || $lifetime == 0)
+		if($lifetime == 0 || ($filemtime + $lifetime) >= time())
 		{
 			return $cacheFile;
 		}
 		else
 		{
 			@unlink($cacheFile);
-
 			return false;
 		}
 	}
@@ -241,9 +267,9 @@ class cache extends initiator implements IStatic
 		));
 
 		$cachePath = self::$cacheDir.$cache_name.self::$cacheExtension;
-		$saveFile  = @file_put_contents($cachePath, $serialize);
+		$saveFile  = file_put_contents($cachePath, $serialize);
 
-		if($saveFile == false || filesize($cachePath) == 0)
+		if($saveFile === false || filesize($cachePath) == 0)
 		{
 			return false;
 		}
@@ -313,6 +339,11 @@ class cache extends initiator implements IStatic
 	 */
 	protected static function _delete_element($cache_name)
 	{
+		if(!self::$cacheActiv)
+		{
+			return false;
+		}
+
 		if(empty($cache_name))
 		{
 			throw new cacheException('Error: cache name is empty');
@@ -327,5 +358,29 @@ class cache extends initiator implements IStatic
 		}
 
 		return $remove;
+	}
+
+	/**
+	 * Löscht ein template cache element
+	 *
+	 * @param string $cache_name
+	 *
+	 * @return bool
+	 */
+	protected static function _delete_template_element($cache_name)
+	{
+		if(!self::$cacheActiv)
+		{
+			return false;
+		}
+
+		$cacheFile = self::$cacheDir.$cache_name.'.html';
+
+		if(!file_exists($cacheFile))
+		{
+			return true;
+		}
+
+		return @unlink($cacheFile);
 	}
 } 
