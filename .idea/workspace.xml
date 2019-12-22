@@ -4,10 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="-">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,14 +322,7 @@
       <workItem from="1516810326890" duration="4064000" />
       <workItem from="1574327090205" duration="6235000" />
       <workItem from="1574844781141" duration="613000" />
-      <workItem from="1577004648890" duration="297000" />
-    </task>
-    <task id="LOCAL-00079" summary="- bugfix valid url string">
-      <created>1466506020985</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1466506020987</updated>
+      <workItem from="1577004648890" duration="399000" />
     </task>
     <task id="LOCAL-00080" summary="- cache control filesize by write&#10;- curl get_city_coordinates add google api key&#10;- template add methode setSingleData&#10;- text add methode strip_tags_with_content&#10;- url add methode loc_url_simple&#10;- minor changes&#10;- many bugfixes">
       <created>1466773777543</created>
@@ -669,7 +660,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577004715267</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="- test">
+      <created>1577005125934</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1577005125934</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -731,7 +729,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- remove todo file" />
     <MESSAGE value="-add readme.md" />
     <MESSAGE value="- add auto security by _GET and _POST requests" />
     <MESSAGE value="- remove unitTest from git repository" />
@@ -756,16 +753,21 @@
     <MESSAGE value="- changes namespace" />
     <MESSAGE value="- add v2020.0 Beta&#10;- change version number&#10;- change copyright&#10;- change namespaces schema&#10;- change autoloader function&#10;- change min php version 5.3 to version 5.6&#10;- various changes" />
     <MESSAGE value="- add azure-pipelines.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add azure-pipelines.yml" />
+    <MESSAGE value="- test" />
+    <option name="LAST_COMMIT_MESSAGE" value="- test" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="341" y="127" key="CommitChangelistDialog2" timestamp="1577004714836">
+    <state x="341" y="127" key="CommitChangelistDialog2" timestamp="1577005125751">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="341" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1577004714836" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1577004963775">
+    <state x="341" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1577005125751" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1577005129531">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1577004963775" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1577005129531" />
+    <state x="486" y="323" key="git4idea.merge.GitPullDialog" timestamp="1577005250069">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="486" y="323" key="git4idea.merge.GitPullDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1577005250069" />
   </component>
 </project>
