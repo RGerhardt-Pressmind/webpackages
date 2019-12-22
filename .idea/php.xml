@@ -11,7 +11,6 @@
       <path value="$USER_HOME$/vendor/robbyn666/webpackages" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="5.3.0" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="$PROJECT_DIR$/../../phpunit-5.3.1.phar" />

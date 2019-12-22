@@ -4,12 +4,11 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="">
+    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="-">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/controllers/welcome.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/package/controllers/welcome.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/models/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/package/models/test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,58 +42,20 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>Copyright (C) 2010 - 2016</find>
-      <find>Copyright (c) 2010 - 2016,</find>
-      <find>get_all_init_classes</find>
-      <find>display</find>
-      <find>entity_decode</find>
-      <find>_js_img</find>
-      <find>_</find>
-      <find>js_link_removal</find>
-      <find>_js_img_removal</find>
-      <find>_js_link_removal</find>
-      <find>_compact_exploded_words</find>
-      <find>_decode_entity</find>
-      <find>$_never_allowed_str</find>
-      <find>xss_clean</find>
-      <find>createValidUrlString</find>
-      <find>LOAD_DATABASE</find>
-      <find>definedPluginsClasses</find>
-      <find>get_plugins</find>
-      <find>Version 2.0.0</find>
-      <find>TEMPLATE_DEFAULT_SKIN</find>
-      <find>getCssUrl</find>
-      <find>getScripts</find>
-      <find>getStyles</find>
-      <find>slider-b</find>
-      <find>getViewPath</find>
-      <find>appendScript</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>Copyright (C) 2010 - 2017</replace>
-      <replace>Copyright (c) 2010 - 2017,</replace>
-      <replace>Version 2017.0</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$/package</dir>
-      <dir>$PROJECT_DIR$</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
         <option value="robbyn &lt;gerhardt@webpackages.de&gt;" />
       </list>
     </option>
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MessDetectorProjectConfiguration">
     <option name="selectedConfigurationId" value="DEFAULT_INTERPRETER" />
@@ -102,10 +63,7 @@
   <component name="PHPCodeSnifferProjectConfiguration">
     <option name="selectedConfigurationId" value="DEFAULT_INTERPRETER" />
   </component>
-  <component name="PhpServers">
-    <servers />
-  </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.0.12">
+  <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$USER_HOME$/vendor/composer" />
       <path value="$USER_HOME$/vendor/robbyn666/webpackages" />
@@ -133,6 +91,11 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -162,12 +125,18 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="options.lastSelected" value="File.Encoding" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -184,18 +153,6 @@
       <recent name="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES" />
       <recent name="$PROJECT_DIR$/package/system/languages/fr_FR/LC_MESSAGES" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="PHPUnit.UnitTests">
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="a70b9372-50ec-4587-ac44-1ac5ada077b5" server_name="Alfahosting webpackages">
@@ -245,6 +202,18 @@
         <item itemvalue="PHPUnit.numberTest" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",Show Private Members,Show Protected Members,Show Constants,Show Fields,Show Includes" />
@@ -353,35 +322,9 @@
       <workItem from="1516695373269" duration="688000" />
       <workItem from="1516697351936" duration="6024000" />
       <workItem from="1516810326890" duration="4064000" />
-      <workItem from="1574327090205" duration="429000" />
-    </task>
-    <task id="LOCAL-00075" summary="- bugfix template unset static var">
-      <created>1460099606191</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1460099606193</updated>
-    </task>
-    <task id="LOCAL-00076" summary="- add multi_query_safety&#10;- fix insertTable, updateTable and deleteTable for sqlite and sqlite 3&#10;- add static methode getAllDefaultClasses in load_functions">
-      <created>1460413722736</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1460413722737</updated>
-    </task>
-    <task id="LOCAL-00077" summary="- add autoload class $inCache parameter&#10;- fix captcha class the create_better_captcha methode&#10;- add curl class downloadFile methode&#10;- fix database class the insertTable methode&#10;- add images class the optimizedImage methode&#10;- add images class the removeMetadata methode&#10;- add text class the convertToUTF8 methode&#10;- add text class the getCharacterEncoding methode&#10;- change loadfunctions class with autoload get inCache methode&#10;- minor changes">
-      <created>1460576452080</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1460576452081</updated>
-    </task>
-    <task id="LOCAL-00078" summary="- add security headers&#10;- add redirect by ssl">
-      <created>1461510694680</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1461510694682</updated>
+      <workItem from="1574327090205" duration="6235000" />
+      <workItem from="1574844781141" duration="613000" />
+      <workItem from="1577004648890" duration="297000" />
     </task>
     <task id="LOCAL-00079" summary="- bugfix valid url string">
       <created>1466506020985</created>
@@ -698,7 +641,35 @@
       <option name="project" value="LOCAL" />
       <updated>1516738842253</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="- changes namespace">
+      <created>1574327572547</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1574327572547</updated>
+    </task>
+    <task id="LOCAL-00125" summary="- add v2020.0 Beta&#10;- change version number&#10;- change copyright&#10;- change namespaces schema&#10;- change autoloader function&#10;- change min php version 5.3 to version 5.6&#10;- various changes">
+      <created>1574340675873</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1574340675874</updated>
+    </task>
+    <task id="LOCAL-00126" summary="- add v2020.0 Beta&#10;- change version number&#10;- change copyright&#10;- change namespaces schema&#10;- change autoloader function&#10;- change min php version 5.3 to version 5.6&#10;- various changes">
+      <created>1574340791635</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1574340791635</updated>
+    </task>
+    <task id="LOCAL-00127" summary="- add azure-pipelines.yml">
+      <created>1577004715267</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1577004715267</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -760,9 +731,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- add Content-Security-Policy" />
-    <MESSAGE value="- logger remove error&#10;- performance update by template.class.php load file&#10;- performance update text.class.php&#10;- remove Content-Security-Policy&#10;- bugfix update.php by security class" />
-    <MESSAGE value="- add composer.json" />
     <MESSAGE value="- remove todo file" />
     <MESSAGE value="-add readme.md" />
     <MESSAGE value="- add auto security by _GET and _POST requests" />
@@ -785,6 +753,19 @@
     <MESSAGE value="- add methode getImageUrlByName&#10;- add methode downloadImageAndSave&#10;- add methode saveImage&#10;- add methode setFilter&#10;- add methode callFilter&#10;- add htaccess rule for images&#10;- add test plugin skin" />
     <MESSAGE value="- add getCssPath method&#10;- add getJsPath method&#10;- add getImageUrl method&#10;- add appendScript method&#10;- add getScripts method&#10;- add appendStyle method&#10;- add getStyles method&#10;- change inactivate redis plugin&#10;- remove .htaccess from system path&#10;- change debug footer/header" />
     <MESSAGE value="- add call to action in load_functions&#10;- add method getViewPath&#10;- change update.php for constants" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add call to action in load_functions&#10;- add method getViewPath&#10;- change update.php for constants" />
+    <MESSAGE value="- changes namespace" />
+    <MESSAGE value="- add v2020.0 Beta&#10;- change version number&#10;- change copyright&#10;- change namespaces schema&#10;- change autoloader function&#10;- change min php version 5.3 to version 5.6&#10;- various changes" />
+    <MESSAGE value="- add azure-pipelines.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add azure-pipelines.yml" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="341" y="127" key="CommitChangelistDialog2" timestamp="1577004714836">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="341" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1577004714836" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1577004963775">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1577004963775" />
   </component>
 </project>
