@@ -33,7 +33,7 @@ require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../../config.php';
 
 class benchmarkTest extends TestCase
 {
-	public function testBenchmark()
+	public function testBenchmarkWithMiddlePoint()
 	{
 		benchmark::start_point(true);
 
@@ -46,6 +46,17 @@ class benchmarkTest extends TestCase
 
 		$finish	=	benchmark::finish();
 
-		$this->assertCount(3, $finish);
+		$this->assertCount(4, $finish);
+	}
+
+
+	public function testBenchmarkWithoutMiddlePoint()
+	{
+		benchmark::start_point(true);
+		benchmark::end_point(true);
+
+		$finish	=	benchmark::finish();
+
+		$this->assertIsInt($finish);
 	}
 }

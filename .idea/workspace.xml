@@ -4,8 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- test">
+    <list default="true" id="fa32038b-87f8-4c66-bb65-8070f32aa94b" name="Default" comment="- add &#10;- fix benchmark.class.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTest/system/core/benchmarkTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/unitTest/system/core/benchmarkTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +97,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
@@ -119,6 +121,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -137,19 +140,19 @@
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/unitTest/system/core" />
+      <recent name="$PROJECT_DIR$/package/system/valueObjects/phpMailer" />
+      <recent name="$PROJECT_DIR$/package/system/plugins" />
+      <recent name="$PROJECT_DIR$/package/system/plugins/testPlugin/commandLinePlugin" />
+      <recent name="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/package/views/welcome-child/css" />
       <recent name="$PROJECT_DIR$/package/system/plugins/redis" />
       <recent name="$PROJECT_DIR$/package/system/plugins/tinyImages/pngquant/UNIX" />
       <recent name="$PROJECT_DIR$/package/views/welcome/videos/love_coding" />
       <recent name="$PROJECT_DIR$/package/system/thirdParty/PHPMailer" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/package/system/valueObjects/phpMailer" />
-      <recent name="$PROJECT_DIR$/package/system/plugins" />
-      <recent name="$PROJECT_DIR$/package/system/plugins/testPlugin/commandLinePlugin" />
-      <recent name="$PROJECT_DIR$/package/system/languages/it_IT/LC_MESSAGES" />
-      <recent name="$PROJECT_DIR$/package/system/languages/fr_FR/LC_MESSAGES" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.UnitTests">
@@ -322,28 +325,8 @@
       <workItem from="1516810326890" duration="4064000" />
       <workItem from="1574327090205" duration="6235000" />
       <workItem from="1574844781141" duration="613000" />
-      <workItem from="1577004648890" duration="399000" />
-    </task>
-    <task id="LOCAL-00080" summary="- cache control filesize by write&#10;- curl get_city_coordinates add google api key&#10;- template add methode setSingleData&#10;- text add methode strip_tags_with_content&#10;- url add methode loc_url_simple&#10;- minor changes&#10;- many bugfixes">
-      <created>1466773777543</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1466773777545</updated>
-    </task>
-    <task id="LOCAL-00081" summary="- load_functions remove phpMailer &#10;- add phpMailer helperclass&#10;- update phpMailer thirdParty Framework&#10;- add valueObjects for phpMailer&#10;- add phpMailer constants&#10;- change include_path function">
-      <created>1466940516661</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1466940516662</updated>
-    </task>
-    <task id="LOCAL-00082" summary="- performance optimizations&#10;- add restClient class&#10;- change chmod 0777 to chmod 0755&#10;- many bugfixes">
-      <created>1474370939822</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1474370939824</updated>
+      <workItem from="1577004648890" duration="2206000" />
+      <workItem from="1577007214933" duration="369000" />
     </task>
     <task id="LOCAL-00083" summary="- add security functions:&#10;create_csrf_token()&#10;exists_csrf_token()&#10;get_csrf_toke()&#10;remove_csrf_token()&#10;">
       <created>1475238139917</created>
@@ -667,7 +650,28 @@
       <option name="project" value="LOCAL" />
       <updated>1577005125934</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="- test">
+      <created>1577005265561</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1577005265562</updated>
+    </task>
+    <task id="LOCAL-00130" summary="- add phpunit-8.4.phar&#10;- add azure-pipelines.yml phpunit test&#10;- update composer.json php version">
+      <created>1577005961597</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1577005961597</updated>
+    </task>
+    <task id="LOCAL-00131" summary="- add phpunit&#10;- fix benchmark.class.php">
+      <created>1577007423014</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1577007423014</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -729,8 +733,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="-add readme.md" />
-    <MESSAGE value="- add auto security by _GET and _POST requests" />
     <MESSAGE value="- remove unitTest from git repository" />
     <MESSAGE value="- change copyright year from 2016 to 2017" />
     <MESSAGE value="- remove getTemplateFile.php&#10;- add HTTP_SKIN constant&#10;- add rewrite skin path&#10;- change default statistic" />
@@ -754,17 +756,43 @@
     <MESSAGE value="- add v2020.0 Beta&#10;- change version number&#10;- change copyright&#10;- change namespaces schema&#10;- change autoloader function&#10;- change min php version 5.3 to version 5.6&#10;- various changes" />
     <MESSAGE value="- add azure-pipelines.yml" />
     <MESSAGE value="- test" />
-    <option name="LAST_COMMIT_MESSAGE" value="- test" />
+    <MESSAGE value="- add phpunit-8.4.phar&#10;- add azure-pipelines.yml phpunit test&#10;- update composer.json php version" />
+    <MESSAGE value="- add phpunit&#10;- fix benchmark.class.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add phpunit&#10;- fix benchmark.class.php" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="341" y="127" key="CommitChangelistDialog2" timestamp="1577005125751">
+    <state x="368" y="112" key="CommitChangelistDialog2" timestamp="1577007427458">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="341" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1577005125751" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1577005129531">
+    <state x="368" y="112" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1577007427458" />
+    <state x="194" y="88" key="DiffContextDialog" timestamp="1577007362733">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1577005129531" />
+    <state x="194" y="88" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1577007362733" />
+    <state x="427" y="348" key="NewPhpClassDialog" timestamp="1577006375144">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="427" y="348" key="NewPhpClassDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1577006375144" />
+    <state x="661" y="455" key="NewPhpFileDialog" timestamp="1577006026816">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="661" y="455" key="NewPhpFileDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1577006026816" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1577007430557">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1577007430557" />
+    <state x="629" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577006888036">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="629" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.1027@0.23.1680.1027" timestamp="1577006888036" />
+    <state x="374" y="189" width="1065" height="671" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1577006408447">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="374" y="189" width="1065" height="671" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1577006408447" />
+    <state x="506" y="282" width="667" height="486" key="find.popup" timestamp="1577007092714">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="506" y="282" width="667" height="486" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1577007092714" />
     <state x="486" y="323" key="git4idea.merge.GitPullDialog" timestamp="1577005250069">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
