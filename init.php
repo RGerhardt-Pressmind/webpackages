@@ -130,6 +130,6 @@ function autoload_functions($class)
 	}
 	else
 	{
-		print_r(debug_backtrace());exit;
+		#print_r(debug_backtrace());exit;
 	}
 }

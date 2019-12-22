@@ -1,6 +1,6 @@
 /package/system/cache/
 /changelog
-/.idea/
+/.idea/*
 .DS_Store
 /.phpunit.result.cache
 /vendor/

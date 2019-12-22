@@ -37,6 +37,7 @@ class benchmarkTest extends TestCase
 	{
 		benchmark::start_point(true);
 
+		sleep(1);
 		benchmark::middle_point(true);
 		benchmark::middle_point(true);
 		benchmark::middle_point(true);
@@ -46,17 +47,26 @@ class benchmarkTest extends TestCase
 
 		$finish	=	benchmark::finish();
 
+		$this->assertTrue(isset($finish['startTime']));
+		$this->assertTrue(isset($finish['endTime']));
+		$this->assertTrue(isset($finish['middleTime']));
+		$this->assertTrue(isset($finish['diff']));
 		$this->assertCount(4, $finish);
+		$this->assertCount(4, $finish['middleTime']);
+		$this->assertGreaterThan(1, $finish['diff']);
+		$this->assertIsArray($finish['middleTime']);
 	}
 
 
 	public function testBenchmarkWithoutMiddlePoint()
 	{
 		benchmark::start_point(true);
+		sleep(1);
 		benchmark::end_point(true);
 
 		$finish	=	benchmark::finish();
 
-		$this->assertIsInt($finish);
+		$this->assertIsFloat($finish);
+		$this->assertGreaterThan(1, $finish);
 	}
 }
