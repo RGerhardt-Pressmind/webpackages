@@ -52,15 +52,20 @@ class benchmark extends initiator implements IStatic
 	 */
 	public function __destruct()
 	{
-		self::$startTime  = null;
-		self::$endTime    = null;
-		self::$middleTime = null;
+		self::$startTime  = 0;
+		self::$endTime    = 0;
+		self::$middleTime = [];
 	}
 
 	/**
-	 * @var array Definiert die Start/End/Mittel Zeiten des Benchmark Ergebnisses
+	 * @var int Definiert die Start & End Zeiten des Benchmark Ergebnisses
 	 */
-	private static $startTime, $endTime, $middleTime = array();
+	private static $startTime, $endTime	=	0;
+
+	/**
+	 * @var array Definiert die Mittel Zeiten des Benachmark Egebnisses
+	 */
+	private static $middleTime = [];
 
 	/**
 	 * Zum initialisieren von Daten
@@ -137,9 +142,9 @@ class benchmark extends initiator implements IStatic
 			);
 		}
 
-		self::$startTime  = '';
-		self::$endTime    = '';
-		self::$middleTime = array();
+		self::$startTime  = 0;
+		self::$endTime    = 0;
+		self::$middleTime = [];
 
 		return $diff;
 	}
