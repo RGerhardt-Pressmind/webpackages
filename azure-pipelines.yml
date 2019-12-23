@@ -21,10 +21,6 @@ steps:
     sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
   displayName: 'Use PHP version $(phpVersion)'
 
-- script: |
-    sudo service mysql start
-  displayName: 'Install MariaDB Server and started'
-
 - script: composer install --no-interaction --prefer-dist
   displayName: 'composer install'
 
