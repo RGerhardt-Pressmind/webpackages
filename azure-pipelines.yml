@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  phpVersion: 7.2
+
 - task: MysqlDeploymentOnMachineGroup@1
   inputs:
     TaskNameSelector: 'SqlTaskFile'
@@ -16,9 +19,6 @@ pool:
     DatabaseName: 'unitTest'
     SqlUsername: 'root'
     SqlPassword: 'root'
-
-variables:
-  phpVersion: 7.2
 
 steps:
 - script: |
