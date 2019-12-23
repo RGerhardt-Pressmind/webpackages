@@ -42,11 +42,10 @@ class databaseTest extends TestCase
 	{
 		parent::__construct($name, $data, $dataName);
 
-		$this->db	=	new database('mysql', '127.0.0.1', 'azure', '', '', 3306);
+		$this->db	=	new database('mysql', 'localhost', 'root', 'root', 'unitTest', 3306);
 
-		$this->db->exec('CREATE DATABASE `unitTest`');
-		$this->db->exec('CREATE TABLE `unitTest`.`test` (a INT NOT NULL, b VARCHAR(10)) ENGINE=MyISAM');
-		$this->db->exec('INSERT INTO `unitTest`.`test` SET `a` = 1, `b` = "test";');
+		$this->db->exec('CREATE TABLE `test` (a INT NOT NULL, b VARCHAR(10)) ENGINE=MyISAM');
+		$this->db->exec('INSERT INTO `test` SET `a` = 1, `b` = "test";');
 	}
 
 
@@ -56,7 +55,7 @@ class databaseTest extends TestCase
 		SELECT
 			COUNT(*) as count
 		FROM
-			`unitTest`.`test`
+			`test`
 		';
 
 		$getData	=	$this->db->quefetch($getData);
