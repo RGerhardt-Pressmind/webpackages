@@ -40,9 +40,7 @@ use package\system\implement\IStatic;
  * @method static bool downloadFile(string $url, string $destination)
  * @method static bool curl_extension_exists()
  * @method static mixed get_data(string $url, $postfields = array())
- * @method static int get_status(string $url)
- * @method @deprecated static array get_city_coordinates(string $city, boolean $resultArray = false, string $googleApiKey = '')
- * @method @deprecated static string get_city_name_by_ip()
+ * @method static int get_http_status(string $url)
  *
  * @package        Webpackages
  * @subpackage     core
@@ -51,11 +49,6 @@ use package\system\implement\IStatic;
  */
 class curl extends initiator implements IStatic
 {
-	/**
-	 * @var bool Ist Cookie bei der cURL Anfrage Aktiv oder nicht
-	 */
-	public static $cookieActive = false;
-
 	/**
 	 * @var string Der Pfad zur Cookie Datei
 	 */
@@ -95,21 +88,17 @@ class curl extends initiator implements IStatic
 			throw new curlException('Error: curl extension not loaded');
 		}
 
-		$fp = fopen($destination, 'w+');
-
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
-		curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-		curl_setopt($ch, CURLOPT_FILE, $fp);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-		curl_exec($ch);
+		$downloadData	=	curl_exec($ch);
 		curl_close($ch);
-		fclose($fp);
+
+		file_put_contents($destination, $downloadData);
 
 		return (filesize($destination) > 0);
 	}
@@ -170,7 +159,7 @@ class curl extends initiator implements IStatic
 	 * @return int Gibt den HTTP-Statuscode zurück
 	 * @throws curlException Wenn die Extension nicht installiert ist oder im Fehlerfall
 	 */
-	protected static function _get_status($url)
+	protected static function _get_http_status($url)
 	{
 		if(!self::curl_extension_exists())
 		{
@@ -189,38 +178,19 @@ class curl extends initiator implements IStatic
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_exec($ch);
 
-		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$httpcode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		curl_close($ch);
 
-		return (int)$httpcode;
-	}
+		if($httpcode === 0)
+		{
+			$httpcode	=	404;
+		}
 
-	/**
-	 * Gibt die Koordinaten einer Stadt zurück
-	 *
-	 * @param string $city        Den Stadtnamen
-	 * @param bool   $resultArray Kann man einstellen ob das Ergebnis als Array zurück kommen soll oder als Objekt
-	 * @param string $googleApiKey Der API Key von Google
-	 *
-	 * @return array Gibt Längen und Breitengrade der Stadt zurück
-	 * @deprecated
-	 */
-	protected static function _get_city_coordinates($city, $resultArray = false, $googleApiKey = '')
-	{
-		return array();
+		return $httpcode;
 	}
-
-	/**
-	 * Gibt den Namen der Stadt, Anhand der aktuellen IP-Adresse, zurück.
-	 *
-	 * @return string Gibt, Anhand der IP-Adresse, den Namen der Stadt zurück oder "Not found" wenn keine Stadt
-	 *                gefunden wurde
-	 */
-	protected static function _get_city_name_by_ip()
-	{
-		return '';
-	}
-} 
+}

@@ -1,24 +1,34 @@
 {
-    "name": "robbyn666/webpackages",
-    "type": "project",
-    "minimum-stability": "stable",
-    "description": "webpackages ist das schnellste, einfachste und sicherste datenbankbasierte MVC PHP Framework auf dem Markt.",
-    "keywords": ["mvc","datenbank","php","framework","php datenbank framework","php datenbank","schnellste php framework"],
-    "homepage": "https://www.webpackages.de/",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Robbyn Gerhardt",
-            "email": "gerhardt@webpackages.de",
-            "homepage": "http://robbyn-gerhardt.de",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php" : ">=7.2",
-        "ext-gd": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.4"
+  "name": "robbyn666/webpackages",
+  "type": "project",
+  "minimum-stability": "stable",
+  "description": "webpackages ist das schnellste, einfachste und sicherste datenbankbasierte MVC PHP Framework auf dem Markt.",
+  "keywords": [
+    "mvc",
+    "datenbank",
+    "php",
+    "framework",
+    "php datenbank framework",
+    "php datenbank",
+    "schnellste php framework"
+  ],
+  "homepage": "https://www.webpackages.de/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robbyn Gerhardt",
+      "email": "gerhardt@webpackages.de",
+      "homepage": "http://robbyn-gerhardt.de",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-gd": "*",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.4"
+  }
 }
