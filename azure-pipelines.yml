@@ -22,7 +22,6 @@ steps:
   displayName: 'Use PHP version $(phpVersion)'
 
 - script: |
-    sudo apt-get install mariadb-server
     sudo service mysql start
   displayName: 'Install MariaDB Server and started'
 
