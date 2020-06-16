@@ -15,18 +15,33 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package       Webpackages
- * @subpackage    core
+ * @package       truetravel_bootstrap
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link          http://webpackages.de
- * @since         Version 2020.0
+ * @copyright     Copyright (c) 2010 - 2020, pressmind GmbH (https://www.pressmind.de/)
+ * @license       http://opensource.org/licenses/MIT	MIT License
+ * @link          https://www.pressmind.de
+ * @since         Version 2.0.0
  * @filesource
  */
 
-use system\core\Bootstrap;
+namespace system\core;
 
-require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'config.php';
+use system\core\Router\router;
+use system\core\Router\RouterConfig;
 
-Bootstrap::loadView();
+class Bootstrap
+{
+	/**
+	 * Load view
+	 */
+	public static function loadView()
+	{
+		$config			=	Registry::getInstance()->get('config');
+
+		$routerConfig	=	RouterConfig::create($config['router']['engine']);
+
+		$router	=	router::create($routerConfig);
+
+		$router->parse();
+	}
+}

@@ -12,11 +12,6 @@
     RewriteCond %{HTTPS}s ^on(s)|
     RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    RewriteRule ^skin/(.*) package/views/$1
-    RewriteRule ^cache/(.*) package/system/cache/$1
-
-    RewriteRule ^images/(.*) package/system/cache/images/$1
-
     RewriteRule ^([^/]*)\.html$ index.php?c=$1&%{QUERY_STRING} [L]
     RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?c=$1&m=$2&%{QUERY_STRING} [L]
 

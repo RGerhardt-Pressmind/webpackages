@@ -1,0 +1,43 @@
+{
+  "development": {
+    "timezone": "Europe/Berlin",
+    "database": {
+      "engine": "mysql",
+      "host": "",
+      "username": "",
+      "password": "",
+      "database": "wp",
+      "port": 3306,
+      "tablePrefix": ""
+    },
+    "template": {
+      "engine": "filesystem",
+      "skin": "webpackages",
+      "path": "system/view"
+    },
+    "logger": {
+      "engine": "filelogger",
+      "path": "cache/logger"
+    },
+    "security": {
+      "engine": "sanitizer"
+    },
+    "language": {
+      "default": "de_DE",
+      "path": "system/language"
+    },
+    "plugin": {
+    },
+    "router": {
+      "engine": "modRewrite"
+    },
+    "defaultClass": "welcome",
+    "defaultMethod": "overview"
+  },
+  "testing": {
+
+  },
+  "production": {
+
+  }
+}

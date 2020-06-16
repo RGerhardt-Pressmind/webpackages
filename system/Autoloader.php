@@ -15,18 +15,39 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package       Webpackages
- * @subpackage    core
+ * @package       truetravel_bootstrap
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link          http://webpackages.de
- * @since         Version 2020.0
+ * @copyright     Copyright (c) 2010 - 2020, pressmind GmbH (https://www.pressmind.de/)
+ * @license       http://opensource.org/licenses/MIT	MIT License
+ * @link          https://www.pressmind.de
+ * @since         Version 2.0.0
  * @filesource
  */
 
-use system\core\Bootstrap;
+namespace system;
 
-require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'config.php';
+class Autoloader
+{
+	/**
+	 * Register autoloader
+	 */
+	public static function register()
+	{
+		spl_autoload_register(function($class){
+			$file	=	ROOT.str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
 
-Bootstrap::loadView();
+			if(file_exists($file))
+			{
+				require_once $file;
+				return true;
+			}
+			else
+			{
+				echo 'Class "'.$file.'" not found';
+				exit;
+			}
+
+			return false;
+		});
+	}
+}

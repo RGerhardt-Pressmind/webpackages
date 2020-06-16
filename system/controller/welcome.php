@@ -15,18 +15,41 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package       Webpackages
- * @subpackage    core
+ * @package       truetravel_bootstrap
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020, Robbyn Gerhardt (http://www.robbyn-gerhardt.de/)
- * @license       http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link          http://webpackages.de
- * @since         Version 2020.0
+ * @copyright     Copyright (c) 2010 - 2020, pressmind GmbH (https://www.pressmind.de/)
+ * @license       http://opensource.org/licenses/MIT	MIT License
+ * @link          https://www.pressmind.de
+ * @since         Version 2.0.0
  * @filesource
  */
 
-use system\core\Bootstrap;
+namespace system\controller;
 
-require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'config.php';
+use system\core\Http;
+use system\core\Language;
+use system\core\Loader;
 
-Bootstrap::loadView();
+class welcome extends Loader
+{
+	public function change_language()
+	{
+		$_SESSION['lng']	=	$_GET['lng'];
+
+		Http::location(Http::getURL());
+	}
+
+	public function overview()
+	{
+		if(!empty($_SESSION['lng']))
+		{
+			Language::changeLanguage($_SESSION['lng']);
+		}
+
+		$params	=	[
+			'name'	=>	'Robbyn'
+		];
+
+		$this->template->parse($params, 'overview');
+	}
+}
