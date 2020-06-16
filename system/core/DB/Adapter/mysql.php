@@ -15,11 +15,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package       truetravel_bootstrap
+ * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020, pressmind GmbH (https://www.pressmind.de/)
+ * @copyright     Copyright (c) 2010 - 2020
  * @license       http://opensource.org/licenses/MIT	MIT License
- * @link          https://www.pressmind.de
  * @since         Version 2.0.0
  * @filesource
  */
