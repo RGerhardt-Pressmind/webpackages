@@ -56,6 +56,9 @@ class mysql implements AdapterInterface
 	 */
 	public function connection(DBConnectionConfig $config)
 	{
+
+
+
 		$this->mysql	=	new \mysqli($config->host, $config->username, $config->password, $config->database, $config->port);
 
 		$this->table_prefix	=	$config->table_prefix;
