@@ -45,8 +45,6 @@ class Autoloader
 				echo 'Class "'.$file.'" not found';
 				exit;
 			}
-
-			return false;
 		});
 	}
 }

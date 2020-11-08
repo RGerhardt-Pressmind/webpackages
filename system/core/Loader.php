@@ -27,8 +27,6 @@ namespace system\core;
 
 use system\core\Logger\logger;
 use system\core\Logger\LoggerConfig;
-use system\core\Security\security;
-use system\core\Security\SecurityConfig;
 use system\core\Template\Adapter\AdapterInterface;
 use system\core\Template\template;
 use system\core\Template\TemplateConfig;

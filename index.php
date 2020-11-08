@@ -27,6 +27,6 @@
 
 use system\core\Bootstrap;
 
-require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'config.php';
+require_once __DIR__.DIRECTORY_SEPARATOR.'config.php';
 
 Bootstrap::loadView();

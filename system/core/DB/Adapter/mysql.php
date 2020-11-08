@@ -32,8 +32,11 @@ class mysql implements AdapterInterface
 	/**
 	 * @var null|\mysqli
 	 */
-	private $mysql	=	null;
+	private $mysql			=	null;
 
+	/**
+	 * @var string|null
+	 */
 	private $table_prefix	=	null;
 
 	/**

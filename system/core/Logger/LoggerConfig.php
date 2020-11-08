@@ -42,7 +42,7 @@ class LoggerConfig
 	{
 		if(is_null(self::$_self))
 		{
-			self::$_self	=	new self();
+			self::$_self			=	new self();
 			self::$_self->engine	=	$engine;
 			self::$_self->path		=	$logPath;
 		}
