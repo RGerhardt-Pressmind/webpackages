@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -34,20 +34,18 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function create(TemplateConfig $config);
+	function create(TemplateConfig $config): mixed;
 
 	/**
 	 * @param array $params
 	 * @param string $template
-	 *
-	 * @return string
 	 */
-	function parse($params, $template);
+	function parse(array $params, string $template);
 
 	/**
 	 * Get template path back
 	 *
 	 * @return string
 	 */
-	function getTemplatePath();
+	function getTemplatePath(): string;
 }

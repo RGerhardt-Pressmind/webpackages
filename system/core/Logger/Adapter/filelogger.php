@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -25,6 +25,7 @@
 
 namespace system\core\Logger\Adapter;
 
+use Exception;
 use system\core\Logger\LoggerConfig;
 use system\core\Registry;
 
@@ -56,9 +57,9 @@ class filelogger implements AdapterInterface
 	 * @param string $filename
 	 *
 	 * @return string
-	 * @throws \Exception
+	 * @throws Exception
 	 */
-	public function write($log, $output = self::OUTPUT_SCREEN, $filename = 'message.log')
+	public function write(string $log, string $output = self::OUTPUT_SCREEN, string $filename = 'message.log'): string
 	{
 		$datetime	=	new \DateTime('now', new \DateTimeZone($this->globalConfig['timezone']));
 

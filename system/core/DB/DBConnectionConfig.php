@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -44,15 +44,15 @@ class DBConnectionConfig
 	 * @param string $host
 	 * @param string $username
 	 * @param string $password
-	 * @param string  $database
+	 * @param string $database
 	 * @param int $port
 	 * @param null $table_prefix
 	 *
-	 * @return DBConnectionConfig|null
+	 * @return DBConnectionConfig
 	 */
-	public static function create($engine, $host, $username, $password, $database, $port, $table_prefix = null)
+	public static function create(string $engine, string $host, string $username, string $password, string $database, int $port, $table_prefix = null): DBConnectionConfig
 	{
-		if(self::$_self === null && !empty($host))
+		if(is_null(self::$_self))
 		{
 			self::$_self				=	new self();
 			self::$_self->engine		=	$engine;

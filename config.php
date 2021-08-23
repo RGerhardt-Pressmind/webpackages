@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -44,7 +44,7 @@ header('Content-Type: text/html; charset=UTF-8');
 session_start();
 
 define('ROOT',	dirname(__FILE__).DIRECTORY_SEPARATOR);
-define('ENV',	'development');
+const ENV = 'development';
 
 require_once ROOT.'system'.DIRECTORY_SEPARATOR.'Autoloader.php';
 

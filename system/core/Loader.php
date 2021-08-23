@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -36,22 +36,22 @@ class Loader
 	/**
 	 * @var AdapterInterface
 	 */
-	public $template;
+	public mixed $template;
 
 	/**
 	 * @var \system\core\Logger\Adapter\AdapterInterface|null
 	 */
-	public $logger;
+	public mixed $logger;
 
 	/**
 	 * @var Curl
 	 */
-	public $curl;
+	public mixed $curl;
 
 	/**
 	 * @var \system\core\Security\Adapter\AdapterInterface
 	 */
-	public $security;
+	public mixed $security;
 
 	public function __construct()
 	{

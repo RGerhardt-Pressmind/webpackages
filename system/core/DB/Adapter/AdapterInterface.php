@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -36,7 +36,7 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function connection(DBConnectionConfig $config);
+	function connection(DBConnectionConfig $config): mixed;
 
 	/**
 	 * Destruct class
@@ -47,7 +47,7 @@ interface AdapterInterface
 	 * Get multiple rows from table in database
 	 *
 	 * @param string $table
-	 * @param array $select
+	 * @param array|null $select
 	 * @param null $where
 	 * @param null $orderBy
 	 * @param int $startIndex
@@ -55,19 +55,19 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function fetchAll($table, $select = null, $where = null, $orderBy = null, $startIndex = -1, $numItems = -1);
+	function fetchAll(string $table, array $select = null, $where = null, $orderBy = null, int $startIndex = -1, int $numItems = -1): mixed;
 
 	/**
 	 * Get single row from database
 	 *
 	 * @param string $table
-	 * @param array $select
+	 * @param array|null $select
 	 * @param null $where
 	 * @param null $orderBy
 	 *
 	 * @return mixed
 	 */
-	function fetchRow($table, $select = null, $where = null, $orderBy = null);
+	function fetchRow(string $table, array $select = null, $where = null, $orderBy = null): mixed;
 
 	/**
 	 * Execute a query in database
@@ -76,7 +76,7 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function execute($query);
+	function execute(mixed $query): mixed;
 
 	/**
 	 * Insert dataset in database
@@ -86,7 +86,7 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function insert($table, $data);
+	function insert(string $table, array $data): mixed;
 
 	/**
 	 * Update dataset in database
@@ -98,7 +98,7 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function update($table, $data, $where = null, $limit = -1);
+	function update(string $table, array $data, $where = null, int $limit = -1): mixed;
 
 	/**
 	 * Delete dataset from database
@@ -109,24 +109,24 @@ interface AdapterInterface
 	 *
 	 * @return mixed
 	 */
-	function delete($table, $where = null, $limit = -1);
+	function delete(string $table, $where = null, int $limit = -1): mixed;
 
 	/**
 	 * Get table prefix
 	 *
 	 * @return string
 	 */
-	function getTablePrefix();
+	function getTablePrefix(): string;
 
 	/**
 	 * Get connection
 	 *
 	 * @return mixed
 	 */
-	function getConnection();
+	function getConnection(): mixed;
 
 	/**
 	 * @return string
 	 */
-	function getEngine();
+	function getEngine(): string;
 }

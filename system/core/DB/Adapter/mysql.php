@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -25,38 +25,37 @@
 
 namespace system\core\DB\Adapter;
 
+use mysqli;
 use system\core\DB\DBConnectionConfig;
 
 class mysql implements AdapterInterface
 {
 	/**
-	 * @var null|\mysqli
+	 * @var null|mysqli
 	 */
-	private $mysql			=	null;
+	private ?mysqli $mysql			=	null;
 
 	/**
 	 * @var string|null
 	 */
-	private $table_prefix	=	null;
+	private ?string $table_prefix	=	null;
 
 	/**
 	 * Get database engine
 	 *
 	 * @return string
 	 */
-	public function getEngine()
+	public function getEngine(): string
 	{
 		return 'mysql';
 	}
 
 	/**
 	 * @param DBConnectionConfig $config
-	 *
-	 * @return mixed|void
 	 */
-	public function connection(DBConnectionConfig $config)
+	public function connection(DBConnectionConfig $config): mixed
 	{
-		$this->mysql	=	new \mysqli($config->host, $config->username, $config->password, $config->database, $config->port);
+		$this->mysql	=	new mysqli($config->host, $config->username, $config->password, $config->database, $config->port);
 
 		$this->table_prefix	=	$config->table_prefix;
 
@@ -80,29 +79,31 @@ class mysql implements AdapterInterface
 	 *
 	 * @param mixed $query
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
-	public function execute($query)
+	public function execute(mixed $query): mixed
 	{
 		if(!is_null($this->mysql))
 		{
-			$this->mysql->query($query);
+			return $this->mysql->query($query);
 		}
+
+		return false;
 	}
 
 	/**
 	 * Fetch all rows in mysql database
 	 *
 	 * @param string $table
-	 * @param null   $select
+	 * @param array|null $select
 	 * @param null   $where
 	 * @param null   $orderBy
-	 * @param int    $startIndex
-	 * @param int    $numItems
+	 * @param int $startIndex
+	 * @param int $numItems
 	 *
 	 * @return mixed
 	 */
-	public function fetchAll($table, $select = null, $where = null, $orderBy = null, $startIndex = -1, $numItems = -1)
+	public function fetchAll(string $table, array $select = null, $where = null, $orderBy = null, int $startIndex = -1, int $numItems = -1): mixed
 	{
 		$sql	=	$this->buildSQLSelectQuery($table, $select, $where, $orderBy, $startIndex, $numItems);
 
@@ -116,13 +117,13 @@ class mysql implements AdapterInterface
 
 	/**
 	 * @param string $table
-	 * @param null   $select
+	 * @param array|null $select
 	 * @param null   $where
 	 * @param null   $orderBy
 	 *
-	 * @return array|mixed|null
+	 * @return mixed
 	 */
-	public function fetchRow($table, $select = null, $where = null, $orderBy = null)
+	public function fetchRow(string $table, array $select = null, $where = null, $orderBy = null): mixed
 	{
 		$sql	=	$this->buildSQLSelectQuery($table, $select, $where, $orderBy, -1, -1);
 
@@ -146,7 +147,7 @@ class mysql implements AdapterInterface
 	 *
 	 * @return string
 	 */
-	private function buildSQLSelectQuery($table, $select, $where, $orderBy, $startIndex, $numItems)
+	private function buildSQLSelectQuery(string $table, array $select, array $where, array $orderBy, int $startIndex, int $numItems): string
 	{
 		$query	=	'SELECT ';
 
@@ -178,11 +179,11 @@ class mysql implements AdapterInterface
 			{
 				if(is_int($value))
 				{
-					$val	=	'= '.(int)$value;
+					$val	=	'= '.$value;
 				}
 				else if(is_float($value))
 				{
-					$val	=	'= '.(float)$value;
+					$val	=	'= '.$value;
 				}
 				else if(mb_strpos(mb_strtolower($value), 'in(') !== false)
 				{
@@ -215,15 +216,15 @@ class mysql implements AdapterInterface
 
 		if($startIndex >= 0 && $numItems >= 0)
 		{
-			$query	.=	' LIMIT '.(int)$startIndex.', '.(int)$numItems;
+			$query	.=	' LIMIT '.$startIndex.', '.$numItems;
 		}
 		else if($startIndex >= 0)
 		{
-			$query	.=	' LIMIT 100000, '.(int)$startIndex;
+			$query	.=	' LIMIT 100000, '.$startIndex;
 		}
 		else if($numItems >= 0)
 		{
-			$query	.=	' LIMIT '.(int)$numItems;
+			$query	.=	' LIMIT '.$numItems;
 		}
 
 		$query	.=	';';
@@ -236,11 +237,11 @@ class mysql implements AdapterInterface
 	 *
 	 * @param string $table
 	 * @param null   $where
-	 * @param int    $limit
+	 * @param int $limit
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function delete($table, $where = null, $limit = -1)
+	public function delete(string $table, $where = null, int $limit = -1): mixed
 	{
 		$sql	=	'DELETE FROM `'.$this->table_prefix.$table.'`';
 
@@ -272,13 +273,13 @@ class mysql implements AdapterInterface
 	 * Update dataset in database
 	 *
 	 * @param string $table
-	 * @param array  $data
+	 * @param array $data
 	 * @param null   $where
-	 * @param int    $limit
+	 * @param int $limit
 	 *
-	 * @return bool|mixed
+	 * @return bool
 	 */
-	public function update($table, $data, $where = null, $limit = -1)
+	public function update(string $table, array $data, $where = null, int $limit = -1): bool
 	{
 		$sql	=	'UPDATE `'.$this->table_prefix.$table.'` SET ';
 
@@ -319,11 +320,11 @@ class mysql implements AdapterInterface
 	 * Insert dataset in database
 	 *
 	 * @param string $table
-	 * @param array  $data
+	 * @param array $data
 	 *
-	 * @return bool|mixed
+	 * @return bool
 	 */
-	public function insert($table, $data)
+	public function insert(string $table, array $data): bool
 	{
 		$sql	=	'INSERT INTO `'.$this->table_prefix.$table.'` SET ';
 
@@ -343,10 +344,8 @@ class mysql implements AdapterInterface
 
 	/**
 	 * Get table prefix
-	 *
-	 * @return string|null
 	 */
-	public function getTablePrefix()
+	public function getTablePrefix(): string
 	{
 		return $this->table_prefix;
 	}
@@ -354,9 +353,9 @@ class mysql implements AdapterInterface
 	/**
 	 * Get connection
 	 *
-	 * @return mixed|\mysqli|null
+	 * @return mysqli|null
 	 */
-	public function getConnection()
+	public function getConnection(): ?mysqli
 	{
 		return $this->mysql;
 	}

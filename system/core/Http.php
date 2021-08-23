@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,13 +17,16 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
  */
 
 namespace system\core;
+
+use JetBrains\PhpStorm\NoReturn;
+use JetBrains\PhpStorm\Pure;
 
 class Http
 {
@@ -32,7 +35,8 @@ class Http
 	 *
 	 * @return string
 	 */
-	public static function getURL()
+	#[Pure]
+	public static function getURL(): string
 	{
 		return self::_getBaseURL();
 	}
@@ -42,7 +46,7 @@ class Http
 	 *
 	 * @return string
 	 */
-	public static function getSkinURL()
+	public static function getSkinURL(): string
 	{
 		$config	=	Registry::getInstance()->get('config');
 
@@ -57,14 +61,20 @@ class Http
 	 *
 	 * @param string $url
 	 */
-	public static function location($url)
+	#[NoReturn]
+	public static function location(string $url)
 	{
 		header('Location: '.$url);
 		exit;
 	}
 
-
-	private static function _getBaseURL()
+	/**
+	 * Get base url with http protocol
+	 *
+	 * @return string
+	 */
+	#[Pure]
+	private static function _getBaseURL(): string
 	{
 		return (self::is_https() ? 'https' : 'http').'://'.(!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost').substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 	}
@@ -74,13 +84,8 @@ class Http
 	 *
 	 * @return bool
 	 */
-	private static function is_https()
+	private static function is_https(): bool
 	{
-		if((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) != 'off'))
-		{
-			return true;
-		}
-
-		return false;
+		return (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) != 'off');
 	}
 }

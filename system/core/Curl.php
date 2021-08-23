@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -38,7 +38,7 @@ class Curl
 	 * @param string $url
 	 * @param null $params
 	 */
-	public function get($url, $params = null)
+	public function get(string $url, $params = null)
 	{
 		if(!empty($params) && is_array($params))
 		{
@@ -57,7 +57,7 @@ class Curl
 	 * @param string $url
 	 * @param null $params
 	 */
-	public function post($url, $params = null)
+	public function post(string $url, $params = null)
 	{
 		$this->_setCurl($url);
 
@@ -78,7 +78,7 @@ class Curl
 	 * @param string $url
 	 * @param null $params
 	 */
-	public function put($url, $params = null)
+	public function put(string $url, $params = null)
 	{
 		$this->_setCurl($url);
 
@@ -99,7 +99,7 @@ class Curl
 	 * @param string $url
 	 * @param null $params
 	 */
-	public function delete($url, $params = null)
+	public function delete(string $url, $params = null)
 	{
 		if(!empty($params) && is_array($params))
 		{
@@ -132,7 +132,7 @@ class Curl
 	 * @param string $username
 	 * @param string $password
 	 */
-	public function setBasicAuthentication($username, $password)
+	public function setBasicAuthentication(string $username, string $password)
 	{
 		$this->_curlopts[CURLOPT_HTTPHEADER][]	=	'Authorization: Basic '.base64_encode($username.':'.$password);
 	}
@@ -142,7 +142,7 @@ class Curl
 	 *
 	 * @param string $agent
 	 */
-	public function setUserAgent($agent = 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0')
+	public function setUserAgent(string $agent = 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0')
 	{
 		$this->_curlopts[CURLOPT_USERAGENT]	=	$agent;
 	}
@@ -152,7 +152,7 @@ class Curl
 	 *
 	 * @param string $referrer
 	 */
-	public function setReferrer($referrer)
+	public function setReferrer(string $referrer)
 	{
 		$this->_curlopts[CURLOPT_REFERER]	=	$referrer;
 	}
@@ -163,7 +163,7 @@ class Curl
 	 * @param string $header
 	 * @param string $value
 	 */
-	public function setHeader($header, $value)
+	public function setHeader(string $header, string $value)
 	{
 		$this->_curlopts[CURLOPT_HTTPHEADER][]	=	$header.': '.$value;
 	}
@@ -174,7 +174,7 @@ class Curl
 	 * @param string $key
 	 * @param string $value
 	 */
-	public function setCookie($key, $value)
+	public function setCookie(string $key, string $value)
 	{
 		$this->_curlopts[CURLOPT_HTTPHEADER][]	=	'Cookie: '.$key.'='.$value;
 	}
@@ -185,7 +185,7 @@ class Curl
 	 * @param string $opt
 	 * @param mixed $value
 	 */
-	public function setOpt($opt, $value)
+	public function setOpt(string $opt, mixed $value)
 	{
 		$this->_curlopts[$opt]	=	$value;
 	}
@@ -195,7 +195,7 @@ class Curl
 	 *
 	 * @param mixed $port
 	 */
-	public function setPort($port)
+	public function setPort(mixed $port)
 	{
 		$this->_curlopts[CURLOPT_PORT]	=	$port;
 	}
@@ -205,7 +205,7 @@ class Curl
 	 *
 	 * @param int $timeout
 	 */
-	public function setTimeout($timeout)
+	public function setTimeout(int $timeout)
 	{
 		$this->_curlopts[CURLOPT_TIMEOUT]	=	$timeout;
 	}
@@ -215,7 +215,7 @@ class Curl
 	 *
 	 * @param int $timeout
 	 */
-	public function setConnectTimeout($timeout)
+	public function setConnectTimeout(int $timeout)
 	{
 		$this->_curlopts[CURLOPT_CONNECTTIMEOUT]	=	$timeout;
 	}
@@ -239,7 +239,7 @@ class Curl
 	 *
 	 * @param string $url
 	 */
-	private function _setCurl($url)
+	private function _setCurl(string $url)
 	{
 		$this->_curl	=	curl_init($url);
 	}
@@ -249,9 +249,9 @@ class Curl
 	 *
 	 * @param bool $jsonDecode
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getResponse($jsonDecode = false)
+	public function getResponse(bool $jsonDecode = false): mixed
 	{
 		if(isset($this->responseData['response']))
 		{
@@ -271,7 +271,7 @@ class Curl
 	 *
 	 * @return bool|mixed
 	 */
-	public function getHTTPCode()
+	public function getHTTPCode(): mixed
 	{
 		return $this->_get('httpCode');
 	}
@@ -279,9 +279,9 @@ class Curl
 	/**
 	 * Get filetime from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getFiletime()
+	public function getFiletime(): mixed
 	{
 		return $this->_get('filetime');
 	}
@@ -289,9 +289,9 @@ class Curl
 	/**
 	 * Get total request time from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getTotalTime()
+	public function getTotalTime(): mixed
 	{
 		return $this->_get('totaltime');
 	}
@@ -299,9 +299,9 @@ class Curl
 	/**
 	 * Get name loikup time from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getNameLookupTime()
+	public function getNameLookupTime(): mixed
 	{
 		return $this->_get('nameLookupTime');
 	}
@@ -309,9 +309,9 @@ class Curl
 	/**
 	 * Get connect time from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getConnectTime()
+	public function getConnectTime(): mixed
 	{
 		return $this->_get('connectTime');
 	}
@@ -319,9 +319,9 @@ class Curl
 	/**
 	 * Get pretransfer time from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getPretransferTime()
+	public function getPretransferTime(): mixed
 	{
 		return $this->_get('pretransferTime');
 	}
@@ -329,9 +329,9 @@ class Curl
 	/**
 	 * Get start transfer time from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getStartTransferTime()
+	public function getStartTransferTime(): mixed
 	{
 		return $this->_get('startTransferTime');
 	}
@@ -339,9 +339,9 @@ class Curl
 	/**
 	 * Get redirect time
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getRedirectTime()
+	public function getRedirectTime(): mixed
 	{
 		return $this->_get('redirectTime');
 	}
@@ -349,9 +349,9 @@ class Curl
 	/**
 	 * Get effective url from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getURL()
+	public function getURL(): mixed
 	{
 		return $this->_get('effectiveURL');
 	}
@@ -359,9 +359,9 @@ class Curl
 	/**
 	 * Get size upload from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getSizeUpload()
+	public function getSizeUpload(): mixed
 	{
 		return $this->_get('sizeUpload');
 	}
@@ -369,9 +369,9 @@ class Curl
 	/**
 	 * Get size download from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getSizeDownload()
+	public function getSizeDownload(): mixed
 	{
 		return $this->_get('sizeDownload');
 	}
@@ -379,9 +379,9 @@ class Curl
 	/**
 	 * Get speed download from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getSpeedDownload()
+	public function getSpeedDownload(): mixed
 	{
 		return $this->_get('speedDownload');
 	}
@@ -389,9 +389,9 @@ class Curl
 	/**
 	 * Get speed upload from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getSpeedUpload()
+	public function getSpeedUpload(): mixed
 	{
 		return $this->_get('speedUpload');
 	}
@@ -399,9 +399,9 @@ class Curl
 	/**
 	 * Get header size from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getHeaderSize()
+	public function getHeaderSize(): mixed
 	{
 		return $this->_get('headerSize');
 	}
@@ -409,9 +409,9 @@ class Curl
 	/**
 	 * Get header from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getHeader()
+	public function getHeader(): mixed
 	{
 		return $this->_get('headerOut');
 	}
@@ -419,9 +419,9 @@ class Curl
 	/**
 	 * Get request size from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getRequestSize()
+	public function getRequestSize(): mixed
 	{
 		return $this->_get('requestSize');
 	}
@@ -429,9 +429,9 @@ class Curl
 	/**
 	 * Get content length download from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getContentLengthDownload()
+	public function getContentLengthDownload(): mixed
 	{
 		return $this->_get('contentLengthDownload');
 	}
@@ -439,9 +439,9 @@ class Curl
 	/**
 	 * Get content length upload from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getContentLengthUpload()
+	public function getContentLengthUpload(): mixed
 	{
 		return $this->_get('contentLengthUpload');
 	}
@@ -449,9 +449,9 @@ class Curl
 	/**
 	 * Get content type from last request
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getContentType()
+	public function getContentType(): mixed
 	{
 		return $this->_get('contentType');
 	}
@@ -461,11 +461,11 @@ class Curl
 	 *
 	 * @param string $key
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	private function _get($key)
+	private function _get(string $key): mixed
 	{
-		return (isset($this->responseData[$key]) ? $this->responseData[$key] : false);
+		return ($this->responseData[$key] ?? false);
 	}
 
 

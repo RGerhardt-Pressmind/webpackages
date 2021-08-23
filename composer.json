@@ -1,5 +1,5 @@
 {
-  "name": "robbyn666/webpackages",
+  "name": "robbyn6/webpackages",
   "type": "project",
   "minimum-stability": "stable",
   "description": "webpackages ist das schnellste, einfachste und sicherste datenbankbasierte MVC PHP Framework auf dem Markt.",
@@ -18,12 +18,12 @@
     {
       "name": "Robbyn Gerhardt",
       "email": "gerhardt@webpackages.de",
-      "homepage": "http://robbyn-gerhardt.de",
+      "homepage": "https://robbyn-gerhardt.de",
       "role": "Developer"
     }
   ],
   "require": {
-    "php": ">=7.2",
+    "php": ">=8.0",
     "ext-gd": "*",
     "ext-curl": "*",
     "ext-json": "*",
