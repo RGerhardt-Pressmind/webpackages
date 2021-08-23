@@ -11,10 +11,10 @@ Mit webpackages brauchen Sie sich keine sorgen mehr um Ladezeiten oder Sicherhei
 Laden Sie sich mittels composer die aktuellste Version von webpackages Framework herunter
 
 ``` bash
-$ composer require robbyn666/webpackages
+$ composer require robbyn6/webpackages
 ```
 
 ##Dokumentation
-webpackages lässt sich ganz einfach installieren und verwalten. Gleichzeitig bring es eine Menge von bereits erprobten Funktionen mit. Schauen Sie sich auf der [Dokumentations Webseite][1] dazu um. 
+webpackages lässt sich ganz einfach installieren und verwalten. Gleichzeitig bring es eine Menge von bereits erprobten Funktionen mit. Schauen Sie sich auf der [Dokumentations Webseite][1] dazu um.
 
 [1]: https://www.webpackages.de/documentation.html#sec-intro
