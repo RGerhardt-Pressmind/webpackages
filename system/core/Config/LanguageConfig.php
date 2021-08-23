@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -27,12 +27,12 @@ namespace system\core\Config;
 
 class LanguageConfig
 {
-	public $language;
-	public $languageFilePath;
+	public string $language	=	'';
+	public string $languageFilePath	=	'';
 
 	private static $_self;
 
-	public static function create($language, $languageFilePath)
+	public static function create(string $language, string $languageFilePath): LanguageConfig
 	{
 		if(is_null(self::$_self))
 		{

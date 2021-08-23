@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -39,9 +39,9 @@ class sanitizer implements AdapterInterface
 	 * @param string  $str
 	 * @param null $convert
 	 *
-	 * @return bool|float|int|mixed|string
+	 * @return mixed
 	 */
-	public function validate($str, $convert = null)
+	public function validate($str, $convert = null): mixed
 	{
 		if($convert)
 		{
@@ -67,12 +67,12 @@ class sanitizer implements AdapterInterface
 	/**
 	 * Convert char to type
 	 *
-	 * @param string $str
+	 * @param mixed $str
 	 * @param string $convert
 	 *
-	 * @return bool|float|int|mixed|string
+	 * @return mixed
 	 */
-	private function convert($str, $convert)
+	private function convert(mixed $str, string $convert): mixed
 	{
 		switch($convert)
 		{
@@ -117,9 +117,9 @@ class sanitizer implements AdapterInterface
 	 * @param string $str
 	 * @param bool $url_encoded
 	 *
-	 * @return string|
+	 * @return string
 	 */
-	private function removeInvisibleCharacters($str, $url_encoded = true)
+	private function removeInvisibleCharacters(string $str, bool $url_encoded = true): string
 	{
 		$non_displayables = [];
 
@@ -151,7 +151,7 @@ class sanitizer implements AdapterInterface
 	 *
 	 * @return string
 	 */
-	private function xss_clean($str)
+	private function xss_clean(string $str): string
 	{
 		$str = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $str);
         $str = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $str);
@@ -190,7 +190,7 @@ class sanitizer implements AdapterInterface
 	 *
 	 * @return string
 	 */
-	public function getType($str)
+	public function getType($str): string
 	{
 		return gettype($str);
 	}

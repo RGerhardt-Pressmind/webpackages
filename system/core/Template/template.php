@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -25,6 +25,7 @@
 
 namespace system\core\Template;
 
+use system\core\Template\Adapter\AdapterInterface;
 use system\core\Template\Adapter\filesystem;
 
 class template
@@ -34,7 +35,7 @@ class template
 	 *
 	 * @return filesystem
 	 */
-	public static function create(TemplateConfig $config)
+	public static function create(TemplateConfig $config): AdapterInterface
 	{
 		if($config->engine == 'filesystem')
 		{

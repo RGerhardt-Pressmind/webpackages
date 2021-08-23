@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -31,9 +31,9 @@ use system\plugins\Adapter\AdapterPlugins;
 class redis implements AdapterPlugins
 {
 	/**
-	 * @var \Redis|null
+	 * @var mixed
 	 */
-	private $redis;
+	private mixed $redis = null;
 
 	public function registerHooks()
 	{
@@ -47,7 +47,7 @@ class redis implements AdapterPlugins
 	 */
 	public function getRedis()
 	{
-		if(class_exists('\Redis') && 1 == 2)
+		if(class_exists('\Redis'))
 		{
 			$this->redis	=	new \Redis();
 
@@ -78,7 +78,7 @@ class redis implements AdapterPlugins
 	 *
 	 * @param array $args
 	 */
-	public function afterBootstrap($args)
+	public function afterBootstrap(array $args)
 	{
 		$hash	=	md5(serialize($_REQUEST));
 

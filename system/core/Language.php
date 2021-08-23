@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -25,11 +25,14 @@
 
 namespace system\core;
 
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use system\core\Config\LanguageConfig;
 
 class Language
 {
-	private static $_translates	=	[];
+	private static array $_translates	=	[];
 
 	private static $languageFilePath;
 
@@ -50,7 +53,7 @@ class Language
 	 *
 	 * @param string $lng
 	 */
-	public static function changeLanguage($lng)
+	public static function changeLanguage(string $lng)
 	{
 		self::$_translates	=	[];
 
@@ -60,8 +63,8 @@ class Language
 			exit;
 		}
 
-		$dir	=	new \RecursiveDirectoryIterator(self::$languageFilePath.$lng, \RecursiveDirectoryIterator::SKIP_DOTS);
-		$files	=	new \RecursiveIteratorIterator($dir, \RecursiveIteratorIterator::CHILD_FIRST);
+		$dir	=	new RecursiveDirectoryIterator(self::$languageFilePath.$lng, FilesystemIterator::SKIP_DOTS);
+		$files	=	new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
 
 		if(iterator_count($files) > 0)
 		{
@@ -94,9 +97,9 @@ class Language
 	 * @param string $key
 	 * @param null $file
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public static function translate($key, $file = null)
+	public static function translate(string $key, $file = null): mixed
 	{
 		if($file)
 		{

@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -27,18 +27,18 @@ namespace system\core;
 
 class Registry
 {
-	private $_class	=	[];
+	private array $_class	=	[];
 
-	private static $_instance	=	null;
+	private static ?Registry $_instance	=	null;
 
 	/**
 	 * Get registry instance
 	 *
-	 * @return Registry|null
+	 * @return Registry
 	 */
-	public static function getInstance()
+	public static function getInstance(): Registry
 	{
-		if(self::$_instance === null)
+		if(is_null(self::$_instance))
 		{
 			self::$_instance	=	new self();
 		}
@@ -52,7 +52,7 @@ class Registry
 	 * @param string $name
 	 * @param mixed $class
 	 */
-	public function add($name, $class)
+	public function add(string $name, mixed $class)
 	{
 		$this->_class[$name]	=	$class;
 	}
@@ -62,9 +62,9 @@ class Registry
 	 *
 	 * @param string $name
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function get($name)
+	public function get(string $name): mixed
 	{
 		if(isset($this->_class[$name]))
 		{

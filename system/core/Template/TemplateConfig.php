@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -40,9 +40,9 @@ class TemplateConfig
 	 * @param string $templatePath
 	 * @param string $skin
 	 *
-	 * @return TemplateConfig|null
+	 * @return TemplateConfig
 	 */
-	public static function create($engine, $templatePath, $skin)
+	public static function create(string $engine, string $templatePath, string $skin): TemplateConfig
 	{
 		if(is_null(self::$_self))
 		{

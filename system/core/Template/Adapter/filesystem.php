@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2020  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2020
+ * @copyright     Copyright (c) 2010 - 2021
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -37,12 +37,14 @@ class filesystem implements AdapterInterface
 	 *
 	 * @param TemplateConfig $config
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
-	public function create(TemplateConfig $config)
+	public function create(TemplateConfig $config): mixed
 	{
 		$this->templatePath	=	ROOT.str_replace('/', DIRECTORY_SEPARATOR, trim(trim($config->templatePath, '/'), '\\'));
 		$this->skin			=	$config->skin;
+
+		return true;
 	}
 
 	/**
@@ -50,7 +52,7 @@ class filesystem implements AdapterInterface
 	 *
 	 * @return string
 	 */
-	public function getTemplatePath()
+	public function getTemplatePath(): string
 	{
 		return $this->templatePath.DIRECTORY_SEPARATOR.$this->skin.DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR;
 	}
@@ -58,12 +60,12 @@ class filesystem implements AdapterInterface
 	/**
 	 * Parse template file and get out
 	 *
-	 * @param array  $params
+	 * @param array $params
 	 * @param string $template
 	 *
 	 * @return void
 	 */
-	public function parse($params, $template)
+	public function parse(array $params, string $template)
 	{
 		$templateFile	=	$this->getTemplatePath().$template.'.php';
 
