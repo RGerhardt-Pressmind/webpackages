@@ -26,7 +26,6 @@
 namespace system\core\Security;
 
 use system\core\Security\Adapter\AdapterInterface;
-use system\core\Security\Adapter\sanitizer;
 
 class security
 {
@@ -38,13 +37,15 @@ class security
 	 */
 	public static function create(SecurityConfig $config): AdapterInterface
 	{
-		if($config->engine == 'sanitizer')
+		$class	=	$config->engine;
+
+		if(class_exists($class))
 		{
-			$security	=	new sanitizer();
+			$security	=	new $class();
 		}
 		else
 		{
-			echo 'Failed, security class "'.$config->engine.'" not exist';
+			echo 'Failed, security class "'.$class.'" not exist';
 			exit;
 		}
 

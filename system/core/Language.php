@@ -28,13 +28,14 @@ namespace system\core;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 use system\core\Config\LanguageConfig;
 
 class Language
 {
 	private static array $_translates	=	[];
 
-	private static $languageFilePath;
+	private static string $languageFilePath;
 
 	/**
 	 * Register language
@@ -55,6 +56,8 @@ class Language
 	 */
 	public static function changeLanguage(string $lng)
 	{
+		Plugin::hook('beforeChangeLanguage', [&$lng]);
+
 		self::$_translates	=	[];
 
 		if(!file_exists(self::$languageFilePath.$lng))
@@ -69,7 +72,7 @@ class Language
 		if(iterator_count($files) > 0)
 		{
 			/**
-			 * @var \SplFileInfo $file
+			 * @var SplFileInfo $file
 			 */
 			foreach($files as $file)
 			{
@@ -115,7 +118,7 @@ class Language
 		}
 		else
 		{
-			foreach(self::$_translates as $file => $values)
+			foreach(self::$_translates as $values)
 			{
 				foreach($values as $_key => $value)
 				{

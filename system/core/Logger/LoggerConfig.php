@@ -27,10 +27,10 @@ namespace system\core\Logger;
 
 class LoggerConfig
 {
-	public $engine;
-	public $path;
+	public string $engine;
+	public string $path;
 
-	private static $_self;
+	private static mixed $_self	=	null;
 
 	/**
 	 * @param string $engine

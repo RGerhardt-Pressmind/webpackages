@@ -25,12 +25,13 @@
 
 namespace system\core\Template\Adapter;
 
+use system\core\Plugin;
 use system\core\Template\TemplateConfig;
 
 class filesystem implements AdapterInterface
 {
-	private $templatePath;
-	private $skin;
+	private string $templatePath;
+	private string $skin;
 
 	/**
 	 * Create new filesystem template
@@ -41,8 +42,10 @@ class filesystem implements AdapterInterface
 	 */
 	public function create(TemplateConfig $config): mixed
 	{
-		$this->templatePath	=	ROOT.str_replace('/', DIRECTORY_SEPARATOR, trim(trim($config->templatePath, '/'), '\\'));
+		$this->templatePath	=	ROOT.str_replace('/', SEP, trim(trim($config->templatePath, '/'), '\\'));
 		$this->skin			=	$config->skin;
+
+		Plugin::hook('afterTemplateCreate', [&$this->templatePath, &$this->skin]);
 
 		return true;
 	}
@@ -54,7 +57,11 @@ class filesystem implements AdapterInterface
 	 */
 	public function getTemplatePath(): string
 	{
-		return $this->templatePath.DIRECTORY_SEPARATOR.$this->skin.DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR;
+		$templatePath	=	$this->templatePath.SEP.$this->skin.SEP.'template'.SEP;
+
+		Plugin::hook('getTemplatePath', [&$templatePath]);
+
+		return $templatePath;
 	}
 
 	/**
@@ -67,6 +74,8 @@ class filesystem implements AdapterInterface
 	 */
 	public function parse(array $params, string $template)
 	{
+		Plugin::hook('beforeParseTemplate', [&$params, &$template]);
+
 		$templateFile	=	$this->getTemplatePath().$template.'.php';
 
 		if(!file_exists($templateFile))
@@ -86,6 +95,8 @@ class filesystem implements AdapterInterface
 
 		$content	=	ob_get_contents();
 		ob_end_clean();
+
+		Plugin::hook('afterParseTemplate', [&$content]);
 
 		echo $content;
 	}

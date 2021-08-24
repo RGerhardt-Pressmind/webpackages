@@ -26,7 +26,6 @@
 namespace system\core\Logger;
 
 use system\core\Logger\Adapter\AdapterInterface;
-use system\core\Logger\Adapter\filelogger;
 
 class logger
 {
@@ -37,13 +36,18 @@ class logger
 	 */
 	public static function create(LoggerConfig $config): AdapterInterface
 	{
-		if($config->engine == 'filelogger')
+		$class	=	$config->engine;
+
+		if(class_exists($class))
 		{
-			$logger	=	new filelogger();
+			/**
+			 * @var AdapterInterface $logger
+			 */
+			$logger	=	new $class();
 		}
 		else
 		{
-			echo 'Failed, logger "'.$config->engine.'" not exist';
+			echo 'Failed, logger "'.$class.'" not exist';
 			exit;
 		}
 

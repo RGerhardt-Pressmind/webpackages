@@ -38,15 +38,15 @@ class Plugin
 	 * Call hook
 	 *
 	 * @param string $name
-	 * @param null $params
+	 * @param array $params
 	 */
-	public static function hook(string $name, $params = null)
+	public static function hook(string $name, array $params = [])
 	{
 		if(isset(self::$_hooks[$name]))
 		{
 			foreach(self::$_hooks[$name] as $hook)
 			{
-				call_user_func($hook, $params);
+				call_user_func_array($hook, $params);
 			}
 		}
 	}
@@ -67,6 +67,8 @@ class Plugin
 	 */
 	public static function loadPluginRegister()
 	{
+		$config	=	Registry::getInstance()->get('config');
+
 		$path	=	ROOT.'system'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR;
 		$dirs	=	new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
 
@@ -90,6 +92,7 @@ class Plugin
 
 					if($plugin instanceof AdapterPlugins)
 					{
+						$plugin->pluginParameter(($config['plugin'][$dirname] ?? []));
 						$plugin->registerHooks();
 					}
 				}

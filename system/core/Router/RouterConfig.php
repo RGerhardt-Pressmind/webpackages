@@ -27,11 +27,11 @@ namespace system\core\Router;
 
 class RouterConfig
 {
-	public $engine;
+	public string $engine;
 
-	private static $_self;
+	private static mixed $_self	=	null;
 
-	public static function create($engine): RouterConfig
+	public static function create(string $engine): RouterConfig
 	{
 		if(is_null(self::$_self))
 		{

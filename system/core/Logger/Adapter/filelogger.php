@@ -25,8 +25,11 @@
 
 namespace system\core\Logger\Adapter;
 
+use DateTime;
+use DateTimeZone;
 use Exception;
 use system\core\Logger\LoggerConfig;
+use system\core\Plugin;
 use system\core\Registry;
 
 class filelogger implements AdapterInterface
@@ -34,12 +37,12 @@ class filelogger implements AdapterInterface
 	const OUTPUT_SCREEN	=	'screen';
 	const OUTPUT_FILE	=	'file';
 
-	private $logPath;
-	private $globalConfig;
+	private string $logPath;
+	private mixed $globalConfig;
 
 	public function connection(LoggerConfig $config)
 	{
-		$this->logPath	=	ROOT.trim(trim($config->path, '/'), '\\').DIRECTORY_SEPARATOR;
+		$this->logPath	=	ROOT.trim(trim($config->path, '/'), '\\').SEP;
 
 		if(!file_exists($this->logPath))
 		{
@@ -61,13 +64,15 @@ class filelogger implements AdapterInterface
 	 */
 	public function write(string $log, string $output = self::OUTPUT_SCREEN, string $filename = 'message.log'): string
 	{
-		$datetime	=	new \DateTime('now', new \DateTimeZone($this->globalConfig['timezone']));
+		$datetime	=	new DateTime('now', new DateTimeZone($this->globalConfig['timezone']));
 
 		$log	=	'['.$datetime->format('d.m.Y H:i:s').'] '.print_r($log, true);
 
+		Plugin::hook('beforeWriteLog', [&$log]);
+
 		if($output == self::OUTPUT_FILE)
 		{
-			file_put_contents($this->logPath.$filename, $log."\r\n", FILE_APPEND);
+			file_put_contents($this->logPath.$filename, $log.PHP_EOL, FILE_APPEND);
 		}
 		else
 		{

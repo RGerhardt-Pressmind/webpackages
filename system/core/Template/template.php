@@ -26,24 +26,28 @@
 namespace system\core\Template;
 
 use system\core\Template\Adapter\AdapterInterface;
-use system\core\Template\Adapter\filesystem;
 
 class template
 {
 	/**
 	 * @param TemplateConfig $config
 	 *
-	 * @return filesystem
+	 * @return AdapterInterface
 	 */
 	public static function create(TemplateConfig $config): AdapterInterface
 	{
-		if($config->engine == 'filesystem')
+		$class		=	$config->engine;
+
+		if(class_exists($class))
 		{
-			$template	=	new filesystem();
+			/**
+			 * @var AdapterInterface $template
+			 */
+			$template	=	new $class();
 		}
 		else
 		{
-			echo 'Failed, template engine "'.$config->engine.'" not exist';
+			echo 'Failed, template engine "'.$class.'" not exist';
 			exit;
 		}
 

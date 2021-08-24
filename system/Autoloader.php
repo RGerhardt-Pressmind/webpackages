@@ -33,7 +33,7 @@ class Autoloader
 	public static function register()
 	{
 		spl_autoload_register(function($class){
-			$file	=	ROOT.str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+			$file	=	ROOT.str_replace('\\', SEP, $class).'.php';
 
 			if(file_exists($file))
 			{

@@ -35,6 +35,12 @@ class redis implements AdapterPlugins
 	 */
 	private mixed $redis = null;
 
+
+	public function pluginParameter(array $parameter)
+	{
+		// TODO: Implement pluginParameter() method.
+	}
+
 	public function registerHooks()
 	{
 		Plugin::register('init', [$this, 'getRedis']);
@@ -76,15 +82,12 @@ class redis implements AdapterPlugins
 	/**
 	 * After template parse, save in redis cache
 	 *
-	 * @param array $args
+	 * @param mixed $content
 	 */
-	public function afterBootstrap(array $args)
+	public function afterBootstrap(mixed $content)
 	{
 		$hash	=	md5(serialize($_REQUEST));
 
-		if($this->redis)
-		{
-			$this->redis->setex($hash, 6000, $args['content']);
-		}
+		$this->redis?->setex($hash, 6000, $content);
 	}
 }

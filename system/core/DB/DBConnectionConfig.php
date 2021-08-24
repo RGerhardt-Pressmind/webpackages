@@ -27,15 +27,15 @@ namespace system\core\DB;
 
 class DBConnectionConfig
 {
-	public $host;
-	public $username;
-	public $password;
-	public $database;
-	public $port;
-	public $table_prefix;
-	public $engine;
+	public string $host;
+	public string $username;
+	public string $password;
+	public string $database;
+	public int $port;
+	public string $table_prefix;
+	public string $engine;
 
-	private static $_self	=	null;
+	private static mixed $_self	=	null;
 
 	/**
 	 * Create database connection config

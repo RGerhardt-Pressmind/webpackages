@@ -43,20 +43,22 @@ header('Content-Type: text/html; charset=UTF-8');
 
 session_start();
 
-define('ROOT',	dirname(__FILE__).DIRECTORY_SEPARATOR);
-const ENV = 'development';
+const ENV 	= 	'development';
+const SEP	=	DIRECTORY_SEPARATOR;
 
-require_once ROOT.'system'.DIRECTORY_SEPARATOR.'Autoloader.php';
+const ROOT 	= 	__DIR__.SEP;
+
+require_once ROOT.'system'.SEP.'Autoloader.php';
 
 // Register autoloader
 Autoloader::register();
 
-// Load all plugins and register all hooks
-Plugin::loadPluginRegister();
-
 // Load config json
 $config	=	Config::getConfig();
 Registry::getInstance()->add('config', $config);
+
+// Load all plugins and register all hooks
+Plugin::loadPluginRegister();
 
 // Default timezone set
 date_default_timezone_set($config['timezone']);

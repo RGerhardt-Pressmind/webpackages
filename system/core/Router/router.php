@@ -26,7 +26,6 @@
 namespace system\core\Router;
 
 use system\core\Router\Adapter\AdapterInterface;
-use system\core\Router\Adapter\modRewrite;
 
 class router
 {
@@ -39,13 +38,15 @@ class router
 	 */
 	public static function create(RouterConfig $config): AdapterInterface
 	{
-		if($config->engine == 'modRewrite')
+		$class	=	$config->engine;
+
+		if(class_exists($class))
 		{
-			$router	=	new modRewrite();
+			$router	=	new $class();
 		}
 		else
 		{
-			echo 'Failed, router "'.$config->engine.'" not exist';
+			echo 'Failed, router "'.$class.'" not exist';
 			exit;
 		}
 

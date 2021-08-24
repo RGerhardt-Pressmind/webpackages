@@ -25,9 +25,6 @@
 
 namespace system\core;
 
-use JetBrains\PhpStorm\NoReturn;
-use JetBrains\PhpStorm\Pure;
-
 class Http
 {
 	/**
@@ -35,7 +32,6 @@ class Http
 	 *
 	 * @return string
 	 */
-	#[Pure]
 	public static function getURL(): string
 	{
 		return self::_getBaseURL();
@@ -53,6 +49,8 @@ class Http
 		$templatePath	=	trim(trim($config['template']['path'], '/'), '\\');
 		$skin			=	$config['template']['skin'];
 
+		Plugin::hook('getSkinURL', [&$templatePath, &$skin]);
+
 		return self::_getBaseURL().$templatePath.'/'.$skin.'/';
 	}
 
@@ -60,10 +58,12 @@ class Http
 	 * Header location to url
 	 *
 	 * @param string $url
+	 * @return void
 	 */
-	#[NoReturn]
 	public static function location(string $url)
 	{
+		Plugin::hook('location', [&$url]);
+
 		header('Location: '.$url);
 		exit;
 	}
@@ -73,10 +73,13 @@ class Http
 	 *
 	 * @return string
 	 */
-	#[Pure]
 	private static function _getBaseURL(): string
 	{
-		return (self::is_https() ? 'https' : 'http').'://'.(!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost').substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
+		$url	=	(self::is_https() ? 'https' : 'http').'://'.(!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost').substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
+
+		Plugin::hook('getBaseURL', [&$url]);
+
+		return $url;
 	}
 
 	/**
@@ -86,6 +89,10 @@ class Http
 	 */
 	private static function is_https(): bool
 	{
-		return (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) != 'off');
+		$is	=	(!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) != 'off');
+
+		Plugin::hook('isHTTPS', [&$is]);
+
+		return $is;
 	}
 }

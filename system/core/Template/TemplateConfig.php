@@ -27,11 +27,11 @@ namespace system\core\Template;
 
 class TemplateConfig
 {
-	public $templatePath;
-	public $skin;
-	public $engine;
+	public string $templatePath;
+	public string $skin;
+	public string $engine;
 
-	private static $_self	=	null;
+	private static mixed $_self	=	null;
 
 	/**
 	 * Create template config

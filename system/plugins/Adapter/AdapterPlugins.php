@@ -28,4 +28,6 @@ namespace system\plugins\Adapter;
 interface AdapterPlugins
 {
 	function registerHooks();
+
+	function pluginParameter(array $parameter);
 }

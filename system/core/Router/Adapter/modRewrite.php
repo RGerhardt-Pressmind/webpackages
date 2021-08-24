@@ -55,7 +55,7 @@ class modRewrite implements AdapterInterface
 			$method	=	$security->validate($_GET['m']);
 		}
 
-		$controllerPath	=	ROOT.'system'.DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR;
+		$controllerPath	=	ROOT.'system'.SEP.'controller'.SEP;
 		$controllerFile	=	$controllerPath.$class.'.php';
 
 		if(file_exists($controllerFile))
@@ -64,7 +64,7 @@ class modRewrite implements AdapterInterface
 
 			$classNamespace	=	'system\controller\\'.$class;
 
-			Plugin::hook('beforeBootstrap');
+			Plugin::hook('beforeBootstrap', [&$classNamespace, &$class, &$method]);
 
 			$instance	=	new $classNamespace();
 
@@ -78,9 +78,9 @@ class modRewrite implements AdapterInterface
 
 				ob_end_clean();
 
-				echo $content;
+				Plugin::hook('afterBootstrap', [&$content]);
 
-				Plugin::hook('afterBootstrap', ['content' => $content]);
+				echo $content;
 			}
 			else
 			{

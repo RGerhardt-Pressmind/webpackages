@@ -11,16 +11,16 @@
       "tablePrefix": ""
     },
     "template": {
-      "engine": "filesystem",
+      "engine": "system\\core\\Template\\Adapter\\filesystem",
       "skin": "webpackages",
       "path": "system/view"
     },
     "logger": {
-      "engine": "filelogger",
+      "engine": "system\\core\\Logger\\Adapter\\filelogger",
       "path": "cache/logger"
     },
     "security": {
-      "engine": "sanitizer"
+      "engine": "system\\core\\Security\\Adapter\\sanitizer"
     },
     "language": {
       "default": "de_DE",
@@ -29,7 +29,7 @@
     "plugin": {
     },
     "router": {
-      "engine": "modRewrite"
+      "engine": "system\\core\\Router\\Adapter\\modRewrite"
     },
     "defaultClass": "welcome",
     "defaultMethod": "overview"

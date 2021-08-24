@@ -27,9 +27,9 @@ namespace system\core\Security;
 
 class SecurityConfig
 {
-	public $engine;
+	public string $engine;
 
-	private static $_self;
+	private static mixed $_self	=	null;
 
 	public static function create($engine): SecurityConfig
 	{

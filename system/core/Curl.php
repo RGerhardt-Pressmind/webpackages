@@ -27,10 +27,10 @@ namespace system\core;
 
 class Curl
 {
-	private $_curl;
-	private $_curlopts	=	[];
+	private mixed $_curl;
+	private array $_curlopts	=	[];
 
-	private $responseData	=	[];
+	private array $responseData	=	[];
 
 	/**
 	 * HTTP get request

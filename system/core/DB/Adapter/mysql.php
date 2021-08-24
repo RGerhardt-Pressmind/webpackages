@@ -51,7 +51,10 @@ class mysql implements AdapterInterface
 	}
 
 	/**
+	 * Connected to database
+	 *
 	 * @param DBConnectionConfig $config
+	 * @return mixed
 	 */
 	public function connection(DBConnectionConfig $config): mixed
 	{
@@ -64,6 +67,8 @@ class mysql implements AdapterInterface
 			echo 'Failed to connect to MySQL: '.$this->mysql->connect_errno;
 			exit;
 		}
+
+		return true;
 	}
 
 	/**

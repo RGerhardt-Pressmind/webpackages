@@ -26,7 +26,6 @@
 namespace system\core\DB;
 
 use system\core\DB\Adapter\AdapterInterface;
-use system\core\DB\Adapter\mysql;
 
 class database
 {
@@ -39,13 +38,15 @@ class database
 	 */
 	public static function getDatabase(DBConnectionConfig $config): AdapterInterface
 	{
-		if($config->engine == 'mysql')
+		$class	=	$config->engine;
+
+		if(class_exists($class))
 		{
-			$database	=	new mysql();
+			$database	=	new $class();
 		}
 		else
 		{
-			echo 'Failed, database "'.$config->engine.'" not exist';
+			echo 'Failed, database "'.$class.'" not exist';
 			exit;
 		}
 

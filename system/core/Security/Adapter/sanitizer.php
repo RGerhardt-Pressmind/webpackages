@@ -25,6 +25,8 @@
 
 namespace system\core\Security\Adapter;
 
+use system\core\Plugin;
+
 class sanitizer implements AdapterInterface
 {
 	const CONVERT_STRING	=	'string';
@@ -43,6 +45,8 @@ class sanitizer implements AdapterInterface
 	 */
 	public function validate($str, $convert = null): mixed
 	{
+		Plugin::hook('beforeValidateSecurity', [&$str, $convert]);
+
 		if($convert)
 		{
 			$str	=	$this->convert($str, $convert);
@@ -60,6 +64,7 @@ class sanitizer implements AdapterInterface
 			$str	=	trim($str);
 		}
 
+		Plugin::hook('afterValidateSecurity', [&$str, $convert]);
 
 		return $str;
 	}
@@ -74,6 +79,8 @@ class sanitizer implements AdapterInterface
 	 */
 	private function convert(mixed $str, string $convert): mixed
 	{
+		Plugin::hook('beforeConvertSecurity', [&$str, $convert]);
+
 		switch($convert)
 		{
 			case self::CONVERT_INT:
@@ -110,6 +117,8 @@ class sanitizer implements AdapterInterface
 			break;
 		}
 
+		Plugin::hook('afterConvertSecurity', [&$str, $convert]);
+
 		return $str;
 	}
 
@@ -121,6 +130,8 @@ class sanitizer implements AdapterInterface
 	 */
 	private function removeInvisibleCharacters(string $str, bool $url_encoded = true): string
 	{
+		Plugin::hook('beforeRemoveInvisibleCharacters', [&$str, $url_encoded]);
+
 		$non_displayables = [];
 
 		if($url_encoded)
@@ -141,6 +152,8 @@ class sanitizer implements AdapterInterface
 			}
 		}
 
+		Plugin::hook('afterRemoveInvisibleCharacters', [&$str, $url_encoded]);
+
 		return $str;
 	}
 
@@ -153,6 +166,8 @@ class sanitizer implements AdapterInterface
 	 */
 	private function xss_clean(string $str): string
 	{
+		Plugin::hook('beforeXSSClean', [&$str]);
+
 		$str = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $str);
         $str = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $str);
         $str = preg_replace('/(&#x*[0-9A-F]+);*/iu', '$1;', $str);
@@ -179,6 +194,8 @@ class sanitizer implements AdapterInterface
 			$old_str = $str;
 			$str = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $str);
         } while ($old_str !== $str);
+
+		Plugin::hook('afterXSSClean', [&$str]);
 
         return $str;
 	}

@@ -27,10 +27,10 @@ namespace system\core\Config;
 
 class LanguageConfig
 {
-	public string $language	=	'';
+	public string $language			=	'';
 	public string $languageFilePath	=	'';
 
-	private static $_self;
+	private static mixed $_self		=	null;
 
 	public static function create(string $language, string $languageFilePath): LanguageConfig
 	{
@@ -38,7 +38,7 @@ class LanguageConfig
 		{
 			self::$_self					=	new self();
 			self::$_self->language			=	$language;
-			self::$_self->languageFilePath	=	ROOT.trim(trim($languageFilePath, '/'), '\\').DIRECTORY_SEPARATOR;
+			self::$_self->languageFilePath	=	ROOT.trim(trim($languageFilePath, '/'), '\\').SEP;
 		}
 
 		return self::$_self;
