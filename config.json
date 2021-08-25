@@ -19,6 +19,17 @@
       "engine": "system\\core\\Logger\\Adapter\\filelogger",
       "path": "cache/logger"
     },
+    "transfer": {
+      "engine": "system\\core\\Transfer\\Adapter\\ftp",
+      "connection": {
+        "host":  "",
+        "username": "",
+        "password": "",
+        "ssl": false,
+        "port": 21,
+        "passiv": false
+      }
+    },
     "security": {
       "engine": "system\\core\\Security\\Adapter\\sanitizer"
     },

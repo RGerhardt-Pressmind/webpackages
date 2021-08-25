@@ -27,65 +27,76 @@ namespace system\core;
 
 use system\core\Logger\logger;
 use system\core\Logger\LoggerConfig;
-use system\core\Template\Adapter\AdapterInterface;
 use system\core\Template\template;
 use system\core\Template\TemplateConfig;
+use system\core\Transfer\transfer;
+use system\core\Transfer\TransferConfig;
 
+/**
+ * @property \system\core\Template\Adapter\AdapterInterface $template
+ * @property \system\core\Logger\Adapter\AdapterInterface $logger
+ * @property Curl $curl
+ * @property \system\core\Security\Adapter\AdapterInterface $security
+ * @property \system\core\Transfer\Adapter\AdapterInterface $transfer
+ */
 class Loader
 {
 	/**
-	 * @var AdapterInterface
+	 * Dynamic class
+	 *
+	 * @param string $name
+	 * @return mixed
 	 */
-	public mixed $template;
-
-	/**
-	 * @var \system\core\Logger\Adapter\AdapterInterface|null
-	 */
-	public mixed $logger;
-
-	/**
-	 * @var Curl
-	 */
-	public mixed $curl;
-
-	/**
-	 * @var \system\core\Security\Adapter\AdapterInterface
-	 */
-	public mixed $security;
-
-	public function __construct()
+	public function __get(string $name): mixed
 	{
-		// call hook before register all loader
-		Plugin::hook('beforeRegisterLoader');
-
 		$config	=	Registry::getInstance()->get('config');
 
-		// Logger
-		$loggerConfig	=	LoggerConfig::create($config['logger']['engine'], $config['logger']['path']);
+		switch($name)
+		{
+			case 'template':
 
-		Registry::getInstance()->add('logger', logger::create($loggerConfig));
+				if(!Registry::getInstance()->exist('template'))
+				{
+					$templateConfig	=	TemplateConfig::create($config['template']['engine'], $config['template']['path'], $config['template']['skin']);
 
-		$this->logger	=	Registry::getInstance()->get('logger');
+					Registry::getInstance()->add('template', template::create($templateConfig));
+				}
 
+				return Registry::getInstance()->get('template');
+			case 'logger':
 
-		// Template
-		$templateConfig	=	TemplateConfig::create($config['template']['engine'], $config['template']['path'], $config['template']['skin']);
+				if(!Registry::getInstance()->exist('logger'))
+				{
+					$loggerConfig	=	LoggerConfig::create($config['logger']['engine'], $config['logger']['path']);
 
-		Registry::getInstance()->add('template', template::create($templateConfig));
+					Registry::getInstance()->add('logger', logger::create($loggerConfig));
+				}
 
-		$this->template	=	Registry::getInstance()->get('template');
+				return Registry::getInstance()->get('logger');
+			case 'curl':
 
+				if(!Registry::getInstance()->exist('curl'))
+				{
+					Registry::getInstance()->add('curl', new Curl());
+				}
 
-		// cUrl
-		Registry::getInstance()->add('curl', new Curl());
+				return Registry::getInstance()->get('curl');
+			case 'transfer':
 
-		$this->curl	=	Registry::getInstance()->get('curl');
+				if(!Registry::getInstance()->exist('transfer'))
+				{
+					$transferConfig	=	TransferConfig::create($config['transfer']['engine'], $config['transfer']['connection']);
 
+					Registry::getInstance()->add('transfer', transfer::create($transferConfig));
+				}
 
-		// security
-		$this->security	=	Registry::getInstance()->get('security');
+				return Registry::getInstance()->get('transfer');
+			case 'security':
 
-		// call hook after register all loader
-		Plugin::hook('registerLoader');
+				return Registry::getInstance()->get('security');
+			default:
+
+				die('Class "'.$name.'" not exist');
+		}
 	}
 }

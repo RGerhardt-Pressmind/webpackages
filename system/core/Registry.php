@@ -58,6 +58,17 @@ class Registry
 	}
 
 	/**
+	 * Exist class
+	 *
+	 * @param string $name
+	 * @return bool
+	 */
+	public function exist(string $name): bool
+	{
+		return isset($this->_class[$name]);
+	}
+
+	/**
 	 * Get class
 	 *
 	 * @param string $name
