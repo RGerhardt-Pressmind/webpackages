@@ -57,9 +57,13 @@ class redis implements AdapterPlugins
 		{
 			$this->redis	=	new \Redis();
 
-			if(!$this->redis->connect('127.0.0.1', 6379))
-			{
-				die('Redis can not be connect');
+			try{
+				if(!$this->redis->connect('127.0.0.1', 6379))
+				{
+					die('Redis can not be connect');
+				}
+			}catch (\Throwable){
+				$this->redis	=	null;
 			}
 		}
 	}
