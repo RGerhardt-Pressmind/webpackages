@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -250,28 +250,7 @@ class mysql implements AdapterInterface
 	{
 		$sql	=	'DELETE FROM `'.$this->table_prefix.$table.'`';
 
-		if(!empty($where))
-		{
-			$sql	.=	' WHERE ';
-
-			$wheres	=	[];
-
-			foreach($where as $key => $value)
-			{
-				$wheres[]	=	'`'.$key.'` = "'.$this->mysql->real_escape_string($value).'"';
-			}
-
-			$sql	.=	implode(' AND ', $wheres);
-		}
-
-		if($limit > 0)
-		{
-			$sql	.=	' LIMIT '.(int)$limit;
-		}
-
-		$query	=	$this->mysql->query($sql);
-
-		return ($query !== false);
+		return $this->extracted($where, $sql, $limit);
 	}
 
 	/**
@@ -297,28 +276,7 @@ class mysql implements AdapterInterface
 
 		$sql	.=	implode(', ', $inserts);
 
-		if(!empty($where))
-		{
-			$sql	.=	' WHERE ';
-
-			$wheres	=	[];
-
-			foreach($where as $key => $value)
-			{
-				$wheres[]	=	'`'.$key.'` = "'.$this->mysql->real_escape_string($value).'"';
-			}
-
-			$sql	.=	implode(' AND ', $wheres);
-		}
-
-		if($limit > 0)
-		{
-			$sql	.=	' LIMIT '.(int)$limit;
-		}
-
-		$query	=	$this->mysql->query($sql);
-
-		return ($query !== false);
+		return $this->extracted($where, $sql, $limit);
 	}
 
 	/**
@@ -363,5 +321,38 @@ class mysql implements AdapterInterface
 	public function getConnection(): ?mysqli
 	{
 		return $this->mysql;
+	}
+
+	/**
+	 * @param array|null $where
+	 * @param string     $sql
+	 * @param int        $limit
+	 *
+	 * @return bool
+	 */
+	private function extracted(?array $where, string $sql, int $limit): bool
+	{
+		if(!empty($where))
+		{
+			$sql .= ' WHERE ';
+
+			$wheres = [];
+
+			foreach($where as $key => $value)
+			{
+				$wheres[] = '`'.$key.'` = "'.$this->mysql->real_escape_string($value).'"';
+			}
+
+			$sql .= implode(' AND ', $wheres);
+		}
+
+		if($limit > 0)
+		{
+			$sql .= ' LIMIT '.$limit;
+		}
+
+		$query = $this->mysql->query($sql);
+
+		return ($query !== false);
 	}
 }

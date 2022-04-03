@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -33,6 +33,7 @@ use system\plugins\Adapter\AdapterPlugins;
 class Plugin
 {
 	private static array $_hooks	=	[];
+	private static array $_filter	=	[];
 
 	/**
 	 * Call hook
@@ -49,6 +50,40 @@ class Plugin
 				call_user_func_array($hook, $params);
 			}
 		}
+	}
+
+	/**
+	 * Call registry filter
+	 *
+	 * @param string $hook
+	 * @param mixed  $param
+	 *
+	 * @return false|mixed
+	 */
+	public static function call_filter(string $hook, mixed $param)
+	{
+		if(!empty(self::$_filter[$hook]))
+		{
+			foreach(self::$_filter[$hook] as $filter)
+			{
+				$param	=	call_user_func_array($filter, (is_array($param) ? $param : [$param]));
+			}
+		}
+
+		return $param;
+	}
+
+	/**
+	 * Add filter
+	 *
+	 * @param string $hook
+	 * @param array  $call
+	 *
+	 * @return void
+	 */
+	public static function add_filter(string $hook, array $call)
+	{
+		self::$_filter[$hook][]	=	$call;
 	}
 
 	/**

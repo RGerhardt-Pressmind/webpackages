@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -56,7 +56,9 @@ class Language
 	 */
 	public static function changeLanguage(string $lng)
 	{
-		Plugin::hook('beforeChangeLanguage', [&$lng]);
+		$lng = Plugin::call_filter('changeLanguage', $lng);
+
+		Plugin::hook('beforeChangeLanguage', [$lng]);
 
 		self::$_translates	=	[];
 
@@ -69,29 +71,30 @@ class Language
 		$dir	=	new RecursiveDirectoryIterator(self::$languageFilePath.$lng, FilesystemIterator::SKIP_DOTS);
 		$files	=	new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
 
-		if(iterator_count($files) > 0)
+		/**
+		 * @var SplFileInfo $file
+		 */
+		foreach($files as $file)
 		{
-			/**
-			 * @var SplFileInfo $file
-			 */
-			foreach($files as $file)
+			if($file->getExtension() == 'json')
 			{
-				if($file->getExtension() == 'json')
+				$filename	=	str_replace('.'.$file->getExtension(), '', $file->getFilename());
+				$json		=	file_get_contents($file->__toString());
+				$json		=	json_decode($json, true);
+
+				if($json === false)
 				{
-					$filename	=	str_replace('.'.$file->getExtension(), '', $file->getFilename());
-					$json		=	file_get_contents($file->__toString());
-					$json		=	json_decode($json, true);
-
-					if($json === false)
-					{
-						echo 'Failed, language json invalid ('.$filename.')';
-						exit;
-					}
-
-					self::$_translates[$filename]	=	$json;
+					echo 'Failed, language json invalid ('.$filename.')';
+					exit;
 				}
+
+				self::$_translates[$filename]	=	$json;
 			}
 		}
+
+		list(self::$_translates)	=	Plugin::call_filter('afterChangeLanguage', [self::$_translates]);
+
+		Plugin::hook('afterChangeLanguge', [self::$_translates]);
 	}
 
 	/**

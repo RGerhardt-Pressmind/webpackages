@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -26,6 +26,7 @@
 namespace plugins;
 
 use system\core\Plugin;
+use system\core\Registry;
 use system\plugins\Adapter\AdapterPlugins;
 
 class redis implements AdapterPlugins
@@ -35,6 +36,8 @@ class redis implements AdapterPlugins
 	 */
 	private mixed $redis = null;
 
+	private mixed $config = null;
+
 
 	public function pluginParameter(array $parameter)
 	{
@@ -43,9 +46,34 @@ class redis implements AdapterPlugins
 
 	public function registerHooks()
 	{
+		$this->config	=	Registry::getInstance()->get('config');
+
 		Plugin::register('init', [$this, 'getRedis']);
-		Plugin::register('beforeBootstrap', [$this, 'beforeBootstrap']);
-		Plugin::register('afterBootstrap', [$this, 'afterBootstrap']);
+		Plugin::add_filter('changeLanguage', [$this, 'changeLanguage']);
+		Plugin::add_filter('beforeValidateSecurity', [$this, 'beforeValidateSecurity']);
+		#Plugin::register('beforeBootstrap', [$this, 'beforeBootstrap']);
+		#Plugin::register('afterBootstrap', [$this, 'afterBootstrap']);
+	}
+
+
+	public function beforeValidateSecurity($str, $convert)
+	{
+		echo $str;
+
+		return [$str, $convert];
+	}
+
+	/**
+	 * Change language
+	 *
+	 * @param string $lng
+	 *
+	 * @return string
+	 */
+	public function changeLanguage(string $lng): string
+	{
+		#return 'de_DE';
+		return $lng;
 	}
 
 	/**
@@ -73,11 +101,11 @@ class redis implements AdapterPlugins
 	 */
 	public function beforeBootstrap()
 	{
-		$hash	=	md5(serialize($_REQUEST));
+		$hash	=	md5(serialize($_REQUEST).($_SESSION['lng'] ?? $this->config['langauge']['default']));
 
 		if($this->redis && $this->redis->exists($hash) && !isset($_REQUEST['no-cache']))
 		{
-			echo '<script>console.log("Load from redis")</script>';
+			header('wp-redis-cache: 1');
 			echo $this->redis->get($hash);
 			exit;
 		}
@@ -90,7 +118,7 @@ class redis implements AdapterPlugins
 	 */
 	public function afterBootstrap(mixed $content)
 	{
-		$hash	=	md5(serialize($_REQUEST));
+		$hash	=	md5(serialize($_REQUEST).($_SESSION['lng'] ?? $this->config['langauge']['default']));
 
 		$this->redis?->setex($hash, 6000, $content);
 	}

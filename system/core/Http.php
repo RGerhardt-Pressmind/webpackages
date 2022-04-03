@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -49,9 +49,16 @@ class Http
 		$templatePath	=	trim(trim($config['template']['path'], '/'), '\\');
 		$skin			=	$config['template']['skin'];
 
-		Plugin::hook('getSkinURL', [&$templatePath, &$skin]);
+		$templatePath	=	(string)Plugin::call_filter('templatePath', $templatePath);
+		$skin			=	(string)Plugin::call_filter('skin', $skin);
 
-		return self::_getBaseURL().$templatePath.'/'.$skin.'/';
+		Plugin::hook('getSkinURL', [$templatePath, $skin]);
+
+		$skinUrl	=	self::_getBaseURL().$templatePath.'/'.$skin.'/';
+
+		$skinUrl	=	Plugin::call_filter('skinURL', $skinUrl);
+
+		return $skinUrl;
 	}
 
 	/**
@@ -62,7 +69,9 @@ class Http
 	 */
 	public static function location(string $url)
 	{
-		Plugin::hook('location', [&$url]);
+		$url = (string)Plugin::call_filter('location', $url);
+
+		Plugin::hook('location', [$url]);
 
 		header('Location: '.$url);
 		exit;
@@ -77,7 +86,9 @@ class Http
 	{
 		$url	=	(self::is_https() ? 'https' : 'http').'://'.(!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost').substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 
-		Plugin::hook('getBaseURL', [&$url]);
+		$url = (string)Plugin::call_filter('getBaseURL', $url);
+
+		Plugin::hook('getBaseURL', [$url]);
 
 		return $url;
 	}
@@ -91,7 +102,9 @@ class Http
 	{
 		$is	=	(!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') || (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) != 'off');
 
-		Plugin::hook('isHTTPS', [&$is]);
+		$is = (bool)Plugin::call_filter('isHTTPS', $is);
+
+		Plugin::hook('isHTTPS', [$is]);
 
 		return $is;
 	}

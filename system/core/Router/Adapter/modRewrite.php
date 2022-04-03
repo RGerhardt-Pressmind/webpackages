@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -64,7 +64,9 @@ class modRewrite implements AdapterInterface
 
 			$classNamespace	=	'system\controller\\'.$class;
 
-			Plugin::hook('beforeBootstrap', [&$classNamespace, &$class, &$method]);
+			list($classNamespace, $class, $method) = Plugin::call_filter('beforeBootstrap', [$classNamespace, $class, $method]);
+
+			Plugin::hook('beforeBootstrap', [$classNamespace, $class, $method]);
 
 			$instance	=	new $classNamespace();
 
@@ -78,7 +80,9 @@ class modRewrite implements AdapterInterface
 
 				ob_end_clean();
 
-				Plugin::hook('afterBootstrap', [&$content]);
+				$content	=	Plugin::call_filter('afterBootstrap', $content);
+
+				Plugin::hook('afterBootstrap', [$content]);
 
 				echo $content;
 			}

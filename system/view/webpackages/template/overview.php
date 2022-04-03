@@ -3,6 +3,7 @@
 use system\core\Language;
 
 require dirname(__FILE__).DIRECTORY_SEPARATOR.'header.php';
+
 ?>
 <section id="main-slider" class="carousel">
 	<div class="carousel-inner">

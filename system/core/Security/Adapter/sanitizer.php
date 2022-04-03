@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -45,7 +45,9 @@ class sanitizer implements AdapterInterface
 	 */
 	public function validate($str, $convert = null): mixed
 	{
-		Plugin::hook('beforeValidateSecurity', [&$str, $convert]);
+		list($str, $convert) = Plugin::call_filter('beforeValidateSecurity', [$str, $convert]);
+
+		Plugin::hook('beforeValidateSecurity', [$str, $convert]);
 
 		if($convert)
 		{
@@ -64,7 +66,9 @@ class sanitizer implements AdapterInterface
 			$str	=	trim($str);
 		}
 
-		Plugin::hook('afterValidateSecurity', [&$str, $convert]);
+		list($str, $convert) = Plugin::call_filter('afterValidateSecurity', [$str, $convert]);
+
+		Plugin::hook('afterValidateSecurity', [$str, $convert]);
 
 		return $str;
 	}
@@ -79,7 +83,9 @@ class sanitizer implements AdapterInterface
 	 */
 	private function convert(mixed $str, string $convert): mixed
 	{
-		Plugin::hook('beforeConvertSecurity', [&$str, $convert]);
+		list($str, $convert)	=	Plugin::call_filter('beforeConvertSecurity', [$str, $convert]);
+
+		Plugin::hook('beforeConvertSecurity', [$str, $convert]);
 
 		switch($convert)
 		{
@@ -117,7 +123,9 @@ class sanitizer implements AdapterInterface
 			break;
 		}
 
-		Plugin::hook('afterConvertSecurity', [&$str, $convert]);
+		list($str) = Plugin::call_filter('afterConvertSecurity', [$str, $convert]);
+
+		Plugin::hook('afterConvertSecurity', [$str, $convert]);
 
 		return $str;
 	}
@@ -130,21 +138,23 @@ class sanitizer implements AdapterInterface
 	 */
 	private function removeInvisibleCharacters(string $str, bool $url_encoded = true): string
 	{
-		Plugin::hook('beforeRemoveInvisibleCharacters', [&$str, $url_encoded]);
+		list($str, $url_encoded) = Plugin::call_filter('beforeRemoveInvisibleCharacters', [$str, $url_encoded]);
 
-		$non_displayables = [];
+		Plugin::hook('beforeRemoveInvisibleCharacters', [$str, $url_encoded]);
+
+		$non_displayable = [];
 
 		if($url_encoded)
 		{
-			$non_displayables[] = '/%0[0-8bcef]/';
-			$non_displayables[] = '/%1[0-9a-f]/';
+			$non_displayable[] = '/%0[0-8bcef]/';
+			$non_displayable[] = '/%1[0-9a-f]/';
 		}
 
-		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
+		$non_displayable[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
 
 		while(true)
 		{
-			$str = preg_replace($non_displayables, '', $str, -1, $count);
+			$str = preg_replace($non_displayable, '', $str, -1, $count);
 
 			if($count == 0)
 			{
@@ -152,7 +162,9 @@ class sanitizer implements AdapterInterface
 			}
 		}
 
-		Plugin::hook('afterRemoveInvisibleCharacters', [&$str, $url_encoded]);
+		list($str) = Plugin::call_filter('afterRemoveInvisibleCharacters', [$str, $url_encoded]);
+
+		Plugin::hook('afterRemoveInvisibleCharacters', [$str, $url_encoded]);
 
 		return $str;
 	}
@@ -166,7 +178,9 @@ class sanitizer implements AdapterInterface
 	 */
 	private function xss_clean(string $str): string
 	{
-		Plugin::hook('beforeXSSClean', [&$str]);
+		$str = Plugin::call_filter('beforeXSSClean', $str);
+
+		Plugin::hook('beforeXSSClean', [$str]);
 
 		$str = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $str);
         $str = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $str);
@@ -195,7 +209,9 @@ class sanitizer implements AdapterInterface
 			$str = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $str);
         } while ($old_str !== $str);
 
-		Plugin::hook('afterXSSClean', [&$str]);
+        $str = Plugin::call_filter('afterXSSClean', $str);
+
+		Plugin::hook('afterXSSClean', [$str]);
 
         return $str;
 	}

@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -62,17 +62,19 @@ class filelogger implements AdapterInterface
 	 * @return string
 	 * @throws Exception
 	 */
-	public function write(string $log, string $output = self::OUTPUT_SCREEN, string $filename = 'message.log'): string
+	public function write(string $log, string $output = self::OUTPUT_SCREEN, string $filename = 'message.log', bool $appendLog = false): string
 	{
 		$datetime	=	new DateTime('now', new DateTimeZone($this->globalConfig['timezone']));
 
 		$log	=	'['.$datetime->format('d.m.Y H:i:s').'] '.print_r($log, true);
 
-		Plugin::hook('beforeWriteLog', [&$log]);
+		$log = Plugin::call_filter('log', $log);
+
+		Plugin::hook('beforeWriteLog', [$log, $output, $filename, $appendLog]);
 
 		if($output == self::OUTPUT_FILE)
 		{
-			file_put_contents($this->logPath.$filename, $log.PHP_EOL, FILE_APPEND);
+			file_put_contents($this->logPath.$filename, $log.PHP_EOL, ($appendLog ? FILE_APPEND : null));
 		}
 		else
 		{

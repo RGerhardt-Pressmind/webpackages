@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2010 - 2021  <Robbyn Gerhardt>
+ *  Copyright (C) 2010 - 2022  <Robbyn Gerhardt>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  *
  * @package       webpackages
  * @author        Robbyn Gerhardt
- * @copyright     Copyright (c) 2010 - 2021
+ * @copyright     Copyright (c) 2010 - 2022
  * @license       http://opensource.org/licenses/MIT	MIT License
  * @since         Version 2.0.0
  * @filesource
@@ -45,7 +45,9 @@ class filesystem implements AdapterInterface
 		$this->templatePath	=	ROOT.str_replace('/', SEP, trim(trim($config->templatePath, '/'), '\\'));
 		$this->skin			=	$config->skin;
 
-		Plugin::hook('afterTemplateCreate', [&$this->templatePath, &$this->skin]);
+		list($this->templatePath, $this->skin) = Plugin::call_filter('afterTemplateCreate', [$this->templatePath, $this->skin]);
+
+		Plugin::hook('afterTemplateCreate', [$this->templatePath, $this->skin]);
 
 		return true;
 	}
@@ -58,8 +60,9 @@ class filesystem implements AdapterInterface
 	public function getTemplatePath(): string
 	{
 		$templatePath	=	$this->templatePath.SEP.$this->skin.SEP.'template'.SEP;
+		$templatePath	=	Plugin::call_filter('getTemplatePath', $templatePath);
 
-		Plugin::hook('getTemplatePath', [&$templatePath]);
+		Plugin::hook('getTemplatePath', [$templatePath]);
 
 		return $templatePath;
 	}
@@ -74,7 +77,9 @@ class filesystem implements AdapterInterface
 	 */
 	public function parse(array $params, string $template)
 	{
-		Plugin::hook('beforeParseTemplate', [&$params, &$template]);
+		list($params, $template) = Plugin::call_filter('beforeParseTemplate', [$params, $template]);
+
+		Plugin::hook('beforeParseTemplate', [$params, $template]);
 
 		$templateFile	=	$this->getTemplatePath().$template.'.php';
 
@@ -96,7 +101,9 @@ class filesystem implements AdapterInterface
 		$content	=	ob_get_contents();
 		ob_end_clean();
 
-		Plugin::hook('afterParseTemplate', [&$content]);
+		$content	=	Plugin::call_filter('afterParseTemplate', $content);
+
+		Plugin::hook('afterParseTemplate', [$content]);
 
 		echo $content;
 	}
