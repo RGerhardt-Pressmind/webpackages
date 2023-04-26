@@ -231,6 +231,7 @@ foreach($copyItems as $copyItem)
 
 if(file_exists(ROOT.'.htaccess') && file_exists($localePath.'.htaccess'))
 {
+	_log('info', 'Move .htaccess');
 	$htaccess	=	file_get_contents(ROOT.'.htaccess');
 
 	preg_match('/(#USER_CONTENT_BEGIN(.*?)#USER_CONTENT_END)/ms', $htaccess, $matches);
@@ -246,4 +247,5 @@ if(file_exists(ROOT.'.htaccess') && file_exists($localePath.'.htaccess'))
 	}
 }
 
+_log('info', 'Remove update folder');
 delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
