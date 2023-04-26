@@ -177,21 +177,24 @@ function move_directory($source, $destination) {
     $source = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
     $destination = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-	$directoryIterator = new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS);
     $files = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
         RecursiveIteratorIterator::CHILD_FIRST
     );
 
     foreach ($files as $file) {
-        $file_path = $destination . $directoryIterator->getSubPathName();
+        if (!$file->isDir()) {
+        	$file_path = str_replace($source, $destination, $file->__toString());
+        	$dirname = dirname($file_path);
 
-        if ($file->isDir()) {
-        	_log('info', 'Create dir: "'.$file_path.'"');
-            mkdir($file_path, 0755, true);
-        } else {
+        	if(!file_exists($dirname))
+			{
+				mkdir($dirname, 0755, true);
+			}
+
         	_log('info', 'Move file from "'.$file->__toString().'" to "'.$file_path.'"');
-            rename($file, $file_path);
+
+        	rename($file, $file_path);
         }
     }
 }
