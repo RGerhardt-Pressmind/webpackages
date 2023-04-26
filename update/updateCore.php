@@ -169,6 +169,30 @@ $copyItems	=	[
 	]
 ];
 
+function move_directory($source, $destination) {
+    if (!is_dir($destination)) {
+        mkdir($destination, 0755, true);
+    }
+
+    $source = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+    $destination = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+    $files = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+
+    foreach ($files as $file) {
+        $file_path = $destination . $files->getSubPathName();
+
+        if ($file->isDir()) {
+            mkdir($file_path);
+        } else {
+            copy($file, $file_path);
+        }
+    }
+}
+
 $executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPARATOR;
 
 foreach($copyItems as $copyItem)
