@@ -51,8 +51,8 @@ class redis implements AdapterPlugins
 		Plugin::register('init', [$this, 'getRedis']);
 		Plugin::add_filter('changeLanguage', [$this, 'changeLanguage']);
 		Plugin::add_filter('beforeValidateSecurity', [$this, 'beforeValidateSecurity']);
-		#Plugin::register('beforeBootstrap', [$this, 'beforeBootstrap']);
-		#Plugin::register('afterBootstrap', [$this, 'afterBootstrap']);
+		Plugin::register('beforeBootstrap', [$this, 'beforeBootstrap']);
+		Plugin::register('afterBootstrap', [$this, 'afterBootstrap']);
 	}
 
 
@@ -85,8 +85,11 @@ class redis implements AdapterPlugins
 		{
 			$this->redis	=	new \Redis();
 
+			$redisHost	=	($this->config['redis']['host'] ?? '127.0.0.1');
+			$redisPort	=	($this->config['redis']['port'] ?? 6379);
+
 			try{
-				if(!$this->redis->connect('127.0.0.1', 6379))
+				if(!$this->redis->connect($redisHost, $redisPort))
 				{
 					die('Redis can not be connect');
 				}
@@ -99,14 +102,15 @@ class redis implements AdapterPlugins
 	/**
 	 * Before template parse, control redis cache
 	 */
-	public function beforeBootstrap()
+	public function beforeBootstrap(): void
 	{
-		$hash	=	md5(serialize($_REQUEST).($_SESSION['lng'] ?? $this->config['langauge']['default']));
+		$key	=	md5(serialize($_REQUEST).($_SESSION['lng'] ?? $this->config['langauge']['default']));
 
-		if($this->redis && $this->redis->exists($hash) && !isset($_REQUEST['no-cache']))
+		if($this->redis?->exists($key) && !isset($_REQUEST['no-cache']))
 		{
-			header('wp-redis-cache: 1');
-			echo $this->redis->get($hash);
+			header('wp-redis-cache: active');
+			header('wp-redis-cache-ttl: '.$this->redis->ttl($key));
+			echo $this->redis->get($key);
 			exit;
 		}
 	}
@@ -116,7 +120,7 @@ class redis implements AdapterPlugins
 	 *
 	 * @param mixed $content
 	 */
-	public function afterBootstrap(mixed $content)
+	public function afterBootstrap(mixed $content): void
 	{
 		$hash	=	md5(serialize($_REQUEST).($_SESSION['lng'] ?? $this->config['langauge']['default']));
 

@@ -107,29 +107,55 @@ class Language
 	 */
 	public static function translate(string $key, $file = null): mixed
 	{
+		$keys = explode('.', $key);
+
 		if($file)
 		{
 			$values	=	self::$_translates[$file];
 
-			foreach($values as $_key => $value)
+			foreach($keys as $key)
 			{
-				if($_key == $value)
+				if(!isset($values[$key]))
 				{
-					return $value;
+					return false;
 				}
+
+				$values = $values[$key];
 			}
+
+			return $values;
 		}
 		else
 		{
+			$current	=	false;
+
 			foreach(self::$_translates as $values)
 			{
-				foreach($values as $_key => $value)
+				if(isset($values[$keys[0]]))
 				{
-					if($_key == $key)
+					$current	=	$values[$keys[0]];
+					break;
+				}
+			}
+
+			if($current !== false)
+			{
+				if(count($keys) > 1)
+				{
+					unset($keys[0]);
+
+					foreach($keys as $key)
 					{
-						return $value;
+						if(!isset($current[$key]))
+						{
+							return false;
+						}
+
+						$current	=	$current[$key];
 					}
 				}
+
+				return $current;
 			}
 		}
 

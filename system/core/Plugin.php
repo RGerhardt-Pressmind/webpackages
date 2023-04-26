@@ -28,7 +28,7 @@ namespace system\core;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use SplFileInfo;
-use system\plugins\Adapter\AdapterPlugins;
+use plugins\Adapter\AdapterPlugins;
 
 class Plugin
 {

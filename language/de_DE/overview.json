@@ -1,17 +1,31 @@
 {
-  "website.title": "webpackages - das Leistungsstärkste PHP Framework",
-  "website.description": "webpackages ist das Leistungsstärkste PHP Framework zum erstellen von PHP Projekten.",
-  "item1.headline": "PHP Framework",
-  "item1.description": "webpackages ist das beste und schnellste PHP Framework<br> das man zum erstellen von neuen PHP Projekten verwenden kann",
-  "item2.headline": "Sicherheit an erster Stelle",
-  "item2.description": "Mit webpackages brauchen Sie sich keine Sorgen mehr<br> um die Sicherheit Ihrer PHP Projekte machen.",
-  "container.text": "Wir von <strong>webpackages</strong> schaffen Vertrauen.<br>Denn unser PHP Framework schafft für Sie das unmögliche. Ein PHP Projekte mit einer Leichtigkeit und Freude umzusetzen und dabei noch Professionel sein.",
-  "speed": "Schnelligkeit",
-  "speed.text": "webpackages ist dank eines gut programmierten Kerns unglaublich schnell.",
-  "security": "Hohe Sicherheit",
-  "security.text": "Durch bewährte Technologien und Anwendungen kann webpackages Ihre Webprojekte stets vor Angriffen durch Benutzereingaben schützen. Diese Technologien werde dennoch stätig erweitert und auf neue Gefahren angepasst.",
-  "stable": "Stabile Umgebung",
-  "stable.text": "Durch unserer Ausgereifte Dokumentationen können Sie alles zu webpackages erfahren. Des Weiteren steht Ihnen unserer Hilfsbereite Community jederzeit zur Verfügung.",
-  "container.subline": "Durch unserer Ausgereifte Dokumentationen können Sie alles zu webpackages erfahren. Des Weiteren steht Ihnen unserer Hilfsbereite Community jederzeit zur Verfügung.",
-  "container.text2": "Mit dem webpackages Framework können Sie so viel mehr erreichen als Sie es bisher mit anderen Frameworks erreicht haben. Um Ihnen dies in Zahlen zu zeigen, haben wir hier für Sie eine kleine Statistik, basierend auf detailierten Technischen Daten eine sich aufbauenden Seite, bereitgestellt."
+  "website": {
+    "title": "webpackages - das Leistungsstärkste PHP Framework",
+    "description": "webpackages ist das Leistungsstärkste PHP Framework zum erstellen von PHP Projekten."
+  },
+  "item1": {
+    "headline": "PHP Framework",
+    "description": "webpackages ist das beste und schnellste PHP Framework<br> das man zum erstellen von neuen PHP Projekten verwenden kann"
+  },
+  "item2": {
+    "headline": "Sicherheit an erster Stelle",
+    "description": "Mit webpackages brauchen Sie sich keine Sorgen mehr<br> um die Sicherheit Ihrer PHP Projekte machen."
+  },
+  "container": {
+    "description": "Wir von <strong>webpackages</strong> schaffen Vertrauen.<br>Denn unser PHP Framework schafft für Sie das unmögliche. Ein PHP Projekte mit einer Leichtigkeit und Freude umzusetzen und dabei noch Professionel sein.",
+    "subline": "Durch unserer Ausgereifte Dokumentationen können Sie alles zu webpackages erfahren. Des Weiteren steht Ihnen unserer Hilfsbereite Community jederzeit zur Verfügung.",
+    "description_2": "Mit dem webpackages Framework können Sie so viel mehr erreichen als Sie es bisher mit anderen Frameworks erreicht haben. Um Ihnen dies in Zahlen zu zeigen, haben wir hier für Sie eine kleine Statistik, basierend auf detailierten Technischen Daten eine sich aufbauenden Seite, bereitgestellt."
+  },
+  "speed": {
+    "headline": "Schnelligkeit",
+    "description": "webpackages ist dank eines gut programmierten Kerns unglaublich schnell."
+  },
+  "security": {
+    "headline": "Hohe Sicherheit",
+    "description": "Durch bewährte Technologien und Anwendungen kann webpackages Ihre Webprojekte stets vor Angriffen durch Benutzereingaben schützen. Diese Technologien werde dennoch stätig erweitert und auf neue Gefahren angepasst."
+  },
+  "stable": {
+    "headline": "Stabile Umgebung",
+    "description": "Durch unserer Ausgereifte Dokumentationen können Sie alles zu webpackages erfahren. Des Weiteren steht Ihnen unserer Hilfsbereite Community jederzeit zur Verfügung."
+  }
 }

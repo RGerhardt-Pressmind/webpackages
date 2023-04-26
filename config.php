@@ -73,6 +73,11 @@ Registry::getInstance()->add('security', security::create($securityConfig));
 $languageConfig	=	Config\LanguageConfig::create($config['language']['default'], $config['language']['path']);
 Language::register($languageConfig);
 
+function __($str, $file = null)
+{
+	return Language::translate($str, $file);
+}
+
 if(!empty($config['database']['host']))
 {
 	// Build database connection

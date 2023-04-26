@@ -9,9 +9,9 @@ use system\core\Language;
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo Language::translate('website.description'); ?>">
+    <meta name="description" content="<?php echo __('website.description'); ?>">
     <meta name="author" content="webpackages">
-	<title><?php echo Language::translate('website.title'); ?></title>
+	<title><?php echo __('website.title'); ?></title>
 	<link rel="stylesheet" href="<?php echo Http::getSkinURL().'css/bootstrap.min.css'; ?>">
 	<link rel="stylesheet" href="<?php echo Http::getSkinURL().'css/font-awesome.min.css'; ?>">
 	<link rel="stylesheet" href="<?php echo Http::getSkinURL().'css/main.css'; ?>">
