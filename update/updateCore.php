@@ -169,21 +169,22 @@ $copyItems	=	[
 	]
 ];
 
-function move_directory($source, $destination) {
-    if (!is_dir($destination)) {
+function move_directory($source, $destination): void
+{
+    if (!is_dir($destination))
+    {
         mkdir($destination, 0755, true);
     }
 
     $source = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
     $destination = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-    $files = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
-        RecursiveIteratorIterator::CHILD_FIRST
-    );
+    $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source, FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST);
 
-    foreach ($files as $file) {
-        if (!$file->isDir()) {
+    foreach ($files as $file)
+    {
+        if (!$file->isDir())
+        {
         	$file_path = str_replace($source, $destination, $file->__toString());
         	$dirname = dirname($file_path);
 
@@ -224,3 +225,5 @@ foreach($copyItems as $copyItem)
 		}
 	}
 }
+
+delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
