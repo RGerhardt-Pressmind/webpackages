@@ -13,14 +13,17 @@ function delete_directory($dirPath)
         $dirPath .= DIRECTORY_SEPARATOR;
     }
 
-    $files = glob($dirPath . '*', GLOB_MARK);
+    $files	=	new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dirPath, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
 
     foreach ($files as $file) {
-        if (is_dir($file)) {
-            delete_directory($file);
-        } else {
-            unlink($file);
-        }
+    	if($file->isFile())
+		{
+			unlink($file->__toString());
+		}
+		else
+		{
+			delete_directory($file->__toString());
+		}
     }
 
     rmdir($dirPath);
