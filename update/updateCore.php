@@ -67,7 +67,7 @@ if(PHP_SAPI !== 'cli')
 
 define('ROOT', str_replace('update', '', __DIR__));
 
-$versionFile	=	'https://github.com/RGerhardt-Pressmind/webpackages/blob/master/system/VERSION';
+$versionFile	=	'https://raw.githubusercontent.com/RGerhardt-Pressmind/webpackages/master/system/VERSION';
 
 $ch	=	curl_init();
 curl_setopt($ch, CURLOPT_URL, $versionFile);
