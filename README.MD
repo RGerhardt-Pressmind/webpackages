@@ -1,5 +1,5 @@
 webpackages, das schnellste und sicherste PHP Framework
-=======================================================
+=
 webpackages - das sicherste, einfachste und schnellste datenbankbasierte MVC PHP Framework auf dem Markt. Überzeugen Sie sich selbst, wie einfach und schnell Sie ihre Projekte realisieren können!
 
 ## Einige Funktionen

@@ -25,25 +25,44 @@
 
 namespace system\core;
 
+use system\core\Config\exception\ConfigException;
+
 class Config
 {
 	private static mixed $_config = null;
 
 	/**
+	 * Clear config environments
+	 *
+	 * @return void
+	 */
+	public static function clearConfig()
+	{
+		self::$_config	=	null;
+	}
+
+	/**
 	 * Get config data
 	 *
+	 * @param string|null $env
+	 *
 	 * @return mixed
+	 * @throws ConfigException
 	 */
-	public static function getConfig(): mixed
+	public static function getConfig(string|null $env = null): mixed
 	{
+		if(empty($env))
+		{
+			$env	=	ENV;
+		}
+
 		if(is_null(self::$_config))
 		{
 			$configFile	=	ROOT.'config.json';
 
 			if(!file_exists($configFile))
 			{
-				echo 'config.json in root path not exist';
-				exit;
+				throw new ConfigException('config.json in root path not exist');
 			}
 
 			$configContent	=	file_get_contents($configFile);
@@ -51,8 +70,7 @@ class Config
 
 			if(!$configJSON)
 			{
-				echo 'config.json content is not json';
-				exit;
+				throw new ConfigException('config.json content is not json');
 			}
 
 			self::$_config	=	$configJSON;
@@ -62,12 +80,11 @@ class Config
 			$configJSON	=	self::$_config;
 		}
 
-		if(!isset($configJSON[ENV]))
+		if(!isset($configJSON[$env]))
 		{
-			echo 'config.json has not "'.ENV.'" environment';
-			exit;
+			throw new ConfigException('config.json has not "'.$env.'" environment');
 		}
 
-		return $configJSON[ENV];
+		return $configJSON[$env];
 	}
 }
