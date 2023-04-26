@@ -180,15 +180,17 @@ function move_directory($source, $destination) {
 	$directoryIterator = new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS);
     $files = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
-        RecursiveIteratorIterator::SELF_FIRST
+        RecursiveIteratorIterator::CHILD_FIRST
     );
 
     foreach ($files as $file) {
         $file_path = $destination . $directoryIterator->getSubPathName();
 
         if ($file->isDir()) {
+        	_log('info', 'Create dir: "'.$file_path.'"');
             mkdir($file_path, 0755, true);
         } else {
+        	_log('info', 'Move file from "'.$file->__toString().'" to "'.$file_path.'"');
             rename($file, $file_path);
         }
     }
