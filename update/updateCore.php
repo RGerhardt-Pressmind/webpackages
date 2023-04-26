@@ -248,11 +248,16 @@ if(file_exists(ROOT.'.htaccess') && file_exists($localePath.'.htaccess'))
 _log('info', 'Remove update folder');
 delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
 
+_log('info', 'Check executable files');
+
 $executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPARATOR;
 
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($executableFiles, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
 
 foreach($files as $file)
 {
+	_log('info', 'Run "'.$file->__toString().'"');
 	require_once $file->__toString();
 }
+
+_log('info', 'Update core finish');
