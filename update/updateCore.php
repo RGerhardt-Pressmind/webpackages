@@ -229,4 +229,21 @@ foreach($copyItems as $copyItem)
 	}
 }
 
+if(file_exists(ROOT.'.htaccess') && file_exists($localePath.'.htaccess'))
+{
+	$htaccess	=	file_get_contents(ROOT.'.htaccess');
+
+	preg_match('/(#USER_CONTENT_BEGIN(.*?)#USER_CONTENT_END)/ms', $htaccess, $matches);
+
+	rename($localePath.'.htaccess', ROOT.'.htaccess');
+
+	if(file_exists(ROOT.'.htaccess') && !empty($matches[1]))
+	{
+		$htaccess	=	file_get_contents(ROOT.'.htaccess');
+		$htaccess	=	preg_replace('/(#USER_CONTENT_BEGIN(.*?)#USER_CONTENT_END)/ms', $matches[1], $htaccess);
+
+		file_put_contents(ROOT.'.htaccess', $htaccess);
+	}
+}
+
 delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
