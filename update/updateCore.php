@@ -203,8 +203,6 @@ function move_directory($source, $destination): void
     }
 }
 
-$executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPARATOR;
-
 foreach($copyItems as $copyItem)
 {
 	if(is_file($copyItem['to']))
@@ -249,3 +247,12 @@ if(file_exists(ROOT.'.htaccess') && file_exists($localePath.'.htaccess'))
 
 _log('info', 'Remove update folder');
 delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
+
+$executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPARATOR;
+
+$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($executableFiles, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
+
+foreach($files as $file)
+{
+	require_once $file->__toString();
+}
