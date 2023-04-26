@@ -75,7 +75,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
-$serverVersion	=	curl_exec($ch);
+$serverVersion	=	trim(curl_exec($ch));
 
 if(curl_errno($ch))
 {
@@ -91,7 +91,7 @@ if(!file_exists(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION'))
 	exit;
 }
 
-$localeFile	=	file_get_contents(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION');
+$localeFile	=	trim(file_get_contents(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION'));
 
 _log('info', 'Locale version: '.$localeFile.', Server version: '.$serverVersion);
 
