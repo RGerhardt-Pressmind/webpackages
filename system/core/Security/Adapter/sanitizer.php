@@ -119,6 +119,10 @@ class sanitizer implements AdapterInterface
 				{
 					$str	=	'std()';
 				}
+				else
+				{
+					$str	=	(string)$str;
+				}
 
 			break;
 		}
