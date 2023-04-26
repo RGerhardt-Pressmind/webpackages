@@ -23,7 +23,7 @@
  * @filesource
  */
 
-namespace system\plugins\Adapter;
+namespace plugins\Adapter;
 
 interface AdapterPlugins
 {

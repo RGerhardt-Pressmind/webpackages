@@ -104,7 +104,7 @@ class Plugin
 	{
 		$config	=	Registry::getInstance()->get('config');
 
-		$path	=	ROOT.'system'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR;
+		$path	=	ROOT.$config['plugin']['path'].DIRECTORY_SEPARATOR;
 		$dirs	=	new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
 
 		/**

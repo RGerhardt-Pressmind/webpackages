@@ -27,7 +27,7 @@ namespace plugins;
 
 use system\core\Plugin;
 use system\core\Registry;
-use system\plugins\Adapter\AdapterPlugins;
+use plugins\Adapter\AdapterPlugins;
 
 class redis implements AdapterPlugins
 {

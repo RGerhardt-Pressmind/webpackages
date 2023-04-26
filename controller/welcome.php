@@ -23,7 +23,7 @@
  * @filesource
  */
 
-namespace system\controller;
+namespace controller;
 
 use system\core\Http;
 use system\core\Language;

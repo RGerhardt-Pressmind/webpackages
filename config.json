@@ -1,5 +1,11 @@
 {
   "development": {
+
+  },
+  "testing": {
+
+  },
+  "production": {
     "timezone": "Europe/Berlin",
     "database": {
       "engine": "mysql",
@@ -10,10 +16,15 @@
       "port": 3306,
       "tablePrefix": ""
     },
+    "controller": {
+      "path": "controller",
+      "defaultClass": "welcome",
+      "defaultMethod": "overview"
+    },
     "template": {
       "engine": "system\\core\\Template\\Adapter\\filesystem",
       "skin": "webpackages",
-      "path": "system/view"
+      "path": "view"
     },
     "logger": {
       "engine": "system\\core\\Logger\\Adapter\\filelogger",
@@ -35,20 +46,13 @@
     },
     "language": {
       "default": "de_DE",
-      "path": "system/language"
+      "path": "language"
     },
     "plugin": {
+      "path": "plugins"
     },
     "router": {
       "engine": "system\\core\\Router\\Adapter\\modRewrite"
-    },
-    "defaultClass": "welcome",
-    "defaultMethod": "overview"
-  },
-  "testing": {
-
-  },
-  "production": {
-
+    }
   }
 }

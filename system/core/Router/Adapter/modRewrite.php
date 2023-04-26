@@ -42,8 +42,8 @@ class modRewrite implements AdapterInterface
 		 */
 		$security	=	Registry::getInstance()->get('security');
 
-		$class	=	$config['defaultClass'];
-		$method	=	$config['defaultMethod'];
+		$class	=	$config['controller']['defaultClass'];
+		$method	=	$config['controller']['defaultMethod'];
 
 		if(!empty($_GET['c']))
 		{
@@ -55,14 +55,14 @@ class modRewrite implements AdapterInterface
 			$method	=	$security->validate($_GET['m']);
 		}
 
-		$controllerPath	=	ROOT.'system'.SEP.'controller'.SEP;
+		$controllerPath	=	ROOT.$config['controller']['path'].SEP;
 		$controllerFile	=	$controllerPath.$class.'.php';
 
 		if(file_exists($controllerFile))
 		{
 			require_once $controllerFile;
 
-			$classNamespace	=	'system\controller\\'.$class;
+			$classNamespace	=	'controller\\'.$class;
 
 			list($classNamespace, $class, $method) = Plugin::call_filter('beforeBootstrap', [$classNamespace, $class, $method]);
 
