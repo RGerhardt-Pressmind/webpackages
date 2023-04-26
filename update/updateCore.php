@@ -252,7 +252,7 @@ _log('info', 'Check executable files');
 
 $executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPARATOR;
 
-$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($executableFiles, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
+$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($executableFiles, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
 
 foreach($files as $file)
 {
