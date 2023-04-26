@@ -285,9 +285,6 @@ if(file_exists(ROOT.'.htaccess') && file_exists($localePath.'.htaccess'))
 	}
 }
 
-_log('info', 'Remove update folder');
-delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
-
 _log('info', 'Check executable files');
 
 $executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPARATOR;
@@ -305,5 +302,8 @@ if(iterator_count($files) > 0)
 		}
 	}
 }
+
+_log('info', 'Remove update folder');
+delete_directory(ROOT.'cache'.DIRECTORY_SEPARATOR.'update');
 
 _log('success', 'Update core finish');
