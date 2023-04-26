@@ -2,11 +2,6 @@
 #error_reporting(-1);
 #ini_set('display_errors', 1);
 
-if(PHP_SAPI !== 'cli')
-{
-	exit('The script may only be executed via the terminal.');
-}
-
 function delete_directory($dirPath)
 {
 	if (substr($dirPath, strlen($dirPath) - 1, 1) !== DIRECTORY_SEPARATOR) {
@@ -40,6 +35,12 @@ function _log($type, $str)
 			$prefix	=	'Info:';
 
 		break;
+		case 'success':
+
+			$color	=	'0;32';
+			$prefix	=	'Success:';
+
+		break;
 		case 'warning':
 
 			$color	=	'0;33';
@@ -59,7 +60,44 @@ function _log($type, $str)
 	echo "\033[".$color."m".$date->format('d.m.Y H:i:s')." - ".$prefix." ".$str."\033[0m".PHP_EOL;
 }
 
+if(PHP_SAPI !== 'cli')
+{
+	exit('The script may only be executed via the terminal.');
+}
+
 define('ROOT', str_replace('update', '', __DIR__));
+
+$versionFile	=	'https://github.com/RGerhardt-Pressmind/webpackages/blob/master/system/VERSION';
+
+$ch	=	curl_init();
+curl_setopt($ch, CURLOPT_URL, $versionFile);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+$serverVersion	=	curl_exec($ch);
+
+if(curl_errno($ch))
+{
+	_log('error', 'Error by download version file: '.curl_error($ch));
+	exit;
+}
+
+curl_close($ch);
+
+if(!file_exists(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION'))
+{
+	_log('error', 'VERSION file in system folder not exist');
+	exit;
+}
+
+$localeFile	=	file_get_contents(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION');
+
+if($localeFile == $serverVersion)
+{
+	_log('success', 'Core version is actually, no update available');
+	exit;
+}
 
 $pathToUpdate	=	'https://github.com/RGerhardt-Pressmind/webpackages/archive/refs/heads/master.zip';
 
