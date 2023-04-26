@@ -177,18 +177,19 @@ function move_directory($source, $destination) {
     $source = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
     $destination = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
+	$directoryIterator = new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS);
     $files = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
         RecursiveIteratorIterator::SELF_FIRST
     );
 
     foreach ($files as $file) {
-        $file_path = $destination . $files->getSubPathName();
+        $file_path = $destination . $directoryIterator->getSubPathName();
 
         if ($file->isDir()) {
-            mkdir($file_path);
+            mkdir($file_path, 0755, true);
         } else {
-            copy($file, $file_path);
+            rename($file, $file_path);
         }
     }
 }
@@ -211,6 +212,10 @@ foreach($copyItems as $copyItem)
 		if(is_file($copyItem['from']))
 		{
 			rename($copyItem['from'], $copyItem['to']);
+		}
+		else if(is_dir($copyItem['from']))
+		{
+			move_directory($copyItem['from'], $copyItem['to']);
 		}
 	}
 }
