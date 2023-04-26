@@ -51,8 +51,8 @@ class redis implements AdapterPlugins
 		Plugin::register('init', [$this, 'getRedis']);
 		Plugin::add_filter('changeLanguage', [$this, 'changeLanguage']);
 		Plugin::add_filter('beforeValidateSecurity', [$this, 'beforeValidateSecurity']);
-		Plugin::register('beforeBootstrap', [$this, 'beforeBootstrap']);
-		Plugin::register('afterBootstrap', [$this, 'afterBootstrap']);
+		#Plugin::register('beforeBootstrap', [$this, 'beforeBootstrap']);
+		#Plugin::register('afterBootstrap', [$this, 'afterBootstrap']);
 	}
 
 

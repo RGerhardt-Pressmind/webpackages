@@ -16,6 +16,9 @@
       "port": 3306,
       "tablePrefix": ""
     },
+    "model": {
+      "path": "model"
+    },
     "controller": {
       "path": "controller",
       "defaultClass": "welcome",

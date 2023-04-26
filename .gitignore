@@ -4,5 +4,6 @@
 .DS_Store
 /.phpunit.result.cache
 /vendor/
-/cache/
+/cache/logger
+/cache/log_fatal_error.log
 /composer.lock

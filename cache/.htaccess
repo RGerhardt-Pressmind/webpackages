@@ -1,0 +1,4 @@
+<Files "log_fatal_error.log">
+    Order allow, deny
+    Deny from all
+</Files>

@@ -42,7 +42,7 @@ class Language
 	 *
 	 * @param LanguageConfig $config
 	 */
-	public static function register(LanguageConfig $config)
+	public static function register(LanguageConfig $config): void
 	{
 		self::$languageFilePath	=	$config->languageFilePath;
 
@@ -54,7 +54,7 @@ class Language
 	 *
 	 * @param string $lng
 	 */
-	public static function changeLanguage(string $lng)
+	public static function changeLanguage(string $lng): void
 	{
 		$lng = Plugin::call_filter('changeLanguage', $lng);
 
@@ -101,11 +101,12 @@ class Language
 	 * Translate string
 	 *
 	 * @param string $key
-	 * @param null $file
+	 * @param array  $parameter
+	 * @param null   $file
 	 *
-	 * @return mixed
+	 * @return string|array|bool
 	 */
-	public static function translate(string $key, $file = null): mixed
+	public static function translate(string $key, array $parameter = [], $file = null): string|array|bool
 	{
 		$keys = explode('.', $key);
 
@@ -123,7 +124,7 @@ class Language
 				$values = $values[$key];
 			}
 
-			return $values;
+			return self::replaceParameter($values, $parameter);
 		}
 		else
 		{
@@ -155,10 +156,38 @@ class Language
 					}
 				}
 
-				return $current;
+				return self::replaceParameter($current, $parameter);
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Replace individual parameter
+	 *
+	 * @param mixed $value
+	 * @param array $parameter
+	 *
+	 * @return array|string|string[]
+	 */
+	private static function replaceParameter(mixed $value, array $parameter): array|string
+	{
+		if(!is_string($value))
+		{
+			return '';
+		}
+
+		if(empty($parameter))
+		{
+			return $value;
+		}
+
+		foreach($parameter as $key => $v)
+		{
+			$value	=	str_replace('{{'.$key.'}}', $v, $value);
+		}
+
+		return $value;
 	}
 }

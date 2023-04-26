@@ -33,6 +33,22 @@ use system\core\Registry;
 use system\core\Security\security;
 use system\core\Security\SecurityConfig;
 
+function log_fatal_error()
+{
+	$error = error_get_last();
+
+    // Überprüfen, ob es sich um einen fatalen Fehler handelt
+    if ($error !== null && $error['type'] === E_ERROR) {
+        $errorMsg = "Fatal error: " . $error['message'] . " in " . $error['file'] . " on line " . $error['line'];
+        $logFile = __DIR__.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.'log_fatal_error.log';
+
+        // Fehlermeldung in die Log-Datei schreiben
+        error_log($errorMsg . PHP_EOL, 3, $logFile);
+    }
+}
+
+register_shutdown_function('log_fatal_error');
+
 header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: sameorigin");
@@ -73,9 +89,9 @@ Registry::getInstance()->add('security', security::create($securityConfig));
 $languageConfig	=	Config\LanguageConfig::create($config['language']['default'], $config['language']['path']);
 Language::register($languageConfig);
 
-function __($str, $file = null)
+function __($str, $parameter = [], $file = null)
 {
-	return Language::translate($str, $file);
+	return Language::translate($str, $parameter, $file);
 }
 
 if(!empty($config['database']['host']))

@@ -30,7 +30,7 @@ class Autoloader
 	/**
 	 * Register autoloader
 	 */
-	public static function register()
+	public static function register(): void
 	{
 		spl_autoload_register(function($class){
 			$file	=	ROOT.str_replace('\\', SEP, $class).'.php';
@@ -40,6 +40,8 @@ class Autoloader
 				require_once $file;
 				return true;
 			}
+
+			return false;
 		});
 	}
 }
