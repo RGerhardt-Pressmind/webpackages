@@ -93,6 +93,8 @@ if(!file_exists(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION'))
 
 $localeFile	=	file_get_contents(ROOT.'system'.DIRECTORY_SEPARATOR.'VERSION');
 
+_log('info', 'Locale version: '.$localeFile.', Server version: '.$serverVersion);
+
 if($localeFile == $serverVersion)
 {
 	_log('success', 'Core version is actually, no update available');
