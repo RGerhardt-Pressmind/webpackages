@@ -300,4 +300,4 @@ foreach($files as $file)
 	require_once $file->__toString();
 }
 
-_log('info', 'Update core finish');
+_log('success', 'Update core finish');
