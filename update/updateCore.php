@@ -294,10 +294,16 @@ $executableFiles	=	ROOT.'update'.DIRECTORY_SEPARATOR.'executable'.DIRECTORY_SEPA
 
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($executableFiles, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
 
-foreach($files as $file)
+if(iterator_count($files) > 0)
 {
-	_log('info', 'Run "'.$file->__toString().'"');
-	require_once $file->__toString();
+	foreach($files as $file)
+	{
+		if($file->isFile())
+		{
+			_log('info', 'Run "'.$file->__toString().'"');
+			require_once $file->__toString();
+		}
+	}
 }
 
 _log('success', 'Update core finish');
