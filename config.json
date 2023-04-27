@@ -8,7 +8,7 @@
   "production": {
     "timezone": "Europe/Berlin",
     "database": {
-      "engine": "mysql",
+      "engine": "system\\core\\DB\\Adapter\\mysql",
       "host": "",
       "username": "",
       "password": "",
