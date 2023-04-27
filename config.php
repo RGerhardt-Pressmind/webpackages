@@ -111,3 +111,8 @@ if(!empty($config['database']['host']))
 }
 
 Plugin::hook('init');
+
+if(file_exists(ROOT.'customer.php'))
+{
+	require_once ROOT.'customer.php';
+}
