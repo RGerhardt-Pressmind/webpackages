@@ -285,9 +285,9 @@ class mysql implements AdapterInterface
 	 * @param string $table
 	 * @param array $data
 	 *
-	 * @return bool
+	 * @return bool|int
 	 */
-	public function insert(string $table, array $data): bool
+	public function insert(string $table, array $data): bool|int
 	{
 		$sql	=	'INSERT INTO `'.$this->table_prefix.$table.'` SET ';
 
@@ -302,7 +302,7 @@ class mysql implements AdapterInterface
 
 		$query	=	$this->mysql->query($sql);
 
-		return ($query !== false);
+		return (($query !== false) ? (int)$this->mysql->insert_id : false);
 	}
 
 	/**
