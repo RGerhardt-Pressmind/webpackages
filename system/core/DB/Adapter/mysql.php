@@ -110,7 +110,7 @@ class mysql implements AdapterInterface
 	 */
 	public function fetchAll(string $table, array $select = null, $where = null, $orderBy = null, int $startIndex = -1, int $numItems = -1): mixed
 	{
-		$sql	=	$this->buildSQLSelectQuery($table, $select, $where, $orderBy, $startIndex, $numItems);
+		$sql	=	$this->buildSQLSelectQuery($table, $select, ($where ?? []), ($orderBy ?? []), $startIndex, $numItems);
 
 		$query	=	$this->mysql->query($sql);
 		$result	=	$query->fetch_all(MYSQLI_ASSOC);
@@ -130,7 +130,7 @@ class mysql implements AdapterInterface
 	 */
 	public function fetchRow(string $table, array $select = null, $where = null, $orderBy = null): mixed
 	{
-		$sql	=	$this->buildSQLSelectQuery($table, $select, $where, $orderBy, -1, -1);
+		$sql	=	$this->buildSQLSelectQuery($table, $select, ($where ?? []), ($orderBy ?? []), -1, -1);
 
 		$query	=	$this->mysql->query($sql);
 		$result	=	$query->fetch_assoc();
